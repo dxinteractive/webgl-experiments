@@ -1,4 +1,5 @@
 const _self = self as DedicatedWorkerGlobalScope & typeof globalThis;
+export {};
 
 function renderBitmap() {
   const offscreen = new OffscreenCanvas(400, 400);
