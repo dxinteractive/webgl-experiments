@@ -3,13 +3,13 @@ import * as PIXI from "pixi.js";
 const _self = self as DedicatedWorkerGlobalScope & typeof globalThis;
 export {};
 
-async function renderBitmap() {
-  const offscreen = new OffscreenCanvas(400, 400);
-
+async function renderBitmapToCanvas(offscreenCanvas: OffscreenCanvas) {
   const renderer = new PIXI.Renderer({
     background: "#1099bb",
-    view: offscreen,
+    view: offscreenCanvas,
     antialias: true,
+    width: 400,
+    height: 400,
   });
 
   const container = new PIXI.Container();
@@ -29,11 +29,9 @@ async function renderBitmap() {
   }
 
   renderer.render(container);
-
-  return offscreen;
+  console.log("!");
 }
 
-_self.addEventListener("message", async () => {
-  const bitmap = await renderBitmap();
-  _self.postMessage(bitmap, [bitmap]);
+_self.addEventListener("message", async (e) => {
+  await renderBitmapToCanvas(e.data);
 });

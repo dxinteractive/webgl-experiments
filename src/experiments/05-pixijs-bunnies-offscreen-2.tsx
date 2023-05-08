@@ -4,12 +4,11 @@ import { useEffect, useRef } from "react";
 
 async function renderBitmap() {
   const offscreen = new OffscreenCanvas(400, 400);
-  const ctx = offscreen.getContext("2d");
-  if (!ctx) throw new Error("Could not create 2d offscreen canvas context");
 
   const renderer = new PIXI.Renderer({
     background: "#1099bb",
     view: offscreen,
+    antialias: true,
   });
 
   const container = new PIXI.Container();
