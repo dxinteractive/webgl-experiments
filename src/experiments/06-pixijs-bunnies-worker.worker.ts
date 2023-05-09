@@ -1,9 +1,10 @@
-import * as PIXI from "pixi.js";
+import * as PIXI from "@pixi/webworker";
 
 const _self = self as DedicatedWorkerGlobalScope & typeof globalThis;
 export {};
 
 async function renderBitmap() {
+  console.log("worker begin");
   const offscreen = new OffscreenCanvas(400, 400);
 
   const renderer = new PIXI.Renderer({
@@ -14,8 +15,8 @@ async function renderBitmap() {
 
   const container = new PIXI.Container();
 
-  // Create a new texture
-  const texture = PIXI.Texture.from("bunny.png");
+  // Create a new texture - this is not how the image path should be provided but it works for now
+  const texture = PIXI.Texture.from("../../bunny.png");
 
   await new Promise((r) => setTimeout(r, 200));
 
@@ -29,8 +30,10 @@ async function renderBitmap() {
   }
 
   renderer.render(container);
+  const bitmap = offscreen.transferToImageBitmap();
+  console.log("worker done");
 
-  return offscreen;
+  return bitmap;
 }
 
 _self.addEventListener("message", async () => {

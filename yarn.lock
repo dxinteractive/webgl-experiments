@@ -588,6 +588,40 @@
     eventemitter3 "^4.0.0"
     url "^0.11.0"
 
+"@pixi/webworker@^7.2.4":
+  version "7.2.4"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@pixi/webworker/-/webworker-7.2.4.tgz#909181ca9d539242f7c3cfa8d0112b5885162510"
+  integrity sha512-pCA0a66X4tK4oRgDGLdV/WW/Y94oKifGbSB+kwSpxfycY1jN+M1Fj80V8jwwdnXgxuL2meHOBOTGPjKX+rosOA==
+  dependencies:
+    "@pixi/app" "7.2.4"
+    "@pixi/assets" "7.2.4"
+    "@pixi/compressed-textures" "7.2.4"
+    "@pixi/core" "7.2.4"
+    "@pixi/display" "7.2.4"
+    "@pixi/extensions" "7.2.4"
+    "@pixi/extract" "7.2.4"
+    "@pixi/filter-alpha" "7.2.4"
+    "@pixi/filter-blur" "7.2.4"
+    "@pixi/filter-color-matrix" "7.2.4"
+    "@pixi/filter-displacement" "7.2.4"
+    "@pixi/filter-fxaa" "7.2.4"
+    "@pixi/filter-noise" "7.2.4"
+    "@pixi/graphics" "7.2.4"
+    "@pixi/mesh" "7.2.4"
+    "@pixi/mesh-extras" "7.2.4"
+    "@pixi/mixin-cache-as-bitmap" "7.2.4"
+    "@pixi/mixin-get-child-by-name" "7.2.4"
+    "@pixi/mixin-get-global-position" "7.2.4"
+    "@pixi/particle-container" "7.2.4"
+    "@pixi/prepare" "7.2.4"
+    "@pixi/sprite" "7.2.4"
+    "@pixi/sprite-animated" "7.2.4"
+    "@pixi/sprite-tiling" "7.2.4"
+    "@pixi/spritesheet" "7.2.4"
+    "@pixi/text" "7.2.4"
+    "@pixi/text-bitmap" "7.2.4"
+    "@xmldom/xmldom" "^0.8.6"
+
 "@rollup/pluginutils@^4.2.1":
   version "4.2.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@rollup/pluginutils/-/pluginutils-4.2.1.tgz#e6c6c3aba0744edce3fb2074922d3776c0af2a6d"
@@ -735,6 +769,11 @@
     "@rollup/pluginutils" "^4.2.1"
     react-refresh "^0.13.0"
     resolve "^1.22.0"
+
+"@xmldom/xmldom@^0.8.6":
+  version "0.8.7"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@xmldom/xmldom/-/xmldom-0.8.7.tgz#8b1e39c547013941974d83ad5e9cf5042071a9a0"
+  integrity sha512-sI1Ly2cODlWStkINzqGrZ8K6n+MTSbAeQnAipGyL+KZCXuHaRlj2gyyy8B/9MvsFFqN7XHryQnB2QwhzvJXovg==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"

@@ -1,9 +1,10 @@
-import * as PIXI from "pixi.js";
+import * as PIXI from "@pixi/webworker";
 
 const _self = self as DedicatedWorkerGlobalScope & typeof globalThis;
 export {};
 
 async function renderBitmapToCanvas(offscreenCanvas: OffscreenCanvas) {
+  console.log("worker start");
   const renderer = new PIXI.Renderer({
     background: "#1099bb",
     view: offscreenCanvas,
@@ -14,10 +15,10 @@ async function renderBitmapToCanvas(offscreenCanvas: OffscreenCanvas) {
 
   const container = new PIXI.Container();
 
-  // Create a new texture
-  const texture = PIXI.Texture.from("bunny.png");
+  // Create a new texture - this is not how the image path should be provided but it works for now
+  const texture = PIXI.Texture.from("../../bunny.png");
 
-  await new Promise((r) => setTimeout(r, 200));
+  await new Promise((r) => setTimeout(r, 400));
 
   // Create a 5x5 grid of bunnies
   for (let i = 0; i < 25; i++) {
@@ -29,7 +30,7 @@ async function renderBitmapToCanvas(offscreenCanvas: OffscreenCanvas) {
   }
 
   renderer.render(container);
-  console.log("!");
+  console.log("worker done");
 }
 
 _self.addEventListener("message", async (e) => {
