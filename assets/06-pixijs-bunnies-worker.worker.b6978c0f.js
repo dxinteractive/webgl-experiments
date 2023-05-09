@@ -859,7 +859,7 @@
     return inside;
   }
   function splitPolygon(a2, b2) {
-    var a22 = new Node(a2.i, a2.x, a2.y), b22 = new Node(b2.i, b2.x, b2.y), an = a2.next, bp = b2.prev;
+    var a22 = new Node$1(a2.i, a2.x, a2.y), b22 = new Node$1(b2.i, b2.x, b2.y), an = a2.next, bp = b2.prev;
     a2.next = b2;
     b2.prev = a2;
     a22.next = an;
@@ -871,7 +871,7 @@
     return b22;
   }
   function insertNode(i2, x2, y2, last) {
-    var p2 = new Node(i2, x2, y2);
+    var p2 = new Node$1(i2, x2, y2);
     if (!last) {
       p2.prev = p2;
       p2.next = p2;
@@ -891,7 +891,7 @@
     if (p2.nextZ)
       p2.nextZ.prevZ = p2.prevZ;
   }
-  function Node(i2, x2, y2) {
+  function Node$1(i2, x2, y2) {
     this.i = i2;
     this.x = x2;
     this.y = y2;
@@ -1268,7 +1268,7 @@
   querystring$1.encode = querystring$1.stringify = encode;
   var punycode = punycode$1.exports;
   var util = util$1;
-  var parse = urlParse;
+  var parse$1 = urlParse;
   var resolve = urlResolve;
   var format = urlFormat;
   function Url() {
@@ -1732,7 +1732,7 @@
       this.hostname = host;
   };
   const url = {
-    parse,
+    parse: parse$1,
     format,
     resolve
   };
@@ -1748,8 +1748,8 @@
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
+  function replaceAll(str, find2, replace) {
+    return str.replace(new RegExp(escapeRegExp(find2), "g"), replace);
   }
   function normalizeStringPosix(path2, allowAboveRoot) {
     let res = "";
@@ -2582,14 +2582,6 @@ Deprecated since v${version}`);
   Color.shared = new _Color();
   Color.temp = new _Color();
   Color.HEX_PATTERN = /^(#|0x)?(([a-f0-9]{3}){1,2}([a-f0-9]{2})?)$/i;
-  function hex2string(hex) {
-    deprecation("7.2.0", "utils.hex2string is deprecated, use Color#toHex instead");
-    return Color.shared.setValue(hex).toHex();
-  }
-  function rgb2hex(rgb) {
-    deprecation("7.2.0", "utils.rgb2hex is deprecated, use Color#toNumber instead");
-    return Color.shared.setValue(rgb).toNumber();
-  }
   function mapPremultipliedBlendModes() {
     const pm = [];
     const npm = [];
@@ -11690,7 +11682,7 @@ ${this.fragmentSrc}`;
       this._bounds.updateID += this._boundsID - worldBoundsID;
       return bounds;
     }
-    toGlobal(position, point, skipUpdate = false) {
+    toGlobal(position2, point, skipUpdate = false) {
       if (!skipUpdate) {
         this._recursivePostUpdateTransform();
         if (!this.parent) {
@@ -11701,11 +11693,11 @@ ${this.fragmentSrc}`;
           this.displayObjectUpdateTransform();
         }
       }
-      return this.worldTransform.apply(position, point);
+      return this.worldTransform.apply(position2, point);
     }
-    toLocal(position, from, point, skipUpdate) {
+    toLocal(position2, from, point, skipUpdate) {
       if (from) {
-        position = from.toGlobal(position, point, skipUpdate);
+        position2 = from.toGlobal(position2, point, skipUpdate);
       }
       if (!skipUpdate) {
         this._recursivePostUpdateTransform();
@@ -11717,7 +11709,7 @@ ${this.fragmentSrc}`;
           this.displayObjectUpdateTransform();
         }
       }
-      return this.worldTransform.applyInverse(position, point);
+      return this.worldTransform.applyInverse(position2, point);
     }
     setParent(container) {
       if (!container || !container.addChild) {
@@ -13824,1648 +13816,6 @@ void main() {
       }
     });
   });
-  class EventsTickerClass {
-    constructor() {
-      this.interactionFrequency = 10;
-      this._deltaTime = 0;
-      this._didMove = false;
-      this.tickerAdded = false;
-      this._pauseUpdate = true;
-    }
-    init(events) {
-      this.removeTickerListener();
-      this.events = events;
-      this.interactionFrequency = 10;
-      this._deltaTime = 0;
-      this._didMove = false;
-      this.tickerAdded = false;
-      this._pauseUpdate = true;
-    }
-    get pauseUpdate() {
-      return this._pauseUpdate;
-    }
-    set pauseUpdate(paused) {
-      this._pauseUpdate = paused;
-    }
-    addTickerListener() {
-      if (this.tickerAdded || !this.domElement) {
-        return;
-      }
-      Ticker.system.add(this.tickerUpdate, this, UPDATE_PRIORITY.INTERACTION);
-      this.tickerAdded = true;
-    }
-    removeTickerListener() {
-      if (!this.tickerAdded) {
-        return;
-      }
-      Ticker.system.remove(this.tickerUpdate, this);
-      this.tickerAdded = false;
-    }
-    pointerMoved() {
-      this._didMove = true;
-    }
-    update() {
-      if (!this.domElement || this._pauseUpdate) {
-        return;
-      }
-      if (this._didMove) {
-        this._didMove = false;
-        return;
-      }
-      const rootPointerEvent = this.events["rootPointerEvent"];
-      if (this.events.supportsTouchEvents && rootPointerEvent.pointerType === "touch") {
-        return;
-      }
-      globalThis.document.dispatchEvent(new PointerEvent("pointermove", {
-        clientX: rootPointerEvent.clientX,
-        clientY: rootPointerEvent.clientY
-      }));
-    }
-    tickerUpdate(deltaTime) {
-      this._deltaTime += deltaTime;
-      if (this._deltaTime < this.interactionFrequency) {
-        return;
-      }
-      this._deltaTime = 0;
-      this.update();
-    }
-  }
-  const EventsTicker = new EventsTickerClass();
-  class FederatedEvent {
-    constructor(manager) {
-      this.bubbles = true;
-      this.cancelBubble = true;
-      this.cancelable = false;
-      this.composed = false;
-      this.defaultPrevented = false;
-      this.eventPhase = FederatedEvent.prototype.NONE;
-      this.propagationStopped = false;
-      this.propagationImmediatelyStopped = false;
-      this.layer = new Point();
-      this.page = new Point();
-      this.NONE = 0;
-      this.CAPTURING_PHASE = 1;
-      this.AT_TARGET = 2;
-      this.BUBBLING_PHASE = 3;
-      this.manager = manager;
-    }
-    get layerX() {
-      return this.layer.x;
-    }
-    get layerY() {
-      return this.layer.y;
-    }
-    get pageX() {
-      return this.page.x;
-    }
-    get pageY() {
-      return this.page.y;
-    }
-    get data() {
-      return this;
-    }
-    composedPath() {
-      if (this.manager && (!this.path || this.path[this.path.length - 1] !== this.target)) {
-        this.path = this.target ? this.manager.propagationPath(this.target) : [];
-      }
-      return this.path;
-    }
-    initEvent(_type, _bubbles, _cancelable) {
-      throw new Error("initEvent() is a legacy DOM API. It is not implemented in the Federated Events API.");
-    }
-    initUIEvent(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg) {
-      throw new Error("initUIEvent() is a legacy DOM API. It is not implemented in the Federated Events API.");
-    }
-    preventDefault() {
-      if (this.nativeEvent instanceof Event && this.nativeEvent.cancelable) {
-        this.nativeEvent.preventDefault();
-      }
-      this.defaultPrevented = true;
-    }
-    stopImmediatePropagation() {
-      this.propagationImmediatelyStopped = true;
-    }
-    stopPropagation() {
-      this.propagationStopped = true;
-    }
-  }
-  class FederatedMouseEvent extends FederatedEvent {
-    constructor() {
-      super(...arguments);
-      this.client = new Point();
-      this.movement = new Point();
-      this.offset = new Point();
-      this.global = new Point();
-      this.screen = new Point();
-    }
-    get clientX() {
-      return this.client.x;
-    }
-    get clientY() {
-      return this.client.y;
-    }
-    get x() {
-      return this.clientX;
-    }
-    get y() {
-      return this.clientY;
-    }
-    get movementX() {
-      return this.movement.x;
-    }
-    get movementY() {
-      return this.movement.y;
-    }
-    get offsetX() {
-      return this.offset.x;
-    }
-    get offsetY() {
-      return this.offset.y;
-    }
-    get globalX() {
-      return this.global.x;
-    }
-    get globalY() {
-      return this.global.y;
-    }
-    get screenX() {
-      return this.screen.x;
-    }
-    get screenY() {
-      return this.screen.y;
-    }
-    getLocalPosition(displayObject, point, globalPos) {
-      return displayObject.worldTransform.applyInverse(globalPos || this.global, point);
-    }
-    getModifierState(key) {
-      return "getModifierState" in this.nativeEvent && this.nativeEvent.getModifierState(key);
-    }
-    initMouseEvent(_typeArg, _canBubbleArg, _cancelableArg, _viewArg, _detailArg, _screenXArg, _screenYArg, _clientXArg, _clientYArg, _ctrlKeyArg, _altKeyArg, _shiftKeyArg, _metaKeyArg, _buttonArg, _relatedTargetArg) {
-      throw new Error("Method not implemented.");
-    }
-  }
-  class FederatedPointerEvent extends FederatedMouseEvent {
-    constructor() {
-      super(...arguments);
-      this.width = 0;
-      this.height = 0;
-      this.isPrimary = false;
-    }
-    getCoalescedEvents() {
-      if (this.type === "pointermove" || this.type === "mousemove" || this.type === "touchmove") {
-        return [this];
-      }
-      return [];
-    }
-    getPredictedEvents() {
-      throw new Error("getPredictedEvents is not supported!");
-    }
-  }
-  class FederatedWheelEvent extends FederatedMouseEvent {
-    constructor() {
-      super(...arguments);
-      this.DOM_DELTA_PIXEL = 0;
-      this.DOM_DELTA_LINE = 1;
-      this.DOM_DELTA_PAGE = 2;
-    }
-  }
-  FederatedWheelEvent.DOM_DELTA_PIXEL = 0;
-  FederatedWheelEvent.DOM_DELTA_LINE = 1;
-  FederatedWheelEvent.DOM_DELTA_PAGE = 2;
-  const PROPAGATION_LIMIT = 2048;
-  const tempHitLocation = new Point();
-  const tempLocalMapping = new Point();
-  class EventBoundary {
-    constructor(rootTarget) {
-      this.dispatch = new EventEmitter();
-      this.moveOnAll = false;
-      this.enableGlobalMoveEvents = true;
-      this.mappingState = {
-        trackingData: {}
-      };
-      this.eventPool = /* @__PURE__ */ new Map();
-      this._allInteractiveElements = [];
-      this._hitElements = [];
-      this._isPointerMoveEvent = false;
-      this.rootTarget = rootTarget;
-      this.hitPruneFn = this.hitPruneFn.bind(this);
-      this.hitTestFn = this.hitTestFn.bind(this);
-      this.mapPointerDown = this.mapPointerDown.bind(this);
-      this.mapPointerMove = this.mapPointerMove.bind(this);
-      this.mapPointerOut = this.mapPointerOut.bind(this);
-      this.mapPointerOver = this.mapPointerOver.bind(this);
-      this.mapPointerUp = this.mapPointerUp.bind(this);
-      this.mapPointerUpOutside = this.mapPointerUpOutside.bind(this);
-      this.mapWheel = this.mapWheel.bind(this);
-      this.mappingTable = {};
-      this.addEventMapping("pointerdown", this.mapPointerDown);
-      this.addEventMapping("pointermove", this.mapPointerMove);
-      this.addEventMapping("pointerout", this.mapPointerOut);
-      this.addEventMapping("pointerleave", this.mapPointerOut);
-      this.addEventMapping("pointerover", this.mapPointerOver);
-      this.addEventMapping("pointerup", this.mapPointerUp);
-      this.addEventMapping("pointerupoutside", this.mapPointerUpOutside);
-      this.addEventMapping("wheel", this.mapWheel);
-    }
-    addEventMapping(type, fn) {
-      if (!this.mappingTable[type]) {
-        this.mappingTable[type] = [];
-      }
-      this.mappingTable[type].push({
-        fn,
-        priority: 0
-      });
-      this.mappingTable[type].sort((a2, b2) => a2.priority - b2.priority);
-    }
-    dispatchEvent(e2, type) {
-      e2.propagationStopped = false;
-      e2.propagationImmediatelyStopped = false;
-      this.propagate(e2, type);
-      this.dispatch.emit(type || e2.type, e2);
-    }
-    mapEvent(e2) {
-      if (!this.rootTarget) {
-        return;
-      }
-      const mappers = this.mappingTable[e2.type];
-      if (mappers) {
-        for (let i2 = 0, j2 = mappers.length; i2 < j2; i2++) {
-          mappers[i2].fn(e2);
-        }
-      } else {
-        console.warn(`[EventBoundary]: Event mapping not defined for ${e2.type}`);
-      }
-    }
-    hitTest(x2, y2) {
-      EventsTicker.pauseUpdate = true;
-      const useMove = this._isPointerMoveEvent && this.enableGlobalMoveEvents;
-      const fn = useMove ? "hitTestMoveRecursive" : "hitTestRecursive";
-      const invertedPath = this[fn](this.rootTarget, this.rootTarget.eventMode, tempHitLocation.set(x2, y2), this.hitTestFn, this.hitPruneFn);
-      return invertedPath && invertedPath[0];
-    }
-    propagate(e2, type) {
-      if (!e2.target) {
-        return;
-      }
-      const composedPath = e2.composedPath();
-      e2.eventPhase = e2.CAPTURING_PHASE;
-      for (let i2 = 0, j2 = composedPath.length - 1; i2 < j2; i2++) {
-        e2.currentTarget = composedPath[i2];
-        this.notifyTarget(e2, type);
-        if (e2.propagationStopped || e2.propagationImmediatelyStopped)
-          return;
-      }
-      e2.eventPhase = e2.AT_TARGET;
-      e2.currentTarget = e2.target;
-      this.notifyTarget(e2, type);
-      if (e2.propagationStopped || e2.propagationImmediatelyStopped)
-        return;
-      e2.eventPhase = e2.BUBBLING_PHASE;
-      for (let i2 = composedPath.length - 2; i2 >= 0; i2--) {
-        e2.currentTarget = composedPath[i2];
-        this.notifyTarget(e2, type);
-        if (e2.propagationStopped || e2.propagationImmediatelyStopped)
-          return;
-      }
-    }
-    all(e2, type, targets = this._allInteractiveElements) {
-      if (targets.length === 0)
-        return;
-      e2.eventPhase = e2.BUBBLING_PHASE;
-      const events = Array.isArray(type) ? type : [type];
-      for (let i2 = targets.length - 1; i2 >= 0; i2--) {
-        events.forEach((event) => {
-          e2.currentTarget = targets[i2];
-          this.notifyTarget(e2, event);
-        });
-      }
-    }
-    propagationPath(target) {
-      const propagationPath = [target];
-      for (let i2 = 0; i2 < PROPAGATION_LIMIT && target !== this.rootTarget; i2++) {
-        if (!target.parent) {
-          throw new Error("Cannot find propagation path to disconnected target");
-        }
-        propagationPath.push(target.parent);
-        target = target.parent;
-      }
-      propagationPath.reverse();
-      return propagationPath;
-    }
-    hitTestMoveRecursive(currentTarget, eventMode, location, testFn, pruneFn, ignore = false) {
-      let shouldReturn = false;
-      if (this._interactivePrune(currentTarget))
-        return null;
-      if (currentTarget.eventMode === "dynamic" || eventMode === "dynamic") {
-        EventsTicker.pauseUpdate = false;
-      }
-      if (currentTarget.interactiveChildren && currentTarget.children) {
-        const children = currentTarget.children;
-        for (let i2 = children.length - 1; i2 >= 0; i2--) {
-          const child = children[i2];
-          const nestedHit = this.hitTestMoveRecursive(child, this._isInteractive(eventMode) ? eventMode : child.eventMode, location, testFn, pruneFn, ignore || pruneFn(currentTarget, location));
-          if (nestedHit) {
-            if (nestedHit.length > 0 && !nestedHit[nestedHit.length - 1].parent) {
-              continue;
-            }
-            const isInteractive = currentTarget.isInteractive();
-            if (nestedHit.length > 0 || isInteractive) {
-              if (isInteractive)
-                this._allInteractiveElements.push(currentTarget);
-              nestedHit.push(currentTarget);
-            }
-            if (this._hitElements.length === 0)
-              this._hitElements = nestedHit;
-            shouldReturn = true;
-          }
-        }
-      }
-      const isInteractiveMode = this._isInteractive(eventMode);
-      const isInteractiveTarget = currentTarget.isInteractive();
-      if (isInteractiveTarget && isInteractiveTarget)
-        this._allInteractiveElements.push(currentTarget);
-      if (ignore || this._hitElements.length > 0)
-        return null;
-      if (shouldReturn)
-        return this._hitElements;
-      if (isInteractiveMode && (!pruneFn(currentTarget, location) && testFn(currentTarget, location))) {
-        return isInteractiveTarget ? [currentTarget] : [];
-      }
-      return null;
-    }
-    hitTestRecursive(currentTarget, eventMode, location, testFn, pruneFn) {
-      if (this._interactivePrune(currentTarget) || pruneFn(currentTarget, location)) {
-        return null;
-      }
-      if (currentTarget.eventMode === "dynamic" || eventMode === "dynamic") {
-        EventsTicker.pauseUpdate = false;
-      }
-      if (currentTarget.interactiveChildren && currentTarget.children) {
-        const children = currentTarget.children;
-        for (let i2 = children.length - 1; i2 >= 0; i2--) {
-          const child = children[i2];
-          const nestedHit = this.hitTestRecursive(child, this._isInteractive(eventMode) ? eventMode : child.eventMode, location, testFn, pruneFn);
-          if (nestedHit) {
-            if (nestedHit.length > 0 && !nestedHit[nestedHit.length - 1].parent) {
-              continue;
-            }
-            const isInteractive = currentTarget.isInteractive();
-            if (nestedHit.length > 0 || isInteractive)
-              nestedHit.push(currentTarget);
-            return nestedHit;
-          }
-        }
-      }
-      const isInteractiveMode = this._isInteractive(eventMode);
-      const isInteractiveTarget = currentTarget.isInteractive();
-      if (isInteractiveMode && testFn(currentTarget, location)) {
-        return isInteractiveTarget ? [currentTarget] : [];
-      }
-      return null;
-    }
-    _isInteractive(int) {
-      return int === "static" || int === "dynamic";
-    }
-    _interactivePrune(displayObject) {
-      if (!displayObject || displayObject.isMask || !displayObject.visible || !displayObject.renderable) {
-        return true;
-      }
-      if (displayObject.eventMode === "none") {
-        return true;
-      }
-      if (displayObject.eventMode === "passive" && !displayObject.interactiveChildren) {
-        return true;
-      }
-      if (displayObject.isMask) {
-        return true;
-      }
-      return false;
-    }
-    hitPruneFn(displayObject, location) {
-      var _a2;
-      if (displayObject.hitArea) {
-        displayObject.worldTransform.applyInverse(location, tempLocalMapping);
-        if (!displayObject.hitArea.contains(tempLocalMapping.x, tempLocalMapping.y)) {
-          return true;
-        }
-      }
-      if (displayObject._mask) {
-        const maskObject = displayObject._mask.isMaskData ? displayObject._mask.maskObject : displayObject._mask;
-        if (maskObject && !((_a2 = maskObject.containsPoint) == null ? void 0 : _a2.call(maskObject, location))) {
-          return true;
-        }
-      }
-      return false;
-    }
-    hitTestFn(displayObject, location) {
-      if (displayObject.eventMode === "passive") {
-        return false;
-      }
-      if (displayObject.hitArea) {
-        return true;
-      }
-      if (displayObject.containsPoint) {
-        return displayObject.containsPoint(location);
-      }
-      return false;
-    }
-    notifyTarget(e2, type) {
-      var _a2, _b;
-      type = type != null ? type : e2.type;
-      const handlerKey = `on${type}`;
-      (_b = (_a2 = e2.currentTarget)[handlerKey]) == null ? void 0 : _b.call(_a2, e2);
-      const key = e2.eventPhase === e2.CAPTURING_PHASE || e2.eventPhase === e2.AT_TARGET ? `${type}capture` : type;
-      this.notifyListeners(e2, key);
-      if (e2.eventPhase === e2.AT_TARGET) {
-        this.notifyListeners(e2, type);
-      }
-    }
-    mapPointerDown(from) {
-      if (!(from instanceof FederatedPointerEvent)) {
-        console.warn("EventBoundary cannot map a non-pointer event as a pointer event");
-        return;
-      }
-      const e2 = this.createPointerEvent(from);
-      this.dispatchEvent(e2, "pointerdown");
-      if (e2.pointerType === "touch") {
-        this.dispatchEvent(e2, "touchstart");
-      } else if (e2.pointerType === "mouse" || e2.pointerType === "pen") {
-        const isRightButton = e2.button === 2;
-        this.dispatchEvent(e2, isRightButton ? "rightdown" : "mousedown");
-      }
-      const trackingData = this.trackingData(from.pointerId);
-      trackingData.pressTargetsByButton[from.button] = e2.composedPath();
-      this.freeEvent(e2);
-    }
-    mapPointerMove(from) {
-      var _a2, _b, _c;
-      if (!(from instanceof FederatedPointerEvent)) {
-        console.warn("EventBoundary cannot map a non-pointer event as a pointer event");
-        return;
-      }
-      this._allInteractiveElements.length = 0;
-      this._hitElements.length = 0;
-      this._isPointerMoveEvent = true;
-      const e2 = this.createPointerEvent(from);
-      this._isPointerMoveEvent = false;
-      const isMouse = e2.pointerType === "mouse" || e2.pointerType === "pen";
-      const trackingData = this.trackingData(from.pointerId);
-      const outTarget = this.findMountedTarget(trackingData.overTargets);
-      if (((_a2 = trackingData.overTargets) == null ? void 0 : _a2.length) > 0 && outTarget !== e2.target) {
-        const outType = from.type === "mousemove" ? "mouseout" : "pointerout";
-        const outEvent = this.createPointerEvent(from, outType, outTarget);
-        this.dispatchEvent(outEvent, "pointerout");
-        if (isMouse)
-          this.dispatchEvent(outEvent, "mouseout");
-        if (!e2.composedPath().includes(outTarget)) {
-          const leaveEvent = this.createPointerEvent(from, "pointerleave", outTarget);
-          leaveEvent.eventPhase = leaveEvent.AT_TARGET;
-          while (leaveEvent.target && !e2.composedPath().includes(leaveEvent.target)) {
-            leaveEvent.currentTarget = leaveEvent.target;
-            this.notifyTarget(leaveEvent);
-            if (isMouse)
-              this.notifyTarget(leaveEvent, "mouseleave");
-            leaveEvent.target = leaveEvent.target.parent;
-          }
-          this.freeEvent(leaveEvent);
-        }
-        this.freeEvent(outEvent);
-      }
-      if (outTarget !== e2.target) {
-        const overType = from.type === "mousemove" ? "mouseover" : "pointerover";
-        const overEvent = this.clonePointerEvent(e2, overType);
-        this.dispatchEvent(overEvent, "pointerover");
-        if (isMouse)
-          this.dispatchEvent(overEvent, "mouseover");
-        let overTargetAncestor = outTarget == null ? void 0 : outTarget.parent;
-        while (overTargetAncestor && overTargetAncestor !== this.rootTarget.parent) {
-          if (overTargetAncestor === e2.target)
-            break;
-          overTargetAncestor = overTargetAncestor.parent;
-        }
-        const didPointerEnter = !overTargetAncestor || overTargetAncestor === this.rootTarget.parent;
-        if (didPointerEnter) {
-          const enterEvent = this.clonePointerEvent(e2, "pointerenter");
-          enterEvent.eventPhase = enterEvent.AT_TARGET;
-          while (enterEvent.target && enterEvent.target !== outTarget && enterEvent.target !== this.rootTarget.parent) {
-            enterEvent.currentTarget = enterEvent.target;
-            this.notifyTarget(enterEvent);
-            if (isMouse)
-              this.notifyTarget(enterEvent, "mouseenter");
-            enterEvent.target = enterEvent.target.parent;
-          }
-          this.freeEvent(enterEvent);
-        }
-        this.freeEvent(overEvent);
-      }
-      const allMethods = [];
-      const allowGlobalPointerEvents = (_b = this.enableGlobalMoveEvents) != null ? _b : true;
-      this.moveOnAll ? allMethods.push("pointermove") : this.dispatchEvent(e2, "pointermove");
-      allowGlobalPointerEvents && allMethods.push("globalpointermove");
-      if (e2.pointerType === "touch") {
-        this.moveOnAll ? allMethods.splice(1, 0, "touchmove") : this.dispatchEvent(e2, "touchmove");
-        allowGlobalPointerEvents && allMethods.push("globaltouchmove");
-      }
-      if (isMouse) {
-        this.moveOnAll ? allMethods.splice(1, 0, "mousemove") : this.dispatchEvent(e2, "mousemove");
-        allowGlobalPointerEvents && allMethods.push("globalmousemove");
-        this.cursor = (_c = e2.target) == null ? void 0 : _c.cursor;
-      }
-      if (allMethods.length > 0) {
-        this.all(e2, allMethods);
-      }
-      this._allInteractiveElements.length = 0;
-      this._hitElements.length = 0;
-      trackingData.overTargets = e2.composedPath();
-      this.freeEvent(e2);
-    }
-    mapPointerOver(from) {
-      var _a2;
-      if (!(from instanceof FederatedPointerEvent)) {
-        console.warn("EventBoundary cannot map a non-pointer event as a pointer event");
-        return;
-      }
-      const trackingData = this.trackingData(from.pointerId);
-      const e2 = this.createPointerEvent(from);
-      const isMouse = e2.pointerType === "mouse" || e2.pointerType === "pen";
-      this.dispatchEvent(e2, "pointerover");
-      if (isMouse)
-        this.dispatchEvent(e2, "mouseover");
-      if (e2.pointerType === "mouse")
-        this.cursor = (_a2 = e2.target) == null ? void 0 : _a2.cursor;
-      const enterEvent = this.clonePointerEvent(e2, "pointerenter");
-      enterEvent.eventPhase = enterEvent.AT_TARGET;
-      while (enterEvent.target && enterEvent.target !== this.rootTarget.parent) {
-        enterEvent.currentTarget = enterEvent.target;
-        this.notifyTarget(enterEvent);
-        if (isMouse)
-          this.notifyTarget(enterEvent, "mouseenter");
-        enterEvent.target = enterEvent.target.parent;
-      }
-      trackingData.overTargets = e2.composedPath();
-      this.freeEvent(e2);
-      this.freeEvent(enterEvent);
-    }
-    mapPointerOut(from) {
-      if (!(from instanceof FederatedPointerEvent)) {
-        console.warn("EventBoundary cannot map a non-pointer event as a pointer event");
-        return;
-      }
-      const trackingData = this.trackingData(from.pointerId);
-      if (trackingData.overTargets) {
-        const isMouse = from.pointerType === "mouse" || from.pointerType === "pen";
-        const outTarget = this.findMountedTarget(trackingData.overTargets);
-        const outEvent = this.createPointerEvent(from, "pointerout", outTarget);
-        this.dispatchEvent(outEvent);
-        if (isMouse)
-          this.dispatchEvent(outEvent, "mouseout");
-        const leaveEvent = this.createPointerEvent(from, "pointerleave", outTarget);
-        leaveEvent.eventPhase = leaveEvent.AT_TARGET;
-        while (leaveEvent.target && leaveEvent.target !== this.rootTarget.parent) {
-          leaveEvent.currentTarget = leaveEvent.target;
-          this.notifyTarget(leaveEvent);
-          if (isMouse)
-            this.notifyTarget(leaveEvent, "mouseleave");
-          leaveEvent.target = leaveEvent.target.parent;
-        }
-        trackingData.overTargets = null;
-        this.freeEvent(outEvent);
-        this.freeEvent(leaveEvent);
-      }
-      this.cursor = null;
-    }
-    mapPointerUp(from) {
-      if (!(from instanceof FederatedPointerEvent)) {
-        console.warn("EventBoundary cannot map a non-pointer event as a pointer event");
-        return;
-      }
-      const now = performance.now();
-      const e2 = this.createPointerEvent(from);
-      this.dispatchEvent(e2, "pointerup");
-      if (e2.pointerType === "touch") {
-        this.dispatchEvent(e2, "touchend");
-      } else if (e2.pointerType === "mouse" || e2.pointerType === "pen") {
-        const isRightButton = e2.button === 2;
-        this.dispatchEvent(e2, isRightButton ? "rightup" : "mouseup");
-      }
-      const trackingData = this.trackingData(from.pointerId);
-      const pressTarget = this.findMountedTarget(trackingData.pressTargetsByButton[from.button]);
-      let clickTarget = pressTarget;
-      if (pressTarget && !e2.composedPath().includes(pressTarget)) {
-        let currentTarget = pressTarget;
-        while (currentTarget && !e2.composedPath().includes(currentTarget)) {
-          e2.currentTarget = currentTarget;
-          this.notifyTarget(e2, "pointerupoutside");
-          if (e2.pointerType === "touch") {
-            this.notifyTarget(e2, "touchendoutside");
-          } else if (e2.pointerType === "mouse" || e2.pointerType === "pen") {
-            const isRightButton = e2.button === 2;
-            this.notifyTarget(e2, isRightButton ? "rightupoutside" : "mouseupoutside");
-          }
-          currentTarget = currentTarget.parent;
-        }
-        delete trackingData.pressTargetsByButton[from.button];
-        clickTarget = currentTarget;
-      }
-      if (clickTarget) {
-        const clickEvent = this.clonePointerEvent(e2, "click");
-        clickEvent.target = clickTarget;
-        clickEvent.path = null;
-        if (!trackingData.clicksByButton[from.button]) {
-          trackingData.clicksByButton[from.button] = {
-            clickCount: 0,
-            target: clickEvent.target,
-            timeStamp: now
-          };
-        }
-        const clickHistory = trackingData.clicksByButton[from.button];
-        if (clickHistory.target === clickEvent.target && now - clickHistory.timeStamp < 200) {
-          ++clickHistory.clickCount;
-        } else {
-          clickHistory.clickCount = 1;
-        }
-        clickHistory.target = clickEvent.target;
-        clickHistory.timeStamp = now;
-        clickEvent.detail = clickHistory.clickCount;
-        if (clickEvent.pointerType === "mouse") {
-          const isRightButton = clickEvent.button === 2;
-          this.dispatchEvent(clickEvent, isRightButton ? "rightclick" : "click");
-        } else if (clickEvent.pointerType === "touch") {
-          this.dispatchEvent(clickEvent, "tap");
-        }
-        this.dispatchEvent(clickEvent, "pointertap");
-        this.freeEvent(clickEvent);
-      }
-      this.freeEvent(e2);
-    }
-    mapPointerUpOutside(from) {
-      if (!(from instanceof FederatedPointerEvent)) {
-        console.warn("EventBoundary cannot map a non-pointer event as a pointer event");
-        return;
-      }
-      const trackingData = this.trackingData(from.pointerId);
-      const pressTarget = this.findMountedTarget(trackingData.pressTargetsByButton[from.button]);
-      const e2 = this.createPointerEvent(from);
-      if (pressTarget) {
-        let currentTarget = pressTarget;
-        while (currentTarget) {
-          e2.currentTarget = currentTarget;
-          this.notifyTarget(e2, "pointerupoutside");
-          if (e2.pointerType === "touch") {
-            this.notifyTarget(e2, "touchendoutside");
-          } else if (e2.pointerType === "mouse" || e2.pointerType === "pen") {
-            this.notifyTarget(e2, e2.button === 2 ? "rightupoutside" : "mouseupoutside");
-          }
-          currentTarget = currentTarget.parent;
-        }
-        delete trackingData.pressTargetsByButton[from.button];
-      }
-      this.freeEvent(e2);
-    }
-    mapWheel(from) {
-      if (!(from instanceof FederatedWheelEvent)) {
-        console.warn("EventBoundary cannot map a non-wheel event as a wheel event");
-        return;
-      }
-      const wheelEvent = this.createWheelEvent(from);
-      this.dispatchEvent(wheelEvent);
-      this.freeEvent(wheelEvent);
-    }
-    findMountedTarget(propagationPath) {
-      if (!propagationPath) {
-        return null;
-      }
-      let currentTarget = propagationPath[0];
-      for (let i2 = 1; i2 < propagationPath.length; i2++) {
-        if (propagationPath[i2].parent === currentTarget) {
-          currentTarget = propagationPath[i2];
-        } else {
-          break;
-        }
-      }
-      return currentTarget;
-    }
-    createPointerEvent(from, type, target) {
-      var _a2;
-      const event = this.allocateEvent(FederatedPointerEvent);
-      this.copyPointerData(from, event);
-      this.copyMouseData(from, event);
-      this.copyData(from, event);
-      event.nativeEvent = from.nativeEvent;
-      event.originalEvent = from;
-      event.target = (_a2 = target != null ? target : this.hitTest(event.global.x, event.global.y)) != null ? _a2 : this._hitElements[0];
-      if (typeof type === "string") {
-        event.type = type;
-      }
-      return event;
-    }
-    createWheelEvent(from) {
-      const event = this.allocateEvent(FederatedWheelEvent);
-      this.copyWheelData(from, event);
-      this.copyMouseData(from, event);
-      this.copyData(from, event);
-      event.nativeEvent = from.nativeEvent;
-      event.originalEvent = from;
-      event.target = this.hitTest(event.global.x, event.global.y);
-      return event;
-    }
-    clonePointerEvent(from, type) {
-      const event = this.allocateEvent(FederatedPointerEvent);
-      event.nativeEvent = from.nativeEvent;
-      event.originalEvent = from.originalEvent;
-      this.copyPointerData(from, event);
-      this.copyMouseData(from, event);
-      this.copyData(from, event);
-      event.target = from.target;
-      event.path = from.composedPath().slice();
-      event.type = type != null ? type : event.type;
-      return event;
-    }
-    copyWheelData(from, to) {
-      to.deltaMode = from.deltaMode;
-      to.deltaX = from.deltaX;
-      to.deltaY = from.deltaY;
-      to.deltaZ = from.deltaZ;
-    }
-    copyPointerData(from, to) {
-      if (!(from instanceof FederatedPointerEvent && to instanceof FederatedPointerEvent))
-        return;
-      to.pointerId = from.pointerId;
-      to.width = from.width;
-      to.height = from.height;
-      to.isPrimary = from.isPrimary;
-      to.pointerType = from.pointerType;
-      to.pressure = from.pressure;
-      to.tangentialPressure = from.tangentialPressure;
-      to.tiltX = from.tiltX;
-      to.tiltY = from.tiltY;
-      to.twist = from.twist;
-    }
-    copyMouseData(from, to) {
-      if (!(from instanceof FederatedMouseEvent && to instanceof FederatedMouseEvent))
-        return;
-      to.altKey = from.altKey;
-      to.button = from.button;
-      to.buttons = from.buttons;
-      to.client.copyFrom(from.client);
-      to.ctrlKey = from.ctrlKey;
-      to.metaKey = from.metaKey;
-      to.movement.copyFrom(from.movement);
-      to.screen.copyFrom(from.screen);
-      to.shiftKey = from.shiftKey;
-      to.global.copyFrom(from.global);
-    }
-    copyData(from, to) {
-      to.isTrusted = from.isTrusted;
-      to.srcElement = from.srcElement;
-      to.timeStamp = performance.now();
-      to.type = from.type;
-      to.detail = from.detail;
-      to.view = from.view;
-      to.which = from.which;
-      to.layer.copyFrom(from.layer);
-      to.page.copyFrom(from.page);
-    }
-    trackingData(id) {
-      if (!this.mappingState.trackingData[id]) {
-        this.mappingState.trackingData[id] = {
-          pressTargetsByButton: {},
-          clicksByButton: {},
-          overTarget: null
-        };
-      }
-      return this.mappingState.trackingData[id];
-    }
-    allocateEvent(constructor) {
-      if (!this.eventPool.has(constructor)) {
-        this.eventPool.set(constructor, []);
-      }
-      const event = this.eventPool.get(constructor).pop() || new constructor(this);
-      event.eventPhase = event.NONE;
-      event.currentTarget = null;
-      event.path = null;
-      event.target = null;
-      return event;
-    }
-    freeEvent(event) {
-      if (event.manager !== this)
-        throw new Error("It is illegal to free an event not managed by this EventBoundary!");
-      const constructor = event.constructor;
-      if (!this.eventPool.has(constructor)) {
-        this.eventPool.set(constructor, []);
-      }
-      this.eventPool.get(constructor).push(event);
-    }
-    notifyListeners(e2, type) {
-      const listeners = e2.currentTarget._events[type];
-      if (!listeners)
-        return;
-      if (!e2.currentTarget.isInteractive())
-        return;
-      if ("fn" in listeners) {
-        if (listeners.once)
-          e2.currentTarget.removeListener(type, listeners.fn, void 0, true);
-        listeners.fn.call(listeners.context, e2);
-      } else {
-        for (let i2 = 0, j2 = listeners.length; i2 < j2 && !e2.propagationImmediatelyStopped; i2++) {
-          if (listeners[i2].once)
-            e2.currentTarget.removeListener(type, listeners[i2].fn, void 0, true);
-          listeners[i2].fn.call(listeners[i2].context, e2);
-        }
-      }
-    }
-  }
-  const MOUSE_POINTER_ID = 1;
-  const TOUCH_TO_POINTER = {
-    touchstart: "pointerdown",
-    touchend: "pointerup",
-    touchendoutside: "pointerupoutside",
-    touchmove: "pointermove",
-    touchcancel: "pointercancel"
-  };
-  const _EventSystem = class {
-    constructor(renderer) {
-      this.supportsTouchEvents = "ontouchstart" in globalThis;
-      this.supportsPointerEvents = !!globalThis.PointerEvent;
-      this.domElement = null;
-      this.resolution = 1;
-      this.renderer = renderer;
-      this.rootBoundary = new EventBoundary(null);
-      EventsTicker.init(this);
-      this.autoPreventDefault = true;
-      this.eventsAdded = false;
-      this.rootPointerEvent = new FederatedPointerEvent(null);
-      this.rootWheelEvent = new FederatedWheelEvent(null);
-      this.cursorStyles = {
-        default: "inherit",
-        pointer: "pointer"
-      };
-      this.features = new Proxy({ ..._EventSystem.defaultEventFeatures }, {
-        set: (target, key, value) => {
-          if (key === "globalMove") {
-            this.rootBoundary.enableGlobalMoveEvents = value;
-          }
-          target[key] = value;
-          return true;
-        }
-      });
-      this.onPointerDown = this.onPointerDown.bind(this);
-      this.onPointerMove = this.onPointerMove.bind(this);
-      this.onPointerUp = this.onPointerUp.bind(this);
-      this.onPointerOverOut = this.onPointerOverOut.bind(this);
-      this.onWheel = this.onWheel.bind(this);
-    }
-    static get defaultEventMode() {
-      return this._defaultEventMode;
-    }
-    init(options) {
-      var _a2, _b;
-      const { view, resolution } = this.renderer;
-      this.setTargetElement(view);
-      this.resolution = resolution;
-      _EventSystem._defaultEventMode = (_a2 = options.eventMode) != null ? _a2 : "auto";
-      Object.assign(this.features, (_b = options.eventFeatures) != null ? _b : {});
-      this.rootBoundary.enableGlobalMoveEvents = this.features.globalMove;
-    }
-    resolutionChange(resolution) {
-      this.resolution = resolution;
-    }
-    destroy() {
-      this.setTargetElement(null);
-      this.renderer = null;
-    }
-    setCursor(mode) {
-      mode = mode || "default";
-      let applyStyles = true;
-      if (globalThis.OffscreenCanvas && this.domElement instanceof OffscreenCanvas) {
-        applyStyles = false;
-      }
-      if (this.currentCursor === mode) {
-        return;
-      }
-      this.currentCursor = mode;
-      const style = this.cursorStyles[mode];
-      if (style) {
-        switch (typeof style) {
-          case "string":
-            if (applyStyles) {
-              this.domElement.style.cursor = style;
-            }
-            break;
-          case "function":
-            style(mode);
-            break;
-          case "object":
-            if (applyStyles) {
-              Object.assign(this.domElement.style, style);
-            }
-            break;
-        }
-      } else if (applyStyles && typeof mode === "string" && !Object.prototype.hasOwnProperty.call(this.cursorStyles, mode)) {
-        this.domElement.style.cursor = mode;
-      }
-    }
-    get pointer() {
-      return this.rootPointerEvent;
-    }
-    onPointerDown(nativeEvent) {
-      if (!this.features.click)
-        return;
-      this.rootBoundary.rootTarget = this.renderer.lastObjectRendered;
-      if (this.supportsTouchEvents && nativeEvent.pointerType === "touch")
-        return;
-      const events = this.normalizeToPointerData(nativeEvent);
-      if (this.autoPreventDefault && events[0].isNormalized) {
-        const cancelable = nativeEvent.cancelable || !("cancelable" in nativeEvent);
-        if (cancelable) {
-          nativeEvent.preventDefault();
-        }
-      }
-      for (let i2 = 0, j2 = events.length; i2 < j2; i2++) {
-        const nativeEvent2 = events[i2];
-        const federatedEvent = this.bootstrapEvent(this.rootPointerEvent, nativeEvent2);
-        this.rootBoundary.mapEvent(federatedEvent);
-      }
-      this.setCursor(this.rootBoundary.cursor);
-    }
-    onPointerMove(nativeEvent) {
-      if (!this.features.move)
-        return;
-      this.rootBoundary.rootTarget = this.renderer.lastObjectRendered;
-      if (this.supportsTouchEvents && nativeEvent.pointerType === "touch")
-        return;
-      EventsTicker.pointerMoved();
-      const normalizedEvents = this.normalizeToPointerData(nativeEvent);
-      for (let i2 = 0, j2 = normalizedEvents.length; i2 < j2; i2++) {
-        const event = this.bootstrapEvent(this.rootPointerEvent, normalizedEvents[i2]);
-        this.rootBoundary.mapEvent(event);
-      }
-      this.setCursor(this.rootBoundary.cursor);
-    }
-    onPointerUp(nativeEvent) {
-      if (!this.features.click)
-        return;
-      this.rootBoundary.rootTarget = this.renderer.lastObjectRendered;
-      if (this.supportsTouchEvents && nativeEvent.pointerType === "touch")
-        return;
-      let target = nativeEvent.target;
-      if (nativeEvent.composedPath && nativeEvent.composedPath().length > 0) {
-        target = nativeEvent.composedPath()[0];
-      }
-      const outside = target !== this.domElement ? "outside" : "";
-      const normalizedEvents = this.normalizeToPointerData(nativeEvent);
-      for (let i2 = 0, j2 = normalizedEvents.length; i2 < j2; i2++) {
-        const event = this.bootstrapEvent(this.rootPointerEvent, normalizedEvents[i2]);
-        event.type += outside;
-        this.rootBoundary.mapEvent(event);
-      }
-      this.setCursor(this.rootBoundary.cursor);
-    }
-    onPointerOverOut(nativeEvent) {
-      if (!this.features.click)
-        return;
-      this.rootBoundary.rootTarget = this.renderer.lastObjectRendered;
-      if (this.supportsTouchEvents && nativeEvent.pointerType === "touch")
-        return;
-      const normalizedEvents = this.normalizeToPointerData(nativeEvent);
-      for (let i2 = 0, j2 = normalizedEvents.length; i2 < j2; i2++) {
-        const event = this.bootstrapEvent(this.rootPointerEvent, normalizedEvents[i2]);
-        this.rootBoundary.mapEvent(event);
-      }
-      this.setCursor(this.rootBoundary.cursor);
-    }
-    onWheel(nativeEvent) {
-      if (!this.features.wheel)
-        return;
-      const wheelEvent = this.normalizeWheelEvent(nativeEvent);
-      this.rootBoundary.rootTarget = this.renderer.lastObjectRendered;
-      this.rootBoundary.mapEvent(wheelEvent);
-    }
-    setTargetElement(element) {
-      this.removeEvents();
-      this.domElement = element;
-      EventsTicker.domElement = element;
-      this.addEvents();
-    }
-    addEvents() {
-      if (this.eventsAdded || !this.domElement) {
-        return;
-      }
-      EventsTicker.addTickerListener();
-      const style = this.domElement.style;
-      if (style) {
-        if (globalThis.navigator.msPointerEnabled) {
-          style.msContentZooming = "none";
-          style.msTouchAction = "none";
-        } else if (this.supportsPointerEvents) {
-          style.touchAction = "none";
-        }
-      }
-      if (this.supportsPointerEvents) {
-        globalThis.document.addEventListener("pointermove", this.onPointerMove, true);
-        this.domElement.addEventListener("pointerdown", this.onPointerDown, true);
-        this.domElement.addEventListener("pointerleave", this.onPointerOverOut, true);
-        this.domElement.addEventListener("pointerover", this.onPointerOverOut, true);
-        globalThis.addEventListener("pointerup", this.onPointerUp, true);
-      } else {
-        globalThis.document.addEventListener("mousemove", this.onPointerMove, true);
-        this.domElement.addEventListener("mousedown", this.onPointerDown, true);
-        this.domElement.addEventListener("mouseout", this.onPointerOverOut, true);
-        this.domElement.addEventListener("mouseover", this.onPointerOverOut, true);
-        globalThis.addEventListener("mouseup", this.onPointerUp, true);
-      }
-      if (this.supportsTouchEvents) {
-        this.domElement.addEventListener("touchstart", this.onPointerDown, true);
-        this.domElement.addEventListener("touchend", this.onPointerUp, true);
-        this.domElement.addEventListener("touchmove", this.onPointerMove, true);
-      }
-      this.domElement.addEventListener("wheel", this.onWheel, {
-        passive: true,
-        capture: true
-      });
-      this.eventsAdded = true;
-    }
-    removeEvents() {
-      if (!this.eventsAdded || !this.domElement) {
-        return;
-      }
-      EventsTicker.removeTickerListener();
-      const style = this.domElement.style;
-      if (globalThis.navigator.msPointerEnabled) {
-        style.msContentZooming = "";
-        style.msTouchAction = "";
-      } else if (this.supportsPointerEvents) {
-        style.touchAction = "";
-      }
-      if (this.supportsPointerEvents) {
-        globalThis.document.removeEventListener("pointermove", this.onPointerMove, true);
-        this.domElement.removeEventListener("pointerdown", this.onPointerDown, true);
-        this.domElement.removeEventListener("pointerleave", this.onPointerOverOut, true);
-        this.domElement.removeEventListener("pointerover", this.onPointerOverOut, true);
-        globalThis.removeEventListener("pointerup", this.onPointerUp, true);
-      } else {
-        globalThis.document.removeEventListener("mousemove", this.onPointerMove, true);
-        this.domElement.removeEventListener("mousedown", this.onPointerDown, true);
-        this.domElement.removeEventListener("mouseout", this.onPointerOverOut, true);
-        this.domElement.removeEventListener("mouseover", this.onPointerOverOut, true);
-        globalThis.removeEventListener("mouseup", this.onPointerUp, true);
-      }
-      if (this.supportsTouchEvents) {
-        this.domElement.removeEventListener("touchstart", this.onPointerDown, true);
-        this.domElement.removeEventListener("touchend", this.onPointerUp, true);
-        this.domElement.removeEventListener("touchmove", this.onPointerMove, true);
-      }
-      this.domElement.removeEventListener("wheel", this.onWheel, true);
-      this.domElement = null;
-      this.eventsAdded = false;
-    }
-    mapPositionToPoint(point, x2, y2) {
-      let rect;
-      if (!this.domElement.parentElement) {
-        rect = {
-          x: 0,
-          y: 0,
-          width: this.domElement.width,
-          height: this.domElement.height,
-          left: 0,
-          top: 0
-        };
-      } else {
-        rect = this.domElement.getBoundingClientRect();
-      }
-      const resolutionMultiplier = 1 / this.resolution;
-      point.x = (x2 - rect.left) * (this.domElement.width / rect.width) * resolutionMultiplier;
-      point.y = (y2 - rect.top) * (this.domElement.height / rect.height) * resolutionMultiplier;
-    }
-    normalizeToPointerData(event) {
-      const normalizedEvents = [];
-      if (this.supportsTouchEvents && event instanceof TouchEvent) {
-        for (let i2 = 0, li = event.changedTouches.length; i2 < li; i2++) {
-          const touch = event.changedTouches[i2];
-          if (typeof touch.button === "undefined")
-            touch.button = 0;
-          if (typeof touch.buttons === "undefined")
-            touch.buttons = 1;
-          if (typeof touch.isPrimary === "undefined") {
-            touch.isPrimary = event.touches.length === 1 && event.type === "touchstart";
-          }
-          if (typeof touch.width === "undefined")
-            touch.width = touch.radiusX || 1;
-          if (typeof touch.height === "undefined")
-            touch.height = touch.radiusY || 1;
-          if (typeof touch.tiltX === "undefined")
-            touch.tiltX = 0;
-          if (typeof touch.tiltY === "undefined")
-            touch.tiltY = 0;
-          if (typeof touch.pointerType === "undefined")
-            touch.pointerType = "touch";
-          if (typeof touch.pointerId === "undefined")
-            touch.pointerId = touch.identifier || 0;
-          if (typeof touch.pressure === "undefined")
-            touch.pressure = touch.force || 0.5;
-          if (typeof touch.twist === "undefined")
-            touch.twist = 0;
-          if (typeof touch.tangentialPressure === "undefined")
-            touch.tangentialPressure = 0;
-          if (typeof touch.layerX === "undefined")
-            touch.layerX = touch.offsetX = touch.clientX;
-          if (typeof touch.layerY === "undefined")
-            touch.layerY = touch.offsetY = touch.clientY;
-          touch.isNormalized = true;
-          touch.type = event.type;
-          normalizedEvents.push(touch);
-        }
-      } else if (!globalThis.MouseEvent || event instanceof MouseEvent && (!this.supportsPointerEvents || !(event instanceof globalThis.PointerEvent))) {
-        const tempEvent = event;
-        if (typeof tempEvent.isPrimary === "undefined")
-          tempEvent.isPrimary = true;
-        if (typeof tempEvent.width === "undefined")
-          tempEvent.width = 1;
-        if (typeof tempEvent.height === "undefined")
-          tempEvent.height = 1;
-        if (typeof tempEvent.tiltX === "undefined")
-          tempEvent.tiltX = 0;
-        if (typeof tempEvent.tiltY === "undefined")
-          tempEvent.tiltY = 0;
-        if (typeof tempEvent.pointerType === "undefined")
-          tempEvent.pointerType = "mouse";
-        if (typeof tempEvent.pointerId === "undefined")
-          tempEvent.pointerId = MOUSE_POINTER_ID;
-        if (typeof tempEvent.pressure === "undefined")
-          tempEvent.pressure = 0.5;
-        if (typeof tempEvent.twist === "undefined")
-          tempEvent.twist = 0;
-        if (typeof tempEvent.tangentialPressure === "undefined")
-          tempEvent.tangentialPressure = 0;
-        tempEvent.isNormalized = true;
-        normalizedEvents.push(tempEvent);
-      } else {
-        normalizedEvents.push(event);
-      }
-      return normalizedEvents;
-    }
-    normalizeWheelEvent(nativeEvent) {
-      const event = this.rootWheelEvent;
-      this.transferMouseData(event, nativeEvent);
-      event.deltaX = nativeEvent.deltaX;
-      event.deltaY = nativeEvent.deltaY;
-      event.deltaZ = nativeEvent.deltaZ;
-      event.deltaMode = nativeEvent.deltaMode;
-      this.mapPositionToPoint(event.screen, nativeEvent.clientX, nativeEvent.clientY);
-      event.global.copyFrom(event.screen);
-      event.offset.copyFrom(event.screen);
-      event.nativeEvent = nativeEvent;
-      event.type = nativeEvent.type;
-      return event;
-    }
-    bootstrapEvent(event, nativeEvent) {
-      event.originalEvent = null;
-      event.nativeEvent = nativeEvent;
-      event.pointerId = nativeEvent.pointerId;
-      event.width = nativeEvent.width;
-      event.height = nativeEvent.height;
-      event.isPrimary = nativeEvent.isPrimary;
-      event.pointerType = nativeEvent.pointerType;
-      event.pressure = nativeEvent.pressure;
-      event.tangentialPressure = nativeEvent.tangentialPressure;
-      event.tiltX = nativeEvent.tiltX;
-      event.tiltY = nativeEvent.tiltY;
-      event.twist = nativeEvent.twist;
-      this.transferMouseData(event, nativeEvent);
-      this.mapPositionToPoint(event.screen, nativeEvent.clientX, nativeEvent.clientY);
-      event.global.copyFrom(event.screen);
-      event.offset.copyFrom(event.screen);
-      event.isTrusted = nativeEvent.isTrusted;
-      if (event.type === "pointerleave") {
-        event.type = "pointerout";
-      }
-      if (event.type.startsWith("mouse")) {
-        event.type = event.type.replace("mouse", "pointer");
-      }
-      if (event.type.startsWith("touch")) {
-        event.type = TOUCH_TO_POINTER[event.type] || event.type;
-      }
-      return event;
-    }
-    transferMouseData(event, nativeEvent) {
-      event.isTrusted = nativeEvent.isTrusted;
-      event.srcElement = nativeEvent.srcElement;
-      event.timeStamp = performance.now();
-      event.type = nativeEvent.type;
-      event.altKey = nativeEvent.altKey;
-      event.button = nativeEvent.button;
-      event.buttons = nativeEvent.buttons;
-      event.client.x = nativeEvent.clientX;
-      event.client.y = nativeEvent.clientY;
-      event.ctrlKey = nativeEvent.ctrlKey;
-      event.metaKey = nativeEvent.metaKey;
-      event.movement.x = nativeEvent.movementX;
-      event.movement.y = nativeEvent.movementY;
-      event.page.x = nativeEvent.pageX;
-      event.page.y = nativeEvent.pageY;
-      event.relatedTarget = null;
-      event.shiftKey = nativeEvent.shiftKey;
-    }
-  };
-  let EventSystem = _EventSystem;
-  EventSystem.extension = {
-    name: "events",
-    type: [
-      ExtensionType.RendererSystem,
-      ExtensionType.CanvasRendererSystem
-    ]
-  };
-  EventSystem.defaultEventFeatures = {
-    move: true,
-    globalMove: true,
-    click: true,
-    wheel: true
-  };
-  extensions$1.add(EventSystem);
-  function convertEventModeToInteractiveMode(mode) {
-    return mode === "dynamic" || mode === "static";
-  }
-  const FederatedDisplayObject = {
-    onclick: null,
-    onmousedown: null,
-    onmouseenter: null,
-    onmouseleave: null,
-    onmousemove: null,
-    onglobalmousemove: null,
-    onmouseout: null,
-    onmouseover: null,
-    onmouseup: null,
-    onmouseupoutside: null,
-    onpointercancel: null,
-    onpointerdown: null,
-    onpointerenter: null,
-    onpointerleave: null,
-    onpointermove: null,
-    onglobalpointermove: null,
-    onpointerout: null,
-    onpointerover: null,
-    onpointertap: null,
-    onpointerup: null,
-    onpointerupoutside: null,
-    onrightclick: null,
-    onrightdown: null,
-    onrightup: null,
-    onrightupoutside: null,
-    ontap: null,
-    ontouchcancel: null,
-    ontouchend: null,
-    ontouchendoutside: null,
-    ontouchmove: null,
-    onglobaltouchmove: null,
-    ontouchstart: null,
-    onwheel: null,
-    _internalInteractive: void 0,
-    get interactive() {
-      var _a2;
-      return (_a2 = this._internalInteractive) != null ? _a2 : convertEventModeToInteractiveMode(EventSystem.defaultEventMode);
-    },
-    set interactive(value) {
-      deprecation("7.2.0", `Setting interactive is deprecated, use eventMode = 'none'/'passive'/'auto'/'static'/'dynamic' instead.`);
-      this._internalInteractive = value;
-      this.eventMode = value ? "static" : "auto";
-    },
-    _internalEventMode: void 0,
-    get eventMode() {
-      var _a2;
-      return (_a2 = this._internalEventMode) != null ? _a2 : EventSystem.defaultEventMode;
-    },
-    set eventMode(value) {
-      this._internalInteractive = convertEventModeToInteractiveMode(value);
-      this._internalEventMode = value;
-    },
-    isInteractive() {
-      return this.eventMode === "static" || this.eventMode === "dynamic";
-    },
-    interactiveChildren: true,
-    hitArea: null,
-    addEventListener(type, listener, options) {
-      const capture = typeof options === "boolean" && options || typeof options === "object" && options.capture;
-      const context2 = typeof listener === "function" ? void 0 : listener;
-      type = capture ? `${type}capture` : type;
-      listener = typeof listener === "function" ? listener : listener.handleEvent;
-      this.on(type, listener, context2);
-    },
-    removeEventListener(type, listener, options) {
-      const capture = typeof options === "boolean" && options || typeof options === "object" && options.capture;
-      const context2 = typeof listener === "function" ? void 0 : listener;
-      type = capture ? `${type}capture` : type;
-      listener = typeof listener === "function" ? listener : listener.handleEvent;
-      this.off(type, listener, context2);
-    },
-    dispatchEvent(e2) {
-      if (!(e2 instanceof FederatedEvent)) {
-        throw new Error("DisplayObject cannot propagate events outside of the Federated Events API");
-      }
-      e2.defaultPrevented = false;
-      e2.path = null;
-      e2.target = this;
-      e2.manager.dispatchEvent(e2);
-      return !e2.defaultPrevented;
-    }
-  };
-  DisplayObject.mixin(FederatedDisplayObject);
-  const accessibleTarget = {
-    accessible: false,
-    accessibleTitle: null,
-    accessibleHint: null,
-    tabIndex: 0,
-    _accessibleActive: false,
-    _accessibleDiv: null,
-    accessibleType: "button",
-    accessiblePointerEvents: "auto",
-    accessibleChildren: true,
-    renderId: -1
-  };
-  DisplayObject.mixin(accessibleTarget);
-  const KEY_CODE_TAB = 9;
-  const DIV_TOUCH_SIZE = 100;
-  const DIV_TOUCH_POS_X = 0;
-  const DIV_TOUCH_POS_Y = 0;
-  const DIV_TOUCH_ZINDEX = 2;
-  const DIV_HOOK_SIZE = 1;
-  const DIV_HOOK_POS_X = -1e3;
-  const DIV_HOOK_POS_Y = -1e3;
-  const DIV_HOOK_ZINDEX = 2;
-  class AccessibilityManager {
-    constructor(renderer) {
-      this.debug = false;
-      this._isActive = false;
-      this._isMobileAccessibility = false;
-      this.pool = [];
-      this.renderId = 0;
-      this.children = [];
-      this.androidUpdateCount = 0;
-      this.androidUpdateFrequency = 500;
-      this._hookDiv = null;
-      if (isMobile.tablet || isMobile.phone) {
-        this.createTouchHook();
-      }
-      const div = document.createElement("div");
-      div.style.width = `${DIV_TOUCH_SIZE}px`;
-      div.style.height = `${DIV_TOUCH_SIZE}px`;
-      div.style.position = "absolute";
-      div.style.top = `${DIV_TOUCH_POS_X}px`;
-      div.style.left = `${DIV_TOUCH_POS_Y}px`;
-      div.style.zIndex = DIV_TOUCH_ZINDEX.toString();
-      this.div = div;
-      this.renderer = renderer;
-      this._onKeyDown = this._onKeyDown.bind(this);
-      this._onMouseMove = this._onMouseMove.bind(this);
-      globalThis.addEventListener("keydown", this._onKeyDown, false);
-    }
-    get isActive() {
-      return this._isActive;
-    }
-    get isMobileAccessibility() {
-      return this._isMobileAccessibility;
-    }
-    createTouchHook() {
-      const hookDiv = document.createElement("button");
-      hookDiv.style.width = `${DIV_HOOK_SIZE}px`;
-      hookDiv.style.height = `${DIV_HOOK_SIZE}px`;
-      hookDiv.style.position = "absolute";
-      hookDiv.style.top = `${DIV_HOOK_POS_X}px`;
-      hookDiv.style.left = `${DIV_HOOK_POS_Y}px`;
-      hookDiv.style.zIndex = DIV_HOOK_ZINDEX.toString();
-      hookDiv.style.backgroundColor = "#FF0000";
-      hookDiv.title = "select to enable accessibility for this content";
-      hookDiv.addEventListener("focus", () => {
-        this._isMobileAccessibility = true;
-        this.activate();
-        this.destroyTouchHook();
-      });
-      document.body.appendChild(hookDiv);
-      this._hookDiv = hookDiv;
-    }
-    destroyTouchHook() {
-      if (!this._hookDiv) {
-        return;
-      }
-      document.body.removeChild(this._hookDiv);
-      this._hookDiv = null;
-    }
-    activate() {
-      var _a2;
-      if (this._isActive) {
-        return;
-      }
-      this._isActive = true;
-      globalThis.document.addEventListener("mousemove", this._onMouseMove, true);
-      globalThis.removeEventListener("keydown", this._onKeyDown, false);
-      this.renderer.on("postrender", this.update, this);
-      (_a2 = this.renderer.view.parentNode) == null ? void 0 : _a2.appendChild(this.div);
-    }
-    deactivate() {
-      var _a2;
-      if (!this._isActive || this._isMobileAccessibility) {
-        return;
-      }
-      this._isActive = false;
-      globalThis.document.removeEventListener("mousemove", this._onMouseMove, true);
-      globalThis.addEventListener("keydown", this._onKeyDown, false);
-      this.renderer.off("postrender", this.update);
-      (_a2 = this.div.parentNode) == null ? void 0 : _a2.removeChild(this.div);
-    }
-    updateAccessibleObjects(displayObject) {
-      if (!displayObject.visible || !displayObject.accessibleChildren) {
-        return;
-      }
-      if (displayObject.accessible && displayObject.isInteractive()) {
-        if (!displayObject._accessibleActive) {
-          this.addChild(displayObject);
-        }
-        displayObject.renderId = this.renderId;
-      }
-      const children = displayObject.children;
-      if (children) {
-        for (let i2 = 0; i2 < children.length; i2++) {
-          this.updateAccessibleObjects(children[i2]);
-        }
-      }
-    }
-    update() {
-      const now = performance.now();
-      if (isMobile.android.device && now < this.androidUpdateCount) {
-        return;
-      }
-      this.androidUpdateCount = now + this.androidUpdateFrequency;
-      if (!this.renderer.renderingToScreen) {
-        return;
-      }
-      if (this.renderer.lastObjectRendered) {
-        this.updateAccessibleObjects(this.renderer.lastObjectRendered);
-      }
-      const { x: x2, y: y2, width, height } = this.renderer.view.getBoundingClientRect();
-      const { width: viewWidth, height: viewHeight, resolution } = this.renderer;
-      const sx = width / viewWidth * resolution;
-      const sy = height / viewHeight * resolution;
-      let div = this.div;
-      div.style.left = `${x2}px`;
-      div.style.top = `${y2}px`;
-      div.style.width = `${viewWidth}px`;
-      div.style.height = `${viewHeight}px`;
-      for (let i2 = 0; i2 < this.children.length; i2++) {
-        const child = this.children[i2];
-        if (child.renderId !== this.renderId) {
-          child._accessibleActive = false;
-          removeItems(this.children, i2, 1);
-          this.div.removeChild(child._accessibleDiv);
-          this.pool.push(child._accessibleDiv);
-          child._accessibleDiv = null;
-          i2--;
-        } else {
-          div = child._accessibleDiv;
-          let hitArea = child.hitArea;
-          const wt = child.worldTransform;
-          if (child.hitArea) {
-            div.style.left = `${(wt.tx + hitArea.x * wt.a) * sx}px`;
-            div.style.top = `${(wt.ty + hitArea.y * wt.d) * sy}px`;
-            div.style.width = `${hitArea.width * wt.a * sx}px`;
-            div.style.height = `${hitArea.height * wt.d * sy}px`;
-          } else {
-            hitArea = child.getBounds();
-            this.capHitArea(hitArea);
-            div.style.left = `${hitArea.x * sx}px`;
-            div.style.top = `${hitArea.y * sy}px`;
-            div.style.width = `${hitArea.width * sx}px`;
-            div.style.height = `${hitArea.height * sy}px`;
-            if (div.title !== child.accessibleTitle && child.accessibleTitle !== null) {
-              div.title = child.accessibleTitle;
-            }
-            if (div.getAttribute("aria-label") !== child.accessibleHint && child.accessibleHint !== null) {
-              div.setAttribute("aria-label", child.accessibleHint);
-            }
-          }
-          if (child.accessibleTitle !== div.title || child.tabIndex !== div.tabIndex) {
-            div.title = child.accessibleTitle;
-            div.tabIndex = child.tabIndex;
-            if (this.debug)
-              this.updateDebugHTML(div);
-          }
-        }
-      }
-      this.renderId++;
-    }
-    updateDebugHTML(div) {
-      div.innerHTML = `type: ${div.type}</br> title : ${div.title}</br> tabIndex: ${div.tabIndex}`;
-    }
-    capHitArea(hitArea) {
-      if (hitArea.x < 0) {
-        hitArea.width += hitArea.x;
-        hitArea.x = 0;
-      }
-      if (hitArea.y < 0) {
-        hitArea.height += hitArea.y;
-        hitArea.y = 0;
-      }
-      const { width: viewWidth, height: viewHeight } = this.renderer;
-      if (hitArea.x + hitArea.width > viewWidth) {
-        hitArea.width = viewWidth - hitArea.x;
-      }
-      if (hitArea.y + hitArea.height > viewHeight) {
-        hitArea.height = viewHeight - hitArea.y;
-      }
-    }
-    addChild(displayObject) {
-      let div = this.pool.pop();
-      if (!div) {
-        div = document.createElement("button");
-        div.style.width = `${DIV_TOUCH_SIZE}px`;
-        div.style.height = `${DIV_TOUCH_SIZE}px`;
-        div.style.backgroundColor = this.debug ? "rgba(255,255,255,0.5)" : "transparent";
-        div.style.position = "absolute";
-        div.style.zIndex = DIV_TOUCH_ZINDEX.toString();
-        div.style.borderStyle = "none";
-        if (navigator.userAgent.toLowerCase().includes("chrome")) {
-          div.setAttribute("aria-live", "off");
-        } else {
-          div.setAttribute("aria-live", "polite");
-        }
-        if (navigator.userAgent.match(/rv:.*Gecko\//)) {
-          div.setAttribute("aria-relevant", "additions");
-        } else {
-          div.setAttribute("aria-relevant", "text");
-        }
-        div.addEventListener("click", this._onClick.bind(this));
-        div.addEventListener("focus", this._onFocus.bind(this));
-        div.addEventListener("focusout", this._onFocusOut.bind(this));
-      }
-      div.style.pointerEvents = displayObject.accessiblePointerEvents;
-      div.type = displayObject.accessibleType;
-      if (displayObject.accessibleTitle && displayObject.accessibleTitle !== null) {
-        div.title = displayObject.accessibleTitle;
-      } else if (!displayObject.accessibleHint || displayObject.accessibleHint === null) {
-        div.title = `displayObject ${displayObject.tabIndex}`;
-      }
-      if (displayObject.accessibleHint && displayObject.accessibleHint !== null) {
-        div.setAttribute("aria-label", displayObject.accessibleHint);
-      }
-      if (this.debug)
-        this.updateDebugHTML(div);
-      displayObject._accessibleActive = true;
-      displayObject._accessibleDiv = div;
-      div.displayObject = displayObject;
-      this.children.push(displayObject);
-      this.div.appendChild(displayObject._accessibleDiv);
-      displayObject._accessibleDiv.tabIndex = displayObject.tabIndex;
-    }
-    _dispatchEvent(e2, type) {
-      const { displayObject: target } = e2.target;
-      const boundry = this.renderer.events.rootBoundary;
-      const event = Object.assign(new FederatedEvent(boundry), { target });
-      boundry.rootTarget = this.renderer.lastObjectRendered;
-      type.forEach((type2) => boundry.dispatchEvent(event, type2));
-    }
-    _onClick(e2) {
-      this._dispatchEvent(e2, ["click", "pointertap", "tap"]);
-    }
-    _onFocus(e2) {
-      if (!e2.target.getAttribute("aria-live")) {
-        e2.target.setAttribute("aria-live", "assertive");
-      }
-      this._dispatchEvent(e2, ["mouseover"]);
-    }
-    _onFocusOut(e2) {
-      if (!e2.target.getAttribute("aria-live")) {
-        e2.target.setAttribute("aria-live", "polite");
-      }
-      this._dispatchEvent(e2, ["mouseout"]);
-    }
-    _onKeyDown(e2) {
-      if (e2.keyCode !== KEY_CODE_TAB) {
-        return;
-      }
-      this.activate();
-    }
-    _onMouseMove(e2) {
-      if (e2.movementX === 0 && e2.movementY === 0) {
-        return;
-      }
-      this.deactivate();
-    }
-    destroy() {
-      this.destroyTouchHook();
-      this.div = null;
-      globalThis.document.removeEventListener("mousemove", this._onMouseMove, true);
-      globalThis.removeEventListener("keydown", this._onKeyDown);
-      this.pool = null;
-      this.children = null;
-      this.renderer = null;
-    }
-  }
-  AccessibilityManager.extension = {
-    name: "accessibility",
-    type: [
-      ExtensionType.RendererPlugin,
-      ExtensionType.CanvasRendererPlugin
-    ]
-  };
-  extensions$1.add(AccessibilityManager);
   const _Application = class {
     constructor(options) {
       this.stage = new Container();
@@ -15504,10 +13854,10 @@ void main() {
   class ResizePlugin {
     static init(options) {
       Object.defineProperty(this, "resizeTo", {
-        set(dom) {
+        set(dom2) {
           globalThis.removeEventListener("resize", this.queueResize);
-          this._resizeTo = dom;
-          if (dom) {
+          this._resizeTo = dom2;
+          if (dom2) {
             globalThis.addEventListener("resize", this.queueResize);
             this.resize();
           }
@@ -15678,8 +14028,8 @@ void main() {
     if (result) {
       const ids = [];
       result.forEach((vars) => {
-        const split = vars.substring(1, vars.length - 1).split(",");
-        ids.push(split);
+        const split2 = vars.substring(1, vars.length - 1).split(",");
+        ids.push(split2);
       });
       processX(string, ids, 0, result, tags);
     } else {
@@ -21084,8 +19434,8 @@ ${e2}`);
       this.dirty = true;
     }
   };
-  let Text = _Text;
-  Text.defaultAutoResolution = true;
+  let Text$1 = _Text;
+  Text$1.defaultAutoResolution = true;
   class CountLimiter {
     constructor(maxItemsPerFrame) {
       this.maxItemsPerFrame = maxItemsPerFrame;
@@ -21135,7 +19485,7 @@ ${e2}`);
     return false;
   }
   function drawText(_helper, item) {
-    if (item instanceof Text) {
+    if (item instanceof Text$1) {
       item.updateText(true);
       return true;
     }
@@ -21150,7 +19500,7 @@ ${e2}`);
     return false;
   }
   function findText(item, queue) {
-    if (item instanceof Text) {
+    if (item instanceof Text$1) {
       if (!queue.includes(item.style)) {
         queue.push(item.style);
       }
@@ -21568,17 +19918,17 @@ ${e2}`);
     resolver: {
       test: (value) => {
         const tempURL = value.split("?")[0];
-        const split = tempURL.split(".");
-        const extension = split.pop();
-        const format2 = split.pop();
+        const split2 = tempURL.split(".");
+        const extension = split2.pop();
+        const format2 = split2.pop();
         return extension === "json" && validImages.includes(format2);
       },
       parse: (value) => {
         var _a2, _b;
-        const split = value.split(".");
+        const split2 = value.split(".");
         return {
           resolution: parseFloat((_b = (_a2 = settings.RETINA_PREFIX.exec(value)) == null ? void 0 : _a2[1]) != null ? _b : "1"),
-          format: split[split.length - 2],
+          format: split2[split2.length - 2],
           src: value
         };
       }
@@ -21668,9 +20018,9 @@ ${e2}`);
         const attributeList = items[i2].match(/[a-zA-Z]+=([^\s"']+|"([^"]*)")/gm);
         const itemData = {};
         for (const i22 in attributeList) {
-          const split = attributeList[i22].split("=");
-          const key = split[0];
-          const strValue = split[1].replace(/"/gm, "");
+          const split2 = attributeList[i22].split("=");
+          const key = split2[0];
+          const strValue = split2[1].replace(/"/gm, "");
           const floatValue = parseFloat(strValue);
           const value = isNaN(floatValue) ? strValue : floatValue;
           itemData[key] = value;
@@ -22655,504 +21005,2348 @@ ${e2}`);
     }
   };
   extensions$1.add(loadBitmapFont);
-  const _HTMLTextStyle = class extends TextStyle {
-    constructor() {
-      super(...arguments);
-      this._fonts = [];
-      this._overrides = [];
-      this._stylesheet = "";
-      this.fontsDirty = false;
+  var dom$1 = {};
+  var conventions$2 = {};
+  function find$1(list, predicate, ac) {
+    if (ac === void 0) {
+      ac = Array.prototype;
     }
-    static from(originalStyle) {
-      return new _HTMLTextStyle(Object.keys(_HTMLTextStyle.defaultOptions).reduce((obj, prop) => ({ ...obj, [prop]: originalStyle[prop] }), {}));
+    if (list && typeof ac.find === "function") {
+      return ac.find.call(list, predicate);
     }
-    cleanFonts() {
-      if (this._fonts.length > 0) {
-        this._fonts.forEach((font) => {
-          URL.revokeObjectURL(font.src);
-          font.refs--;
-          if (font.refs === 0) {
-            if (font.fontFace) {
-              document.fonts.delete(font.fontFace);
+    for (var i2 = 0; i2 < list.length; i2++) {
+      if (Object.prototype.hasOwnProperty.call(list, i2)) {
+        var item = list[i2];
+        if (predicate.call(void 0, item, i2, list)) {
+          return item;
+        }
+      }
+    }
+  }
+  function freeze(object, oc) {
+    if (oc === void 0) {
+      oc = Object;
+    }
+    return oc && typeof oc.freeze === "function" ? oc.freeze(object) : object;
+  }
+  function assign(target, source) {
+    if (target === null || typeof target !== "object") {
+      throw new TypeError("target is not an object");
+    }
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  var MIME_TYPE = freeze({
+    HTML: "text/html",
+    isHTML: function(value) {
+      return value === MIME_TYPE.HTML;
+    },
+    XML_APPLICATION: "application/xml",
+    XML_TEXT: "text/xml",
+    XML_XHTML_APPLICATION: "application/xhtml+xml",
+    XML_SVG_IMAGE: "image/svg+xml"
+  });
+  var NAMESPACE$3 = freeze({
+    HTML: "http://www.w3.org/1999/xhtml",
+    isHTML: function(uri) {
+      return uri === NAMESPACE$3.HTML;
+    },
+    SVG: "http://www.w3.org/2000/svg",
+    XML: "http://www.w3.org/XML/1998/namespace",
+    XMLNS: "http://www.w3.org/2000/xmlns/"
+  });
+  conventions$2.assign = assign;
+  conventions$2.find = find$1;
+  conventions$2.freeze = freeze;
+  conventions$2.MIME_TYPE = MIME_TYPE;
+  conventions$2.NAMESPACE = NAMESPACE$3;
+  var conventions$1 = conventions$2;
+  var find = conventions$1.find;
+  var NAMESPACE$2 = conventions$1.NAMESPACE;
+  function notEmptyString(input) {
+    return input !== "";
+  }
+  function splitOnASCIIWhitespace(input) {
+    return input ? input.split(/[\t\n\f\r ]+/).filter(notEmptyString) : [];
+  }
+  function orderedSetReducer(current, element) {
+    if (!current.hasOwnProperty(element)) {
+      current[element] = true;
+    }
+    return current;
+  }
+  function toOrderedSet(input) {
+    if (!input)
+      return [];
+    var list = splitOnASCIIWhitespace(input);
+    return Object.keys(list.reduce(orderedSetReducer, {}));
+  }
+  function arrayIncludes(list) {
+    return function(element) {
+      return list && list.indexOf(element) !== -1;
+    };
+  }
+  function copy(src, dest) {
+    for (var p2 in src) {
+      if (Object.prototype.hasOwnProperty.call(src, p2)) {
+        dest[p2] = src[p2];
+      }
+    }
+  }
+  function _extends(Class, Super) {
+    var pt = Class.prototype;
+    if (!(pt instanceof Super)) {
+      let t2 = function() {
+      };
+      t2.prototype = Super.prototype;
+      t2 = new t2();
+      copy(pt, t2);
+      Class.prototype = pt = t2;
+    }
+    if (pt.constructor != Class) {
+      if (typeof Class != "function") {
+        console.error("unknown Class:" + Class);
+      }
+      pt.constructor = Class;
+    }
+  }
+  var NodeType = {};
+  var ELEMENT_NODE = NodeType.ELEMENT_NODE = 1;
+  var ATTRIBUTE_NODE = NodeType.ATTRIBUTE_NODE = 2;
+  var TEXT_NODE = NodeType.TEXT_NODE = 3;
+  var CDATA_SECTION_NODE = NodeType.CDATA_SECTION_NODE = 4;
+  var ENTITY_REFERENCE_NODE = NodeType.ENTITY_REFERENCE_NODE = 5;
+  var ENTITY_NODE = NodeType.ENTITY_NODE = 6;
+  var PROCESSING_INSTRUCTION_NODE = NodeType.PROCESSING_INSTRUCTION_NODE = 7;
+  var COMMENT_NODE = NodeType.COMMENT_NODE = 8;
+  var DOCUMENT_NODE = NodeType.DOCUMENT_NODE = 9;
+  var DOCUMENT_TYPE_NODE = NodeType.DOCUMENT_TYPE_NODE = 10;
+  var DOCUMENT_FRAGMENT_NODE = NodeType.DOCUMENT_FRAGMENT_NODE = 11;
+  var NOTATION_NODE = NodeType.NOTATION_NODE = 12;
+  var ExceptionCode = {};
+  var ExceptionMessage = {};
+  ExceptionCode.INDEX_SIZE_ERR = (ExceptionMessage[1] = "Index size error", 1);
+  ExceptionCode.DOMSTRING_SIZE_ERR = (ExceptionMessage[2] = "DOMString size error", 2);
+  var HIERARCHY_REQUEST_ERR = ExceptionCode.HIERARCHY_REQUEST_ERR = (ExceptionMessage[3] = "Hierarchy request error", 3);
+  ExceptionCode.WRONG_DOCUMENT_ERR = (ExceptionMessage[4] = "Wrong document", 4);
+  ExceptionCode.INVALID_CHARACTER_ERR = (ExceptionMessage[5] = "Invalid character", 5);
+  ExceptionCode.NO_DATA_ALLOWED_ERR = (ExceptionMessage[6] = "No data allowed", 6);
+  ExceptionCode.NO_MODIFICATION_ALLOWED_ERR = (ExceptionMessage[7] = "No modification allowed", 7);
+  var NOT_FOUND_ERR = ExceptionCode.NOT_FOUND_ERR = (ExceptionMessage[8] = "Not found", 8);
+  ExceptionCode.NOT_SUPPORTED_ERR = (ExceptionMessage[9] = "Not supported", 9);
+  var INUSE_ATTRIBUTE_ERR = ExceptionCode.INUSE_ATTRIBUTE_ERR = (ExceptionMessage[10] = "Attribute in use", 10);
+  ExceptionCode.INVALID_STATE_ERR = (ExceptionMessage[11] = "Invalid state", 11);
+  ExceptionCode.SYNTAX_ERR = (ExceptionMessage[12] = "Syntax error", 12);
+  ExceptionCode.INVALID_MODIFICATION_ERR = (ExceptionMessage[13] = "Invalid modification", 13);
+  ExceptionCode.NAMESPACE_ERR = (ExceptionMessage[14] = "Invalid namespace", 14);
+  ExceptionCode.INVALID_ACCESS_ERR = (ExceptionMessage[15] = "Invalid access", 15);
+  function DOMException(code, message) {
+    if (message instanceof Error) {
+      var error = message;
+    } else {
+      error = this;
+      Error.call(this, ExceptionMessage[code]);
+      this.message = ExceptionMessage[code];
+      if (Error.captureStackTrace)
+        Error.captureStackTrace(this, DOMException);
+    }
+    error.code = code;
+    if (message)
+      this.message = this.message + ": " + message;
+    return error;
+  }
+  DOMException.prototype = Error.prototype;
+  copy(ExceptionCode, DOMException);
+  function NodeList() {
+  }
+  NodeList.prototype = {
+    length: 0,
+    item: function(index) {
+      return this[index] || null;
+    },
+    toString: function(isHTML, nodeFilter) {
+      for (var buf = [], i2 = 0; i2 < this.length; i2++) {
+        serializeToString(this[i2], buf, isHTML, nodeFilter);
+      }
+      return buf.join("");
+    },
+    filter: function(predicate) {
+      return Array.prototype.filter.call(this, predicate);
+    },
+    indexOf: function(item) {
+      return Array.prototype.indexOf.call(this, item);
+    }
+  };
+  function LiveNodeList(node, refresh) {
+    this._node = node;
+    this._refresh = refresh;
+    _updateLiveList(this);
+  }
+  function _updateLiveList(list) {
+    var inc = list._node._inc || list._node.ownerDocument._inc;
+    if (list._inc != inc) {
+      var ls = list._refresh(list._node);
+      __set__(list, "length", ls.length);
+      copy(ls, list);
+      list._inc = inc;
+    }
+  }
+  LiveNodeList.prototype.item = function(i2) {
+    _updateLiveList(this);
+    return this[i2];
+  };
+  _extends(LiveNodeList, NodeList);
+  function NamedNodeMap() {
+  }
+  function _findNodeIndex(list, node) {
+    var i2 = list.length;
+    while (i2--) {
+      if (list[i2] === node) {
+        return i2;
+      }
+    }
+  }
+  function _addNamedNode(el, list, newAttr, oldAttr) {
+    if (oldAttr) {
+      list[_findNodeIndex(list, oldAttr)] = newAttr;
+    } else {
+      list[list.length++] = newAttr;
+    }
+    if (el) {
+      newAttr.ownerElement = el;
+      var doc = el.ownerDocument;
+      if (doc) {
+        oldAttr && _onRemoveAttribute(doc, el, oldAttr);
+        _onAddAttribute(doc, el, newAttr);
+      }
+    }
+  }
+  function _removeNamedNode(el, list, attr) {
+    var i2 = _findNodeIndex(list, attr);
+    if (i2 >= 0) {
+      var lastIndex = list.length - 1;
+      while (i2 < lastIndex) {
+        list[i2] = list[++i2];
+      }
+      list.length = lastIndex;
+      if (el) {
+        var doc = el.ownerDocument;
+        if (doc) {
+          _onRemoveAttribute(doc, el, attr);
+          attr.ownerElement = null;
+        }
+      }
+    } else {
+      throw new DOMException(NOT_FOUND_ERR, new Error(el.tagName + "@" + attr));
+    }
+  }
+  NamedNodeMap.prototype = {
+    length: 0,
+    item: NodeList.prototype.item,
+    getNamedItem: function(key) {
+      var i2 = this.length;
+      while (i2--) {
+        var attr = this[i2];
+        if (attr.nodeName == key) {
+          return attr;
+        }
+      }
+    },
+    setNamedItem: function(attr) {
+      var el = attr.ownerElement;
+      if (el && el != this._ownerElement) {
+        throw new DOMException(INUSE_ATTRIBUTE_ERR);
+      }
+      var oldAttr = this.getNamedItem(attr.nodeName);
+      _addNamedNode(this._ownerElement, this, attr, oldAttr);
+      return oldAttr;
+    },
+    setNamedItemNS: function(attr) {
+      var el = attr.ownerElement, oldAttr;
+      if (el && el != this._ownerElement) {
+        throw new DOMException(INUSE_ATTRIBUTE_ERR);
+      }
+      oldAttr = this.getNamedItemNS(attr.namespaceURI, attr.localName);
+      _addNamedNode(this._ownerElement, this, attr, oldAttr);
+      return oldAttr;
+    },
+    removeNamedItem: function(key) {
+      var attr = this.getNamedItem(key);
+      _removeNamedNode(this._ownerElement, this, attr);
+      return attr;
+    },
+    removeNamedItemNS: function(namespaceURI, localName) {
+      var attr = this.getNamedItemNS(namespaceURI, localName);
+      _removeNamedNode(this._ownerElement, this, attr);
+      return attr;
+    },
+    getNamedItemNS: function(namespaceURI, localName) {
+      var i2 = this.length;
+      while (i2--) {
+        var node = this[i2];
+        if (node.localName == localName && node.namespaceURI == namespaceURI) {
+          return node;
+        }
+      }
+      return null;
+    }
+  };
+  function DOMImplementation$1() {
+  }
+  DOMImplementation$1.prototype = {
+    hasFeature: function(feature, version) {
+      return true;
+    },
+    createDocument: function(namespaceURI, qualifiedName, doctype) {
+      var doc = new Document();
+      doc.implementation = this;
+      doc.childNodes = new NodeList();
+      doc.doctype = doctype || null;
+      if (doctype) {
+        doc.appendChild(doctype);
+      }
+      if (qualifiedName) {
+        var root = doc.createElementNS(namespaceURI, qualifiedName);
+        doc.appendChild(root);
+      }
+      return doc;
+    },
+    createDocumentType: function(qualifiedName, publicId, systemId) {
+      var node = new DocumentType();
+      node.name = qualifiedName;
+      node.nodeName = qualifiedName;
+      node.publicId = publicId || "";
+      node.systemId = systemId || "";
+      return node;
+    }
+  };
+  function Node() {
+  }
+  Node.prototype = {
+    firstChild: null,
+    lastChild: null,
+    previousSibling: null,
+    nextSibling: null,
+    attributes: null,
+    parentNode: null,
+    childNodes: null,
+    ownerDocument: null,
+    nodeValue: null,
+    namespaceURI: null,
+    prefix: null,
+    localName: null,
+    insertBefore: function(newChild, refChild) {
+      return _insertBefore(this, newChild, refChild);
+    },
+    replaceChild: function(newChild, oldChild) {
+      _insertBefore(this, newChild, oldChild, assertPreReplacementValidityInDocument);
+      if (oldChild) {
+        this.removeChild(oldChild);
+      }
+    },
+    removeChild: function(oldChild) {
+      return _removeChild(this, oldChild);
+    },
+    appendChild: function(newChild) {
+      return this.insertBefore(newChild, null);
+    },
+    hasChildNodes: function() {
+      return this.firstChild != null;
+    },
+    cloneNode: function(deep) {
+      return cloneNode(this.ownerDocument || this, this, deep);
+    },
+    normalize: function() {
+      var child = this.firstChild;
+      while (child) {
+        var next = child.nextSibling;
+        if (next && next.nodeType == TEXT_NODE && child.nodeType == TEXT_NODE) {
+          this.removeChild(next);
+          child.appendData(next.data);
+        } else {
+          child.normalize();
+          child = next;
+        }
+      }
+    },
+    isSupported: function(feature, version) {
+      return this.ownerDocument.implementation.hasFeature(feature, version);
+    },
+    hasAttributes: function() {
+      return this.attributes.length > 0;
+    },
+    lookupPrefix: function(namespaceURI) {
+      var el = this;
+      while (el) {
+        var map2 = el._nsMap;
+        if (map2) {
+          for (var n2 in map2) {
+            if (Object.prototype.hasOwnProperty.call(map2, n2) && map2[n2] === namespaceURI) {
+              return n2;
             }
-            delete _HTMLTextStyle.availableFonts[font.originalUrl];
           }
-        });
-        this.fontFamily = "Arial";
-        this._fonts.length = 0;
-        this.styleID++;
-        this.fontsDirty = true;
+        }
+        el = el.nodeType == ATTRIBUTE_NODE ? el.ownerDocument : el.parentNode;
       }
-    }
-    loadFont(url2, options = {}) {
-      const { availableFonts } = _HTMLTextStyle;
-      if (availableFonts[url2]) {
-        const font = availableFonts[url2];
-        this._fonts.push(font);
-        font.refs++;
-        this.styleID++;
-        this.fontsDirty = true;
-        return Promise.resolve();
+      return null;
+    },
+    lookupNamespaceURI: function(prefix) {
+      var el = this;
+      while (el) {
+        var map2 = el._nsMap;
+        if (map2) {
+          if (Object.prototype.hasOwnProperty.call(map2, prefix)) {
+            return map2[prefix];
+          }
+        }
+        el = el.nodeType == ATTRIBUTE_NODE ? el.ownerDocument : el.parentNode;
       }
-      return settings.ADAPTER.fetch(url2).then((response) => response.blob()).then(async (blob) => new Promise((resolve2, reject) => {
-        const src = URL.createObjectURL(blob);
-        const reader = new FileReader();
-        reader.onload = () => resolve2([src, reader.result]);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      })).then(async ([src, dataSrc]) => {
-        const font = Object.assign({
-          family: path.basename(url2, path.extname(url2)),
-          weight: "normal",
-          style: "normal",
-          src,
-          dataSrc,
-          refs: 1,
-          originalUrl: url2,
-          fontFace: null
-        }, options);
-        availableFonts[url2] = font;
-        this._fonts.push(font);
-        this.styleID++;
-        const fontFace = new FontFace(font.family, `url(${font.src})`, {
-          weight: font.weight,
-          style: font.style
-        });
-        font.fontFace = fontFace;
-        await fontFace.load();
-        document.fonts.add(fontFace);
-        await document.fonts.ready;
-        this.styleID++;
-        this.fontsDirty = true;
-      });
-    }
-    addOverride(...value) {
-      const toAdd = value.filter((v2) => !this._overrides.includes(v2));
-      if (toAdd.length > 0) {
-        this._overrides.push(...toAdd);
-        this.styleID++;
-      }
-    }
-    removeOverride(...value) {
-      const toRemove = value.filter((v2) => this._overrides.includes(v2));
-      if (toRemove.length > 0) {
-        this._overrides = this._overrides.filter((v2) => !toRemove.includes(v2));
-        this.styleID++;
-      }
-    }
-    toCSS(scale) {
-      return [
-        `transform: scale(${scale})`,
-        `transform-origin: top left`,
-        "display: inline-block",
-        `color: ${this.normalizeColor(this.fill)}`,
-        `font-size: ${this.fontSize}px`,
-        `font-family: ${this.fontFamily}`,
-        `font-weight: ${this.fontWeight}`,
-        `font-style: ${this.fontStyle}`,
-        `font-variant: ${this.fontVariant}`,
-        `letter-spacing: ${this.letterSpacing}px`,
-        `text-align: ${this.align}`,
-        `padding: ${this.padding}px`,
-        `white-space: ${this.whiteSpace}`,
-        ...this.lineHeight ? [`line-height: ${this.lineHeight}px`] : [],
-        ...this.wordWrap ? [
-          `word-wrap: ${this.breakWords ? "break-all" : "break-word"}`,
-          `max-width: ${this.wordWrapWidth}px`
-        ] : [],
-        ...this.strokeThickness ? [
-          `-webkit-text-stroke-width: ${this.strokeThickness}px`,
-          `-webkit-text-stroke-color: ${this.normalizeColor(this.stroke)}`,
-          `text-stroke-width: ${this.strokeThickness}px`,
-          `text-stroke-color: ${this.normalizeColor(this.stroke)}`,
-          "paint-order: stroke"
-        ] : [],
-        ...this.dropShadow ? [this.dropShadowToCSS()] : [],
-        ...this._overrides
-      ].join(";");
-    }
-    toGlobalCSS() {
-      return this._fonts.reduce((result, font) => `${result}
-            @font-face {
-                font-family: "${font.family}";
-                src: url('${font.dataSrc}');
-                font-weight: ${font.weight};
-                font-style: ${font.style}; 
-            }`, this._stylesheet);
-    }
-    get stylesheet() {
-      return this._stylesheet;
-    }
-    set stylesheet(value) {
-      if (this._stylesheet !== value) {
-        this._stylesheet = value;
-        this.styleID++;
-      }
-    }
-    normalizeColor(color) {
-      if (Array.isArray(color)) {
-        color = rgb2hex(color);
-      }
-      if (typeof color === "number") {
-        return hex2string(color);
-      }
-      return color;
-    }
-    dropShadowToCSS() {
-      let color = this.normalizeColor(this.dropShadowColor);
-      const alpha = this.dropShadowAlpha;
-      const x2 = Math.round(Math.cos(this.dropShadowAngle) * this.dropShadowDistance);
-      const y2 = Math.round(Math.sin(this.dropShadowAngle) * this.dropShadowDistance);
-      if (color.startsWith("#") && alpha < 1) {
-        color += (alpha * 255 | 0).toString(16).padStart(2, "0");
-      }
-      const position = `${x2}px ${y2}px`;
-      if (this.dropShadowBlur > 0) {
-        return `text-shadow: ${position} ${this.dropShadowBlur}px ${color}`;
-      }
-      return `text-shadow: ${position} ${color}`;
-    }
-    reset() {
-      Object.assign(this, _HTMLTextStyle.defaultOptions);
-    }
-    onBeforeDraw() {
-      const { fontsDirty: prevFontsDirty } = this;
-      this.fontsDirty = false;
-      if (this.isSafari && this._fonts.length > 0 && prevFontsDirty) {
-        return new Promise((resolve2) => setTimeout(resolve2, 100));
-      }
-      return Promise.resolve();
-    }
-    get isSafari() {
-      const { userAgent } = settings.ADAPTER.getNavigator();
-      return /^((?!chrome|android).)*safari/i.test(userAgent);
-    }
-    set fillGradientStops(_value) {
-      console.warn("[HTMLTextStyle] fillGradientStops is not supported by HTMLText");
-    }
-    get fillGradientStops() {
-      return super.fillGradientStops;
-    }
-    set fillGradientType(_value) {
-      console.warn("[HTMLTextStyle] fillGradientType is not supported by HTMLText");
-    }
-    get fillGradientType() {
-      return super.fillGradientType;
-    }
-    set miterLimit(_value) {
-      console.warn("[HTMLTextStyle] miterLimit is not supported by HTMLText");
-    }
-    get miterLimit() {
-      return super.miterLimit;
-    }
-    set trim(_value) {
-      console.warn("[HTMLTextStyle] trim is not supported by HTMLText");
-    }
-    get trim() {
-      return super.trim;
-    }
-    set textBaseline(_value) {
-      console.warn("[HTMLTextStyle] textBaseline is not supported by HTMLText");
-    }
-    get textBaseline() {
-      return super.textBaseline;
-    }
-    set leading(_value) {
-      console.warn("[HTMLTextStyle] leading is not supported by HTMLText");
-    }
-    get leading() {
-      return super.leading;
-    }
-    set lineJoin(_value) {
-      console.warn("[HTMLTextStyle] lineJoin is not supported by HTMLText");
-    }
-    get lineJoin() {
-      return super.lineJoin;
+      return null;
+    },
+    isDefaultNamespace: function(namespaceURI) {
+      var prefix = this.lookupPrefix(namespaceURI);
+      return prefix == null;
     }
   };
-  let HTMLTextStyle = _HTMLTextStyle;
-  HTMLTextStyle.availableFonts = {};
-  HTMLTextStyle.defaultOptions = {
-    align: "left",
-    breakWords: false,
-    dropShadow: false,
-    dropShadowAlpha: 1,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowBlur: 0,
-    dropShadowColor: "black",
-    dropShadowDistance: 5,
-    fill: "black",
-    fontFamily: "Arial",
-    fontSize: 26,
-    fontStyle: "normal",
-    fontVariant: "normal",
-    fontWeight: "normal",
-    letterSpacing: 0,
-    lineHeight: 0,
-    padding: 0,
-    stroke: "black",
-    strokeThickness: 0,
-    whiteSpace: "normal",
-    wordWrap: false,
-    wordWrapWidth: 100
-  };
-  const _HTMLText = class extends Sprite {
-    constructor(text = "", style = {}) {
-      var _a2;
-      super(Texture.EMPTY);
-      this._text = null;
-      this._style = null;
-      this._autoResolution = true;
-      this._loading = false;
-      this.localStyleID = -1;
-      this.dirty = false;
-      this.ownsStyle = false;
-      const image = new Image();
-      const texture = Texture.from(image, {
-        scaleMode: settings.SCALE_MODE,
-        resourceOptions: {
-          autoLoad: false
+  function _xmlEncoder(c2) {
+    return c2 == "<" && "&lt;" || c2 == ">" && "&gt;" || c2 == "&" && "&amp;" || c2 == '"' && "&quot;" || "&#" + c2.charCodeAt() + ";";
+  }
+  copy(NodeType, Node);
+  copy(NodeType, Node.prototype);
+  function _visitNode(node, callback) {
+    if (callback(node)) {
+      return true;
+    }
+    if (node = node.firstChild) {
+      do {
+        if (_visitNode(node, callback)) {
+          return true;
+        }
+      } while (node = node.nextSibling);
+    }
+  }
+  function Document() {
+    this.ownerDocument = this;
+  }
+  function _onAddAttribute(doc, el, newAttr) {
+    doc && doc._inc++;
+    var ns = newAttr.namespaceURI;
+    if (ns === NAMESPACE$2.XMLNS) {
+      el._nsMap[newAttr.prefix ? newAttr.localName : ""] = newAttr.value;
+    }
+  }
+  function _onRemoveAttribute(doc, el, newAttr, remove) {
+    doc && doc._inc++;
+    var ns = newAttr.namespaceURI;
+    if (ns === NAMESPACE$2.XMLNS) {
+      delete el._nsMap[newAttr.prefix ? newAttr.localName : ""];
+    }
+  }
+  function _onUpdateChild(doc, el, newChild) {
+    if (doc && doc._inc) {
+      doc._inc++;
+      var cs = el.childNodes;
+      if (newChild) {
+        cs[cs.length++] = newChild;
+      } else {
+        var child = el.firstChild;
+        var i2 = 0;
+        while (child) {
+          cs[i2++] = child;
+          child = child.nextSibling;
+        }
+        cs.length = i2;
+        delete cs[cs.length];
+      }
+    }
+  }
+  function _removeChild(parentNode, child) {
+    var previous = child.previousSibling;
+    var next = child.nextSibling;
+    if (previous) {
+      previous.nextSibling = next;
+    } else {
+      parentNode.firstChild = next;
+    }
+    if (next) {
+      next.previousSibling = previous;
+    } else {
+      parentNode.lastChild = previous;
+    }
+    child.parentNode = null;
+    child.previousSibling = null;
+    child.nextSibling = null;
+    _onUpdateChild(parentNode.ownerDocument, parentNode);
+    return child;
+  }
+  function hasValidParentNodeType(node) {
+    return node && (node.nodeType === Node.DOCUMENT_NODE || node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.ELEMENT_NODE);
+  }
+  function hasInsertableNodeType(node) {
+    return node && (isElementNode(node) || isTextNode(node) || isDocTypeNode(node) || node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.COMMENT_NODE || node.nodeType === Node.PROCESSING_INSTRUCTION_NODE);
+  }
+  function isDocTypeNode(node) {
+    return node && node.nodeType === Node.DOCUMENT_TYPE_NODE;
+  }
+  function isElementNode(node) {
+    return node && node.nodeType === Node.ELEMENT_NODE;
+  }
+  function isTextNode(node) {
+    return node && node.nodeType === Node.TEXT_NODE;
+  }
+  function isElementInsertionPossible(doc, child) {
+    var parentChildNodes = doc.childNodes || [];
+    if (find(parentChildNodes, isElementNode) || isDocTypeNode(child)) {
+      return false;
+    }
+    var docTypeNode = find(parentChildNodes, isDocTypeNode);
+    return !(child && docTypeNode && parentChildNodes.indexOf(docTypeNode) > parentChildNodes.indexOf(child));
+  }
+  function isElementReplacementPossible(doc, child) {
+    var parentChildNodes = doc.childNodes || [];
+    function hasElementChildThatIsNotChild(node) {
+      return isElementNode(node) && node !== child;
+    }
+    if (find(parentChildNodes, hasElementChildThatIsNotChild)) {
+      return false;
+    }
+    var docTypeNode = find(parentChildNodes, isDocTypeNode);
+    return !(child && docTypeNode && parentChildNodes.indexOf(docTypeNode) > parentChildNodes.indexOf(child));
+  }
+  function assertPreInsertionValidity1to5(parent, node, child) {
+    if (!hasValidParentNodeType(parent)) {
+      throw new DOMException(HIERARCHY_REQUEST_ERR, "Unexpected parent node type " + parent.nodeType);
+    }
+    if (child && child.parentNode !== parent) {
+      throw new DOMException(NOT_FOUND_ERR, "child not in parent");
+    }
+    if (!hasInsertableNodeType(node) || isDocTypeNode(node) && parent.nodeType !== Node.DOCUMENT_NODE) {
+      throw new DOMException(
+        HIERARCHY_REQUEST_ERR,
+        "Unexpected node type " + node.nodeType + " for parent node type " + parent.nodeType
+      );
+    }
+  }
+  function assertPreInsertionValidityInDocument(parent, node, child) {
+    var parentChildNodes = parent.childNodes || [];
+    var nodeChildNodes = node.childNodes || [];
+    if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      var nodeChildElements = nodeChildNodes.filter(isElementNode);
+      if (nodeChildElements.length > 1 || find(nodeChildNodes, isTextNode)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "More than one element or text in fragment");
+      }
+      if (nodeChildElements.length === 1 && !isElementInsertionPossible(parent, child)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Element in fragment can not be inserted before doctype");
+      }
+    }
+    if (isElementNode(node)) {
+      if (!isElementInsertionPossible(parent, child)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Only one element can be added and only after doctype");
+      }
+    }
+    if (isDocTypeNode(node)) {
+      if (find(parentChildNodes, isDocTypeNode)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Only one doctype is allowed");
+      }
+      var parentElementChild = find(parentChildNodes, isElementNode);
+      if (child && parentChildNodes.indexOf(parentElementChild) < parentChildNodes.indexOf(child)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Doctype can only be inserted before an element");
+      }
+      if (!child && parentElementChild) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Doctype can not be appended since element is present");
+      }
+    }
+  }
+  function assertPreReplacementValidityInDocument(parent, node, child) {
+    var parentChildNodes = parent.childNodes || [];
+    var nodeChildNodes = node.childNodes || [];
+    if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      var nodeChildElements = nodeChildNodes.filter(isElementNode);
+      if (nodeChildElements.length > 1 || find(nodeChildNodes, isTextNode)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "More than one element or text in fragment");
+      }
+      if (nodeChildElements.length === 1 && !isElementReplacementPossible(parent, child)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Element in fragment can not be inserted before doctype");
+      }
+    }
+    if (isElementNode(node)) {
+      if (!isElementReplacementPossible(parent, child)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Only one element can be added and only after doctype");
+      }
+    }
+    if (isDocTypeNode(node)) {
+      let hasDoctypeChildThatIsNotChild = function(node2) {
+        return isDocTypeNode(node2) && node2 !== child;
+      };
+      if (find(parentChildNodes, hasDoctypeChildThatIsNotChild)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Only one doctype is allowed");
+      }
+      var parentElementChild = find(parentChildNodes, isElementNode);
+      if (child && parentChildNodes.indexOf(parentElementChild) < parentChildNodes.indexOf(child)) {
+        throw new DOMException(HIERARCHY_REQUEST_ERR, "Doctype can only be inserted before an element");
+      }
+    }
+  }
+  function _insertBefore(parent, node, child, _inDocumentAssertion) {
+    assertPreInsertionValidity1to5(parent, node, child);
+    if (parent.nodeType === Node.DOCUMENT_NODE) {
+      (_inDocumentAssertion || assertPreInsertionValidityInDocument)(parent, node, child);
+    }
+    var cp = node.parentNode;
+    if (cp) {
+      cp.removeChild(node);
+    }
+    if (node.nodeType === DOCUMENT_FRAGMENT_NODE) {
+      var newFirst = node.firstChild;
+      if (newFirst == null) {
+        return node;
+      }
+      var newLast = node.lastChild;
+    } else {
+      newFirst = newLast = node;
+    }
+    var pre = child ? child.previousSibling : parent.lastChild;
+    newFirst.previousSibling = pre;
+    newLast.nextSibling = child;
+    if (pre) {
+      pre.nextSibling = newFirst;
+    } else {
+      parent.firstChild = newFirst;
+    }
+    if (child == null) {
+      parent.lastChild = newLast;
+    } else {
+      child.previousSibling = newLast;
+    }
+    do {
+      newFirst.parentNode = parent;
+    } while (newFirst !== newLast && (newFirst = newFirst.nextSibling));
+    _onUpdateChild(parent.ownerDocument || parent, parent);
+    if (node.nodeType == DOCUMENT_FRAGMENT_NODE) {
+      node.firstChild = node.lastChild = null;
+    }
+    return node;
+  }
+  function _appendSingleChild(parentNode, newChild) {
+    if (newChild.parentNode) {
+      newChild.parentNode.removeChild(newChild);
+    }
+    newChild.parentNode = parentNode;
+    newChild.previousSibling = parentNode.lastChild;
+    newChild.nextSibling = null;
+    if (newChild.previousSibling) {
+      newChild.previousSibling.nextSibling = newChild;
+    } else {
+      parentNode.firstChild = newChild;
+    }
+    parentNode.lastChild = newChild;
+    _onUpdateChild(parentNode.ownerDocument, parentNode, newChild);
+    return newChild;
+  }
+  Document.prototype = {
+    nodeName: "#document",
+    nodeType: DOCUMENT_NODE,
+    doctype: null,
+    documentElement: null,
+    _inc: 1,
+    insertBefore: function(newChild, refChild) {
+      if (newChild.nodeType == DOCUMENT_FRAGMENT_NODE) {
+        var child = newChild.firstChild;
+        while (child) {
+          var next = child.nextSibling;
+          this.insertBefore(child, refChild);
+          child = next;
+        }
+        return newChild;
+      }
+      _insertBefore(this, newChild, refChild);
+      newChild.ownerDocument = this;
+      if (this.documentElement === null && newChild.nodeType === ELEMENT_NODE) {
+        this.documentElement = newChild;
+      }
+      return newChild;
+    },
+    removeChild: function(oldChild) {
+      if (this.documentElement == oldChild) {
+        this.documentElement = null;
+      }
+      return _removeChild(this, oldChild);
+    },
+    replaceChild: function(newChild, oldChild) {
+      _insertBefore(this, newChild, oldChild, assertPreReplacementValidityInDocument);
+      newChild.ownerDocument = this;
+      if (oldChild) {
+        this.removeChild(oldChild);
+      }
+      if (isElementNode(newChild)) {
+        this.documentElement = newChild;
+      }
+    },
+    importNode: function(importedNode, deep) {
+      return importNode(this, importedNode, deep);
+    },
+    getElementById: function(id) {
+      var rtv = null;
+      _visitNode(this.documentElement, function(node) {
+        if (node.nodeType == ELEMENT_NODE) {
+          if (node.getAttribute("id") == id) {
+            rtv = node;
+            return true;
+          }
         }
       });
-      texture.orig = new Rectangle();
-      texture.trim = new Rectangle();
-      this.texture = texture;
-      const nssvg = "http://www.w3.org/2000/svg";
-      const nsxhtml = "http://www.w3.org/1999/xhtml";
-      const svgRoot = document.createElementNS(nssvg, "svg");
-      const foreignObject = document.createElementNS(nssvg, "foreignObject");
-      const domElement = document.createElementNS(nsxhtml, "div");
-      const styleElement = document.createElementNS(nsxhtml, "style");
-      foreignObject.setAttribute("width", "10000");
-      foreignObject.setAttribute("height", "10000");
-      foreignObject.style.overflow = "hidden";
-      svgRoot.appendChild(foreignObject);
-      this.maxWidth = _HTMLText.defaultMaxWidth;
-      this.maxHeight = _HTMLText.defaultMaxHeight;
-      this._domElement = domElement;
-      this._styleElement = styleElement;
-      this._svgRoot = svgRoot;
-      this._foreignObject = foreignObject;
-      this._foreignObject.appendChild(styleElement);
-      this._foreignObject.appendChild(domElement);
-      this._image = image;
-      this._loadImage = new Image();
-      this._autoResolution = _HTMLText.defaultAutoResolution;
-      this._resolution = (_a2 = _HTMLText.defaultResolution) != null ? _a2 : settings.RESOLUTION;
-      this.text = text;
-      this.style = style;
-    }
-    measureText(overrides) {
-      var _a2, _b;
-      const { text, style, resolution } = Object.assign({
-        text: this._text,
-        style: this._style,
-        resolution: this._resolution
-      }, overrides);
-      Object.assign(this._domElement, {
-        innerHTML: text,
-        style: style.toCSS(resolution)
+      return rtv;
+    },
+    getElementsByClassName: function(classNames) {
+      var classNamesSet = toOrderedSet(classNames);
+      return new LiveNodeList(this, function(base) {
+        var ls = [];
+        if (classNamesSet.length > 0) {
+          _visitNode(base.documentElement, function(node) {
+            if (node !== base && node.nodeType === ELEMENT_NODE) {
+              var nodeClassNames = node.getAttribute("class");
+              if (nodeClassNames) {
+                var matches = classNames === nodeClassNames;
+                if (!matches) {
+                  var nodeClassNamesSet = toOrderedSet(nodeClassNames);
+                  matches = classNamesSet.every(arrayIncludes(nodeClassNamesSet));
+                }
+                if (matches) {
+                  ls.push(node);
+                }
+              }
+            }
+          });
+        }
+        return ls;
       });
-      this._styleElement.textContent = style.toGlobalCSS();
-      document.body.appendChild(this._svgRoot);
-      const contentBounds = this._domElement.getBoundingClientRect();
-      this._svgRoot.remove();
-      const contentWidth = Math.min(this.maxWidth, Math.ceil(contentBounds.width));
-      const contentHeight = Math.min(this.maxHeight, Math.ceil(contentBounds.height));
-      this._svgRoot.setAttribute("width", contentWidth.toString());
-      this._svgRoot.setAttribute("height", contentHeight.toString());
-      if (text !== this._text) {
-        this._domElement.innerHTML = this._text;
+    },
+    createElement: function(tagName) {
+      var node = new Element();
+      node.ownerDocument = this;
+      node.nodeName = tagName;
+      node.tagName = tagName;
+      node.localName = tagName;
+      node.childNodes = new NodeList();
+      var attrs = node.attributes = new NamedNodeMap();
+      attrs._ownerElement = node;
+      return node;
+    },
+    createDocumentFragment: function() {
+      var node = new DocumentFragment();
+      node.ownerDocument = this;
+      node.childNodes = new NodeList();
+      return node;
+    },
+    createTextNode: function(data) {
+      var node = new Text();
+      node.ownerDocument = this;
+      node.appendData(data);
+      return node;
+    },
+    createComment: function(data) {
+      var node = new Comment();
+      node.ownerDocument = this;
+      node.appendData(data);
+      return node;
+    },
+    createCDATASection: function(data) {
+      var node = new CDATASection();
+      node.ownerDocument = this;
+      node.appendData(data);
+      return node;
+    },
+    createProcessingInstruction: function(target, data) {
+      var node = new ProcessingInstruction();
+      node.ownerDocument = this;
+      node.tagName = node.target = target;
+      node.nodeValue = node.data = data;
+      return node;
+    },
+    createAttribute: function(name) {
+      var node = new Attr();
+      node.ownerDocument = this;
+      node.name = name;
+      node.nodeName = name;
+      node.localName = name;
+      node.specified = true;
+      return node;
+    },
+    createEntityReference: function(name) {
+      var node = new EntityReference();
+      node.ownerDocument = this;
+      node.nodeName = name;
+      return node;
+    },
+    createElementNS: function(namespaceURI, qualifiedName) {
+      var node = new Element();
+      var pl = qualifiedName.split(":");
+      var attrs = node.attributes = new NamedNodeMap();
+      node.childNodes = new NodeList();
+      node.ownerDocument = this;
+      node.nodeName = qualifiedName;
+      node.tagName = qualifiedName;
+      node.namespaceURI = namespaceURI;
+      if (pl.length == 2) {
+        node.prefix = pl[0];
+        node.localName = pl[1];
+      } else {
+        node.localName = qualifiedName;
       }
-      if (style !== this._style) {
-        Object.assign(this._domElement, { style: (_a2 = this._style) == null ? void 0 : _a2.toCSS(resolution) });
-        this._styleElement.textContent = (_b = this._style) == null ? void 0 : _b.toGlobalCSS();
+      attrs._ownerElement = node;
+      return node;
+    },
+    createAttributeNS: function(namespaceURI, qualifiedName) {
+      var node = new Attr();
+      var pl = qualifiedName.split(":");
+      node.ownerDocument = this;
+      node.nodeName = qualifiedName;
+      node.name = qualifiedName;
+      node.namespaceURI = namespaceURI;
+      node.specified = true;
+      if (pl.length == 2) {
+        node.prefix = pl[0];
+        node.localName = pl[1];
+      } else {
+        node.localName = qualifiedName;
       }
-      return {
-        width: contentWidth + style.padding * 2,
-        height: contentHeight + style.padding * 2
+      return node;
+    }
+  };
+  _extends(Document, Node);
+  function Element() {
+    this._nsMap = {};
+  }
+  Element.prototype = {
+    nodeType: ELEMENT_NODE,
+    hasAttribute: function(name) {
+      return this.getAttributeNode(name) != null;
+    },
+    getAttribute: function(name) {
+      var attr = this.getAttributeNode(name);
+      return attr && attr.value || "";
+    },
+    getAttributeNode: function(name) {
+      return this.attributes.getNamedItem(name);
+    },
+    setAttribute: function(name, value) {
+      var attr = this.ownerDocument.createAttribute(name);
+      attr.value = attr.nodeValue = "" + value;
+      this.setAttributeNode(attr);
+    },
+    removeAttribute: function(name) {
+      var attr = this.getAttributeNode(name);
+      attr && this.removeAttributeNode(attr);
+    },
+    appendChild: function(newChild) {
+      if (newChild.nodeType === DOCUMENT_FRAGMENT_NODE) {
+        return this.insertBefore(newChild, null);
+      } else {
+        return _appendSingleChild(this, newChild);
+      }
+    },
+    setAttributeNode: function(newAttr) {
+      return this.attributes.setNamedItem(newAttr);
+    },
+    setAttributeNodeNS: function(newAttr) {
+      return this.attributes.setNamedItemNS(newAttr);
+    },
+    removeAttributeNode: function(oldAttr) {
+      return this.attributes.removeNamedItem(oldAttr.nodeName);
+    },
+    removeAttributeNS: function(namespaceURI, localName) {
+      var old = this.getAttributeNodeNS(namespaceURI, localName);
+      old && this.removeAttributeNode(old);
+    },
+    hasAttributeNS: function(namespaceURI, localName) {
+      return this.getAttributeNodeNS(namespaceURI, localName) != null;
+    },
+    getAttributeNS: function(namespaceURI, localName) {
+      var attr = this.getAttributeNodeNS(namespaceURI, localName);
+      return attr && attr.value || "";
+    },
+    setAttributeNS: function(namespaceURI, qualifiedName, value) {
+      var attr = this.ownerDocument.createAttributeNS(namespaceURI, qualifiedName);
+      attr.value = attr.nodeValue = "" + value;
+      this.setAttributeNode(attr);
+    },
+    getAttributeNodeNS: function(namespaceURI, localName) {
+      return this.attributes.getNamedItemNS(namespaceURI, localName);
+    },
+    getElementsByTagName: function(tagName) {
+      return new LiveNodeList(this, function(base) {
+        var ls = [];
+        _visitNode(base, function(node) {
+          if (node !== base && node.nodeType == ELEMENT_NODE && (tagName === "*" || node.tagName == tagName)) {
+            ls.push(node);
+          }
+        });
+        return ls;
+      });
+    },
+    getElementsByTagNameNS: function(namespaceURI, localName) {
+      return new LiveNodeList(this, function(base) {
+        var ls = [];
+        _visitNode(base, function(node) {
+          if (node !== base && node.nodeType === ELEMENT_NODE && (namespaceURI === "*" || node.namespaceURI === namespaceURI) && (localName === "*" || node.localName == localName)) {
+            ls.push(node);
+          }
+        });
+        return ls;
+      });
+    }
+  };
+  Document.prototype.getElementsByTagName = Element.prototype.getElementsByTagName;
+  Document.prototype.getElementsByTagNameNS = Element.prototype.getElementsByTagNameNS;
+  _extends(Element, Node);
+  function Attr() {
+  }
+  Attr.prototype.nodeType = ATTRIBUTE_NODE;
+  _extends(Attr, Node);
+  function CharacterData() {
+  }
+  CharacterData.prototype = {
+    data: "",
+    substringData: function(offset, count) {
+      return this.data.substring(offset, offset + count);
+    },
+    appendData: function(text) {
+      text = this.data + text;
+      this.nodeValue = this.data = text;
+      this.length = text.length;
+    },
+    insertData: function(offset, text) {
+      this.replaceData(offset, 0, text);
+    },
+    appendChild: function(newChild) {
+      throw new Error(ExceptionMessage[HIERARCHY_REQUEST_ERR]);
+    },
+    deleteData: function(offset, count) {
+      this.replaceData(offset, count, "");
+    },
+    replaceData: function(offset, count, text) {
+      var start = this.data.substring(0, offset);
+      var end = this.data.substring(offset + count);
+      text = start + text + end;
+      this.nodeValue = this.data = text;
+      this.length = text.length;
+    }
+  };
+  _extends(CharacterData, Node);
+  function Text() {
+  }
+  Text.prototype = {
+    nodeName: "#text",
+    nodeType: TEXT_NODE,
+    splitText: function(offset) {
+      var text = this.data;
+      var newText = text.substring(offset);
+      text = text.substring(0, offset);
+      this.data = this.nodeValue = text;
+      this.length = text.length;
+      var newNode = this.ownerDocument.createTextNode(newText);
+      if (this.parentNode) {
+        this.parentNode.insertBefore(newNode, this.nextSibling);
+      }
+      return newNode;
+    }
+  };
+  _extends(Text, CharacterData);
+  function Comment() {
+  }
+  Comment.prototype = {
+    nodeName: "#comment",
+    nodeType: COMMENT_NODE
+  };
+  _extends(Comment, CharacterData);
+  function CDATASection() {
+  }
+  CDATASection.prototype = {
+    nodeName: "#cdata-section",
+    nodeType: CDATA_SECTION_NODE
+  };
+  _extends(CDATASection, CharacterData);
+  function DocumentType() {
+  }
+  DocumentType.prototype.nodeType = DOCUMENT_TYPE_NODE;
+  _extends(DocumentType, Node);
+  function Notation() {
+  }
+  Notation.prototype.nodeType = NOTATION_NODE;
+  _extends(Notation, Node);
+  function Entity() {
+  }
+  Entity.prototype.nodeType = ENTITY_NODE;
+  _extends(Entity, Node);
+  function EntityReference() {
+  }
+  EntityReference.prototype.nodeType = ENTITY_REFERENCE_NODE;
+  _extends(EntityReference, Node);
+  function DocumentFragment() {
+  }
+  DocumentFragment.prototype.nodeName = "#document-fragment";
+  DocumentFragment.prototype.nodeType = DOCUMENT_FRAGMENT_NODE;
+  _extends(DocumentFragment, Node);
+  function ProcessingInstruction() {
+  }
+  ProcessingInstruction.prototype.nodeType = PROCESSING_INSTRUCTION_NODE;
+  _extends(ProcessingInstruction, Node);
+  function XMLSerializer() {
+  }
+  XMLSerializer.prototype.serializeToString = function(node, isHtml, nodeFilter) {
+    return nodeSerializeToString.call(node, isHtml, nodeFilter);
+  };
+  Node.prototype.toString = nodeSerializeToString;
+  function nodeSerializeToString(isHtml, nodeFilter) {
+    var buf = [];
+    var refNode = this.nodeType == 9 && this.documentElement || this;
+    var prefix = refNode.prefix;
+    var uri = refNode.namespaceURI;
+    if (uri && prefix == null) {
+      var prefix = refNode.lookupPrefix(uri);
+      if (prefix == null) {
+        var visibleNamespaces = [
+          { namespace: uri, prefix: null }
+        ];
+      }
+    }
+    serializeToString(this, buf, isHtml, nodeFilter, visibleNamespaces);
+    return buf.join("");
+  }
+  function needNamespaceDefine(node, isHTML, visibleNamespaces) {
+    var prefix = node.prefix || "";
+    var uri = node.namespaceURI;
+    if (!uri) {
+      return false;
+    }
+    if (prefix === "xml" && uri === NAMESPACE$2.XML || uri === NAMESPACE$2.XMLNS) {
+      return false;
+    }
+    var i2 = visibleNamespaces.length;
+    while (i2--) {
+      var ns = visibleNamespaces[i2];
+      if (ns.prefix === prefix) {
+        return ns.namespace !== uri;
+      }
+    }
+    return true;
+  }
+  function addSerializedAttribute(buf, qualifiedName, value) {
+    buf.push(" ", qualifiedName, '="', value.replace(/[<>&"\t\n\r]/g, _xmlEncoder), '"');
+  }
+  function serializeToString(node, buf, isHTML, nodeFilter, visibleNamespaces) {
+    if (!visibleNamespaces) {
+      visibleNamespaces = [];
+    }
+    if (nodeFilter) {
+      node = nodeFilter(node);
+      if (node) {
+        if (typeof node == "string") {
+          buf.push(node);
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+    switch (node.nodeType) {
+      case ELEMENT_NODE:
+        var attrs = node.attributes;
+        var len = attrs.length;
+        var child = node.firstChild;
+        var nodeName = node.tagName;
+        isHTML = NAMESPACE$2.isHTML(node.namespaceURI) || isHTML;
+        var prefixedNodeName = nodeName;
+        if (!isHTML && !node.prefix && node.namespaceURI) {
+          var defaultNS;
+          for (var ai = 0; ai < attrs.length; ai++) {
+            if (attrs.item(ai).name === "xmlns") {
+              defaultNS = attrs.item(ai).value;
+              break;
+            }
+          }
+          if (!defaultNS) {
+            for (var nsi = visibleNamespaces.length - 1; nsi >= 0; nsi--) {
+              var namespace = visibleNamespaces[nsi];
+              if (namespace.prefix === "" && namespace.namespace === node.namespaceURI) {
+                defaultNS = namespace.namespace;
+                break;
+              }
+            }
+          }
+          if (defaultNS !== node.namespaceURI) {
+            for (var nsi = visibleNamespaces.length - 1; nsi >= 0; nsi--) {
+              var namespace = visibleNamespaces[nsi];
+              if (namespace.namespace === node.namespaceURI) {
+                if (namespace.prefix) {
+                  prefixedNodeName = namespace.prefix + ":" + nodeName;
+                }
+                break;
+              }
+            }
+          }
+        }
+        buf.push("<", prefixedNodeName);
+        for (var i2 = 0; i2 < len; i2++) {
+          var attr = attrs.item(i2);
+          if (attr.prefix == "xmlns") {
+            visibleNamespaces.push({ prefix: attr.localName, namespace: attr.value });
+          } else if (attr.nodeName == "xmlns") {
+            visibleNamespaces.push({ prefix: "", namespace: attr.value });
+          }
+        }
+        for (var i2 = 0; i2 < len; i2++) {
+          var attr = attrs.item(i2);
+          if (needNamespaceDefine(attr, isHTML, visibleNamespaces)) {
+            var prefix = attr.prefix || "";
+            var uri = attr.namespaceURI;
+            addSerializedAttribute(buf, prefix ? "xmlns:" + prefix : "xmlns", uri);
+            visibleNamespaces.push({ prefix, namespace: uri });
+          }
+          serializeToString(attr, buf, isHTML, nodeFilter, visibleNamespaces);
+        }
+        if (nodeName === prefixedNodeName && needNamespaceDefine(node, isHTML, visibleNamespaces)) {
+          var prefix = node.prefix || "";
+          var uri = node.namespaceURI;
+          addSerializedAttribute(buf, prefix ? "xmlns:" + prefix : "xmlns", uri);
+          visibleNamespaces.push({ prefix, namespace: uri });
+        }
+        if (child || isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName)) {
+          buf.push(">");
+          if (isHTML && /^script$/i.test(nodeName)) {
+            while (child) {
+              if (child.data) {
+                buf.push(child.data);
+              } else {
+                serializeToString(child, buf, isHTML, nodeFilter, visibleNamespaces.slice());
+              }
+              child = child.nextSibling;
+            }
+          } else {
+            while (child) {
+              serializeToString(child, buf, isHTML, nodeFilter, visibleNamespaces.slice());
+              child = child.nextSibling;
+            }
+          }
+          buf.push("</", prefixedNodeName, ">");
+        } else {
+          buf.push("/>");
+        }
+        return;
+      case DOCUMENT_NODE:
+      case DOCUMENT_FRAGMENT_NODE:
+        var child = node.firstChild;
+        while (child) {
+          serializeToString(child, buf, isHTML, nodeFilter, visibleNamespaces.slice());
+          child = child.nextSibling;
+        }
+        return;
+      case ATTRIBUTE_NODE:
+        return addSerializedAttribute(buf, node.name, node.value);
+      case TEXT_NODE:
+        return buf.push(
+          node.data.replace(/[<&>]/g, _xmlEncoder)
+        );
+      case CDATA_SECTION_NODE:
+        return buf.push("<![CDATA[", node.data, "]]>");
+      case COMMENT_NODE:
+        return buf.push("<!--", node.data, "-->");
+      case DOCUMENT_TYPE_NODE:
+        var pubid = node.publicId;
+        var sysid = node.systemId;
+        buf.push("<!DOCTYPE ", node.name);
+        if (pubid) {
+          buf.push(" PUBLIC ", pubid);
+          if (sysid && sysid != ".") {
+            buf.push(" ", sysid);
+          }
+          buf.push(">");
+        } else if (sysid && sysid != ".") {
+          buf.push(" SYSTEM ", sysid, ">");
+        } else {
+          var sub = node.internalSubset;
+          if (sub) {
+            buf.push(" [", sub, "]");
+          }
+          buf.push(">");
+        }
+        return;
+      case PROCESSING_INSTRUCTION_NODE:
+        return buf.push("<?", node.target, " ", node.data, "?>");
+      case ENTITY_REFERENCE_NODE:
+        return buf.push("&", node.nodeName, ";");
+      default:
+        buf.push("??", node.nodeName);
+    }
+  }
+  function importNode(doc, node, deep) {
+    var node2;
+    switch (node.nodeType) {
+      case ELEMENT_NODE:
+        node2 = node.cloneNode(false);
+        node2.ownerDocument = doc;
+      case DOCUMENT_FRAGMENT_NODE:
+        break;
+      case ATTRIBUTE_NODE:
+        deep = true;
+        break;
+    }
+    if (!node2) {
+      node2 = node.cloneNode(false);
+    }
+    node2.ownerDocument = doc;
+    node2.parentNode = null;
+    if (deep) {
+      var child = node.firstChild;
+      while (child) {
+        node2.appendChild(importNode(doc, child, deep));
+        child = child.nextSibling;
+      }
+    }
+    return node2;
+  }
+  function cloneNode(doc, node, deep) {
+    var node2 = new node.constructor();
+    for (var n2 in node) {
+      if (Object.prototype.hasOwnProperty.call(node, n2)) {
+        var v2 = node[n2];
+        if (typeof v2 != "object") {
+          if (v2 != node2[n2]) {
+            node2[n2] = v2;
+          }
+        }
+      }
+    }
+    if (node.childNodes) {
+      node2.childNodes = new NodeList();
+    }
+    node2.ownerDocument = doc;
+    switch (node2.nodeType) {
+      case ELEMENT_NODE:
+        var attrs = node.attributes;
+        var attrs2 = node2.attributes = new NamedNodeMap();
+        var len = attrs.length;
+        attrs2._ownerElement = node2;
+        for (var i2 = 0; i2 < len; i2++) {
+          node2.setAttributeNode(cloneNode(doc, attrs.item(i2), true));
+        }
+        break;
+      case ATTRIBUTE_NODE:
+        deep = true;
+    }
+    if (deep) {
+      var child = node.firstChild;
+      while (child) {
+        node2.appendChild(cloneNode(doc, child, deep));
+        child = child.nextSibling;
+      }
+    }
+    return node2;
+  }
+  function __set__(object, key, value) {
+    object[key] = value;
+  }
+  try {
+    if (Object.defineProperty) {
+      let getTextContent = function(node) {
+        switch (node.nodeType) {
+          case ELEMENT_NODE:
+          case DOCUMENT_FRAGMENT_NODE:
+            var buf = [];
+            node = node.firstChild;
+            while (node) {
+              if (node.nodeType !== 7 && node.nodeType !== 8) {
+                buf.push(getTextContent(node));
+              }
+              node = node.nextSibling;
+            }
+            return buf.join("");
+          default:
+            return node.nodeValue;
+        }
+      };
+      Object.defineProperty(LiveNodeList.prototype, "length", {
+        get: function() {
+          _updateLiveList(this);
+          return this.$$length;
+        }
+      });
+      Object.defineProperty(Node.prototype, "textContent", {
+        get: function() {
+          return getTextContent(this);
+        },
+        set: function(data) {
+          switch (this.nodeType) {
+            case ELEMENT_NODE:
+            case DOCUMENT_FRAGMENT_NODE:
+              while (this.firstChild) {
+                this.removeChild(this.firstChild);
+              }
+              if (data || String(data)) {
+                this.appendChild(this.ownerDocument.createTextNode(data));
+              }
+              break;
+            default:
+              this.data = data;
+              this.value = data;
+              this.nodeValue = data;
+          }
+        }
+      });
+      __set__ = function(object, key, value) {
+        object["$$" + key] = value;
       };
     }
-    async updateText(respectDirty = true) {
-      const { style, _image: image, _loadImage: loadImage } = this;
-      if (this.localStyleID !== style.styleID) {
-        this.dirty = true;
-        this.localStyleID = style.styleID;
-      }
-      if (!this.dirty && respectDirty) {
-        return;
-      }
-      const { width, height } = this.measureText();
-      image.width = loadImage.width = Math.ceil(Math.max(1, width));
-      image.height = loadImage.height = Math.ceil(Math.max(1, height));
-      if (!this._loading) {
-        this._loading = true;
-        await new Promise((resolve2) => {
-          loadImage.onload = async () => {
-            await style.onBeforeDraw();
-            this._loading = false;
-            image.src = loadImage.src;
-            loadImage.onload = null;
-            loadImage.src = "";
-            this.updateTexture();
-            resolve2();
-          };
-          const svgURL = new XMLSerializer().serializeToString(this._svgRoot);
-          loadImage.src = `data:image/svg+xml;charset=utf8,${encodeURIComponent(svgURL)}`;
-        });
-      }
+  } catch (e2) {
+  }
+  dom$1.DocumentType = DocumentType;
+  dom$1.DOMException = DOMException;
+  dom$1.DOMImplementation = DOMImplementation$1;
+  dom$1.Element = Element;
+  dom$1.Node = Node;
+  dom$1.NodeList = NodeList;
+  dom$1.XMLSerializer = XMLSerializer;
+  var domParser = {};
+  var entities$1 = {};
+  (function(exports) {
+    var freeze2 = conventions$2.freeze;
+    exports.XML_ENTITIES = freeze2({ amp: "&", apos: "'", gt: ">", lt: "<", quot: '"' });
+    exports.HTML_ENTITIES = freeze2({
+      lt: "<",
+      gt: ">",
+      amp: "&",
+      quot: '"',
+      apos: "'",
+      Agrave: "\xC0",
+      Aacute: "\xC1",
+      Acirc: "\xC2",
+      Atilde: "\xC3",
+      Auml: "\xC4",
+      Aring: "\xC5",
+      AElig: "\xC6",
+      Ccedil: "\xC7",
+      Egrave: "\xC8",
+      Eacute: "\xC9",
+      Ecirc: "\xCA",
+      Euml: "\xCB",
+      Igrave: "\xCC",
+      Iacute: "\xCD",
+      Icirc: "\xCE",
+      Iuml: "\xCF",
+      ETH: "\xD0",
+      Ntilde: "\xD1",
+      Ograve: "\xD2",
+      Oacute: "\xD3",
+      Ocirc: "\xD4",
+      Otilde: "\xD5",
+      Ouml: "\xD6",
+      Oslash: "\xD8",
+      Ugrave: "\xD9",
+      Uacute: "\xDA",
+      Ucirc: "\xDB",
+      Uuml: "\xDC",
+      Yacute: "\xDD",
+      THORN: "\xDE",
+      szlig: "\xDF",
+      agrave: "\xE0",
+      aacute: "\xE1",
+      acirc: "\xE2",
+      atilde: "\xE3",
+      auml: "\xE4",
+      aring: "\xE5",
+      aelig: "\xE6",
+      ccedil: "\xE7",
+      egrave: "\xE8",
+      eacute: "\xE9",
+      ecirc: "\xEA",
+      euml: "\xEB",
+      igrave: "\xEC",
+      iacute: "\xED",
+      icirc: "\xEE",
+      iuml: "\xEF",
+      eth: "\xF0",
+      ntilde: "\xF1",
+      ograve: "\xF2",
+      oacute: "\xF3",
+      ocirc: "\xF4",
+      otilde: "\xF5",
+      ouml: "\xF6",
+      oslash: "\xF8",
+      ugrave: "\xF9",
+      uacute: "\xFA",
+      ucirc: "\xFB",
+      uuml: "\xFC",
+      yacute: "\xFD",
+      thorn: "\xFE",
+      yuml: "\xFF",
+      nbsp: "\xA0",
+      iexcl: "\xA1",
+      cent: "\xA2",
+      pound: "\xA3",
+      curren: "\xA4",
+      yen: "\xA5",
+      brvbar: "\xA6",
+      sect: "\xA7",
+      uml: "\xA8",
+      copy: "\xA9",
+      ordf: "\xAA",
+      laquo: "\xAB",
+      not: "\xAC",
+      shy: "\xAD\xAD",
+      reg: "\xAE",
+      macr: "\xAF",
+      deg: "\xB0",
+      plusmn: "\xB1",
+      sup2: "\xB2",
+      sup3: "\xB3",
+      acute: "\xB4",
+      micro: "\xB5",
+      para: "\xB6",
+      middot: "\xB7",
+      cedil: "\xB8",
+      sup1: "\xB9",
+      ordm: "\xBA",
+      raquo: "\xBB",
+      frac14: "\xBC",
+      frac12: "\xBD",
+      frac34: "\xBE",
+      iquest: "\xBF",
+      times: "\xD7",
+      divide: "\xF7",
+      forall: "\u2200",
+      part: "\u2202",
+      exist: "\u2203",
+      empty: "\u2205",
+      nabla: "\u2207",
+      isin: "\u2208",
+      notin: "\u2209",
+      ni: "\u220B",
+      prod: "\u220F",
+      sum: "\u2211",
+      minus: "\u2212",
+      lowast: "\u2217",
+      radic: "\u221A",
+      prop: "\u221D",
+      infin: "\u221E",
+      ang: "\u2220",
+      and: "\u2227",
+      or: "\u2228",
+      cap: "\u2229",
+      cup: "\u222A",
+      "int": "\u222B",
+      there4: "\u2234",
+      sim: "\u223C",
+      cong: "\u2245",
+      asymp: "\u2248",
+      ne: "\u2260",
+      equiv: "\u2261",
+      le: "\u2264",
+      ge: "\u2265",
+      sub: "\u2282",
+      sup: "\u2283",
+      nsub: "\u2284",
+      sube: "\u2286",
+      supe: "\u2287",
+      oplus: "\u2295",
+      otimes: "\u2297",
+      perp: "\u22A5",
+      sdot: "\u22C5",
+      Alpha: "\u0391",
+      Beta: "\u0392",
+      Gamma: "\u0393",
+      Delta: "\u0394",
+      Epsilon: "\u0395",
+      Zeta: "\u0396",
+      Eta: "\u0397",
+      Theta: "\u0398",
+      Iota: "\u0399",
+      Kappa: "\u039A",
+      Lambda: "\u039B",
+      Mu: "\u039C",
+      Nu: "\u039D",
+      Xi: "\u039E",
+      Omicron: "\u039F",
+      Pi: "\u03A0",
+      Rho: "\u03A1",
+      Sigma: "\u03A3",
+      Tau: "\u03A4",
+      Upsilon: "\u03A5",
+      Phi: "\u03A6",
+      Chi: "\u03A7",
+      Psi: "\u03A8",
+      Omega: "\u03A9",
+      alpha: "\u03B1",
+      beta: "\u03B2",
+      gamma: "\u03B3",
+      delta: "\u03B4",
+      epsilon: "\u03B5",
+      zeta: "\u03B6",
+      eta: "\u03B7",
+      theta: "\u03B8",
+      iota: "\u03B9",
+      kappa: "\u03BA",
+      lambda: "\u03BB",
+      mu: "\u03BC",
+      nu: "\u03BD",
+      xi: "\u03BE",
+      omicron: "\u03BF",
+      pi: "\u03C0",
+      rho: "\u03C1",
+      sigmaf: "\u03C2",
+      sigma: "\u03C3",
+      tau: "\u03C4",
+      upsilon: "\u03C5",
+      phi: "\u03C6",
+      chi: "\u03C7",
+      psi: "\u03C8",
+      omega: "\u03C9",
+      thetasym: "\u03D1",
+      upsih: "\u03D2",
+      piv: "\u03D6",
+      OElig: "\u0152",
+      oelig: "\u0153",
+      Scaron: "\u0160",
+      scaron: "\u0161",
+      Yuml: "\u0178",
+      fnof: "\u0192",
+      circ: "\u02C6",
+      tilde: "\u02DC",
+      ensp: "\u2002",
+      emsp: "\u2003",
+      thinsp: "\u2009",
+      zwnj: "\u200C",
+      zwj: "\u200D",
+      lrm: "\u200E",
+      rlm: "\u200F",
+      ndash: "\u2013",
+      mdash: "\u2014",
+      lsquo: "\u2018",
+      rsquo: "\u2019",
+      sbquo: "\u201A",
+      ldquo: "\u201C",
+      rdquo: "\u201D",
+      bdquo: "\u201E",
+      dagger: "\u2020",
+      Dagger: "\u2021",
+      bull: "\u2022",
+      hellip: "\u2026",
+      permil: "\u2030",
+      prime: "\u2032",
+      Prime: "\u2033",
+      lsaquo: "\u2039",
+      rsaquo: "\u203A",
+      oline: "\u203E",
+      euro: "\u20AC",
+      trade: "\u2122",
+      larr: "\u2190",
+      uarr: "\u2191",
+      rarr: "\u2192",
+      darr: "\u2193",
+      harr: "\u2194",
+      crarr: "\u21B5",
+      lceil: "\u2308",
+      rceil: "\u2309",
+      lfloor: "\u230A",
+      rfloor: "\u230B",
+      loz: "\u25CA",
+      spades: "\u2660",
+      clubs: "\u2663",
+      hearts: "\u2665",
+      diams: "\u2666"
+    });
+    exports.entityMap = exports.HTML_ENTITIES;
+  })(entities$1);
+  var sax$1 = {};
+  var NAMESPACE$1 = conventions$2.NAMESPACE;
+  var nameStartChar = /[A-Z_a-z\xC0-\xD6\xD8-\xF6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/;
+  var nameChar = new RegExp("[\\-\\.0-9" + nameStartChar.source.slice(1, -1) + "\\u00B7\\u0300-\\u036F\\u203F-\\u2040]");
+  var tagNamePattern = new RegExp("^" + nameStartChar.source + nameChar.source + "*(?::" + nameStartChar.source + nameChar.source + "*)?$");
+  var S_TAG = 0;
+  var S_ATTR = 1;
+  var S_ATTR_SPACE = 2;
+  var S_EQ = 3;
+  var S_ATTR_NOQUOT_VALUE = 4;
+  var S_ATTR_END = 5;
+  var S_TAG_SPACE = 6;
+  var S_TAG_CLOSE = 7;
+  function ParseError$1(message, locator) {
+    this.message = message;
+    this.locator = locator;
+    if (Error.captureStackTrace)
+      Error.captureStackTrace(this, ParseError$1);
+  }
+  ParseError$1.prototype = new Error();
+  ParseError$1.prototype.name = ParseError$1.name;
+  function XMLReader$1() {
+  }
+  XMLReader$1.prototype = {
+    parse: function(source, defaultNSMap, entityMap) {
+      var domBuilder = this.domBuilder;
+      domBuilder.startDocument();
+      _copy(defaultNSMap, defaultNSMap = {});
+      parse(
+        source,
+        defaultNSMap,
+        entityMap,
+        domBuilder,
+        this.errorHandler
+      );
+      domBuilder.endDocument();
     }
-    get source() {
-      return this._image;
-    }
-    updateTexture() {
-      const { style, texture, _image: image, resolution } = this;
-      const { padding } = style;
-      const { baseTexture } = texture;
-      texture.trim.width = texture._frame.width = image.width / resolution;
-      texture.trim.height = texture._frame.height = image.height / resolution;
-      texture.trim.x = -padding;
-      texture.trim.y = -padding;
-      texture.orig.width = texture._frame.width - padding * 2;
-      texture.orig.height = texture._frame.height - padding * 2;
-      this._onTextureUpdate();
-      baseTexture.setRealSize(image.width, image.height, resolution);
-      this.dirty = false;
-    }
-    _render(renderer) {
-      if (this._autoResolution && this._resolution !== renderer.resolution) {
-        this._resolution = renderer.resolution;
-        this.dirty = true;
-      }
-      this.updateText(true);
-      super._render(renderer);
-    }
-    _renderCanvas(renderer) {
-      if (this._autoResolution && this._resolution !== renderer.resolution) {
-        this._resolution = renderer.resolution;
-        this.dirty = true;
-      }
-      this.updateText(true);
-      super._renderCanvas(renderer);
-    }
-    getLocalBounds(rect) {
-      this.updateText(true);
-      return super.getLocalBounds(rect);
-    }
-    _calculateBounds() {
-      this.updateText(true);
-      this.calculateVertices();
-      this._bounds.addQuad(this.vertexData);
-    }
-    _onStyleChange() {
-      this.dirty = true;
-    }
-    destroy(options) {
-      var _a2, _b, _c, _d, _e;
-      if (typeof options === "boolean") {
-        options = { children: options };
-      }
-      options = Object.assign({}, _HTMLText.defaultDestroyOptions, options);
-      super.destroy(options);
-      const forceClear = null;
-      if (this.ownsStyle) {
-        (_a2 = this._style) == null ? void 0 : _a2.cleanFonts();
-      }
-      this._style = forceClear;
-      (_b = this._svgRoot) == null ? void 0 : _b.remove();
-      this._svgRoot = forceClear;
-      (_c = this._domElement) == null ? void 0 : _c.remove();
-      this._domElement = forceClear;
-      (_d = this._foreignObject) == null ? void 0 : _d.remove();
-      this._foreignObject = forceClear;
-      (_e = this._styleElement) == null ? void 0 : _e.remove();
-      this._styleElement = forceClear;
-      this._loadImage.src = "";
-      this._loadImage.onload = null;
-      this._loadImage = forceClear;
-      this._image.src = "";
-      this._image = forceClear;
-    }
-    get width() {
-      this.updateText(true);
-      return Math.abs(this.scale.x) * this._image.width / this.resolution;
-    }
-    set width(value) {
-      this.updateText(true);
-      const s2 = sign(this.scale.x) || 1;
-      this.scale.x = s2 * value / this._image.width / this.resolution;
-      this._width = value;
-    }
-    get height() {
-      this.updateText(true);
-      return Math.abs(this.scale.y) * this._image.height / this.resolution;
-    }
-    set height(value) {
-      this.updateText(true);
-      const s2 = sign(this.scale.y) || 1;
-      this.scale.y = s2 * value / this._image.height / this.resolution;
-      this._height = value;
-    }
-    get style() {
-      return this._style;
-    }
-    set style(style) {
-      if (this._style === style) {
-        return;
-      }
-      style = style || {};
-      if (style instanceof HTMLTextStyle) {
-        this.ownsStyle = false;
-        this._style = style;
-      } else if (style instanceof TextStyle) {
-        console.warn("[HTMLText] Cloning TextStyle, if this is not what you want, use HTMLTextStyle");
-        this.ownsStyle = true;
-        this._style = HTMLTextStyle.from(style);
+  };
+  function parse(source, defaultNSMapCopy, entityMap, domBuilder, errorHandler) {
+    function fixedFromCharCode(code) {
+      if (code > 65535) {
+        code -= 65536;
+        var surrogate1 = 55296 + (code >> 10), surrogate2 = 56320 + (code & 1023);
+        return String.fromCharCode(surrogate1, surrogate2);
       } else {
-        this.ownsStyle = true;
-        this._style = new HTMLTextStyle(style);
+        return String.fromCharCode(code);
       }
-      this.localStyleID = -1;
-      this.dirty = true;
     }
-    get text() {
-      return this._text;
-    }
-    set text(text) {
-      text = String(text === "" || text === null || text === void 0 ? " " : text);
-      text = this.sanitiseText(text);
-      if (this._text === text) {
-        return;
+    function entityReplacer(a3) {
+      var k2 = a3.slice(1, -1);
+      if (Object.hasOwnProperty.call(entityMap, k2)) {
+        return entityMap[k2];
+      } else if (k2.charAt(0) === "#") {
+        return fixedFromCharCode(parseInt(k2.substr(1).replace("x", "0x")));
+      } else {
+        errorHandler.error("entity not found:" + a3);
+        return a3;
       }
-      this._text = text;
-      this.dirty = true;
     }
-    get resolution() {
-      return this._resolution;
-    }
-    set resolution(value) {
-      this._autoResolution = false;
-      if (this._resolution === value) {
-        return;
+    function appendText(end2) {
+      if (end2 > start) {
+        var xt = source.substring(start, end2).replace(/&#?\w+;/g, entityReplacer);
+        locator && position2(start);
+        domBuilder.characters(xt, 0, end2 - start);
+        start = end2;
       }
-      this._resolution = value;
-      this.dirty = true;
     }
-    sanitiseText(text) {
-      return text.replace(/<br>/gi, "<br/>").replace(/<hr>/gi, "<hr/>").replace(/&nbsp;/gi, "&#160;");
+    function position2(p2, m2) {
+      while (p2 >= lineEnd && (m2 = linePattern.exec(source))) {
+        lineStart = m2.index;
+        lineEnd = lineStart + m2[0].length;
+        locator.lineNumber++;
+      }
+      locator.columnNumber = p2 - lineStart + 1;
+    }
+    var lineStart = 0;
+    var lineEnd = 0;
+    var linePattern = /.*(?:\r\n?|\n)|.*$/g;
+    var locator = domBuilder.locator;
+    var parseStack = [{ currentNSMap: defaultNSMapCopy }];
+    var closeMap = {};
+    var start = 0;
+    while (true) {
+      try {
+        var tagStart = source.indexOf("<", start);
+        if (tagStart < 0) {
+          if (!source.substr(start).match(/^\s*$/)) {
+            var doc = domBuilder.doc;
+            var text = doc.createTextNode(source.substr(start));
+            doc.appendChild(text);
+            domBuilder.currentElement = text;
+          }
+          return;
+        }
+        if (tagStart > start) {
+          appendText(tagStart);
+        }
+        switch (source.charAt(tagStart + 1)) {
+          case "/":
+            var end = source.indexOf(">", tagStart + 3);
+            var tagName = source.substring(tagStart + 2, end).replace(/[ \t\n\r]+$/g, "");
+            var config = parseStack.pop();
+            if (end < 0) {
+              tagName = source.substring(tagStart + 2).replace(/[\s<].*/, "");
+              errorHandler.error("end tag name: " + tagName + " is not complete:" + config.tagName);
+              end = tagStart + 1 + tagName.length;
+            } else if (tagName.match(/\s</)) {
+              tagName = tagName.replace(/[\s<].*/, "");
+              errorHandler.error("end tag name: " + tagName + " maybe not complete");
+              end = tagStart + 1 + tagName.length;
+            }
+            var localNSMap = config.localNSMap;
+            var endMatch = config.tagName == tagName;
+            var endIgnoreCaseMach = endMatch || config.tagName && config.tagName.toLowerCase() == tagName.toLowerCase();
+            if (endIgnoreCaseMach) {
+              domBuilder.endElement(config.uri, config.localName, tagName);
+              if (localNSMap) {
+                for (var prefix in localNSMap) {
+                  if (Object.prototype.hasOwnProperty.call(localNSMap, prefix)) {
+                    domBuilder.endPrefixMapping(prefix);
+                  }
+                }
+              }
+              if (!endMatch) {
+                errorHandler.fatalError("end tag name: " + tagName + " is not match the current start tagName:" + config.tagName);
+              }
+            } else {
+              parseStack.push(config);
+            }
+            end++;
+            break;
+          case "?":
+            locator && position2(tagStart);
+            end = parseInstruction(source, tagStart, domBuilder);
+            break;
+          case "!":
+            locator && position2(tagStart);
+            end = parseDCC(source, tagStart, domBuilder, errorHandler);
+            break;
+          default:
+            locator && position2(tagStart);
+            var el = new ElementAttributes();
+            var currentNSMap = parseStack[parseStack.length - 1].currentNSMap;
+            var end = parseElementStartPart(source, tagStart, el, currentNSMap, entityReplacer, errorHandler);
+            var len = el.length;
+            if (!el.closed && fixSelfClosed(source, end, el.tagName, closeMap)) {
+              el.closed = true;
+              if (!entityMap.nbsp) {
+                errorHandler.warning("unclosed xml attribute");
+              }
+            }
+            if (locator && len) {
+              var locator2 = copyLocator(locator, {});
+              for (var i2 = 0; i2 < len; i2++) {
+                var a2 = el[i2];
+                position2(a2.offset);
+                a2.locator = copyLocator(locator, {});
+              }
+              domBuilder.locator = locator2;
+              if (appendElement$1(el, domBuilder, currentNSMap)) {
+                parseStack.push(el);
+              }
+              domBuilder.locator = locator;
+            } else {
+              if (appendElement$1(el, domBuilder, currentNSMap)) {
+                parseStack.push(el);
+              }
+            }
+            if (NAMESPACE$1.isHTML(el.uri) && !el.closed) {
+              end = parseHtmlSpecialContent(source, end, el.tagName, entityReplacer, domBuilder);
+            } else {
+              end++;
+            }
+        }
+      } catch (e2) {
+        if (e2 instanceof ParseError$1) {
+          throw e2;
+        }
+        errorHandler.error("element parse error: " + e2);
+        end = -1;
+      }
+      if (end > start) {
+        start = end;
+      } else {
+        appendText(Math.max(tagStart, start) + 1);
+      }
+    }
+  }
+  function copyLocator(f2, t2) {
+    t2.lineNumber = f2.lineNumber;
+    t2.columnNumber = f2.columnNumber;
+    return t2;
+  }
+  function parseElementStartPart(source, start, el, currentNSMap, entityReplacer, errorHandler) {
+    function addAttribute(qname, value2, startIndex) {
+      if (el.attributeNames.hasOwnProperty(qname)) {
+        errorHandler.fatalError("Attribute " + qname + " redefined");
+      }
+      el.addValue(
+        qname,
+        value2.replace(/[\t\n\r]/g, " ").replace(/&#?\w+;/g, entityReplacer),
+        startIndex
+      );
+    }
+    var attrName;
+    var value;
+    var p2 = ++start;
+    var s2 = S_TAG;
+    while (true) {
+      var c2 = source.charAt(p2);
+      switch (c2) {
+        case "=":
+          if (s2 === S_ATTR) {
+            attrName = source.slice(start, p2);
+            s2 = S_EQ;
+          } else if (s2 === S_ATTR_SPACE) {
+            s2 = S_EQ;
+          } else {
+            throw new Error("attribute equal must after attrName");
+          }
+          break;
+        case "'":
+        case '"':
+          if (s2 === S_EQ || s2 === S_ATTR) {
+            if (s2 === S_ATTR) {
+              errorHandler.warning('attribute value must after "="');
+              attrName = source.slice(start, p2);
+            }
+            start = p2 + 1;
+            p2 = source.indexOf(c2, start);
+            if (p2 > 0) {
+              value = source.slice(start, p2);
+              addAttribute(attrName, value, start - 1);
+              s2 = S_ATTR_END;
+            } else {
+              throw new Error("attribute value no end '" + c2 + "' match");
+            }
+          } else if (s2 == S_ATTR_NOQUOT_VALUE) {
+            value = source.slice(start, p2);
+            addAttribute(attrName, value, start);
+            errorHandler.warning('attribute "' + attrName + '" missed start quot(' + c2 + ")!!");
+            start = p2 + 1;
+            s2 = S_ATTR_END;
+          } else {
+            throw new Error('attribute value must after "="');
+          }
+          break;
+        case "/":
+          switch (s2) {
+            case S_TAG:
+              el.setTagName(source.slice(start, p2));
+            case S_ATTR_END:
+            case S_TAG_SPACE:
+            case S_TAG_CLOSE:
+              s2 = S_TAG_CLOSE;
+              el.closed = true;
+            case S_ATTR_NOQUOT_VALUE:
+            case S_ATTR:
+              break;
+            case S_ATTR_SPACE:
+              el.closed = true;
+              break;
+            default:
+              throw new Error("attribute invalid close char('/')");
+          }
+          break;
+        case "":
+          errorHandler.error("unexpected end of input");
+          if (s2 == S_TAG) {
+            el.setTagName(source.slice(start, p2));
+          }
+          return p2;
+        case ">":
+          switch (s2) {
+            case S_TAG:
+              el.setTagName(source.slice(start, p2));
+            case S_ATTR_END:
+            case S_TAG_SPACE:
+            case S_TAG_CLOSE:
+              break;
+            case S_ATTR_NOQUOT_VALUE:
+            case S_ATTR:
+              value = source.slice(start, p2);
+              if (value.slice(-1) === "/") {
+                el.closed = true;
+                value = value.slice(0, -1);
+              }
+            case S_ATTR_SPACE:
+              if (s2 === S_ATTR_SPACE) {
+                value = attrName;
+              }
+              if (s2 == S_ATTR_NOQUOT_VALUE) {
+                errorHandler.warning('attribute "' + value + '" missed quot(")!');
+                addAttribute(attrName, value, start);
+              } else {
+                if (!NAMESPACE$1.isHTML(currentNSMap[""]) || !value.match(/^(?:disabled|checked|selected)$/i)) {
+                  errorHandler.warning('attribute "' + value + '" missed value!! "' + value + '" instead!!');
+                }
+                addAttribute(value, value, start);
+              }
+              break;
+            case S_EQ:
+              throw new Error("attribute value missed!!");
+          }
+          return p2;
+        case "\x80":
+          c2 = " ";
+        default:
+          if (c2 <= " ") {
+            switch (s2) {
+              case S_TAG:
+                el.setTagName(source.slice(start, p2));
+                s2 = S_TAG_SPACE;
+                break;
+              case S_ATTR:
+                attrName = source.slice(start, p2);
+                s2 = S_ATTR_SPACE;
+                break;
+              case S_ATTR_NOQUOT_VALUE:
+                var value = source.slice(start, p2);
+                errorHandler.warning('attribute "' + value + '" missed quot(")!!');
+                addAttribute(attrName, value, start);
+              case S_ATTR_END:
+                s2 = S_TAG_SPACE;
+                break;
+            }
+          } else {
+            switch (s2) {
+              case S_ATTR_SPACE:
+                el.tagName;
+                if (!NAMESPACE$1.isHTML(currentNSMap[""]) || !attrName.match(/^(?:disabled|checked|selected)$/i)) {
+                  errorHandler.warning('attribute "' + attrName + '" missed value!! "' + attrName + '" instead2!!');
+                }
+                addAttribute(attrName, attrName, start);
+                start = p2;
+                s2 = S_ATTR;
+                break;
+              case S_ATTR_END:
+                errorHandler.warning('attribute space is required"' + attrName + '"!!');
+              case S_TAG_SPACE:
+                s2 = S_ATTR;
+                start = p2;
+                break;
+              case S_EQ:
+                s2 = S_ATTR_NOQUOT_VALUE;
+                start = p2;
+                break;
+              case S_TAG_CLOSE:
+                throw new Error("elements closed character '/' and '>' must be connected to");
+            }
+          }
+      }
+      p2++;
+    }
+  }
+  function appendElement$1(el, domBuilder, currentNSMap) {
+    var tagName = el.tagName;
+    var localNSMap = null;
+    var i2 = el.length;
+    while (i2--) {
+      var a2 = el[i2];
+      var qName = a2.qName;
+      var value = a2.value;
+      var nsp = qName.indexOf(":");
+      if (nsp > 0) {
+        var prefix = a2.prefix = qName.slice(0, nsp);
+        var localName = qName.slice(nsp + 1);
+        var nsPrefix = prefix === "xmlns" && localName;
+      } else {
+        localName = qName;
+        prefix = null;
+        nsPrefix = qName === "xmlns" && "";
+      }
+      a2.localName = localName;
+      if (nsPrefix !== false) {
+        if (localNSMap == null) {
+          localNSMap = {};
+          _copy(currentNSMap, currentNSMap = {});
+        }
+        currentNSMap[nsPrefix] = localNSMap[nsPrefix] = value;
+        a2.uri = NAMESPACE$1.XMLNS;
+        domBuilder.startPrefixMapping(nsPrefix, value);
+      }
+    }
+    var i2 = el.length;
+    while (i2--) {
+      a2 = el[i2];
+      var prefix = a2.prefix;
+      if (prefix) {
+        if (prefix === "xml") {
+          a2.uri = NAMESPACE$1.XML;
+        }
+        if (prefix !== "xmlns") {
+          a2.uri = currentNSMap[prefix || ""];
+        }
+      }
+    }
+    var nsp = tagName.indexOf(":");
+    if (nsp > 0) {
+      prefix = el.prefix = tagName.slice(0, nsp);
+      localName = el.localName = tagName.slice(nsp + 1);
+    } else {
+      prefix = null;
+      localName = el.localName = tagName;
+    }
+    var ns = el.uri = currentNSMap[prefix || ""];
+    domBuilder.startElement(ns, localName, tagName, el);
+    if (el.closed) {
+      domBuilder.endElement(ns, localName, tagName);
+      if (localNSMap) {
+        for (prefix in localNSMap) {
+          if (Object.prototype.hasOwnProperty.call(localNSMap, prefix)) {
+            domBuilder.endPrefixMapping(prefix);
+          }
+        }
+      }
+    } else {
+      el.currentNSMap = currentNSMap;
+      el.localNSMap = localNSMap;
+      return true;
+    }
+  }
+  function parseHtmlSpecialContent(source, elStartEnd, tagName, entityReplacer, domBuilder) {
+    if (/^(?:script|textarea)$/i.test(tagName)) {
+      var elEndStart = source.indexOf("</" + tagName + ">", elStartEnd);
+      var text = source.substring(elStartEnd + 1, elEndStart);
+      if (/[&<]/.test(text)) {
+        if (/^script$/i.test(tagName)) {
+          domBuilder.characters(text, 0, text.length);
+          return elEndStart;
+        }
+        text = text.replace(/&#?\w+;/g, entityReplacer);
+        domBuilder.characters(text, 0, text.length);
+        return elEndStart;
+      }
+    }
+    return elStartEnd + 1;
+  }
+  function fixSelfClosed(source, elStartEnd, tagName, closeMap) {
+    var pos = closeMap[tagName];
+    if (pos == null) {
+      pos = source.lastIndexOf("</" + tagName + ">");
+      if (pos < elStartEnd) {
+        pos = source.lastIndexOf("</" + tagName);
+      }
+      closeMap[tagName] = pos;
+    }
+    return pos < elStartEnd;
+  }
+  function _copy(source, target) {
+    for (var n2 in source) {
+      if (Object.prototype.hasOwnProperty.call(source, n2)) {
+        target[n2] = source[n2];
+      }
+    }
+  }
+  function parseDCC(source, start, domBuilder, errorHandler) {
+    var next = source.charAt(start + 2);
+    switch (next) {
+      case "-":
+        if (source.charAt(start + 3) === "-") {
+          var end = source.indexOf("-->", start + 4);
+          if (end > start) {
+            domBuilder.comment(source, start + 4, end - start - 4);
+            return end + 3;
+          } else {
+            errorHandler.error("Unclosed comment");
+            return -1;
+          }
+        } else {
+          return -1;
+        }
+      default:
+        if (source.substr(start + 3, 6) == "CDATA[") {
+          var end = source.indexOf("]]>", start + 9);
+          domBuilder.startCDATA();
+          domBuilder.characters(source, start + 9, end - start - 9);
+          domBuilder.endCDATA();
+          return end + 3;
+        }
+        var matchs = split(source, start);
+        var len = matchs.length;
+        if (len > 1 && /!doctype/i.test(matchs[0][0])) {
+          var name = matchs[1][0];
+          var pubid = false;
+          var sysid = false;
+          if (len > 3) {
+            if (/^public$/i.test(matchs[2][0])) {
+              pubid = matchs[3][0];
+              sysid = len > 4 && matchs[4][0];
+            } else if (/^system$/i.test(matchs[2][0])) {
+              sysid = matchs[3][0];
+            }
+          }
+          var lastMatch = matchs[len - 1];
+          domBuilder.startDTD(name, pubid, sysid);
+          domBuilder.endDTD();
+          return lastMatch.index + lastMatch[0].length;
+        }
+    }
+    return -1;
+  }
+  function parseInstruction(source, start, domBuilder) {
+    var end = source.indexOf("?>", start);
+    if (end) {
+      var match = source.substring(start, end).match(/^<\?(\S*)\s*([\s\S]*?)\s*$/);
+      if (match) {
+        match[0].length;
+        domBuilder.processingInstruction(match[1], match[2]);
+        return end + 2;
+      } else {
+        return -1;
+      }
+    }
+    return -1;
+  }
+  function ElementAttributes() {
+    this.attributeNames = {};
+  }
+  ElementAttributes.prototype = {
+    setTagName: function(tagName) {
+      if (!tagNamePattern.test(tagName)) {
+        throw new Error("invalid tagName:" + tagName);
+      }
+      this.tagName = tagName;
+    },
+    addValue: function(qName, value, offset) {
+      if (!tagNamePattern.test(qName)) {
+        throw new Error("invalid attribute:" + qName);
+      }
+      this.attributeNames[qName] = this.length;
+      this[this.length++] = { qName, value, offset };
+    },
+    length: 0,
+    getLocalName: function(i2) {
+      return this[i2].localName;
+    },
+    getLocator: function(i2) {
+      return this[i2].locator;
+    },
+    getQName: function(i2) {
+      return this[i2].qName;
+    },
+    getURI: function(i2) {
+      return this[i2].uri;
+    },
+    getValue: function(i2) {
+      return this[i2].value;
     }
   };
-  let HTMLText = _HTMLText;
-  HTMLText.defaultDestroyOptions = {
-    texture: true,
-    children: false,
-    baseTexture: true
+  function split(source, start) {
+    var match;
+    var buf = [];
+    var reg = /'[^']+'|"[^"]+"|[^\s<>\/=]+=?|(\/?\s*>|<)/g;
+    reg.lastIndex = start;
+    reg.exec(source);
+    while (match = reg.exec(source)) {
+      buf.push(match);
+      if (match[1])
+        return buf;
+    }
+  }
+  sax$1.XMLReader = XMLReader$1;
+  sax$1.ParseError = ParseError$1;
+  var conventions = conventions$2;
+  var dom = dom$1;
+  var entities = entities$1;
+  var sax = sax$1;
+  var DOMImplementation = dom.DOMImplementation;
+  var NAMESPACE = conventions.NAMESPACE;
+  var ParseError = sax.ParseError;
+  var XMLReader = sax.XMLReader;
+  function normalizeLineEndings(input) {
+    return input.replace(/\r[\n\u0085]/g, "\n").replace(/[\r\u0085\u2028]/g, "\n");
+  }
+  function DOMParser$2(options) {
+    this.options = options || { locator: {} };
+  }
+  DOMParser$2.prototype.parseFromString = function(source, mimeType) {
+    var options = this.options;
+    var sax2 = new XMLReader();
+    var domBuilder = options.domBuilder || new DOMHandler();
+    var errorHandler = options.errorHandler;
+    var locator = options.locator;
+    var defaultNSMap = options.xmlns || {};
+    var isHTML = /\/x?html?$/.test(mimeType);
+    var entityMap = isHTML ? entities.HTML_ENTITIES : entities.XML_ENTITIES;
+    if (locator) {
+      domBuilder.setDocumentLocator(locator);
+    }
+    sax2.errorHandler = buildErrorHandler(errorHandler, domBuilder, locator);
+    sax2.domBuilder = options.domBuilder || domBuilder;
+    if (isHTML) {
+      defaultNSMap[""] = NAMESPACE.HTML;
+    }
+    defaultNSMap.xml = defaultNSMap.xml || NAMESPACE.XML;
+    var normalize = options.normalizeLineEndings || normalizeLineEndings;
+    if (source && typeof source === "string") {
+      sax2.parse(
+        normalize(source),
+        defaultNSMap,
+        entityMap
+      );
+    } else {
+      sax2.errorHandler.error("invalid doc source");
+    }
+    return domBuilder.doc;
   };
-  HTMLText.defaultMaxWidth = 2024;
-  HTMLText.defaultMaxHeight = 2024;
-  HTMLText.defaultAutoResolution = true;
+  function buildErrorHandler(errorImpl, domBuilder, locator) {
+    if (!errorImpl) {
+      if (domBuilder instanceof DOMHandler) {
+        return domBuilder;
+      }
+      errorImpl = domBuilder;
+    }
+    var errorHandler = {};
+    var isCallback = errorImpl instanceof Function;
+    locator = locator || {};
+    function build(key) {
+      var fn = errorImpl[key];
+      if (!fn && isCallback) {
+        fn = errorImpl.length == 2 ? function(msg) {
+          errorImpl(key, msg);
+        } : errorImpl;
+      }
+      errorHandler[key] = fn && function(msg) {
+        fn("[xmldom " + key + "]	" + msg + _locator(locator));
+      } || function() {
+      };
+    }
+    build("warning");
+    build("error");
+    build("fatalError");
+    return errorHandler;
+  }
+  function DOMHandler() {
+    this.cdata = false;
+  }
+  function position(locator, node) {
+    node.lineNumber = locator.lineNumber;
+    node.columnNumber = locator.columnNumber;
+  }
+  DOMHandler.prototype = {
+    startDocument: function() {
+      this.doc = new DOMImplementation().createDocument(null, null, null);
+      if (this.locator) {
+        this.doc.documentURI = this.locator.systemId;
+      }
+    },
+    startElement: function(namespaceURI, localName, qName, attrs) {
+      var doc = this.doc;
+      var el = doc.createElementNS(namespaceURI, qName || localName);
+      var len = attrs.length;
+      appendElement(this, el);
+      this.currentElement = el;
+      this.locator && position(this.locator, el);
+      for (var i2 = 0; i2 < len; i2++) {
+        var namespaceURI = attrs.getURI(i2);
+        var value = attrs.getValue(i2);
+        var qName = attrs.getQName(i2);
+        var attr = doc.createAttributeNS(namespaceURI, qName);
+        this.locator && position(attrs.getLocator(i2), attr);
+        attr.value = attr.nodeValue = value;
+        el.setAttributeNode(attr);
+      }
+    },
+    endElement: function(namespaceURI, localName, qName) {
+      var current = this.currentElement;
+      current.tagName;
+      this.currentElement = current.parentNode;
+    },
+    startPrefixMapping: function(prefix, uri) {
+    },
+    endPrefixMapping: function(prefix) {
+    },
+    processingInstruction: function(target, data) {
+      var ins = this.doc.createProcessingInstruction(target, data);
+      this.locator && position(this.locator, ins);
+      appendElement(this, ins);
+    },
+    ignorableWhitespace: function(ch, start, length) {
+    },
+    characters: function(chars, start, length) {
+      chars = _toString.apply(this, arguments);
+      if (chars) {
+        if (this.cdata) {
+          var charNode = this.doc.createCDATASection(chars);
+        } else {
+          var charNode = this.doc.createTextNode(chars);
+        }
+        if (this.currentElement) {
+          this.currentElement.appendChild(charNode);
+        } else if (/^\s*$/.test(chars)) {
+          this.doc.appendChild(charNode);
+        }
+        this.locator && position(this.locator, charNode);
+      }
+    },
+    skippedEntity: function(name) {
+    },
+    endDocument: function() {
+      this.doc.normalize();
+    },
+    setDocumentLocator: function(locator) {
+      if (this.locator = locator) {
+        locator.lineNumber = 0;
+      }
+    },
+    comment: function(chars, start, length) {
+      chars = _toString.apply(this, arguments);
+      var comm = this.doc.createComment(chars);
+      this.locator && position(this.locator, comm);
+      appendElement(this, comm);
+    },
+    startCDATA: function() {
+      this.cdata = true;
+    },
+    endCDATA: function() {
+      this.cdata = false;
+    },
+    startDTD: function(name, publicId, systemId) {
+      var impl = this.doc.implementation;
+      if (impl && impl.createDocumentType) {
+        var dt = impl.createDocumentType(name, publicId, systemId);
+        this.locator && position(this.locator, dt);
+        appendElement(this, dt);
+        this.doc.doctype = dt;
+      }
+    },
+    warning: function(error) {
+      console.warn("[xmldom warning]	" + error, _locator(this.locator));
+    },
+    error: function(error) {
+      console.error("[xmldom error]	" + error, _locator(this.locator));
+    },
+    fatalError: function(error) {
+      throw new ParseError(error, this.locator);
+    }
+  };
+  function _locator(l2) {
+    if (l2) {
+      return "\n@" + (l2.systemId || "") + "#[line:" + l2.lineNumber + ",col:" + l2.columnNumber + "]";
+    }
+  }
+  function _toString(chars, start, length) {
+    if (typeof chars == "string") {
+      return chars.substr(start, length);
+    } else {
+      if (chars.length >= start + length || start) {
+        return new java.lang.String(chars, start, length) + "";
+      }
+      return chars;
+    }
+  }
+  "endDTD,startEntity,endEntity,attributeDecl,elementDecl,externalEntityDecl,internalEntityDecl,resolveEntity,getExternalSubset,notationDecl,unparsedEntityDecl".replace(/\w+/g, function(key) {
+    DOMHandler.prototype[key] = function() {
+      return null;
+    };
+  });
+  function appendElement(hander, node) {
+    if (!hander.currentElement) {
+      hander.doc.appendChild(node);
+    } else {
+      hander.currentElement.appendChild(node);
+    }
+  }
+  domParser.__DOMHandler = DOMHandler;
+  domParser.normalizeLineEndings = normalizeLineEndings;
+  domParser.DOMParser = DOMParser$2;
+  var DOMParser$1 = domParser.DOMParser;
+  const WebWorkerAdapter = {
+    createCanvas: (width, height) => new OffscreenCanvas(width != null ? width : 0, height != null ? height : 0),
+    getCanvasRenderingContext2D: () => OffscreenCanvasRenderingContext2D,
+    getWebGLRenderingContext: () => WebGLRenderingContext,
+    getNavigator: () => navigator,
+    getBaseUrl: () => globalThis.location.href,
+    getFontFaceSet: () => globalThis.fonts,
+    fetch: (url2, options) => fetch(url2, options),
+    parseXML: (xml) => {
+      const parser = new DOMParser$1();
+      return parser.parseFromString(xml, "text/xml");
+    }
+  };
+  settings.ADAPTER = WebWorkerAdapter;
   const _self = self;
   async function renderBitmap() {
+    console.log("worker begin");
     const offscreen = new OffscreenCanvas(400, 400);
     const renderer = new Renderer({
       background: "#1099bb",
@@ -23160,7 +23354,7 @@ ${e2}`);
       antialias: true
     });
     const container = new Container();
-    const texture = Texture.from("bunny.png");
+    const texture = Texture.from("../../bunny.png");
     await new Promise((r2) => setTimeout(r2, 200));
     for (let i2 = 0; i2 < 25; i2++) {
       const bunny = new Sprite(texture);
@@ -23170,7 +23364,9 @@ ${e2}`);
       container.addChild(bunny);
     }
     renderer.render(container);
-    return offscreen;
+    const bitmap = offscreen.transferToImageBitmap();
+    console.log("worker done");
+    return bitmap;
   }
   _self.addEventListener("message", async () => {
     const bitmap = await renderBitmap();

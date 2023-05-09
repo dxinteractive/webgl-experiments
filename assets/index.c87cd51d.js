@@ -47103,7 +47103,7 @@ const example$2 = {
 var _jsxFileName$2 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap() {
   return new Promise((resolve2) => {
-    const worker = new Worker(new URL("/pixijs-experiments/assets/06-pixijs-bunnies-worker.worker.d6d793b8.js", self.location), {
+    const worker = new Worker(new URL("/pixijs-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
       type: "module"
     });
     worker.addEventListener("message", (e2) => {
@@ -47143,7 +47143,7 @@ const example$1 = {
 };
 var _jsxFileName$1 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
-  const worker = new Worker(new URL("/pixijs-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.431e6ccd.js", self.location), {
+  const worker = new Worker(new URL("/pixijs-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
