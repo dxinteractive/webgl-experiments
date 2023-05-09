@@ -23704,7 +23704,7 @@ var reactJsxDevRuntime_development = {};
     module.exports = reactJsxDevRuntime_development;
   }
 })(jsxDevRuntime);
-var _jsxFileName$8 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/00-blank.tsx";
+var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
 function Component$7() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     children: "..."
@@ -23721,7 +23721,7 @@ const example$7 = {
   description: "Duplicate this to make new experiments.",
   Component: Component$7
 };
-var _jsxFileName$7 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/01-offscreen-canvas.tsx";
+var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
 function renderBitmap$4() {
   const offscreen = new OffscreenCanvas(400, 400);
   const ctx = offscreen.getContext("2d");
@@ -23760,10 +23760,10 @@ const example$6 = {
   description: "Usage of an offscreen canvas",
   Component: Component$6
 };
-var _jsxFileName$6 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
+var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
 async function renderBitmap$3() {
   return new Promise((resolve2) => {
-    const worker = new Worker(new URL("/pixijs-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
+    const worker = new Worker(new URL("/webgl-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
       type: "module"
     });
     worker.addEventListener("message", (e2) => {
@@ -46950,7 +46950,7 @@ HTMLText.defaultDestroyOptions = {
 HTMLText.defaultMaxWidth = 2024;
 HTMLText.defaultMaxHeight = 2024;
 HTMLText.defaultAutoResolution = true;
-var _jsxFileName$5 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/03-pixijs-bunnies.tsx";
+var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
 function createBunnies(view) {
   const app = new Application({
     background: "#1099bb",
@@ -46999,7 +46999,7 @@ const example$4 = {
   description: "Hello world for Pixi.js.",
   Component: Component$4
 };
-var _jsxFileName$4 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
+var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
 async function renderBitmap$2() {
   const canvas = document.createElement("canvas");
   document.body.appendChild(canvas);
@@ -47050,7 +47050,7 @@ const example$3 = {
   description: "Using canvas.transferControlToOffscreen()",
   Component: Component$3
 };
-var _jsxFileName$3 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
+var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
 async function renderBitmap$1() {
   const offscreen = new OffscreenCanvas(400, 400);
   const renderer = new Renderer({
@@ -47100,10 +47100,10 @@ const example$2 = {
   description: "Using new OffscreenCanvas()",
   Component: Component$2
 };
-var _jsxFileName$2 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap() {
   return new Promise((resolve2) => {
-    const worker = new Worker(new URL("/pixijs-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
+    const worker = new Worker(new URL("/webgl-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
       type: "module"
     });
     worker.addEventListener("message", (e2) => {
@@ -47141,9 +47141,9 @@ const example$1 = {
   description: "Pixi.js bunnies in a worker",
   Component: Component$1
 };
-var _jsxFileName$1 = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
+var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
-  const worker = new Worker(new URL("/pixijs-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
+  const worker = new Worker(new URL("/webgl-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
@@ -48169,7 +48169,7 @@ function useLinkClickHandler(to, _temp) {
     }
   }, [location, navigate, path2, replaceProp, state, target, to]);
 }
-var _jsxFileName = "/home/runner/work/pixijs-experiments/pixijs-experiments/src/dev.tsx";
+var _jsxFileName = "/home/runner/work/webgl-experiments/webgl-experiments/src/dev.tsx";
 client.createRoot(document.getElementById("root")).render(/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(React.StrictMode, {
   children: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(HashRouter, {
     children: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Routes, {
@@ -48274,7 +48274,7 @@ function List() {
     children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(ListHeader, {
       children: ["Pixijs experiments -", " ", /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("a", {
         className: classes.link,
-        href: "https://github.com/dxinteractive/pixijs-experiments",
+        href: "https://github.com/dxinteractive/webgl-experiments",
         children: "github repo"
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -48360,7 +48360,7 @@ function ExperimentPage(props) {
     filename,
     Component: Component2
   } = experiment;
-  const sourceUrl = `https://github.com/dxinteractive/pixijs-experiments/blob/main/src/experiments/${filename}`;
+  const sourceUrl = `https://github.com/dxinteractive/webgl-experiments/blob/main/src/experiments/${filename}`;
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(jsxDevRuntime.exports.Fragment, {
     children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Header, {
       children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("strong", {
