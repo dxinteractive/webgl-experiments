@@ -61,7 +61,7 @@ function List() {
         Pixijs experiments -{" "}
         <a
           className={classes.link}
-          href="https://github.com/dxinteractive/pixijs-experiments"
+          href="https://github.com/dxinteractive/webgl-experiments"
         >
           github repo
         </a>
@@ -110,7 +110,7 @@ function ExperimentPage(props: PageProps) {
   const { experiment } = props;
   const { name, description, filename, Component } = experiment;
 
-  const sourceUrl = `https://github.com/dxinteractive/pixijs-experiments/blob/main/src/experiments/${filename}`;
+  const sourceUrl = `https://github.com/dxinteractive/webgl-experiments/blob/main/src/experiments/${filename}`;
 
   return (
     <>

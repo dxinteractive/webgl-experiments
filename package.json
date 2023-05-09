@@ -1,11 +1,11 @@
 {
-  "name": "pixijs-experiments",
+  "name": "webgl-experiments",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build-gh-pages": "tsc && vite build --base=/pixijs-experiments/ --mode=deployed",
+    "build-gh-pages": "tsc && vite build --base=/webgl-experiments/ --mode=deployed",
     "preview": "vite preview",
     "pretty": "yarn prettier --write .",
     "lint": "yarn eslint src",

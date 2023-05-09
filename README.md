@@ -1,4 +1,4 @@
-# pixijs-experiments
+# webgl-experiments
 
 ```
 yarn && yarn dev
