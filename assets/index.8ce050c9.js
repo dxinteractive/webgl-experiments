@@ -23704,24 +23704,24 @@ var reactJsxDevRuntime_development = {};
     module.exports = reactJsxDevRuntime_development;
   }
 })(jsxDevRuntime);
-var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
-function Component$a() {
+var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
+function Component$b() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     children: "..."
   }, void 0, false, {
-    fileName: _jsxFileName$b,
+    fileName: _jsxFileName$c,
     lineNumber: 4,
     columnNumber: 10
   }, this);
 }
-const example$a = {
+const example$b = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
   description: "Duplicate this to make new experiments.",
-  Component: Component$a
+  Component: Component$b
 };
-var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
+var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
 function renderBitmap$6() {
   const offscreen = new OffscreenCanvas(400, 400);
   const ctx = offscreen.getContext("2d");
@@ -23733,7 +23733,7 @@ function renderBitmap$6() {
   ctx.fillRect(0, 0, 400, 400);
   return offscreen.transferToImageBitmap();
 }
-function Component$9() {
+function Component$a() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23748,19 +23748,19 @@ function Component$9() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$a,
+    fileName: _jsxFileName$b,
     lineNumber: 25,
     columnNumber: 10
   }, this);
 }
-const example$9 = {
+const example$a = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
   description: "Usage of an offscreen canvas",
-  Component: Component$9
+  Component: Component$a
 };
-var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
+var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
 async function renderBitmap$5() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
@@ -23772,7 +23772,7 @@ async function renderBitmap$5() {
     worker.postMessage("begin");
   });
 }
-function Component$8() {
+function Component$9() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23789,17 +23789,17 @@ function Component$8() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$9,
+    fileName: _jsxFileName$a,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$8 = {
+const example$9 = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
   description: "Usage of an offscreen canvas in a worker",
-  Component: Component$8
+  Component: Component$9
 };
 var ENV = /* @__PURE__ */ ((ENV2) => {
   ENV2[ENV2["WEBGL_LEGACY"] = 0] = "WEBGL_LEGACY";
@@ -46950,8 +46950,8 @@ HTMLText.defaultDestroyOptions = {
 HTMLText.defaultMaxWidth = 2024;
 HTMLText.defaultMaxHeight = 2024;
 HTMLText.defaultAutoResolution = true;
-var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
-function createBunnies(view) {
+var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
+function createBunnies$1(view) {
   const app = new Application({
     background: "#1099bb",
     view
@@ -46974,32 +46974,32 @@ function createBunnies(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$7() {
+function Component$8() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
       throw new Error("Could not find canvas element");
     }
-    createBunnies(ref.current);
+    createBunnies$1(ref.current);
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
     ref,
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$8,
+    fileName: _jsxFileName$9,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example$7 = {
+const example$8 = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
-  name: "Pixi.js bunnies",
+  name: "Pixi bunnies",
   description: "Hello world for Pixi.js.",
-  Component: Component$7
+  Component: Component$8
 };
-var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
+var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
 async function renderBitmap$4() {
   const canvas = document.createElement("canvas");
   document.body.appendChild(canvas);
@@ -47007,6 +47007,56 @@ async function renderBitmap$4() {
   const renderer = new Renderer({
     background: "#1099bb",
     view: offscreen
+  });
+  const container = new Container();
+  const texture = Texture$1.from("bunny.png");
+  await new Promise((r2) => setTimeout(r2, 200));
+  for (let i2 = 0; i2 < 25; i2++) {
+    const bunny = new Sprite(texture);
+    bunny.anchor.set(0.5);
+    bunny.x = i2 % 5 * 40;
+    bunny.y = Math.floor(i2 / 5) * 40;
+    container.addChild(bunny);
+  }
+  renderer.render(container);
+  return offscreen;
+}
+function Component$7() {
+  const ref = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a2;
+    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
+    if (!ctx) {
+      throw new Error("Could not create 2d canvas context");
+    }
+    renderBitmap$4().then((bitmap) => {
+      ctx.drawImage(bitmap, 0, 0);
+    });
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+    ref,
+    width: 400,
+    height: 400
+  }, void 0, false, {
+    fileName: _jsxFileName$8,
+    lineNumber: 47,
+    columnNumber: 10
+  }, this);
+}
+const example$7 = {
+  id: "pixijs-bunnies-offscreen",
+  filename: "04-pixijs-bunnies-offscreen.tsx",
+  name: "Pixi bunnies on offscreen canvas",
+  description: "Using canvas.transferControlToOffscreen()",
+  Component: Component$7
+};
+var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
+async function renderBitmap$3() {
+  const offscreen = new OffscreenCanvas(400, 400);
+  const renderer = new Renderer({
+    background: "#1099bb",
+    view: offscreen,
+    antialias: true
   });
   const container = new Container();
   const texture = Texture$1.from("bunny.png");
@@ -47029,56 +47079,6 @@ function Component$6() {
     if (!ctx) {
       throw new Error("Could not create 2d canvas context");
     }
-    renderBitmap$4().then((bitmap) => {
-      ctx.drawImage(bitmap, 0, 0);
-    });
-  }, []);
-  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
-    ref,
-    width: 400,
-    height: 400
-  }, void 0, false, {
-    fileName: _jsxFileName$7,
-    lineNumber: 47,
-    columnNumber: 10
-  }, this);
-}
-const example$6 = {
-  id: "pixijs-bunnies-offscreen",
-  filename: "04-pixijs-bunnies-offscreen.tsx",
-  name: "Pixi.js bunnies on offscreen canvas",
-  description: "Using canvas.transferControlToOffscreen()",
-  Component: Component$6
-};
-var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
-async function renderBitmap$3() {
-  const offscreen = new OffscreenCanvas(400, 400);
-  const renderer = new Renderer({
-    background: "#1099bb",
-    view: offscreen,
-    antialias: true
-  });
-  const container = new Container();
-  const texture = Texture$1.from("bunny.png");
-  await new Promise((r2) => setTimeout(r2, 200));
-  for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite(texture);
-    bunny.anchor.set(0.5);
-    bunny.x = i2 % 5 * 40;
-    bunny.y = Math.floor(i2 / 5) * 40;
-    container.addChild(bunny);
-  }
-  renderer.render(container);
-  return offscreen;
-}
-function Component$5() {
-  const ref = react.exports.useRef(null);
-  react.exports.useEffect(() => {
-    var _a2;
-    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
-    if (!ctx) {
-      throw new Error("Could not create 2d canvas context");
-    }
     renderBitmap$3().then((bitmap) => {
       ctx.drawImage(bitmap, 0, 0);
     });
@@ -47088,19 +47088,19 @@ function Component$5() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$6,
+    fileName: _jsxFileName$7,
     lineNumber: 46,
     columnNumber: 10
   }, this);
 }
-const example$5 = {
+const example$6 = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
-  name: "Pixi.js bunnies on offscreen canvas 2",
+  name: "Pixi bunnies on offscreen canvas 2",
   description: "Using new OffscreenCanvas()",
-  Component: Component$5
+  Component: Component$6
 };
-var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
+var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap$2() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
@@ -47112,7 +47112,7 @@ async function renderBitmap$2() {
     worker.postMessage("begin");
   });
 }
-function Component$4() {
+function Component$5() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47129,26 +47129,26 @@ function Component$4() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$5,
+    fileName: _jsxFileName$6,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$4 = {
+const example$5 = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
-  name: "Pixi.js bunnies in a worker",
+  name: "Pixi bunnies in a worker",
   description: "Pixi.js bunnies in a worker",
-  Component: Component$4
+  Component: Component$5
 };
-var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
+var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
   const worker = new Worker(new URL("/webgl-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
 }
-function Component$3() {
+function Component$4() {
   const ref = react.exports.useRef(null);
   const transferred = react.exports.useRef(false);
   react.exports.useEffect(() => {
@@ -47166,17 +47166,17 @@ function Component$3() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$4,
+    fileName: _jsxFileName$5,
     lineNumber: 27,
     columnNumber: 10
   }, this);
 }
-const example$3 = {
+const example$4 = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
-  name: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
+  name: "Pixi bunnies in a worker using transferControlToOffscreen()",
   description: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
-  Component: Component$3
+  Component: Component$4
 };
 /**
  * @license
@@ -64687,7 +64687,7 @@ if (typeof window !== "undefined") {
     window.__THREE__ = REVISION;
   }
 }
-var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
+var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
 function helloThreeJs(canvas) {
   const scene = new Scene();
   const camera = new PerspectiveCamera(75, 1, 0.1, 1e3);
@@ -64705,7 +64705,7 @@ function helloThreeJs(canvas) {
   camera.position.z = 5;
   renderer.render(scene, camera);
 }
-function Component$2() {
+function Component$3() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const canvas = ref.current;
@@ -64719,19 +64719,19 @@ function Component$2() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$3,
+    fileName: _jsxFileName$4,
     lineNumber: 35,
     columnNumber: 10
   }, this);
 }
-const example$2 = {
+const example$3 = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
-  name: "Three.js hello world",
+  name: "Three hello world",
   description: "Three.js hello world",
-  Component: Component$2
+  Component: Component$3
 };
-var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
+var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
 async function renderBitmap$1() {
   const w2 = 400;
   const h2 = 400;
@@ -64755,7 +64755,7 @@ async function renderBitmap$1() {
   renderer.render(scene, camera);
   return canvas.transferToImageBitmap();
 }
-function Component$1() {
+function Component$2() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64772,19 +64772,19 @@ function Component$1() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$2,
+    fileName: _jsxFileName$3,
     lineNumber: 44,
     columnNumber: 10
   }, this);
 }
-const example$1 = {
+const example$2 = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
-  name: "Three.js with offscreen canvas",
+  name: "Three with offscreen canvas",
   description: "Three.js with offscreen canvas",
-  Component: Component$1
+  Component: Component$2
 };
-var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
 async function renderBitmap(w2, h2) {
   const bunnySize = [26, 37];
   const canvas = new OffscreenCanvas(w2, h2);
@@ -64812,7 +64812,7 @@ async function renderBitmap(w2, h2) {
   renderer.render(scene, camera);
   return canvas.transferToImageBitmap();
 }
-function Component() {
+function Component$1() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64831,26 +64831,76 @@ function Component() {
       width: 260,
       height: 370
     }, void 0, false, {
-      fileName: _jsxFileName$1,
+      fileName: _jsxFileName$2,
       lineNumber: 55,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("img", {
       src: "/bunny.png"
     }, void 0, false, {
-      fileName: _jsxFileName$1,
+      fileName: _jsxFileName$2,
       lineNumber: 56,
       columnNumber: 7
     }, this)]
   }, void 0, true);
 }
-const example = {
+const example$1 = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
-  name: "Three.js rendering a texture",
+  name: "Three rendering a texture",
   description: "Three.js rendering a texture",
+  Component: Component$1
+};
+var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
+function createBunnies(view) {
+  const app = new Application({
+    background: "#1099bb",
+    view
+  });
+  const container = new Container();
+  app.stage.addChild(container);
+  const texture = Texture$1.from("bunny.png");
+  for (let i2 = 0; i2 < 25; i2++) {
+    const bunny = new Sprite(texture);
+    bunny.anchor.set(0.5);
+    bunny.x = i2 % 5 * 40;
+    bunny.y = Math.floor(i2 / 5) * 40;
+    container.addChild(bunny);
+  }
+  container.x = app.screen.width / 2;
+  container.y = app.screen.height / 2;
+  container.pivot.x = container.width / 2;
+  container.pivot.y = container.height / 2;
+  app.ticker.add((delta) => {
+    container.rotation -= 0.01 * delta;
+  });
+}
+function Component() {
+  const ref = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    if (!ref.current) {
+      throw new Error("Could not find canvas element");
+    }
+    createBunnies(ref.current);
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+    ref,
+    width: 400,
+    height: 400
+  }, void 0, false, {
+    fileName: _jsxFileName$1,
+    lineNumber: 51,
+    columnNumber: 10
+  }, this);
+}
+const example = {
+  id: "pixijs-blend-modes",
+  filename: "11-pixijs-blend-modes.tsx",
+  name: "Pixi blend modes",
+  description: "",
   Component
 };
 const all = [
+  example$b,
   example$a,
   example$9,
   example$8,
