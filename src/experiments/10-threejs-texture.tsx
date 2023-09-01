@@ -61,7 +61,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
-  name: "Three.js rendering a texture",
+  name: "Three rendering a texture",
   description: "Three.js rendering a texture",
   Component,
 };

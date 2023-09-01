@@ -47,7 +47,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
-  name: "Three.js with offscreen canvas",
+  name: "Three with offscreen canvas",
   description: "Three.js with offscreen canvas",
   Component,
 };

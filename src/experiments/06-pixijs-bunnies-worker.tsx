@@ -33,7 +33,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
-  name: "Pixi.js bunnies in a worker",
+  name: "Pixi bunnies in a worker",
   description: "Pixi.js bunnies in a worker",
   Component,
 };

@@ -38,7 +38,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
-  name: "Three.js hello world",
+  name: "Three hello world",
   description: "Three.js hello world",
   Component,
 };

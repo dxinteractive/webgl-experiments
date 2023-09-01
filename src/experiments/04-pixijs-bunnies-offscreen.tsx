@@ -50,7 +50,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
-  name: "Pixi.js bunnies on offscreen canvas",
+  name: "Pixi bunnies on offscreen canvas",
   description: "Using canvas.transferControlToOffscreen()",
   Component,
 };

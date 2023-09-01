@@ -30,7 +30,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
-  name: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
+  name: "Pixi bunnies in a worker using transferControlToOffscreen()",
   description: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
   Component,
 };
