@@ -623,7 +623,7 @@ var react_development = { exports: {} };
         }
         return index.toString(36);
       }
-      function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
+      function mapIntoArray(children, array2, escapedPrefix, nameSoFar, callback) {
         var type2 = typeof children;
         if (type2 === "undefined" || type2 === "boolean") {
           children = null;
@@ -654,7 +654,7 @@ var react_development = { exports: {} };
             if (childKey != null) {
               escapedChildKey = escapeUserProvidedKey(childKey) + "/";
             }
-            mapIntoArray(mappedChild, array, escapedChildKey, "", function(c2) {
+            mapIntoArray(mappedChild, array2, escapedChildKey, "", function(c2) {
               return c2;
             });
           } else if (mappedChild != null) {
@@ -669,7 +669,7 @@ var react_development = { exports: {} };
                 escapedPrefix + (mappedChild.key && (!_child || _child.key !== mappedChild.key) ? escapeUserProvidedKey("" + mappedChild.key) + "/" : "") + childKey
               );
             }
-            array.push(mappedChild);
+            array2.push(mappedChild);
           }
           return 1;
         }
@@ -681,7 +681,7 @@ var react_development = { exports: {} };
           for (var i2 = 0; i2 < children.length; i2++) {
             child = children[i2];
             nextName = nextNamePrefix + getElementKey(child, i2);
-            subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
+            subtreeCount += mapIntoArray(child, array2, escapedPrefix, nextName, callback);
           }
         } else {
           var iteratorFn = getIteratorFn(children);
@@ -701,7 +701,7 @@ var react_development = { exports: {} };
             while (!(step = iterator.next()).done) {
               child = step.value;
               nextName = nextNamePrefix + getElementKey(child, ii++);
-              subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
+              subtreeCount += mapIntoArray(child, array2, escapedPrefix, nextName, callback);
             }
           } else if (type2 === "object") {
             var childrenString = String(children);
@@ -715,9 +715,9 @@ var react_development = { exports: {} };
           return children;
         }
         var result = [];
-        var count = 0;
+        var count2 = 0;
         mapIntoArray(children, result, "", "", function(child) {
-          return func.call(context2, child, count++);
+          return func.call(context2, child, count2++);
         });
         return result;
       }
@@ -1792,14 +1792,14 @@ var react_development = { exports: {} };
       var createElement$1 = createElementWithValidation;
       var cloneElement$1 = cloneElementWithValidation;
       var createFactory = createFactoryWithValidation;
-      var Children = {
+      var Children2 = {
         map: mapChildren,
         forEach: forEachChildren,
         count: countChildren,
         toArray,
         only: onlyChild
       };
-      exports.Children = Children;
+      exports.Children = Children2;
       exports.Component = Component2;
       exports.Fragment = REACT_FRAGMENT_TYPE;
       exports.Profiler = REACT_PROFILER_TYPE;
@@ -4269,7 +4269,7 @@ var scheduler_development = {};
       var warnedForNaNValue = false;
       var warnedForInfinityValue = false;
       var camelize = function(string) {
-        return string.replace(hyphenPattern, function(_, character) {
+        return string.replace(hyphenPattern, function(_2, character) {
           return character.toUpperCase();
         });
       };
@@ -5797,11 +5797,11 @@ var scheduler_development = {};
         return false;
       }
     }
-    function onScheduleRoot(root2, children) {
+    function onScheduleRoot(root3, children) {
       {
         if (injectedHook && typeof injectedHook.onScheduleFiberRoot === "function") {
           try {
-            injectedHook.onScheduleFiberRoot(rendererID, root2, children);
+            injectedHook.onScheduleFiberRoot(rendererID, root3, children);
           } catch (err) {
             if (!hasLoggedError) {
               hasLoggedError = true;
@@ -5811,10 +5811,10 @@ var scheduler_development = {};
         }
       }
     }
-    function onCommitRoot(root2, eventPriority) {
+    function onCommitRoot(root3, eventPriority) {
       if (injectedHook && typeof injectedHook.onCommitFiberRoot === "function") {
         try {
-          var didError = (root2.current.flags & DidCapture) === DidCapture;
+          var didError = (root3.current.flags & DidCapture) === DidCapture;
           if (enableProfilerTimer) {
             var schedulerPriority;
             switch (eventPriority) {
@@ -5834,7 +5834,7 @@ var scheduler_development = {};
                 schedulerPriority = NormalPriority;
                 break;
             }
-            injectedHook.onCommitFiberRoot(rendererID, root2, schedulerPriority, didError);
+            injectedHook.onCommitFiberRoot(rendererID, root3, schedulerPriority, didError);
           }
         } catch (err) {
           {
@@ -5846,10 +5846,10 @@ var scheduler_development = {};
         }
       }
     }
-    function onPostCommitRoot(root2) {
+    function onPostCommitRoot(root3) {
       if (injectedHook && typeof injectedHook.onPostCommitFiberRoot === "function") {
         try {
-          injectedHook.onPostCommitFiberRoot(rendererID, root2);
+          injectedHook.onPostCommitFiberRoot(rendererID, root3);
         } catch (err) {
           {
             if (!hasLoggedError) {
@@ -6225,14 +6225,14 @@ var scheduler_development = {};
           return lanes;
       }
     }
-    function getNextLanes(root2, wipLanes) {
-      var pendingLanes = root2.pendingLanes;
+    function getNextLanes(root3, wipLanes) {
+      var pendingLanes = root3.pendingLanes;
       if (pendingLanes === NoLanes) {
         return NoLanes;
       }
       var nextLanes = NoLanes;
-      var suspendedLanes = root2.suspendedLanes;
-      var pingedLanes = root2.pingedLanes;
+      var suspendedLanes = root3.suspendedLanes;
+      var pingedLanes = root3.pingedLanes;
       var nonIdlePendingLanes = pendingLanes & NonIdleLanes;
       if (nonIdlePendingLanes !== NoLanes) {
         var nonIdleUnblockedLanes = nonIdlePendingLanes & ~suspendedLanes;
@@ -6267,9 +6267,9 @@ var scheduler_development = {};
       if ((nextLanes & InputContinuousLane) !== NoLanes) {
         nextLanes |= pendingLanes & DefaultLane;
       }
-      var entangledLanes = root2.entangledLanes;
+      var entangledLanes = root3.entangledLanes;
       if (entangledLanes !== NoLanes) {
-        var entanglements = root2.entanglements;
+        var entanglements = root3.entanglements;
         var lanes = nextLanes & entangledLanes;
         while (lanes > 0) {
           var index2 = pickArbitraryLaneIndex(lanes);
@@ -6280,8 +6280,8 @@ var scheduler_development = {};
       }
       return nextLanes;
     }
-    function getMostRecentEventTime(root2, lanes) {
-      var eventTimes = root2.eventTimes;
+    function getMostRecentEventTime(root3, lanes) {
+      var eventTimes = root3.eventTimes;
       var mostRecentEventTime = NoTimestamp;
       while (lanes > 0) {
         var index2 = pickArbitraryLaneIndex(lanes);
@@ -6338,11 +6338,11 @@ var scheduler_development = {};
           return NoTimestamp;
       }
     }
-    function markStarvedLanesAsExpired(root2, currentTime) {
-      var pendingLanes = root2.pendingLanes;
-      var suspendedLanes = root2.suspendedLanes;
-      var pingedLanes = root2.pingedLanes;
-      var expirationTimes = root2.expirationTimes;
+    function markStarvedLanesAsExpired(root3, currentTime) {
+      var pendingLanes = root3.pendingLanes;
+      var suspendedLanes = root3.suspendedLanes;
+      var pingedLanes = root3.pingedLanes;
+      var expirationTimes = root3.expirationTimes;
       var lanes = pendingLanes;
       while (lanes > 0) {
         var index2 = pickArbitraryLaneIndex(lanes);
@@ -6353,16 +6353,16 @@ var scheduler_development = {};
             expirationTimes[index2] = computeExpirationTime(lane, currentTime);
           }
         } else if (expirationTime <= currentTime) {
-          root2.expiredLanes |= lane;
+          root3.expiredLanes |= lane;
         }
         lanes &= ~lane;
       }
     }
-    function getHighestPriorityPendingLanes(root2) {
-      return getHighestPriorityLanes(root2.pendingLanes);
+    function getHighestPriorityPendingLanes(root3) {
+      return getHighestPriorityLanes(root3.pendingLanes);
     }
-    function getLanesToRetrySynchronouslyOnError(root2) {
-      var everythingButOffscreen = root2.pendingLanes & ~OffscreenLane;
+    function getLanesToRetrySynchronouslyOnError(root3) {
+      var everythingButOffscreen = root3.pendingLanes & ~OffscreenLane;
       if (everythingButOffscreen !== NoLanes) {
         return everythingButOffscreen;
       }
@@ -6387,12 +6387,12 @@ var scheduler_development = {};
     function includesOnlyTransitions(lanes) {
       return (lanes & TransitionLanes) === lanes;
     }
-    function includesBlockingLane(root2, lanes) {
+    function includesBlockingLane(root3, lanes) {
       var SyncDefaultLanes = InputContinuousHydrationLane | InputContinuousLane | DefaultHydrationLane | DefaultLane;
       return (lanes & SyncDefaultLanes) !== NoLanes;
     }
-    function includesExpiredLane(root2, lanes) {
-      return (lanes & root2.expiredLanes) !== NoLanes;
+    function includesExpiredLane(root3, lanes) {
+      return (lanes & root3.expiredLanes) !== NoLanes;
     }
     function isTransitionLane(lane) {
       return (lane & TransitionLanes) !== NoLanes;
@@ -6453,20 +6453,20 @@ var scheduler_development = {};
       }
       return laneMap;
     }
-    function markRootUpdated(root2, updateLane, eventTime) {
-      root2.pendingLanes |= updateLane;
+    function markRootUpdated(root3, updateLane, eventTime) {
+      root3.pendingLanes |= updateLane;
       if (updateLane !== IdleLane) {
-        root2.suspendedLanes = NoLanes;
-        root2.pingedLanes = NoLanes;
+        root3.suspendedLanes = NoLanes;
+        root3.pingedLanes = NoLanes;
       }
-      var eventTimes = root2.eventTimes;
+      var eventTimes = root3.eventTimes;
       var index2 = laneToIndex(updateLane);
       eventTimes[index2] = eventTime;
     }
-    function markRootSuspended(root2, suspendedLanes) {
-      root2.suspendedLanes |= suspendedLanes;
-      root2.pingedLanes &= ~suspendedLanes;
-      var expirationTimes = root2.expirationTimes;
+    function markRootSuspended(root3, suspendedLanes) {
+      root3.suspendedLanes |= suspendedLanes;
+      root3.pingedLanes &= ~suspendedLanes;
+      var expirationTimes = root3.expirationTimes;
       var lanes = suspendedLanes;
       while (lanes > 0) {
         var index2 = pickArbitraryLaneIndex(lanes);
@@ -6475,20 +6475,20 @@ var scheduler_development = {};
         lanes &= ~lane;
       }
     }
-    function markRootPinged(root2, pingedLanes, eventTime) {
-      root2.pingedLanes |= root2.suspendedLanes & pingedLanes;
+    function markRootPinged(root3, pingedLanes, eventTime) {
+      root3.pingedLanes |= root3.suspendedLanes & pingedLanes;
     }
-    function markRootFinished(root2, remainingLanes) {
-      var noLongerPendingLanes = root2.pendingLanes & ~remainingLanes;
-      root2.pendingLanes = remainingLanes;
-      root2.suspendedLanes = NoLanes;
-      root2.pingedLanes = NoLanes;
-      root2.expiredLanes &= remainingLanes;
-      root2.mutableReadLanes &= remainingLanes;
-      root2.entangledLanes &= remainingLanes;
-      var entanglements = root2.entanglements;
-      var eventTimes = root2.eventTimes;
-      var expirationTimes = root2.expirationTimes;
+    function markRootFinished(root3, remainingLanes) {
+      var noLongerPendingLanes = root3.pendingLanes & ~remainingLanes;
+      root3.pendingLanes = remainingLanes;
+      root3.suspendedLanes = NoLanes;
+      root3.pingedLanes = NoLanes;
+      root3.expiredLanes &= remainingLanes;
+      root3.mutableReadLanes &= remainingLanes;
+      root3.entangledLanes &= remainingLanes;
+      var entanglements = root3.entanglements;
+      var eventTimes = root3.eventTimes;
+      var expirationTimes = root3.expirationTimes;
       var lanes = noLongerPendingLanes;
       while (lanes > 0) {
         var index2 = pickArbitraryLaneIndex(lanes);
@@ -6499,9 +6499,9 @@ var scheduler_development = {};
         lanes &= ~lane;
       }
     }
-    function markRootEntangled(root2, entangledLanes) {
-      var rootEntangledLanes = root2.entangledLanes |= entangledLanes;
-      var entanglements = root2.entanglements;
+    function markRootEntangled(root3, entangledLanes) {
+      var rootEntangledLanes = root3.entangledLanes |= entangledLanes;
+      var entanglements = root3.entanglements;
       var lanes = rootEntangledLanes;
       while (lanes) {
         var index2 = pickArbitraryLaneIndex(lanes);
@@ -6512,7 +6512,7 @@ var scheduler_development = {};
         lanes &= ~lane;
       }
     }
-    function getBumpedLaneForHydration(root2, renderLanes2) {
+    function getBumpedLaneForHydration(root3, renderLanes2) {
       var renderLane = getHighestPriorityLane(renderLanes2);
       var lane;
       switch (renderLane) {
@@ -6552,16 +6552,16 @@ var scheduler_development = {};
           lane = NoLane;
           break;
       }
-      if ((lane & (root2.suspendedLanes | renderLanes2)) !== NoLane) {
+      if ((lane & (root3.suspendedLanes | renderLanes2)) !== NoLane) {
         return NoLane;
       }
       return lane;
     }
-    function addFiberToLanesMap(root2, fiber, lanes) {
+    function addFiberToLanesMap(root3, fiber, lanes) {
       if (!isDevToolsPresent) {
         return;
       }
-      var pendingUpdatersLaneMap = root2.pendingUpdatersLaneMap;
+      var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
       while (lanes > 0) {
         var index2 = laneToIndex(lanes);
         var lane = 1 << index2;
@@ -6570,12 +6570,12 @@ var scheduler_development = {};
         lanes &= ~lane;
       }
     }
-    function movePendingFibersToMemoized(root2, lanes) {
+    function movePendingFibersToMemoized(root3, lanes) {
       if (!isDevToolsPresent) {
         return;
       }
-      var pendingUpdatersLaneMap = root2.pendingUpdatersLaneMap;
-      var memoizedUpdaters = root2.memoizedUpdaters;
+      var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
+      var memoizedUpdaters = root3.memoizedUpdaters;
       while (lanes > 0) {
         var index2 = laneToIndex(lanes);
         var lane = 1 << index2;
@@ -6592,7 +6592,7 @@ var scheduler_development = {};
         lanes &= ~lane;
       }
     }
-    function getTransitionsForLanes(root2, lanes) {
+    function getTransitionsForLanes(root3, lanes) {
       {
         return null;
       }
@@ -6639,8 +6639,8 @@ var scheduler_development = {};
       }
       return IdleEventPriority;
     }
-    function isRootDehydrated(root2) {
-      var currentState = root2.current.memoizedState;
+    function isRootDehydrated(root3) {
+      var currentState = root3.current.memoizedState;
       return currentState.isDehydrated;
     }
     var _attemptSynchronousHydration;
@@ -6810,8 +6810,8 @@ var scheduler_development = {};
               return;
             }
           } else if (tag === HostRoot) {
-            var root2 = nearestMounted.stateNode;
-            if (isRootDehydrated(root2)) {
+            var root3 = nearestMounted.stateNode;
+            if (isRootDehydrated(root3)) {
               queuedTarget.blockedOn = getContainerFromFiber(nearestMounted);
               return;
             }
@@ -7045,8 +7045,8 @@ var scheduler_development = {};
             }
             targetInst = null;
           } else if (tag === HostRoot) {
-            var root2 = nearestMounted.stateNode;
-            if (isRootDehydrated(root2)) {
+            var root3 = nearestMounted.stateNode;
+            if (isRootDehydrated(root3)) {
               return getContainerFromFiber(nearestMounted);
             }
             targetInst = null;
@@ -7173,16 +7173,16 @@ var scheduler_development = {};
       });
       return listener;
     }
-    var root = null;
+    var root2 = null;
     var startText = null;
     var fallbackText = null;
     function initialize(nativeEventTarget) {
-      root = nativeEventTarget;
+      root2 = nativeEventTarget;
       startText = getText();
       return true;
     }
     function reset() {
-      root = null;
+      root2 = null;
       startText = null;
       fallbackText = null;
     }
@@ -7212,10 +7212,10 @@ var scheduler_development = {};
       return fallbackText;
     }
     function getText() {
-      if ("value" in root) {
-        return root.value;
+      if ("value" in root2) {
+        return root2.value;
       }
-      return root.textContent;
+      return root2.textContent;
     }
     function getEventCharCode(nativeEvent) {
       var charCode;
@@ -8021,8 +8021,8 @@ var scheduler_development = {};
         node = node.parentNode;
       }
     }
-    function getNodeForCharacterOffset(root2, offset) {
-      var node = getLeafNode(root2);
+    function getNodeForCharacterOffset(root3, offset) {
+      var node = getLeafNode(root3);
       var nodeStart = 0;
       var nodeEnd = 0;
       while (node) {
@@ -8119,9 +8119,9 @@ var scheduler_development = {};
       var start = Math.min(offsets.start, length);
       var end = offsets.end === void 0 ? start : Math.min(offsets.end, length);
       if (!selection.extend && start > end) {
-        var temp = end;
+        var temp2 = end;
         end = start;
-        start = temp;
+        start = temp2;
       }
       var startMarker = getNodeForCharacterOffset(node, start);
       var endMarker = getNodeForCharacterOffset(node, end);
@@ -9773,8 +9773,8 @@ var scheduler_development = {};
         case DOCUMENT_NODE:
         case DOCUMENT_FRAGMENT_NODE: {
           type2 = nodeType === DOCUMENT_NODE ? "#document" : "#fragment";
-          var root2 = rootContainerInstance.documentElement;
-          namespace = root2 ? root2.namespaceURI : getChildNamespace(null, "");
+          var root3 = rootContainerInstance.documentElement;
+          namespace = root3 ? root3.namespaceURI : getChildNamespace(null, "");
           break;
         }
         default: {
@@ -10652,11 +10652,11 @@ var scheduler_development = {};
         return maybeStrictRoot;
       };
       var setToSortedString = function(set2) {
-        var array = [];
+        var array2 = [];
         set2.forEach(function(value) {
-          array.push(value);
+          array2.push(value);
         });
-        return array.sort().join(", ");
+        return array2.sort().join(", ");
       };
       var pendingComponentWillMountWarnings = [];
       var pendingUNSAFE_ComponentWillMountWarnings = [];
@@ -11143,7 +11143,7 @@ var scheduler_development = {};
         }
       }
     }
-    function entangleTransitions(root2, fiber, lane) {
+    function entangleTransitions(root3, fiber, lane) {
       var updateQueue = fiber.updateQueue;
       if (updateQueue === null) {
         return;
@@ -11151,10 +11151,10 @@ var scheduler_development = {};
       var sharedQueue = updateQueue.shared;
       if (isTransitionLane(lane)) {
         var queueLanes = sharedQueue.lanes;
-        queueLanes = intersectLanes(queueLanes, root2.pendingLanes);
+        queueLanes = intersectLanes(queueLanes, root3.pendingLanes);
         var newQueueLanes = mergeLanes(queueLanes, lane);
         sharedQueue.lanes = newQueueLanes;
-        markRootEntangled(root2, newQueueLanes);
+        markRootEntangled(root3, newQueueLanes);
       }
     }
     function enqueueCapturedUpdate(workInProgress2, capturedUpdate) {
@@ -11508,9 +11508,9 @@ var scheduler_development = {};
           update.callback = callback;
         }
         enqueueUpdate(fiber, update);
-        var root2 = scheduleUpdateOnFiber(fiber, lane, eventTime);
-        if (root2 !== null) {
-          entangleTransitions(root2, fiber, lane);
+        var root3 = scheduleUpdateOnFiber(fiber, lane, eventTime);
+        if (root3 !== null) {
+          entangleTransitions(root3, fiber, lane);
         }
         {
           markStateUpdateScheduled(fiber, lane);
@@ -11530,9 +11530,9 @@ var scheduler_development = {};
           update.callback = callback;
         }
         enqueueUpdate(fiber, update);
-        var root2 = scheduleUpdateOnFiber(fiber, lane, eventTime);
-        if (root2 !== null) {
-          entangleTransitions(root2, fiber, lane);
+        var root3 = scheduleUpdateOnFiber(fiber, lane, eventTime);
+        if (root3 !== null) {
+          entangleTransitions(root3, fiber, lane);
         }
         {
           markStateUpdateScheduled(fiber, lane);
@@ -11551,9 +11551,9 @@ var scheduler_development = {};
           update.callback = callback;
         }
         enqueueUpdate(fiber, update);
-        var root2 = scheduleUpdateOnFiber(fiber, lane, eventTime);
-        if (root2 !== null) {
-          entangleTransitions(root2, fiber, lane);
+        var root3 = scheduleUpdateOnFiber(fiber, lane, eventTime);
+        if (root3 !== null) {
+          entangleTransitions(root3, fiber, lane);
         }
         {
           markForceUpdateScheduled(fiber, lane);
@@ -13395,13 +13395,13 @@ var scheduler_development = {};
       }
       workInProgressSources.length = 0;
     }
-    function registerMutableSourceForHydration(root2, mutableSource) {
+    function registerMutableSourceForHydration(root3, mutableSource) {
       var getVersion = mutableSource._getVersion;
       var version = getVersion(mutableSource._source);
-      if (root2.mutableSourceEagerHydrationData == null) {
-        root2.mutableSourceEagerHydrationData = [mutableSource, version];
+      if (root3.mutableSourceEagerHydrationData == null) {
+        root3.mutableSourceEagerHydrationData = [mutableSource, version];
       } else {
-        root2.mutableSourceEagerHydrationData.push(mutableSource, version);
+        root3.mutableSourceEagerHydrationData.push(mutableSource, version);
       }
     }
     var ReactCurrentDispatcher$1 = ReactSharedInternals.ReactCurrentDispatcher, ReactCurrentBatchConfig$2 = ReactSharedInternals.ReactCurrentBatchConfig;
@@ -13862,11 +13862,11 @@ var scheduler_development = {};
             }
           }
         }
-        var root2 = getWorkInProgressRoot();
-        if (root2 === null) {
+        var root3 = getWorkInProgressRoot();
+        if (root3 === null) {
           throw new Error("Expected a work-in-progress root. This is a bug in React. Please file an issue.");
         }
-        if (!includesBlockingLane(root2, renderLanes)) {
+        if (!includesBlockingLane(root3, renderLanes)) {
           pushStoreConsistencyCheck(fiber, getSnapshot, nextSnapshot);
         }
       }
@@ -13905,11 +13905,11 @@ var scheduler_development = {};
       if (inst.getSnapshot !== getSnapshot || snapshotChanged || workInProgressHook !== null && workInProgressHook.memoizedState.tag & HasEffect) {
         fiber.flags |= Passive;
         pushEffect(HasEffect | Passive$1, updateStoreInstance.bind(null, fiber, inst, nextSnapshot, getSnapshot), void 0, null);
-        var root2 = getWorkInProgressRoot();
-        if (root2 === null) {
+        var root3 = getWorkInProgressRoot();
+        if (root3 === null) {
           throw new Error("Expected a work-in-progress root. This is a bug in React. Please file an issue.");
         }
-        if (!includesBlockingLane(root2, renderLanes)) {
+        if (!includesBlockingLane(root3, renderLanes)) {
           pushStoreConsistencyCheck(fiber, getSnapshot, nextSnapshot);
         }
       }
@@ -14268,8 +14268,8 @@ var scheduler_development = {};
     }
     function mountId() {
       var hook = mountWorkInProgressHook();
-      var root2 = getWorkInProgressRoot();
-      var identifierPrefix = root2.identifierPrefix;
+      var root3 = getWorkInProgressRoot();
+      var identifierPrefix = root3.identifierPrefix;
       var id;
       if (getIsHydrating()) {
         var treeId = getTreeId();
@@ -14310,9 +14310,9 @@ var scheduler_development = {};
       } else {
         enqueueUpdate$1(fiber, queue, update);
         var eventTime = requestEventTime();
-        var root2 = scheduleUpdateOnFiber(fiber, lane, eventTime);
-        if (root2 !== null) {
-          entangleTransitionUpdate(root2, queue, lane);
+        var root3 = scheduleUpdateOnFiber(fiber, lane, eventTime);
+        if (root3 !== null) {
+          entangleTransitionUpdate(root3, queue, lane);
         }
       }
       markUpdateInDevTools(fiber, lane);
@@ -14361,9 +14361,9 @@ var scheduler_development = {};
           }
         }
         var eventTime = requestEventTime();
-        var root2 = scheduleUpdateOnFiber(fiber, lane, eventTime);
-        if (root2 !== null) {
-          entangleTransitionUpdate(root2, queue, lane);
+        var root3 = scheduleUpdateOnFiber(fiber, lane, eventTime);
+        if (root3 !== null) {
+          entangleTransitionUpdate(root3, queue, lane);
         }
       }
       markUpdateInDevTools(fiber, lane);
@@ -14405,13 +14405,13 @@ var scheduler_development = {};
         queue.pending = update;
       }
     }
-    function entangleTransitionUpdate(root2, queue, lane) {
+    function entangleTransitionUpdate(root3, queue, lane) {
       if (isTransitionLane(lane)) {
         var queueLanes = queue.lanes;
-        queueLanes = intersectLanes(queueLanes, root2.pendingLanes);
+        queueLanes = intersectLanes(queueLanes, root3.pendingLanes);
         var newQueueLanes = mergeLanes(queueLanes, lane);
         queue.lanes = newQueueLanes;
-        markRootEntangled(root2, newQueueLanes);
+        markRootEntangled(root3, newQueueLanes);
       }
     }
     function markUpdateInDevTools(fiber, lane, action) {
@@ -15299,8 +15299,8 @@ var scheduler_development = {};
         while (parentFiber !== null) {
           switch (parentFiber.tag) {
             case HostRoot:
-              var root2 = parentFiber.stateNode;
-              root2.effectDuration += elapsedTime;
+              var root3 = parentFiber.stateNode;
+              root3.effectDuration += elapsedTime;
               return;
             case Profiler:
               var parentStateNode = parentFiber.stateNode;
@@ -15319,9 +15319,9 @@ var scheduler_development = {};
         while (parentFiber !== null) {
           switch (parentFiber.tag) {
             case HostRoot:
-              var root2 = parentFiber.stateNode;
-              if (root2 !== null) {
-                root2.passiveEffectDuration += elapsedTime;
+              var root3 = parentFiber.stateNode;
+              if (root3 !== null) {
+                root3.passiveEffectDuration += elapsedTime;
               }
               return;
             case Profiler:
@@ -15449,11 +15449,11 @@ var scheduler_development = {};
       }
       return update;
     }
-    function attachPingListener(root2, wakeable, lanes) {
-      var pingCache = root2.pingCache;
+    function attachPingListener(root3, wakeable, lanes) {
+      var pingCache = root3.pingCache;
       var threadIDs;
       if (pingCache === null) {
-        pingCache = root2.pingCache = new PossiblyWeakMap$1();
+        pingCache = root3.pingCache = new PossiblyWeakMap$1();
         threadIDs = /* @__PURE__ */ new Set();
         pingCache.set(wakeable, threadIDs);
       } else {
@@ -15465,16 +15465,16 @@ var scheduler_development = {};
       }
       if (!threadIDs.has(lanes)) {
         threadIDs.add(lanes);
-        var ping = pingSuspendedRoot.bind(null, root2, wakeable, lanes);
+        var ping = pingSuspendedRoot.bind(null, root3, wakeable, lanes);
         {
           if (isDevToolsPresent) {
-            restorePendingUpdaters(root2, lanes);
+            restorePendingUpdaters(root3, lanes);
           }
         }
         wakeable.then(ping, ping);
       }
     }
-    function attachRetryListener(suspenseBoundary, root2, wakeable, lanes) {
+    function attachRetryListener(suspenseBoundary, root3, wakeable, lanes) {
       var wakeables = suspenseBoundary.updateQueue;
       if (wakeables === null) {
         var updateQueue = /* @__PURE__ */ new Set();
@@ -15508,7 +15508,7 @@ var scheduler_development = {};
       } while (node !== null);
       return null;
     }
-    function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes) {
+    function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes) {
       if ((suspenseBoundary.mode & ConcurrentMode) === NoMode) {
         if (suspenseBoundary === returnFiber) {
           suspenseBoundary.flags |= ShouldCapture;
@@ -15534,11 +15534,11 @@ var scheduler_development = {};
       suspenseBoundary.lanes = rootRenderLanes;
       return suspenseBoundary;
     }
-    function throwException(root2, returnFiber, sourceFiber, value, rootRenderLanes) {
+    function throwException(root3, returnFiber, sourceFiber, value, rootRenderLanes) {
       sourceFiber.flags |= Incomplete;
       {
         if (isDevToolsPresent) {
-          restorePendingUpdaters(root2, rootRenderLanes);
+          restorePendingUpdaters(root3, rootRenderLanes);
         }
       }
       if (value !== null && typeof value === "object" && typeof value.then === "function") {
@@ -15552,15 +15552,15 @@ var scheduler_development = {};
         var suspenseBoundary = getNearestSuspenseBoundaryToCapture(returnFiber);
         if (suspenseBoundary !== null) {
           suspenseBoundary.flags &= ~ForceClientRender;
-          markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes);
+          markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes);
           if (suspenseBoundary.mode & ConcurrentMode) {
-            attachPingListener(root2, wakeable, rootRenderLanes);
+            attachPingListener(root3, wakeable, rootRenderLanes);
           }
-          attachRetryListener(suspenseBoundary, root2, wakeable);
+          attachRetryListener(suspenseBoundary, root3, wakeable);
           return;
         } else {
           if (!includesSyncLane(rootRenderLanes)) {
-            attachPingListener(root2, wakeable, rootRenderLanes);
+            attachPingListener(root3, wakeable, rootRenderLanes);
             renderDidSuspendDelayIfPossible();
             return;
           }
@@ -15575,7 +15575,7 @@ var scheduler_development = {};
             if ((_suspenseBoundary.flags & ShouldCapture) === NoFlags) {
               _suspenseBoundary.flags |= ForceClientRender;
             }
-            markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes);
+            markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes);
             queueHydrationError(value);
             return;
           }
@@ -16593,13 +16593,13 @@ var scheduler_development = {};
       return workInProgress2.child;
     }
     function pushHostRootContext(workInProgress2) {
-      var root2 = workInProgress2.stateNode;
-      if (root2.pendingContext) {
-        pushTopLevelContextObject(workInProgress2, root2.pendingContext, root2.pendingContext !== root2.context);
-      } else if (root2.context) {
-        pushTopLevelContextObject(workInProgress2, root2.context, false);
+      var root3 = workInProgress2.stateNode;
+      if (root3.pendingContext) {
+        pushTopLevelContextObject(workInProgress2, root3.pendingContext, root3.pendingContext !== root3.context);
+      } else if (root3.context) {
+        pushTopLevelContextObject(workInProgress2, root3.context, false);
       }
-      pushHostContainer(workInProgress2, root2.containerInfo);
+      pushHostContainer(workInProgress2, root3.containerInfo);
     }
     function updateHostRoot(current2, workInProgress2, renderLanes2) {
       pushHostRootContext(workInProgress2);
@@ -17210,9 +17210,9 @@ var scheduler_development = {};
       }
       var hasContextChanged2 = includesSomeLane(renderLanes2, current2.childLanes);
       if (didReceiveUpdate || hasContextChanged2) {
-        var root2 = getWorkInProgressRoot();
-        if (root2 !== null) {
-          var attemptHydrationAtLane = getBumpedLaneForHydration(root2, renderLanes2);
+        var root3 = getWorkInProgressRoot();
+        if (root3 !== null) {
+          var attemptHydrationAtLane = getBumpedLaneForHydration(root3, renderLanes2);
           if (attemptHydrationAtLane !== NoLane && attemptHydrationAtLane !== suspenseState.retryLane) {
             suspenseState.retryLane = attemptHydrationAtLane;
             var eventTime = NoTimestamp;
@@ -18048,8 +18048,8 @@ var scheduler_development = {};
       }
     }
     var shouldFireAfterActiveInstanceBlur = false;
-    function commitBeforeMutationEffects(root2, firstChild) {
-      prepareForCommit(root2.containerInfo);
+    function commitBeforeMutationEffects(root3, firstChild) {
+      prepareForCommit(root3.containerInfo);
       nextEffect = firstChild;
       commitBeforeMutationEffects_begin();
       var shouldFire = shouldFireAfterActiveInstanceBlur;
@@ -18127,8 +18127,8 @@ var scheduler_development = {};
           }
           case HostRoot: {
             {
-              var root2 = finishedWork.stateNode;
-              clearContainer(root2.containerInfo);
+              var root3 = finishedWork.stateNode;
+              clearContainer(root3.containerInfo);
             }
             break;
           }
@@ -18269,8 +18269,8 @@ var scheduler_development = {};
                 while (parentFiber !== null) {
                   switch (parentFiber.tag) {
                     case HostRoot:
-                      var root2 = parentFiber.stateNode;
-                      root2.passiveEffectDuration += passiveEffectDuration;
+                      var root3 = parentFiber.stateNode;
+                      root3.passiveEffectDuration += passiveEffectDuration;
                       break outer;
                     case Profiler:
                       var parentStateNode = parentFiber.stateNode;
@@ -18429,8 +18429,8 @@ var scheduler_development = {};
                   while (parentFiber !== null) {
                     switch (parentFiber.tag) {
                       case HostRoot:
-                        var root2 = parentFiber.stateNode;
-                        root2.effectDuration += effectDuration;
+                        var root3 = parentFiber.stateNode;
+                        root3.effectDuration += effectDuration;
                         break outer;
                       case Profiler:
                         var parentStateNode = parentFiber.stateNode;
@@ -18748,7 +18748,7 @@ var scheduler_development = {};
     }
     var hostParent = null;
     var hostParentIsContainer = false;
-    function commitDeletionEffects(root2, returnFiber, deletedFiber) {
+    function commitDeletionEffects(root3, returnFiber, deletedFiber) {
       {
         var parent = returnFiber;
         findParent:
@@ -18775,7 +18775,7 @@ var scheduler_development = {};
         if (hostParent === null) {
           throw new Error("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue.");
         }
-        commitDeletionEffectsOnFiber(root2, returnFiber, deletedFiber);
+        commitDeletionEffectsOnFiber(root3, returnFiber, deletedFiber);
         hostParent = null;
         hostParentIsContainer = false;
       }
@@ -18954,22 +18954,22 @@ var scheduler_development = {};
         });
       }
     }
-    function commitMutationEffects(root2, finishedWork, committedLanes) {
+    function commitMutationEffects(root3, finishedWork, committedLanes) {
       inProgressLanes = committedLanes;
-      inProgressRoot = root2;
+      inProgressRoot = root3;
       setCurrentFiber(finishedWork);
-      commitMutationEffectsOnFiber(finishedWork, root2);
+      commitMutationEffectsOnFiber(finishedWork, root3);
       setCurrentFiber(finishedWork);
       inProgressLanes = null;
       inProgressRoot = null;
     }
-    function recursivelyTraverseMutationEffects(root2, parentFiber, lanes) {
+    function recursivelyTraverseMutationEffects(root3, parentFiber, lanes) {
       var deletions = parentFiber.deletions;
       if (deletions !== null) {
         for (var i2 = 0; i2 < deletions.length; i2++) {
           var childToDelete = deletions[i2];
           try {
-            commitDeletionEffects(root2, parentFiber, childToDelete);
+            commitDeletionEffects(root3, parentFiber, childToDelete);
           } catch (error2) {
             captureCommitPhaseError(childToDelete, parentFiber, error2);
           }
@@ -18980,13 +18980,13 @@ var scheduler_development = {};
         var child = parentFiber.child;
         while (child !== null) {
           setCurrentFiber(child);
-          commitMutationEffectsOnFiber(child, root2);
+          commitMutationEffectsOnFiber(child, root3);
           child = child.sibling;
         }
       }
       setCurrentFiber(prevDebugFiber);
     }
-    function commitMutationEffectsOnFiber(finishedWork, root2, lanes) {
+    function commitMutationEffectsOnFiber(finishedWork, root3, lanes) {
       var current2 = finishedWork.alternate;
       var flags = finishedWork.flags;
       switch (finishedWork.tag) {
@@ -18994,7 +18994,7 @@ var scheduler_development = {};
         case ForwardRef:
         case MemoComponent:
         case SimpleMemoComponent: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           if (flags & Update) {
             try {
@@ -19022,7 +19022,7 @@ var scheduler_development = {};
           return;
         }
         case ClassComponent: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           if (flags & Ref) {
             if (current2 !== null) {
@@ -19032,7 +19032,7 @@ var scheduler_development = {};
           return;
         }
         case HostComponent: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           if (flags & Ref) {
             if (current2 !== null) {
@@ -19069,7 +19069,7 @@ var scheduler_development = {};
           return;
         }
         case HostText: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           if (flags & Update) {
             {
@@ -19089,7 +19089,7 @@ var scheduler_development = {};
           return;
         }
         case HostRoot: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           if (flags & Update) {
             {
@@ -19097,7 +19097,7 @@ var scheduler_development = {};
                 var prevRootState = current2.memoizedState;
                 if (prevRootState.isDehydrated) {
                   try {
-                    commitHydratedContainer(root2.containerInfo);
+                    commitHydratedContainer(root3.containerInfo);
                   } catch (error2) {
                     captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                   }
@@ -19108,12 +19108,12 @@ var scheduler_development = {};
           return;
         }
         case HostPortal: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           return;
         }
         case SuspenseComponent: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           var offscreenFiber = finishedWork.child;
           if (offscreenFiber.flags & Visibility) {
@@ -19141,10 +19141,10 @@ var scheduler_development = {};
           if (finishedWork.mode & ConcurrentMode) {
             var prevOffscreenSubtreeWasHidden = offscreenSubtreeWasHidden;
             offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden || _wasHidden;
-            recursivelyTraverseMutationEffects(root2, finishedWork);
+            recursivelyTraverseMutationEffects(root3, finishedWork);
             offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
           } else {
-            recursivelyTraverseMutationEffects(root2, finishedWork);
+            recursivelyTraverseMutationEffects(root3, finishedWork);
           }
           commitReconciliationEffects(finishedWork);
           if (flags & Visibility) {
@@ -19173,7 +19173,7 @@ var scheduler_development = {};
           return;
         }
         case SuspenseListComponent: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           if (flags & Update) {
             attachSuspenseRetryListeners(finishedWork);
@@ -19184,7 +19184,7 @@ var scheduler_development = {};
           return;
         }
         default: {
-          recursivelyTraverseMutationEffects(root2, finishedWork);
+          recursivelyTraverseMutationEffects(root3, finishedWork);
           commitReconciliationEffects(finishedWork);
           return;
         }
@@ -19204,15 +19204,15 @@ var scheduler_development = {};
         finishedWork.flags &= ~Hydrating;
       }
     }
-    function commitLayoutEffects(finishedWork, root2, committedLanes) {
+    function commitLayoutEffects(finishedWork, root3, committedLanes) {
       inProgressLanes = committedLanes;
-      inProgressRoot = root2;
+      inProgressRoot = root3;
       nextEffect = finishedWork;
-      commitLayoutEffects_begin(finishedWork, root2, committedLanes);
+      commitLayoutEffects_begin(finishedWork, root3, committedLanes);
       inProgressLanes = null;
       inProgressRoot = null;
     }
-    function commitLayoutEffects_begin(subtreeRoot, root2, committedLanes) {
+    function commitLayoutEffects_begin(subtreeRoot, root3, committedLanes) {
       var isModernRoot = (subtreeRoot.mode & ConcurrentMode) !== NoMode;
       while (nextEffect !== null) {
         var fiber = nextEffect;
@@ -19221,7 +19221,7 @@ var scheduler_development = {};
           var isHidden = fiber.memoizedState !== null;
           var newOffscreenSubtreeIsHidden = isHidden || offscreenSubtreeIsHidden;
           if (newOffscreenSubtreeIsHidden) {
-            commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes);
+            commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
             continue;
           } else {
             var current2 = fiber.alternate;
@@ -19240,7 +19240,7 @@ var scheduler_development = {};
               nextEffect = child;
               commitLayoutEffects_begin(
                 child,
-                root2,
+                root3,
                 committedLanes
               );
               child = child.sibling;
@@ -19248,7 +19248,7 @@ var scheduler_development = {};
             nextEffect = fiber;
             offscreenSubtreeIsHidden = prevOffscreenSubtreeIsHidden;
             offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
-            commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes);
+            commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
             continue;
           }
         }
@@ -19256,18 +19256,18 @@ var scheduler_development = {};
           firstChild.return = fiber;
           nextEffect = firstChild;
         } else {
-          commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes);
+          commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
         }
       }
     }
-    function commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes) {
+    function commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes) {
       while (nextEffect !== null) {
         var fiber = nextEffect;
         if ((fiber.flags & LayoutMask) !== NoFlags) {
           var current2 = fiber.alternate;
           setCurrentFiber(fiber);
           try {
-            commitLayoutEffectOnFiber(root2, current2, fiber, committedLanes);
+            commitLayoutEffectOnFiber(root3, current2, fiber, committedLanes);
           } catch (error2) {
             captureCommitPhaseError(fiber, fiber.return, error2);
           }
@@ -19394,11 +19394,11 @@ var scheduler_development = {};
         nextEffect = fiber.return;
       }
     }
-    function commitPassiveMountEffects(root2, finishedWork, committedLanes, committedTransitions) {
+    function commitPassiveMountEffects(root3, finishedWork, committedLanes, committedTransitions) {
       nextEffect = finishedWork;
-      commitPassiveMountEffects_begin(finishedWork, root2, committedLanes, committedTransitions);
+      commitPassiveMountEffects_begin(finishedWork, root3, committedLanes, committedTransitions);
     }
-    function commitPassiveMountEffects_begin(subtreeRoot, root2, committedLanes, committedTransitions) {
+    function commitPassiveMountEffects_begin(subtreeRoot, root3, committedLanes, committedTransitions) {
       while (nextEffect !== null) {
         var fiber = nextEffect;
         var firstChild = fiber.child;
@@ -19406,17 +19406,17 @@ var scheduler_development = {};
           firstChild.return = fiber;
           nextEffect = firstChild;
         } else {
-          commitPassiveMountEffects_complete(subtreeRoot, root2, committedLanes, committedTransitions);
+          commitPassiveMountEffects_complete(subtreeRoot, root3, committedLanes, committedTransitions);
         }
       }
     }
-    function commitPassiveMountEffects_complete(subtreeRoot, root2, committedLanes, committedTransitions) {
+    function commitPassiveMountEffects_complete(subtreeRoot, root3, committedLanes, committedTransitions) {
       while (nextEffect !== null) {
         var fiber = nextEffect;
         if ((fiber.flags & Passive) !== NoFlags) {
           setCurrentFiber(fiber);
           try {
-            commitPassiveMountOnFiber(root2, fiber, committedLanes, committedTransitions);
+            commitPassiveMountOnFiber(root3, fiber, committedLanes, committedTransitions);
           } catch (error2) {
             captureCommitPhaseError(fiber, fiber.return, error2);
           }
@@ -19691,7 +19691,7 @@ var scheduler_development = {};
         return isReactActEnvironmentGlobal;
       }
     }
-    var ceil = Math.ceil;
+    var ceil3 = Math.ceil;
     var ReactCurrentDispatcher$2 = ReactSharedInternals.ReactCurrentDispatcher, ReactCurrentOwner$2 = ReactSharedInternals.ReactCurrentOwner, ReactCurrentBatchConfig$3 = ReactSharedInternals.ReactCurrentBatchConfig, ReactCurrentActQueue$1 = ReactSharedInternals.ReactCurrentActQueue;
     var NoContext = 0;
     var BatchedContext = 1;
@@ -19802,8 +19802,8 @@ var scheduler_development = {};
           error("useInsertionEffect must not schedule updates.");
         }
       }
-      var root2 = markUpdateLaneFromFiberToRoot(fiber, lane);
-      if (root2 === null) {
+      var root3 = markUpdateLaneFromFiberToRoot(fiber, lane);
+      if (root3 === null) {
         return null;
       }
       {
@@ -19811,37 +19811,37 @@ var scheduler_development = {};
           didScheduleUpdateDuringPassiveEffects = true;
         }
       }
-      markRootUpdated(root2, lane, eventTime);
-      if ((executionContext & RenderContext) !== NoLanes && root2 === workInProgressRoot) {
+      markRootUpdated(root3, lane, eventTime);
+      if ((executionContext & RenderContext) !== NoLanes && root3 === workInProgressRoot) {
         warnAboutRenderPhaseUpdatesInDEV(fiber);
       } else {
         {
           if (isDevToolsPresent) {
-            addFiberToLanesMap(root2, fiber, lane);
+            addFiberToLanesMap(root3, fiber, lane);
           }
         }
         warnIfUpdatesNotWrappedWithActDEV(fiber);
-        if (root2 === workInProgressRoot) {
+        if (root3 === workInProgressRoot) {
           if ((executionContext & RenderContext) === NoContext) {
             workInProgressRootInterleavedUpdatedLanes = mergeLanes(workInProgressRootInterleavedUpdatedLanes, lane);
           }
           if (workInProgressRootExitStatus === RootSuspendedWithDelay) {
-            markRootSuspended$1(root2, workInProgressRootRenderLanes);
+            markRootSuspended$1(root3, workInProgressRootRenderLanes);
           }
         }
-        ensureRootIsScheduled(root2, eventTime);
+        ensureRootIsScheduled(root3, eventTime);
         if (lane === SyncLane && executionContext === NoContext && (fiber.mode & ConcurrentMode) === NoMode && !ReactCurrentActQueue$1.isBatchingLegacy) {
           resetRenderTimer();
           flushSyncCallbacksOnlyInLegacyMode();
         }
       }
-      return root2;
+      return root3;
     }
-    function scheduleInitialHydrationOnRoot(root2, lane, eventTime) {
-      var current2 = root2.current;
+    function scheduleInitialHydrationOnRoot(root3, lane, eventTime) {
+      var current2 = root3.current;
       current2.lanes = lane;
-      markRootUpdated(root2, lane, eventTime);
-      ensureRootIsScheduled(root2, eventTime);
+      markRootUpdated(root3, lane, eventTime);
+      ensureRootIsScheduled(root3, eventTime);
     }
     function markUpdateLaneFromFiberToRoot(sourceFiber, lane) {
       sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
@@ -19872,8 +19872,8 @@ var scheduler_development = {};
         parent = parent.return;
       }
       if (node.tag === HostRoot) {
-        var root2 = node.stateNode;
-        return root2;
+        var root3 = node.stateNode;
+        return root3;
       } else {
         return null;
       }
@@ -19881,20 +19881,20 @@ var scheduler_development = {};
     function isInterleavedUpdate(fiber, lane) {
       return (workInProgressRoot !== null || hasInterleavedUpdates()) && (fiber.mode & ConcurrentMode) !== NoMode && (executionContext & RenderContext) === NoContext;
     }
-    function ensureRootIsScheduled(root2, currentTime) {
-      var existingCallbackNode = root2.callbackNode;
-      markStarvedLanesAsExpired(root2, currentTime);
-      var nextLanes = getNextLanes(root2, root2 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
+    function ensureRootIsScheduled(root3, currentTime) {
+      var existingCallbackNode = root3.callbackNode;
+      markStarvedLanesAsExpired(root3, currentTime);
+      var nextLanes = getNextLanes(root3, root3 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
       if (nextLanes === NoLanes) {
         if (existingCallbackNode !== null) {
           cancelCallback$1(existingCallbackNode);
         }
-        root2.callbackNode = null;
-        root2.callbackPriority = NoLane;
+        root3.callbackNode = null;
+        root3.callbackPriority = NoLane;
         return;
       }
       var newCallbackPriority = getHighestPriorityLane(nextLanes);
-      var existingCallbackPriority = root2.callbackPriority;
+      var existingCallbackPriority = root3.callbackPriority;
       if (existingCallbackPriority === newCallbackPriority && !(ReactCurrentActQueue$1.current !== null && existingCallbackNode !== fakeActCallbackNode)) {
         {
           if (existingCallbackNode == null && existingCallbackPriority !== SyncLane) {
@@ -19908,13 +19908,13 @@ var scheduler_development = {};
       }
       var newCallbackNode;
       if (newCallbackPriority === SyncLane) {
-        if (root2.tag === LegacyRoot) {
+        if (root3.tag === LegacyRoot) {
           if (ReactCurrentActQueue$1.isBatchingLegacy !== null) {
             ReactCurrentActQueue$1.didScheduleLegacyUpdate = true;
           }
-          scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root2));
+          scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root3));
         } else {
-          scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root2));
+          scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root3));
         }
         {
           if (ReactCurrentActQueue$1.current !== null) {
@@ -19947,12 +19947,12 @@ var scheduler_development = {};
             schedulerPriorityLevel = NormalPriority;
             break;
         }
-        newCallbackNode = scheduleCallback$1(schedulerPriorityLevel, performConcurrentWorkOnRoot.bind(null, root2));
+        newCallbackNode = scheduleCallback$1(schedulerPriorityLevel, performConcurrentWorkOnRoot.bind(null, root3));
       }
-      root2.callbackPriority = newCallbackPriority;
-      root2.callbackNode = newCallbackNode;
+      root3.callbackPriority = newCallbackPriority;
+      root3.callbackNode = newCallbackNode;
     }
-    function performConcurrentWorkOnRoot(root2, didTimeout) {
+    function performConcurrentWorkOnRoot(root3, didTimeout) {
       {
         resetNestedUpdateFlag();
       }
@@ -19961,77 +19961,77 @@ var scheduler_development = {};
       if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
         throw new Error("Should not already be working.");
       }
-      var originalCallbackNode = root2.callbackNode;
+      var originalCallbackNode = root3.callbackNode;
       var didFlushPassiveEffects = flushPassiveEffects();
       if (didFlushPassiveEffects) {
-        if (root2.callbackNode !== originalCallbackNode) {
+        if (root3.callbackNode !== originalCallbackNode) {
           return null;
         }
       }
-      var lanes = getNextLanes(root2, root2 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
+      var lanes = getNextLanes(root3, root3 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
       if (lanes === NoLanes) {
         return null;
       }
-      var shouldTimeSlice = !includesBlockingLane(root2, lanes) && !includesExpiredLane(root2, lanes) && !didTimeout;
-      var exitStatus = shouldTimeSlice ? renderRootConcurrent(root2, lanes) : renderRootSync(root2, lanes);
+      var shouldTimeSlice = !includesBlockingLane(root3, lanes) && !includesExpiredLane(root3, lanes) && !didTimeout;
+      var exitStatus = shouldTimeSlice ? renderRootConcurrent(root3, lanes) : renderRootSync(root3, lanes);
       if (exitStatus !== RootInProgress) {
         if (exitStatus === RootErrored) {
-          var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root2);
+          var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
           if (errorRetryLanes !== NoLanes) {
             lanes = errorRetryLanes;
-            exitStatus = recoverFromConcurrentError(root2, errorRetryLanes);
+            exitStatus = recoverFromConcurrentError(root3, errorRetryLanes);
           }
         }
         if (exitStatus === RootFatalErrored) {
           var fatalError = workInProgressRootFatalError;
-          prepareFreshStack(root2, NoLanes);
-          markRootSuspended$1(root2, lanes);
-          ensureRootIsScheduled(root2, now());
+          prepareFreshStack(root3, NoLanes);
+          markRootSuspended$1(root3, lanes);
+          ensureRootIsScheduled(root3, now());
           throw fatalError;
         }
         if (exitStatus === RootDidNotComplete) {
-          markRootSuspended$1(root2, lanes);
+          markRootSuspended$1(root3, lanes);
         } else {
-          var renderWasConcurrent = !includesBlockingLane(root2, lanes);
-          var finishedWork = root2.current.alternate;
+          var renderWasConcurrent = !includesBlockingLane(root3, lanes);
+          var finishedWork = root3.current.alternate;
           if (renderWasConcurrent && !isRenderConsistentWithExternalStores(finishedWork)) {
-            exitStatus = renderRootSync(root2, lanes);
+            exitStatus = renderRootSync(root3, lanes);
             if (exitStatus === RootErrored) {
-              var _errorRetryLanes = getLanesToRetrySynchronouslyOnError(root2);
+              var _errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
               if (_errorRetryLanes !== NoLanes) {
                 lanes = _errorRetryLanes;
-                exitStatus = recoverFromConcurrentError(root2, _errorRetryLanes);
+                exitStatus = recoverFromConcurrentError(root3, _errorRetryLanes);
               }
             }
             if (exitStatus === RootFatalErrored) {
               var _fatalError = workInProgressRootFatalError;
-              prepareFreshStack(root2, NoLanes);
-              markRootSuspended$1(root2, lanes);
-              ensureRootIsScheduled(root2, now());
+              prepareFreshStack(root3, NoLanes);
+              markRootSuspended$1(root3, lanes);
+              ensureRootIsScheduled(root3, now());
               throw _fatalError;
             }
           }
-          root2.finishedWork = finishedWork;
-          root2.finishedLanes = lanes;
-          finishConcurrentRender(root2, exitStatus, lanes);
+          root3.finishedWork = finishedWork;
+          root3.finishedLanes = lanes;
+          finishConcurrentRender(root3, exitStatus, lanes);
         }
       }
-      ensureRootIsScheduled(root2, now());
-      if (root2.callbackNode === originalCallbackNode) {
-        return performConcurrentWorkOnRoot.bind(null, root2);
+      ensureRootIsScheduled(root3, now());
+      if (root3.callbackNode === originalCallbackNode) {
+        return performConcurrentWorkOnRoot.bind(null, root3);
       }
       return null;
     }
-    function recoverFromConcurrentError(root2, errorRetryLanes) {
+    function recoverFromConcurrentError(root3, errorRetryLanes) {
       var errorsFromFirstAttempt = workInProgressRootConcurrentErrors;
-      if (isRootDehydrated(root2)) {
-        var rootWorkInProgress = prepareFreshStack(root2, errorRetryLanes);
+      if (isRootDehydrated(root3)) {
+        var rootWorkInProgress = prepareFreshStack(root3, errorRetryLanes);
         rootWorkInProgress.flags |= ForceClientRender;
         {
-          errorHydratingContainer(root2.containerInfo);
+          errorHydratingContainer(root3.containerInfo);
         }
       }
-      var exitStatus = renderRootSync(root2, errorRetryLanes);
+      var exitStatus = renderRootSync(root3, errorRetryLanes);
       if (exitStatus !== RootErrored) {
         var errorsFromSecondAttempt = workInProgressRootRecoverableErrors;
         workInProgressRootRecoverableErrors = errorsFromFirstAttempt;
@@ -20048,58 +20048,58 @@ var scheduler_development = {};
         workInProgressRootRecoverableErrors.push.apply(workInProgressRootRecoverableErrors, errors);
       }
     }
-    function finishConcurrentRender(root2, exitStatus, lanes) {
+    function finishConcurrentRender(root3, exitStatus, lanes) {
       switch (exitStatus) {
         case RootInProgress:
         case RootFatalErrored: {
           throw new Error("Root did not complete. This is a bug in React.");
         }
         case RootErrored: {
-          commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
+          commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
           break;
         }
         case RootSuspended: {
-          markRootSuspended$1(root2, lanes);
+          markRootSuspended$1(root3, lanes);
           if (includesOnlyRetries(lanes) && !shouldForceFlushFallbacksInDEV()) {
             var msUntilTimeout = globalMostRecentFallbackTime + FALLBACK_THROTTLE_MS - now();
             if (msUntilTimeout > 10) {
-              var nextLanes = getNextLanes(root2, NoLanes);
+              var nextLanes = getNextLanes(root3, NoLanes);
               if (nextLanes !== NoLanes) {
                 break;
               }
-              var suspendedLanes = root2.suspendedLanes;
+              var suspendedLanes = root3.suspendedLanes;
               if (!isSubsetOfLanes(suspendedLanes, lanes)) {
                 requestEventTime();
-                markRootPinged(root2, suspendedLanes);
+                markRootPinged(root3, suspendedLanes);
                 break;
               }
-              root2.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root2, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
+              root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
               break;
             }
           }
-          commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
+          commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
           break;
         }
         case RootSuspendedWithDelay: {
-          markRootSuspended$1(root2, lanes);
+          markRootSuspended$1(root3, lanes);
           if (includesOnlyTransitions(lanes)) {
             break;
           }
           if (!shouldForceFlushFallbacksInDEV()) {
-            var mostRecentEventTime = getMostRecentEventTime(root2, lanes);
+            var mostRecentEventTime = getMostRecentEventTime(root3, lanes);
             var eventTimeMs = mostRecentEventTime;
             var timeElapsedMs = now() - eventTimeMs;
             var _msUntilTimeout = jnd(timeElapsedMs) - timeElapsedMs;
             if (_msUntilTimeout > 10) {
-              root2.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root2, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
+              root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
               break;
             }
           }
-          commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
+          commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
           break;
         }
         case RootCompleted: {
-          commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
+          commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
           break;
         }
         default: {
@@ -20150,12 +20150,12 @@ var scheduler_development = {};
       }
       return true;
     }
-    function markRootSuspended$1(root2, suspendedLanes) {
+    function markRootSuspended$1(root3, suspendedLanes) {
       suspendedLanes = removeLanes(suspendedLanes, workInProgressRootPingedLanes);
       suspendedLanes = removeLanes(suspendedLanes, workInProgressRootInterleavedUpdatedLanes);
-      markRootSuspended(root2, suspendedLanes);
+      markRootSuspended(root3, suspendedLanes);
     }
-    function performSyncWorkOnRoot(root2) {
+    function performSyncWorkOnRoot(root3) {
       {
         syncNestedUpdateFlag();
       }
@@ -20163,40 +20163,40 @@ var scheduler_development = {};
         throw new Error("Should not already be working.");
       }
       flushPassiveEffects();
-      var lanes = getNextLanes(root2, NoLanes);
+      var lanes = getNextLanes(root3, NoLanes);
       if (!includesSomeLane(lanes, SyncLane)) {
-        ensureRootIsScheduled(root2, now());
+        ensureRootIsScheduled(root3, now());
         return null;
       }
-      var exitStatus = renderRootSync(root2, lanes);
-      if (root2.tag !== LegacyRoot && exitStatus === RootErrored) {
-        var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root2);
+      var exitStatus = renderRootSync(root3, lanes);
+      if (root3.tag !== LegacyRoot && exitStatus === RootErrored) {
+        var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
         if (errorRetryLanes !== NoLanes) {
           lanes = errorRetryLanes;
-          exitStatus = recoverFromConcurrentError(root2, errorRetryLanes);
+          exitStatus = recoverFromConcurrentError(root3, errorRetryLanes);
         }
       }
       if (exitStatus === RootFatalErrored) {
         var fatalError = workInProgressRootFatalError;
-        prepareFreshStack(root2, NoLanes);
-        markRootSuspended$1(root2, lanes);
-        ensureRootIsScheduled(root2, now());
+        prepareFreshStack(root3, NoLanes);
+        markRootSuspended$1(root3, lanes);
+        ensureRootIsScheduled(root3, now());
         throw fatalError;
       }
       if (exitStatus === RootDidNotComplete) {
         throw new Error("Root did not complete. This is a bug in React.");
       }
-      var finishedWork = root2.current.alternate;
-      root2.finishedWork = finishedWork;
-      root2.finishedLanes = lanes;
-      commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
-      ensureRootIsScheduled(root2, now());
+      var finishedWork = root3.current.alternate;
+      root3.finishedWork = finishedWork;
+      root3.finishedLanes = lanes;
+      commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+      ensureRootIsScheduled(root3, now());
       return null;
     }
-    function flushRoot(root2, lanes) {
+    function flushRoot(root3, lanes) {
       if (lanes !== NoLanes) {
-        markRootEntangled(root2, mergeLanes(lanes, SyncLane));
-        ensureRootIsScheduled(root2, now());
+        markRootEntangled(root3, mergeLanes(lanes, SyncLane));
+        ensureRootIsScheduled(root3, now());
         if ((executionContext & (RenderContext | CommitContext)) === NoContext) {
           resetRenderTimer();
           flushSyncCallbacks();
@@ -20267,12 +20267,12 @@ var scheduler_development = {};
       subtreeRenderLanes = subtreeRenderLanesCursor.current;
       pop(subtreeRenderLanesCursor, fiber);
     }
-    function prepareFreshStack(root2, lanes) {
-      root2.finishedWork = null;
-      root2.finishedLanes = NoLanes;
-      var timeoutHandle = root2.timeoutHandle;
+    function prepareFreshStack(root3, lanes) {
+      root3.finishedWork = null;
+      root3.finishedLanes = NoLanes;
+      var timeoutHandle = root3.timeoutHandle;
       if (timeoutHandle !== noTimeout) {
-        root2.timeoutHandle = noTimeout;
+        root3.timeoutHandle = noTimeout;
         cancelTimeout(timeoutHandle);
       }
       if (workInProgress !== null) {
@@ -20283,8 +20283,8 @@ var scheduler_development = {};
           interruptedWork = interruptedWork.return;
         }
       }
-      workInProgressRoot = root2;
-      var rootWorkInProgress = createWorkInProgress(root2.current, null);
+      workInProgressRoot = root3;
+      var rootWorkInProgress = createWorkInProgress(root3.current, null);
       workInProgress = rootWorkInProgress;
       workInProgressRootRenderLanes = subtreeRenderLanes = lanes;
       workInProgressRootExitStatus = RootInProgress;
@@ -20300,7 +20300,7 @@ var scheduler_development = {};
       }
       return rootWorkInProgress;
     }
-    function handleError(root2, thrownValue) {
+    function handleError(root3, thrownValue) {
       do {
         var erroredWork = workInProgress;
         try {
@@ -20326,7 +20326,7 @@ var scheduler_development = {};
               markComponentErrored(erroredWork, thrownValue, workInProgressRootRenderLanes);
             }
           }
-          throwException(root2, erroredWork.return, erroredWork, thrownValue, workInProgressRootRenderLanes);
+          throwException(root3, erroredWork.return, erroredWork, thrownValue, workInProgressRootRenderLanes);
           completeUnitOfWork(erroredWork);
         } catch (yetAnotherThrownValue) {
           thrownValue = yetAnotherThrownValue;
@@ -20385,23 +20385,23 @@ var scheduler_development = {};
     function renderHasNotSuspendedYet() {
       return workInProgressRootExitStatus === RootInProgress;
     }
-    function renderRootSync(root2, lanes) {
+    function renderRootSync(root3, lanes) {
       var prevExecutionContext = executionContext;
       executionContext |= RenderContext;
       var prevDispatcher = pushDispatcher();
-      if (workInProgressRoot !== root2 || workInProgressRootRenderLanes !== lanes) {
+      if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
         {
           if (isDevToolsPresent) {
-            var memoizedUpdaters = root2.memoizedUpdaters;
+            var memoizedUpdaters = root3.memoizedUpdaters;
             if (memoizedUpdaters.size > 0) {
-              restorePendingUpdaters(root2, workInProgressRootRenderLanes);
+              restorePendingUpdaters(root3, workInProgressRootRenderLanes);
               memoizedUpdaters.clear();
             }
-            movePendingFibersToMemoized(root2, lanes);
+            movePendingFibersToMemoized(root3, lanes);
           }
         }
         workInProgressTransitions = getTransitionsForLanes();
-        prepareFreshStack(root2, lanes);
+        prepareFreshStack(root3, lanes);
       }
       {
         markRenderStarted(lanes);
@@ -20411,7 +20411,7 @@ var scheduler_development = {};
           workLoopSync();
           break;
         } catch (thrownValue) {
-          handleError(root2, thrownValue);
+          handleError(root3, thrownValue);
         }
       } while (true);
       resetContextDependencies();
@@ -20432,24 +20432,24 @@ var scheduler_development = {};
         performUnitOfWork(workInProgress);
       }
     }
-    function renderRootConcurrent(root2, lanes) {
+    function renderRootConcurrent(root3, lanes) {
       var prevExecutionContext = executionContext;
       executionContext |= RenderContext;
       var prevDispatcher = pushDispatcher();
-      if (workInProgressRoot !== root2 || workInProgressRootRenderLanes !== lanes) {
+      if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
         {
           if (isDevToolsPresent) {
-            var memoizedUpdaters = root2.memoizedUpdaters;
+            var memoizedUpdaters = root3.memoizedUpdaters;
             if (memoizedUpdaters.size > 0) {
-              restorePendingUpdaters(root2, workInProgressRootRenderLanes);
+              restorePendingUpdaters(root3, workInProgressRootRenderLanes);
               memoizedUpdaters.clear();
             }
-            movePendingFibersToMemoized(root2, lanes);
+            movePendingFibersToMemoized(root3, lanes);
           }
         }
         workInProgressTransitions = getTransitionsForLanes();
         resetRenderTimer();
-        prepareFreshStack(root2, lanes);
+        prepareFreshStack(root3, lanes);
       }
       {
         markRenderStarted(lanes);
@@ -20459,7 +20459,7 @@ var scheduler_development = {};
           workLoopConcurrent();
           break;
         } catch (thrownValue) {
-          handleError(root2, thrownValue);
+          handleError(root3, thrownValue);
         }
       } while (true);
       resetContextDependencies();
@@ -20563,20 +20563,20 @@ var scheduler_development = {};
         workInProgressRootExitStatus = RootCompleted;
       }
     }
-    function commitRoot(root2, recoverableErrors, transitions) {
+    function commitRoot(root3, recoverableErrors, transitions) {
       var previousUpdateLanePriority = getCurrentUpdatePriority();
       var prevTransition = ReactCurrentBatchConfig$3.transition;
       try {
         ReactCurrentBatchConfig$3.transition = null;
         setCurrentUpdatePriority(DiscreteEventPriority);
-        commitRootImpl(root2, recoverableErrors, transitions, previousUpdateLanePriority);
+        commitRootImpl(root3, recoverableErrors, transitions, previousUpdateLanePriority);
       } finally {
         ReactCurrentBatchConfig$3.transition = prevTransition;
         setCurrentUpdatePriority(previousUpdateLanePriority);
       }
       return null;
     }
-    function commitRootImpl(root2, recoverableErrors, transitions, renderPriorityLevel) {
+    function commitRootImpl(root3, recoverableErrors, transitions, renderPriorityLevel) {
       do {
         flushPassiveEffects();
       } while (rootWithPendingPassiveEffects !== null);
@@ -20584,8 +20584,8 @@ var scheduler_development = {};
       if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
         throw new Error("Should not already be working.");
       }
-      var finishedWork = root2.finishedWork;
-      var lanes = root2.finishedLanes;
+      var finishedWork = root3.finishedWork;
+      var lanes = root3.finishedLanes;
       {
         markCommitStarted(lanes);
       }
@@ -20601,16 +20601,16 @@ var scheduler_development = {};
           }
         }
       }
-      root2.finishedWork = null;
-      root2.finishedLanes = NoLanes;
-      if (finishedWork === root2.current) {
+      root3.finishedWork = null;
+      root3.finishedLanes = NoLanes;
+      if (finishedWork === root3.current) {
         throw new Error("Cannot commit the same tree as before. This error is likely caused by a bug in React. Please file an issue.");
       }
-      root2.callbackNode = null;
-      root2.callbackPriority = NoLane;
+      root3.callbackNode = null;
+      root3.callbackPriority = NoLane;
       var remainingLanes = mergeLanes(finishedWork.lanes, finishedWork.childLanes);
-      markRootFinished(root2, remainingLanes);
-      if (root2 === workInProgressRoot) {
+      markRootFinished(root3, remainingLanes);
+      if (root3 === workInProgressRoot) {
         workInProgressRoot = null;
         workInProgress = null;
         workInProgressRootRenderLanes = NoLanes;
@@ -20635,17 +20635,17 @@ var scheduler_development = {};
         var prevExecutionContext = executionContext;
         executionContext |= CommitContext;
         ReactCurrentOwner$2.current = null;
-        commitBeforeMutationEffects(root2, finishedWork);
+        commitBeforeMutationEffects(root3, finishedWork);
         {
           recordCommitTime();
         }
-        commitMutationEffects(root2, finishedWork, lanes);
-        resetAfterCommit(root2.containerInfo);
-        root2.current = finishedWork;
+        commitMutationEffects(root3, finishedWork, lanes);
+        resetAfterCommit(root3.containerInfo);
+        root3.current = finishedWork;
         {
           markLayoutEffectsStarted(lanes);
         }
-        commitLayoutEffects(finishedWork, root2, lanes);
+        commitLayoutEffects(finishedWork, root3, lanes);
         {
           markLayoutEffectsStopped();
         }
@@ -20654,7 +20654,7 @@ var scheduler_development = {};
         setCurrentUpdatePriority(previousPriority);
         ReactCurrentBatchConfig$3.transition = prevTransition;
       } else {
-        root2.current = finishedWork;
+        root3.current = finishedWork;
         {
           recordCommitTime();
         }
@@ -20662,7 +20662,7 @@ var scheduler_development = {};
       var rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
       if (rootDoesHavePassiveEffects) {
         rootDoesHavePassiveEffects = false;
-        rootWithPendingPassiveEffects = root2;
+        rootWithPendingPassiveEffects = root3;
         pendingPassiveEffectsLanes = lanes;
       } else {
         {
@@ -20670,27 +20670,27 @@ var scheduler_development = {};
           rootWithPassiveNestedUpdates = null;
         }
       }
-      remainingLanes = root2.pendingLanes;
+      remainingLanes = root3.pendingLanes;
       if (remainingLanes === NoLanes) {
         legacyErrorBoundariesThatAlreadyFailed = null;
       }
       {
         if (!rootDidHavePassiveEffects) {
-          commitDoubleInvokeEffectsInDEV(root2.current, false);
+          commitDoubleInvokeEffectsInDEV(root3.current, false);
         }
       }
       onCommitRoot(finishedWork.stateNode, renderPriorityLevel);
       {
         if (isDevToolsPresent) {
-          root2.memoizedUpdaters.clear();
+          root3.memoizedUpdaters.clear();
         }
       }
       {
         onCommitRoot$1();
       }
-      ensureRootIsScheduled(root2, now());
+      ensureRootIsScheduled(root3, now());
       if (recoverableErrors !== null) {
-        var onRecoverableError = root2.onRecoverableError;
+        var onRecoverableError = root3.onRecoverableError;
         for (var i2 = 0; i2 < recoverableErrors.length; i2++) {
           var recoverableError = recoverableErrors[i2];
           onRecoverableError(recoverableError);
@@ -20702,19 +20702,19 @@ var scheduler_development = {};
         firstUncaughtError = null;
         throw error$1;
       }
-      if (includesSomeLane(pendingPassiveEffectsLanes, SyncLane) && root2.tag !== LegacyRoot) {
+      if (includesSomeLane(pendingPassiveEffectsLanes, SyncLane) && root3.tag !== LegacyRoot) {
         flushPassiveEffects();
       }
-      remainingLanes = root2.pendingLanes;
+      remainingLanes = root3.pendingLanes;
       if (includesSomeLane(remainingLanes, SyncLane)) {
         {
           markNestedUpdateScheduled();
         }
-        if (root2 === rootWithNestedUpdates) {
+        if (root3 === rootWithNestedUpdates) {
           nestedUpdateCount++;
         } else {
           nestedUpdateCount = 0;
-          rootWithNestedUpdates = root2;
+          rootWithNestedUpdates = root3;
         }
       } else {
         nestedUpdateCount = 0;
@@ -20760,7 +20760,7 @@ var scheduler_development = {};
       }
       var transitions = pendingPassiveTransitions;
       pendingPassiveTransitions = null;
-      var root2 = rootWithPendingPassiveEffects;
+      var root3 = rootWithPendingPassiveEffects;
       var lanes = pendingPassiveEffectsLanes;
       rootWithPendingPassiveEffects = null;
       pendingPassiveEffectsLanes = NoLanes;
@@ -20776,31 +20776,31 @@ var scheduler_development = {};
       }
       var prevExecutionContext = executionContext;
       executionContext |= CommitContext;
-      commitPassiveUnmountEffects(root2.current);
-      commitPassiveMountEffects(root2, root2.current, lanes, transitions);
+      commitPassiveUnmountEffects(root3.current);
+      commitPassiveMountEffects(root3, root3.current, lanes, transitions);
       {
         var profilerEffects = pendingPassiveProfilerEffects;
         pendingPassiveProfilerEffects = [];
         for (var i2 = 0; i2 < profilerEffects.length; i2++) {
           var _fiber = profilerEffects[i2];
-          commitPassiveEffectDurations(root2, _fiber);
+          commitPassiveEffectDurations(root3, _fiber);
         }
       }
       {
         markPassiveEffectsStopped();
       }
       {
-        commitDoubleInvokeEffectsInDEV(root2.current, true);
+        commitDoubleInvokeEffectsInDEV(root3.current, true);
       }
       executionContext = prevExecutionContext;
       flushSyncCallbacks();
       {
         if (didScheduleUpdateDuringPassiveEffects) {
-          if (root2 === rootWithPassiveNestedUpdates) {
+          if (root3 === rootWithPassiveNestedUpdates) {
             nestedPassiveUpdateCount++;
           } else {
             nestedPassiveUpdateCount = 0;
-            rootWithPassiveNestedUpdates = root2;
+            rootWithPassiveNestedUpdates = root3;
           }
         } else {
           nestedPassiveUpdateCount = 0;
@@ -20808,9 +20808,9 @@ var scheduler_development = {};
         isFlushingPassiveEffects = false;
         didScheduleUpdateDuringPassiveEffects = false;
       }
-      onPostCommitRoot(root2);
+      onPostCommitRoot(root3);
       {
-        var stateNode = root2.current.stateNode;
+        var stateNode = root3.current.stateNode;
         stateNode.effectDuration = 0;
         stateNode.passiveEffectDuration = 0;
       }
@@ -20838,10 +20838,10 @@ var scheduler_development = {};
       var update = createRootErrorUpdate(rootFiber, errorInfo, SyncLane);
       enqueueUpdate(rootFiber, update);
       var eventTime = requestEventTime();
-      var root2 = markUpdateLaneFromFiberToRoot(rootFiber, SyncLane);
-      if (root2 !== null) {
-        markRootUpdated(root2, SyncLane, eventTime);
-        ensureRootIsScheduled(root2, eventTime);
+      var root3 = markUpdateLaneFromFiberToRoot(rootFiber, SyncLane);
+      if (root3 !== null) {
+        markRootUpdated(root3, SyncLane, eventTime);
+        ensureRootIsScheduled(root3, eventTime);
       }
     }
     function captureCommitPhaseError(sourceFiber, nearestMountedAncestor, error$1) {
@@ -20869,10 +20869,10 @@ var scheduler_development = {};
             var update = createClassErrorUpdate(fiber, errorInfo, SyncLane);
             enqueueUpdate(fiber, update);
             var eventTime = requestEventTime();
-            var root2 = markUpdateLaneFromFiberToRoot(fiber, SyncLane);
-            if (root2 !== null) {
-              markRootUpdated(root2, SyncLane, eventTime);
-              ensureRootIsScheduled(root2, eventTime);
+            var root3 = markUpdateLaneFromFiberToRoot(fiber, SyncLane);
+            if (root3 !== null) {
+              markRootUpdated(root3, SyncLane, eventTime);
+              ensureRootIsScheduled(root3, eventTime);
             }
             return;
           }
@@ -20883,32 +20883,32 @@ var scheduler_development = {};
         error("Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Likely causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.\n\nError message:\n\n%s", error$1);
       }
     }
-    function pingSuspendedRoot(root2, wakeable, pingedLanes) {
-      var pingCache = root2.pingCache;
+    function pingSuspendedRoot(root3, wakeable, pingedLanes) {
+      var pingCache = root3.pingCache;
       if (pingCache !== null) {
         pingCache.delete(wakeable);
       }
       var eventTime = requestEventTime();
-      markRootPinged(root2, pingedLanes);
-      warnIfSuspenseResolutionNotWrappedWithActDEV(root2);
-      if (workInProgressRoot === root2 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
+      markRootPinged(root3, pingedLanes);
+      warnIfSuspenseResolutionNotWrappedWithActDEV(root3);
+      if (workInProgressRoot === root3 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
         if (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && includesOnlyRetries(workInProgressRootRenderLanes) && now() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS) {
-          prepareFreshStack(root2, NoLanes);
+          prepareFreshStack(root3, NoLanes);
         } else {
           workInProgressRootPingedLanes = mergeLanes(workInProgressRootPingedLanes, pingedLanes);
         }
       }
-      ensureRootIsScheduled(root2, eventTime);
+      ensureRootIsScheduled(root3, eventTime);
     }
     function retryTimedOutBoundary(boundaryFiber, retryLane) {
       if (retryLane === NoLane) {
         retryLane = requestRetryLane(boundaryFiber);
       }
       var eventTime = requestEventTime();
-      var root2 = markUpdateLaneFromFiberToRoot(boundaryFiber, retryLane);
-      if (root2 !== null) {
-        markRootUpdated(root2, retryLane, eventTime);
-        ensureRootIsScheduled(root2, eventTime);
+      var root3 = markUpdateLaneFromFiberToRoot(boundaryFiber, retryLane);
+      if (root3 !== null) {
+        markRootUpdated(root3, retryLane, eventTime);
+        ensureRootIsScheduled(root3, eventTime);
       }
     }
     function retryDehydratedSuspenseBoundary(boundaryFiber) {
@@ -20942,7 +20942,7 @@ var scheduler_development = {};
       retryTimedOutBoundary(boundaryFiber, retryLane);
     }
     function jnd(timeElapsed) {
-      return timeElapsed < 120 ? 120 : timeElapsed < 480 ? 480 : timeElapsed < 1080 ? 1080 : timeElapsed < 1920 ? 1920 : timeElapsed < 3e3 ? 3e3 : timeElapsed < 4320 ? 4320 : ceil(timeElapsed / 1960) * 1960;
+      return timeElapsed < 120 ? 120 : timeElapsed < 480 ? 480 : timeElapsed < 1080 ? 1080 : timeElapsed < 1920 ? 1920 : timeElapsed < 3e3 ? 3e3 : timeElapsed < 4320 ? 4320 : ceil3(timeElapsed / 1960) * 1960;
     }
     function checkForNestedUpdates() {
       if (nestedUpdateCount > NESTED_UPDATE_LIMIT) {
@@ -21097,12 +21097,12 @@ var scheduler_development = {};
         }
       }
     }
-    function restorePendingUpdaters(root2, lanes) {
+    function restorePendingUpdaters(root3, lanes) {
       {
         if (isDevToolsPresent) {
-          var memoizedUpdaters = root2.memoizedUpdaters;
+          var memoizedUpdaters = root3.memoizedUpdaters;
           memoizedUpdaters.forEach(function(schedulingFiber) {
-            addFiberToLanesMap(root2, schedulingFiber, lanes);
+            addFiberToLanesMap(root3, schedulingFiber, lanes);
           });
         }
       }
@@ -21160,9 +21160,9 @@ var scheduler_development = {};
         }
       }
     }
-    function warnIfSuspenseResolutionNotWrappedWithActDEV(root2) {
+    function warnIfSuspenseResolutionNotWrappedWithActDEV(root3) {
       {
-        if (root2.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
+        if (root3.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
           error("A suspended resource finished loading inside a test, but the event was not wrapped in act(...).\n\nWhen testing, code that resolves suspended data should be wrapped into act(...):\n\nact(() => {\n  /* finish loading suspended data */\n});\n/* assert on the output */\n\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act");
         }
       }
@@ -21286,7 +21286,7 @@ var scheduler_development = {};
         failedBoundaries.add(fiber);
       }
     }
-    var scheduleRefresh = function(root2, update) {
+    var scheduleRefresh = function(root3, update) {
       {
         if (resolveFamily === null) {
           return;
@@ -21294,18 +21294,18 @@ var scheduler_development = {};
         var staleFamilies = update.staleFamilies, updatedFamilies = update.updatedFamilies;
         flushPassiveEffects();
         flushSync(function() {
-          scheduleFibersWithFamiliesRecursively(root2.current, updatedFamilies, staleFamilies);
+          scheduleFibersWithFamiliesRecursively(root3.current, updatedFamilies, staleFamilies);
         });
       }
     };
-    var scheduleRoot = function(root2, element) {
+    var scheduleRoot = function(root3, element) {
       {
-        if (root2.context !== emptyContextObject) {
+        if (root3.context !== emptyContextObject) {
           return;
         }
         flushPassiveEffects();
         flushSync(function() {
-          updateContainer(element, root2, null, null);
+          updateContainer(element, root3, null, null);
         });
       }
     };
@@ -21361,13 +21361,13 @@ var scheduler_development = {};
         }
       }
     }
-    var findHostInstancesForRefresh = function(root2, families) {
+    var findHostInstancesForRefresh = function(root3, families) {
       {
         var hostInstances = /* @__PURE__ */ new Set();
         var types = new Set(families.map(function(family) {
           return family.current;
         }));
-        findHostInstancesForMatchingFibersRecursively(root2.current, types, hostInstances);
+        findHostInstancesForMatchingFibersRecursively(root3.current, types, hostInstances);
         return hostInstances;
       }
     };
@@ -21913,10 +21913,10 @@ var scheduler_development = {};
       }
     }
     function createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError, transitionCallbacks) {
-      var root2 = new FiberRootNode(containerInfo, tag, hydrate2, identifierPrefix, onRecoverableError);
+      var root3 = new FiberRootNode(containerInfo, tag, hydrate2, identifierPrefix, onRecoverableError);
       var uninitializedFiber = createHostRootFiber(tag, isStrictMode);
-      root2.current = uninitializedFiber;
-      uninitializedFiber.stateNode = root2;
+      root3.current = uninitializedFiber;
+      uninitializedFiber.stateNode = root3;
       {
         var _initialState = {
           element: initialChildren,
@@ -21928,7 +21928,7 @@ var scheduler_development = {};
         uninitializedFiber.memoizedState = _initialState;
       }
       initializeUpdateQueue(uninitializedFiber);
-      return root2;
+      return root3;
     }
     var ReactVersion = "18.1.0";
     function createPortal(children, containerInfo, implementation) {
@@ -22010,16 +22010,16 @@ var scheduler_development = {};
     }
     function createHydrationContainer(initialChildren, callback, containerInfo, tag, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError, transitionCallbacks) {
       var hydrate2 = true;
-      var root2 = createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-      root2.context = getContextForSubtree(null);
-      var current2 = root2.current;
+      var root3 = createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+      root3.context = getContextForSubtree(null);
+      var current2 = root3.current;
       var eventTime = requestEventTime();
       var lane = requestUpdateLane(current2);
       var update = createUpdate(eventTime, lane);
       update.callback = callback !== void 0 && callback !== null ? callback : null;
       enqueueUpdate(current2, update);
-      scheduleInitialHydrationOnRoot(root2, lane, eventTime);
-      return root2;
+      scheduleInitialHydrationOnRoot(root3, lane, eventTime);
+      return root3;
     }
     function updateContainer(element, container, parentComponent, callback) {
       {
@@ -22057,9 +22057,9 @@ var scheduler_development = {};
         update.callback = callback;
       }
       enqueueUpdate(current$1, update);
-      var root2 = scheduleUpdateOnFiber(current$1, lane, eventTime);
-      if (root2 !== null) {
-        entangleTransitions(root2, current$1, lane);
+      var root3 = scheduleUpdateOnFiber(current$1, lane, eventTime);
+      if (root3 !== null) {
+        entangleTransitions(root3, current$1, lane);
       }
       return lane;
     }
@@ -22078,10 +22078,10 @@ var scheduler_development = {};
     function attemptSynchronousHydration$1(fiber) {
       switch (fiber.tag) {
         case HostRoot:
-          var root2 = fiber.stateNode;
-          if (isRootDehydrated(root2)) {
-            var lanes = getHighestPriorityPendingLanes(root2);
-            flushRoot(root2, lanes);
+          var root3 = fiber.stateNode;
+          if (isRootDehydrated(root3)) {
+            var lanes = getHighestPriorityPendingLanes(root3);
+            flushRoot(root3, lanes);
           }
           break;
         case SuspenseComponent:
@@ -22335,8 +22335,8 @@ var scheduler_development = {};
       this._internalRoot = internalRoot;
     }
     ReactDOMHydrationRoot.prototype.render = ReactDOMRoot.prototype.render = function(children) {
-      var root2 = this._internalRoot;
-      if (root2 === null) {
+      var root3 = this._internalRoot;
+      if (root3 === null) {
         throw new Error("Cannot update an unmounted root.");
       }
       {
@@ -22347,9 +22347,9 @@ var scheduler_development = {};
         } else if (typeof arguments[1] !== "undefined") {
           error("You passed a second argument to root.render(...) but it only accepts one argument.");
         }
-        var container = root2.containerInfo;
+        var container = root3.containerInfo;
         if (container.nodeType !== COMMENT_NODE) {
-          var hostInstance = findHostInstanceWithNoPortals(root2.current);
+          var hostInstance = findHostInstanceWithNoPortals(root3.current);
           if (hostInstance) {
             if (hostInstance.parentNode !== container) {
               error("render(...): It looks like the React-rendered content of the root container was removed without using React. This is not supported and will cause errors. Instead, call root.unmount() to empty a root's container.");
@@ -22357,7 +22357,7 @@ var scheduler_development = {};
           }
         }
       }
-      updateContainer(children, root2, null, null);
+      updateContainer(children, root3, null, null);
     };
     ReactDOMHydrationRoot.prototype.unmount = ReactDOMRoot.prototype.unmount = function() {
       {
@@ -22365,17 +22365,17 @@ var scheduler_development = {};
           error("unmount(...): does not support a callback argument. To execute a side effect after rendering, declare it in a component body with useEffect().");
         }
       }
-      var root2 = this._internalRoot;
-      if (root2 !== null) {
+      var root3 = this._internalRoot;
+      if (root3 !== null) {
         this._internalRoot = null;
-        var container = root2.containerInfo;
+        var container = root3.containerInfo;
         {
           if (isAlreadyRendering()) {
             error("Attempted to synchronously unmount a root while React was already rendering. React cannot finish unmounting the root until the current render has completed, which may lead to a race condition.");
           }
         }
         flushSync(function() {
-          updateContainer(null, root2, null, null);
+          updateContainer(null, root3, null, null);
         });
         unmarkContainerAsRoot(container);
       }
@@ -22412,11 +22412,11 @@ var scheduler_development = {};
           options2.transitionCallbacks;
         }
       }
-      var root2 = createContainer(container, ConcurrentRoot, null, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-      markContainerAsRoot(root2.current, container);
+      var root3 = createContainer(container, ConcurrentRoot, null, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+      markContainerAsRoot(root3.current, container);
       var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
       listenToAllSupportedEvents(rootContainerElement);
-      return new ReactDOMRoot(root2);
+      return new ReactDOMRoot(root3);
     }
     function ReactDOMHydrationRoot(internalRoot) {
       this._internalRoot = internalRoot;
@@ -22454,16 +22454,16 @@ var scheduler_development = {};
           onRecoverableError = options2.onRecoverableError;
         }
       }
-      var root2 = createHydrationContainer(initialChildren, null, container, ConcurrentRoot, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-      markContainerAsRoot(root2.current, container);
+      var root3 = createHydrationContainer(initialChildren, null, container, ConcurrentRoot, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+      markContainerAsRoot(root3.current, container);
       listenToAllSupportedEvents(container);
       if (mutableSources) {
         for (var i2 = 0; i2 < mutableSources.length; i2++) {
           var mutableSource = mutableSources[i2];
-          registerMutableSourceForHydration(root2, mutableSource);
+          registerMutableSourceForHydration(root3, mutableSource);
         }
       }
-      return new ReactDOMHydrationRoot(root2);
+      return new ReactDOMHydrationRoot(root3);
     }
     function isValidContainer(node) {
       return !!(node && (node.nodeType === ELEMENT_NODE || node.nodeType === DOCUMENT_NODE || node.nodeType === DOCUMENT_FRAGMENT_NODE || !disableCommentsAsDOMContainers));
@@ -22525,11 +22525,11 @@ var scheduler_development = {};
         if (typeof callback === "function") {
           var originalCallback = callback;
           callback = function() {
-            var instance = getPublicRootInstance(root2);
+            var instance = getPublicRootInstance(root3);
             originalCallback.call(instance);
           };
         }
-        var root2 = createHydrationContainer(
+        var root3 = createHydrationContainer(
           initialChildren,
           callback,
           container,
@@ -22540,12 +22540,12 @@ var scheduler_development = {};
           "",
           noopOnRecoverableError
         );
-        container._reactRootContainer = root2;
-        markContainerAsRoot(root2.current, container);
+        container._reactRootContainer = root3;
+        markContainerAsRoot(root3.current, container);
         var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
         listenToAllSupportedEvents(rootContainerElement);
         flushSync();
-        return root2;
+        return root3;
       } else {
         var rootSibling;
         while (rootSibling = container.lastChild) {
@@ -22590,21 +22590,21 @@ var scheduler_development = {};
         warnOnInvalidCallback$1(callback === void 0 ? null : callback, "render");
       }
       var maybeRoot = container._reactRootContainer;
-      var root2;
+      var root3;
       if (!maybeRoot) {
-        root2 = legacyCreateRootFromDOMContainer(container, children, parentComponent, callback, forceHydrate);
+        root3 = legacyCreateRootFromDOMContainer(container, children, parentComponent, callback, forceHydrate);
       } else {
-        root2 = maybeRoot;
+        root3 = maybeRoot;
         if (typeof callback === "function") {
           var originalCallback = callback;
           callback = function() {
-            var instance = getPublicRootInstance(root2);
+            var instance = getPublicRootInstance(root3);
             originalCallback.call(instance);
           };
         }
-        updateContainer(children, root2, parentComponent, callback);
+        updateContainer(children, root3, parentComponent, callback);
       }
-      return getPublicRootInstance(root2);
+      return getPublicRootInstance(root3);
     }
     function findDOMNode(componentOrElement) {
       {
@@ -23704,24 +23704,24 @@ var reactJsxDevRuntime_development = {};
     module.exports = reactJsxDevRuntime_development;
   }
 })(jsxDevRuntime);
-var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
-function Component$b() {
+var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
+function Component$c() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     children: "..."
   }, void 0, false, {
-    fileName: _jsxFileName$c,
+    fileName: _jsxFileName$d,
     lineNumber: 4,
     columnNumber: 10
   }, this);
 }
-const example$b = {
+const example$c = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
   description: "Duplicate this to make new experiments.",
-  Component: Component$b
+  Component: Component$c
 };
-var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
+var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
 function renderBitmap$6() {
   const offscreen = new OffscreenCanvas(400, 400);
   const ctx = offscreen.getContext("2d");
@@ -23733,7 +23733,7 @@ function renderBitmap$6() {
   ctx.fillRect(0, 0, 400, 400);
   return offscreen.transferToImageBitmap();
 }
-function Component$a() {
+function Component$b() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23748,19 +23748,19 @@ function Component$a() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$b,
+    fileName: _jsxFileName$c,
     lineNumber: 25,
     columnNumber: 10
   }, this);
 }
-const example$a = {
+const example$b = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
   description: "Usage of an offscreen canvas",
-  Component: Component$a
+  Component: Component$b
 };
-var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
+var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
 async function renderBitmap$5() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
@@ -23772,7 +23772,7 @@ async function renderBitmap$5() {
     worker.postMessage("begin");
   });
 }
-function Component$9() {
+function Component$a() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23789,17 +23789,17 @@ function Component$9() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$a,
+    fileName: _jsxFileName$b,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$9 = {
+const example$a = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
   description: "Usage of an offscreen canvas in a worker",
-  Component: Component$9
+  Component: Component$a
 };
 var ENV = /* @__PURE__ */ ((ENV2) => {
   ENV2[ENV2["WEBGL_LEGACY"] = 0] = "WEBGL_LEGACY";
@@ -23987,10 +23987,10 @@ var BUFFER_TYPE = /* @__PURE__ */ ((BUFFER_TYPE2) => {
 })(BUFFER_TYPE || {});
 const BrowserAdapter = {
   createCanvas: (width, height) => {
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    return canvas;
+    const canvas3 = document.createElement("canvas");
+    canvas3.width = width;
+    canvas3.height = height;
+    return canvas3;
   },
   getCanvasRenderingContext2D: () => CanvasRenderingContext2D,
   getWebGLRenderingContext: () => WebGLRenderingContext,
@@ -24031,8 +24031,8 @@ var isAppleTabletOnIos13 = function(navigator2) {
   return typeof navigator2 !== "undefined" && navigator2.platform === "MacIntel" && typeof navigator2.maxTouchPoints === "number" && navigator2.maxTouchPoints > 1 && typeof MSStream === "undefined";
 };
 function createMatch(userAgent) {
-  return function(regex) {
-    return regex.test(userAgent);
+  return function(regex3) {
+    return regex3.test(userAgent);
   };
 }
 function isMobile$1(param) {
@@ -24113,11 +24113,11 @@ settings.FAIL_IF_MAJOR_PERFORMANCE_CAVEAT = false;
 var eventemitter3 = { exports: {} };
 (function(module) {
   var has = Object.prototype.hasOwnProperty, prefix = "~";
-  function Events() {
+  function Events2() {
   }
   if (Object.create) {
-    Events.prototype = /* @__PURE__ */ Object.create(null);
-    if (!new Events().__proto__)
+    Events2.prototype = /* @__PURE__ */ Object.create(null);
+    if (!new Events2().__proto__)
       prefix = false;
   }
   function EE(fn, context2, once) {
@@ -24140,12 +24140,12 @@ var eventemitter3 = { exports: {} };
   }
   function clearEvent(emitter, evt) {
     if (--emitter._eventsCount === 0)
-      emitter._events = new Events();
+      emitter._events = new Events2();
     else
       delete emitter._events[evt];
   }
   function EventEmitter2() {
-    this._events = new Events();
+    this._events = new Events2();
     this._eventsCount = 0;
   }
   EventEmitter2.prototype.eventNames = function eventNames() {
@@ -24274,7 +24274,7 @@ var eventemitter3 = { exports: {} };
       if (this._events[evt])
         clearEvent(this, evt);
     } else {
-      this._events = new Events();
+      this._events = new Events2();
       this._eventsCount = 0;
     }
     return this;
@@ -24507,14 +24507,14 @@ function findHoleBridge(hole, outerNode) {
   } while (p2 !== outerNode);
   if (!m2)
     return null;
-  var stop = m2, mx = m2.x, my = m2.y, tanMin = Infinity, tan;
+  var stop = m2, mx = m2.x, my = m2.y, tanMin = Infinity, tan2;
   p2 = m2;
   do {
     if (hx >= p2.x && p2.x >= mx && hx !== p2.x && pointInTriangle(hy < my ? hx : qx, hy, mx, my, hy < my ? qx : hx, hy, p2.x, p2.y)) {
-      tan = Math.abs(hy - p2.y) / (hx - p2.x);
-      if (locallyInside(p2, hole) && (tan < tanMin || tan === tanMin && (p2.x > m2.x || p2.x === m2.x && sectorContainsSector(m2, p2)))) {
+      tan2 = Math.abs(hy - p2.y) / (hx - p2.x);
+      if (locallyInside(p2, hole) && (tan2 < tanMin || tan2 === tanMin && (p2.x > m2.x || p2.x === m2.x && sectorContainsSector(m2, p2)))) {
         m2 = p2;
-        tanMin = tan;
+        tanMin = tan2;
       }
     }
     p2 = p2.next;
@@ -24748,26 +24748,26 @@ earcut.flatten = function(data) {
 var punycode$1 = { exports: {} };
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 (function(module, exports) {
-  (function(root) {
+  (function(root2) {
     var freeExports = exports && !exports.nodeType && exports;
     var freeModule = module && !module.nodeType && module;
     var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal;
     if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal) {
-      root = freeGlobal;
+      root2 = freeGlobal;
     }
     var punycode2, maxInt = 2147483647, base2 = 36, tMin = 1, tMax = 26, skew = 38, damp = 700, initialBias = 72, initialN = 128, delimiter = "-", regexPunycode = /^xn--/, regexNonASCII = /[^\x20-\x7E]/, regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, errors = {
       "overflow": "Overflow: input needs wider integers to process",
       "not-basic": "Illegal input >= 0x80 (not a basic code point)",
       "invalid-input": "Invalid input"
-    }, baseMinusTMin = base2 - tMin, floor = Math.floor, stringFromCharCode = String.fromCharCode, key;
+    }, baseMinusTMin = base2 - tMin, floor4 = Math.floor, stringFromCharCode = String.fromCharCode, key;
     function error(type2) {
       throw RangeError(errors[type2]);
     }
-    function map2(array, fn) {
-      var length = array.length;
+    function map2(array2, fn) {
+      var length = array2.length;
       var result = [];
       while (length--) {
-        result[length] = fn(array[length]);
+        result[length] = fn(array2[length]);
       }
       return result;
     }
@@ -24801,8 +24801,8 @@ var punycode$1 = { exports: {} };
       }
       return output;
     }
-    function ucs2encode(array) {
-      return map2(array, function(value) {
+    function ucs2encode(array2) {
+      return map2(array2, function(value) {
         var output = "";
         if (value > 65535) {
           value -= 65536;
@@ -24830,12 +24830,12 @@ var punycode$1 = { exports: {} };
     }
     function adapt(delta, numPoints, firstTime) {
       var k2 = 0;
-      delta = firstTime ? floor(delta / damp) : delta >> 1;
-      delta += floor(delta / numPoints);
+      delta = firstTime ? floor4(delta / damp) : delta >> 1;
+      delta += floor4(delta / numPoints);
       for (; delta > baseMinusTMin * tMax >> 1; k2 += base2) {
-        delta = floor(delta / baseMinusTMin);
+        delta = floor4(delta / baseMinusTMin);
       }
-      return floor(k2 + (baseMinusTMin + 1) * delta / (delta + skew));
+      return floor4(k2 + (baseMinusTMin + 1) * delta / (delta + skew));
     }
     function decode2(input) {
       var output = [], inputLength = input.length, out, i2 = 0, n2 = initialN, bias = initialBias, basic, j2, index, oldi, w2, k2, digit, t2, baseMinusT;
@@ -24855,7 +24855,7 @@ var punycode$1 = { exports: {} };
             error("invalid-input");
           }
           digit = basicToDigit(input.charCodeAt(index++));
-          if (digit >= base2 || digit > floor((maxInt - i2) / w2)) {
+          if (digit >= base2 || digit > floor4((maxInt - i2) / w2)) {
             error("overflow");
           }
           i2 += digit * w2;
@@ -24864,17 +24864,17 @@ var punycode$1 = { exports: {} };
             break;
           }
           baseMinusT = base2 - t2;
-          if (w2 > floor(maxInt / baseMinusT)) {
+          if (w2 > floor4(maxInt / baseMinusT)) {
             error("overflow");
           }
           w2 *= baseMinusT;
         }
         out = output.length + 1;
         bias = adapt(i2 - oldi, out, oldi == 0);
-        if (floor(i2 / out) > maxInt - n2) {
+        if (floor4(i2 / out) > maxInt - n2) {
           error("overflow");
         }
-        n2 += floor(i2 / out);
+        n2 += floor4(i2 / out);
         i2 %= out;
         output.splice(i2++, 0, n2);
       }
@@ -24905,7 +24905,7 @@ var punycode$1 = { exports: {} };
           }
         }
         handledCPCountPlusOne = handledCPCount + 1;
-        if (m2 - n2 > floor((maxInt - delta) / handledCPCountPlusOne)) {
+        if (m2 - n2 > floor4((maxInt - delta) / handledCPCountPlusOne)) {
           error("overflow");
         }
         delta += (m2 - n2) * handledCPCountPlusOne;
@@ -24926,7 +24926,7 @@ var punycode$1 = { exports: {} };
               output.push(
                 stringFromCharCode(digitToBasic(t2 + qMinusT % baseMinusT, 0))
               );
-              q = floor(qMinusT / baseMinusT);
+              q = floor4(qMinusT / baseMinusT);
             }
             output.push(stringFromCharCode(digitToBasic(q, 0)));
             bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
@@ -24969,7 +24969,7 @@ var punycode$1 = { exports: {} };
         }
       }
     } else {
-      root.punycode = punycode2;
+      root2.punycode = punycode2;
     }
   })(commonjsGlobal);
 })(punycode$1, punycode$1.exports);
@@ -25138,21 +25138,21 @@ Url.prototype.parse = function(url2, parseQueryString, slashesDenoteHost) {
       return this;
     }
   }
-  var proto = protocolPattern.exec(rest);
-  if (proto) {
-    proto = proto[0];
-    var lowerProto = proto.toLowerCase();
+  var proto24 = protocolPattern.exec(rest);
+  if (proto24) {
+    proto24 = proto24[0];
+    var lowerProto = proto24.toLowerCase();
     this.protocol = lowerProto;
-    rest = rest.substr(proto.length);
+    rest = rest.substr(proto24.length);
   }
-  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
+  if (slashesDenoteHost || proto24 || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
     var slashes = rest.substr(0, 2) === "//";
-    if (slashes && !(proto && hostlessProtocol[proto])) {
+    if (slashes && !(proto24 && hostlessProtocol[proto24])) {
       rest = rest.substr(2);
       this.slashes = true;
     }
   }
-  if (!hostlessProtocol[proto] && (slashes || proto && !slashedProtocol[proto])) {
+  if (!hostlessProtocol[proto24] && (slashes || proto24 && !slashedProtocol[proto24])) {
     var hostEnd = -1;
     for (var i2 = 0; i2 < hostEndingChars.length; i2++) {
       var hec = rest.indexOf(hostEndingChars[i2]);
@@ -25719,9 +25719,9 @@ const path = {
     const hasRoot = code === 47;
     let end = -1;
     let matchedSlash = true;
-    const proto = this.getProtocol(path2);
+    const proto24 = this.getProtocol(path2);
     const origpath = path2;
-    path2 = path2.slice(proto.length);
+    path2 = path2.slice(proto24.length);
     for (let i2 = path2.length - 1; i2 >= 1; --i2) {
       code = path2.charCodeAt(i2);
       if (code === 47) {
@@ -25734,30 +25734,30 @@ const path = {
       }
     }
     if (end === -1)
-      return hasRoot ? "/" : this.isUrl(origpath) ? proto + path2 : proto;
+      return hasRoot ? "/" : this.isUrl(origpath) ? proto24 + path2 : proto24;
     if (hasRoot && end === 1)
       return "//";
-    return proto + path2.slice(0, end);
+    return proto24 + path2.slice(0, end);
   },
   rootname(path2) {
     assertPath(path2);
     path2 = this.toPosix(path2);
-    let root = "";
+    let root2 = "";
     if (path2.startsWith("/"))
-      root = "/";
+      root2 = "/";
     else {
-      root = this.getProtocol(path2);
+      root2 = this.getProtocol(path2);
     }
     if (this.isUrl(path2)) {
-      const index = path2.indexOf("/", root.length);
+      const index = path2.indexOf("/", root2.length);
       if (index !== -1) {
-        root = path2.slice(0, index);
+        root2 = path2.slice(0, index);
       } else
-        root = path2;
-      if (!root.endsWith("/"))
-        root += "/";
+        root2 = path2;
+      if (!root2.endsWith("/"))
+        root2 += "/";
     }
-    return root;
+    return root2;
   },
   basename(path2, ext) {
     assertPath(path2);
@@ -25956,8 +25956,8 @@ function isWebGLSupported() {
         if (!settings.ADAPTER.getWebGLRenderingContext()) {
           return false;
         }
-        const canvas = settings.ADAPTER.createCanvas();
-        let gl = canvas.getContext("webgl", contextOptions) || canvas.getContext("experimental-webgl", contextOptions);
+        const canvas3 = settings.ADAPTER.createCanvas();
+        let gl = canvas3.getContext("webgl", contextOptions) || canvas3.getContext("experimental-webgl", contextOptions);
         const success = !!((_a2 = gl == null ? void 0 : gl.getContextAttributes()) == null ? void 0 : _a2.stencil);
         if (gl) {
           const loseContext = gl.getExtension("WEBGL_lose_context");
@@ -26367,12 +26367,12 @@ const _Color = class {
     const [r2, g2, b2] = this._components;
     this._int = (r2 * 255 << 16) + (g2 * 255 << 8) + (b2 * 255 | 0);
   }
-  _clamp(value, min = 0, max = 1) {
+  _clamp(value, min5 = 0, max5 = 1) {
     if (typeof value === "number") {
-      return Math.min(Math.max(value, min), max);
+      return Math.min(Math.max(value, min5), max5);
     }
     value.forEach((v2, i2) => {
-      value[i2] = Math.min(Math.max(v2, min), max);
+      value[i2] = Math.min(Math.max(v2, min5), max5);
     });
     return value;
   }
@@ -26402,10 +26402,10 @@ function mapPremultipliedBlendModes() {
   npm[BLEND_MODES.NORMAL] = BLEND_MODES.NORMAL_NPM;
   npm[BLEND_MODES.ADD] = BLEND_MODES.ADD_NPM;
   npm[BLEND_MODES.SCREEN] = BLEND_MODES.SCREEN_NPM;
-  const array = [];
-  array.push(npm);
-  array.push(pm);
-  return array;
+  const array2 = [];
+  array2.push(npm);
+  array2.push(pm);
+  return array2;
 }
 const premultiplyBlendMode = mapPremultipliedBlendModes();
 function correctBlendMode(blendMode, premultiplied) {
@@ -26427,20 +26427,20 @@ function createIndicesForQuads(size, outBuffer = null) {
   }
   return outBuffer;
 }
-function getBufferType(array) {
-  if (array.BYTES_PER_ELEMENT === 4) {
-    if (array instanceof Float32Array) {
+function getBufferType(array2) {
+  if (array2.BYTES_PER_ELEMENT === 4) {
+    if (array2 instanceof Float32Array) {
       return "Float32Array";
-    } else if (array instanceof Uint32Array) {
+    } else if (array2 instanceof Uint32Array) {
       return "Uint32Array";
     }
     return "Int32Array";
-  } else if (array.BYTES_PER_ELEMENT === 2) {
-    if (array instanceof Uint16Array) {
+  } else if (array2.BYTES_PER_ELEMENT === 2) {
+    if (array2 instanceof Uint16Array) {
       return "Uint16Array";
     }
-  } else if (array.BYTES_PER_ELEMENT === 1) {
-    if (array instanceof Uint8Array) {
+  } else if (array2.BYTES_PER_ELEMENT === 1) {
+    if (array2 instanceof Uint8Array) {
       return "Uint8Array";
     }
   }
@@ -26583,9 +26583,9 @@ function checkColumn(data, width, x2, top, bottom) {
   }
   return true;
 }
-function getCanvasBoundingBox(canvas) {
-  const { width, height } = canvas;
-  const context2 = canvas.getContext("2d", {
+function getCanvasBoundingBox(canvas3) {
+  const { width, height } = canvas3;
+  const context2 = canvas3.getContext("2d", {
     willReadFrequently: true
   });
   if (context2 === null) {
@@ -26611,12 +26611,12 @@ function getCanvasBoundingBox(canvas) {
   ++bottom;
   return new BoundingBox(left, top, right, bottom);
 }
-function trimCanvas(canvas) {
-  const boundingBox = getCanvasBoundingBox(canvas);
+function trimCanvas(canvas3) {
+  const boundingBox = getCanvasBoundingBox(canvas3);
   const { width, height } = boundingBox;
   let data = null;
   if (!boundingBox.isEmpty()) {
-    const context2 = canvas.getContext("2d");
+    const context2 = canvas3.getContext("2d");
     if (context2 === null) {
       throw new TypeError("Failed to get canvas 2D context");
     }
@@ -27470,16 +27470,16 @@ function interleaveTypedArrays(arrays, sizes) {
   let littleOffset = 0;
   for (let i2 = 0; i2 < arrays.length; i2++) {
     const size = sizes[i2];
-    const array = arrays[i2];
-    const type2 = getBufferType(array);
+    const array2 = arrays[i2];
+    const type2 = getBufferType(array2);
     if (!views[type2]) {
       views[type2] = new map$1[type2](buffer);
     }
     out = views[type2];
-    for (let j2 = 0; j2 < array.length; j2++) {
+    for (let j2 = 0; j2 < array2.length; j2++) {
       const indexStart = (j2 / size | 0) * stride + littleOffset;
       const index = j2 % size;
-      out[indexStart + index] = array[j2];
+      out[indexStart + index] = array2[j2];
     }
     littleOffset += size;
   }
@@ -27720,7 +27720,7 @@ class Point {
   }
 }
 const tempPoints$1 = [new Point(), new Point(), new Point(), new Point()];
-class Rectangle {
+class Rectangle$1 {
   constructor(x2 = 0, y2 = 0, width = 0, height = 0) {
     this.x = Number(x2);
     this.y = Number(y2);
@@ -27741,10 +27741,10 @@ class Rectangle {
     return this.y + this.height;
   }
   static get EMPTY() {
-    return new Rectangle(0, 0, 0, 0);
+    return new Rectangle$1(0, 0, 0, 0);
   }
   clone() {
-    return new Rectangle(this.x, this.y, this.width, this.height);
+    return new Rectangle$1(this.x, this.y, this.width, this.height);
   }
   copyFrom(rectangle) {
     this.x = rectangle.x;
@@ -27869,7 +27869,7 @@ class Rectangle {
     return `[@pixi/math:Rectangle x=${this.x} y=${this.y} width=${this.width} height=${this.height}]`;
   }
 }
-class Circle {
+class Circle$1 {
   constructor(x2 = 0, y2 = 0, radius = 0) {
     this.x = x2;
     this.y = y2;
@@ -27877,7 +27877,7 @@ class Circle {
     this.type = SHAPES.CIRC;
   }
   clone() {
-    return new Circle(this.x, this.y, this.radius);
+    return new Circle$1(this.x, this.y, this.radius);
   }
   contains(x2, y2) {
     if (this.radius <= 0) {
@@ -27891,13 +27891,13 @@ class Circle {
     return dx + dy <= r2;
   }
   getBounds() {
-    return new Rectangle(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+    return new Rectangle$1(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
   }
   toString() {
     return `[@pixi/math:Circle x=${this.x} y=${this.y} radius=${this.radius}]`;
   }
 }
-class Ellipse {
+class Ellipse$1 {
   constructor(x2 = 0, y2 = 0, halfWidth = 0, halfHeight = 0) {
     this.x = x2;
     this.y = y2;
@@ -27906,7 +27906,7 @@ class Ellipse {
     this.type = SHAPES.ELIP;
   }
   clone() {
-    return new Ellipse(this.x, this.y, this.width, this.height);
+    return new Ellipse$1(this.x, this.y, this.width, this.height);
   }
   contains(x2, y2) {
     if (this.width <= 0 || this.height <= 0) {
@@ -27919,13 +27919,13 @@ class Ellipse {
     return normx + normy <= 1;
   }
   getBounds() {
-    return new Rectangle(this.x - this.width, this.y - this.height, this.width, this.height);
+    return new Rectangle$1(this.x - this.width, this.y - this.height, this.width, this.height);
   }
   toString() {
     return `[@pixi/math:Ellipse x=${this.x} y=${this.y} width=${this.width} height=${this.height}]`;
   }
 }
-class Polygon {
+class Polygon$1 {
   constructor(...points) {
     let flat = Array.isArray(points[0]) ? points[0] : points;
     if (typeof flat[0] !== "number") {
@@ -27941,7 +27941,7 @@ class Polygon {
   }
   clone() {
     const points = this.points.slice();
-    const polygon = new Polygon(points);
+    const polygon = new Polygon$1(points);
     polygon.closeStroke = this.closeStroke;
     return polygon;
   }
@@ -27964,7 +27964,7 @@ class Polygon {
     return `[@pixi/math:PolygoncloseStroke=${this.closeStroke}points=${this.points.reduce((pointsDesc, currentPoint) => `${pointsDesc}, ${currentPoint}`, "")}]`;
   }
 }
-class RoundedRectangle {
+class RoundedRectangle$1 {
   constructor(x2 = 0, y2 = 0, width = 0, height = 0, radius = 20) {
     this.x = x2;
     this.y = y2;
@@ -27974,7 +27974,7 @@ class RoundedRectangle {
     this.type = SHAPES.RREC;
   }
   clone() {
-    return new RoundedRectangle(this.x, this.y, this.width, this.height, this.radius);
+    return new RoundedRectangle$1(this.x, this.y, this.width, this.height, this.radius);
   }
   contains(x2, y2) {
     if (this.width <= 0 || this.height <= 0) {
@@ -28012,7 +28012,7 @@ class RoundedRectangle {
     return `[@pixi/math:RoundedRectangle x=${this.x} y=${this.y}width=${this.width} height=${this.height} radius=${this.radius}]`;
   }
 }
-class Matrix {
+class Matrix$1 {
   constructor(a2 = 1, b2 = 0, c2 = 0, d2 = 1, tx = 0, ty = 0) {
     this.array = null;
     this.a = a2;
@@ -28022,13 +28022,13 @@ class Matrix {
     this.tx = tx;
     this.ty = ty;
   }
-  fromArray(array) {
-    this.a = array[0];
-    this.b = array[1];
-    this.c = array[3];
-    this.d = array[4];
-    this.tx = array[2];
-    this.ty = array[5];
+  fromArray(array2) {
+    this.a = array2[0];
+    this.b = array2[1];
+    this.c = array2[3];
+    this.d = array2[4];
+    this.tx = array2[2];
+    this.ty = array2[5];
   }
   set(a2, b2, c2, d2, tx, ty) {
     this.a = a2;
@@ -28043,29 +28043,29 @@ class Matrix {
     if (!this.array) {
       this.array = new Float32Array(9);
     }
-    const array = out || this.array;
+    const array2 = out || this.array;
     if (transpose) {
-      array[0] = this.a;
-      array[1] = this.b;
-      array[2] = 0;
-      array[3] = this.c;
-      array[4] = this.d;
-      array[5] = 0;
-      array[6] = this.tx;
-      array[7] = this.ty;
-      array[8] = 1;
+      array2[0] = this.a;
+      array2[1] = this.b;
+      array2[2] = 0;
+      array2[3] = this.c;
+      array2[4] = this.d;
+      array2[5] = 0;
+      array2[6] = this.tx;
+      array2[7] = this.ty;
+      array2[8] = 1;
     } else {
-      array[0] = this.a;
-      array[1] = this.c;
-      array[2] = this.tx;
-      array[3] = this.b;
-      array[4] = this.d;
-      array[5] = this.ty;
-      array[6] = 0;
-      array[7] = 0;
-      array[8] = 1;
+      array2[0] = this.a;
+      array2[1] = this.c;
+      array2[2] = this.tx;
+      array2[3] = this.b;
+      array2[4] = this.d;
+      array2[5] = this.ty;
+      array2[6] = 0;
+      array2[7] = 0;
+      array2[8] = 1;
     }
-    return array;
+    return array2;
   }
   apply(pos, newPos) {
     newPos = newPos || new Point();
@@ -28099,17 +28099,17 @@ class Matrix {
     return this;
   }
   rotate(angle) {
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
+    const cos7 = Math.cos(angle);
+    const sin7 = Math.sin(angle);
     const a1 = this.a;
     const c1 = this.c;
     const tx1 = this.tx;
-    this.a = a1 * cos - this.b * sin;
-    this.b = a1 * sin + this.b * cos;
-    this.c = c1 * cos - this.d * sin;
-    this.d = c1 * sin + this.d * cos;
-    this.tx = tx1 * cos - this.ty * sin;
-    this.ty = tx1 * sin + this.ty * cos;
+    this.a = a1 * cos7 - this.b * sin7;
+    this.b = a1 * sin7 + this.b * cos7;
+    this.c = c1 * cos7 - this.d * sin7;
+    this.d = c1 * sin7 + this.d * cos7;
+    this.tx = tx1 * cos7 - this.ty * sin7;
+    this.ty = tx1 * sin7 + this.ty * cos7;
     return this;
   }
   append(matrix) {
@@ -28196,7 +28196,7 @@ class Matrix {
     return this;
   }
   clone() {
-    const matrix = new Matrix();
+    const matrix = new Matrix$1();
     matrix.a = this.a;
     matrix.b = this.b;
     matrix.c = this.c;
@@ -28227,10 +28227,10 @@ class Matrix {
     return `[@pixi/math:Matrix a=${this.a} b=${this.b} c=${this.c} d=${this.d} tx=${this.tx} ty=${this.ty}]`;
   }
   static get IDENTITY() {
-    return new Matrix();
+    return new Matrix$1();
   }
   static get TEMP_MATRIX() {
-    return new Matrix();
+    return new Matrix$1();
   }
 }
 const ux = [1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1];
@@ -28258,7 +28258,7 @@ function init() {
     }
   }
   for (let i2 = 0; i2 < 16; i2++) {
-    const mat = new Matrix();
+    const mat = new Matrix$1();
     mat.set(ux[i2], uy[i2], vx[i2], vy[i2], 0, 0);
     rotationMatrices.push(mat);
   }
@@ -28376,8 +28376,8 @@ class ObservablePoint {
 }
 const _Transform = class {
   constructor() {
-    this.worldTransform = new Matrix();
-    this.localTransform = new Matrix();
+    this.worldTransform = new Matrix$1();
+    this.localTransform = new Matrix$1();
     this.position = new ObservablePoint(this.onChange, this, 0, 0);
     this.scale = new ObservablePoint(this.onChange, this, 1, 1);
     this.pivot = new ObservablePoint(this.onChange, this, 0, 0);
@@ -28468,11 +28468,11 @@ function compileShader(gl, type2, src) {
   return shader;
 }
 function booleanArray(size) {
-  const array = new Array(size);
-  for (let i2 = 0; i2 < array.length; i2++) {
-    array[i2] = false;
+  const array2 = new Array(size);
+  for (let i2 = 0; i2 < array2.length; i2++) {
+    array2[i2] = false;
   }
-  return array;
+  return array2;
 }
 function defaultValue(type2, size) {
   switch (type2) {
@@ -28947,13 +28947,13 @@ const unknownContext = {};
 let context = unknownContext;
 function getTestContext() {
   if (context === unknownContext || (context == null ? void 0 : context.isContextLost())) {
-    const canvas = settings.ADAPTER.createCanvas();
+    const canvas3 = settings.ADAPTER.createCanvas();
     let gl;
     if (settings.PREFER_ENV >= ENV.WEBGL2) {
-      gl = canvas.getContext("webgl2", {});
+      gl = canvas3.getContext("webgl2", {});
     }
     if (!gl) {
-      gl = canvas.getContext("webgl", {}) || canvas.getContext("experimental-webgl", {});
+      gl = canvas3.getContext("webgl", {}) || canvas3.getContext("experimental-webgl", {});
       if (!gl) {
         gl = null;
       } else {
@@ -29268,7 +29268,7 @@ class BatchShaderGenerator {
     }
     const uniforms = {
       tint: new Float32Array([1, 1, 1, 1]),
-      translationMatrix: new Matrix(),
+      translationMatrix: new Matrix$1(),
       default: this.defaultGroupCache[maxTextures]
     };
     return new Shader(this.programCache[maxTextures], uniforms);
@@ -29310,7 +29310,7 @@ class BatchTextureArray {
 function canUploadSameBuffer() {
   return !isMobile.apple.device;
 }
-function maxRecommendedTextures(max) {
+function maxRecommendedTextures(max5) {
   let allowMax = true;
   const navigator2 = settings.ADAPTER.getNavigator();
   if (isMobile.tablet || isMobile.phone) {
@@ -29333,7 +29333,7 @@ function maxRecommendedTextures(max) {
       }
     }
   }
-  return allowMax ? max : 4;
+  return allowMax ? max5 : 4;
 }
 class ObjectRenderer {
   constructor(renderer) {
@@ -29807,9 +29807,9 @@ class BatchSystem {
     }
   }
   boundArray(texArray, boundTextures, batchId, maxTextures) {
-    const { elements, ids, count } = texArray;
+    const { elements, ids, count: count2 } = texArray;
     let j2 = 0;
-    for (let i2 = 0; i2 < count; i2++) {
+    for (let i2 = 0; i2 < count2; i2++) {
       const tex = elements[i2];
       const loc = tex._batchLocation;
       if (loc >= 0 && loc < maxTextures && boundTextures[loc] === tex) {
@@ -29893,16 +29893,16 @@ class ContextSystem {
     const gl = this.createContext(this.renderer.view, options);
     this.initFromContext(gl);
   }
-  createContext(canvas, options) {
+  createContext(canvas3, options) {
     let gl;
     if (settings.PREFER_ENV >= ENV.WEBGL2) {
-      gl = canvas.getContext("webgl2", options);
+      gl = canvas3.getContext("webgl2", options);
     }
     if (gl) {
       this.webGLVersion = 2;
     } else {
       this.webGLVersion = 1;
-      gl = canvas.getContext("webgl", options) || canvas.getContext("experimental-webgl", options);
+      gl = canvas3.getContext("webgl", options) || canvas3.getContext("experimental-webgl", options);
       if (!gl) {
         throw new Error("This browser does not support WebGL. Try using the canvas renderer");
       }
@@ -30401,15 +30401,15 @@ function removeAllHandlers(tex) {
   tex.emit = function _emptyEmit() {
   };
 }
-class Texture$1 extends EventEmitter {
-  constructor(baseTexture, frame, orig, trim, rotate, anchor, borders) {
+class Texture$2 extends EventEmitter {
+  constructor(baseTexture, frame, orig, trim, rotate, anchor2, borders) {
     super();
     this.noFrame = false;
     if (!frame) {
       this.noFrame = true;
-      frame = new Rectangle(0, 0, 1, 1);
+      frame = new Rectangle$1(0, 0, 1, 1);
     }
-    if (baseTexture instanceof Texture$1) {
+    if (baseTexture instanceof Texture$2) {
       baseTexture = baseTexture.baseTexture;
     }
     this.baseTexture = baseTexture;
@@ -30425,7 +30425,7 @@ class Texture$1 extends EventEmitter {
     } else if (this._rotate % 2 !== 0) {
       throw new Error("attempt to use diamond-shaped UVs. If you are sure, set rotation manually");
     }
-    this.defaultAnchor = anchor ? new Point(anchor.x, anchor.y) : new Point(0, 0);
+    this.defaultAnchor = anchor2 ? new Point(anchor2.x, anchor2.y) : new Point(0, 0);
     this.defaultBorders = borders;
     this._updateID = 0;
     this.textureCacheIds = [];
@@ -30466,7 +30466,7 @@ class Texture$1 extends EventEmitter {
       if (destroyBase) {
         const { resource } = this.baseTexture;
         if ((resource == null ? void 0 : resource.url) && TextureCache[resource.url]) {
-          Texture$1.removeFromCache(resource.url);
+          Texture$2.removeFromCache(resource.url);
         }
         this.baseTexture.destroy();
       }
@@ -30479,14 +30479,14 @@ class Texture$1 extends EventEmitter {
     this.trim = null;
     this.orig = null;
     this.valid = false;
-    Texture$1.removeFromCache(this);
+    Texture$2.removeFromCache(this);
     this.textureCacheIds = null;
   }
   clone() {
     var _a2;
     const clonedFrame = this._frame.clone();
     const clonedOrig = this._frame === this.orig ? clonedFrame : this.orig.clone();
-    const clonedTexture = new Texture$1(this.baseTexture, !this.noFrame && clonedFrame, clonedOrig, (_a2 = this.trim) == null ? void 0 : _a2.clone(), this.rotate, this.defaultAnchor, this.defaultBorders);
+    const clonedTexture = new Texture$2(this.baseTexture, !this.noFrame && clonedFrame, clonedOrig, (_a2 = this.trim) == null ? void 0 : _a2.clone(), this.rotate, this.defaultAnchor, this.defaultBorders);
     if (this.noFrame) {
       clonedTexture._frame = clonedFrame;
     }
@@ -30526,19 +30526,19 @@ class Texture$1 extends EventEmitter {
       if (!options.resolution) {
         options.resolution = getResolutionOfUrl(source);
       }
-      texture = new Texture$1(new BaseTexture(source, options));
+      texture = new Texture$2(new BaseTexture(source, options));
       texture.baseTexture.cacheId = cacheId;
       BaseTexture.addToCache(texture.baseTexture, cacheId);
-      Texture$1.addToCache(texture, cacheId);
+      Texture$2.addToCache(texture, cacheId);
     } else if (!texture && source instanceof BaseTexture) {
-      texture = new Texture$1(source);
-      Texture$1.addToCache(texture, cacheId);
+      texture = new Texture$2(source);
+      Texture$2.addToCache(texture, cacheId);
     }
     return texture;
   }
   static fromURL(url2, options) {
     const resourceOptions = Object.assign({ autoLoad: false }, options == null ? void 0 : options.resourceOptions);
-    const texture = Texture$1.from(url2, Object.assign({ resourceOptions }, options), false);
+    const texture = Texture$2.from(url2, Object.assign({ resourceOptions }, options), false);
     const resource = texture.baseTexture.resource;
     if (texture.baseTexture.valid) {
       return Promise.resolve(texture);
@@ -30546,7 +30546,7 @@ class Texture$1 extends EventEmitter {
     return resource.load().then(() => Promise.resolve(texture));
   }
   static fromBuffer(buffer, width, height, options) {
-    return new Texture$1(BaseTexture.fromBuffer(buffer, width, height, options));
+    return new Texture$2(BaseTexture.fromBuffer(buffer, width, height, options));
   }
   static fromLoader(source, imageUrl, name, options) {
     const baseTexture = new BaseTexture(source, Object.assign({
@@ -30557,15 +30557,15 @@ class Texture$1 extends EventEmitter {
     if (resource instanceof ImageResource) {
       resource.url = imageUrl;
     }
-    const texture = new Texture$1(baseTexture);
+    const texture = new Texture$2(baseTexture);
     if (!name) {
       name = imageUrl;
     }
     BaseTexture.addToCache(texture.baseTexture, name);
-    Texture$1.addToCache(texture, name);
+    Texture$2.addToCache(texture, name);
     if (name !== imageUrl) {
       BaseTexture.addToCache(texture.baseTexture, imageUrl);
-      Texture$1.addToCache(texture, imageUrl);
+      Texture$2.addToCache(texture, imageUrl);
     }
     if (texture.baseTexture.valid) {
       return Promise.resolve(texture);
@@ -30652,29 +30652,29 @@ class Texture$1 extends EventEmitter {
     return this.baseTexture;
   }
   static get EMPTY() {
-    if (!Texture$1._EMPTY) {
-      Texture$1._EMPTY = new Texture$1(new BaseTexture());
-      removeAllHandlers(Texture$1._EMPTY);
-      removeAllHandlers(Texture$1._EMPTY.baseTexture);
+    if (!Texture$2._EMPTY) {
+      Texture$2._EMPTY = new Texture$2(new BaseTexture());
+      removeAllHandlers(Texture$2._EMPTY);
+      removeAllHandlers(Texture$2._EMPTY.baseTexture);
     }
-    return Texture$1._EMPTY;
+    return Texture$2._EMPTY;
   }
   static get WHITE() {
-    if (!Texture$1._WHITE) {
-      const canvas = settings.ADAPTER.createCanvas(16, 16);
-      const context2 = canvas.getContext("2d");
-      canvas.width = 16;
-      canvas.height = 16;
+    if (!Texture$2._WHITE) {
+      const canvas3 = settings.ADAPTER.createCanvas(16, 16);
+      const context2 = canvas3.getContext("2d");
+      canvas3.width = 16;
+      canvas3.height = 16;
       context2.fillStyle = "white";
       context2.fillRect(0, 0, 16, 16);
-      Texture$1._WHITE = new Texture$1(BaseTexture.from(canvas));
-      removeAllHandlers(Texture$1._WHITE);
-      removeAllHandlers(Texture$1._WHITE.baseTexture);
+      Texture$2._WHITE = new Texture$2(BaseTexture.from(canvas3));
+      removeAllHandlers(Texture$2._WHITE);
+      removeAllHandlers(Texture$2._WHITE.baseTexture);
     }
-    return Texture$1._WHITE;
+    return Texture$2._WHITE;
   }
 }
-class RenderTexture extends Texture$1 {
+class RenderTexture extends Texture$2 {
   constructor(baseRenderTexture, frame) {
     super(baseRenderTexture, frame);
     this.valid = true;
@@ -30885,10 +30885,10 @@ class FilterState {
     this.legacy = false;
     this.resolution = 1;
     this.multisample = MSAA_QUALITY.NONE;
-    this.sourceFrame = new Rectangle();
-    this.destinationFrame = new Rectangle();
-    this.bindingSourceFrame = new Rectangle();
-    this.bindingDestinationFrame = new Rectangle();
+    this.sourceFrame = new Rectangle$1();
+    this.destinationFrame = new Rectangle$1();
+    this.bindingSourceFrame = new Rectangle$1();
+    this.bindingDestinationFrame = new Rectangle$1();
     this.filters = [];
     this.transform = null;
   }
@@ -30899,7 +30899,7 @@ class FilterState {
   }
 }
 const tempPoints = [new Point(), new Point(), new Point(), new Point()];
-const tempMatrix$2 = new Matrix();
+const tempMatrix$2 = new Matrix$1();
 class FilterSystem {
   constructor(renderer) {
     this.renderer = renderer;
@@ -30908,10 +30908,10 @@ class FilterSystem {
     this.statePool = [];
     this.quad = new Quad();
     this.quadUv = new QuadUv();
-    this.tempRect = new Rectangle();
+    this.tempRect = new Rectangle$1();
     this.activeState = {};
     this.globalUniforms = new UniformGroup({
-      outputFrame: new Rectangle(),
+      outputFrame: new Rectangle$1(),
       inputSize: new Float32Array(4),
       inputPixel: new Float32Array(4),
       inputClamp: new Float32Array(4),
@@ -31096,7 +31096,7 @@ class FilterSystem {
     const { sourceFrame, destinationFrame } = this.activeState;
     const { orig } = sprite._texture;
     const mappedMatrix = outputMatrix.set(destinationFrame.width, 0, 0, destinationFrame.height, sourceFrame.x, sourceFrame.y);
-    const worldTransform = sprite.worldTransform.copyTo(Matrix.TEMP_MATRIX);
+    const worldTransform = sprite.worldTransform.copyTo(Matrix$1.TEMP_MATRIX);
     worldTransform.invert();
     mappedMatrix.prepend(worldTransform);
     mappedMatrix.scale(1 / orig.width, 1 / orig.height);
@@ -31187,7 +31187,7 @@ class GLFramebuffer {
     this.mipLevel = 0;
   }
 }
-const tempRectangle = new Rectangle();
+const tempRectangle = new Rectangle$1();
 class FramebufferSystem {
   constructor(renderer) {
     this.renderer = renderer;
@@ -31200,7 +31200,7 @@ class FramebufferSystem {
     const gl = this.gl = this.renderer.gl;
     this.CONTEXT_UID = this.renderer.CONTEXT_UID;
     this.current = this.unknownFramebuffer;
-    this.viewport = new Rectangle();
+    this.viewport = new Rectangle$1();
     this.hasMRT = true;
     this.writeDepthTexture = true;
     if (this.renderer.context.webGLVersion === 1) {
@@ -31323,11 +31323,11 @@ class FramebufferSystem {
       }
     }
     const colorTextures = framebuffer.colorTextures;
-    let count = colorTextures.length;
+    let count2 = colorTextures.length;
     if (!gl.drawBuffers) {
-      count = Math.min(count, 1);
+      count2 = Math.min(count2, 1);
     }
-    for (let i2 = 0; i2 < count; i2++) {
+    for (let i2 = 0; i2 < count2; i2++) {
       const texture = colorTextures[i2];
       const parentTexture = texture.parentTextureArray || texture;
       this.renderer.texture.bind(parentTexture, 0);
@@ -31344,9 +31344,9 @@ class FramebufferSystem {
     const { gl } = this;
     const fbo = framebuffer.glFramebuffers[this.CONTEXT_UID];
     const colorTextures = framebuffer.colorTextures;
-    let count = colorTextures.length;
+    let count2 = colorTextures.length;
     if (!gl.drawBuffers) {
-      count = Math.min(count, 1);
+      count2 = Math.min(count2, 1);
     }
     if (fbo.multisample > 1 && this.canMultisampleFramebuffer(framebuffer)) {
       fbo.msaaBuffer = fbo.msaaBuffer || gl.createRenderbuffer();
@@ -31359,7 +31359,7 @@ class FramebufferSystem {
       }
     }
     const activeTextures = [];
-    for (let i2 = 0; i2 < count; i2++) {
+    for (let i2 = 0; i2 < count2; i2++) {
       const texture = colorTextures[i2];
       const parentTexture = texture.parentTextureArray || texture;
       this.renderer.texture.bind(parentTexture, 0);
@@ -31525,7 +31525,7 @@ class FramebufferSystem {
   }
   reset() {
     this.current = this.unknownFramebuffer;
-    this.viewport = new Rectangle();
+    this.viewport = new Rectangle$1();
   }
   destroy() {
     this.renderer = null;
@@ -31809,11 +31809,11 @@ GeometrySystem.extension = {
   name: "geometry"
 };
 extensions$1.add(GeometrySystem);
-const tempMat$1 = new Matrix();
+const tempMat$1 = new Matrix$1();
 class TextureMatrix {
   constructor(texture, clampMargin) {
     this._texture = texture;
-    this.mapCoord = new Matrix();
+    this.mapCoord = new Matrix$1();
     this.uClampFrame = new Float32Array(4);
     this.uClampOffset = new Float32Array(2);
     this._textureID = -1;
@@ -31887,7 +31887,7 @@ class SpriteMaskFilter extends Filter {
     }
     super(vertexSrc || vertex$m, fragmentSrc || fragment$p, uniforms);
     this.maskSprite = sprite;
-    this.maskMatrix = new Matrix();
+    this.maskMatrix = new Matrix$1();
   }
   get maskSprite() {
     return this._maskSprite;
@@ -32163,7 +32163,7 @@ class AbstractMaskSystem {
     this.maskStack = null;
   }
 }
-const tempMatrix$1 = new Matrix();
+const tempMatrix$1 = new Matrix$1();
 const rectPool = [];
 const _ScissorSystem = class extends AbstractMaskSystem {
   constructor(renderer) {
@@ -32186,7 +32186,7 @@ const _ScissorSystem = class extends AbstractMaskSystem {
     const { maskObject } = maskData;
     const { renderer } = this;
     const renderTextureSystem = renderer.renderTexture;
-    const rect = maskObject.getBounds(true, (_a2 = rectPool.pop()) != null ? _a2 : new Rectangle());
+    const rect = maskObject.getBounds(true, (_a2 = rectPool.pop()) != null ? _a2 : new Rectangle$1());
     this.roundFrameToPixels(rect, renderTextureSystem.current ? renderTextureSystem.current.resolution : renderer.resolution, renderTextureSystem.sourceFrame, renderTextureSystem.destinationFrame, renderer.projection.transform);
     if (prevData) {
       rect.fit(prevData);
@@ -32397,13 +32397,13 @@ class ProjectionSystem {
     this.destinationFrame = null;
     this.sourceFrame = null;
     this.defaultFrame = null;
-    this.projectionMatrix = new Matrix();
+    this.projectionMatrix = new Matrix$1();
     this.transform = null;
   }
-  update(destinationFrame, sourceFrame, resolution, root) {
+  update(destinationFrame, sourceFrame, resolution, root2) {
     this.destinationFrame = destinationFrame || this.destinationFrame || this.defaultFrame;
     this.sourceFrame = sourceFrame || this.sourceFrame || destinationFrame;
-    this.calculateProjection(this.destinationFrame, this.sourceFrame, resolution, root);
+    this.calculateProjection(this.destinationFrame, this.sourceFrame, resolution, root2);
     if (this.transform) {
       this.projectionMatrix.append(this.transform);
     }
@@ -32414,9 +32414,9 @@ class ProjectionSystem {
       renderer.shader.syncUniformGroup(renderer.shader.shader.uniforms.globals);
     }
   }
-  calculateProjection(_destinationFrame, sourceFrame, _resolution, root) {
+  calculateProjection(_destinationFrame, sourceFrame, _resolution, root2) {
     const pm = this.projectionMatrix;
-    const sign2 = !root ? 1 : -1;
+    const sign2 = !root2 ? 1 : -1;
     pm.identity();
     pm.a = 1 / sourceFrame.width * 2;
     pm.d = sign2 * (1 / sourceFrame.height * 2);
@@ -32438,7 +32438,7 @@ const tempTransform = new Transform();
 class GenerateTextureSystem {
   constructor(renderer) {
     this.renderer = renderer;
-    this._tempMatrix = new Matrix();
+    this._tempMatrix = new Matrix$1();
   }
   generateTexture(displayObject, options) {
     const { region: manualRegion, ...textureOptions } = options || {};
@@ -32476,16 +32476,16 @@ GenerateTextureSystem.extension = {
   name: "textureGenerator"
 };
 extensions$1.add(GenerateTextureSystem);
-const tempRect = new Rectangle();
-const tempRect2 = new Rectangle();
+const tempRect = new Rectangle$1();
+const tempRect2 = new Rectangle$1();
 class RenderTextureSystem {
   constructor(renderer) {
     this.renderer = renderer;
     this.defaultMaskStack = [];
     this.current = null;
-    this.sourceFrame = new Rectangle();
-    this.destinationFrame = new Rectangle();
-    this.viewportFrame = new Rectangle();
+    this.sourceFrame = new Rectangle$1();
+    this.destinationFrame = new Rectangle$1();
+    this.viewportFrame = new Rectangle$1();
   }
   contextChange() {
     var _a2;
@@ -33030,38 +33030,38 @@ StartupSystem.extension = {
   name: "startup"
 };
 extensions$1.add(StartupSystem);
-function mapWebGLBlendModesToPixi(gl, array = []) {
-  array[BLEND_MODES.NORMAL] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.ADD] = [gl.ONE, gl.ONE];
-  array[BLEND_MODES.MULTIPLY] = [gl.DST_COLOR, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.SCREEN] = [gl.ONE, gl.ONE_MINUS_SRC_COLOR, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.OVERLAY] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.DARKEN] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.LIGHTEN] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.COLOR_DODGE] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.COLOR_BURN] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.HARD_LIGHT] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.SOFT_LIGHT] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.DIFFERENCE] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.EXCLUSION] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.HUE] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.SATURATION] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.COLOR] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.LUMINOSITY] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.NONE] = [0, 0];
-  array[BLEND_MODES.NORMAL_NPM] = [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.ADD_NPM] = [gl.SRC_ALPHA, gl.ONE, gl.ONE, gl.ONE];
-  array[BLEND_MODES.SCREEN_NPM] = [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_COLOR, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.SRC_IN] = [gl.DST_ALPHA, gl.ZERO];
-  array[BLEND_MODES.SRC_OUT] = [gl.ONE_MINUS_DST_ALPHA, gl.ZERO];
-  array[BLEND_MODES.SRC_ATOP] = [gl.DST_ALPHA, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.DST_OVER] = [gl.ONE_MINUS_DST_ALPHA, gl.ONE];
-  array[BLEND_MODES.DST_IN] = [gl.ZERO, gl.SRC_ALPHA];
-  array[BLEND_MODES.DST_OUT] = [gl.ZERO, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.DST_ATOP] = [gl.ONE_MINUS_DST_ALPHA, gl.SRC_ALPHA];
-  array[BLEND_MODES.XOR] = [gl.ONE_MINUS_DST_ALPHA, gl.ONE_MINUS_SRC_ALPHA];
-  array[BLEND_MODES.SUBTRACT] = [gl.ONE, gl.ONE, gl.ONE, gl.ONE, gl.FUNC_REVERSE_SUBTRACT, gl.FUNC_ADD];
-  return array;
+function mapWebGLBlendModesToPixi(gl, array2 = []) {
+  array2[BLEND_MODES.NORMAL] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.ADD] = [gl.ONE, gl.ONE];
+  array2[BLEND_MODES.MULTIPLY] = [gl.DST_COLOR, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.SCREEN] = [gl.ONE, gl.ONE_MINUS_SRC_COLOR, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.OVERLAY] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.DARKEN] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.LIGHTEN] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.COLOR_DODGE] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.COLOR_BURN] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.HARD_LIGHT] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.SOFT_LIGHT] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.DIFFERENCE] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.EXCLUSION] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.HUE] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.SATURATION] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.COLOR] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.LUMINOSITY] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.NONE] = [0, 0];
+  array2[BLEND_MODES.NORMAL_NPM] = [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.ADD_NPM] = [gl.SRC_ALPHA, gl.ONE, gl.ONE, gl.ONE];
+  array2[BLEND_MODES.SCREEN_NPM] = [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_COLOR, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.SRC_IN] = [gl.DST_ALPHA, gl.ZERO];
+  array2[BLEND_MODES.SRC_OUT] = [gl.ONE_MINUS_DST_ALPHA, gl.ZERO];
+  array2[BLEND_MODES.SRC_ATOP] = [gl.DST_ALPHA, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.DST_OVER] = [gl.ONE_MINUS_DST_ALPHA, gl.ONE];
+  array2[BLEND_MODES.DST_IN] = [gl.ZERO, gl.SRC_ALPHA];
+  array2[BLEND_MODES.DST_OUT] = [gl.ZERO, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.DST_ATOP] = [gl.ONE_MINUS_DST_ALPHA, gl.SRC_ALPHA];
+  array2[BLEND_MODES.XOR] = [gl.ONE_MINUS_DST_ALPHA, gl.ONE_MINUS_SRC_ALPHA];
+  array2[BLEND_MODES.SUBTRACT] = [gl.ONE, gl.ONE, gl.ONE, gl.ONE, gl.FUNC_REVERSE_SUBTRACT, gl.FUNC_ADD];
+  return array2;
 }
 const BLEND = 0;
 const OFFSET = 1;
@@ -33749,7 +33749,7 @@ class ViewSystem {
     this.renderer = renderer;
   }
   init(options) {
-    this.screen = new Rectangle(0, 0, options.width, options.height);
+    this.screen = new Rectangle$1(0, 0, options.width, options.height);
     this.element = options.view || settings.ADAPTER.createCanvas();
     this.resolution = options.resolution || settings.RESOLUTION;
     this.autoDensity = !!options.autoDensity;
@@ -34080,12 +34080,12 @@ const _Ticker = class {
     if (!this._head) {
       return 0;
     }
-    let count = 0;
+    let count2 = 0;
     let current = this._head;
     while (current = current.next) {
-      count++;
+      count2++;
     }
-    return count;
+    return count2;
   }
   start() {
     if (!this.started) {
@@ -34448,7 +34448,7 @@ const _Renderer = class extends SystemManager {
     this.gl = null;
     this.CONTEXT_UID = 0;
     this.globalUniforms = new UniformGroup({
-      projectionMatrix: new Matrix()
+      projectionMatrix: new Matrix$1()
     }, true);
     const systemConfig = {
       runners: [
@@ -34598,16 +34598,16 @@ const _Renderer = class extends SystemManager {
     return this.textureGenerator.generateTexture(displayObject, options);
   }
 };
-let Renderer = _Renderer;
-Renderer.extension = {
+let Renderer$1 = _Renderer;
+Renderer$1.extension = {
   type: ExtensionType.Renderer,
   priority: 1
 };
-Renderer.__plugins = {};
-Renderer.__systems = {};
-extensions$1.handleByMap(ExtensionType.RendererPlugin, Renderer.__plugins);
-extensions$1.handleByMap(ExtensionType.RendererSystem, Renderer.__systems);
-extensions$1.add(Renderer);
+Renderer$1.__plugins = {};
+Renderer$1.__systems = {};
+extensions$1.handleByMap(ExtensionType.RendererPlugin, Renderer$1.__plugins);
+extensions$1.handleByMap(ExtensionType.RendererSystem, Renderer$1.__systems);
+extensions$1.add(Renderer$1);
 class AbstractMultiResource extends Resource {
   constructor(length, options) {
     const { width, height } = options || {};
@@ -34959,11 +34959,11 @@ const _SVGResource = class extends BaseImageResource {
       }
       width = Math.round(width);
       height = Math.round(height);
-      const canvas = this.source;
-      canvas.width = width;
-      canvas.height = height;
-      canvas._pixiId = `canvas_${uid()}`;
-      canvas.getContext("2d").drawImage(tempImage, 0, 0, svgWidth, svgHeight, 0, 0, width, height);
+      const canvas3 = this.source;
+      canvas3.width = width;
+      canvas3.height = height;
+      canvas3._pixiId = `canvas_${uid()}`;
+      canvas3.getContext("2d").drawImage(tempImage, 0, 0, svgWidth, svgHeight, 0, 0, width, height);
       this._resolve();
       this._resolve = null;
     };
@@ -35179,9 +35179,9 @@ class Bounds {
   }
   getRectangle(rect) {
     if (this.minX > this.maxX || this.minY > this.maxY) {
-      return Rectangle.EMPTY;
+      return Rectangle$1.EMPTY;
     }
-    rect = rect || new Rectangle(0, 0, 1, 1);
+    rect = rect || new Rectangle$1(0, 0, 1, 1);
     rect.x = this.minX;
     rect.y = this.minY;
     rect.width = this.maxX - this.minX;
@@ -35459,7 +35459,7 @@ class DisplayObject extends EventEmitter {
     }
     if (!rect) {
       if (!this._boundsRect) {
-        this._boundsRect = new Rectangle();
+        this._boundsRect = new Rectangle$1();
       }
       rect = this._boundsRect;
     }
@@ -35468,7 +35468,7 @@ class DisplayObject extends EventEmitter {
   getLocalBounds(rect) {
     if (!rect) {
       if (!this._localBoundsRect) {
-        this._localBoundsRect = new Rectangle();
+        this._localBoundsRect = new Rectangle$1();
       }
       rect = this._localBoundsRect;
     }
@@ -35681,7 +35681,7 @@ class TemporaryDisplayObject extends DisplayObject {
   }
 }
 DisplayObject.prototype.displayObjectUpdateTransform = DisplayObject.prototype.updateTransform;
-const tempMatrix = new Matrix();
+const tempMatrix = new Matrix$1();
 function sortChildren(a2, b2) {
   if (a2.zIndex === b2.zIndex) {
     return a2._lastSortedIndex - b2._lastSortedIndex;
@@ -36038,7 +36038,7 @@ Object.defineProperties(settings, {
 });
 const tempPoint$1 = new Point();
 const indices = new Uint16Array([0, 1, 2, 0, 2, 3]);
-class Sprite extends Container {
+class Sprite$1 extends Container {
   constructor(texture) {
     super();
     this._anchor = new ObservablePoint(this._onAnchorUpdate, this, texture ? texture.defaultAnchor.x : 0, texture ? texture.defaultAnchor.y : 0);
@@ -36051,7 +36051,7 @@ class Sprite extends Container {
     this.blendMode = BLEND_MODES.NORMAL;
     this._cachedTint = 16777215;
     this.uvs = null;
-    this.texture = texture || Texture$1.EMPTY;
+    this.texture = texture || Texture$2.EMPTY;
     this.vertexData = new Float32Array(8);
     this.vertexTrimmedData = null;
     this._transformID = -1;
@@ -36098,20 +36098,20 @@ class Sprite extends Container {
     const vertexData = this.vertexData;
     const trim = texture.trim;
     const orig = texture.orig;
-    const anchor = this._anchor;
+    const anchor2 = this._anchor;
     let w0 = 0;
     let w1 = 0;
     let h0 = 0;
     let h1 = 0;
     if (trim) {
-      w1 = trim.x - anchor._x * orig.width;
+      w1 = trim.x - anchor2._x * orig.width;
       w0 = w1 + trim.width;
-      h1 = trim.y - anchor._y * orig.height;
+      h1 = trim.y - anchor2._y * orig.height;
       h0 = h1 + trim.height;
     } else {
-      w1 = -anchor._x * orig.width;
+      w1 = -anchor2._x * orig.width;
       w0 = w1 + orig.width;
-      h1 = -anchor._y * orig.height;
+      h1 = -anchor2._y * orig.height;
       h0 = h1 + orig.height;
     }
     vertexData[0] = a2 * w1 + c2 * h1 + tx;
@@ -36140,7 +36140,7 @@ class Sprite extends Container {
     const texture = this._texture;
     const vertexData = this.vertexTrimmedData;
     const orig = texture.orig;
-    const anchor = this._anchor;
+    const anchor2 = this._anchor;
     const wt = this.transform.worldTransform;
     const a2 = wt.a;
     const b2 = wt.b;
@@ -36148,9 +36148,9 @@ class Sprite extends Container {
     const d2 = wt.d;
     const tx = wt.tx;
     const ty = wt.ty;
-    const w1 = -anchor._x * orig.width;
+    const w1 = -anchor2._x * orig.width;
     const w0 = w1 + orig.width;
-    const h1 = -anchor._y * orig.height;
+    const h1 = -anchor2._y * orig.height;
     const h0 = h1 + orig.height;
     vertexData[0] = a2 * w1 + c2 * h1 + tx;
     vertexData[1] = d2 * h1 + b2 * w1 + ty;
@@ -36188,7 +36188,7 @@ class Sprite extends Container {
       this._localBounds.maxY = this._texture.orig.height * (1 - this._anchor._y);
       if (!rect) {
         if (!this._localBoundsRect) {
-          this._localBoundsRect = new Rectangle();
+          this._localBoundsRect = new Rectangle$1();
         }
         rect = this._localBoundsRect;
       }
@@ -36222,8 +36222,8 @@ class Sprite extends Container {
     this._texture = null;
   }
   static from(source, options) {
-    const texture = source instanceof Texture$1 ? source : Texture$1.from(source, options);
-    return new Sprite(texture);
+    const texture = source instanceof Texture$2 ? source : Texture$2.from(source, options);
+    return new Sprite$1(texture);
   }
   set roundPixels(value) {
     if (this._roundPixels !== value) {
@@ -36276,7 +36276,7 @@ class Sprite extends Container {
     if (this._texture) {
       this._texture.off("update", this._onTextureUpdate, this);
     }
-    this._texture = value || Texture$1.EMPTY;
+    this._texture = value || Texture$2.EMPTY;
     this._cachedTint = 16777215;
     this._textureID = -1;
     this._textureTrimmedID = -1;
@@ -36289,7 +36289,7 @@ class Sprite extends Container {
     }
   }
 }
-const _tempMatrix = new Matrix();
+const _tempMatrix = new Matrix$1();
 DisplayObject.prototype._cacheAsBitmap = false;
 DisplayObject.prototype._cacheData = null;
 DisplayObject.prototype._cacheAsBitmapResolution = null;
@@ -36421,7 +36421,7 @@ DisplayObject.prototype._initCachedDisplayObject = function _initCachedDisplayOb
   const textureCacheId = `cacheAsBitmap_${uid()}`;
   this._cacheData.textureCacheId = textureCacheId;
   BaseTexture.addToCache(renderTexture.baseTexture, textureCacheId);
-  Texture$1.addToCache(renderTexture, textureCacheId);
+  Texture$2.addToCache(renderTexture, textureCacheId);
   const m2 = this.transform.localTransform.copyTo(_tempMatrix).invert().translate(-bounds.x, -bounds.y);
   this.render = this._cacheData.originalRender;
   renderer.render(this, { renderTexture, clear: true, transform: m2, skipUpdateTransform: false });
@@ -36435,7 +36435,7 @@ DisplayObject.prototype._initCachedDisplayObject = function _initCachedDisplayOb
   this._mask = null;
   this.filterArea = null;
   this.alpha = cacheAlpha;
-  const cachedSprite = new Sprite(renderTexture);
+  const cachedSprite = new Sprite$1(renderTexture);
   cachedSprite.transform.worldTransform = this.transform.worldTransform;
   cachedSprite.anchor.x = -(bounds.x / bounds.width);
   cachedSprite.anchor.y = -(bounds.y / bounds.height);
@@ -36475,7 +36475,7 @@ DisplayObject.prototype._initCachedDisplayObjectCanvas = function _initCachedDis
   const textureCacheId = `cacheAsBitmap_${uid()}`;
   this._cacheData.textureCacheId = textureCacheId;
   BaseTexture.addToCache(renderTexture.baseTexture, textureCacheId);
-  Texture$1.addToCache(renderTexture, textureCacheId);
+  Texture$2.addToCache(renderTexture, textureCacheId);
   const m2 = _tempMatrix;
   this.transform.localTransform.copyTo(m2);
   m2.invert();
@@ -36492,7 +36492,7 @@ DisplayObject.prototype._initCachedDisplayObjectCanvas = function _initCachedDis
   this._mask = null;
   this.filterArea = null;
   this.alpha = cacheAlpha;
-  const cachedSprite = new Sprite(renderTexture);
+  const cachedSprite = new Sprite$1(renderTexture);
   cachedSprite.transform.worldTransform = this.transform.worldTransform;
   cachedSprite.anchor.x = -(bounds.x / bounds.width);
   cachedSprite.anchor.y = -(bounds.y / bounds.height);
@@ -36522,7 +36522,7 @@ DisplayObject.prototype._destroyCachedDisplayObject = function _destroyCachedDis
   this._cacheData.sprite._texture.destroy(true);
   this._cacheData.sprite = null;
   BaseTexture.removeFromCache(this._cacheData.textureCacheId);
-  Texture$1.removeFromCache(this._cacheData.textureCacheId);
+  Texture$2.removeFromCache(this._cacheData.textureCacheId);
   this._cacheData.textureCacheId = null;
 };
 DisplayObject.prototype._cacheAsBitmapDestroy = function _cacheAsBitmapDestroy(options) {
@@ -36700,9 +36700,9 @@ class BlurFilterPass extends Filter {
       for (let i2 = 1; i2 < this.passes - 1; i2++) {
         filterManager.bindAndClear(flip, CLEAR_MODES.BLIT);
         this.uniforms.uSampler = flop;
-        const temp = flop;
+        const temp2 = flop;
         flop = flip;
-        flip = temp;
+        flip = temp2;
         renderer.shader.bind(this);
         renderer.geometry.draw(5);
       }
@@ -36974,9 +36974,9 @@ class ColorMatrixFilter extends Filter {
     rotation = (rotation || 0) / 180 * Math.PI;
     const cosR = Math.cos(rotation);
     const sinR = Math.sin(rotation);
-    const sqrt = Math.sqrt;
+    const sqrt2 = Math.sqrt;
     const w2 = 1 / 3;
-    const sqrW = sqrt(w2);
+    const sqrW = sqrt2(w2);
     const a00 = cosR + (1 - cosR) * w2;
     const a01 = w2 * (1 - cosR) - sqrW * sinR;
     const a02 = w2 * (1 - cosR) + sqrW * sinR;
@@ -37272,9 +37272,9 @@ class ColorMatrixFilter extends Filter {
     toned = toned || 0.15;
     lightColor = lightColor || 16770432;
     darkColor = darkColor || 3375104;
-    const temp = Color$1.shared;
-    const [lR, lG, lB] = temp.setValue(lightColor).toArray();
-    const [dR, dG, dB] = temp.setValue(darkColor).toArray();
+    const temp2 = Color$1.shared;
+    const [lR, lG, lB] = temp2.setValue(lightColor).toArray();
+    const [dR, dG, dB] = temp2.setValue(darkColor).toArray();
     const matrix = [
       0.3,
       0.59,
@@ -37418,7 +37418,7 @@ var fragment$m = "varying vec2 vFilterCoord;\nvarying vec2 vTextureCoord;\n\nuni
 var vertex$l = "attribute vec2 aVertexPosition;\n\nuniform mat3 projectionMatrix;\nuniform mat3 filterMatrix;\n\nvarying vec2 vTextureCoord;\nvarying vec2 vFilterCoord;\n\nuniform vec4 inputSize;\nuniform vec4 outputFrame;\n\nvec4 filterVertexPosition( void )\n{\n    vec2 position = aVertexPosition * max(outputFrame.zw, vec2(0.)) + outputFrame.xy;\n\n    return vec4((projectionMatrix * vec3(position, 1.0)).xy, 0.0, 1.0);\n}\n\nvec2 filterTextureCoord( void )\n{\n    return aVertexPosition * (outputFrame.zw * inputSize.zw);\n}\n\nvoid main(void)\n{\n	gl_Position = filterVertexPosition();\n	vTextureCoord = filterTextureCoord();\n	vFilterCoord = ( filterMatrix * vec3( vTextureCoord, 1.0)  ).xy;\n}\n";
 class DisplacementFilter extends Filter {
   constructor(sprite, scale) {
-    const maskMatrix = new Matrix();
+    const maskMatrix = new Matrix$1();
     sprite.renderable = false;
     super(vertex$l, fragment$m, {
       mapSampler: sprite._texture,
@@ -39303,10 +39303,10 @@ extensions$1.handleByList(ExtensionType.Application, Application._plugins);
 class ResizePlugin {
   static init(options) {
     Object.defineProperty(this, "resizeTo", {
-      set(dom) {
+      set(dom2) {
         globalThis.removeEventListener("resize", this.queueResize);
-        this._resizeTo = dom;
-        if (dom) {
+        this._resizeTo = dom2;
+        if (dom2) {
           globalThis.addEventListener("resize", this.queueResize);
           this.resize();
         }
@@ -39471,8 +39471,8 @@ function processX(base2, ids, depth, result, tags) {
   }
 }
 function createStringVariations(string) {
-  const regex = /\{(.*?)\}/g;
-  const result = string.match(regex);
+  const regex3 = /\{(.*?)\}/g;
+  const result = string.match(regex3);
   const tags = [];
   if (result) {
     const ids = [];
@@ -39537,13 +39537,13 @@ class CacheClass {
       }
       this._cache.set(key2, cacheableAssets[key2]);
     });
-    if (value instanceof Texture$1) {
+    if (value instanceof Texture$2) {
       const texture = value;
       keys.forEach((key2) => {
-        if (texture.baseTexture !== Texture$1.EMPTY.baseTexture) {
+        if (texture.baseTexture !== Texture$2.EMPTY.baseTexture) {
           BaseTexture.addToCache(texture.baseTexture, key2);
         }
-        Texture$1.addToCache(texture, key2);
+        Texture$2.addToCache(texture, key2);
       });
     }
   }
@@ -39631,7 +39631,7 @@ class Loader$1 {
     if (!this._parsersValidated) {
       this._validateParsers();
     }
-    let count = 0;
+    let count2 = 0;
     const assets = {};
     const singleAsset = isSingleItem(assetsToLoadIn);
     const assetsToLoad = convertToList(assetsToLoadIn, (item) => ({
@@ -39647,7 +39647,7 @@ class Loader$1 {
           }
           assets[asset.src] = await this.promiseCache[url2].promise;
           if (onProgress)
-            onProgress(++count / total);
+            onProgress(++count2 / total);
         } catch (e2) {
           delete this.promiseCache[url2];
           delete assets[asset.src];
@@ -39957,7 +39957,7 @@ class WorkerManagerClass {
 }
 const WorkerManager = new WorkerManagerClass();
 function createTexture(base2, loader, url2) {
-  const texture = new Texture$1(base2);
+  const texture = new Texture$2(base2);
   texture.baseTexture.on("dispose", () => {
     delete loader.promiseCache[url2];
   });
@@ -40402,10 +40402,10 @@ class AssetsClass {
     const resolveResults = this.resolver.resolveBundle(bundleIds);
     const out = {};
     const keys = Object.keys(resolveResults);
-    let count = 0;
+    let count2 = 0;
     let total = 0;
     const _onProgress = () => {
-      onProgress == null ? void 0 : onProgress(++count / total);
+      onProgress == null ? void 0 : onProgress(++count2 / total);
     };
     const promises = keys.map((bundleId) => {
       const resolveResult = resolveResults[bundleId];
@@ -40521,7 +40521,7 @@ const Assets = new AssetsClass();
 extensions$1.handleByList(ExtensionType.LoadParser, Assets.loader.parsers).handleByList(ExtensionType.ResolveParser, Assets.resolver.parsers).handleByList(ExtensionType.CacheParser, Assets.cache.parsers).handleByList(ExtensionType.DetectionParser, Assets.detections);
 const cacheTextureArray = {
   extension: ExtensionType.CacheParser,
-  test: (asset) => Array.isArray(asset) && asset.every((t2) => t2 instanceof Texture$1),
+  test: (asset) => Array.isArray(asset) && asset.every((t2) => t2 instanceof Texture$2),
   getCacheableAssets: (keys, asset) => {
     const out = {};
     keys.forEach((key) => {
@@ -40667,8 +40667,8 @@ const detectCompressedTextures = {
     priority: 2
   },
   test: async () => {
-    const canvas = settings.ADAPTER.createCanvas();
-    const gl = canvas.getContext("webgl");
+    const canvas3 = settings.ADAPTER.createCanvas();
+    const gl = canvas3.getContext("webgl");
     if (!gl) {
       console.warn("WebGL not available for compressed textures.");
       return false;
@@ -41236,14 +41236,14 @@ extensions$1.add(loadKTX);
 const resolveCompressedTextureUrl = {
   extension: ExtensionType.ResolveParser,
   test: (value) => {
-    const temp = value.split("?")[0];
-    const extension = temp.split(".").pop();
+    const temp2 = value.split("?")[0];
+    const extension = temp2.split(".").pop();
     return ["basis", "ktx", "dds"].includes(extension);
   },
   parse: (value) => {
     var _a2, _b, _c, _d;
-    const temp = value.split("?")[0];
-    const extension = temp.split(".").pop();
+    const temp2 = value.split("?")[0];
+    const extension = temp2.split(".").pop();
     if (extension === "ktx") {
       const extensions2 = [
         ".s3tc.ktx",
@@ -41270,7 +41270,7 @@ const resolveCompressedTextureUrl = {
   }
 };
 extensions$1.add(resolveCompressedTextureUrl);
-const TEMP_RECT = new Rectangle();
+const TEMP_RECT = new Rectangle$1();
 const BYTES_PER_PIXEL = 4;
 const _Extract = class {
   constructor(renderer) {
@@ -41282,10 +41282,10 @@ const _Extract = class {
     return image;
   }
   async base64(target, format2, quality) {
-    const canvas = this.canvas(target);
-    if (canvas.toBlob !== void 0) {
+    const canvas3 = this.canvas(target);
+    if (canvas3.toBlob !== void 0) {
       return new Promise((resolve2, reject) => {
-        canvas.toBlob((blob) => {
+        canvas3.toBlob((blob) => {
           if (!blob) {
             reject(new Error("ICanvas.toBlob failed!"));
             return;
@@ -41297,11 +41297,11 @@ const _Extract = class {
         }, format2, quality);
       });
     }
-    if (canvas.toDataURL !== void 0) {
-      return canvas.toDataURL(format2, quality);
+    if (canvas3.toDataURL !== void 0) {
+      return canvas3.toDataURL(format2, quality);
     }
-    if (canvas.convertToBlob !== void 0) {
-      const blob = await canvas.convertToBlob({ type: format2, quality });
+    if (canvas3.convertToBlob !== void 0) {
+      const blob = await canvas3.convertToBlob({ type: format2, quality });
       return new Promise((resolve2, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve2(reader.result);
@@ -41387,13 +41387,13 @@ const _Extract = class {
   static _flipY(pixels, width, height) {
     const w2 = width << 2;
     const h2 = height >> 1;
-    const temp = new Uint8Array(w2);
+    const temp2 = new Uint8Array(w2);
     for (let y2 = 0; y2 < h2; y2++) {
       const t2 = y2 * w2;
       const b2 = (height - y2 - 1) * w2;
-      temp.set(pixels.subarray(t2, t2 + w2));
+      temp2.set(pixels.subarray(t2, t2 + w2));
       pixels.copyWithin(t2, b2, b2 + w2);
-      pixels.set(temp, b2);
+      pixels.set(temp2, b2);
     }
   }
   static _unpremultiplyAlpha(pixels) {
@@ -42623,7 +42623,7 @@ class FillStyle {
   constructor() {
     this.color = 16777215;
     this.alpha = 1;
-    this.texture = Texture$1.WHITE;
+    this.texture = Texture$2.WHITE;
     this.matrix = null;
     this.visible = false;
     this.reset();
@@ -42640,7 +42640,7 @@ class FillStyle {
   reset() {
     this.color = 16777215;
     this.alpha = 1;
-    this.texture = Texture$1.WHITE;
+    this.texture = Texture$2.WHITE;
     this.matrix = null;
     this.visible = false;
   }
@@ -42738,7 +42738,7 @@ const _Graphics = class extends Container {
   lineTextureStyle(options) {
     const defaultLineStyleOptions = {
       width: 0,
-      texture: Texture$1.WHITE,
+      texture: Texture$2.WHITE,
       color: (options == null ? void 0 : options.texture) ? 16777215 : 0,
       matrix: null,
       alignment: 0.5,
@@ -42770,12 +42770,12 @@ const _Graphics = class extends Container {
       const len = this.currentPath.points.length;
       if (len > 2) {
         this.drawShape(this.currentPath);
-        this.currentPath = new Polygon();
+        this.currentPath = new Polygon$1();
         this.currentPath.closeStroke = false;
         this.currentPath.points.push(points[len - 2], points[len - 1]);
       }
     } else {
-      this.currentPath = new Polygon();
+      this.currentPath = new Polygon$1();
       this.currentPath.closeStroke = false;
     }
   }
@@ -42873,17 +42873,17 @@ const _Graphics = class extends Container {
     return this;
   }
   beginFill(color = 0, alpha) {
-    return this.beginTextureFill({ texture: Texture$1.WHITE, color, alpha });
+    return this.beginTextureFill({ texture: Texture$2.WHITE, color, alpha });
   }
   normalizeColor(options) {
     var _a2, _b;
-    const temp = Color$1.shared.setValue((_a2 = options.color) != null ? _a2 : 0);
-    options.color = temp.toNumber();
-    (_b = options.alpha) != null ? _b : options.alpha = temp.alpha;
+    const temp2 = Color$1.shared.setValue((_a2 = options.color) != null ? _a2 : 0);
+    options.color = temp2.toNumber();
+    (_b = options.alpha) != null ? _b : options.alpha = temp2.alpha;
   }
   beginTextureFill(options) {
     const defaultOptions = {
-      texture: Texture$1.WHITE,
+      texture: Texture$2.WHITE,
       color: 16777215,
       matrix: null
     };
@@ -42910,16 +42910,16 @@ const _Graphics = class extends Container {
     return this;
   }
   drawRect(x2, y2, width, height) {
-    return this.drawShape(new Rectangle(x2, y2, width, height));
+    return this.drawShape(new Rectangle$1(x2, y2, width, height));
   }
   drawRoundedRect(x2, y2, width, height, radius) {
-    return this.drawShape(new RoundedRectangle(x2, y2, width, height, radius));
+    return this.drawShape(new RoundedRectangle$1(x2, y2, width, height, radius));
   }
   drawCircle(x2, y2, radius) {
-    return this.drawShape(new Circle(x2, y2, radius));
+    return this.drawShape(new Circle$1(x2, y2, radius));
   }
   drawEllipse(x2, y2, width, height) {
-    return this.drawShape(new Ellipse(x2, y2, width, height));
+    return this.drawShape(new Ellipse$1(x2, y2, width, height));
   }
   drawPolygon(...path2) {
     let points;
@@ -42933,7 +42933,7 @@ const _Graphics = class extends Container {
     } else {
       points = path2;
     }
-    const shape = new Polygon(points);
+    const shape = new Polygon$1(points);
     shape.closeStroke = closeStroke;
     this.drawShape(shape);
     return this;
@@ -43051,7 +43051,7 @@ const _Graphics = class extends Container {
         }
         const uniforms = {
           tint: new Float32Array([1, 1, 1, 1]),
-          translationMatrix: new Matrix(),
+          translationMatrix: new Matrix$1(),
           default: UniformGroup.from({ uSamplers: sampleValues }, true)
         };
         const program = renderer.plugins[pluginName]._shader.program;
@@ -43098,12 +43098,12 @@ const _Graphics = class extends Container {
     const ty = wt.ty;
     const data = this._geometry.points;
     const vertexData = this.vertexData;
-    let count = 0;
+    let count2 = 0;
     for (let i2 = 0; i2 < data.length; i2 += 2) {
       const x2 = data[i2];
       const y2 = data[i2 + 1];
-      vertexData[count++] = a2 * x2 + c2 * y2 + tx;
-      vertexData[count++] = d2 * y2 + b2 * x2 + ty;
+      vertexData[count2++] = a2 * x2 + c2 * y2 + tx;
+      vertexData[count2++] = d2 * y2 + b2 * x2 + ty;
     }
   }
   closePath() {
@@ -43174,7 +43174,7 @@ class MeshBatchUvs {
   }
 }
 const tempPoint = new Point();
-const tempPolygon = new Polygon();
+const tempPolygon = new Polygon$1();
 const _Mesh = class extends Container {
   constructor(geometry, shader, state, drawMode = DRAW_MODES.TRIANGLES) {
     super();
@@ -43403,7 +43403,7 @@ class MeshMaterial extends Shader {
     const uniforms = {
       uSampler,
       alpha: 1,
-      uTextureMatrix: Matrix.IDENTITY,
+      uTextureMatrix: Matrix$1.IDENTITY,
       uColor: new Float32Array([1, 1, 1, 1])
     };
     options = Object.assign({
@@ -43574,7 +43574,7 @@ class ParticleRenderer extends ObjectRenderer {
     super(renderer);
     this.shader = null;
     this.properties = null;
-    this.tempMatrix = new Matrix();
+    this.tempMatrix = new Matrix$1();
     this.properties = [
       {
         attributeName: "aVertexPosition",
@@ -43673,7 +43673,7 @@ class ParticleRenderer extends ObjectRenderer {
     const dynamicPropertyFlags = container._properties;
     return new ParticleBuffer(this.properties, dynamicPropertyFlags, batchSize);
   }
-  uploadVertices(children, startIndex, amount, array, stride, offset) {
+  uploadVertices(children, startIndex, amount, array2, stride, offset) {
     let w0 = 0;
     let w1 = 0;
     let h0 = 0;
@@ -43696,75 +43696,75 @@ class ParticleRenderer extends ObjectRenderer {
         h0 = orig.height * (1 - sprite.anchor.y);
         h1 = orig.height * -sprite.anchor.y;
       }
-      array[offset] = w1 * sx;
-      array[offset + 1] = h1 * sy;
-      array[offset + stride] = w0 * sx;
-      array[offset + stride + 1] = h1 * sy;
-      array[offset + stride * 2] = w0 * sx;
-      array[offset + stride * 2 + 1] = h0 * sy;
-      array[offset + stride * 3] = w1 * sx;
-      array[offset + stride * 3 + 1] = h0 * sy;
+      array2[offset] = w1 * sx;
+      array2[offset + 1] = h1 * sy;
+      array2[offset + stride] = w0 * sx;
+      array2[offset + stride + 1] = h1 * sy;
+      array2[offset + stride * 2] = w0 * sx;
+      array2[offset + stride * 2 + 1] = h0 * sy;
+      array2[offset + stride * 3] = w1 * sx;
+      array2[offset + stride * 3 + 1] = h0 * sy;
       offset += stride * 4;
     }
   }
-  uploadPosition(children, startIndex, amount, array, stride, offset) {
+  uploadPosition(children, startIndex, amount, array2, stride, offset) {
     for (let i2 = 0; i2 < amount; i2++) {
       const spritePosition = children[startIndex + i2].position;
-      array[offset] = spritePosition.x;
-      array[offset + 1] = spritePosition.y;
-      array[offset + stride] = spritePosition.x;
-      array[offset + stride + 1] = spritePosition.y;
-      array[offset + stride * 2] = spritePosition.x;
-      array[offset + stride * 2 + 1] = spritePosition.y;
-      array[offset + stride * 3] = spritePosition.x;
-      array[offset + stride * 3 + 1] = spritePosition.y;
+      array2[offset] = spritePosition.x;
+      array2[offset + 1] = spritePosition.y;
+      array2[offset + stride] = spritePosition.x;
+      array2[offset + stride + 1] = spritePosition.y;
+      array2[offset + stride * 2] = spritePosition.x;
+      array2[offset + stride * 2 + 1] = spritePosition.y;
+      array2[offset + stride * 3] = spritePosition.x;
+      array2[offset + stride * 3 + 1] = spritePosition.y;
       offset += stride * 4;
     }
   }
-  uploadRotation(children, startIndex, amount, array, stride, offset) {
+  uploadRotation(children, startIndex, amount, array2, stride, offset) {
     for (let i2 = 0; i2 < amount; i2++) {
       const spriteRotation = children[startIndex + i2].rotation;
-      array[offset] = spriteRotation;
-      array[offset + stride] = spriteRotation;
-      array[offset + stride * 2] = spriteRotation;
-      array[offset + stride * 3] = spriteRotation;
+      array2[offset] = spriteRotation;
+      array2[offset + stride] = spriteRotation;
+      array2[offset + stride * 2] = spriteRotation;
+      array2[offset + stride * 3] = spriteRotation;
       offset += stride * 4;
     }
   }
-  uploadUvs(children, startIndex, amount, array, stride, offset) {
+  uploadUvs(children, startIndex, amount, array2, stride, offset) {
     for (let i2 = 0; i2 < amount; ++i2) {
       const textureUvs = children[startIndex + i2]._texture._uvs;
       if (textureUvs) {
-        array[offset] = textureUvs.x0;
-        array[offset + 1] = textureUvs.y0;
-        array[offset + stride] = textureUvs.x1;
-        array[offset + stride + 1] = textureUvs.y1;
-        array[offset + stride * 2] = textureUvs.x2;
-        array[offset + stride * 2 + 1] = textureUvs.y2;
-        array[offset + stride * 3] = textureUvs.x3;
-        array[offset + stride * 3 + 1] = textureUvs.y3;
+        array2[offset] = textureUvs.x0;
+        array2[offset + 1] = textureUvs.y0;
+        array2[offset + stride] = textureUvs.x1;
+        array2[offset + stride + 1] = textureUvs.y1;
+        array2[offset + stride * 2] = textureUvs.x2;
+        array2[offset + stride * 2 + 1] = textureUvs.y2;
+        array2[offset + stride * 3] = textureUvs.x3;
+        array2[offset + stride * 3 + 1] = textureUvs.y3;
         offset += stride * 4;
       } else {
-        array[offset] = 0;
-        array[offset + 1] = 0;
-        array[offset + stride] = 0;
-        array[offset + stride + 1] = 0;
-        array[offset + stride * 2] = 0;
-        array[offset + stride * 2 + 1] = 0;
-        array[offset + stride * 3] = 0;
-        array[offset + stride * 3 + 1] = 0;
+        array2[offset] = 0;
+        array2[offset + 1] = 0;
+        array2[offset + stride] = 0;
+        array2[offset + stride + 1] = 0;
+        array2[offset + stride * 2] = 0;
+        array2[offset + stride * 2 + 1] = 0;
+        array2[offset + stride * 3] = 0;
+        array2[offset + stride * 3 + 1] = 0;
         offset += stride * 4;
       }
     }
   }
-  uploadTint(children, startIndex, amount, array, stride, offset) {
+  uploadTint(children, startIndex, amount, array2, stride, offset) {
     for (let i2 = 0; i2 < amount; ++i2) {
       const sprite = children[startIndex + i2];
       const result = Color$1.shared.setValue(sprite._tintRGB).toPremultiplied(sprite.alpha, sprite.texture.baseTexture.alphaMode > 0);
-      array[offset] = result;
-      array[offset + stride] = result;
-      array[offset + stride * 2] = result;
-      array[offset + stride * 3] = result;
+      array2[offset] = result;
+      array2[offset + stride] = result;
+      array2[offset + stride * 2] = result;
+      array2[offset + stride * 3] = result;
       offset += stride * 4;
     }
   }
@@ -43794,8 +43794,8 @@ const _TextMetrics = class {
   static get experimentalLetterSpacingSupported() {
     let result = _TextMetrics._experimentalLetterSpacingSupported;
     if (result !== void 0) {
-      const proto = settings.ADAPTER.getCanvasRenderingContext2D().prototype;
-      result = _TextMetrics._experimentalLetterSpacingSupported = "letterSpacing" in proto || "textLetterSpacing" in proto;
+      const proto24 = settings.ADAPTER.getCanvasRenderingContext2D().prototype;
+      result = _TextMetrics._experimentalLetterSpacingSupported = "letterSpacing" in proto24 || "textLetterSpacing" in proto24;
     }
     return result;
   }
@@ -43810,7 +43810,7 @@ const _TextMetrics = class {
     this.maxLineWidth = maxLineWidth;
     this.fontProperties = fontProperties;
   }
-  static measureText(text, style, wordWrap, canvas = _TextMetrics._canvas) {
+  static measureText(text, style, wordWrap, canvas3 = _TextMetrics._canvas) {
     wordWrap = wordWrap === void 0 || wordWrap === null ? style.wordWrap : wordWrap;
     const font = style.toFontString();
     const fontProperties = _TextMetrics.measureFont(font);
@@ -43818,9 +43818,9 @@ const _TextMetrics = class {
       fontProperties.fontSize = style.fontSize;
       fontProperties.ascent = style.fontSize;
     }
-    const context2 = canvas.getContext("2d", contextSettings);
+    const context2 = canvas3.getContext("2d", contextSettings);
     context2.font = font;
-    const outputText = wordWrap ? _TextMetrics.wordWrap(text, style, canvas) : text;
+    const outputText = wordWrap ? _TextMetrics.wordWrap(text, style, canvas3) : text;
     const lines = outputText.split(/(?:\r\n|\r|\n)/);
     const lineWidths = new Array(lines.length);
     let maxLineWidth = 0;
@@ -43862,8 +43862,8 @@ const _TextMetrics = class {
     }
     return width;
   }
-  static wordWrap(text, style, canvas = _TextMetrics._canvas) {
-    const context2 = canvas.getContext("2d", contextSettings);
+  static wordWrap(text, style, canvas3 = _TextMetrics._canvas) {
+    const context2 = canvas3.getContext("2d", contextSettings);
     let width = 0;
     let line = "";
     let lines = "";
@@ -44042,7 +44042,7 @@ const _TextMetrics = class {
       descent: 0,
       fontSize: 0
     };
-    const canvas = _TextMetrics._canvas;
+    const canvas3 = _TextMetrics._canvas;
     const context2 = _TextMetrics._context;
     context2.font = font;
     const metricsString = _TextMetrics.METRICS_STRING + _TextMetrics.BASELINE_SYMBOL;
@@ -44054,8 +44054,8 @@ const _TextMetrics = class {
       _TextMetrics._fonts[font] = properties;
       return properties;
     }
-    canvas.width = width;
-    canvas.height = height;
+    canvas3.width = width;
+    canvas3.height = height;
     context2.fillStyle = "#f00";
     context2.fillRect(0, 0, width, height);
     context2.font = font;
@@ -44111,7 +44111,7 @@ const _TextMetrics = class {
   }
   static get _canvas() {
     if (!_TextMetrics.__canvas) {
-      let canvas;
+      let canvas3;
       try {
         const c2 = new OffscreenCanvas(0, 0);
         const context2 = c2.getContext("2d", contextSettings);
@@ -44119,12 +44119,12 @@ const _TextMetrics = class {
           _TextMetrics.__canvas = c2;
           return c2;
         }
-        canvas = settings.ADAPTER.createCanvas();
+        canvas3 = settings.ADAPTER.createCanvas();
       } catch (ex) {
-        canvas = settings.ADAPTER.createCanvas();
+        canvas3 = settings.ADAPTER.createCanvas();
       }
-      canvas.width = canvas.height = 10;
-      _TextMetrics.__canvas = canvas;
+      canvas3.width = canvas3.height = 10;
+      _TextMetrics.__canvas = canvas3;
     }
     return _TextMetrics.__canvas;
   }
@@ -44504,11 +44504,11 @@ TextStyle.defaultStyle = {
   wordWrapWidth: 100
 };
 function getColor(color) {
-  const temp = Color$1.shared;
+  const temp2 = Color$1.shared;
   if (!Array.isArray(color)) {
-    return temp.setValue(color).toHex();
+    return temp2.setValue(color).toHex();
   } else {
-    return color.map((c2) => temp.setValue(c2).toHex());
+    return color.map((c2) => temp2.setValue(c2).toHex());
   }
 }
 function areArraysEqual(array1, array2) {
@@ -44539,27 +44539,27 @@ const defaultDestroyOptions = {
   children: false,
   baseTexture: true
 };
-const _Text = class extends Sprite {
-  constructor(text, style, canvas) {
+const _Text$1 = class extends Sprite$1 {
+  constructor(text, style, canvas3) {
     var _a2;
     let ownCanvas = false;
-    if (!canvas) {
-      canvas = settings.ADAPTER.createCanvas();
+    if (!canvas3) {
+      canvas3 = settings.ADAPTER.createCanvas();
       ownCanvas = true;
     }
-    canvas.width = 3;
-    canvas.height = 3;
-    const texture = Texture$1.from(canvas);
-    texture.orig = new Rectangle();
-    texture.trim = new Rectangle();
+    canvas3.width = 3;
+    canvas3.height = 3;
+    const texture = Texture$2.from(canvas3);
+    texture.orig = new Rectangle$1();
+    texture.trim = new Rectangle$1();
     super(texture);
     this._ownCanvas = ownCanvas;
-    this.canvas = canvas;
-    this.context = canvas.getContext("2d", {
+    this.canvas = canvas3;
+    this.context = canvas3.getContext("2d", {
       willReadFrequently: true
     });
-    this._resolution = (_a2 = _Text.defaultResolution) != null ? _a2 : settings.RESOLUTION;
-    this._autoResolution = _Text.defaultAutoResolution;
+    this._resolution = (_a2 = _Text$1.defaultResolution) != null ? _a2 : settings.RESOLUTION;
+    this._autoResolution = _Text$1.defaultAutoResolution;
     this._text = null;
     this._style = null;
     this._styleListener = null;
@@ -44693,12 +44693,12 @@ const _Text = class extends Sprite {
     }
   }
   updateTexture() {
-    const canvas = this.canvas;
+    const canvas3 = this.canvas;
     if (this._style.trim) {
-      const trimmed = trimCanvas(canvas);
+      const trimmed = trimCanvas(canvas3);
       if (trimmed.data) {
-        canvas.width = trimmed.width;
-        canvas.height = trimmed.height;
+        canvas3.width = trimmed.width;
+        canvas3.height = trimmed.height;
         this.context.putImageData(trimmed.data, 0, 0);
       }
     }
@@ -44706,14 +44706,14 @@ const _Text = class extends Sprite {
     const style = this._style;
     const padding = style.trim ? 0 : style.padding;
     const baseTexture = texture.baseTexture;
-    texture.trim.width = texture._frame.width = canvas.width / this._resolution;
-    texture.trim.height = texture._frame.height = canvas.height / this._resolution;
+    texture.trim.width = texture._frame.width = canvas3.width / this._resolution;
+    texture.trim.height = texture._frame.height = canvas3.height / this._resolution;
     texture.trim.x = -padding;
     texture.trim.y = -padding;
     texture.orig.width = texture._frame.width - padding * 2;
     texture.orig.height = texture._frame.height - padding * 2;
     this._onTextureUpdate();
-    baseTexture.setRealSize(canvas.width, canvas.height, this._resolution);
+    baseTexture.setRealSize(canvas3.width, canvas3.height, this._resolution);
     texture.updateUvs();
     this.dirty = false;
   }
@@ -44883,8 +44883,8 @@ const _Text = class extends Sprite {
     this.dirty = true;
   }
 };
-let Text = _Text;
-Text.defaultAutoResolution = true;
+let Text$1 = _Text$1;
+Text$1.defaultAutoResolution = true;
 class CountLimiter {
   constructor(maxItemsPerFrame) {
     this.maxItemsPerFrame = maxItemsPerFrame;
@@ -44902,7 +44902,7 @@ function findMultipleBaseTextures(item, queue) {
   let result = false;
   if ((_a2 = item == null ? void 0 : item._textures) == null ? void 0 : _a2.length) {
     for (let i2 = 0; i2 < item._textures.length; i2++) {
-      if (item._textures[i2] instanceof Texture$1) {
+      if (item._textures[i2] instanceof Texture$2) {
         const baseTexture = item._textures[i2].baseTexture;
         if (!queue.includes(baseTexture)) {
           queue.push(baseTexture);
@@ -44924,7 +44924,7 @@ function findBaseTexture(item, queue) {
   return false;
 }
 function findTexture(item, queue) {
-  if (item._texture && item._texture instanceof Texture$1) {
+  if (item._texture && item._texture instanceof Texture$2) {
     const texture = item._texture.baseTexture;
     if (!queue.includes(texture)) {
       queue.push(texture);
@@ -44934,7 +44934,7 @@ function findTexture(item, queue) {
   return false;
 }
 function drawText(_helper, item) {
-  if (item instanceof Text) {
+  if (item instanceof Text$1) {
     item.updateText(true);
     return true;
   }
@@ -44949,7 +44949,7 @@ function calculateTextStyle(_helper, item) {
   return false;
 }
 function findText(item, queue) {
-  if (item instanceof Text) {
+  if (item instanceof Text$1) {
     if (!queue.includes(item.style)) {
       queue.push(item.style);
     }
@@ -45152,7 +45152,7 @@ var gl2VertexSrc = "#version 300 es\n#define SHADER_NAME Tiling-Sprite-300\n\npr
 var gl1FragmentSrc = "#version 100\n#ifdef GL_EXT_shader_texture_lod\n    #extension GL_EXT_shader_texture_lod : enable\n#endif\n#define SHADER_NAME Tiling-Sprite-100\n\nprecision lowp float;\n\nvarying vec2 vTextureCoord;\n\nuniform sampler2D uSampler;\nuniform vec4 uColor;\nuniform mat3 uMapCoord;\nuniform vec4 uClampFrame;\nuniform vec2 uClampOffset;\n\nvoid main(void)\n{\n    vec2 coord = vTextureCoord + ceil(uClampOffset - vTextureCoord);\n    coord = (uMapCoord * vec3(coord, 1.0)).xy;\n    vec2 unclamped = coord;\n    coord = clamp(coord, uClampFrame.xy, uClampFrame.zw);\n\n    #ifdef GL_EXT_shader_texture_lod\n        vec4 texSample = unclamped == coord\n            ? texture2D(uSampler, coord) \n            : texture2DLodEXT(uSampler, coord, 0);\n    #else\n        vec4 texSample = texture2D(uSampler, coord);\n    #endif\n\n    gl_FragColor = texSample * uColor;\n}\n";
 var gl1VertexSrc = "#version 100\n#define SHADER_NAME Tiling-Sprite-100\n\nprecision lowp float;\n\nattribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\nuniform mat3 uTransform;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n\n    vTextureCoord = (uTransform * vec3(aTextureCoord, 1.0)).xy;\n}\n";
 var fragmentSimpleSrc = "#version 100\n#define SHADER_NAME Tiling-Sprite-Simple-100\n\nprecision lowp float;\n\nvarying vec2 vTextureCoord;\n\nuniform sampler2D uSampler;\nuniform vec4 uColor;\n\nvoid main(void)\n{\n    vec4 texSample = texture2D(uSampler, vTextureCoord);\n    gl_FragColor = texSample * uColor;\n}\n";
-const tempMat = new Matrix();
+const tempMat = new Matrix$1();
 class TilingSpriteRenderer extends ObjectRenderer {
   constructor(renderer) {
     super(renderer);
@@ -45168,20 +45168,20 @@ class TilingSpriteRenderer extends ObjectRenderer {
   }
   render(ts) {
     const renderer = this.renderer;
-    const quad = this.quad;
-    let vertices = quad.vertices;
+    const quad2 = this.quad;
+    let vertices = quad2.vertices;
     vertices[0] = vertices[6] = ts._width * -ts.anchor.x;
     vertices[1] = vertices[3] = ts._height * -ts.anchor.y;
     vertices[2] = vertices[4] = ts._width * (1 - ts.anchor.x);
     vertices[5] = vertices[7] = ts._height * (1 - ts.anchor.y);
     const anchorX = ts.uvRespectAnchor ? ts.anchor.x : 0;
     const anchorY = ts.uvRespectAnchor ? ts.anchor.y : 0;
-    vertices = quad.uvs;
+    vertices = quad2.uvs;
     vertices[0] = vertices[6] = -anchorX;
     vertices[1] = vertices[3] = -anchorY;
     vertices[2] = vertices[4] = 1 - anchorX;
     vertices[5] = vertices[7] = 1 - anchorY;
-    quad.invalidate();
+    quad2.invalidate();
     const tex = ts._texture;
     const baseTex = tex.baseTexture;
     const premultiplied = baseTex.alphaMode > 0;
@@ -45216,7 +45216,7 @@ class TilingSpriteRenderer extends ObjectRenderer {
     shader.uniforms.translationMatrix = ts.transform.worldTransform.toArray(true);
     shader.uniforms.uSampler = tex;
     renderer.shader.bind(shader);
-    renderer.geometry.bind(quad);
+    renderer.geometry.bind(quad2);
     this.state.blendMode = correctBlendMode(ts.blendMode, premultiplied);
     renderer.state.set(this.state);
     renderer.geometry.draw(this.renderer.gl.TRIANGLES, 6, 0);
@@ -45230,7 +45230,7 @@ extensions$1.add(TilingSpriteRenderer);
 const _Spritesheet = class {
   constructor(texture, data, resolutionFilename = null) {
     this.linkedSheets = [];
-    this._texture = texture instanceof Texture$1 ? texture : null;
+    this._texture = texture instanceof Texture$2 ? texture : null;
     this.baseTexture = texture instanceof BaseTexture ? texture : this._texture.baseTexture;
     this.textures = {};
     this.animations = {};
@@ -45277,17 +45277,17 @@ const _Spritesheet = class {
         let frame = null;
         let trim = null;
         const sourceSize = data.trimmed !== false && data.sourceSize ? data.sourceSize : data.frame;
-        const orig = new Rectangle(0, 0, Math.floor(sourceSize.w) / this.resolution, Math.floor(sourceSize.h) / this.resolution);
+        const orig = new Rectangle$1(0, 0, Math.floor(sourceSize.w) / this.resolution, Math.floor(sourceSize.h) / this.resolution);
         if (data.rotated) {
-          frame = new Rectangle(Math.floor(rect.x) / this.resolution, Math.floor(rect.y) / this.resolution, Math.floor(rect.h) / this.resolution, Math.floor(rect.w) / this.resolution);
+          frame = new Rectangle$1(Math.floor(rect.x) / this.resolution, Math.floor(rect.y) / this.resolution, Math.floor(rect.h) / this.resolution, Math.floor(rect.w) / this.resolution);
         } else {
-          frame = new Rectangle(Math.floor(rect.x) / this.resolution, Math.floor(rect.y) / this.resolution, Math.floor(rect.w) / this.resolution, Math.floor(rect.h) / this.resolution);
+          frame = new Rectangle$1(Math.floor(rect.x) / this.resolution, Math.floor(rect.y) / this.resolution, Math.floor(rect.w) / this.resolution, Math.floor(rect.h) / this.resolution);
         }
         if (data.trimmed !== false && data.spriteSourceSize) {
-          trim = new Rectangle(Math.floor(data.spriteSourceSize.x) / this.resolution, Math.floor(data.spriteSourceSize.y) / this.resolution, Math.floor(rect.w) / this.resolution, Math.floor(rect.h) / this.resolution);
+          trim = new Rectangle$1(Math.floor(data.spriteSourceSize.x) / this.resolution, Math.floor(data.spriteSourceSize.y) / this.resolution, Math.floor(rect.w) / this.resolution, Math.floor(rect.h) / this.resolution);
         }
-        this.textures[i2] = new Texture$1(this.baseTexture, frame, orig, trim, data.rotated ? 2 : 0, data.anchor, data.borders);
-        Texture$1.addToCache(this.textures[i2], i2);
+        this.textures[i2] = new Texture$2(this.baseTexture, frame, orig, trim, data.rotated ? 2 : 0, data.anchor, data.borders);
+        Texture$2.addToCache(this.textures[i2], i2);
       }
       frameIndex++;
     }
@@ -45595,7 +45595,7 @@ function autoDetectFormat(data) {
   }
   return null;
 }
-function generateFillStyle(canvas, context2, style, resolution, lines, metrics) {
+function generateFillStyle(canvas3, context2, style, resolution, lines, metrics) {
   const fillStyle = style.fill;
   if (!Array.isArray(fillStyle)) {
     return fillStyle;
@@ -45605,8 +45605,8 @@ function generateFillStyle(canvas, context2, style, resolution, lines, metrics) 
   let gradient;
   const dropShadowCorrection = style.dropShadow ? style.dropShadowDistance : 0;
   const padding = style.padding || 0;
-  const width = canvas.width / resolution - dropShadowCorrection - padding * 2;
-  const height = canvas.height / resolution - dropShadowCorrection - padding * 2;
+  const width = canvas3.width / resolution - dropShadowCorrection - padding * 2;
+  const height = canvas3.height / resolution - dropShadowCorrection - padding * 2;
   const fill = fillStyle.slice();
   const fillGradientStops = style.fillGradientStops.slice();
   if (!fillGradientStops.length) {
@@ -45657,7 +45657,7 @@ function generateFillStyle(canvas, context2, style, resolution, lines, metrics) 
   }
   return gradient;
 }
-function drawGlyph(canvas, context2, metrics, x2, y2, resolution, style) {
+function drawGlyph(canvas3, context2, metrics, x2, y2, resolution, style) {
   const char = metrics.text;
   const fontProperties = metrics.fontProperties;
   context2.translate(x2, y2);
@@ -45669,7 +45669,7 @@ function drawGlyph(canvas, context2, metrics, x2, y2, resolution, style) {
   context2.textBaseline = style.textBaseline;
   context2.lineJoin = style.lineJoin;
   context2.miterLimit = style.miterLimit;
-  context2.fillStyle = generateFillStyle(canvas, context2, style, resolution, [char], metrics);
+  context2.fillStyle = generateFillStyle(canvas3, context2, style, resolution, [char], metrics);
   context2.strokeStyle = style.stroke;
   if (style.dropShadow) {
     const dropShadowColor = style.dropShadowColor;
@@ -45761,13 +45761,13 @@ const _BitmapFont = class {
       xoffset /= res;
       yoffset /= res;
       xadvance /= res;
-      const rect = new Rectangle(x2 + pageTextures[page2].frame.x / res, y2 + pageTextures[page2].frame.y / res, width, height);
+      const rect = new Rectangle$1(x2 + pageTextures[page2].frame.x / res, y2 + pageTextures[page2].frame.y / res, width, height);
       this.chars[id] = {
         xOffset: xoffset,
         yOffset: yoffset,
         xAdvance: xadvance,
         kerning: {},
-        texture: new Texture$1(pageTextures[page2].baseTexture, rect),
+        texture: new Texture$2(pageTextures[page2].baseTexture, rect),
         page: page2
       };
     }
@@ -45808,7 +45808,7 @@ const _BitmapFont = class {
       }
       fontData = format2.parse(data);
     }
-    if (textures instanceof Texture$1) {
+    if (textures instanceof Texture$2) {
       textures = [textures];
     }
     const font = new _BitmapFont(fontData, textures, ownsTextures);
@@ -45848,26 +45848,26 @@ const _BitmapFont = class {
     };
     let positionX = 0;
     let positionY = 0;
-    let canvas;
+    let canvas3;
     let context2;
     let baseTexture;
     let maxCharHeight = 0;
     const textures = [];
     for (let i2 = 0; i2 < charsList.length; i2++) {
-      if (!canvas) {
-        canvas = settings.ADAPTER.createCanvas();
-        canvas.width = textureWidth;
-        canvas.height = textureHeight;
-        context2 = canvas.getContext("2d");
-        baseTexture = new BaseTexture(canvas, { resolution, ...baseOptions });
-        textures.push(new Texture$1(baseTexture));
+      if (!canvas3) {
+        canvas3 = settings.ADAPTER.createCanvas();
+        canvas3.width = textureWidth;
+        canvas3.height = textureHeight;
+        context2 = canvas3.getContext("2d");
+        baseTexture = new BaseTexture(canvas3, { resolution, ...baseOptions });
+        textures.push(new Texture$2(baseTexture));
         fontData.page.push({
           id: textures.length - 1,
           file: ""
         });
       }
       const character = charsList[i2];
-      const metrics = TextMetrics.measureText(character, style, false, canvas);
+      const metrics = TextMetrics.measureText(character, style, false, canvas3);
       const width = metrics.width;
       const height = Math.ceil(metrics.height);
       const textureGlyphWidth = Math.ceil((style.fontStyle === "italic" ? 2 : 1) * width);
@@ -45876,7 +45876,7 @@ const _BitmapFont = class {
           throw new Error(`[BitmapFont] textureHeight ${textureHeight}px is too small (fontFamily: '${style.fontFamily}', fontSize: ${style.fontSize}px, char: '${character}')`);
         }
         --i2;
-        canvas = null;
+        canvas3 = null;
         context2 = null;
         baseTexture = null;
         positionY = 0;
@@ -45896,7 +45896,7 @@ const _BitmapFont = class {
         maxCharHeight = 0;
         continue;
       }
-      drawGlyph(canvas, context2, metrics, positionX, positionY, resolution, style);
+      drawGlyph(canvas3, context2, metrics, positionX, positionY, resolution, style);
       const id = extractCharCode(metrics.text);
       fontData.char.push({
         id,
@@ -46033,7 +46033,7 @@ const _BitmapText = class extends Container {
         pos.x += charData.kerning[prevCharCode];
       }
       const charRenderData = charRenderDataPool.pop() || {
-        texture: Texture$1.EMPTY,
+        texture: Texture$2.EMPTY,
         line: 0,
         charCode: 0,
         prevSpaces: 0,
@@ -46101,10 +46101,10 @@ const _BitmapText = class extends Container {
           let material;
           let meshBlendMode;
           if (data.distanceFieldType === "none") {
-            material = new MeshMaterial(Texture$1.EMPTY);
+            material = new MeshMaterial(Texture$2.EMPTY);
             meshBlendMode = BLEND_MODES.NORMAL;
           } else {
-            material = new MeshMaterial(Texture$1.EMPTY, { program: Program.from(msdfVert, msdfFrag), uniforms: { uFWidth: 0 } });
+            material = new MeshMaterial(Texture$2.EMPTY, { program: Program.from(msdfVert, msdfFrag), uniforms: { uFWidth: 0 } });
             meshBlendMode = BLEND_MODES.NORMAL_NPM;
           }
           const mesh = new Mesh$1(geometry, material);
@@ -46127,7 +46127,7 @@ const _BitmapText = class extends Container {
         pageMeshData.uvsCount = 0;
         pageMeshData.total = 0;
         const { _textureCache } = this;
-        _textureCache[baseTextureUid] = _textureCache[baseTextureUid] || new Texture$1(texture.baseTexture);
+        _textureCache[baseTextureUid] = _textureCache[baseTextureUid] || new Texture$2(texture.baseTexture);
         pageMeshData.mesh.texture = _textureCache[baseTextureUid];
         pageMeshData.mesh.tint = this._tintColor.value;
         newPagesMeshData.push(pageMeshData);
@@ -46397,7 +46397,7 @@ const _BitmapText = class extends Container {
     }
     this._activePagesMeshData = [];
     pageMeshDataPool.filter((page) => _textureCache[page.mesh.texture.baseTexture.uid]).forEach((page) => {
-      page.mesh.texture = Texture$1.EMPTY;
+      page.mesh.texture = Texture$2.EMPTY;
     });
     for (const id in _textureCache) {
       const texture = _textureCache[id];
@@ -46695,10 +46695,10 @@ HTMLTextStyle.defaultOptions = {
   wordWrap: false,
   wordWrapWidth: 100
 };
-const _HTMLText = class extends Sprite {
+const _HTMLText = class extends Sprite$1 {
   constructor(text = "", style = {}) {
     var _a2;
-    super(Texture$1.EMPTY);
+    super(Texture$2.EMPTY);
     this._text = null;
     this._style = null;
     this._autoResolution = true;
@@ -46707,14 +46707,14 @@ const _HTMLText = class extends Sprite {
     this.dirty = false;
     this.ownsStyle = false;
     const image = new Image();
-    const texture = Texture$1.from(image, {
+    const texture = Texture$2.from(image, {
       scaleMode: settings.SCALE_MODE,
       resourceOptions: {
         autoLoad: false
       }
     });
-    texture.orig = new Rectangle();
-    texture.trim = new Rectangle();
+    texture.orig = new Rectangle$1();
+    texture.trim = new Rectangle$1();
     this.texture = texture;
     const nssvg = "http://www.w3.org/2000/svg";
     const nsxhtml = "http://www.w3.org/1999/xhtml";
@@ -46950,7 +46950,7 @@ HTMLText.defaultDestroyOptions = {
 HTMLText.defaultMaxWidth = 2024;
 HTMLText.defaultMaxHeight = 2024;
 HTMLText.defaultAutoResolution = true;
-var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
+var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
 function createBunnies$1(view) {
   const app = new Application({
     background: "#1099bb",
@@ -46958,9 +46958,9 @@ function createBunnies$1(view) {
   });
   const container = new Container();
   app.stage.addChild(container);
-  const texture = Texture$1.from("bunny.png");
+  const texture = Texture$2.from("bunny.png");
   for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite(texture);
+    const bunny = new Sprite$1(texture);
     bunny.anchor.set(0.5);
     bunny.x = i2 % 5 * 40;
     bunny.y = Math.floor(i2 / 5) * 40;
@@ -46974,7 +46974,7 @@ function createBunnies$1(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$8() {
+function Component$9() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -46987,32 +46987,32 @@ function Component$8() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$9,
+    fileName: _jsxFileName$a,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example$8 = {
+const example$9 = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
   description: "Hello world for Pixi.js.",
-  Component: Component$8
+  Component: Component$9
 };
-var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
+var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
 async function renderBitmap$4() {
-  const canvas = document.createElement("canvas");
-  document.body.appendChild(canvas);
-  const offscreen = canvas.transferControlToOffscreen();
-  const renderer = new Renderer({
+  const canvas3 = document.createElement("canvas");
+  document.body.appendChild(canvas3);
+  const offscreen = canvas3.transferControlToOffscreen();
+  const renderer = new Renderer$1({
     background: "#1099bb",
     view: offscreen
   });
   const container = new Container();
-  const texture = Texture$1.from("bunny.png");
+  const texture = Texture$2.from("bunny.png");
   await new Promise((r2) => setTimeout(r2, 200));
   for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite(texture);
+    const bunny = new Sprite$1(texture);
     bunny.anchor.set(0.5);
     bunny.x = i2 % 5 * 40;
     bunny.y = Math.floor(i2 / 5) * 40;
@@ -47021,7 +47021,7 @@ async function renderBitmap$4() {
   renderer.render(container);
   return offscreen;
 }
-function Component$7() {
+function Component$8() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47038,31 +47038,31 @@ function Component$7() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$8,
+    fileName: _jsxFileName$9,
     lineNumber: 47,
     columnNumber: 10
   }, this);
 }
-const example$7 = {
+const example$8 = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
   description: "Using canvas.transferControlToOffscreen()",
-  Component: Component$7
+  Component: Component$8
 };
-var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
+var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
 async function renderBitmap$3() {
   const offscreen = new OffscreenCanvas(400, 400);
-  const renderer = new Renderer({
+  const renderer = new Renderer$1({
     background: "#1099bb",
     view: offscreen,
     antialias: true
   });
   const container = new Container();
-  const texture = Texture$1.from("bunny.png");
+  const texture = Texture$2.from("bunny.png");
   await new Promise((r2) => setTimeout(r2, 200));
   for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite(texture);
+    const bunny = new Sprite$1(texture);
     bunny.anchor.set(0.5);
     bunny.x = i2 % 5 * 40;
     bunny.y = Math.floor(i2 / 5) * 40;
@@ -47071,7 +47071,7 @@ async function renderBitmap$3() {
   renderer.render(container);
   return offscreen;
 }
-function Component$6() {
+function Component$7() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47088,19 +47088,19 @@ function Component$6() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$7,
+    fileName: _jsxFileName$8,
     lineNumber: 46,
     columnNumber: 10
   }, this);
 }
-const example$6 = {
+const example$7 = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
   description: "Using new OffscreenCanvas()",
-  Component: Component$6
+  Component: Component$7
 };
-var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
+var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap$2() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
@@ -47112,7 +47112,7 @@ async function renderBitmap$2() {
     worker.postMessage("begin");
   });
 }
-function Component$5() {
+function Component$6() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47129,36 +47129,36 @@ function Component$5() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$6,
+    fileName: _jsxFileName$7,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$5 = {
+const example$6 = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
   description: "Pixi.js bunnies in a worker",
-  Component: Component$5
+  Component: Component$6
 };
-var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
+var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
   const worker = new Worker(new URL("/webgl-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
 }
-function Component$4() {
+function Component$5() {
   const ref = react.exports.useRef(null);
   const transferred = react.exports.useRef(false);
   react.exports.useEffect(() => {
     if (transferred.current)
       return;
-    const canvas = ref.current;
-    if (!canvas) {
+    const canvas3 = ref.current;
+    if (!canvas3) {
       throw new Error("Could not create canvas");
     }
-    renderOffscreenCanvas(canvas.transferControlToOffscreen());
+    renderOffscreenCanvas(canvas3.transferControlToOffscreen());
     transferred.current = true;
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -47166,17 +47166,17 @@ function Component$4() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$5,
+    fileName: _jsxFileName$6,
     lineNumber: 27,
     columnNumber: 10
   }, this);
 }
-const example$4 = {
+const example$5 = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
   description: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
-  Component: Component$4
+  Component: Component$5
 };
 /**
  * @license
@@ -47351,9 +47351,9 @@ class EventDispatcher {
     const listenerArray = listeners[event.type];
     if (listenerArray !== void 0) {
       event.target = this;
-      const array = listenerArray.slice(0);
-      for (let i2 = 0, l2 = array.length; i2 < l2; i2++) {
-        array[i2].call(this, event);
+      const array2 = listenerArray.slice(0);
+      for (let i2 = 0, l2 = array2.length; i2 < l2; i2++) {
+        array2[i2].call(this, event);
       }
       event.target = null;
     }
@@ -47370,13 +47370,13 @@ function generateUUID() {
   const uuid = _lut[d0 & 255] + _lut[d0 >> 8 & 255] + _lut[d0 >> 16 & 255] + _lut[d0 >> 24 & 255] + "-" + _lut[d1 & 255] + _lut[d1 >> 8 & 255] + "-" + _lut[d1 >> 16 & 15 | 64] + _lut[d1 >> 24 & 255] + "-" + _lut[d2 & 63 | 128] + _lut[d2 >> 8 & 255] + "-" + _lut[d2 >> 16 & 255] + _lut[d2 >> 24 & 255] + _lut[d3 & 255] + _lut[d3 >> 8 & 255] + _lut[d3 >> 16 & 255] + _lut[d3 >> 24 & 255];
   return uuid.toLowerCase();
 }
-function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
+function clamp(value, min5, max5) {
+  return Math.max(min5, Math.min(max5, value));
 }
 function euclideanModulo(n2, m2) {
   return (n2 % m2 + m2) % m2;
 }
-function lerp(x2, y2, t2) {
+function lerp$1(x2, y2, t2) {
   return (1 - t2) * x2 + t2 * y2;
 }
 function isPowerOfTwo(value) {
@@ -47385,8 +47385,8 @@ function isPowerOfTwo(value) {
 function floorPowerOfTwo(value) {
   return Math.pow(2, Math.floor(Math.log(value) / Math.LN2));
 }
-function denormalize(value, array) {
-  switch (array.constructor) {
+function denormalize(value, array2) {
+  switch (array2.constructor) {
     case Float32Array:
       return value;
     case Uint16Array:
@@ -47401,8 +47401,8 @@ function denormalize(value, array) {
       throw new Error("Invalid component type.");
   }
 }
-function normalize(value, array) {
-  switch (array.constructor) {
+function normalize(value, array2) {
+  switch (array2.constructor) {
     case Float32Array:
       return value;
     case Uint16Array:
@@ -47554,9 +47554,9 @@ class Vector2 {
     this.y = Math.max(this.y, v2.y);
     return this;
   }
-  clamp(min, max) {
-    this.x = Math.max(min.x, Math.min(max.x, this.x));
-    this.y = Math.max(min.y, Math.min(max.y, this.y));
+  clamp(min5, max5) {
+    this.x = Math.max(min5.x, Math.min(max5.x, this.x));
+    this.y = Math.max(min5.y, Math.min(max5.y, this.y));
     return this;
   }
   clampScalar(minVal, maxVal) {
@@ -47564,9 +47564,9 @@ class Vector2 {
     this.y = Math.max(minVal, Math.min(maxVal, this.y));
     return this;
   }
-  clampLength(min, max) {
+  clampLength(min5, max5) {
     const length = this.length();
-    return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+    return this.divideScalar(length || 1).multiplyScalar(Math.max(min5, Math.min(max5, length)));
   }
   floor() {
     this.x = Math.floor(this.x);
@@ -47648,15 +47648,15 @@ class Vector2 {
   equals(v2) {
     return v2.x === this.x && v2.y === this.y;
   }
-  fromArray(array, offset = 0) {
-    this.x = array[offset];
-    this.y = array[offset + 1];
+  fromArray(array2, offset = 0) {
+    this.x = array2[offset];
+    this.y = array2[offset + 1];
     return this;
   }
-  toArray(array = [], offset = 0) {
-    array[offset] = this.x;
-    array[offset + 1] = this.y;
-    return array;
+  toArray(array2 = [], offset = 0) {
+    array2[offset] = this.x;
+    array2[offset + 1] = this.y;
+    return array2;
   }
   fromBufferAttribute(attribute, index) {
     this.x = attribute.getX(index);
@@ -47930,33 +47930,33 @@ class Matrix3 {
     }
     return true;
   }
-  fromArray(array, offset = 0) {
+  fromArray(array2, offset = 0) {
     for (let i2 = 0; i2 < 9; i2++) {
-      this.elements[i2] = array[i2 + offset];
+      this.elements[i2] = array2[i2 + offset];
     }
     return this;
   }
-  toArray(array = [], offset = 0) {
+  toArray(array2 = [], offset = 0) {
     const te = this.elements;
-    array[offset] = te[0];
-    array[offset + 1] = te[1];
-    array[offset + 2] = te[2];
-    array[offset + 3] = te[3];
-    array[offset + 4] = te[4];
-    array[offset + 5] = te[5];
-    array[offset + 6] = te[6];
-    array[offset + 7] = te[7];
-    array[offset + 8] = te[8];
-    return array;
+    array2[offset] = te[0];
+    array2[offset + 1] = te[1];
+    array2[offset + 2] = te[2];
+    array2[offset + 3] = te[3];
+    array2[offset + 4] = te[4];
+    array2[offset + 5] = te[5];
+    array2[offset + 6] = te[6];
+    array2[offset + 7] = te[7];
+    array2[offset + 8] = te[8];
+    return array2;
   }
   clone() {
     return new this.constructor().fromArray(this.elements);
   }
 }
 const _m3 = /* @__PURE__ */ new Matrix3();
-function arrayNeedsUint32(array) {
-  for (let i2 = array.length - 1; i2 >= 0; --i2) {
-    if (array[i2] >= 65535)
+function arrayNeedsUint32(array2) {
+  for (let i2 = array2.length - 1; i2 >= 0; --i2) {
+    if (array2[i2] >= 65535)
       return true;
   }
   return false;
@@ -48058,9 +48058,9 @@ class ImageUtils {
     if (typeof HTMLCanvasElement === "undefined") {
       return image.src;
     }
-    let canvas;
+    let canvas3;
     if (image instanceof HTMLCanvasElement) {
-      canvas = image;
+      canvas3 = image;
     } else {
       if (_canvas === void 0)
         _canvas = createElementNS("canvas");
@@ -48072,21 +48072,21 @@ class ImageUtils {
       } else {
         context2.drawImage(image, 0, 0, image.width, image.height);
       }
-      canvas = _canvas;
+      canvas3 = _canvas;
     }
-    if (canvas.width > 2048 || canvas.height > 2048) {
+    if (canvas3.width > 2048 || canvas3.height > 2048) {
       console.warn("THREE.ImageUtils.getDataURL: Image converted to jpg for performance reasons", image);
-      return canvas.toDataURL("image/jpeg", 0.6);
+      return canvas3.toDataURL("image/jpeg", 0.6);
     } else {
-      return canvas.toDataURL("image/png");
+      return canvas3.toDataURL("image/png");
     }
   }
   static sRGBToLinear(image) {
     if (typeof HTMLImageElement !== "undefined" && image instanceof HTMLImageElement || typeof HTMLCanvasElement !== "undefined" && image instanceof HTMLCanvasElement || typeof ImageBitmap !== "undefined" && image instanceof ImageBitmap) {
-      const canvas = createElementNS("canvas");
-      canvas.width = image.width;
-      canvas.height = image.height;
-      const context2 = canvas.getContext("2d");
+      const canvas3 = createElementNS("canvas");
+      canvas3.width = image.width;
+      canvas3.height = image.height;
+      const context2 = canvas3.getContext("2d");
       context2.drawImage(image, 0, 0, image.width, image.height);
       const imageData = context2.getImageData(0, 0, image.width, image.height);
       const data = imageData.data;
@@ -48094,7 +48094,7 @@ class ImageUtils {
         data[i2] = SRGBToLinear(data[i2] / 255) * 255;
       }
       context2.putImageData(imageData, 0, 0);
-      return canvas;
+      return canvas3;
     } else if (image.data) {
       const data = image.data.slice(0);
       for (let i2 = 0; i2 < data.length; i2++) {
@@ -48176,8 +48176,8 @@ function serializeImage(image) {
   }
 }
 let textureId = 0;
-class Texture extends EventDispatcher {
-  constructor(image = Texture.DEFAULT_IMAGE, mapping = Texture.DEFAULT_MAPPING, wrapS = ClampToEdgeWrapping, wrapT = ClampToEdgeWrapping, magFilter = LinearFilter, minFilter = LinearMipmapLinearFilter, format2 = RGBAFormat, type2 = UnsignedByteType, anisotropy = Texture.DEFAULT_ANISOTROPY, colorSpace = NoColorSpace) {
+class Texture$1 extends EventDispatcher {
+  constructor(image = Texture$1.DEFAULT_IMAGE, mapping = Texture$1.DEFAULT_MAPPING, wrapS = ClampToEdgeWrapping, wrapT = ClampToEdgeWrapping, magFilter = LinearFilter, minFilter = LinearMipmapLinearFilter, format2 = RGBAFormat, type2 = UnsignedByteType, anisotropy = Texture$1.DEFAULT_ANISOTROPY, colorSpace = NoColorSpace) {
     super();
     this.isTexture = true;
     Object.defineProperty(this, "id", { value: textureId++ });
@@ -48359,9 +48359,9 @@ class Texture extends EventDispatcher {
     this.colorSpace = encoding === sRGBEncoding ? SRGBColorSpace : NoColorSpace;
   }
 }
-Texture.DEFAULT_IMAGE = null;
-Texture.DEFAULT_MAPPING = UVMapping;
-Texture.DEFAULT_ANISOTROPY = 1;
+Texture$1.DEFAULT_IMAGE = null;
+Texture$1.DEFAULT_MAPPING = UVMapping;
+Texture$1.DEFAULT_ANISOTROPY = 1;
 class Vector4 {
   constructor(x2 = 0, y2 = 0, z = 0, w2 = 1) {
     Vector4.prototype.isVector4 = true;
@@ -48616,11 +48616,11 @@ class Vector4 {
     this.w = Math.max(this.w, v2.w);
     return this;
   }
-  clamp(min, max) {
-    this.x = Math.max(min.x, Math.min(max.x, this.x));
-    this.y = Math.max(min.y, Math.min(max.y, this.y));
-    this.z = Math.max(min.z, Math.min(max.z, this.z));
-    this.w = Math.max(min.w, Math.min(max.w, this.w));
+  clamp(min5, max5) {
+    this.x = Math.max(min5.x, Math.min(max5.x, this.x));
+    this.y = Math.max(min5.y, Math.min(max5.y, this.y));
+    this.z = Math.max(min5.z, Math.min(max5.z, this.z));
+    this.w = Math.max(min5.w, Math.min(max5.w, this.w));
     return this;
   }
   clampScalar(minVal, maxVal) {
@@ -48630,9 +48630,9 @@ class Vector4 {
     this.w = Math.max(minVal, Math.min(maxVal, this.w));
     return this;
   }
-  clampLength(min, max) {
+  clampLength(min5, max5) {
     const length = this.length();
-    return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+    return this.divideScalar(length || 1).multiplyScalar(Math.max(min5, Math.min(max5, length)));
   }
   floor() {
     this.x = Math.floor(this.x);
@@ -48704,19 +48704,19 @@ class Vector4 {
   equals(v2) {
     return v2.x === this.x && v2.y === this.y && v2.z === this.z && v2.w === this.w;
   }
-  fromArray(array, offset = 0) {
-    this.x = array[offset];
-    this.y = array[offset + 1];
-    this.z = array[offset + 2];
-    this.w = array[offset + 3];
+  fromArray(array2, offset = 0) {
+    this.x = array2[offset];
+    this.y = array2[offset + 1];
+    this.z = array2[offset + 2];
+    this.w = array2[offset + 3];
     return this;
   }
-  toArray(array = [], offset = 0) {
-    array[offset] = this.x;
-    array[offset + 1] = this.y;
-    array[offset + 2] = this.z;
-    array[offset + 3] = this.w;
-    return array;
+  toArray(array2 = [], offset = 0) {
+    array2[offset] = this.x;
+    array2[offset + 1] = this.y;
+    array2[offset + 2] = this.z;
+    array2[offset + 3] = this.w;
+    return array2;
   }
   fromBufferAttribute(attribute, index) {
     this.x = attribute.getX(index);
@@ -48754,7 +48754,7 @@ class WebGLRenderTarget extends EventDispatcher {
       warnOnce("THREE.WebGLRenderTarget: option.encoding has been replaced by option.colorSpace.");
       options.colorSpace = options.encoding === sRGBEncoding ? SRGBColorSpace : NoColorSpace;
     }
-    this.texture = new Texture(image, options.mapping, options.wrapS, options.wrapT, options.magFilter, options.minFilter, options.format, options.type, options.anisotropy, options.colorSpace);
+    this.texture = new Texture$1(image, options.mapping, options.wrapS, options.wrapT, options.magFilter, options.minFilter, options.format, options.type, options.anisotropy, options.colorSpace);
     this.texture.isRenderTargetTexture = true;
     this.texture.flipY = false;
     this.texture.generateMipmaps = options.generateMipmaps !== void 0 ? options.generateMipmaps : false;
@@ -48803,7 +48803,7 @@ class WebGLRenderTarget extends EventDispatcher {
     this.dispatchEvent({ type: "dispose" });
   }
 }
-class DataArrayTexture extends Texture {
+class DataArrayTexture extends Texture$1 {
   constructor(data = null, width = 1, height = 1, depth = 1) {
     super(null);
     this.isDataArrayTexture = true;
@@ -48816,7 +48816,7 @@ class DataArrayTexture extends Texture {
     this.unpackAlignment = 1;
   }
 }
-class Data3DTexture extends Texture {
+class Data3DTexture extends Texture$1 {
   constructor(data = null, width = 1, height = 1, depth = 1) {
     super(null);
     this.isData3DTexture = true;
@@ -48856,11 +48856,11 @@ class Quaternion {
     }
     if (w0 !== w1 || x0 !== x1 || y0 !== y1 || z0 !== z1) {
       let s2 = 1 - t2;
-      const cos = x0 * x1 + y0 * y1 + z0 * z1 + w0 * w1, dir = cos >= 0 ? 1 : -1, sqrSin = 1 - cos * cos;
+      const cos7 = x0 * x1 + y0 * y1 + z0 * z1 + w0 * w1, dir = cos7 >= 0 ? 1 : -1, sqrSin = 1 - cos7 * cos7;
       if (sqrSin > Number.EPSILON) {
-        const sin = Math.sqrt(sqrSin), len = Math.atan2(sin, cos * dir);
-        s2 = Math.sin(s2 * len) / sin;
-        t2 = Math.sin(t2 * len) / sin;
+        const sin7 = Math.sqrt(sqrSin), len = Math.atan2(sin7, cos7 * dir);
+        s2 = Math.sin(s2 * len) / sin7;
+        t2 = Math.sin(t2 * len) / sin7;
       }
       const tDir = t2 * dir;
       x0 = x0 * s2 + x1 * tDir;
@@ -48944,14 +48944,14 @@ class Quaternion {
   }
   setFromEuler(euler, update) {
     const x2 = euler._x, y2 = euler._y, z = euler._z, order = euler._order;
-    const cos = Math.cos;
-    const sin = Math.sin;
-    const c1 = cos(x2 / 2);
-    const c2 = cos(y2 / 2);
-    const c3 = cos(z / 2);
-    const s1 = sin(x2 / 2);
-    const s2 = sin(y2 / 2);
-    const s3 = sin(z / 2);
+    const cos7 = Math.cos;
+    const sin7 = Math.sin;
+    const c1 = cos7(x2 / 2);
+    const c2 = cos7(y2 / 2);
+    const c3 = cos7(z / 2);
+    const s1 = sin7(x2 / 2);
+    const s2 = sin7(y2 / 2);
+    const s3 = sin7(z / 2);
     switch (order) {
       case "XYZ":
         this._x = s1 * c2 * c3 + c1 * s2 * s3;
@@ -49187,20 +49187,20 @@ class Quaternion {
   equals(quaternion) {
     return quaternion._x === this._x && quaternion._y === this._y && quaternion._z === this._z && quaternion._w === this._w;
   }
-  fromArray(array, offset = 0) {
-    this._x = array[offset];
-    this._y = array[offset + 1];
-    this._z = array[offset + 2];
-    this._w = array[offset + 3];
+  fromArray(array2, offset = 0) {
+    this._x = array2[offset];
+    this._y = array2[offset + 1];
+    this._z = array2[offset + 2];
+    this._w = array2[offset + 3];
     this._onChangeCallback();
     return this;
   }
-  toArray(array = [], offset = 0) {
-    array[offset] = this._x;
-    array[offset + 1] = this._y;
-    array[offset + 2] = this._z;
-    array[offset + 3] = this._w;
-    return array;
+  toArray(array2 = [], offset = 0) {
+    array2[offset] = this._x;
+    array2[offset + 1] = this._y;
+    array2[offset + 2] = this._z;
+    array2[offset + 3] = this._w;
+    return array2;
   }
   fromBufferAttribute(attribute, index) {
     this._x = attribute.getX(index);
@@ -49428,10 +49428,10 @@ class Vector3 {
     this.z = Math.max(this.z, v2.z);
     return this;
   }
-  clamp(min, max) {
-    this.x = Math.max(min.x, Math.min(max.x, this.x));
-    this.y = Math.max(min.y, Math.min(max.y, this.y));
-    this.z = Math.max(min.z, Math.min(max.z, this.z));
+  clamp(min5, max5) {
+    this.x = Math.max(min5.x, Math.min(max5.x, this.x));
+    this.y = Math.max(min5.y, Math.min(max5.y, this.y));
+    this.z = Math.max(min5.z, Math.min(max5.z, this.z));
     return this;
   }
   clampScalar(minVal, maxVal) {
@@ -49440,9 +49440,9 @@ class Vector3 {
     this.z = Math.max(minVal, Math.min(maxVal, this.z));
     return this;
   }
-  clampLength(min, max) {
+  clampLength(min5, max5) {
     const length = this.length();
-    return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+    return this.divideScalar(length || 1).multiplyScalar(Math.max(min5, Math.min(max5, length)));
   }
   floor() {
     this.x = Math.floor(this.x);
@@ -49602,17 +49602,17 @@ class Vector3 {
   equals(v2) {
     return v2.x === this.x && v2.y === this.y && v2.z === this.z;
   }
-  fromArray(array, offset = 0) {
-    this.x = array[offset];
-    this.y = array[offset + 1];
-    this.z = array[offset + 2];
+  fromArray(array2, offset = 0) {
+    this.x = array2[offset];
+    this.y = array2[offset + 1];
+    this.z = array2[offset + 2];
     return this;
   }
-  toArray(array = [], offset = 0) {
-    array[offset] = this.x;
-    array[offset + 1] = this.y;
-    array[offset + 2] = this.z;
-    return array;
+  toArray(array2 = [], offset = 0) {
+    array2[offset] = this.x;
+    array2[offset + 1] = this.y;
+    array2[offset + 2] = this.z;
+    return array2;
   }
   fromBufferAttribute(attribute, index) {
     this.x = attribute.getX(index);
@@ -49644,20 +49644,20 @@ class Vector3 {
 const _vector$b = /* @__PURE__ */ new Vector3();
 const _quaternion$4 = /* @__PURE__ */ new Quaternion();
 class Box3 {
-  constructor(min = new Vector3(Infinity, Infinity, Infinity), max = new Vector3(-Infinity, -Infinity, -Infinity)) {
+  constructor(min5 = new Vector3(Infinity, Infinity, Infinity), max5 = new Vector3(-Infinity, -Infinity, -Infinity)) {
     this.isBox3 = true;
-    this.min = min;
-    this.max = max;
+    this.min = min5;
+    this.max = max5;
   }
-  set(min, max) {
-    this.min.copy(min);
-    this.max.copy(max);
+  set(min5, max5) {
+    this.min.copy(min5);
+    this.max.copy(max5);
     return this;
   }
-  setFromArray(array) {
+  setFromArray(array2) {
     this.makeEmpty();
-    for (let i2 = 0, il = array.length; i2 < il; i2 += 3) {
-      this.expandByPoint(_vector$a.fromArray(array, i2));
+    for (let i2 = 0, il = array2.length; i2 < il; i2 += 3) {
+      this.expandByPoint(_vector$a.fromArray(array2, i2));
     }
     return this;
   }
@@ -49712,9 +49712,9 @@ class Box3 {
     this.max.max(point);
     return this;
   }
-  expandByVector(vector) {
-    this.min.sub(vector);
-    this.max.add(vector);
+  expandByVector(vector2) {
+    this.min.sub(vector2);
+    this.max.add(vector2);
     return this;
   }
   expandByScalar(scalar) {
@@ -49777,29 +49777,29 @@ class Box3 {
     return _vector$a.distanceToSquared(sphere.center) <= sphere.radius * sphere.radius;
   }
   intersectsPlane(plane) {
-    let min, max;
+    let min5, max5;
     if (plane.normal.x > 0) {
-      min = plane.normal.x * this.min.x;
-      max = plane.normal.x * this.max.x;
+      min5 = plane.normal.x * this.min.x;
+      max5 = plane.normal.x * this.max.x;
     } else {
-      min = plane.normal.x * this.max.x;
-      max = plane.normal.x * this.min.x;
+      min5 = plane.normal.x * this.max.x;
+      max5 = plane.normal.x * this.min.x;
     }
     if (plane.normal.y > 0) {
-      min += plane.normal.y * this.min.y;
-      max += plane.normal.y * this.max.y;
+      min5 += plane.normal.y * this.min.y;
+      max5 += plane.normal.y * this.max.y;
     } else {
-      min += plane.normal.y * this.max.y;
-      max += plane.normal.y * this.min.y;
+      min5 += plane.normal.y * this.max.y;
+      max5 += plane.normal.y * this.min.y;
     }
     if (plane.normal.z > 0) {
-      min += plane.normal.z * this.min.z;
-      max += plane.normal.z * this.max.z;
+      min5 += plane.normal.z * this.min.z;
+      max5 += plane.normal.z * this.max.z;
     } else {
-      min += plane.normal.z * this.max.z;
-      max += plane.normal.z * this.min.z;
+      min5 += plane.normal.z * this.max.z;
+      max5 += plane.normal.z * this.min.z;
     }
-    return min <= -plane.constant && max >= -plane.constant;
+    return min5 <= -plane.constant && max5 >= -plane.constant;
   }
   intersectsTriangle(triangle) {
     if (this.isEmpty()) {
@@ -51013,31 +51013,31 @@ class Matrix4 {
     }
     return true;
   }
-  fromArray(array, offset = 0) {
+  fromArray(array2, offset = 0) {
     for (let i2 = 0; i2 < 16; i2++) {
-      this.elements[i2] = array[i2 + offset];
+      this.elements[i2] = array2[i2 + offset];
     }
     return this;
   }
-  toArray(array = [], offset = 0) {
+  toArray(array2 = [], offset = 0) {
     const te = this.elements;
-    array[offset] = te[0];
-    array[offset + 1] = te[1];
-    array[offset + 2] = te[2];
-    array[offset + 3] = te[3];
-    array[offset + 4] = te[4];
-    array[offset + 5] = te[5];
-    array[offset + 6] = te[6];
-    array[offset + 7] = te[7];
-    array[offset + 8] = te[8];
-    array[offset + 9] = te[9];
-    array[offset + 10] = te[10];
-    array[offset + 11] = te[11];
-    array[offset + 12] = te[12];
-    array[offset + 13] = te[13];
-    array[offset + 14] = te[14];
-    array[offset + 15] = te[15];
-    return array;
+    array2[offset] = te[0];
+    array2[offset + 1] = te[1];
+    array2[offset + 2] = te[2];
+    array2[offset + 3] = te[3];
+    array2[offset + 4] = te[4];
+    array2[offset + 5] = te[5];
+    array2[offset + 6] = te[6];
+    array2[offset + 7] = te[7];
+    array2[offset + 8] = te[8];
+    array2[offset + 9] = te[9];
+    array2[offset + 10] = te[10];
+    array2[offset + 11] = te[11];
+    array2[offset + 12] = te[12];
+    array2[offset + 13] = te[13];
+    array2[offset + 14] = te[14];
+    array2[offset + 15] = te[15];
+    return array2;
   }
 }
 const _v1$5 = /* @__PURE__ */ new Vector3();
@@ -51192,21 +51192,21 @@ class Euler {
   equals(euler) {
     return euler._x === this._x && euler._y === this._y && euler._z === this._z && euler._order === this._order;
   }
-  fromArray(array) {
-    this._x = array[0];
-    this._y = array[1];
-    this._z = array[2];
-    if (array[3] !== void 0)
-      this._order = array[3];
+  fromArray(array2) {
+    this._x = array2[0];
+    this._y = array2[1];
+    this._z = array2[2];
+    if (array2[3] !== void 0)
+      this._order = array2[3];
     this._onChangeCallback();
     return this;
   }
-  toArray(array = [], offset = 0) {
-    array[offset] = this._x;
-    array[offset + 1] = this._y;
-    array[offset + 2] = this._z;
-    array[offset + 3] = this._order;
-    return array;
+  toArray(array2 = [], offset = 0) {
+    array2[offset] = this._x;
+    array2[offset + 1] = this._y;
+    array2[offset + 2] = this._z;
+    array2[offset + 3] = this._order;
+    return array2;
   }
   _onChange(callback) {
     this._onChangeCallback = callback;
@@ -51388,13 +51388,13 @@ class Object3D extends EventDispatcher {
   translateZ(distance) {
     return this.translateOnAxis(_zAxis, distance);
   }
-  localToWorld(vector) {
+  localToWorld(vector2) {
     this.updateWorldMatrix(true, false);
-    return vector.applyMatrix4(this.matrixWorld);
+    return vector2.applyMatrix4(this.matrixWorld);
   }
-  worldToLocal(vector) {
+  worldToLocal(vector2) {
     this.updateWorldMatrix(true, false);
-    return vector.applyMatrix4(_m1$1.copy(this.matrixWorld).invert());
+    return vector2.applyMatrix4(_m1$1.copy(this.matrixWorld).invert());
   }
   lookAt(x2, y2, z) {
     if (x2.isVector3) {
@@ -52690,17 +52690,17 @@ class Color {
   getHSL(target, colorSpace = ColorManagement.workingColorSpace) {
     ColorManagement.fromWorkingColorSpace(_color.copy(this), colorSpace);
     const r2 = _color.r, g2 = _color.g, b2 = _color.b;
-    const max = Math.max(r2, g2, b2);
-    const min = Math.min(r2, g2, b2);
+    const max5 = Math.max(r2, g2, b2);
+    const min5 = Math.min(r2, g2, b2);
     let hue, saturation;
-    const lightness = (min + max) / 2;
-    if (min === max) {
+    const lightness = (min5 + max5) / 2;
+    if (min5 === max5) {
       hue = 0;
       saturation = 0;
     } else {
-      const delta = max - min;
-      saturation = lightness <= 0.5 ? delta / (max + min) : delta / (2 - max - min);
-      switch (max) {
+      const delta = max5 - min5;
+      saturation = lightness <= 0.5 ? delta / (max5 + min5) : delta / (2 - max5 - min5);
+      switch (max5) {
         case r2:
           hue = (g2 - b2) / delta + (g2 < b2 ? 6 : 0);
           break;
@@ -52792,9 +52792,9 @@ class Color {
   lerpHSL(color, alpha) {
     this.getHSL(_hslA);
     color.getHSL(_hslB);
-    const h2 = lerp(_hslA.h, _hslB.h, alpha);
-    const s2 = lerp(_hslA.s, _hslB.s, alpha);
-    const l2 = lerp(_hslA.l, _hslB.l, alpha);
+    const h2 = lerp$1(_hslA.h, _hslB.h, alpha);
+    const s2 = lerp$1(_hslA.s, _hslB.s, alpha);
+    const l2 = lerp$1(_hslA.l, _hslB.l, alpha);
     this.setHSL(h2, s2, l2);
     return this;
   }
@@ -52815,17 +52815,17 @@ class Color {
   equals(c2) {
     return c2.r === this.r && c2.g === this.g && c2.b === this.b;
   }
-  fromArray(array, offset = 0) {
-    this.r = array[offset];
-    this.g = array[offset + 1];
-    this.b = array[offset + 2];
+  fromArray(array2, offset = 0) {
+    this.r = array2[offset];
+    this.g = array2[offset + 1];
+    this.b = array2[offset + 2];
     return this;
   }
-  toArray(array = [], offset = 0) {
-    array[offset] = this.r;
-    array[offset + 1] = this.g;
-    array[offset + 2] = this.b;
-    return array;
+  toArray(array2 = [], offset = 0) {
+    array2[offset] = this.r;
+    array2[offset + 1] = this.g;
+    array2[offset + 2] = this.b;
+    return array2;
   }
   fromBufferAttribute(attribute, index) {
     this.r = attribute.getX(index);
@@ -52893,15 +52893,15 @@ class MeshBasicMaterial extends Material {
 const _vector$8 = /* @__PURE__ */ new Vector3();
 const _vector2$1 = /* @__PURE__ */ new Vector2();
 class BufferAttribute {
-  constructor(array, itemSize, normalized = false) {
-    if (Array.isArray(array)) {
+  constructor(array2, itemSize, normalized = false) {
+    if (Array.isArray(array2)) {
       throw new TypeError("THREE.BufferAttribute: array should be a Typed Array.");
     }
     this.isBufferAttribute = true;
     this.name = "";
-    this.array = array;
+    this.array = array2;
     this.itemSize = itemSize;
-    this.count = array !== void 0 ? array.length / itemSize : 0;
+    this.count = array2 !== void 0 ? array2.length / itemSize : 0;
     this.normalized = normalized;
     this.usage = StaticDrawUsage;
     this.updateRange = { offset: 0, count: -1 };
@@ -52934,8 +52934,8 @@ class BufferAttribute {
     }
     return this;
   }
-  copyArray(array) {
-    this.array.set(array);
+  copyArray(array2) {
+    this.array.set(array2);
     return this;
   }
   applyMatrix3(m2) {
@@ -53102,18 +53102,18 @@ class BufferAttribute {
   }
 }
 class Uint16BufferAttribute extends BufferAttribute {
-  constructor(array, itemSize, normalized) {
-    super(new Uint16Array(array), itemSize, normalized);
+  constructor(array2, itemSize, normalized) {
+    super(new Uint16Array(array2), itemSize, normalized);
   }
 }
 class Uint32BufferAttribute extends BufferAttribute {
-  constructor(array, itemSize, normalized) {
-    super(new Uint32Array(array), itemSize, normalized);
+  constructor(array2, itemSize, normalized) {
+    super(new Uint32Array(array2), itemSize, normalized);
   }
 }
 class Float32BufferAttribute extends BufferAttribute {
-  constructor(array, itemSize, normalized) {
-    super(new Float32Array(array), itemSize, normalized);
+  constructor(array2, itemSize, normalized) {
+    super(new Float32Array(array2), itemSize, normalized);
   }
 }
 let _id$1 = 0;
@@ -53166,19 +53166,19 @@ class BufferGeometry extends EventDispatcher {
   hasAttribute(name) {
     return this.attributes[name] !== void 0;
   }
-  addGroup(start, count, materialIndex = 0) {
+  addGroup(start, count2, materialIndex = 0) {
     this.groups.push({
       start,
-      count,
+      count: count2,
       materialIndex
     });
   }
   clearGroups() {
     this.groups = [];
   }
-  setDrawRange(start, count) {
+  setDrawRange(start, count2) {
     this.drawRange.start = start;
-    this.drawRange.count = count;
+    this.drawRange.count = count2;
   }
   applyMatrix4(matrix) {
     const position = this.attributes.position;
@@ -53235,8 +53235,8 @@ class BufferGeometry extends EventDispatcher {
     this.applyMatrix4(_m1);
     return this;
   }
-  lookAt(vector) {
-    _obj.lookAt(vector);
+  lookAt(vector2) {
+    _obj.lookAt(vector2);
     _obj.updateMatrix();
     this.applyMatrix4(_obj.matrix);
     return this;
@@ -53404,8 +53404,8 @@ class BufferGeometry extends EventDispatcher {
     for (let i2 = 0, il = groups.length; i2 < il; ++i2) {
       const group = groups[i2];
       const start = group.start;
-      const count = group.count;
-      for (let j2 = start, jl = start + count; j2 < jl; j2 += 3) {
+      const count2 = group.count;
+      for (let j2 = start, jl = start + count2; j2 < jl; j2 += 3) {
         handleTriangle(
           indices2[j2 + 0],
           indices2[j2 + 1],
@@ -53432,8 +53432,8 @@ class BufferGeometry extends EventDispatcher {
     for (let i2 = 0, il = groups.length; i2 < il; ++i2) {
       const group = groups[i2];
       const start = group.start;
-      const count = group.count;
-      for (let j2 = start, jl = start + count; j2 < jl; j2 += 3) {
+      const count2 = group.count;
+      for (let j2 = start, jl = start + count2; j2 < jl; j2 += 3) {
         handleVertex(indices2[j2 + 0]);
         handleVertex(indices2[j2 + 1]);
         handleVertex(indices2[j2 + 2]);
@@ -53508,10 +53508,10 @@ class BufferGeometry extends EventDispatcher {
   }
   toNonIndexed() {
     function convertBufferAttribute(attribute, indices3) {
-      const array = attribute.array;
+      const array2 = attribute.array;
       const itemSize = attribute.itemSize;
       const normalized = attribute.normalized;
-      const array2 = new array.constructor(indices3.length * itemSize);
+      const array22 = new array2.constructor(indices3.length * itemSize);
       let index = 0, index2 = 0;
       for (let i2 = 0, l2 = indices3.length; i2 < l2; i2++) {
         if (attribute.isInterleavedBufferAttribute) {
@@ -53520,10 +53520,10 @@ class BufferGeometry extends EventDispatcher {
           index = indices3[i2] * itemSize;
         }
         for (let j2 = 0; j2 < itemSize; j2++) {
-          array2[index2++] = array[index++];
+          array22[index2++] = array2[index++];
         }
       }
-      return new BufferAttribute(array2, itemSize, normalized);
+      return new BufferAttribute(array22, itemSize, normalized);
     }
     if (this.index === null) {
       console.warn("THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.");
@@ -53595,13 +53595,13 @@ class BufferGeometry extends EventDispatcher {
     let hasMorphAttributes = false;
     for (const key in this.morphAttributes) {
       const attributeArray = this.morphAttributes[key];
-      const array = [];
+      const array2 = [];
       for (let i2 = 0, il = attributeArray.length; i2 < il; i2++) {
         const attribute = attributeArray[i2];
-        array.push(attribute.toJSON(data.data));
+        array2.push(attribute.toJSON(data.data));
       }
-      if (array.length > 0) {
-        morphAttributes[key] = array;
+      if (array2.length > 0) {
+        morphAttributes[key] = array2;
         hasMorphAttributes = true;
       }
     }
@@ -53645,12 +53645,12 @@ class BufferGeometry extends EventDispatcher {
     }
     const morphAttributes = source.morphAttributes;
     for (const name in morphAttributes) {
-      const array = [];
+      const array2 = [];
       const morphAttribute = morphAttributes[name];
       for (let i2 = 0, l2 = morphAttribute.length; i2 < l2; i2++) {
-        array.push(morphAttribute[i2].clone(data));
+        array2.push(morphAttribute[i2].clone(data));
       }
-      this.morphAttributes[name] = array;
+      this.morphAttributes[name] = array2;
     }
     this.morphTargetsRelative = source.morphTargetsRelative;
     const groups = source.groups;
@@ -53962,19 +53962,19 @@ class BoxGeometry extends BufferGeometry {
       const gridY1 = gridY + 1;
       let vertexCounter = 0;
       let groupCount = 0;
-      const vector = new Vector3();
+      const vector2 = new Vector3();
       for (let iy = 0; iy < gridY1; iy++) {
         const y2 = iy * segmentHeight - heightHalf;
         for (let ix = 0; ix < gridX1; ix++) {
           const x2 = ix * segmentWidth - widthHalf;
-          vector[u2] = x2 * udir;
-          vector[v2] = y2 * vdir;
-          vector[w2] = depthHalf;
-          vertices.push(vector.x, vector.y, vector.z);
-          vector[u2] = 0;
-          vector[v2] = 0;
-          vector[w2] = depth2 > 0 ? 1 : -1;
-          normals.push(vector.x, vector.y, vector.z);
+          vector2[u2] = x2 * udir;
+          vector2[v2] = y2 * vdir;
+          vector2[w2] = depthHalf;
+          vertices.push(vector2.x, vector2.y, vector2.z);
+          vector2[u2] = 0;
+          vector2[v2] = 0;
+          vector2[w2] = depth2 > 0 ? 1 : -1;
+          normals.push(vector2.x, vector2.y, vector2.z);
           uvs.push(ix / gridX);
           uvs.push(1 - iy / gridY);
           vertexCounter += 1;
@@ -54382,7 +54382,7 @@ class CubeCamera extends Object3D {
     renderTarget.texture.needsPMREMUpdate = true;
   }
 }
-class CubeTexture extends Texture {
+class CubeTexture extends Texture$1 {
   constructor(images, mapping, wrapS, wrapT, magFilter, minFilter, format2, type2, anisotropy, colorSpace) {
     images = images !== void 0 ? images : [];
     mapping = mapping !== void 0 ? mapping : CubeReflectionMapping;
@@ -54720,16 +54720,16 @@ function WebGLAttributes(gl, capabilities) {
   const isWebGL2 = capabilities.isWebGL2;
   const buffers = /* @__PURE__ */ new WeakMap();
   function createBuffer(attribute, bufferType) {
-    const array = attribute.array;
+    const array2 = attribute.array;
     const usage = attribute.usage;
     const buffer = gl.createBuffer();
     gl.bindBuffer(bufferType, buffer);
-    gl.bufferData(bufferType, array, usage);
+    gl.bufferData(bufferType, array2, usage);
     attribute.onUploadCallback();
     let type2;
-    if (array instanceof Float32Array) {
+    if (array2 instanceof Float32Array) {
       type2 = gl.FLOAT;
-    } else if (array instanceof Uint16Array) {
+    } else if (array2 instanceof Uint16Array) {
       if (attribute.isFloat16BufferAttribute) {
         if (isWebGL2) {
           type2 = gl.HALF_FLOAT;
@@ -54739,48 +54739,48 @@ function WebGLAttributes(gl, capabilities) {
       } else {
         type2 = gl.UNSIGNED_SHORT;
       }
-    } else if (array instanceof Int16Array) {
+    } else if (array2 instanceof Int16Array) {
       type2 = gl.SHORT;
-    } else if (array instanceof Uint32Array) {
+    } else if (array2 instanceof Uint32Array) {
       type2 = gl.UNSIGNED_INT;
-    } else if (array instanceof Int32Array) {
+    } else if (array2 instanceof Int32Array) {
       type2 = gl.INT;
-    } else if (array instanceof Int8Array) {
+    } else if (array2 instanceof Int8Array) {
       type2 = gl.BYTE;
-    } else if (array instanceof Uint8Array) {
+    } else if (array2 instanceof Uint8Array) {
       type2 = gl.UNSIGNED_BYTE;
-    } else if (array instanceof Uint8ClampedArray) {
+    } else if (array2 instanceof Uint8ClampedArray) {
       type2 = gl.UNSIGNED_BYTE;
     } else {
-      throw new Error("THREE.WebGLAttributes: Unsupported buffer data format: " + array);
+      throw new Error("THREE.WebGLAttributes: Unsupported buffer data format: " + array2);
     }
     return {
       buffer,
       type: type2,
-      bytesPerElement: array.BYTES_PER_ELEMENT,
+      bytesPerElement: array2.BYTES_PER_ELEMENT,
       version: attribute.version
     };
   }
   function updateBuffer(buffer, attribute, bufferType) {
-    const array = attribute.array;
+    const array2 = attribute.array;
     const updateRange = attribute.updateRange;
     gl.bindBuffer(bufferType, buffer);
     if (updateRange.count === -1) {
-      gl.bufferSubData(bufferType, 0, array);
+      gl.bufferSubData(bufferType, 0, array2);
     } else {
       if (isWebGL2) {
         gl.bufferSubData(
           bufferType,
-          updateRange.offset * array.BYTES_PER_ELEMENT,
-          array,
+          updateRange.offset * array2.BYTES_PER_ELEMENT,
+          array2,
           updateRange.offset,
           updateRange.count
         );
       } else {
         gl.bufferSubData(
           bufferType,
-          updateRange.offset * array.BYTES_PER_ELEMENT,
-          array.subarray(updateRange.offset, updateRange.offset + updateRange.count)
+          updateRange.offset * array2.BYTES_PER_ELEMENT,
+          array2.subarray(updateRange.offset, updateRange.offset + updateRange.count)
         );
       }
       updateRange.count = -1;
@@ -56098,11 +56098,11 @@ function WebGLBufferRenderer(gl, extensions2, info, capabilities) {
   function setMode(value) {
     mode = value;
   }
-  function render(start, count) {
-    gl.drawArrays(mode, start, count);
-    info.update(count, mode, 1);
+  function render(start, count2) {
+    gl.drawArrays(mode, start, count2);
+    info.update(count2, mode, 1);
   }
-  function renderInstances(start, count, primcount) {
+  function renderInstances(start, count2, primcount) {
     if (primcount === 0)
       return;
     let extension, methodName;
@@ -56117,8 +56117,8 @@ function WebGLBufferRenderer(gl, extensions2, info, capabilities) {
         return;
       }
     }
-    extension[methodName](mode, start, count, primcount);
-    info.update(count, mode, primcount);
+    extension[methodName](mode, start, count2, primcount);
+    info.update(count2, mode, primcount);
   }
   this.setMode = setMode;
   this.render = render;
@@ -56719,9 +56719,9 @@ function _createPlanes(lodMax) {
     }
     sigmas.push(sigma);
     const texelSize = 1 / (sizeLod - 2);
-    const min = -texelSize;
-    const max = 1 + texelSize;
-    const uv1 = [min, min, max, min, max, max, min, min, max, max, min, max];
+    const min5 = -texelSize;
+    const max5 = 1 + texelSize;
+    const uv1 = [min5, min5, max5, min5, max5, max5, min5, min5, max5, max5, min5, max5];
     const cubeFaces = 6;
     const vertices = 6;
     const positionSize = 3;
@@ -57027,13 +57027,13 @@ function WebGLCubeUVMaps(renderer) {
     return texture;
   }
   function isCubeTextureComplete(image) {
-    let count = 0;
+    let count2 = 0;
     const length = 6;
     for (let i2 = 0; i2 < length; i2++) {
       if (image[i2] !== void 0)
-        count++;
+        count2++;
     }
-    return count === length;
+    return count2 === length;
   }
   function onTextureDispose(event) {
     const texture = event.target;
@@ -57151,9 +57151,9 @@ function WebGLGeometries(gl, attributes, info, bindingStates) {
     }
     const morphAttributes = geometry.morphAttributes;
     for (const name in morphAttributes) {
-      const array = morphAttributes[name];
-      for (let i2 = 0, l2 = array.length; i2 < l2; i2++) {
-        attributes.update(array[i2], gl.ARRAY_BUFFER);
+      const array2 = morphAttributes[name];
+      for (let i2 = 0, l2 = array2.length; i2 < l2; i2++) {
+        attributes.update(array2[i2], gl.ARRAY_BUFFER);
       }
     }
   }
@@ -57163,18 +57163,18 @@ function WebGLGeometries(gl, attributes, info, bindingStates) {
     const geometryPosition = geometry.attributes.position;
     let version = 0;
     if (geometryIndex !== null) {
-      const array = geometryIndex.array;
+      const array2 = geometryIndex.array;
       version = geometryIndex.version;
-      for (let i2 = 0, l2 = array.length; i2 < l2; i2 += 3) {
-        const a2 = array[i2 + 0];
-        const b2 = array[i2 + 1];
-        const c2 = array[i2 + 2];
+      for (let i2 = 0, l2 = array2.length; i2 < l2; i2 += 3) {
+        const a2 = array2[i2 + 0];
+        const b2 = array2[i2 + 1];
+        const c2 = array2[i2 + 2];
         indices2.push(a2, b2, b2, c2, c2, a2);
       }
     } else {
-      const array = geometryPosition.array;
+      const array2 = geometryPosition.array;
       version = geometryPosition.version;
-      for (let i2 = 0, l2 = array.length / 3 - 1; i2 < l2; i2 += 3) {
+      for (let i2 = 0, l2 = array2.length / 3 - 1; i2 < l2; i2 += 3) {
         const a2 = i2 + 0;
         const b2 = i2 + 1;
         const c2 = i2 + 2;
@@ -57219,11 +57219,11 @@ function WebGLIndexedBufferRenderer(gl, extensions2, info, capabilities) {
     type2 = value.type;
     bytesPerElement = value.bytesPerElement;
   }
-  function render(start, count) {
-    gl.drawElements(mode, count, type2, start * bytesPerElement);
-    info.update(count, mode, 1);
+  function render(start, count2) {
+    gl.drawElements(mode, count2, type2, start * bytesPerElement);
+    info.update(count2, mode, 1);
   }
-  function renderInstances(start, count, primcount) {
+  function renderInstances(start, count2, primcount) {
     if (primcount === 0)
       return;
     let extension, methodName;
@@ -57238,8 +57238,8 @@ function WebGLIndexedBufferRenderer(gl, extensions2, info, capabilities) {
         return;
       }
     }
-    extension[methodName](mode, count, type2, start * bytesPerElement, primcount);
-    info.update(count, mode, primcount);
+    extension[methodName](mode, count2, type2, start * bytesPerElement, primcount);
+    info.update(count2, mode, primcount);
   }
   this.setMode = setMode;
   this.setIndex = setIndex;
@@ -57258,23 +57258,23 @@ function WebGLInfo(gl) {
     points: 0,
     lines: 0
   };
-  function update(count, mode, instanceCount) {
+  function update(count2, mode, instanceCount) {
     render.calls++;
     switch (mode) {
       case gl.TRIANGLES:
-        render.triangles += instanceCount * (count / 3);
+        render.triangles += instanceCount * (count2 / 3);
         break;
       case gl.LINES:
-        render.lines += instanceCount * (count / 2);
+        render.lines += instanceCount * (count2 / 2);
         break;
       case gl.LINE_STRIP:
-        render.lines += instanceCount * (count - 1);
+        render.lines += instanceCount * (count2 - 1);
         break;
       case gl.LINE_LOOP:
-        render.lines += instanceCount * count;
+        render.lines += instanceCount * count2;
         break;
       case gl.POINTS:
-        render.points += instanceCount * count;
+        render.points += instanceCount * count2;
         break;
       default:
         console.error("THREE.WebGLInfo: Unknown draw mode:", mode);
@@ -57495,7 +57495,7 @@ function WebGLObjects(gl, geometries, attributes, info) {
     dispose
   };
 }
-const emptyTexture = /* @__PURE__ */ new Texture();
+const emptyTexture = /* @__PURE__ */ new Texture$1();
 const emptyArrayTexture = /* @__PURE__ */ new DataArrayTexture();
 const empty3dTexture = /* @__PURE__ */ new Data3DTexture();
 const emptyCubeTexture = /* @__PURE__ */ new CubeTexture();
@@ -57504,10 +57504,10 @@ const arrayCacheI32 = [];
 const mat4array = new Float32Array(16);
 const mat3array = new Float32Array(9);
 const mat2array = new Float32Array(4);
-function flatten(array, nBlocks, blockSize) {
-  const firstElem = array[0];
+function flatten(array2, nBlocks, blockSize) {
+  const firstElem = array2[0];
   if (firstElem <= 0 || firstElem > 0)
-    return array;
+    return array2;
   const n2 = nBlocks * blockSize;
   let r2 = arrayCacheF32[n2];
   if (r2 === void 0) {
@@ -57518,7 +57518,7 @@ function flatten(array, nBlocks, blockSize) {
     firstElem.toArray(r2, 0);
     for (let i2 = 1, offset = 0; i2 !== nBlocks; ++i2) {
       offset += blockSize;
-      array[i2].toArray(r2, offset);
+      array2[i2].toArray(r2, offset);
     }
   }
   return r2;
@@ -58983,76 +58983,76 @@ function WebGLPrograms(renderer, cubemaps, cubeuvmaps, extensions2, capabilities
     return parameters;
   }
   function getProgramCacheKey(parameters) {
-    const array = [];
+    const array2 = [];
     if (parameters.shaderID) {
-      array.push(parameters.shaderID);
+      array2.push(parameters.shaderID);
     } else {
-      array.push(parameters.customVertexShaderID);
-      array.push(parameters.customFragmentShaderID);
+      array2.push(parameters.customVertexShaderID);
+      array2.push(parameters.customFragmentShaderID);
     }
     if (parameters.defines !== void 0) {
       for (const name in parameters.defines) {
-        array.push(name);
-        array.push(parameters.defines[name]);
+        array2.push(name);
+        array2.push(parameters.defines[name]);
       }
     }
     if (parameters.isRawShaderMaterial === false) {
-      getProgramCacheKeyParameters(array, parameters);
-      getProgramCacheKeyBooleans(array, parameters);
-      array.push(renderer.outputColorSpace);
+      getProgramCacheKeyParameters(array2, parameters);
+      getProgramCacheKeyBooleans(array2, parameters);
+      array2.push(renderer.outputColorSpace);
     }
-    array.push(parameters.customProgramCacheKey);
-    return array.join();
+    array2.push(parameters.customProgramCacheKey);
+    return array2.join();
   }
-  function getProgramCacheKeyParameters(array, parameters) {
-    array.push(parameters.precision);
-    array.push(parameters.outputColorSpace);
-    array.push(parameters.envMapMode);
-    array.push(parameters.envMapCubeUVHeight);
-    array.push(parameters.mapUv);
-    array.push(parameters.alphaMapUv);
-    array.push(parameters.lightMapUv);
-    array.push(parameters.aoMapUv);
-    array.push(parameters.bumpMapUv);
-    array.push(parameters.normalMapUv);
-    array.push(parameters.displacementMapUv);
-    array.push(parameters.emissiveMapUv);
-    array.push(parameters.metalnessMapUv);
-    array.push(parameters.roughnessMapUv);
-    array.push(parameters.clearcoatMapUv);
-    array.push(parameters.clearcoatNormalMapUv);
-    array.push(parameters.clearcoatRoughnessMapUv);
-    array.push(parameters.iridescenceMapUv);
-    array.push(parameters.iridescenceThicknessMapUv);
-    array.push(parameters.sheenColorMapUv);
-    array.push(parameters.sheenRoughnessMapUv);
-    array.push(parameters.specularMapUv);
-    array.push(parameters.specularColorMapUv);
-    array.push(parameters.specularIntensityMapUv);
-    array.push(parameters.transmissionMapUv);
-    array.push(parameters.thicknessMapUv);
-    array.push(parameters.combine);
-    array.push(parameters.fogExp2);
-    array.push(parameters.sizeAttenuation);
-    array.push(parameters.morphTargetsCount);
-    array.push(parameters.morphAttributeCount);
-    array.push(parameters.numDirLights);
-    array.push(parameters.numPointLights);
-    array.push(parameters.numSpotLights);
-    array.push(parameters.numSpotLightMaps);
-    array.push(parameters.numHemiLights);
-    array.push(parameters.numRectAreaLights);
-    array.push(parameters.numDirLightShadows);
-    array.push(parameters.numPointLightShadows);
-    array.push(parameters.numSpotLightShadows);
-    array.push(parameters.numSpotLightShadowsWithMaps);
-    array.push(parameters.shadowMapType);
-    array.push(parameters.toneMapping);
-    array.push(parameters.numClippingPlanes);
-    array.push(parameters.numClipIntersection);
-    array.push(parameters.depthPacking);
+  function getProgramCacheKeyParameters(array2, parameters) {
+    array2.push(parameters.precision);
+    array2.push(parameters.outputColorSpace);
+    array2.push(parameters.envMapMode);
+    array2.push(parameters.envMapCubeUVHeight);
+    array2.push(parameters.mapUv);
+    array2.push(parameters.alphaMapUv);
+    array2.push(parameters.lightMapUv);
+    array2.push(parameters.aoMapUv);
+    array2.push(parameters.bumpMapUv);
+    array2.push(parameters.normalMapUv);
+    array2.push(parameters.displacementMapUv);
+    array2.push(parameters.emissiveMapUv);
+    array2.push(parameters.metalnessMapUv);
+    array2.push(parameters.roughnessMapUv);
+    array2.push(parameters.clearcoatMapUv);
+    array2.push(parameters.clearcoatNormalMapUv);
+    array2.push(parameters.clearcoatRoughnessMapUv);
+    array2.push(parameters.iridescenceMapUv);
+    array2.push(parameters.iridescenceThicknessMapUv);
+    array2.push(parameters.sheenColorMapUv);
+    array2.push(parameters.sheenRoughnessMapUv);
+    array2.push(parameters.specularMapUv);
+    array2.push(parameters.specularColorMapUv);
+    array2.push(parameters.specularIntensityMapUv);
+    array2.push(parameters.transmissionMapUv);
+    array2.push(parameters.thicknessMapUv);
+    array2.push(parameters.combine);
+    array2.push(parameters.fogExp2);
+    array2.push(parameters.sizeAttenuation);
+    array2.push(parameters.morphTargetsCount);
+    array2.push(parameters.morphAttributeCount);
+    array2.push(parameters.numDirLights);
+    array2.push(parameters.numPointLights);
+    array2.push(parameters.numSpotLights);
+    array2.push(parameters.numSpotLightMaps);
+    array2.push(parameters.numHemiLights);
+    array2.push(parameters.numRectAreaLights);
+    array2.push(parameters.numDirLightShadows);
+    array2.push(parameters.numPointLightShadows);
+    array2.push(parameters.numSpotLightShadows);
+    array2.push(parameters.numSpotLightShadowsWithMaps);
+    array2.push(parameters.shadowMapType);
+    array2.push(parameters.toneMapping);
+    array2.push(parameters.numClippingPlanes);
+    array2.push(parameters.numClipIntersection);
+    array2.push(parameters.depthPacking);
   }
-  function getProgramCacheKeyBooleans(array, parameters) {
+  function getProgramCacheKeyBooleans(array2, parameters) {
     _programLayers.disableAll();
     if (parameters.isWebGL2)
       _programLayers.enable(0);
@@ -59088,7 +59088,7 @@ function WebGLPrograms(renderer, cubemaps, cubeuvmaps, extensions2, capabilities
       _programLayers.enable(15);
     if (parameters.vertexTangents)
       _programLayers.enable(16);
-    array.push(_programLayers.mask);
+    array2.push(_programLayers.mask);
     _programLayers.disableAll();
     if (parameters.fog)
       _programLayers.enable(0);
@@ -59128,7 +59128,7 @@ function WebGLPrograms(renderer, cubemaps, cubeuvmaps, extensions2, capabilities
       _programLayers.enable(17);
     if (parameters.pointsUvs)
       _programLayers.enable(18);
-    array.push(_programLayers.mask);
+    array2.push(_programLayers.mask);
   }
   function getUniforms(material) {
     const shaderID = shaderIDs[material.type];
@@ -60240,13 +60240,13 @@ function WebGLState(gl, extensions2, capabilities) {
   const viewportParam = gl.getParameter(gl.VIEWPORT);
   const currentScissor = new Vector4().fromArray(scissorParam);
   const currentViewport = new Vector4().fromArray(viewportParam);
-  function createTexture2(type2, target, count, dimensions) {
+  function createTexture2(type2, target, count2, dimensions) {
     const data = new Uint8Array(4);
     const texture = gl.createTexture();
     gl.bindTexture(type2, texture);
     gl.texParameteri(type2, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(type2, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    for (let i2 = 0; i2 < count; i2++) {
+    for (let i2 = 0; i2 < count2; i2++) {
       if (isWebGL2 && (type2 === gl.TEXTURE_3D || type2 === gl.TEXTURE_2D_ARRAY)) {
         gl.texImage3D(target, 0, gl.RGBA, 1, 1, dimensions, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
       } else {
@@ -60795,18 +60795,18 @@ function WebGLTextures(_gl, extensions2, state, properties, capabilities, utils,
     }
     if (scale < 1 || needsPowerOfTwo === true) {
       if (typeof HTMLImageElement !== "undefined" && image instanceof HTMLImageElement || typeof HTMLCanvasElement !== "undefined" && image instanceof HTMLCanvasElement || typeof ImageBitmap !== "undefined" && image instanceof ImageBitmap) {
-        const floor = needsPowerOfTwo ? floorPowerOfTwo : Math.floor;
-        const width = floor(scale * image.width);
-        const height = floor(scale * image.height);
+        const floor4 = needsPowerOfTwo ? floorPowerOfTwo : Math.floor;
+        const width = floor4(scale * image.width);
+        const height = floor4(scale * image.height);
         if (_canvas2 === void 0)
           _canvas2 = createCanvas(width, height);
-        const canvas = needsNewCanvas ? createCanvas(width, height) : _canvas2;
-        canvas.width = width;
-        canvas.height = height;
-        const context2 = canvas.getContext("2d");
+        const canvas3 = needsNewCanvas ? createCanvas(width, height) : _canvas2;
+        canvas3.width = width;
+        canvas3.height = height;
+        const context2 = canvas3.getContext("2d");
         context2.drawImage(image, 0, 0, width, height);
         console.warn("THREE.WebGLRenderer: Texture has been resized from (" + image.width + "x" + image.height + ") to (" + width + "x" + height + ").");
-        return canvas;
+        return canvas3;
       } else {
         if ("data" in image) {
           console.warn("THREE.WebGLRenderer: Image in DataTexture is too big (" + image.width + "x" + image.height + ").");
@@ -60986,22 +60986,22 @@ function WebGLTextures(_gl, extensions2, state, properties, capabilities, utils,
     return textureUnit;
   }
   function getTextureCacheKey(texture) {
-    const array = [];
-    array.push(texture.wrapS);
-    array.push(texture.wrapT);
-    array.push(texture.wrapR || 0);
-    array.push(texture.magFilter);
-    array.push(texture.minFilter);
-    array.push(texture.anisotropy);
-    array.push(texture.internalFormat);
-    array.push(texture.format);
-    array.push(texture.type);
-    array.push(texture.generateMipmaps);
-    array.push(texture.premultiplyAlpha);
-    array.push(texture.flipY);
-    array.push(texture.unpackAlignment);
-    array.push(texture.colorSpace);
-    return array.join();
+    const array2 = [];
+    array2.push(texture.wrapS);
+    array2.push(texture.wrapT);
+    array2.push(texture.wrapR || 0);
+    array2.push(texture.magFilter);
+    array2.push(texture.minFilter);
+    array2.push(texture.anisotropy);
+    array2.push(texture.internalFormat);
+    array2.push(texture.format);
+    array2.push(texture.type);
+    array2.push(texture.generateMipmaps);
+    array2.push(texture.premultiplyAlpha);
+    array2.push(texture.flipY);
+    array2.push(texture.unpackAlignment);
+    array2.push(texture.colorSpace);
+    return array2.join();
   }
   function setTexture2D(texture, slot) {
     const textureProperties = properties.get(texture);
@@ -62015,13 +62015,13 @@ function WebGLUtils(gl, extensions2, capabilities) {
   return { convert };
 }
 class ArrayCamera extends PerspectiveCamera {
-  constructor(array = []) {
+  constructor(array2 = []) {
     super();
     this.isArrayCamera = true;
-    this.cameras = array;
+    this.cameras = array2;
   }
 }
-class Group extends Object3D {
+class Group$1 extends Object3D {
   constructor() {
     super();
     this.isGroup = true;
@@ -62037,7 +62037,7 @@ class WebXRController {
   }
   getHandSpace() {
     if (this._hand === null) {
-      this._hand = new Group();
+      this._hand = new Group$1();
       this._hand.matrixAutoUpdate = false;
       this._hand.visible = false;
       this._hand.joints = {};
@@ -62047,7 +62047,7 @@ class WebXRController {
   }
   getTargetRaySpace() {
     if (this._targetRay === null) {
-      this._targetRay = new Group();
+      this._targetRay = new Group$1();
       this._targetRay.matrixAutoUpdate = false;
       this._targetRay.visible = false;
       this._targetRay.hasLinearVelocity = false;
@@ -62059,7 +62059,7 @@ class WebXRController {
   }
   getGripSpace() {
     if (this._grip === null) {
-      this._grip = new Group();
+      this._grip = new Group$1();
       this._grip.matrixAutoUpdate = false;
       this._grip.visible = false;
       this._grip.hasLinearVelocity = false;
@@ -62207,7 +62207,7 @@ class WebXRController {
   }
   _getHandJoint(hand, inputjoint) {
     if (hand.joints[inputjoint.jointName] === void 0) {
-      const joint = new Group();
+      const joint = new Group$1();
       joint.matrixAutoUpdate = false;
       joint.visible = false;
       hand.joints[inputjoint.jointName] = joint;
@@ -62216,7 +62216,7 @@ class WebXRController {
     return hand.joints[inputjoint.jointName];
   }
 }
-class DepthTexture extends Texture {
+class DepthTexture extends Texture$1 {
   constructor(width, height, type2, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, format2) {
     format2 = format2 !== void 0 ? format2 : DepthFormat;
     if (format2 !== DepthFormat && format2 !== DepthStencilFormat) {
@@ -63193,14 +63193,14 @@ function WebGLUniformsGroups(gl, info, capabilities, state) {
   };
 }
 function createCanvasElement() {
-  const canvas = createElementNS("canvas");
-  canvas.style.display = "block";
-  return canvas;
+  const canvas3 = createElementNS("canvas");
+  canvas3.style.display = "block";
+  return canvas3;
 }
 class WebGLRenderer {
   constructor(parameters = {}) {
     const {
-      canvas = createCanvasElement(),
+      canvas: canvas3 = createCanvasElement(),
       context: context2 = null,
       depth = true,
       stencil = true,
@@ -63222,7 +63222,7 @@ class WebGLRenderer {
     let currentRenderState = null;
     const renderListStack = [];
     const renderStateStack = [];
-    this.domElement = canvas;
+    this.domElement = canvas3;
     this.debug = {
       checkShaderErrors: true,
       onShaderError: null
@@ -63248,8 +63248,8 @@ class WebGLRenderer {
     const _currentViewport = new Vector4();
     const _currentScissor = new Vector4();
     let _currentScissorTest = null;
-    let _width = canvas.width;
-    let _height = canvas.height;
+    let _width = canvas3.width;
+    let _height = canvas3.height;
     let _pixelRatio = 1;
     let _opaqueSort = null;
     let _transparentSort = null;
@@ -63270,7 +63270,7 @@ class WebGLRenderer {
     function getContext(contextNames, contextAttributes) {
       for (let i2 = 0; i2 < contextNames.length; i2++) {
         const contextName = contextNames[i2];
-        const context3 = canvas.getContext(contextName, contextAttributes);
+        const context3 = canvas3.getContext(contextName, contextAttributes);
         if (context3 !== null)
           return context3;
       }
@@ -63287,11 +63287,11 @@ class WebGLRenderer {
         powerPreference,
         failIfMajorPerformanceCaveat
       };
-      if ("setAttribute" in canvas)
-        canvas.setAttribute("data-engine", `three.js r${REVISION}`);
-      canvas.addEventListener("webglcontextlost", onContextLost, false);
-      canvas.addEventListener("webglcontextrestored", onContextRestore, false);
-      canvas.addEventListener("webglcontextcreationerror", onContextCreationError, false);
+      if ("setAttribute" in canvas3)
+        canvas3.setAttribute("data-engine", `three.js r${REVISION}`);
+      canvas3.addEventListener("webglcontextlost", onContextLost, false);
+      canvas3.addEventListener("webglcontextrestored", onContextRestore, false);
+      canvas3.addEventListener("webglcontextcreationerror", onContextCreationError, false);
       if (_gl === null) {
         const contextNames = ["webgl2", "webgl", "experimental-webgl"];
         if (_this.isWebGL1Renderer === true) {
@@ -63393,11 +63393,11 @@ class WebGLRenderer {
       }
       _width = width;
       _height = height;
-      canvas.width = Math.floor(width * _pixelRatio);
-      canvas.height = Math.floor(height * _pixelRatio);
+      canvas3.width = Math.floor(width * _pixelRatio);
+      canvas3.height = Math.floor(height * _pixelRatio);
       if (updateStyle === true) {
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
+        canvas3.style.width = width + "px";
+        canvas3.style.height = height + "px";
       }
       this.setViewport(0, 0, width, height);
     };
@@ -63408,8 +63408,8 @@ class WebGLRenderer {
       _width = width;
       _height = height;
       _pixelRatio = pixelRatio;
-      canvas.width = Math.floor(width * pixelRatio);
-      canvas.height = Math.floor(height * pixelRatio);
+      canvas3.width = Math.floor(width * pixelRatio);
+      canvas3.height = Math.floor(height * pixelRatio);
       this.setViewport(0, 0, width, height);
     };
     this.getCurrentViewport = function(target) {
@@ -63481,9 +63481,9 @@ class WebGLRenderer {
       this.clear(false, false, true);
     };
     this.dispose = function() {
-      canvas.removeEventListener("webglcontextlost", onContextLost, false);
-      canvas.removeEventListener("webglcontextrestored", onContextRestore, false);
-      canvas.removeEventListener("webglcontextcreationerror", onContextCreationError, false);
+      canvas3.removeEventListener("webglcontextlost", onContextLost, false);
+      canvas3.removeEventListener("webglcontextrestored", onContextRestore, false);
+      canvas3.removeEventListener("webglcontextcreationerror", onContextCreationError, false);
       renderLists.dispose();
       renderStates.dispose();
       properties.dispose();
@@ -64541,12 +64541,12 @@ class LoadingManager {
       urlModifier = transform;
       return this;
     };
-    this.addHandler = function(regex, loader) {
-      handlers.push(regex, loader);
+    this.addHandler = function(regex3, loader) {
+      handlers.push(regex3, loader);
       return this;
     };
-    this.removeHandler = function(regex) {
-      const index = handlers.indexOf(regex);
+    this.removeHandler = function(regex3) {
+      const index = handlers.indexOf(regex3);
       if (index !== -1) {
         handlers.splice(index, 2);
       }
@@ -64554,11 +64554,11 @@ class LoadingManager {
     };
     this.getHandler = function(file) {
       for (let i2 = 0, l2 = handlers.length; i2 < l2; i2 += 2) {
-        const regex = handlers[i2];
+        const regex3 = handlers[i2];
         const loader = handlers[i2 + 1];
-        if (regex.global)
-          regex.lastIndex = 0;
-        if (regex.test(file)) {
+        if (regex3.global)
+          regex3.lastIndex = 0;
+        if (regex3.test(file)) {
           return loader;
         }
       }
@@ -64661,7 +64661,7 @@ class TextureLoader extends Loader {
     super(manager);
   }
   load(url2, onLoad, onProgress, onError) {
-    const texture = new Texture();
+    const texture = new Texture$1();
     const loader = new ImageLoader(this.manager);
     loader.setCrossOrigin(this.crossOrigin);
     loader.setPath(this.path);
@@ -64687,13 +64687,13 @@ if (typeof window !== "undefined") {
     window.__THREE__ = REVISION;
   }
 }
-var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
-function helloThreeJs(canvas) {
+var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
+function helloThreeJs(canvas3) {
   const scene = new Scene();
   const camera = new PerspectiveCamera(75, 1, 0.1, 1e3);
   const renderer = new WebGLRenderer({
     antialias: true,
-    canvas
+    canvas: canvas3
   });
   renderer.setSize(400, 400);
   const geometry = new BoxGeometry(1, 1, 1);
@@ -64705,45 +64705,45 @@ function helloThreeJs(canvas) {
   camera.position.z = 5;
   renderer.render(scene, camera);
 }
-function Component$3() {
+function Component$4() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) {
+    const canvas3 = ref.current;
+    if (!canvas3) {
       throw new Error("Could not find canvas");
     }
-    helloThreeJs(canvas);
+    helloThreeJs(canvas3);
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
     ref,
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$4,
+    fileName: _jsxFileName$5,
     lineNumber: 35,
     columnNumber: 10
   }, this);
 }
-const example$3 = {
+const example$4 = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
   description: "Three.js hello world",
-  Component: Component$3
+  Component: Component$4
 };
-var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
+var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
 async function renderBitmap$1() {
   const w2 = 400;
   const h2 = 400;
-  const canvas = new OffscreenCanvas(0, 0);
+  const canvas3 = new OffscreenCanvas(0, 0);
   const scene = new Scene();
   const camera = new PerspectiveCamera(75, w2 / h2, 0.1, 1e3);
   const renderer = new WebGLRenderer({
     antialias: true,
-    canvas
+    canvas: canvas3
   });
-  canvas.width = w2;
-  canvas.height = h2;
+  canvas3.width = w2;
+  canvas3.height = h2;
   renderer.setViewport(0, 0, w2, h2);
   const geometry = new BoxGeometry(1, 1, 1);
   const material = new MeshBasicMaterial({
@@ -64753,9 +64753,9 @@ async function renderBitmap$1() {
   scene.add(cube);
   camera.position.z = 5;
   renderer.render(scene, camera);
-  return canvas.transferToImageBitmap();
+  return canvas3.transferToImageBitmap();
 }
-function Component$2() {
+function Component$3() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64772,22 +64772,22 @@ function Component$2() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$3,
+    fileName: _jsxFileName$4,
     lineNumber: 44,
     columnNumber: 10
   }, this);
 }
-const example$2 = {
+const example$3 = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
   description: "Three.js with offscreen canvas",
-  Component: Component$2
+  Component: Component$3
 };
-var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
+var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
 async function renderBitmap(w2, h2) {
   const bunnySize = [26, 37];
-  const canvas = new OffscreenCanvas(w2, h2);
+  const canvas3 = new OffscreenCanvas(w2, h2);
   const perspective = 100;
   const fov2 = 180 * (2 * Math.atan(h2 / 2 / perspective)) / Math.PI;
   const camera = new PerspectiveCamera(fov2, w2 / h2, 0.1, 1e3);
@@ -64807,21 +64807,21 @@ async function renderBitmap(w2, h2) {
   scene.add(mesh2);
   const renderer = new WebGLRenderer({
     antialias: true,
-    canvas
+    canvas: canvas3
   });
   renderer.render(scene, camera);
-  return canvas.transferToImageBitmap();
+  return canvas3.transferToImageBitmap();
 }
-function Component$1() {
+function Component$2() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
-    const canvas = ref.current;
+    const canvas3 = ref.current;
     const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
-    if (!canvas || !ctx) {
+    if (!canvas3 || !ctx) {
       throw new Error("Could not create 2d canvas context");
     }
-    renderBitmap(canvas.width, canvas.height).then((bitmap) => {
+    renderBitmap(canvas3.width, canvas3.height).then((bitmap) => {
       ctx.drawImage(bitmap, 0, 0);
     });
   }, []);
@@ -64831,26 +64831,26 @@ function Component$1() {
       width: 260,
       height: 370
     }, void 0, false, {
-      fileName: _jsxFileName$2,
+      fileName: _jsxFileName$3,
       lineNumber: 55,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("img", {
       src: "/bunny.png"
     }, void 0, false, {
-      fileName: _jsxFileName$2,
+      fileName: _jsxFileName$3,
       lineNumber: 56,
       columnNumber: 7
     }, this)]
   }, void 0, true);
 }
-const example$1 = {
+const example$2 = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
   description: "Three.js rendering a texture",
-  Component: Component$1
+  Component: Component$2
 };
-var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
 function createBunnies(view) {
   const app = new Application({
     background: "#1099bb",
@@ -64858,9 +64858,9 @@ function createBunnies(view) {
   });
   const container = new Container();
   app.stage.addChild(container);
-  const texture = Texture$1.from("bunny.png");
+  const texture = Texture$2.from("bunny.png");
   for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite(texture);
+    const bunny = new Sprite$1(texture);
     bunny.anchor.set(0.5);
     bunny.x = i2 % 5 * 40;
     bunny.y = Math.floor(i2 / 5) * 40;
@@ -64874,7 +64874,7 @@ function createBunnies(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component() {
+function Component$1() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -64887,19 +64887,10585 @@ function Component() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$1,
+    fileName: _jsxFileName$2,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example = {
+const example$1 = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
   description: "",
+  Component: Component$1
+};
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __export = (target, all2) => {
+  for (var name in all2)
+    __defProp(target, name, { get: all2[name], enumerable: true });
+};
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+var Commands = {
+  move: "M",
+  line: "L",
+  curve: "C",
+  arc: "A",
+  close: "Z"
+};
+var math_exports = {};
+__export(math_exports, {
+  HALF_PI: () => HALF_PI,
+  NumArray: () => NumArray,
+  TWO_PI: () => TWO_PI,
+  decomposeMatrix: () => decomposeMatrix,
+  getComputedMatrix: () => getComputedMatrix,
+  getPoT: () => getPoT,
+  lerp: () => lerp,
+  mod: () => mod,
+  setMatrix: () => setMatrix,
+  toFixed: () => toFixed
+});
+var root;
+if (typeof window !== "undefined") {
+  root = window;
+} else if (typeof global !== "undefined") {
+  root = global;
+} else if (typeof self !== "undefined") {
+  root = self;
+}
+var Matrix;
+var TWO_PI = Math.PI * 2;
+var HALF_PI = Math.PI * 0.5;
+function decomposeMatrix(matrix, b2, c2, d2, e2, f2) {
+  let a2;
+  if (arguments.length <= 1) {
+    a2 = matrix.a;
+    b2 = matrix.b;
+    c2 = matrix.c;
+    d2 = matrix.d;
+    e2 = matrix.e;
+    f2 = matrix.f;
+  } else {
+    a2 = matrix;
+  }
+  return {
+    translateX: e2,
+    translateY: f2,
+    scaleX: Math.sqrt(a2 * a2 + b2 * b2),
+    scaleY: Math.sqrt(c2 * c2 + d2 * d2),
+    rotation: 180 * Math.atan2(b2, a2) / Math.PI
+  };
+}
+function setMatrix(matrix) {
+  Matrix = matrix;
+}
+function getComputedMatrix(object, matrix) {
+  matrix = matrix && matrix.identity() || new Matrix();
+  let parent = object;
+  const matrices = [];
+  while (parent && parent._matrix) {
+    matrices.push(parent._matrix);
+    parent = parent.parent;
+  }
+  matrices.reverse();
+  for (let i2 = 0; i2 < matrices.length; i2++) {
+    const m2 = matrices[i2];
+    const e2 = m2.elements;
+    matrix.multiply(
+      e2[0],
+      e2[1],
+      e2[2],
+      e2[3],
+      e2[4],
+      e2[5],
+      e2[6],
+      e2[7],
+      e2[8],
+      e2[9]
+    );
+  }
+  return matrix;
+}
+function lerp(a2, b2, t2) {
+  return t2 * (b2 - a2) + a2;
+}
+var pots = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096];
+function getPoT(value) {
+  let i2 = 0;
+  while (pots[i2] && pots[i2] < value) {
+    i2++;
+  }
+  return pots[i2];
+}
+function mod(v2, l2) {
+  while (v2 < 0) {
+    v2 += l2;
+  }
+  return v2 % l2;
+}
+var NumArray = root.Float32Array || Array;
+var floor = Math.floor;
+function toFixed(v2) {
+  return floor(v2 * 1e6) / 1e6;
+}
+var curves_exports = {};
+__export(curves_exports, {
+  Curve: () => Curve,
+  getAnchorsFromArcData: () => getAnchorsFromArcData,
+  getComponentOnCubicBezier: () => getComponentOnCubicBezier,
+  getControlPoints: () => getControlPoints,
+  getCurveBoundingBox: () => getCurveBoundingBox,
+  getCurveFromPoints: () => getCurveFromPoints,
+  getCurveLength: () => getCurveLength,
+  getReflection: () => getReflection,
+  integrate: () => integrate,
+  subdivide: () => subdivide
+});
+var Events = class {
+  constructor() {
+    __publicField(this, "_events", {});
+    __publicField(this, "_bound", false);
+  }
+  addEventListener(name, handler) {
+    const list2 = this._events[name] || (this._events[name] = []);
+    list2.push(handler);
+    this._bound = true;
+    return this;
+  }
+  on() {
+    return this.addEventListener.apply(this, arguments);
+  }
+  bind() {
+    return this.addEventListener.apply(this, arguments);
+  }
+  removeEventListener(name, handler) {
+    if (!this._events) {
+      return this;
+    }
+    if (!name && !handler) {
+      this._events = {};
+      this._bound = false;
+      return this;
+    }
+    const names = name ? [name] : Object.keys(this._events);
+    for (let i2 = 0, l2 = names.length; i2 < l2; i2++) {
+      name = names[i2];
+      let list2 = this._events[name];
+      if (list2) {
+        let events = [];
+        if (handler) {
+          for (let j2 = 0, k2 = list2.length; j2 < k2; j2++) {
+            let e2 = list2[j2];
+            e2 = e2.handler ? e2.handler : e2;
+            if (handler !== e2) {
+              events.push(e2);
+            }
+          }
+        }
+        this._events[name] = events;
+      }
+    }
+    return this;
+  }
+  off() {
+    return this.removeEventListener.apply(this, arguments);
+  }
+  unbind() {
+    return this.removeEventListener.apply(this, arguments);
+  }
+  dispatchEvent(name) {
+    if (!this._events) {
+      return this;
+    }
+    const args = Array.prototype.slice.call(arguments, 1);
+    const events = this._events[name];
+    if (events) {
+      for (let i2 = 0; i2 < events.length; i2++) {
+        events[i2].call(this, ...args);
+      }
+    }
+    return this;
+  }
+  trigger() {
+    return this.dispatchEvent.apply(this, arguments);
+  }
+  listen(obj, name, handler) {
+    const scope = this;
+    if (obj) {
+      e2.obj = obj;
+      e2.name = name;
+      e2.handler = handler;
+      obj.on(name, e2);
+    }
+    function e2() {
+      handler.apply(scope, arguments);
+    }
+    return scope;
+  }
+  ignore(obj, name, handler) {
+    obj.off(name, handler);
+    return this;
+  }
+};
+__publicField(Events, "Types", {
+  play: "play",
+  pause: "pause",
+  update: "update",
+  render: "render",
+  resize: "resize",
+  change: "change",
+  remove: "remove",
+  insert: "insert",
+  order: "order",
+  load: "load"
+});
+__publicField(Events, "Methods", [
+  "addEventListener",
+  "on",
+  "removeEventListener",
+  "off",
+  "unbind",
+  "dispatchEvent",
+  "trigger",
+  "listen",
+  "ignore"
+]);
+var proto = {
+  x: {
+    enumerable: true,
+    get: function() {
+      return this._x;
+    },
+    set: function(v2) {
+      if (this._x !== v2) {
+        this._x = v2;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  y: {
+    enumerable: true,
+    get: function() {
+      return this._y;
+    },
+    set: function(v2) {
+      if (this._y !== v2) {
+        this._y = v2;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  }
+};
+var _Vector = class extends Events {
+  constructor(x2 = 0, y2 = 0) {
+    super();
+    __publicField(this, "_x", 0);
+    __publicField(this, "_y", 0);
+    for (let prop in proto) {
+      Object.defineProperty(this, prop, proto[prop]);
+    }
+    this.x = x2;
+    this.y = y2;
+  }
+  static add(v1, v2) {
+    return new _Vector(v1.x + v2.x, v1.y + v2.y);
+  }
+  static sub(v1, v2) {
+    return new _Vector(v1.x - v2.x, v1.y - v2.y);
+  }
+  static subtract(v1, v2) {
+    return _Vector.sub(v1, v2);
+  }
+  static ratioBetween(v1, v2) {
+    return (v1.x * v2.x + v1.y * v2.y) / (v1.length() * v2.length());
+  }
+  static angleBetween(v1, v2) {
+    if (arguments.length >= 4) {
+      const dx2 = arguments[0] - arguments[2];
+      const dy2 = arguments[1] - arguments[3];
+      return Math.atan2(dy2, dx2);
+    }
+    const dx = v1.x - v2.x;
+    const dy = v1.y - v2.y;
+    return Math.atan2(dy, dx);
+  }
+  static distanceBetween(v1, v2) {
+    return Math.sqrt(_Vector.distanceBetweenSquared(v1, v2));
+  }
+  static distanceBetweenSquared(v1, v2) {
+    const dx = v1.x - v2.x;
+    const dy = v1.y - v2.y;
+    return dx * dx + dy * dy;
+  }
+  set(x2, y2) {
+    this.x = x2;
+    this.y = y2;
+    return this;
+  }
+  copy(v2) {
+    this.x = v2.x;
+    this.y = v2.y;
+    return this;
+  }
+  clear() {
+    this.x = 0;
+    this.y = 0;
+    return this;
+  }
+  clone() {
+    return new _Vector(this.x, this.y);
+  }
+  add(x2, y2) {
+    if (arguments.length <= 0) {
+      return this;
+    } else if (arguments.length <= 1) {
+      if (typeof x2 === "number") {
+        this.x += x2;
+        this.y += x2;
+      } else if (x2 && typeof x2.x === "number" && typeof x2.y === "number") {
+        this.x += x2.x;
+        this.y += x2.y;
+      }
+    } else {
+      this.x += x2;
+      this.y += y2;
+    }
+    return this;
+  }
+  addSelf(v2) {
+    return this.add.apply(this, arguments);
+  }
+  sub(x2, y2) {
+    if (arguments.length <= 0) {
+      return this;
+    } else if (arguments.length <= 1) {
+      if (typeof x2 === "number") {
+        this.x -= x2;
+        this.y -= x2;
+      } else if (x2 && typeof x2.x === "number" && typeof x2.y === "number") {
+        this.x -= x2.x;
+        this.y -= x2.y;
+      }
+    } else {
+      this.x -= x2;
+      this.y -= y2;
+    }
+    return this;
+  }
+  subtract() {
+    return this.sub.apply(this, arguments);
+  }
+  subSelf(v2) {
+    return this.sub.apply(this, arguments);
+  }
+  subtractSelf(v2) {
+    return this.sub.apply(this, arguments);
+  }
+  multiply(x2, y2) {
+    if (arguments.length <= 0) {
+      return this;
+    } else if (arguments.length <= 1) {
+      if (typeof x2 === "number") {
+        this.x *= x2;
+        this.y *= x2;
+      } else if (x2 && typeof x2.x === "number" && typeof x2.y === "number") {
+        this.x *= x2.x;
+        this.y *= x2.y;
+      }
+    } else {
+      this.x *= x2;
+      this.y *= y2;
+    }
+    return this;
+  }
+  multiplySelf(v2) {
+    return this.multiply.apply(this, arguments);
+  }
+  multiplyScalar(s2) {
+    return this.multiply(s2);
+  }
+  divide(x2, y2) {
+    if (arguments.length <= 0) {
+      return this;
+    } else if (arguments.length <= 1) {
+      if (typeof x2 === "number") {
+        this.x /= x2;
+        this.y /= x2;
+      } else if (x2 && typeof x2.x === "number" && typeof x2.y === "number") {
+        this.x /= x2.x;
+        this.y /= x2.y;
+      }
+    } else {
+      this.x /= x2;
+      this.y /= y2;
+    }
+    if (isNaN(this.x)) {
+      this.x = 0;
+    }
+    if (isNaN(this.y)) {
+      this.y = 0;
+    }
+    return this;
+  }
+  divideSelf(v2) {
+    return this.divide.apply(this, arguments);
+  }
+  divideScalar(s2) {
+    return this.divide(s2);
+  }
+  negate() {
+    return this.multiply(-1);
+  }
+  dot(v2) {
+    return this.x * v2.x + this.y * v2.y;
+  }
+  length() {
+    return Math.sqrt(this.lengthSquared());
+  }
+  lengthSquared() {
+    return this.x * this.x + this.y * this.y;
+  }
+  normalize() {
+    return this.divideScalar(this.length());
+  }
+  distanceTo(v2) {
+    return Math.sqrt(this.distanceToSquared(v2));
+  }
+  distanceToSquared(v2) {
+    const dx = this.x - v2.x;
+    const dy = this.y - v2.y;
+    return dx * dx + dy * dy;
+  }
+  setLength(l2) {
+    return this.normalize().multiplyScalar(l2);
+  }
+  equals(v2, eps) {
+    eps = typeof eps === "undefined" ? 1e-4 : eps;
+    return this.distanceTo(v2) < eps;
+  }
+  lerp(v2, t2) {
+    const x2 = (v2.x - this.x) * t2 + this.x;
+    const y2 = (v2.y - this.y) * t2 + this.y;
+    return this.set(x2, y2);
+  }
+  isZero(eps) {
+    eps = typeof eps === "undefined" ? 1e-4 : eps;
+    return this.length() < eps;
+  }
+  toString() {
+    return this.x + ", " + this.y;
+  }
+  toObject() {
+    return { x: this.x, y: this.y };
+  }
+  rotate(radians) {
+    const x2 = this.x;
+    const y2 = this.y;
+    const cos7 = Math.cos(radians);
+    const sin7 = Math.sin(radians);
+    this.x = x2 * cos7 - y2 * sin7;
+    this.y = x2 * sin7 + y2 * cos7;
+    return this;
+  }
+};
+var Vector = _Vector;
+__publicField(Vector, "zero", new _Vector());
+__publicField(Vector, "left", new _Vector(-1, 0));
+__publicField(Vector, "right", new _Vector(1, 0));
+__publicField(Vector, "up", new _Vector(0, -1));
+__publicField(Vector, "down", new _Vector(0, 1));
+var Anchor = class extends Vector {
+  constructor(x2 = 0, y2 = 0, ax = 0, ay = 0, bx = 0, by = 0, command = Commands.move) {
+    super(x2, y2);
+    __publicField(this, "controls", {
+      left: new Vector(),
+      right: new Vector()
+    });
+    __publicField(this, "_command", Commands.move);
+    __publicField(this, "_relative", true);
+    __publicField(this, "_rx", 0);
+    __publicField(this, "_ry", 0);
+    __publicField(this, "_xAxisRotation", 0);
+    __publicField(this, "_largeArcFlag", 0);
+    __publicField(this, "_sweepFlag", 1);
+    for (let prop in proto2) {
+      Object.defineProperty(this, prop, proto2[prop]);
+    }
+    this.command = command;
+    this.relative = true;
+    const broadcast = Anchor.makeBroadcast(this);
+    this.controls.left.set(ax, ay).addEventListener(Events.Types.change, broadcast);
+    this.controls.right.set(bx, by).addEventListener(Events.Types.change, broadcast);
+  }
+  static makeBroadcast(scope) {
+    return broadcast;
+    function broadcast() {
+      if (scope._bound) {
+        scope.dispatchEvent(Events.Types.change);
+      }
+    }
+  }
+  copy(v2) {
+    this.x = v2.x;
+    this.y = v2.y;
+    if (typeof v2.command === "string") {
+      this.command = v2.command;
+    }
+    if (v2.controls) {
+      if (v2.controls.left) {
+        this.controls.left.copy(v2.controls.left);
+      }
+      if (v2.controls.right) {
+        this.controls.right.copy(v2.controls.right);
+      }
+    }
+    if (typeof v2.relative === "boolean") {
+      this.relative = v2.relative;
+    }
+    if (typeof v2.rx === "number") {
+      this.rx = v2.rx;
+    }
+    if (typeof v2.ry === "number") {
+      this.ry = v2.ry;
+    }
+    if (typeof v2.xAxisRotation === "number") {
+      this.xAxisRotation = v2.xAxisRotation;
+    }
+    if (typeof v2.largeArcFlag === "number") {
+      this.largeArcFlag = v2.largeArcFlag;
+    }
+    if (typeof v2.sweepFlag === "number") {
+      this.sweepFlag = v2.sweepFlag;
+    }
+    return this;
+  }
+  clone() {
+    return new Anchor().copy(this);
+  }
+  toObject() {
+    return {
+      x: this.x,
+      y: this.y,
+      command: this.command,
+      relative: this.relative,
+      controls: {
+        left: this.controls.left.toObject(),
+        right: this.controls.right.toObject()
+      },
+      rx: this.rx,
+      ry: this.ry,
+      xAxisRotation: this.xAxisRotation,
+      largeArcFlag: this.largeArcFlag,
+      sweepFlag: this.sweepFlag
+    };
+  }
+  toString() {
+    return JSON.stringify(this.toObject());
+  }
+};
+var proto2 = {
+  command: {
+    enumerable: true,
+    get: function() {
+      return this._command;
+    },
+    set: function(command) {
+      if (this._command !== command) {
+        this._command = command;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  relative: {
+    enumerable: true,
+    get: function() {
+      return this._relative;
+    },
+    set: function(relative) {
+      if (this._relative !== !!relative) {
+        this._relative = !!relative;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  rx: {
+    enumerable: true,
+    get: function() {
+      return this._rx;
+    },
+    set: function(rx) {
+      if (this._rx !== rx) {
+        this._rx = rx;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  ry: {
+    enumerable: true,
+    get: function() {
+      return this._ry;
+    },
+    set: function(ry) {
+      if (this._ry !== ry) {
+        this._ry = ry;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  xAxisRotation: {
+    enumerable: true,
+    get: function() {
+      return this._xAxisRotation;
+    },
+    set: function(xAxisRotation) {
+      if (this._xAxisRotation !== xAxisRotation) {
+        this._xAxisRotation = xAxisRotation;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  largeArcFlag: {
+    enumerable: true,
+    get: function() {
+      return this._largeArcFlag;
+    },
+    set: function(largeArcFlag) {
+      if (this._largeArcFlag !== largeArcFlag) {
+        this._largeArcFlag = largeArcFlag;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  },
+  sweepFlag: {
+    get: function() {
+      return this._sweepFlag;
+    },
+    set: function(sweepFlag) {
+      if (this._sweepFlag !== sweepFlag) {
+        this._sweepFlag = sweepFlag;
+        if (this._bound) {
+          this.dispatchEvent(Events.Types.change);
+        }
+      }
+    }
+  }
+};
+var count = 0;
+var Constants = {
+  nextFrameID: null,
+  Types: {
+    webgl: "WebGLRenderer",
+    svg: "SVGRenderer",
+    canvas: "CanvasRenderer"
+  },
+  Version: "v0.8.12",
+  PublishDate: "2023-10-16T17:55:26.551Z",
+  Identifier: "two-",
+  Resolution: 12,
+  AutoCalculateImportedMatrices: true,
+  Instances: [],
+  uniqueId: function() {
+    return count++;
+  }
+};
+var Curve = {
+  CollinearityEpsilon: Math.pow(10, -30),
+  RecursionLimit: 16,
+  CuspLimit: 0,
+  Tolerance: {
+    distance: 0.25,
+    angle: 0,
+    epsilon: Number.EPSILON
+  },
+  abscissas: [
+    [0.5773502691896257],
+    [0, 0.7745966692414834],
+    [0.33998104358485626, 0.8611363115940526],
+    [0, 0.5384693101056831, 0.906179845938664],
+    [0.2386191860831969, 0.6612093864662645, 0.932469514203152],
+    [0, 0.4058451513773972, 0.7415311855993945, 0.9491079123427585],
+    [0.1834346424956498, 0.525532409916329, 0.7966664774136267, 0.9602898564975363],
+    [0, 0.3242534234038089, 0.6133714327005904, 0.8360311073266358, 0.9681602395076261],
+    [0.14887433898163122, 0.4333953941292472, 0.6794095682990244, 0.8650633666889845, 0.9739065285171717],
+    [0, 0.26954315595234496, 0.5190961292068118, 0.7301520055740494, 0.8870625997680953, 0.978228658146057],
+    [0.1252334085114689, 0.3678314989981802, 0.5873179542866175, 0.7699026741943047, 0.9041172563704749, 0.9815606342467192],
+    [0, 0.2304583159551348, 0.44849275103644687, 0.6423493394403402, 0.8015780907333099, 0.9175983992229779, 0.9841830547185881],
+    [0.10805494870734367, 0.31911236892788974, 0.5152486363581541, 0.6872929048116855, 0.827201315069765, 0.9284348836635735, 0.9862838086968123],
+    [0, 0.20119409399743451, 0.3941513470775634, 0.5709721726085388, 0.7244177313601701, 0.8482065834104272, 0.937273392400706, 0.9879925180204854],
+    [0.09501250983763744, 0.2816035507792589, 0.45801677765722737, 0.6178762444026438, 0.755404408355003, 0.8656312023878318, 0.9445750230732326, 0.9894009349916499]
+  ],
+  weights: [
+    [1],
+    [0.8888888888888888, 0.5555555555555556],
+    [0.6521451548625461, 0.34785484513745385],
+    [0.5688888888888889, 0.47862867049936647, 0.23692688505618908],
+    [0.46791393457269104, 0.3607615730481386, 0.17132449237917036],
+    [0.4179591836734694, 0.3818300505051189, 0.27970539148927664, 0.1294849661688697],
+    [0.362683783378362, 0.31370664587788727, 0.22238103445337448, 0.10122853629037626],
+    [0.3302393550012598, 0.31234707704000286, 0.26061069640293544, 0.1806481606948574, 0.08127438836157441],
+    [0.29552422471475287, 0.26926671930999635, 0.21908636251598204, 0.1494513491505806, 0.06667134430868814],
+    [0.2729250867779006, 0.26280454451024665, 0.23319376459199048, 0.18629021092773426, 0.1255803694649046, 0.05566856711617366],
+    [0.24914704581340277, 0.2334925365383548, 0.20316742672306592, 0.16007832854334622, 0.10693932599531843, 0.04717533638651183],
+    [0.2325515532308739, 0.22628318026289723, 0.2078160475368885, 0.17814598076194574, 0.13887351021978725, 0.09212149983772845, 0.04048400476531588],
+    [0.2152638534631578, 0.2051984637212956, 0.18553839747793782, 0.15720316715819355, 0.12151857068790319, 0.08015808715976021, 0.03511946033175186],
+    [0.2025782419255613, 0.19843148532711158, 0.1861610000155622, 0.16626920581699392, 0.13957067792615432, 0.10715922046717194, 0.07036604748810812, 0.03075324199611727],
+    [0.1894506104550685, 0.18260341504492358, 0.16915651939500254, 0.14959598881657674, 0.12462897125553388, 0.09515851168249279, 0.062253523938647894, 0.027152459411754096]
+  ]
+};
+function getComponentOnCubicBezier(t2, a2, b2, c2, d2) {
+  const k2 = 1 - t2;
+  return k2 * k2 * k2 * a2 + 3 * k2 * k2 * t2 * b2 + 3 * k2 * t2 * t2 * c2 + t2 * t2 * t2 * d2;
+}
+function subdivide(x1, y1, x2, y2, x3, y3, x4, y4, limit) {
+  limit = limit || Curve.RecursionLimit;
+  const amount = limit + 1;
+  if (Math.abs(x1 - x4) < 1e-3 && Math.abs(y1 - y4) < 1e-3) {
+    return [new Anchor(x4, y4)];
+  }
+  const result = [];
+  for (let i2 = 0; i2 < amount; i2++) {
+    const t2 = i2 / amount;
+    const x5 = getComponentOnCubicBezier(t2, x1, x2, x3, x4);
+    const y5 = getComponentOnCubicBezier(t2, y1, y2, y3, y4);
+    result.push(new Anchor(x5, y5));
+  }
+  return result;
+}
+function getCurveLength(x1, y1, x2, y2, x3, y3, x4, y4, limit) {
+  if (x1 === x2 && y1 === y2 && x3 === x4 && y3 === y4) {
+    const dx = x4 - x1;
+    const dy = y4 - y1;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  const ax = 9 * (x2 - x3) + 3 * (x4 - x1), bx = 6 * (x1 + x3) - 12 * x2, cx = 3 * (x2 - x1), ay = 9 * (y2 - y3) + 3 * (y4 - y1), by = 6 * (y1 + y3) - 12 * y2, cy = 3 * (y2 - y1);
+  function integrand(t2) {
+    const dx = (ax * t2 + bx) * t2 + cx, dy = (ay * t2 + by) * t2 + cy;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  return integrate(
+    integrand,
+    0,
+    1,
+    limit || Curve.RecursionLimit
+  );
+}
+function getCurveBoundingBox(x1, y1, x2, y2, x3, y3, x4, y4) {
+  const tvalues = [];
+  const bounds = [[], []];
+  let a2, b2, c2, t2, t1, t22, b2ac, sqrtb2ac;
+  for (let i2 = 0; i2 < 2; ++i2) {
+    if (i2 == 0) {
+      b2 = 6 * x1 - 12 * x2 + 6 * x3;
+      a2 = -3 * x1 + 9 * x2 - 9 * x3 + 3 * x4;
+      c2 = 3 * x2 - 3 * x1;
+    } else {
+      b2 = 6 * y1 - 12 * y2 + 6 * y3;
+      a2 = -3 * y1 + 9 * y2 - 9 * y3 + 3 * y4;
+      c2 = 3 * y2 - 3 * y1;
+    }
+    if (Math.abs(a2) < 1e-12) {
+      if (Math.abs(b2) < 1e-12) {
+        continue;
+      }
+      t2 = -c2 / b2;
+      if (0 < t2 && t2 < 1) {
+        tvalues.push(t2);
+      }
+      continue;
+    }
+    b2ac = b2 * b2 - 4 * c2 * a2;
+    sqrtb2ac = Math.sqrt(b2ac);
+    if (b2ac < 0) {
+      continue;
+    }
+    t1 = (-b2 + sqrtb2ac) / (2 * a2);
+    if (0 < t1 && t1 < 1) {
+      tvalues.push(t1);
+    }
+    t22 = (-b2 - sqrtb2ac) / (2 * a2);
+    if (0 < t22 && t22 < 1) {
+      tvalues.push(t22);
+    }
+  }
+  let j2 = tvalues.length;
+  let jlen = j2;
+  let mt;
+  while (j2--) {
+    t2 = tvalues[j2];
+    mt = 1 - t2;
+    bounds[0][j2] = mt * mt * mt * x1 + 3 * mt * mt * t2 * x2 + 3 * mt * t2 * t2 * x3 + t2 * t2 * t2 * x4;
+    bounds[1][j2] = mt * mt * mt * y1 + 3 * mt * mt * t2 * y2 + 3 * mt * t2 * t2 * y3 + t2 * t2 * t2 * y4;
+  }
+  bounds[0][jlen] = x1;
+  bounds[1][jlen] = y1;
+  bounds[0][jlen + 1] = x4;
+  bounds[1][jlen + 1] = y4;
+  bounds[0].length = bounds[1].length = jlen + 2;
+  return {
+    min: { x: Math.min.apply(0, bounds[0]), y: Math.min.apply(0, bounds[1]) },
+    max: { x: Math.max.apply(0, bounds[0]), y: Math.max.apply(0, bounds[1]) }
+  };
+}
+function integrate(f2, a2, b2, n2) {
+  let x2 = Curve.abscissas[n2 - 2], w2 = Curve.weights[n2 - 2], A = 0.5 * (b2 - a2), B = A + a2, i2 = 0, m2 = n2 + 1 >> 1, sum = n2 & 1 ? w2[i2++] * f2(B) : 0;
+  while (i2 < m2) {
+    const Ax = A * x2[i2];
+    sum += w2[i2++] * (f2(B + Ax) + f2(B - Ax));
+  }
+  return A * sum;
+}
+function getCurveFromPoints(points, closed2) {
+  const l2 = points.length, last = l2 - 1;
+  for (let i2 = 0; i2 < l2; i2++) {
+    const point = points[i2];
+    const prev = closed2 ? mod(i2 - 1, l2) : Math.max(i2 - 1, 0);
+    const next = closed2 ? mod(i2 + 1, l2) : Math.min(i2 + 1, last);
+    const a2 = points[prev];
+    const b2 = point;
+    const c2 = points[next];
+    getControlPoints(a2, b2, c2);
+    b2.command = i2 === 0 ? Commands.move : Commands.curve;
+  }
+}
+function getControlPoints(a2, b2, c2) {
+  const a1 = Vector.angleBetween(a2, b2);
+  const a22 = Vector.angleBetween(c2, b2);
+  let d1 = Vector.distanceBetween(a2, b2);
+  let d2 = Vector.distanceBetween(c2, b2);
+  let mid = (a1 + a22) / 2;
+  if (d1 < 1e-4 || d2 < 1e-4) {
+    if (typeof b2.relative === "boolean" && !b2.relative) {
+      b2.controls.left.copy(b2);
+      b2.controls.right.copy(b2);
+    }
+    return b2;
+  }
+  d1 *= 0.33;
+  d2 *= 0.33;
+  if (a22 < a1) {
+    mid += HALF_PI;
+  } else {
+    mid -= HALF_PI;
+  }
+  b2.controls.left.x = Math.cos(mid) * d1;
+  b2.controls.left.y = Math.sin(mid) * d1;
+  mid -= Math.PI;
+  b2.controls.right.x = Math.cos(mid) * d2;
+  b2.controls.right.y = Math.sin(mid) * d2;
+  if (typeof b2.relative === "boolean" && !b2.relative) {
+    b2.controls.left.x += b2.x;
+    b2.controls.left.y += b2.y;
+    b2.controls.right.x += b2.x;
+    b2.controls.right.y += b2.y;
+  }
+  return b2;
+}
+function getReflection(a2, b2, relative) {
+  return new Vector(
+    2 * a2.x - (b2.x + a2.x) - (relative ? a2.x : 0),
+    2 * a2.y - (b2.y + a2.y) - (relative ? a2.y : 0)
+  );
+}
+function getAnchorsFromArcData(center, xAxisRotation, rx, ry, ts, td, ccw) {
+  const resolution = Constants.Resolution;
+  for (let i2 = 0; i2 < resolution; i2++) {
+    let pct = (i2 + 1) / resolution;
+    if (ccw) {
+      pct = 1 - pct;
+    }
+    const theta = pct * td + ts;
+    const x2 = rx * Math.cos(theta);
+    const y2 = ry * Math.sin(theta);
+    const anchor2 = new Anchor(x2, y2);
+    anchor2.command = Commands.line;
+  }
+}
+var devicePixelRatio = root.devicePixelRatio || 1;
+function getBackingStoreRatio(ctx) {
+  return ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
+}
+function getRatio(ctx) {
+  return devicePixelRatio / getBackingStoreRatio(ctx);
+}
+var slice = Array.prototype.slice;
+function isArrayLike(collection) {
+  if (collection === null || collection === void 0)
+    return false;
+  const length = collection.length;
+  return typeof length == "number" && length >= 0 && length < 4294967296;
+}
+var _ = {
+  isNaN: function(obj) {
+    return typeof obj === "number" && obj !== +obj;
+  },
+  isElement: function(obj) {
+    return !!(obj && obj.nodeType === 1);
+  },
+  isObject: function(obj) {
+    const type2 = typeof obj;
+    return type2 === "function" || type2 === "object" && !!obj;
+  },
+  extend: function(base2) {
+    const sources = slice.call(arguments, 1);
+    for (let i2 = 0; i2 < sources.length; i2++) {
+      const obj = sources[i2];
+      for (let k2 in obj) {
+        base2[k2] = obj[k2];
+      }
+    }
+    return base2;
+  },
+  defaults: function(base2) {
+    const sources = slice.call(arguments, 1);
+    for (let i2 = 0; i2 < sources.length; i2++) {
+      const obj = sources[i2];
+      for (let k2 in obj) {
+        if (base2[k2] === void 0) {
+          base2[k2] = obj[k2];
+        }
+      }
+    }
+    return base2;
+  },
+  each: function(obj, iteratee, context2) {
+    const ctx = context2 || this;
+    const keys = !isArrayLike(obj) && Object.keys(obj);
+    const length = (keys || obj).length;
+    for (let i2 = 0; i2 < length; i2++) {
+      const k2 = keys ? keys[i2] : i2;
+      iteratee.call(ctx, obj[k2], k2, obj);
+    }
+    return obj;
+  },
+  performance: root.performance && root.performance.now ? root.performance : Date
+};
+var Element = class extends Events {
+  constructor() {
+    super();
+    __publicField(this, "_flagId", false);
+    __publicField(this, "_flagClassName", false);
+    __publicField(this, "_renderer", {});
+    __publicField(this, "_id", "");
+    __publicField(this, "_className", "");
+    __publicField(this, "classList", []);
+    for (let prop in proto3) {
+      Object.defineProperty(this, prop, proto3[prop]);
+    }
+  }
+  flagReset() {
+    this._flagId = this._flagClassName = false;
+  }
+};
+var proto3 = {
+  renderer: {
+    enumerable: false,
+    get: function() {
+      return this._renderer;
+    }
+  },
+  id: {
+    enumerable: true,
+    get: function() {
+      return this._id;
+    },
+    set: function(v2) {
+      const id = this._id;
+      if (v2 === this._id) {
+        return;
+      }
+      this._id = v2;
+      this._flagId = true;
+      if (this.parent) {
+        delete this.parent.children.ids[id];
+        this.parent.children.ids[this._id] = this;
+      }
+    }
+  },
+  className: {
+    enumerable: true,
+    get: function() {
+      return this._className;
+    },
+    set: function(v2) {
+      if (this._className !== v2) {
+        this._flagClassName = true;
+        this.classList = v2.split(/\s+?/);
+        this._className = v2;
+      }
+    }
+  }
+};
+var cos = Math.cos;
+var sin = Math.sin;
+var tan = Math.tan;
+var array = [];
+var _Matrix = class extends Events {
+  constructor(a2, b2, c2, d2, e2, f2) {
+    super();
+    __publicField(this, "elements", new NumArray(9));
+    __publicField(this, "manual", false);
+    let elements = a2;
+    if (!Array.isArray(elements)) {
+      elements = Array.prototype.slice.call(arguments);
+    }
+    this.identity();
+    if (elements.length > 0) {
+      this.set(elements);
+    }
+  }
+  static Multiply(A, B, C) {
+    if (B.length <= 3) {
+      const e2 = A;
+      let x2, y2, z;
+      const a2 = B[0] || 0, b2 = B[1] || 0, c2 = B[2] || 0;
+      x2 = e2[0] * a2 + e2[1] * b2 + e2[2] * c2;
+      y2 = e2[3] * a2 + e2[4] * b2 + e2[5] * c2;
+      z = e2[6] * a2 + e2[7] * b2 + e2[8] * c2;
+      return [x2, y2, z];
+    }
+    const A0 = A[0], A1 = A[1], A2 = A[2];
+    const A3 = A[3], A4 = A[4], A5 = A[5];
+    const A6 = A[6], A7 = A[7], A8 = A[8];
+    const B0 = B[0], B1 = B[1], B2 = B[2];
+    const B3 = B[3], B4 = B[4], B5 = B[5];
+    const B6 = B[6], B7 = B[7], B8 = B[8];
+    C = C || new NumArray(9);
+    C[0] = A0 * B0 + A1 * B3 + A2 * B6;
+    C[1] = A0 * B1 + A1 * B4 + A2 * B7;
+    C[2] = A0 * B2 + A1 * B5 + A2 * B8;
+    C[3] = A3 * B0 + A4 * B3 + A5 * B6;
+    C[4] = A3 * B1 + A4 * B4 + A5 * B7;
+    C[5] = A3 * B2 + A4 * B5 + A5 * B8;
+    C[6] = A6 * B0 + A7 * B3 + A8 * B6;
+    C[7] = A6 * B1 + A7 * B4 + A8 * B7;
+    C[8] = A6 * B2 + A7 * B5 + A8 * B8;
+    return C;
+  }
+  set(a2, b2, c2, d2, e2, f2, g2, h2, i2) {
+    if (typeof b2 === "undefined") {
+      const elements = a2;
+      a2 = elements[0];
+      b2 = elements[1];
+      c2 = elements[2];
+      d2 = elements[3];
+      e2 = elements[4];
+      f2 = elements[5];
+      g2 = elements[6];
+      h2 = elements[7];
+      i2 = elements[8];
+    }
+    this.elements[0] = a2;
+    this.elements[1] = b2;
+    this.elements[2] = c2;
+    this.elements[3] = d2;
+    this.elements[4] = e2;
+    this.elements[5] = f2;
+    this.elements[6] = g2;
+    this.elements[7] = h2;
+    this.elements[8] = i2;
+    return this.trigger(Events.Types.change);
+  }
+  copy(m2) {
+    this.elements[0] = m2.elements[0];
+    this.elements[1] = m2.elements[1];
+    this.elements[2] = m2.elements[2];
+    this.elements[3] = m2.elements[3];
+    this.elements[4] = m2.elements[4];
+    this.elements[5] = m2.elements[5];
+    this.elements[6] = m2.elements[6];
+    this.elements[7] = m2.elements[7];
+    this.elements[8] = m2.elements[8];
+    this.manual = m2.manual;
+    return this.trigger(Events.Types.change);
+  }
+  identity() {
+    this.elements[0] = _Matrix.Identity[0];
+    this.elements[1] = _Matrix.Identity[1];
+    this.elements[2] = _Matrix.Identity[2];
+    this.elements[3] = _Matrix.Identity[3];
+    this.elements[4] = _Matrix.Identity[4];
+    this.elements[5] = _Matrix.Identity[5];
+    this.elements[6] = _Matrix.Identity[6];
+    this.elements[7] = _Matrix.Identity[7];
+    this.elements[8] = _Matrix.Identity[8];
+    return this.trigger(Events.Types.change);
+  }
+  multiply(a2, b2, c2, d2, e2, f2, g2, h2, i2) {
+    if (typeof b2 === "undefined") {
+      this.elements[0] *= a2;
+      this.elements[1] *= a2;
+      this.elements[2] *= a2;
+      this.elements[3] *= a2;
+      this.elements[4] *= a2;
+      this.elements[5] *= a2;
+      this.elements[6] *= a2;
+      this.elements[7] *= a2;
+      this.elements[8] *= a2;
+      return this.trigger(Events.Types.change);
+    }
+    if (typeof c2 === "undefined") {
+      c2 = 1;
+    }
+    if (typeof d2 === "undefined") {
+      a2 = a2 || 0;
+      b2 = b2 || 0;
+      c2 = c2 || 0;
+      e2 = this.elements;
+      const x2 = e2[0] * a2 + e2[1] * b2 + e2[2] * c2;
+      const y2 = e2[3] * a2 + e2[4] * b2 + e2[5] * c2;
+      const z = e2[6] * a2 + e2[7] * b2 + e2[8] * c2;
+      return [x2, y2, z];
+    }
+    const A = this.elements;
+    const B = [a2, b2, c2, d2, e2, f2, g2, h2, i2];
+    const A0 = A[0], A1 = A[1], A2 = A[2];
+    const A3 = A[3], A4 = A[4], A5 = A[5];
+    const A6 = A[6], A7 = A[7], A8 = A[8];
+    const B0 = B[0], B1 = B[1], B2 = B[2];
+    const B3 = B[3], B4 = B[4], B5 = B[5];
+    const B6 = B[6], B7 = B[7], B8 = B[8];
+    this.elements[0] = A0 * B0 + A1 * B3 + A2 * B6;
+    this.elements[1] = A0 * B1 + A1 * B4 + A2 * B7;
+    this.elements[2] = A0 * B2 + A1 * B5 + A2 * B8;
+    this.elements[3] = A3 * B0 + A4 * B3 + A5 * B6;
+    this.elements[4] = A3 * B1 + A4 * B4 + A5 * B7;
+    this.elements[5] = A3 * B2 + A4 * B5 + A5 * B8;
+    this.elements[6] = A6 * B0 + A7 * B3 + A8 * B6;
+    this.elements[7] = A6 * B1 + A7 * B4 + A8 * B7;
+    this.elements[8] = A6 * B2 + A7 * B5 + A8 * B8;
+    return this.trigger(Events.Types.change);
+  }
+  inverse(out) {
+    const a2 = this.elements;
+    out = out || new _Matrix();
+    const a00 = a2[0], a01 = a2[1], a02 = a2[2];
+    const a10 = a2[3], a11 = a2[4], a12 = a2[5];
+    const a20 = a2[6], a21 = a2[7], a22 = a2[8];
+    const b01 = a22 * a11 - a12 * a21;
+    const b11 = -a22 * a10 + a12 * a20;
+    const b21 = a21 * a10 - a11 * a20;
+    let det = a00 * b01 + a01 * b11 + a02 * b21;
+    if (!det) {
+      return null;
+    }
+    det = 1 / det;
+    out.elements[0] = b01 * det;
+    out.elements[1] = (-a22 * a01 + a02 * a21) * det;
+    out.elements[2] = (a12 * a01 - a02 * a11) * det;
+    out.elements[3] = b11 * det;
+    out.elements[4] = (a22 * a00 - a02 * a20) * det;
+    out.elements[5] = (-a12 * a00 + a02 * a10) * det;
+    out.elements[6] = b21 * det;
+    out.elements[7] = (-a21 * a00 + a01 * a20) * det;
+    out.elements[8] = (a11 * a00 - a01 * a10) * det;
+    return out;
+  }
+  scale(sx, sy) {
+    const l2 = arguments.length;
+    if (l2 <= 1) {
+      sy = sx;
+    }
+    return this.multiply(sx, 0, 0, 0, sy, 0, 0, 0, 1);
+  }
+  rotate(Number2) {
+    const c2 = cos(Number2);
+    const s2 = sin(Number2);
+    return this.multiply(c2, -s2, 0, s2, c2, 0, 0, 0, 1);
+  }
+  translate(x2, y2) {
+    return this.multiply(1, 0, x2, 0, 1, y2, 0, 0, 1);
+  }
+  skewX(Number2) {
+    const a2 = tan(Number2);
+    return this.multiply(1, a2, 0, 0, 1, 0, 0, 0, 1);
+  }
+  skewY(Number2) {
+    const a2 = tan(Number2);
+    return this.multiply(1, 0, 0, a2, 1, 0, 0, 0, 1);
+  }
+  toString(fullMatrix) {
+    array.length = 0;
+    this.toTransformArray(fullMatrix, array);
+    return array.map(toFixed).join(" ");
+  }
+  toTransformArray(fullMatrix, output) {
+    const elements = this.elements;
+    const hasOutput = !!output;
+    const a2 = elements[0];
+    const b2 = elements[1];
+    const c2 = elements[2];
+    const d2 = elements[3];
+    const e2 = elements[4];
+    const f2 = elements[5];
+    if (fullMatrix) {
+      const g2 = elements[6];
+      const h2 = elements[7];
+      const i2 = elements[8];
+      if (hasOutput) {
+        output[0] = a2;
+        output[1] = d2;
+        output[2] = g2;
+        output[3] = b2;
+        output[4] = e2;
+        output[5] = h2;
+        output[6] = c2;
+        output[7] = f2;
+        output[8] = i2;
+        return;
+      }
+      return [
+        a2,
+        d2,
+        g2,
+        b2,
+        e2,
+        h2,
+        c2,
+        f2,
+        i2
+      ];
+    }
+    if (hasOutput) {
+      output[0] = a2;
+      output[1] = d2;
+      output[2] = b2;
+      output[3] = e2;
+      output[4] = c2;
+      output[5] = f2;
+      return;
+    }
+    return [
+      a2,
+      d2,
+      b2,
+      e2,
+      c2,
+      f2
+    ];
+  }
+  toArray(fullMatrix, output) {
+    const elements = this.elements;
+    const hasOutput = !!output;
+    const a2 = elements[0];
+    const b2 = elements[1];
+    const c2 = elements[2];
+    const d2 = elements[3];
+    const e2 = elements[4];
+    const f2 = elements[5];
+    if (fullMatrix) {
+      const g2 = elements[6];
+      const h2 = elements[7];
+      const i2 = elements[8];
+      if (hasOutput) {
+        output[0] = a2;
+        output[1] = b2;
+        output[2] = c2;
+        output[3] = d2;
+        output[4] = e2;
+        output[5] = f2;
+        output[6] = g2;
+        output[7] = h2;
+        output[8] = i2;
+        return;
+      }
+      return [
+        a2,
+        b2,
+        c2,
+        d2,
+        e2,
+        f2,
+        g2,
+        h2,
+        i2
+      ];
+    }
+    if (hasOutput) {
+      output[0] = a2;
+      output[1] = b2;
+      output[2] = c2;
+      output[3] = d2;
+      output[4] = e2;
+      output[5] = f2;
+      return;
+    }
+    return [
+      a2,
+      b2,
+      c2,
+      d2,
+      e2,
+      f2
+    ];
+  }
+  toObject() {
+    return {
+      elements: this.toArray(true),
+      manual: !!this.manual
+    };
+  }
+  clone() {
+    return new _Matrix().copy(this);
+  }
+};
+var Matrix2 = _Matrix;
+__publicField(Matrix2, "Identity", [
+  1,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  1
+]);
+setMatrix(Matrix2);
+var Shape = class extends Element {
+  constructor() {
+    super();
+    __publicField(this, "_flagMatrix", true);
+    __publicField(this, "_flagScale", false);
+    __publicField(this, "_matrix", null);
+    __publicField(this, "_worldMatrix", null);
+    __publicField(this, "_position", null);
+    __publicField(this, "_rotation", 0);
+    __publicField(this, "_scale", 1);
+    __publicField(this, "_skewX", 0);
+    __publicField(this, "_skewY", 0);
+    for (let prop in proto4) {
+      Object.defineProperty(this, prop, proto4[prop]);
+    }
+    this._renderer.flagMatrix = FlagMatrix.bind(this);
+    this.isShape = true;
+    this.id = Constants.Identifier + Constants.uniqueId();
+    this.matrix = new Matrix2();
+    this.worldMatrix = new Matrix2();
+    this.position = new Vector();
+    this.rotation = 0;
+    this.scale = 1;
+    this.skewX = 0;
+    this.skewY = 0;
+  }
+  get renderer() {
+    return this._renderer;
+  }
+  set renderer(v2) {
+    this._renderer = v2;
+  }
+  get translation() {
+    return proto4.position.get.apply(this, arguments);
+  }
+  set translation(v2) {
+    proto4.position.set.apply(this, arguments);
+  }
+  addTo(group) {
+    group.add(this);
+    return this;
+  }
+  remove() {
+    if (!this.parent) {
+      return this;
+    }
+    this.parent.remove(this);
+    return this;
+  }
+  clone(parent) {
+    const clone = new Shape();
+    clone.position.copy(this.position);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone._update();
+  }
+  _update(bubbles) {
+    if (!this._matrix.manual && this._flagMatrix) {
+      this._matrix.identity().translate(this.position.x, this.position.y);
+      if (this._scale instanceof Vector) {
+        this._matrix.scale(this._scale.x, this._scale.y);
+      } else {
+        this._matrix.scale(this._scale);
+      }
+      this._matrix.rotate(this.rotation);
+      this._matrix.skewX(this.skewX);
+      this._matrix.skewY(this.skewY);
+    }
+    if (bubbles) {
+      if (this.parent && this.parent._update) {
+        this.parent._update();
+      }
+    }
+    return this;
+  }
+  flagReset() {
+    this._flagMatrix = this._flagScale = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var proto4 = {
+  position: {
+    enumerable: true,
+    get: function() {
+      return this._position;
+    },
+    set: function(v2) {
+      if (this._position) {
+        this._position.unbind(Events.Types.change, this._renderer.flagMatrix);
+      }
+      this._position = v2;
+      this._position.bind(Events.Types.change, this._renderer.flagMatrix);
+      FlagMatrix.call(this);
+    }
+  },
+  rotation: {
+    enumerable: true,
+    get: function() {
+      return this._rotation;
+    },
+    set: function(v2) {
+      this._rotation = v2;
+      this._flagMatrix = true;
+    }
+  },
+  scale: {
+    enumerable: true,
+    get: function() {
+      return this._scale;
+    },
+    set: function(v2) {
+      if (this._scale instanceof Vector) {
+        this._scale.unbind(Events.Types.change, this._renderer.flagMatrix);
+      }
+      this._scale = v2;
+      if (this._scale instanceof Vector) {
+        this._scale.bind(Events.Types.change, this._renderer.flagMatrix);
+      }
+      this._flagMatrix = true;
+      this._flagScale = true;
+    }
+  },
+  skewX: {
+    enumerable: true,
+    get: function() {
+      return this._skewX;
+    },
+    set: function(v2) {
+      this._skewX = v2;
+      this._flagMatrix = true;
+    }
+  },
+  skewY: {
+    enumerable: true,
+    get: function() {
+      return this._skewY;
+    },
+    set: function(v2) {
+      this._skewY = v2;
+      this._flagMatrix = true;
+    }
+  },
+  matrix: {
+    enumerable: true,
+    get: function() {
+      return this._matrix;
+    },
+    set: function(v2) {
+      this._matrix = v2;
+      this._flagMatrix = true;
+    }
+  },
+  worldMatrix: {
+    enumerable: true,
+    get: function() {
+      getComputedMatrix(this, this._worldMatrix);
+      return this._worldMatrix;
+    },
+    set: function(v2) {
+      this._worldMatrix = v2;
+    }
+  }
+};
+function FlagMatrix() {
+  this._flagMatrix = true;
+}
+var Collection = class extends Array {
+  constructor() {
+    super();
+    __publicField(this, "_events", new Events());
+    if (arguments[0] && Array.isArray(arguments[0])) {
+      if (arguments[0].length > 0) {
+        this.push.apply(this, arguments[0]);
+      }
+    } else if (arguments.length > 0) {
+      this.push.apply(this, arguments);
+    }
+  }
+  get _bound() {
+    return this._events._bound;
+  }
+  set _bound(v2) {
+    this._events._bound = v2;
+  }
+  addEventListener() {
+    return this._events.addEventListener.apply(this, arguments);
+  }
+  on() {
+    return this._events.on.apply(this, arguments);
+  }
+  bind() {
+    return this._events.bind.apply(this, arguments);
+  }
+  removeEventListener() {
+    return this._events.removeEventListener.apply(this, arguments);
+  }
+  off() {
+    return this._events.off.apply(this, arguments);
+  }
+  unbind() {
+    return this._events.unbind.apply(this, arguments);
+  }
+  dispatchEvent() {
+    return this._events.dispatchEvent.apply(this, arguments);
+  }
+  trigger() {
+    return this._events.trigger.apply(this, arguments);
+  }
+  listen() {
+    return this._events.listen.apply(this, arguments);
+  }
+  ignore() {
+    return this._events.ignore.apply(this, arguments);
+  }
+  pop() {
+    const popped = super.pop.apply(this, arguments);
+    this.trigger(Events.Types.remove, [popped]);
+    return popped;
+  }
+  shift() {
+    const shifted = super.shift.apply(this, arguments);
+    this.trigger(Events.Types.remove, [shifted]);
+    return shifted;
+  }
+  push() {
+    const pushed = super.push.apply(this, arguments);
+    this.trigger(Events.Types.insert, arguments);
+    return pushed;
+  }
+  unshift() {
+    const unshifted = super.unshift.apply(this, arguments);
+    this.trigger(Events.Types.insert, arguments);
+    return unshifted;
+  }
+  splice() {
+    const spliced = super.splice.apply(this, arguments);
+    this.trigger(Events.Types.remove, spliced);
+    if (arguments.length > 2) {
+      const inserted = this.slice(arguments[0], arguments[0] + arguments.length - 2);
+      this.trigger(Events.Types.insert, inserted);
+      this.trigger(Events.Types.order);
+    }
+    return spliced;
+  }
+  sort() {
+    super.sort.apply(this, arguments);
+    this.trigger(Events.Types.order);
+    return this;
+  }
+  reverse() {
+    super.reverse.apply(this, arguments);
+    this.trigger(Events.Types.order);
+    return this;
+  }
+  indexOf() {
+    return super.indexOf.apply(this, arguments);
+  }
+  map(func, scope) {
+    const results = [];
+    for (let key = 0; key < this.length; key++) {
+      const value = this[key];
+      let result;
+      if (scope) {
+        result = func.call(scope, value, key);
+      } else {
+        result = func(value, key);
+      }
+      results.push(result);
+    }
+    return results;
+  }
+};
+var Children = class extends Collection {
+  constructor(children) {
+    children = Array.isArray(children) ? children : Array.prototype.slice.call(arguments);
+    super(children);
+    __publicField(this, "ids", {});
+    this.attach(children);
+    this.on(Events.Types.insert, this.attach);
+    this.on(Events.Types.remove, this.detach);
+  }
+  attach(children) {
+    for (let i2 = 0; i2 < children.length; i2++) {
+      const child = children[i2];
+      if (child && child.id) {
+        this.ids[child.id] = child;
+      }
+    }
+    return this;
+  }
+  detach(children) {
+    for (let i2 = 0; i2 < children.length; i2++) {
+      delete this.ids[children[i2].id];
+    }
+    return this;
+  }
+};
+var min = Math.min;
+var max = Math.max;
+var _Group = class extends Shape {
+  constructor(children) {
+    super();
+    __publicField(this, "_flagAdditions", false);
+    __publicField(this, "_flagSubtractions", false);
+    __publicField(this, "_flagOrder", false);
+    __publicField(this, "_flagOpacity", true);
+    __publicField(this, "_flagBeginning", false);
+    __publicField(this, "_flagEnding", false);
+    __publicField(this, "_flagLength", false);
+    __publicField(this, "_flagMask", false);
+    __publicField(this, "_fill", "#fff");
+    __publicField(this, "_stroke", "#000");
+    __publicField(this, "_linewidth", 1);
+    __publicField(this, "_opacity", 1);
+    __publicField(this, "_visible", true);
+    __publicField(this, "_cap", "round");
+    __publicField(this, "_join", "round");
+    __publicField(this, "_miter", 4);
+    __publicField(this, "_closed", true);
+    __publicField(this, "_curved", false);
+    __publicField(this, "_automatic", true);
+    __publicField(this, "_beginning", 0);
+    __publicField(this, "_ending", 1);
+    __publicField(this, "_length", 0);
+    __publicField(this, "_mask", null);
+    for (let prop in proto5) {
+      Object.defineProperty(this, prop, proto5[prop]);
+    }
+    this._renderer.type = "group";
+    this.additions = [];
+    this.subtractions = [];
+    this.children = Array.isArray(children) ? children : Array.prototype.slice.call(arguments);
+  }
+  static InsertChildren(children) {
+    for (let i2 = 0; i2 < children.length; i2++) {
+      replaceParent.call(this, children[i2], this);
+    }
+  }
+  static RemoveChildren(children) {
+    for (let i2 = 0; i2 < children.length; i2++) {
+      replaceParent.call(this, children[i2]);
+    }
+  }
+  static OrderChildren(children) {
+    this._flagOrder = true;
+  }
+  clone(parent) {
+    const clone = new _Group();
+    const children = this.children.map(function(child) {
+      return child.clone();
+    });
+    clone.add(children);
+    clone.opacity = this.opacity;
+    if (this.mask) {
+      clone.mask = this.mask;
+    }
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.className = this.className;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone._update();
+  }
+  toObject() {
+    const result = {
+      children: [],
+      translation: this.translation.toObject(),
+      rotation: this.rotation,
+      scale: this.scale instanceof Vector ? this.scale.toObject() : this.scale,
+      opacity: this.opacity,
+      className: this.className,
+      mask: this.mask ? this.mask.toObject() : null
+    };
+    if (this.matrix.manual) {
+      result.matrix = this.matrix.toObject();
+    }
+    _.each(this.children, function(child, i2) {
+      result.children[i2] = child.toObject();
+    }, this);
+    return result;
+  }
+  corner() {
+    const rect = this.getBoundingClientRect(true);
+    for (let i2 = 0; i2 < this.children.length; i2++) {
+      const child = this.children[i2];
+      child.translation.x -= rect.left;
+      child.translation.y -= rect.top;
+    }
+    if (this.mask) {
+      this.mask.translation.x -= rect.left;
+      this.mask.translation.y -= rect.top;
+    }
+    return this;
+  }
+  center() {
+    const rect = this.getBoundingClientRect(true);
+    const cx = rect.left + rect.width / 2 - this.translation.x;
+    const cy = rect.top + rect.height / 2 - this.translation.y;
+    for (let i2 = 0; i2 < this.children.length; i2++) {
+      const child = this.children[i2];
+      if (child.isShape) {
+        child.translation.x -= cx;
+        child.translation.y -= cy;
+      }
+    }
+    if (this.mask) {
+      this.mask.translation.x -= cx;
+      this.mask.translation.y -= cy;
+    }
+    return this;
+  }
+  getById(id) {
+    let found = null;
+    function search(node) {
+      if (node.id === id) {
+        return node;
+      } else if (node.children) {
+        for (let i2 = 0; i2 < node.children.length; i2++) {
+          found = search(node.children[i2]);
+          if (found) {
+            return found;
+          }
+        }
+      }
+      return null;
+    }
+    return search(this);
+  }
+  getByClassName(className) {
+    const found = [];
+    function search(node) {
+      if (Array.prototype.indexOf.call(node.classList, className) >= 0) {
+        found.push(node);
+      }
+      if (node.children) {
+        for (let i2 = 0; i2 < node.children.length; i2++) {
+          const child = node.children[i2];
+          search(child);
+        }
+      }
+      return found;
+    }
+    return search(this);
+  }
+  getByType(type2) {
+    const found = [];
+    function search(node) {
+      if (node instanceof type2) {
+        found.push(node);
+      }
+      if (node.children) {
+        for (let i2 = 0; i2 < node.children.length; i2++) {
+          const child = node.children[i2];
+          search(child);
+        }
+      }
+      return found;
+    }
+    return search(this);
+  }
+  add(objects) {
+    if (!(objects instanceof Array)) {
+      objects = Array.prototype.slice.call(arguments);
+    } else {
+      objects = objects.slice();
+    }
+    for (let i2 = 0; i2 < objects.length; i2++) {
+      const child = objects[i2];
+      if (!(child && child.id)) {
+        continue;
+      }
+      const index = Array.prototype.indexOf.call(this.children, child);
+      if (index >= 0) {
+        this.children.splice(index, 1);
+      }
+      this.children.push(child);
+    }
+    return this;
+  }
+  remove(objects) {
+    const l2 = arguments.length, grandparent = this.parent;
+    if (l2 <= 0 && grandparent) {
+      grandparent.remove(this);
+      return this;
+    }
+    if (!(objects instanceof Array)) {
+      objects = Array.prototype.slice.call(arguments);
+    } else {
+      objects = objects.slice();
+    }
+    for (let i2 = 0; i2 < objects.length; i2++) {
+      const object = objects[i2];
+      if (!object || !this.children.ids[object.id]) {
+        continue;
+      }
+      const index = this.children.indexOf(object);
+      if (index >= 0) {
+        this.children.splice(index, 1);
+      }
+    }
+    return this;
+  }
+  getBoundingClientRect(shallow) {
+    let rect, matrix, tc, lc, rc, bc;
+    this._update(true);
+    let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+    const regex3 = /texture|gradient/i;
+    matrix = shallow ? this.matrix : this.worldMatrix;
+    for (let i2 = 0; i2 < this.children.length; i2++) {
+      const child = this.children[i2];
+      if (!child.visible || regex3.test(child._renderer.type)) {
+        continue;
+      }
+      rect = child.getBoundingClientRect(shallow);
+      tc = typeof rect.top !== "number" || _.isNaN(rect.top) || !isFinite(rect.top);
+      lc = typeof rect.left !== "number" || _.isNaN(rect.left) || !isFinite(rect.left);
+      rc = typeof rect.right !== "number" || _.isNaN(rect.right) || !isFinite(rect.right);
+      bc = typeof rect.bottom !== "number" || _.isNaN(rect.bottom) || !isFinite(rect.bottom);
+      if (tc || lc || rc || bc) {
+        continue;
+      }
+      if (shallow) {
+        const [ax, ay] = matrix.multiply(rect.left, rect.top);
+        const [bx, by] = matrix.multiply(rect.right, rect.top);
+        const [cx, cy] = matrix.multiply(rect.left, rect.bottom);
+        const [dx, dy] = matrix.multiply(rect.right, rect.bottom);
+        top = min(ay, by, cy, dy);
+        left = min(ax, bx, cx, dx);
+        right = max(ax, bx, cx, dx);
+        bottom = max(ay, by, cy, dy);
+      } else {
+        top = min(rect.top, top);
+        left = min(rect.left, left);
+        right = max(rect.right, right);
+        bottom = max(rect.bottom, bottom);
+      }
+    }
+    return {
+      top,
+      left,
+      right,
+      bottom,
+      width: right - left,
+      height: bottom - top
+    };
+  }
+  noFill() {
+    this.children.forEach(function(child) {
+      child.noFill();
+    });
+    return this;
+  }
+  noStroke() {
+    this.children.forEach(function(child) {
+      child.noStroke();
+    });
+    return this;
+  }
+  subdivide() {
+    const args = arguments;
+    this.children.forEach(function(child) {
+      child.subdivide.apply(child, args);
+    });
+    return this;
+  }
+  _update() {
+    let i2, l2, child;
+    if (this._flagBeginning || this._flagEnding) {
+      const beginning = Math.min(this._beginning, this._ending);
+      const ending = Math.max(this._beginning, this._ending);
+      const length = this.length;
+      let sum = 0;
+      const bd = beginning * length;
+      const ed = ending * length;
+      for (i2 = 0; i2 < this.children.length; i2++) {
+        child = this.children[i2];
+        l2 = child.length;
+        if (bd > sum + l2) {
+          child.beginning = 1;
+          child.ending = 1;
+        } else if (ed < sum) {
+          child.beginning = 0;
+          child.ending = 0;
+        } else if (bd > sum && bd < sum + l2) {
+          child.beginning = (bd - sum) / l2;
+          child.ending = 1;
+        } else if (ed > sum && ed < sum + l2) {
+          child.beginning = 0;
+          child.ending = (ed - sum) / l2;
+        } else {
+          child.beginning = 0;
+          child.ending = 1;
+        }
+        sum += l2;
+      }
+    }
+    return super._update.apply(this, arguments);
+  }
+  flagReset() {
+    if (this._flagAdditions) {
+      this.additions.length = 0;
+      this._flagAdditions = false;
+    }
+    if (this._flagSubtractions) {
+      this.subtractions.length = 0;
+      this._flagSubtractions = false;
+    }
+    this._flagOrder = this._flagMask = this._flagOpacity = this._flagBeginning = this._flagEnding = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var Group = _Group;
+__publicField(Group, "Children", Children);
+__publicField(Group, "Properties", [
+  "fill",
+  "stroke",
+  "linewidth",
+  "cap",
+  "join",
+  "miter",
+  "closed",
+  "curved",
+  "automatic"
+]);
+var proto5 = {
+  visible: {
+    enumerable: true,
+    get: function() {
+      return this._visible;
+    },
+    set: function(v2) {
+      this._flagVisible = this._visible !== v2 || this._flagVisible;
+      this._visible = v2;
+    }
+  },
+  opacity: {
+    enumerable: true,
+    get: function() {
+      return this._opacity;
+    },
+    set: function(v2) {
+      this._flagOpacity = this._opacity !== v2 || this._flagOpacity;
+      this._opacity = v2;
+    }
+  },
+  beginning: {
+    enumerable: true,
+    get: function() {
+      return this._beginning;
+    },
+    set: function(v2) {
+      this._flagBeginning = this._beginning !== v2 || this._flagBeginning;
+      this._beginning = v2;
+    }
+  },
+  ending: {
+    enumerable: true,
+    get: function() {
+      return this._ending;
+    },
+    set: function(v2) {
+      this._flagEnding = this._ending !== v2 || this._flagEnding;
+      this._ending = v2;
+    }
+  },
+  length: {
+    enumerable: true,
+    get: function() {
+      if (this._flagLength || this._length <= 0) {
+        this._length = 0;
+        if (!this.children) {
+          return this._length;
+        }
+        for (let i2 = 0; i2 < this.children.length; i2++) {
+          const child = this.children[i2];
+          this._length += child.length;
+        }
+      }
+      return this._length;
+    }
+  },
+  fill: {
+    enumerable: true,
+    get: function() {
+      return this._fill;
+    },
+    set: function(v2) {
+      this._fill = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.fill = v2;
+      }
+    }
+  },
+  stroke: {
+    enumerable: true,
+    get: function() {
+      return this._stroke;
+    },
+    set: function(v2) {
+      this._stroke = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.stroke = v2;
+      }
+    }
+  },
+  linewidth: {
+    enumerable: true,
+    get: function() {
+      return this._linewidth;
+    },
+    set: function(v2) {
+      this._linewidth = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.linewidth = v2;
+      }
+    }
+  },
+  join: {
+    enumerable: true,
+    get: function() {
+      return this._join;
+    },
+    set: function(v2) {
+      this._join = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.join = v2;
+      }
+    }
+  },
+  miter: {
+    enumerable: true,
+    get: function() {
+      return this._miter;
+    },
+    set: function(v2) {
+      this._miter = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.miter = v2;
+      }
+    }
+  },
+  cap: {
+    enumerable: true,
+    get: function() {
+      return this._cap;
+    },
+    set: function(v2) {
+      this._cap = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.cap = v2;
+      }
+    }
+  },
+  closed: {
+    enumerable: true,
+    get: function() {
+      return this._closed;
+    },
+    set: function(v2) {
+      this._closed = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.closed = v2;
+      }
+    }
+  },
+  curved: {
+    enumerable: true,
+    get: function() {
+      return this._curved;
+    },
+    set: function(v2) {
+      this._curved = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.curved = v2;
+      }
+    }
+  },
+  automatic: {
+    enumerable: true,
+    get: function() {
+      return this._automatic;
+    },
+    set: function(v2) {
+      this._automatic = v2;
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        child.automatic = v2;
+      }
+    }
+  },
+  children: {
+    enumerable: true,
+    get: function() {
+      return this._children;
+    },
+    set: function(children) {
+      const insertChildren = Group.InsertChildren.bind(this);
+      const removeChildren = Group.RemoveChildren.bind(this);
+      const orderChildren = Group.OrderChildren.bind(this);
+      if (this._children) {
+        this._children.unbind();
+        if (this._children.length > 0) {
+          removeChildren(this._children);
+        }
+      }
+      this._children = new Children(children);
+      this._children.bind(Events.Types.insert, insertChildren);
+      this._children.bind(Events.Types.remove, removeChildren);
+      this._children.bind(Events.Types.order, orderChildren);
+      if (children.length > 0) {
+        insertChildren(children);
+      }
+    }
+  },
+  mask: {
+    enumerable: true,
+    get: function() {
+      return this._mask;
+    },
+    set: function(v2) {
+      this._mask = v2;
+      this._flagMask = true;
+      if (_.isObject(v2) && !v2.clip) {
+        v2.clip = true;
+      }
+    }
+  }
+};
+function replaceParent(child, newParent) {
+  const parent = child.parent;
+  let index;
+  if (parent === newParent) {
+    add();
+    return;
+  }
+  if (parent && parent.children.ids[child.id]) {
+    index = Array.prototype.indexOf.call(parent.children, child);
+    parent.children.splice(index, 1);
+    splice();
+  }
+  if (newParent) {
+    add();
+    return;
+  }
+  splice();
+  if (parent._flagAdditions && parent.additions.length === 0) {
+    parent._flagAdditions = false;
+  }
+  if (parent._flagSubtractions && parent.subtractions.length === 0) {
+    parent._flagSubtractions = false;
+  }
+  delete child.parent;
+  function add() {
+    if (newParent.subtractions.length > 0) {
+      index = Array.prototype.indexOf.call(newParent.subtractions, child);
+      if (index >= 0) {
+        newParent.subtractions.splice(index, 1);
+      }
+    }
+    if (newParent.additions.length > 0) {
+      index = Array.prototype.indexOf.call(newParent.additions, child);
+      if (index >= 0) {
+        newParent.additions.splice(index, 1);
+      }
+    }
+    child.parent = newParent;
+    newParent.additions.push(child);
+    newParent._flagAdditions = true;
+  }
+  function splice() {
+    index = Array.prototype.indexOf.call(parent.additions, child);
+    if (index >= 0) {
+      parent.additions.splice(index, 1);
+    }
+    index = Array.prototype.indexOf.call(parent.subtractions, child);
+    if (index < 0) {
+      parent.subtractions.push(child);
+      parent._flagSubtractions = true;
+    }
+  }
+}
+var emptyArray = [];
+var max2 = Math.max;
+var min2 = Math.min;
+var abs = Math.abs;
+var sin2 = Math.sin;
+var cos2 = Math.cos;
+var acos = Math.acos;
+var sqrt = Math.sqrt;
+var canvas = {
+  isHidden: /(undefined|none|transparent)/i,
+  alignments: {
+    left: "start",
+    middle: "center",
+    right: "end"
+  },
+  shim: function(elem, name) {
+    elem.tagName = elem.nodeName = name || "canvas";
+    elem.nodeType = 1;
+    elem.getAttribute = function(prop) {
+      return this[prop];
+    };
+    elem.setAttribute = function(prop, val) {
+      this[prop] = val;
+      return this;
+    };
+    return elem;
+  },
+  group: {
+    renderChild: function(child) {
+      canvas[child._renderer.type].render.call(child, this.ctx, true, this.clip);
+    },
+    render: function(ctx) {
+      if (!this._visible) {
+        return this;
+      }
+      this._update();
+      const matrix = this._matrix.elements;
+      const parent = this.parent;
+      this._renderer.opacity = this._opacity * (parent && parent._renderer ? parent._renderer.opacity : 1);
+      const mask = this._mask;
+      const defaultMatrix = isDefaultMatrix(matrix);
+      const shouldIsolate = !defaultMatrix || !!mask;
+      if (!this._renderer.context) {
+        this._renderer.context = {};
+      }
+      this._renderer.context.ctx = ctx;
+      if (shouldIsolate) {
+        ctx.save();
+        if (!defaultMatrix) {
+          ctx.transform(
+            matrix[0],
+            matrix[3],
+            matrix[1],
+            matrix[4],
+            matrix[2],
+            matrix[5]
+          );
+        }
+      }
+      if (mask) {
+        canvas[mask._renderer.type].render.call(mask, ctx, true);
+      }
+      if (this._opacity > 0 && this._scale !== 0) {
+        for (let i2 = 0; i2 < this.children.length; i2++) {
+          const child = this.children[i2];
+          canvas[child._renderer.type].render.call(child, ctx);
+        }
+      }
+      if (shouldIsolate) {
+        ctx.restore();
+      }
+      return this.flagReset();
+    }
+  },
+  path: {
+    render: function(ctx, forced, parentClipped) {
+      let matrix, stroke, linewidth, fill, opacity, visible, cap, join, miter, closed2, commands, length, last, prev, a2, b2, c2, d2, ux2, uy2, vx2, vy2, ar, bl, br, cl, x2, y2, mask, clip, defaultMatrix, isOffset, dashes, po;
+      po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
+      mask = this._mask;
+      clip = this._clip;
+      opacity = this._opacity * (po || 1);
+      visible = this._visible;
+      if (!forced && (!visible || clip || opacity === 0)) {
+        return this;
+      }
+      this._update();
+      matrix = this._matrix.elements;
+      stroke = this._stroke;
+      linewidth = this._linewidth;
+      fill = this._fill;
+      cap = this._cap;
+      join = this._join;
+      miter = this._miter;
+      closed2 = this._closed;
+      commands = this._renderer.vertices;
+      length = commands.length;
+      last = length - 1;
+      defaultMatrix = isDefaultMatrix(matrix);
+      dashes = this.dashes;
+      if (!defaultMatrix) {
+        ctx.save();
+        ctx.transform(matrix[0], matrix[3], matrix[1], matrix[4], matrix[2], matrix[5]);
+      }
+      if (mask) {
+        canvas[mask._renderer.type].render.call(mask, ctx, true);
+      }
+      if (fill) {
+        if (typeof fill === "string") {
+          ctx.fillStyle = fill;
+        } else {
+          canvas[fill._renderer.type].render.call(fill, ctx, this);
+          ctx.fillStyle = fill._renderer.effect;
+        }
+      }
+      if (stroke) {
+        if (typeof stroke === "string") {
+          ctx.strokeStyle = stroke;
+        } else {
+          canvas[stroke._renderer.type].render.call(stroke, ctx, this);
+          ctx.strokeStyle = stroke._renderer.effect;
+        }
+        if (linewidth) {
+          ctx.lineWidth = linewidth;
+        }
+        if (miter) {
+          ctx.miterLimit = miter;
+        }
+        if (join) {
+          ctx.lineJoin = join;
+        }
+        if (!closed2 && cap) {
+          ctx.lineCap = cap;
+        }
+      }
+      if (typeof opacity === "number") {
+        ctx.globalAlpha = opacity;
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.lineDashOffset = dashes.offset || 0;
+        ctx.setLineDash(dashes);
+      }
+      ctx.beginPath();
+      let rx, ry, xAxisRotation, largeArcFlag, sweepFlag, ax, ay;
+      for (let i2 = 0; i2 < length; i2++) {
+        b2 = commands[i2];
+        x2 = b2.x;
+        y2 = b2.y;
+        switch (b2.command) {
+          case Commands.close:
+            ctx.closePath();
+            break;
+          case Commands.arc:
+            rx = b2.rx;
+            ry = b2.ry;
+            xAxisRotation = b2.xAxisRotation;
+            largeArcFlag = b2.largeArcFlag;
+            sweepFlag = b2.sweepFlag;
+            prev = closed2 ? mod(i2 - 1, length) : max2(i2 - 1, 0);
+            a2 = commands[prev];
+            ax = a2.x;
+            ay = a2.y;
+            canvas.renderSvgArcCommand(
+              ctx,
+              ax,
+              ay,
+              rx,
+              ry,
+              largeArcFlag,
+              sweepFlag,
+              xAxisRotation,
+              x2,
+              y2
+            );
+            break;
+          case Commands.curve:
+            prev = closed2 ? mod(i2 - 1, length) : Math.max(i2 - 1, 0);
+            a2 = commands[prev];
+            ar = a2.controls && a2.controls.right || Vector.zero;
+            bl = b2.controls && b2.controls.left || Vector.zero;
+            if (a2._relative) {
+              vx2 = ar.x + a2.x;
+              vy2 = ar.y + a2.y;
+            } else {
+              vx2 = ar.x;
+              vy2 = ar.y;
+            }
+            if (b2._relative) {
+              ux2 = bl.x + b2.x;
+              uy2 = bl.y + b2.y;
+            } else {
+              ux2 = bl.x;
+              uy2 = bl.y;
+            }
+            ctx.bezierCurveTo(vx2, vy2, ux2, uy2, x2, y2);
+            if (i2 >= last && closed2) {
+              c2 = d2;
+              br = b2.controls && b2.controls.right || Vector.zero;
+              cl = c2.controls && c2.controls.left || Vector.zero;
+              if (b2._relative) {
+                vx2 = br.x + b2.x;
+                vy2 = br.y + b2.y;
+              } else {
+                vx2 = br.x;
+                vy2 = br.y;
+              }
+              if (c2._relative) {
+                ux2 = cl.x + c2.x;
+                uy2 = cl.y + c2.y;
+              } else {
+                ux2 = cl.x;
+                uy2 = cl.y;
+              }
+              x2 = c2.x;
+              y2 = c2.y;
+              ctx.bezierCurveTo(vx2, vy2, ux2, uy2, x2, y2);
+            }
+            break;
+          case Commands.line:
+            ctx.lineTo(x2, y2);
+            break;
+          case Commands.move:
+            d2 = b2;
+            ctx.moveTo(x2, y2);
+            break;
+        }
+      }
+      if (closed2) {
+        ctx.closePath();
+      }
+      if (!clip && !parentClipped) {
+        if (!canvas.isHidden.test(fill)) {
+          isOffset = fill._renderer && fill._renderer.offset;
+          if (isOffset) {
+            ctx.save();
+            ctx.translate(
+              -fill._renderer.offset.x,
+              -fill._renderer.offset.y
+            );
+            ctx.scale(fill._renderer.scale.x, fill._renderer.scale.y);
+          }
+          ctx.fill();
+          if (isOffset) {
+            ctx.restore();
+          }
+        }
+        if (!canvas.isHidden.test(stroke)) {
+          isOffset = stroke._renderer && stroke._renderer.offset;
+          if (isOffset) {
+            ctx.save();
+            ctx.translate(
+              -stroke._renderer.offset.x,
+              -stroke._renderer.offset.y
+            );
+            ctx.scale(stroke._renderer.scale.x, stroke._renderer.scale.y);
+            ctx.lineWidth = linewidth / stroke._renderer.scale.x;
+          }
+          ctx.stroke();
+          if (isOffset) {
+            ctx.restore();
+          }
+        }
+      }
+      if (!defaultMatrix) {
+        ctx.restore();
+      }
+      if (clip && !parentClipped) {
+        ctx.clip();
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.setLineDash(emptyArray);
+      }
+      return this.flagReset();
+    }
+  },
+  points: {
+    render: function(ctx, forced, parentClipped) {
+      let me, stroke, linewidth, fill, opacity, visible, size, commands, length, b2, x2, y2, defaultMatrix, isOffset, dashes, po;
+      po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
+      opacity = this._opacity * (po || 1);
+      visible = this._visible;
+      if (!forced && (!visible || opacity === 0)) {
+        return this;
+      }
+      this._update();
+      me = this._matrix.elements;
+      stroke = this._stroke;
+      linewidth = this._linewidth;
+      fill = this._fill;
+      commands = this._renderer.collection;
+      length = commands.length;
+      defaultMatrix = isDefaultMatrix(me);
+      dashes = this.dashes;
+      size = this._size;
+      if (!defaultMatrix) {
+        ctx.save();
+        ctx.transform(me[0], me[3], me[1], me[4], me[2], me[5]);
+      }
+      if (fill) {
+        if (typeof fill === "string") {
+          ctx.fillStyle = fill;
+        } else {
+          canvas[fill._renderer.type].render.call(fill, ctx, this);
+          ctx.fillStyle = fill._renderer.effect;
+        }
+      }
+      if (stroke) {
+        if (typeof stroke === "string") {
+          ctx.strokeStyle = stroke;
+        } else {
+          canvas[stroke._renderer.type].render.call(stroke, ctx, this);
+          ctx.strokeStyle = stroke._renderer.effect;
+        }
+        if (linewidth) {
+          ctx.lineWidth = linewidth;
+        }
+      }
+      if (typeof opacity === "number") {
+        ctx.globalAlpha = opacity;
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.lineDashOffset = dashes.offset || 0;
+        ctx.setLineDash(dashes);
+      }
+      ctx.beginPath();
+      let radius = size * 0.5, m2;
+      if (!this._sizeAttenuation) {
+        m2 = this.worldMatrix.elements;
+        m2 = decomposeMatrix(m2[0], m2[3], m2[1], m2[4], m2[2], m2[5]);
+        radius /= Math.max(m2.scaleX, m2.scaleY);
+      }
+      for (let i2 = 0; i2 < length; i2++) {
+        b2 = commands[i2];
+        x2 = b2.x;
+        y2 = b2.y;
+        ctx.moveTo(x2 + radius, y2);
+        ctx.arc(x2, y2, radius, 0, TWO_PI);
+      }
+      if (!parentClipped) {
+        if (!canvas.isHidden.test(fill)) {
+          isOffset = fill._renderer && fill._renderer.offset;
+          if (isOffset) {
+            ctx.save();
+            ctx.translate(
+              -fill._renderer.offset.x,
+              -fill._renderer.offset.y
+            );
+            ctx.scale(fill._renderer.scale.x, fill._renderer.scale.y);
+          }
+          ctx.fill();
+          if (isOffset) {
+            ctx.restore();
+          }
+        }
+        if (!canvas.isHidden.test(stroke)) {
+          isOffset = stroke._renderer && stroke._renderer.offset;
+          if (isOffset) {
+            ctx.save();
+            ctx.translate(
+              -stroke._renderer.offset.x,
+              -stroke._renderer.offset.y
+            );
+            ctx.scale(stroke._renderer.scale.x, stroke._renderer.scale.y);
+            ctx.lineWidth = linewidth / stroke._renderer.scale.x;
+          }
+          ctx.stroke();
+          if (isOffset) {
+            ctx.restore();
+          }
+        }
+      }
+      if (!defaultMatrix) {
+        ctx.restore();
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.setLineDash(emptyArray);
+      }
+      return this.flagReset();
+    }
+  },
+  text: {
+    render: function(ctx, forced, parentClipped) {
+      const po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
+      const opacity = this._opacity * po;
+      const visible = this._visible;
+      const mask = this._mask;
+      const clip = this._clip;
+      if (!forced && (!visible || clip || opacity === 0)) {
+        return this;
+      }
+      this._update();
+      const matrix = this._matrix.elements;
+      const stroke = this._stroke;
+      const linewidth = this._linewidth;
+      const fill = this._fill;
+      const decoration = this._decoration;
+      const defaultMatrix = isDefaultMatrix(matrix);
+      const isOffset = fill._renderer && fill._renderer.offset && stroke._renderer && stroke._renderer.offset;
+      const dashes = this.dashes;
+      const alignment = canvas.alignments[this._alignment] || this._alignment;
+      const baseline = this._baseline;
+      let a2, b2, c2, d2, e2, sx, sy, x1, y1, x2, y2;
+      if (!defaultMatrix) {
+        ctx.save();
+        ctx.transform(matrix[0], matrix[3], matrix[1], matrix[4], matrix[2], matrix[5]);
+      }
+      if (mask) {
+        canvas[mask._renderer.type].render.call(mask, ctx, true);
+      }
+      if (!isOffset) {
+        ctx.font = [this._style, this._weight, this._size + "px/" + this._leading + "px", this._family].join(" ");
+      }
+      ctx.textAlign = alignment;
+      ctx.textBaseline = baseline;
+      if (fill) {
+        if (typeof fill === "string") {
+          ctx.fillStyle = fill;
+        } else {
+          canvas[fill._renderer.type].render.call(fill, ctx, this);
+          ctx.fillStyle = fill._renderer.effect;
+        }
+      }
+      if (stroke) {
+        if (typeof stroke === "string") {
+          ctx.strokeStyle = stroke;
+        } else {
+          canvas[stroke._renderer.type].render.call(stroke, ctx, this);
+          ctx.strokeStyle = stroke._renderer.effect;
+        }
+        if (linewidth) {
+          ctx.lineWidth = linewidth;
+        }
+      }
+      if (typeof opacity === "number") {
+        ctx.globalAlpha = opacity;
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.lineDashOffset = dashes.offset || 0;
+        ctx.setLineDash(dashes);
+      }
+      if (!clip && !parentClipped) {
+        if (!canvas.isHidden.test(fill)) {
+          if (fill._renderer && fill._renderer.offset) {
+            sx = fill._renderer.scale.x;
+            sy = fill._renderer.scale.y;
+            ctx.save();
+            ctx.translate(
+              -fill._renderer.offset.x,
+              -fill._renderer.offset.y
+            );
+            ctx.scale(sx, sy);
+            a2 = this._size / fill._renderer.scale.y;
+            b2 = this._leading / fill._renderer.scale.y;
+            ctx.font = [
+              this._style,
+              this._weight,
+              a2 + "px/",
+              b2 + "px",
+              this._family
+            ].join(" ");
+            c2 = fill._renderer.offset.x / fill._renderer.scale.x;
+            d2 = fill._renderer.offset.y / fill._renderer.scale.y;
+            ctx.fillText(this.value, c2, d2);
+            ctx.restore();
+          } else {
+            ctx.fillText(this.value, 0, 0);
+          }
+        }
+        if (!canvas.isHidden.test(stroke)) {
+          if (stroke._renderer && stroke._renderer.offset) {
+            sx = stroke._renderer.scale.x;
+            sy = stroke._renderer.scale.y;
+            ctx.save();
+            ctx.translate(
+              -stroke._renderer.offset.x,
+              -stroke._renderer.offset.y
+            );
+            ctx.scale(sx, sy);
+            a2 = this._size / stroke._renderer.scale.y;
+            b2 = this._leading / stroke._renderer.scale.y;
+            ctx.font = [
+              this._style,
+              this._weight,
+              a2 + "px/",
+              b2 + "px",
+              this._family
+            ].join(" ");
+            c2 = stroke._renderer.offset.x / stroke._renderer.scale.x;
+            d2 = stroke._renderer.offset.y / stroke._renderer.scale.y;
+            e2 = linewidth / stroke._renderer.scale.x;
+            ctx.lineWidth = e2;
+            ctx.strokeText(this.value, c2, d2);
+            ctx.restore();
+          } else {
+            ctx.strokeText(this.value, 0, 0);
+          }
+        }
+      }
+      if (/(underline|strikethrough)/i.test(decoration)) {
+        const metrics = ctx.measureText(this.value);
+        let scalar = 1;
+        switch (decoration) {
+          case "underline":
+            y1 = metrics.actualBoundingBoxAscent;
+            y2 = metrics.actualBoundingBoxAscent;
+            break;
+          case "strikethrough":
+            y1 = 0;
+            y2 = 0;
+            scalar = 0.5;
+            break;
+        }
+        switch (baseline) {
+          case "top":
+            y1 += this._size * scalar;
+            y2 += this._size * scalar;
+            break;
+          case "baseline":
+          case "bottom":
+            y1 -= this._size * scalar;
+            y2 -= this._size * scalar;
+            break;
+        }
+        switch (alignment) {
+          case "left":
+          case "start":
+            x1 = 0;
+            x2 = metrics.width;
+            break;
+          case "right":
+          case "end":
+            x1 = -metrics.width;
+            x2 = 0;
+            break;
+          default:
+            x1 = -metrics.width / 2;
+            x2 = metrics.width / 2;
+        }
+        ctx.lineWidth = Math.max(Math.floor(this._size / 15), 1);
+        ctx.strokeStyle = ctx.fillStyle;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+      if (!defaultMatrix) {
+        ctx.restore();
+      }
+      if (clip && !parentClipped) {
+        ctx.clip();
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.setLineDash(emptyArray);
+      }
+      return this.flagReset();
+    }
+  },
+  "linear-gradient": {
+    render: function(ctx, parent) {
+      if (!parent) {
+        return;
+      }
+      this._update();
+      if (!this._renderer.effect || this._flagEndPoints || this._flagStops || this._flagUnits) {
+        let rect;
+        let lx = this.left._x;
+        let ly = this.left._y;
+        let rx = this.right._x;
+        let ry = this.right._y;
+        if (/objectBoundingBox/i.test(this._units)) {
+          rect = parent.getBoundingClientRect(true);
+          lx = (lx - 0.5) * rect.width;
+          ly = (ly - 0.5) * rect.height;
+          rx = (rx - 0.5) * rect.width;
+          ry = (ry - 0.5) * rect.height;
+        }
+        this._renderer.effect = ctx.createLinearGradient(lx, ly, rx, ry);
+        for (let i2 = 0; i2 < this.stops.length; i2++) {
+          const stop = this.stops[i2];
+          this._renderer.effect.addColorStop(stop._offset, stop._color);
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  "radial-gradient": {
+    render: function(ctx, parent) {
+      if (!parent) {
+        return;
+      }
+      this._update();
+      if (!this._renderer.effect || this._flagCenter || this._flagFocal || this._flagRadius || this._flagStops || this._flagUnits) {
+        let rect;
+        let cx = this.center._x;
+        let cy = this.center._y;
+        let fx = this.focal._x;
+        let fy = this.focal._y;
+        let radius = this._radius;
+        if (/objectBoundingBox/i.test(this._units)) {
+          rect = parent.getBoundingClientRect(true);
+          cx = cx * rect.width * 0.5;
+          cy = cy * rect.height * 0.5;
+          fx = fx * rect.width * 0.5;
+          fy = fy * rect.height * 0.5;
+          radius *= Math.min(rect.width, rect.height) * 0.5;
+        }
+        this._renderer.effect = ctx.createRadialGradient(
+          cx,
+          cy,
+          0,
+          fx,
+          fy,
+          radius
+        );
+        for (let i2 = 0; i2 < this.stops.length; i2++) {
+          const stop = this.stops[i2];
+          this._renderer.effect.addColorStop(stop._offset, stop._color);
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  texture: {
+    render: function(ctx) {
+      this._update();
+      const image = this.image;
+      if (!this._renderer.effect || (this._flagLoaded || this._flagImage || this._flagVideo || this._flagRepeat) && this.loaded) {
+        this._renderer.effect = ctx.createPattern(this.image, this._repeat);
+      }
+      if (this._flagOffset || this._flagLoaded || this._flagScale) {
+        if (!(this._renderer.offset instanceof Vector)) {
+          this._renderer.offset = new Vector();
+        }
+        this._renderer.offset.x = -this._offset.x;
+        this._renderer.offset.y = -this._offset.y;
+        if (image) {
+          this._renderer.offset.x += image.width / 2;
+          this._renderer.offset.y += image.height / 2;
+          if (this._scale instanceof Vector) {
+            this._renderer.offset.x *= this._scale.x;
+            this._renderer.offset.y *= this._scale.y;
+          } else {
+            this._renderer.offset.x *= this._scale;
+            this._renderer.offset.y *= this._scale;
+          }
+        }
+      }
+      if (this._flagScale || this._flagLoaded) {
+        if (!(this._renderer.scale instanceof Vector)) {
+          this._renderer.scale = new Vector();
+        }
+        if (this._scale instanceof Vector) {
+          this._renderer.scale.copy(this._scale);
+        } else {
+          this._renderer.scale.set(this._scale, this._scale);
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  renderSvgArcCommand: function(ctx, ax, ay, rx, ry, largeArcFlag, sweepFlag, xAxisRotation, x2, y2) {
+    xAxisRotation = xAxisRotation * Math.PI / 180;
+    rx = abs(rx);
+    ry = abs(ry);
+    const dx2 = (ax - x2) / 2;
+    const dy2 = (ay - y2) / 2;
+    const x1p = cos2(xAxisRotation) * dx2 + sin2(xAxisRotation) * dy2;
+    const y1p = -sin2(xAxisRotation) * dx2 + cos2(xAxisRotation) * dy2;
+    const x1ps = x1p * x1p;
+    const y1ps = y1p * y1p;
+    let rxs = rx * rx;
+    let rys = ry * ry;
+    const cr = x1ps / rxs + y1ps / rys;
+    if (cr > 1) {
+      const s2 = sqrt(cr);
+      rx = s2 * rx;
+      ry = s2 * ry;
+      rxs = rx * rx;
+      rys = ry * ry;
+    }
+    const dq = rxs * y1ps + rys * x1ps;
+    const pq = (rxs * rys - dq) / dq;
+    let q = sqrt(max2(0, pq));
+    if (largeArcFlag === sweepFlag)
+      q = -q;
+    const cxp = q * rx * y1p / ry;
+    const cyp = -q * ry * x1p / rx;
+    const cx = cos2(xAxisRotation) * cxp - sin2(xAxisRotation) * cyp + (ax + x2) / 2;
+    const cy = sin2(xAxisRotation) * cxp + cos2(xAxisRotation) * cyp + (ay + y2) / 2;
+    const startAngle = svgAngle(1, 0, (x1p - cxp) / rx, (y1p - cyp) / ry);
+    const delta = svgAngle(
+      (x1p - cxp) / rx,
+      (y1p - cyp) / ry,
+      (-x1p - cxp) / rx,
+      (-y1p - cyp) / ry
+    ) % TWO_PI;
+    const endAngle = startAngle + delta;
+    const clockwise = sweepFlag === 0;
+    renderArcEstimate(
+      ctx,
+      cx,
+      cy,
+      rx,
+      ry,
+      startAngle,
+      endAngle,
+      clockwise,
+      xAxisRotation
+    );
+  }
+};
+var Renderer = class extends Events {
+  constructor(params) {
+    super();
+    const smoothing = params.smoothing !== false;
+    this.domElement = params.domElement || document.createElement("canvas");
+    this.ctx = this.domElement.getContext("2d");
+    this.overdraw = params.overdraw || false;
+    if (typeof this.ctx.imageSmoothingEnabled !== "undefined") {
+      this.ctx.imageSmoothingEnabled = smoothing;
+    }
+    this.scene = new Group();
+    this.scene.parent = this;
+  }
+  setSize(width, height, ratio) {
+    this.width = width;
+    this.height = height;
+    this.ratio = typeof ratio === "undefined" ? getRatio(this.ctx) : ratio;
+    this.domElement.width = width * this.ratio;
+    this.domElement.height = height * this.ratio;
+    if (this.domElement.style) {
+      _.extend(this.domElement.style, {
+        width: width + "px",
+        height: height + "px"
+      });
+    }
+    return this.trigger(Events.Types.resize, width, height, ratio);
+  }
+  render() {
+    const isOne = this.ratio === 1;
+    if (!isOne) {
+      this.ctx.save();
+      this.ctx.scale(this.ratio, this.ratio);
+    }
+    if (!this.overdraw) {
+      this.ctx.clearRect(0, 0, this.width, this.height);
+    }
+    canvas.group.render.call(this.scene, this.ctx);
+    if (!isOne) {
+      this.ctx.restore();
+    }
+    return this;
+  }
+};
+__publicField(Renderer, "Utils", canvas);
+function renderArcEstimate(ctx, ox, oy, rx, ry, startAngle, endAngle, clockwise, xAxisRotation) {
+  const delta = endAngle - startAngle;
+  const epsilon = Curve.Tolerance.epsilon;
+  const samePoints = Math.abs(delta) < epsilon;
+  let deltaAngle = mod(delta, TWO_PI);
+  if (deltaAngle < epsilon) {
+    if (samePoints) {
+      deltaAngle = 0;
+    } else {
+      deltaAngle = TWO_PI;
+    }
+  }
+  if (clockwise === true && !samePoints) {
+    if (deltaAngle === TWO_PI) {
+      deltaAngle = -TWO_PI;
+    } else {
+      deltaAngle = deltaAngle - TWO_PI;
+    }
+  }
+  for (let i2 = 0; i2 < Constants.Resolution; i2++) {
+    const t2 = i2 / (Constants.Resolution - 1);
+    const angle = startAngle + t2 * deltaAngle;
+    let x2 = ox + rx * Math.cos(angle);
+    let y2 = oy + ry * Math.sin(angle);
+    if (xAxisRotation !== 0) {
+      const cos7 = Math.cos(xAxisRotation);
+      const sin7 = Math.sin(xAxisRotation);
+      const tx = x2 - ox;
+      const ty = y2 - oy;
+      x2 = tx * cos7 - ty * sin7 + ox;
+      y2 = tx * sin7 + ty * cos7 + oy;
+    }
+    ctx.lineTo(x2, y2);
+  }
+}
+function svgAngle(ux2, uy2, vx2, vy2) {
+  const dot = ux2 * vx2 + uy2 * vy2;
+  const len = sqrt(ux2 * ux2 + uy2 * uy2) * sqrt(vx2 * vx2 + vy2 * vy2);
+  let ang = acos(max2(-1, min2(1, dot / len)));
+  if (ux2 * vy2 - uy2 * vx2 < 0) {
+    ang = -ang;
+  }
+  return ang;
+}
+function isDefaultMatrix(m2) {
+  return m2[0] == 1 && m2[3] == 0 && m2[1] == 0 && m2[4] == 1 && m2[2] == 0 && m2[5] == 0;
+}
+var CanvasShim = {
+  Image: null,
+  isHeadless: false,
+  shim: function(canvas3, Image2) {
+    Renderer.Utils.shim(canvas3);
+    if (typeof Image2 !== "undefined") {
+      CanvasShim.Image = Image2;
+    }
+    CanvasShim.isHeadless = true;
+    return canvas3;
+  }
+};
+var dom = {
+  hasEventListeners: typeof root.addEventListener === "function",
+  bind: function(elem, event, func, bool) {
+    if (this.hasEventListeners) {
+      elem.addEventListener(event, func, !!bool);
+    } else {
+      elem.attachEvent("on" + event, func);
+    }
+    return dom;
+  },
+  unbind: function(elem, event, func, bool) {
+    if (dom.hasEventListeners) {
+      elem.removeEventListeners(event, func, !!bool);
+    } else {
+      elem.detachEvent("on" + event, func);
+    }
+    return dom;
+  },
+  getRequestAnimationFrame: function() {
+    const vendors = ["ms", "moz", "webkit", "o"];
+    let lastTime = 0;
+    let request = root.requestAnimationFrame;
+    if (!request) {
+      for (let i2 = 0; i2 < vendors.length; i2++) {
+        request = root[vendors[i2] + "RequestAnimationFrame"] || request;
+      }
+      request = request || fallbackRequest;
+    }
+    function fallbackRequest(callback, element) {
+      const currTime = new Date().getTime();
+      const timeToCall = Math.max(0, 16 - (currTime - lastTime));
+      const id = root.setTimeout(nextRequest, timeToCall);
+      lastTime = currTime + timeToCall;
+      function nextRequest() {
+        callback(currTime + timeToCall);
+      }
+      return id;
+    }
+    return request;
+  }
+};
+var temp = root.document ? root.document.createElement("div") : {};
+temp.id = "help-two-load";
+Object.defineProperty(dom, "temp", {
+  enumerable: true,
+  get: function() {
+    if (_.isElement(temp) && !root.document.head.contains(temp)) {
+      temp.style.display = "none";
+      root.document.head.appendChild(temp);
+    }
+    return temp;
+  }
+});
+var TwoError = class extends Error {
+  constructor(message) {
+    super();
+    __publicField(this, "name", "Two.js");
+    __publicField(this, "message");
+    this.message = message;
+  }
+};
+var Registry = class {
+  constructor() {
+    __publicField(this, "map", {});
+  }
+  add(id, obj) {
+    this.map[id] = obj;
+    return this;
+  }
+  remove(id) {
+    delete this.map[id];
+    return this;
+  }
+  get(id) {
+    return this.map[id];
+  }
+  contains(id) {
+    return id in this.map;
+  }
+};
+function contains(path2, t2) {
+  if (t2 === 0 || t2 === 1) {
+    return true;
+  }
+  const length = path2._length;
+  const target = length * t2;
+  let elapsed = 0;
+  for (let i2 = 0; i2 < path2._lengths.length; i2++) {
+    const dist = path2._lengths[i2];
+    if (elapsed >= target) {
+      return target - elapsed >= 0;
+    }
+    elapsed += dist;
+  }
+  return false;
+}
+function getIdByLength(path2, target) {
+  const total = path2._length;
+  if (target <= 0) {
+    return 0;
+  } else if (target >= total) {
+    return path2._lengths.length - 1;
+  }
+  for (let i2 = 0, sum = 0; i2 < path2._lengths.length; i2++) {
+    if (sum + path2._lengths[i2] >= target) {
+      target -= sum;
+      return Math.max(i2 - 1, 0) + target / path2._lengths[i2];
+    }
+    sum += path2._lengths[i2];
+  }
+  return -1;
+}
+function getCurveLength2(a2, b2, limit) {
+  let x1, x2, x3, x4, y1, y2, y3, y4;
+  const right = b2.controls && b2.controls.right;
+  const left = a2.controls && a2.controls.left;
+  x1 = b2.x;
+  y1 = b2.y;
+  x2 = (right || b2).x;
+  y2 = (right || b2).y;
+  x3 = (left || a2).x;
+  y3 = (left || a2).y;
+  x4 = a2.x;
+  y4 = a2.y;
+  if (right && b2._relative) {
+    x2 += b2.x;
+    y2 += b2.y;
+  }
+  if (left && a2._relative) {
+    x3 += a2.x;
+    y3 += a2.y;
+  }
+  return getCurveLength(x1, y1, x2, y2, x3, y3, x4, y4, limit);
+}
+function getSubdivisions(a2, b2, limit) {
+  let x1, x2, x3, x4, y1, y2, y3, y4;
+  const right = b2.controls && b2.controls.right;
+  const left = a2.controls && a2.controls.left;
+  x1 = b2.x;
+  y1 = b2.y;
+  x2 = (right || b2).x;
+  y2 = (right || b2).y;
+  x3 = (left || a2).x;
+  y3 = (left || a2).y;
+  x4 = a2.x;
+  y4 = a2.y;
+  if (right && b2._relative) {
+    x2 += b2.x;
+    y2 += b2.y;
+  }
+  if (left && a2._relative) {
+    x3 += a2.x;
+    y3 += a2.y;
+  }
+  return subdivide(x1, y1, x2, y2, x3, y3, x4, y4, limit);
+}
+var _Stop = class extends Element {
+  constructor(offset, color, opacity) {
+    super();
+    __publicField(this, "_flagOffset", true);
+    __publicField(this, "_flagOpacity", true);
+    __publicField(this, "_flagColor", true);
+    __publicField(this, "_offset", 0);
+    __publicField(this, "_opacity", 1);
+    __publicField(this, "_color", "#fff");
+    for (let prop in proto6) {
+      Object.defineProperty(this, prop, proto6[prop]);
+    }
+    this._renderer.type = "stop";
+    this.offset = typeof offset === "number" ? offset : _Stop.Index <= 0 ? 0 : 1;
+    this.opacity = typeof opacity === "number" ? opacity : 1;
+    this.color = typeof color === "string" ? color : _Stop.Index <= 0 ? "#fff" : "#000";
+    _Stop.Index = (_Stop.Index + 1) % 2;
+  }
+  clone(parent) {
+    const clone = new _Stop();
+    _.each(_Stop.Properties, function(property) {
+      clone[property] = this[property];
+    }, this);
+    if (parent && parent.stops) {
+      parent.stops.push(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const result = {};
+    _.each(_Stop.Properties, function(k2) {
+      result[k2] = this[k2];
+    }, this);
+    return result;
+  }
+  flagReset() {
+    this._flagOffset = this._flagColor = this._flagOpacity = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var Stop = _Stop;
+__publicField(Stop, "Index", 0);
+__publicField(Stop, "Properties", ["offset", "opacity", "color"]);
+var proto6 = {
+  offset: {
+    enumerable: true,
+    get: function() {
+      return this._offset;
+    },
+    set: function(v2) {
+      this._offset = v2;
+      this._flagOffset = true;
+      if (this.parent) {
+        this.parent._flagStops = true;
+      }
+    }
+  },
+  opacity: {
+    enumerable: true,
+    get: function() {
+      return this._opacity;
+    },
+    set: function(v2) {
+      this._opacity = v2;
+      this._flagOpacity = true;
+      if (this.parent) {
+        this.parent._flagStops = true;
+      }
+    }
+  },
+  color: {
+    enumerable: true,
+    get: function() {
+      return this._color;
+    },
+    set: function(v2) {
+      this._color = v2;
+      this._flagColor = true;
+      if (this.parent) {
+        this.parent._flagStops = true;
+      }
+    }
+  }
+};
+var _Gradient = class extends Element {
+  constructor(stops) {
+    super();
+    __publicField(this, "_flagStops", false);
+    __publicField(this, "_flagSpread", false);
+    __publicField(this, "_flagUnits", false);
+    __publicField(this, "_spread", "");
+    __publicField(this, "_units", "");
+    for (let prop in proto7) {
+      Object.defineProperty(this, prop, proto7[prop]);
+    }
+    this._renderer.type = "gradient";
+    this.id = Constants.Identifier + Constants.uniqueId();
+    this.classList = [];
+    this._renderer.flagStops = FlagStops.bind(this);
+    this._renderer.bindStops = BindStops.bind(this);
+    this._renderer.unbindStops = UnbindStops.bind(this);
+    this.spread = "pad";
+    this.units = "objectBoundingBox";
+    if (stops) {
+      this.stops = stops;
+    }
+  }
+  clone(parent) {
+    const stops = this.stops.map(function(s2) {
+      return s2.clone();
+    });
+    const clone = new _Gradient(stops);
+    _.each(_Gradient.Properties, function(k2) {
+      clone[k2] = this[k2];
+    }, this);
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const result = {
+      stops: this.stops.map(function(s2) {
+        return s2.toObject();
+      })
+    };
+    _.each(_Gradient.Properties, function(k2) {
+      result[k2] = this[k2];
+    }, this);
+    return result;
+  }
+  _update() {
+    if (this._flagSpread || this._flagStops) {
+      this.trigger(Events.Types.change);
+    }
+    return this;
+  }
+  flagReset() {
+    this._flagSpread = this._flagUnits = this._flagStops = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var Gradient = _Gradient;
+__publicField(Gradient, "Stop", Stop);
+__publicField(Gradient, "Properties", ["spread", "stops", "renderer", "units"]);
+var proto7 = {
+  spread: {
+    enumerable: true,
+    get: function() {
+      return this._spread;
+    },
+    set: function(v2) {
+      this._spread = v2;
+      this._flagSpread = true;
+    }
+  },
+  units: {
+    enumerable: true,
+    get: function() {
+      return this._units;
+    },
+    set: function(v2) {
+      this._units = v2;
+      this._flagUnits = true;
+    }
+  },
+  stops: {
+    enumerable: true,
+    get: function() {
+      return this._stops;
+    },
+    set: function(stops) {
+      const bindStops = this._renderer.bindStops;
+      const unbindStops = this._renderer.unbindStops;
+      if (this._stops) {
+        this._stops.unbind(Events.Types.insert, bindStops).unbind(Events.Types.remove, unbindStops);
+      }
+      this._stops = new Collection((stops || []).slice(0));
+      this._stops.bind(Events.Types.insert, bindStops).bind(Events.Types.remove, unbindStops);
+      bindStops(this._stops);
+    }
+  }
+};
+function FlagStops() {
+  this._flagStops = true;
+}
+function BindStops(items) {
+  let i2 = items.length;
+  while (i2--) {
+    items[i2].bind(Events.Types.change, this._renderer.flagStops);
+    items[i2].parent = this;
+  }
+  this._renderer.flagStops();
+}
+function UnbindStops(items) {
+  let i2 = items.length;
+  while (i2--) {
+    items[i2].unbind(Events.Types.change, this._renderer.flagStops);
+    delete items[i2].parent;
+  }
+  this._renderer.flagStops();
+}
+var _LinearGradient = class extends Gradient {
+  constructor(x1, y1, x2, y2, stops) {
+    super(stops);
+    __publicField(this, "_flagEndPoints", false);
+    __publicField(this, "_left", null);
+    __publicField(this, "_right", null);
+    for (let prop in proto8) {
+      Object.defineProperty(this, prop, proto8[prop]);
+    }
+    this._renderer.type = "linear-gradient";
+    this._renderer.flagEndPoints = FlagEndPoints.bind(this);
+    this.left = new Vector();
+    this.right = new Vector();
+    if (typeof x1 === "number") {
+      this.left.x = x1;
+    }
+    if (typeof y1 === "number") {
+      this.left.y = y1;
+    }
+    if (typeof x2 === "number") {
+      this.right.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.right.y = y2;
+    }
+  }
+  clone(parent) {
+    const stops = this.stops.map(function(stop) {
+      return stop.clone();
+    });
+    const clone = new _LinearGradient(
+      this.left._x,
+      this.left._y,
+      this.right._x,
+      this.right._y,
+      stops
+    );
+    _.each(Gradient.Properties, function(k2) {
+      clone[k2] = this[k2];
+    }, this);
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const result = super.toObject.call(this);
+    result.left = this.left.toObject();
+    result.right = this.right.toObject();
+    return result;
+  }
+  _update() {
+    if (this._flagEndPoints || this._flagSpread || this._flagStops) {
+      this.trigger(Events.Types.change);
+    }
+    return this;
+  }
+  flagReset() {
+    this._flagEndPoints = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var LinearGradient = _LinearGradient;
+__publicField(LinearGradient, "Properties", ["left", "right"]);
+__publicField(LinearGradient, "Stop", Stop);
+var proto8 = {
+  left: {
+    enumerable: true,
+    get: function() {
+      return this._left;
+    },
+    set: function(v2) {
+      if (this._left instanceof Vector) {
+        this._left.unbind(Events.Types.change, this._renderer.flagEndPoints);
+      }
+      this._left = v2;
+      this._left.bind(Events.Types.change, this._renderer.flagEndPoints);
+      this._flagEndPoints = true;
+    }
+  },
+  right: {
+    enumerable: true,
+    get: function() {
+      return this._right;
+    },
+    set: function(v2) {
+      if (this._right instanceof Vector) {
+        this._right.unbind(Events.Types.change, this._renderer.flagEndPoints);
+      }
+      this._right = v2;
+      this._right.bind(Events.Types.change, this._renderer.flagEndPoints);
+      this._flagEndPoints = true;
+    }
+  }
+};
+function FlagEndPoints() {
+  this._flagEndPoints = true;
+}
+var _RadialGradient = class extends Gradient {
+  constructor(cx, cy, r2, stops, fx, fy) {
+    super(stops);
+    __publicField(this, "_flagRadius", false);
+    __publicField(this, "_flagCenter", false);
+    __publicField(this, "_flagFocal", false);
+    __publicField(this, "_radius", 0);
+    __publicField(this, "_center", null);
+    __publicField(this, "_focal", null);
+    for (let prop in proto9) {
+      Object.defineProperty(this, prop, proto9[prop]);
+    }
+    this._renderer.type = "radial-gradient";
+    this._renderer.flagCenter = FlagCenter.bind(this);
+    this._renderer.flagFocal = FlagFocal.bind(this);
+    this.center = new Vector();
+    this.radius = typeof r2 === "number" ? r2 : 1;
+    this.focal = new Vector();
+    if (typeof cx === "number") {
+      this.center.x = cx;
+    }
+    if (typeof cy === "number") {
+      this.center.y = cy;
+    }
+    this.focal.copy(this.center);
+    if (typeof fx === "number") {
+      this.focal.x = fx;
+    }
+    if (typeof fy === "number") {
+      this.focal.y = fy;
+    }
+  }
+  clone(parent) {
+    const stops = this.stops.map(function(stop) {
+      return stop.clone();
+    });
+    const clone = new _RadialGradient(
+      this.center._x,
+      this.center._y,
+      this._radius,
+      stops,
+      this.focal._x,
+      this.focal._y
+    );
+    _.each(Gradient.Properties.concat(_RadialGradient.Properties), function(k2) {
+      clone[k2] = this[k2];
+    }, this);
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const result = super.toObject.call(this);
+    _.each(_RadialGradient.Properties, function(k2) {
+      result[k2] = this[k2];
+    }, this);
+    result.center = this.center.toObject();
+    result.focal = this.focal.toObject();
+    return result;
+  }
+  _update() {
+    if (this._flagRadius || this._flatCenter || this._flagFocal || this._flagSpread || this._flagStops) {
+      this.trigger(Events.Types.change);
+    }
+    return this;
+  }
+  flagReset() {
+    this._flagRadius = this._flagCenter = this._flagFocal = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var RadialGradient = _RadialGradient;
+__publicField(RadialGradient, "Stop", Stop);
+__publicField(RadialGradient, "Properties", ["center", "radius", "focal"]);
+var proto9 = {
+  radius: {
+    enumerable: true,
+    get: function() {
+      return this._radius;
+    },
+    set: function(v2) {
+      this._radius = v2;
+      this._flagRadius = true;
+    }
+  },
+  center: {
+    enumerable: true,
+    get: function() {
+      return this._center;
+    },
+    set: function(v2) {
+      if (this._center) {
+        this._center.unbind(Events.Types.change, this._renderer.flagCenter);
+      }
+      this._center = v2;
+      this._center.bind(Events.Types.change, this._renderer.flagCenter);
+      this._flagCenter = true;
+    }
+  },
+  focal: {
+    enumerable: true,
+    get: function() {
+      return this._focal;
+    },
+    set: function(v2) {
+      if (this._focal) {
+        this._focal.unbind(Events.Types.change, this._renderer.flagFocal);
+      }
+      this._focal = v2;
+      this._focal.bind(Events.Types.change, this._renderer.flagFocal);
+      this._flagFocal = true;
+    }
+  }
+};
+function FlagCenter() {
+  this._flagCenter = true;
+}
+function FlagFocal() {
+  this._flagFocal = true;
+}
+var anchor;
+var regex = {
+  video: /\.(mp4|webm|ogg)$/i,
+  image: /\.(jpe?g|png|gif|tiff|webp)$/i,
+  effect: /texture|gradient/i
+};
+if (root.document) {
+  anchor = document.createElement("a");
+}
+var _Texture = class extends Element {
+  constructor(src, callback) {
+    super();
+    __publicField(this, "_flagSrc", false);
+    __publicField(this, "_flagImage", false);
+    __publicField(this, "_flagVideo", false);
+    __publicField(this, "_flagLoaded", false);
+    __publicField(this, "_flagRepeat", false);
+    __publicField(this, "_flagOffset", false);
+    __publicField(this, "_flagScale", false);
+    __publicField(this, "_src", "");
+    __publicField(this, "_image", null);
+    __publicField(this, "_loaded", false);
+    __publicField(this, "_repeat", "no-repeat");
+    __publicField(this, "_scale", 1);
+    __publicField(this, "_offset", null);
+    this._renderer = {};
+    for (let prop in proto10) {
+      Object.defineProperty(this, prop, proto10[prop]);
+    }
+    this._renderer.type = "texture";
+    this._renderer.flagOffset = FlagOffset.bind(this);
+    this._renderer.flagScale = FlagScale.bind(this);
+    this.id = Constants.Identifier + Constants.uniqueId();
+    this.classList = [];
+    this.loaded = false;
+    this.repeat = "no-repeat";
+    this.offset = new Vector();
+    if (typeof callback === "function") {
+      const loaded = function() {
+        this.unbind(Events.Types.load, loaded);
+        if (typeof callback === "function") {
+          callback();
+        }
+      }.bind(this);
+      this.bind(Events.Types.load, loaded);
+    }
+    if (typeof src === "string") {
+      this.src = src;
+    } else if (typeof src === "object") {
+      const elemString = Object.prototype.toString.call(src);
+      if (elemString === "[object HTMLImageElement]" || elemString === "[object HTMLCanvasElement]" || elemString === "[object HTMLVideoElement]" || elemString === "[object Image]") {
+        this.image = src;
+      }
+    }
+    this._update();
+  }
+  static getAbsoluteURL(path2) {
+    if (!anchor) {
+      return path2;
+    }
+    anchor.href = path2;
+    return anchor.href;
+  }
+  static loadHeadlessBuffer(texture, loaded) {
+    texture.image.onload = loaded;
+    texture.image.src = texture.src;
+  }
+  static getTag(image) {
+    return image && image.nodeName && image.nodeName.toLowerCase() || "img";
+  }
+  static getImage(src) {
+    const absoluteSrc = _Texture.getAbsoluteURL(src);
+    if (_Texture.ImageRegistry.contains(absoluteSrc)) {
+      return _Texture.ImageRegistry.get(absoluteSrc);
+    }
+    let image;
+    if (CanvasShim.Image) {
+      image = new CanvasShim.Image();
+      Renderer.Utils.shim(image, "img");
+    } else if (root.document) {
+      if (regex.video.test(absoluteSrc)) {
+        image = document.createElement("video");
+      } else {
+        image = document.createElement("img");
+      }
+    } else {
+      console.warn("Two.js: no prototypical image defined for Two.Texture");
+    }
+    image.crossOrigin = "anonymous";
+    image.referrerPolicy = "no-referrer";
+    return image;
+  }
+  static load(texture, callback) {
+    let image = texture.image;
+    let tag = _Texture.getTag(image);
+    if (texture._flagImage) {
+      if (/canvas/i.test(tag)) {
+        _Texture.Register.canvas(texture, callback);
+      } else {
+        texture._src = !CanvasShim.isHeadless && image.getAttribute("two-src") || image.src;
+        _Texture.Register[tag](texture, callback);
+      }
+    }
+    if (texture._flagSrc) {
+      if (!image) {
+        image = _Texture.getImage(texture.src);
+        texture.image = image;
+      }
+      tag = _Texture.getTag(image);
+      _Texture.Register[tag](texture, callback);
+    }
+  }
+  clone() {
+    const clone = new _Texture(this.src);
+    clone.repeat = this.repeat;
+    clone.offset.copy(this.origin);
+    clone.scale = this.scale;
+    return clone;
+  }
+  toObject() {
+    return {
+      src: this.src,
+      repeat: this.repeat,
+      origin: this.origin.toObject(),
+      scale: typeof this.scale === "number" ? this.scale : this.scale.toObject()
+    };
+  }
+  _update() {
+    if (this._flagSrc || this._flagImage) {
+      this.trigger(Events.Types.change);
+      if (this._flagSrc || this._flagImage) {
+        this.loaded = false;
+        _Texture.load(this, function() {
+          this.loaded = true;
+          this.trigger(Events.Types.change).trigger(Events.Types.load);
+        }.bind(this));
+      }
+    }
+    if (this._image && this._image.readyState >= 4) {
+      this._flagVideo = true;
+    }
+    return this;
+  }
+  flagReset() {
+    this._flagSrc = this._flagImage = this._flagLoaded = this._flagRepeat = this._flagVideo = this._flagScale = this._flagOffset = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var Texture = _Texture;
+__publicField(Texture, "Properties", [
+  "src",
+  "loaded",
+  "repeat",
+  "scale",
+  "offset",
+  "image"
+]);
+__publicField(Texture, "RegularExpressions", regex);
+__publicField(Texture, "ImageRegistry", new Registry());
+__publicField(Texture, "Register", {
+  canvas: function(texture, callback) {
+    texture._src = "#" + texture.id;
+    _Texture.ImageRegistry.add(texture.src, texture.image);
+    if (typeof callback === "function") {
+      callback();
+    }
+  },
+  img: function(texture, callback) {
+    const image = texture.image;
+    const loaded = function(e2) {
+      if (!CanvasShim.isHeadless && image.removeEventListener && typeof image.removeEventListener === "function") {
+        image.removeEventListener("load", loaded, false);
+        image.removeEventListener("error", error, false);
+      }
+      if (typeof callback === "function") {
+        callback();
+      }
+    };
+    const error = function(e2) {
+      if (!CanvasShim.isHeadless && typeof image.removeEventListener === "function") {
+        image.removeEventListener("load", loaded, false);
+        image.removeEventListener("error", error, false);
+      }
+      throw new TwoError("unable to load " + texture.src);
+    };
+    if (typeof image.width === "number" && image.width > 0 && typeof image.height === "number" && image.height > 0) {
+      loaded();
+    } else if (!CanvasShim.isHeadless && typeof image.addEventListener === "function") {
+      image.addEventListener("load", loaded, false);
+      image.addEventListener("error", error, false);
+    }
+    texture._src = _Texture.getAbsoluteURL(texture._src);
+    if (!CanvasShim.isHeadless && image && image.getAttribute("two-src")) {
+      return;
+    }
+    if (!CanvasShim.isHeadless) {
+      image.setAttribute("two-src", texture.src);
+    }
+    _Texture.ImageRegistry.add(texture.src, image);
+    if (CanvasShim.isHeadless) {
+      _Texture.loadHeadlessBuffer(texture, loaded);
+    } else {
+      texture.image.src = texture.src;
+    }
+  },
+  video: function(texture, callback) {
+    if (CanvasShim.isHeadless) {
+      throw new TwoError("video textures are not implemented in headless environments.");
+    }
+    const loaded = function(e2) {
+      texture.image.removeEventListener("canplaythrough", loaded, false);
+      texture.image.removeEventListener("error", error, false);
+      texture.image.width = texture.image.videoWidth;
+      texture.image.height = texture.image.videoHeight;
+      if (typeof callback === "function") {
+        callback();
+      }
+    };
+    const error = function(e2) {
+      texture.image.removeEventListener("canplaythrough", loaded, false);
+      texture.image.removeEventListener("error", error, false);
+      throw new TwoError("unable to load " + texture.src);
+    };
+    texture._src = _Texture.getAbsoluteURL(texture._src);
+    if (!texture.image.getAttribute("two-src")) {
+      texture.image.setAttribute("two-src", texture.src);
+      _Texture.ImageRegistry.add(texture.src, texture.image);
+    }
+    if (texture.image.readyState >= 4) {
+      loaded();
+    } else {
+      texture.image.addEventListener("canplaythrough", loaded, false);
+      texture.image.addEventListener("error", error, false);
+      texture.image.src = texture.src;
+      texture.image.load();
+    }
+  }
+});
+var proto10 = {
+  src: {
+    enumerable: true,
+    get: function() {
+      return this._src;
+    },
+    set: function(v2) {
+      this._src = v2;
+      this._flagSrc = true;
+    }
+  },
+  loaded: {
+    enumerable: true,
+    get: function() {
+      return this._loaded;
+    },
+    set: function(v2) {
+      this._loaded = v2;
+      this._flagLoaded = true;
+    }
+  },
+  repeat: {
+    enumerable: true,
+    get: function() {
+      return this._repeat;
+    },
+    set: function(v2) {
+      this._repeat = v2;
+      this._flagRepeat = true;
+    }
+  },
+  image: {
+    enumerable: true,
+    get: function() {
+      return this._image;
+    },
+    set: function(image) {
+      const tag = Texture.getTag(image);
+      let index;
+      switch (tag) {
+        case "canvas":
+          index = "#" + image.id;
+          break;
+        default:
+          index = image.src;
+      }
+      if (Texture.ImageRegistry.contains(index)) {
+        this._image = Texture.ImageRegistry.get(image.src);
+      } else {
+        this._image = image;
+      }
+      this._flagImage = true;
+    }
+  },
+  offset: {
+    enumerable: true,
+    get: function() {
+      return this._offset;
+    },
+    set: function(v2) {
+      if (this._offset) {
+        this._offset.unbind(Events.Types.change, this._renderer.flagOffset);
+      }
+      this._offset = v2;
+      this._offset.bind(Events.Types.change, this._renderer.flagOffset);
+      this._flagOffset = true;
+    }
+  },
+  scale: {
+    enumerable: true,
+    get: function() {
+      return this._scale;
+    },
+    set: function(v2) {
+      if (this._scale instanceof Vector) {
+        this._scale.unbind(Events.Types.change, this._renderer.flagScale);
+      }
+      this._scale = v2;
+      if (this._scale instanceof Vector) {
+        this._scale.bind(Events.Types.change, this._renderer.flagScale);
+      }
+      this._flagScale = true;
+    }
+  }
+};
+function FlagOffset() {
+  this._flagOffset = true;
+}
+function FlagScale() {
+  this._flagScale = true;
+}
+var min3 = Math.min;
+var max3 = Math.max;
+var ceil = Math.ceil;
+var floor2 = Math.floor;
+var vector = new Vector();
+var _Path = class extends Shape {
+  constructor(vertices, closed2, curved, manual) {
+    super();
+    __publicField(this, "_flagVertices", true);
+    __publicField(this, "_flagLength", true);
+    __publicField(this, "_flagFill", true);
+    __publicField(this, "_flagStroke", true);
+    __publicField(this, "_flagLinewidth", true);
+    __publicField(this, "_flagOpacity", true);
+    __publicField(this, "_flagVisible", true);
+    __publicField(this, "_flagCap", true);
+    __publicField(this, "_flagJoin", true);
+    __publicField(this, "_flagMiter", true);
+    __publicField(this, "_flagMask", false);
+    __publicField(this, "_flagClip", false);
+    __publicField(this, "_length", 0);
+    __publicField(this, "_fill", "#fff");
+    __publicField(this, "_stroke", "#000");
+    __publicField(this, "_linewidth", 1);
+    __publicField(this, "_opacity", 1);
+    __publicField(this, "_visible", true);
+    __publicField(this, "_cap", "round");
+    __publicField(this, "_join", "round");
+    __publicField(this, "_miter", 4);
+    __publicField(this, "_closed", true);
+    __publicField(this, "_curved", false);
+    __publicField(this, "_automatic", true);
+    __publicField(this, "_beginning", 0);
+    __publicField(this, "_ending", 1);
+    __publicField(this, "_mask", null);
+    __publicField(this, "_clip", false);
+    __publicField(this, "_dashes", null);
+    for (let prop in proto11) {
+      Object.defineProperty(this, prop, proto11[prop]);
+    }
+    this._renderer.type = "path";
+    this._renderer.flagVertices = FlagVertices.bind(this);
+    this._renderer.bindVertices = BindVertices.bind(this);
+    this._renderer.unbindVertices = UnbindVertices.bind(this);
+    this._renderer.flagFill = FlagFill.bind(this);
+    this._renderer.flagStroke = FlagStroke.bind(this);
+    this._renderer.vertices = [];
+    this._renderer.collection = [];
+    this.closed = !!closed2;
+    this.curved = !!curved;
+    this.beginning = 0;
+    this.ending = 1;
+    this.fill = "#fff";
+    this.stroke = "#000";
+    this.linewidth = 1;
+    this.opacity = 1;
+    this.className = "";
+    this.visible = true;
+    this.cap = "butt";
+    this.join = "miter";
+    this.miter = 4;
+    this.vertices = vertices;
+    this.automatic = !manual;
+    this.dashes = [];
+    this.dashes.offset = 0;
+  }
+  clone(parent) {
+    const clone = new _Path();
+    for (let j2 = 0; j2 < this.vertices.length; j2++) {
+      clone.vertices.push(this.vertices[j2].clone());
+    }
+    for (let i2 = 0; i2 < _Path.Properties.length; i2++) {
+      const k2 = _Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    clone.className = this.className;
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone._update();
+  }
+  toObject() {
+    const result = {
+      vertices: this.vertices.map(function(v2) {
+        return v2.toObject();
+      })
+    };
+    _.each(_Path.Properties, function(k2) {
+      if (typeof this[k2] !== "undefined") {
+        if (this[k2].toObject) {
+          result[k2] = this[k2].toObject();
+        } else {
+          result[k2] = this[k2];
+        }
+      }
+    }, this);
+    result.className = this.className;
+    result.translation = this.translation.toObject();
+    result.rotation = this.rotation;
+    result.scale = this.scale instanceof Vector ? this.scale.toObject() : this.scale;
+    result.skewX = this.skewX;
+    result.skewY = this.skewY;
+    if (this.matrix.manual) {
+      result.matrix = this.matrix.toObject();
+    }
+    return result;
+  }
+  noFill() {
+    this.fill = "none";
+    return this;
+  }
+  noStroke() {
+    this.stroke = "none";
+    return this;
+  }
+  corner() {
+    const rect = this.getBoundingClientRect(true);
+    const hw = rect.width / 2;
+    const hh = rect.height / 2;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    for (let i2 = 0; i2 < this.vertices.length; i2++) {
+      const v2 = this.vertices[i2];
+      v2.x -= cx;
+      v2.y -= cy;
+      v2.x += hw;
+      v2.y += hh;
+    }
+    if (this.mask) {
+      this.mask.translation.x -= cx;
+      this.mask.translation.x += hw;
+      this.mask.translation.y -= cy;
+      this.mask.translation.y += hh;
+    }
+    return this;
+  }
+  center() {
+    const rect = this.getBoundingClientRect(true);
+    const cx = rect.left + rect.width / 2 - this.translation.x;
+    const cy = rect.top + rect.height / 2 - this.translation.y;
+    for (let i2 = 0; i2 < this.vertices.length; i2++) {
+      const v2 = this.vertices[i2];
+      v2.x -= cx;
+      v2.y -= cy;
+    }
+    if (this.mask) {
+      this.mask.translation.x -= cx;
+      this.mask.translation.y -= cy;
+    }
+    return this;
+  }
+  getBoundingClientRect(shallow) {
+    let matrix, border, l2, i2, v0, v1;
+    let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+    this._update(true);
+    matrix = shallow ? this.matrix : this.worldMatrix;
+    border = (this.linewidth || 0) / 2;
+    l2 = this._renderer.vertices.length;
+    if (this.linewidth > 0 || this.stroke && !/(transparent|none)/i.test(this.stroke)) {
+      if (this.matrix.manual) {
+        const { scaleX, scaleY } = decomposeMatrix(
+          matrix.elements[0],
+          matrix.elements[3],
+          matrix.elements[1],
+          matrix.elements[4],
+          matrix.elements[2],
+          matrix.elements[5]
+        );
+        if (typeof scaleX === "number" && typeof scaleY === "number") {
+          border = Math.max(scaleX, scaleY) * (this.linewidth || 0) / 2;
+        }
+      } else {
+        border *= typeof this.scale === "number" ? this.scale : Math.max(this.scale.x, this.scale.y);
+      }
+    }
+    if (l2 <= 0) {
+      return {
+        width: 0,
+        height: 0
+      };
+    }
+    for (i2 = 0; i2 < l2; i2++) {
+      v1 = this._renderer.vertices[i2];
+      v0 = this._renderer.vertices[(i2 + l2 - 1) % l2];
+      const [v0x, v0y] = matrix.multiply(v0.x, v0.y);
+      const [v1x, v1y] = matrix.multiply(v1.x, v1.y);
+      if (v0.controls && v1.controls) {
+        let rx = v0.controls.right.x;
+        let ry = v0.controls.right.y;
+        if (v0.relative) {
+          rx += v0.x;
+          ry += v0.y;
+        }
+        let [c0x, c0y] = matrix.multiply(rx, ry);
+        let lx = v1.controls.left.x;
+        let ly = v1.controls.left.y;
+        if (v1.relative) {
+          lx += v1.x;
+          ly += v1.y;
+        }
+        let [c1x, c1y] = matrix.multiply(lx, ly);
+        const bb = getCurveBoundingBox(
+          v0x,
+          v0y,
+          c0x,
+          c0y,
+          c1x,
+          c1y,
+          v1x,
+          v1y
+        );
+        top = min3(bb.min.y - border, top);
+        left = min3(bb.min.x - border, left);
+        right = max3(bb.max.x + border, right);
+        bottom = max3(bb.max.y + border, bottom);
+      } else {
+        if (i2 <= 1) {
+          top = min3(v0y - border, top);
+          left = min3(v0x - border, left);
+          right = max3(v0x + border, right);
+          bottom = max3(v0y + border, bottom);
+        }
+        top = min3(v1y - border, top);
+        left = min3(v1x - border, left);
+        right = max3(v1x + border, right);
+        bottom = max3(v1y + border, bottom);
+      }
+    }
+    return {
+      top,
+      left,
+      right,
+      bottom,
+      width: right - left,
+      height: bottom - top
+    };
+  }
+  getPointAt(t2, obj) {
+    let ia, ib, result;
+    let x2, x1, x22, x3, x4, y2, y1, y22, y3, y4, left, right;
+    let target = this.length * Math.min(Math.max(t2, 0), 1);
+    const length = this.vertices.length;
+    const last = length - 1;
+    let a2 = null;
+    let b2 = null;
+    for (let i2 = 0, l2 = this._lengths.length, sum = 0; i2 < l2; i2++) {
+      if (sum + this._lengths[i2] >= target) {
+        if (this._closed) {
+          ia = mod(i2, length);
+          ib = mod(i2 - 1, length);
+          if (i2 === 0) {
+            ia = ib;
+            ib = i2;
+          }
+        } else {
+          ia = i2;
+          ib = Math.min(Math.max(i2 - 1, 0), last);
+        }
+        a2 = this.vertices[ia];
+        b2 = this.vertices[ib];
+        target -= sum;
+        if (this._lengths[i2] !== 0) {
+          t2 = target / this._lengths[i2];
+        } else {
+          t2 = 0;
+        }
+        break;
+      }
+      sum += this._lengths[i2];
+    }
+    if (a2 === null || b2 === null) {
+      return null;
+    }
+    if (!a2) {
+      return b2;
+    } else if (!b2) {
+      return a2;
+    }
+    right = b2.controls && b2.controls.right;
+    left = a2.controls && a2.controls.left;
+    x1 = b2.x;
+    y1 = b2.y;
+    x22 = (right || b2).x;
+    y22 = (right || b2).y;
+    x3 = (left || a2).x;
+    y3 = (left || a2).y;
+    x4 = a2.x;
+    y4 = a2.y;
+    if (right && b2.relative) {
+      x22 += b2.x;
+      y22 += b2.y;
+    }
+    if (left && a2.relative) {
+      x3 += a2.x;
+      y3 += a2.y;
+    }
+    x2 = getComponentOnCubicBezier(t2, x1, x22, x3, x4);
+    y2 = getComponentOnCubicBezier(t2, y1, y22, y3, y4);
+    const t1x = lerp(x1, x22, t2);
+    const t1y = lerp(y1, y22, t2);
+    const t2x = lerp(x22, x3, t2);
+    const t2y = lerp(y22, y3, t2);
+    const t3x = lerp(x3, x4, t2);
+    const t3y = lerp(y3, y4, t2);
+    const brx = lerp(t1x, t2x, t2);
+    const bry = lerp(t1y, t2y, t2);
+    const alx = lerp(t2x, t3x, t2);
+    const aly = lerp(t2y, t3y, t2);
+    if (_.isObject(obj)) {
+      obj.x = x2;
+      obj.y = y2;
+      if (obj instanceof Anchor) {
+        obj.controls.left.x = brx;
+        obj.controls.left.y = bry;
+        obj.controls.right.x = alx;
+        obj.controls.right.y = aly;
+        if (!(typeof obj.relative === "boolean") || obj.relative) {
+          obj.controls.left.x -= x2;
+          obj.controls.left.y -= y2;
+          obj.controls.right.x -= x2;
+          obj.controls.right.y -= y2;
+        }
+      }
+      obj.t = t2;
+      return obj;
+    }
+    result = new Anchor(
+      x2,
+      y2,
+      brx - x2,
+      bry - y2,
+      alx - x2,
+      aly - y2,
+      this._curved ? Commands.curve : Commands.line
+    );
+    result.t = t2;
+    return result;
+  }
+  plot() {
+    if (this.curved) {
+      getCurveFromPoints(this._collection, this.closed);
+      return this;
+    }
+    for (let i2 = 0; i2 < this._collection.length; i2++) {
+      this._collection[i2].command = i2 === 0 ? Commands.move : Commands.line;
+    }
+    return this;
+  }
+  subdivide(limit) {
+    this._update();
+    const last = this.vertices.length - 1;
+    const closed2 = this._closed || this.vertices[last]._command === Commands.close;
+    let b2 = this.vertices[last];
+    let points = [], verts;
+    _.each(this.vertices, function(a2, i2) {
+      if (i2 <= 0 && !closed2) {
+        b2 = a2;
+        return;
+      }
+      if (a2.command === Commands.move) {
+        points.push(new Anchor(b2.x, b2.y));
+        if (i2 > 0) {
+          points[points.length - 1].command = Commands.line;
+        }
+        b2 = a2;
+        return;
+      }
+      verts = getSubdivisions(a2, b2, limit);
+      points = points.concat(verts);
+      _.each(verts, function(v2, i22) {
+        if (i22 <= 0 && b2.command === Commands.move) {
+          v2.command = Commands.move;
+        } else {
+          v2.command = Commands.line;
+        }
+      });
+      if (i2 >= last) {
+        if (this._closed && this._automatic) {
+          b2 = a2;
+          verts = getSubdivisions(a2, b2, limit);
+          points = points.concat(verts);
+          _.each(verts, function(v2, i22) {
+            if (i22 <= 0 && b2.command === Commands.move) {
+              v2.command = Commands.move;
+            } else {
+              v2.command = Commands.line;
+            }
+          });
+        } else if (closed2) {
+          points.push(new Anchor(a2.x, a2.y));
+        }
+        points[points.length - 1].command = closed2 ? Commands.close : Commands.line;
+      }
+      b2 = a2;
+    }, this);
+    this._automatic = false;
+    this._curved = false;
+    this.vertices = points;
+    return this;
+  }
+  _updateLength(limit, silent) {
+    if (!silent) {
+      this._update();
+    }
+    const length = this.vertices.length;
+    const last = length - 1;
+    const closed2 = false;
+    let b2 = this.vertices[last];
+    let sum = 0;
+    if (typeof this._lengths === "undefined") {
+      this._lengths = [];
+    }
+    _.each(this.vertices, function(a2, i2) {
+      if (i2 <= 0 && !closed2 || a2.command === Commands.move) {
+        b2 = a2;
+        this._lengths[i2] = 0;
+        return;
+      }
+      this._lengths[i2] = getCurveLength2(a2, b2, limit);
+      sum += this._lengths[i2];
+      if (i2 >= last && closed2) {
+        b2 = this.vertices[(i2 + 1) % length];
+        this._lengths[i2 + 1] = getCurveLength2(a2, b2, limit);
+        sum += this._lengths[i2 + 1];
+      }
+      b2 = a2;
+    }, this);
+    this._length = sum;
+    this._flagLength = false;
+    return this;
+  }
+  _update() {
+    if (this._flagVertices) {
+      if (this._automatic) {
+        this.plot();
+      }
+      if (this._flagLength) {
+        this._updateLength(void 0, true);
+      }
+      const l2 = this._collection.length;
+      const closed2 = this._closed;
+      const beginning = Math.min(this._beginning, this._ending);
+      const ending = Math.max(this._beginning, this._ending);
+      const bid = getIdByLength(this, beginning * this._length);
+      const eid = getIdByLength(this, ending * this._length);
+      const low = ceil(bid);
+      const high = floor2(eid);
+      let left, right, prev, next, v2, i2;
+      this._renderer.vertices.length = 0;
+      for (i2 = 0; i2 < l2; i2++) {
+        if (this._renderer.collection.length <= i2) {
+          this._renderer.collection.push(new Anchor());
+        }
+        if (i2 > high && !right) {
+          v2 = this._renderer.collection[i2].copy(this._collection[i2]);
+          this.getPointAt(ending, v2);
+          v2.command = this._renderer.collection[i2].command;
+          this._renderer.vertices.push(v2);
+          right = v2;
+          prev = this._collection[i2 - 1];
+          if (prev && prev.controls) {
+            if (v2.relative) {
+              v2.controls.right.clear();
+            } else {
+              v2.controls.right.copy(v2);
+            }
+            if (prev.relative) {
+              this._renderer.collection[i2 - 1].controls.right.copy(prev.controls.right).lerp(Vector.zero, 1 - v2.t);
+            } else {
+              this._renderer.collection[i2 - 1].controls.right.copy(prev.controls.right).lerp(prev, 1 - v2.t);
+            }
+          }
+        } else if (i2 >= low && i2 <= high) {
+          v2 = this._renderer.collection[i2].copy(this._collection[i2]);
+          this._renderer.vertices.push(v2);
+          if (i2 === high && contains(this, ending)) {
+            right = v2;
+            if (!closed2 && right.controls) {
+              if (right.relative) {
+                right.controls.right.clear();
+              } else {
+                right.controls.right.copy(right);
+              }
+            }
+          } else if (i2 === low && contains(this, beginning)) {
+            left = v2;
+            left.command = Commands.move;
+            if (!closed2 && left.controls) {
+              if (left.relative) {
+                left.controls.left.clear();
+              } else {
+                left.controls.left.copy(left);
+              }
+            }
+          }
+        }
+      }
+      if (low > 0 && !left) {
+        i2 = low - 1;
+        v2 = this._renderer.collection[i2].copy(this._collection[i2]);
+        this.getPointAt(beginning, v2);
+        v2.command = Commands.move;
+        this._renderer.vertices.unshift(v2);
+        next = this._collection[i2 + 1];
+        if (next && next.controls) {
+          v2.controls.left.clear();
+          if (next.relative) {
+            this._renderer.collection[i2 + 1].controls.left.copy(next.controls.left).lerp(Vector.zero, v2.t);
+          } else {
+            vector.copy(next);
+            this._renderer.collection[i2 + 1].controls.left.copy(next.controls.left).lerp(next, v2.t);
+          }
+        }
+      }
+    }
+    Shape.prototype._update.apply(this, arguments);
+    return this;
+  }
+  flagReset() {
+    this._flagVertices = this._flagLength = this._flagFill = this._flagStroke = this._flagLinewidth = this._flagOpacity = this._flagVisible = this._flagCap = this._flagJoin = this._flagMiter = this._flagClip = false;
+    Shape.prototype.flagReset.call(this);
+    return this;
+  }
+};
+var Path = _Path;
+__publicField(Path, "Properties", [
+  "fill",
+  "stroke",
+  "linewidth",
+  "opacity",
+  "visible",
+  "cap",
+  "join",
+  "miter",
+  "closed",
+  "curved",
+  "automatic",
+  "beginning",
+  "ending"
+]);
+__publicField(Path, "Utils", {
+  getCurveLength: getCurveLength2
+});
+var proto11 = {
+  linewidth: {
+    enumerable: true,
+    get: function() {
+      return this._linewidth;
+    },
+    set: function(v2) {
+      this._linewidth = v2;
+      this._flagLinewidth = true;
+    }
+  },
+  opacity: {
+    enumerable: true,
+    get: function() {
+      return this._opacity;
+    },
+    set: function(v2) {
+      this._opacity = v2;
+      this._flagOpacity = true;
+    }
+  },
+  visible: {
+    enumerable: true,
+    get: function() {
+      return this._visible;
+    },
+    set: function(v2) {
+      this._visible = v2;
+      this._flagVisible = true;
+    }
+  },
+  cap: {
+    enumerable: true,
+    get: function() {
+      return this._cap;
+    },
+    set: function(v2) {
+      this._cap = v2;
+      this._flagCap = true;
+    }
+  },
+  join: {
+    enumerable: true,
+    get: function() {
+      return this._join;
+    },
+    set: function(v2) {
+      this._join = v2;
+      this._flagJoin = true;
+    }
+  },
+  miter: {
+    enumerable: true,
+    get: function() {
+      return this._miter;
+    },
+    set: function(v2) {
+      this._miter = v2;
+      this._flagMiter = true;
+    }
+  },
+  fill: {
+    enumerable: true,
+    get: function() {
+      return this._fill;
+    },
+    set: function(f2) {
+      if (this._fill instanceof Gradient || this._fill instanceof LinearGradient || this._fill instanceof RadialGradient || this._fill instanceof Texture) {
+        this._fill.unbind(Events.Types.change, this._renderer.flagFill);
+      }
+      this._fill = f2;
+      this._flagFill = true;
+      if (this._fill instanceof Gradient || this._fill instanceof LinearGradient || this._fill instanceof RadialGradient || this._fill instanceof Texture) {
+        this._fill.bind(Events.Types.change, this._renderer.flagFill);
+      }
+    }
+  },
+  stroke: {
+    enumerable: true,
+    get: function() {
+      return this._stroke;
+    },
+    set: function(f2) {
+      if (this._stroke instanceof Gradient || this._stroke instanceof LinearGradient || this._stroke instanceof RadialGradient || this._stroke instanceof Texture) {
+        this._stroke.unbind(Events.Types.change, this._renderer.flagStroke);
+      }
+      this._stroke = f2;
+      this._flagStroke = true;
+      if (this._stroke instanceof Gradient || this._stroke instanceof LinearGradient || this._stroke instanceof RadialGradient || this._stroke instanceof Texture) {
+        this._stroke.bind(Events.Types.change, this._renderer.flagStroke);
+      }
+    }
+  },
+  length: {
+    get: function() {
+      if (this._flagLength) {
+        this._updateLength();
+      }
+      return this._length;
+    }
+  },
+  closed: {
+    enumerable: true,
+    get: function() {
+      return this._closed;
+    },
+    set: function(v2) {
+      this._closed = !!v2;
+      this._flagVertices = true;
+    }
+  },
+  curved: {
+    enumerable: true,
+    get: function() {
+      return this._curved;
+    },
+    set: function(v2) {
+      this._curved = !!v2;
+      this._flagVertices = true;
+    }
+  },
+  automatic: {
+    enumerable: true,
+    get: function() {
+      return this._automatic;
+    },
+    set: function(v2) {
+      if (v2 === this._automatic) {
+        return;
+      }
+      this._automatic = !!v2;
+      const method = this._automatic ? "ignore" : "listen";
+      _.each(this.vertices, function(v22) {
+        v22[method]();
+      });
+    }
+  },
+  beginning: {
+    enumerable: true,
+    get: function() {
+      return this._beginning;
+    },
+    set: function(v2) {
+      this._beginning = v2;
+      this._flagVertices = true;
+    }
+  },
+  ending: {
+    enumerable: true,
+    get: function() {
+      return this._ending;
+    },
+    set: function(v2) {
+      this._ending = v2;
+      this._flagVertices = true;
+    }
+  },
+  vertices: {
+    enumerable: true,
+    get: function() {
+      return this._collection;
+    },
+    set: function(vertices) {
+      const bindVertices = this._renderer.bindVertices;
+      const unbindVertices = this._renderer.unbindVertices;
+      if (this._collection) {
+        this._collection.unbind(Events.Types.insert, bindVertices).unbind(Events.Types.remove, unbindVertices);
+      }
+      if (vertices instanceof Collection) {
+        this._collection = vertices;
+      } else {
+        this._collection = new Collection(vertices || []);
+      }
+      this._collection.bind(Events.Types.insert, bindVertices).bind(Events.Types.remove, unbindVertices);
+      bindVertices(this._collection);
+    }
+  },
+  mask: {
+    enumerable: true,
+    get: function() {
+      return this._mask;
+    },
+    set: function(v2) {
+      this._mask = v2;
+      this._flagMask = true;
+      if (_.isObject(v2) && !v2.clip) {
+        v2.clip = true;
+      }
+    }
+  },
+  clip: {
+    enumerable: true,
+    get: function() {
+      return this._clip;
+    },
+    set: function(v2) {
+      this._clip = v2;
+      this._flagClip = true;
+    }
+  },
+  dashes: {
+    enumerable: true,
+    get: function() {
+      return this._dashes;
+    },
+    set: function(v2) {
+      if (typeof v2.offset !== "number") {
+        v2.offset = this.dashes && this._dashes.offset || 0;
+      }
+      this._dashes = v2;
+    }
+  }
+};
+function FlagVertices() {
+  this._flagVertices = true;
+  this._flagLength = true;
+  if (this.parent) {
+    this.parent._flagLength = true;
+  }
+}
+function BindVertices(items) {
+  let i2 = items.length;
+  while (i2--) {
+    items[i2].bind(Events.Types.change, this._renderer.flagVertices);
+  }
+  this._renderer.flagVertices();
+}
+function UnbindVertices(items) {
+  let i2 = items.length;
+  while (i2--) {
+    items[i2].unbind(Events.Types.change, this._renderer.flagVertices);
+  }
+  this._renderer.flagVertices();
+}
+function FlagFill() {
+  this._flagFill = true;
+}
+function FlagStroke() {
+  this._flagStroke = true;
+}
+var _Rectangle = class extends Path {
+  constructor(x2, y2, width, height) {
+    const points = [
+      new Anchor(),
+      new Anchor(),
+      new Anchor(),
+      new Anchor()
+    ];
+    super(points, true, false, true);
+    __publicField(this, "_flagWidth", 0);
+    __publicField(this, "_flagHeight", 0);
+    __publicField(this, "_width", 0);
+    __publicField(this, "_height", 0);
+    __publicField(this, "_origin", null);
+    for (let prop in proto12) {
+      Object.defineProperty(this, prop, proto12[prop]);
+    }
+    this.width = typeof width === "number" ? width : 1;
+    this.height = typeof height === "number" ? height : 1;
+    this.origin = new Vector();
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+    this._update();
+  }
+  _update() {
+    if (this._flagVertices || this._flagWidth || this._flagHeight) {
+      const xr = this._width / 2;
+      const yr = this._height / 2;
+      if (!this._closed && this.vertices.length === 4) {
+        this.vertices.push(new Anchor());
+      }
+      this.vertices[0].set(-xr, -yr).sub(this._origin).command = Commands.move;
+      this.vertices[1].set(xr, -yr).sub(this._origin).command = Commands.line;
+      this.vertices[2].set(xr, yr).sub(this._origin).command = Commands.line;
+      this.vertices[3].set(-xr, yr).sub(this._origin).command = Commands.line;
+      if (this.vertices[4]) {
+        this.vertices[4].set(-xr, -yr).sub(this._origin).command = Commands.line;
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagWidth = this._flagHeight = false;
+    super.flagReset.call(this);
+    return this;
+  }
+  clone(parent) {
+    const clone = new _Rectangle(0, 0, this.width, this.height);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    object.width = this.width;
+    object.height = this.height;
+    object.origin = this.origin.toObject();
+    return object;
+  }
+};
+var Rectangle = _Rectangle;
+__publicField(Rectangle, "Properties", ["width", "height"]);
+var proto12 = {
+  width: {
+    enumerable: true,
+    get: function() {
+      return this._width;
+    },
+    set: function(v2) {
+      this._width = v2;
+      this._flagWidth = true;
+    }
+  },
+  height: {
+    enumerable: true,
+    get: function() {
+      return this._height;
+    },
+    set: function(v2) {
+      this._height = v2;
+      this._flagHeight = true;
+    }
+  },
+  origin: {
+    enumerable: true,
+    get: function() {
+      return this._origin;
+    },
+    set: function(v2) {
+      if (this._origin) {
+        this._origin.unbind(Events.Types.change, this._renderer.flagVertices);
+      }
+      this._origin = v2;
+      this._origin.bind(Events.Types.change, this._renderer.flagVertices);
+      this._renderer.flagVertices();
+    }
+  }
+};
+var _Sprite = class extends Rectangle {
+  constructor(path2, ox, oy, cols, rows, frameRate) {
+    super(ox, oy, 0, 0);
+    __publicField(this, "_flagTexture", false);
+    __publicField(this, "_flagColumns", false);
+    __publicField(this, "_flagRows", false);
+    __publicField(this, "_flagFrameRate", false);
+    __publicField(this, "_flagIndex", false);
+    __publicField(this, "_amount", 1);
+    __publicField(this, "_duration", 0);
+    __publicField(this, "_startTime", 0);
+    __publicField(this, "_playing", false);
+    __publicField(this, "_firstFrame", 0);
+    __publicField(this, "_lastFrame", 0);
+    __publicField(this, "_loop", true);
+    __publicField(this, "_texture", null);
+    __publicField(this, "_columns", 1);
+    __publicField(this, "_rows", 1);
+    __publicField(this, "_frameRate", 0);
+    __publicField(this, "_index", 0);
+    __publicField(this, "_origin", null);
+    for (let prop in proto13) {
+      Object.defineProperty(this, prop, proto13[prop]);
+    }
+    this.noStroke();
+    this.noFill();
+    if (path2 instanceof Texture) {
+      this.texture = path2;
+    } else if (typeof path2 === "string") {
+      this.texture = new Texture(path2);
+    }
+    this.origin = new Vector();
+    this._update();
+    if (typeof cols === "number") {
+      this.columns = cols;
+    }
+    if (typeof rows === "number") {
+      this.rows = rows;
+    }
+    if (typeof frameRate === "number") {
+      this.frameRate = frameRate;
+    }
+    this.index = 0;
+  }
+  play(firstFrame, lastFrame, onLastFrame) {
+    this._playing = true;
+    this._firstFrame = 0;
+    this._lastFrame = this.amount - 1;
+    this._startTime = _.performance.now();
+    if (typeof firstFrame === "number") {
+      this._firstFrame = firstFrame;
+    }
+    if (typeof lastFrame === "number") {
+      this._lastFrame = lastFrame;
+    }
+    if (typeof onLastFrame === "function") {
+      this._onLastFrame = onLastFrame;
+    } else {
+      delete this._onLastFrame;
+    }
+    if (this._index !== this._firstFrame) {
+      this._startTime -= 1e3 * Math.abs(this._index - this._firstFrame) / this._frameRate;
+    }
+    return this;
+  }
+  pause() {
+    this._playing = false;
+    return this;
+  }
+  stop() {
+    this._playing = false;
+    this._index = 0;
+    return this;
+  }
+  clone(parent) {
+    const clone = new _Sprite(
+      this.texture,
+      this.translation.x,
+      this.translation.y,
+      this.columns,
+      this.rows,
+      this.frameRate
+    );
+    if (this.playing) {
+      clone.play(this._firstFrame, this._lastFrame);
+      clone._loop = this._loop;
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    object.texture = this.texture.toObject();
+    object.columns = this.columns;
+    object.rows = this.rows;
+    object.frameRate = this.frameRate;
+    object.index = this.index;
+    object._firstFrame = this._firstFrame;
+    object._lastFrame = this._lastFrame;
+    object._loop = this._loop;
+    return object;
+  }
+  _update() {
+    const effect = this._texture;
+    const cols = this._columns;
+    const rows = this._rows;
+    let width, height, elapsed, amount, duration;
+    let index, iw, ih, frames;
+    if (effect) {
+      if (this._flagColumns || this._flagRows) {
+        this._amount = this._columns * this._rows;
+      }
+      if (this._flagFrameRate) {
+        this._duration = 1e3 * this._amount / this._frameRate;
+      }
+      if (this._flagTexture) {
+        this.fill = effect;
+      }
+      if (effect.loaded) {
+        iw = effect.image.width;
+        ih = effect.image.height;
+        width = iw / cols;
+        height = ih / rows;
+        amount = this._amount;
+        if (this.width !== width) {
+          this.width = width;
+        }
+        if (this.height !== height) {
+          this.height = height;
+        }
+        if (this._playing && this._frameRate > 0) {
+          if (_.isNaN(this._lastFrame)) {
+            this._lastFrame = amount - 1;
+          }
+          elapsed = _.performance.now() - this._startTime;
+          frames = this._lastFrame + 1;
+          duration = 1e3 * (frames - this._firstFrame) / this._frameRate;
+          if (this._loop) {
+            elapsed = elapsed % duration;
+          } else {
+            elapsed = Math.min(elapsed, duration);
+          }
+          index = lerp(this._firstFrame, frames, elapsed / duration);
+          index = Math.floor(index);
+          if (index !== this._index) {
+            this._index = index;
+            if (index >= this._lastFrame - 1 && this._onLastFrame) {
+              this._onLastFrame();
+            }
+          }
+        }
+        const col = this._index % cols;
+        const row = Math.floor(this._index / cols);
+        const ox = -width * col + (iw - width) / 2;
+        const oy = -height * row + (ih - height) / 2;
+        if (ox !== effect.offset.x) {
+          effect.offset.x = ox;
+        }
+        if (oy !== effect.offset.y) {
+          effect.offset.y = oy;
+        }
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagTexture = this._flagColumns = this._flagRows = this._flagFrameRate = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var Sprite = _Sprite;
+__publicField(Sprite, "Properties", [
+  "texture",
+  "columns",
+  "rows",
+  "frameRate",
+  "index"
+]);
+var proto13 = {
+  texture: {
+    enumerable: true,
+    get: function() {
+      return this._texture;
+    },
+    set: function(v2) {
+      this._texture = v2;
+      this._flagTexture = true;
+    }
+  },
+  columns: {
+    enumerable: true,
+    get: function() {
+      return this._columns;
+    },
+    set: function(v2) {
+      this._columns = v2;
+      this._flagColumns = true;
+    }
+  },
+  rows: {
+    enumerable: true,
+    get: function() {
+      return this._rows;
+    },
+    set: function(v2) {
+      this._rows = v2;
+      this._flagRows = true;
+    }
+  },
+  frameRate: {
+    enumerable: true,
+    get: function() {
+      return this._frameRate;
+    },
+    set: function(v2) {
+      this._frameRate = v2;
+      this._flagFrameRate = true;
+    }
+  },
+  index: {
+    enumerable: true,
+    get: function() {
+      return this._index;
+    },
+    set: function(v2) {
+      this._index = v2;
+      this._flagIndex = true;
+    }
+  }
+};
+var cos3 = Math.cos;
+var sin3 = Math.sin;
+var _Circle = class extends Path {
+  constructor(ox, oy, r2, resolution) {
+    const amount = resolution ? Math.max(resolution, 2) : 4;
+    const points = [];
+    for (let i2 = 0; i2 < amount; i2++) {
+      points.push(new Anchor(0, 0, 0, 0, 0, 0));
+    }
+    super(points, true, true, true);
+    __publicField(this, "_flagRadius", false);
+    __publicField(this, "_radius", 0);
+    for (let prop in proto14) {
+      Object.defineProperty(this, prop, proto14[prop]);
+    }
+    if (typeof r2 === "number") {
+      this.radius = r2;
+    }
+    this._update();
+    if (typeof ox === "number") {
+      this.translation.x = ox;
+    }
+    if (typeof oy === "number") {
+      this.translation.y = oy;
+    }
+  }
+  _update() {
+    if (this._flagVertices || this._flagRadius) {
+      let length = this.vertices.length;
+      if (!this._closed && length > 2) {
+        length -= 1;
+      }
+      const c2 = 4 / 3 * Math.tan(Math.PI / (length * 2));
+      const radius = this._radius;
+      const rc = radius * c2;
+      for (let i2 = 0; i2 < this.vertices.length; i2++) {
+        const pct = i2 / length;
+        const theta = pct * TWO_PI;
+        const x2 = radius * cos3(theta);
+        const y2 = radius * sin3(theta);
+        const lx = rc * cos3(theta - HALF_PI);
+        const ly = rc * sin3(theta - HALF_PI);
+        const rx = rc * cos3(theta + HALF_PI);
+        const ry = rc * sin3(theta + HALF_PI);
+        const v2 = this.vertices[i2];
+        v2.command = i2 === 0 ? Commands.move : Commands.curve;
+        v2.set(x2, y2);
+        v2.controls.left.set(lx, ly);
+        v2.controls.right.set(rx, ry);
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagRadius = false;
+    super.flagReset.call(this);
+    return this;
+  }
+  clone(parent) {
+    const clone = new _Circle(0, 0, this.radius, this.vertices.length);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    for (let i2 = 0; i2 < _Circle.Properties.length; i2++) {
+      const k2 = _Circle.Properties[i2];
+      object[k2] = this[k2];
+    }
+    return object;
+  }
+};
+var Circle = _Circle;
+__publicField(Circle, "Properties", ["radius"]);
+var proto14 = {
+  radius: {
+    enumerable: true,
+    get: function() {
+      return this._radius;
+    },
+    set: function(v2) {
+      this._radius = v2;
+      this._flagRadius = true;
+    }
+  }
+};
+var cos4 = Math.cos;
+var sin4 = Math.sin;
+var _Ellipse = class extends Path {
+  constructor(x2, y2, rx, ry, resolution) {
+    if (typeof ry !== "number" && typeof rx === "number") {
+      ry = rx;
+    }
+    const amount = resolution ? Math.max(resolution, 2) : 4;
+    const points = [];
+    for (let i2 = 0; i2 < amount; i2++) {
+      points.push(new Anchor());
+    }
+    super(points, true, true, true);
+    __publicField(this, "_flagWidth", false);
+    __publicField(this, "_flagHeight", false);
+    __publicField(this, "_width", 0);
+    __publicField(this, "_height", 0);
+    for (let prop in proto15) {
+      Object.defineProperty(this, prop, proto15[prop]);
+    }
+    if (typeof rx === "number") {
+      this.width = rx * 2;
+    }
+    if (typeof ry === "number") {
+      this.height = ry * 2;
+    }
+    this._update();
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+  }
+  _update() {
+    if (this._flagVertices || this._flagWidth || this._flagHeight) {
+      let length = this.vertices.length;
+      if (!this._closed && length > 2) {
+        length -= 1;
+      }
+      const c2 = 4 / 3 * Math.tan(Math.PI / (this.vertices.length * 2));
+      const radiusX = this._width / 2;
+      const radiusY = this._height / 2;
+      for (let i2 = 0; i2 < this.vertices.length; i2++) {
+        const pct = i2 / length;
+        const theta = pct * TWO_PI;
+        const x2 = radiusX * cos4(theta);
+        const y2 = radiusY * sin4(theta);
+        const lx = radiusX * c2 * cos4(theta - HALF_PI);
+        const ly = radiusY * c2 * sin4(theta - HALF_PI);
+        const rx = radiusX * c2 * cos4(theta + HALF_PI);
+        const ry = radiusY * c2 * sin4(theta + HALF_PI);
+        const v2 = this.vertices[i2];
+        v2.command = i2 === 0 ? Commands.move : Commands.curve;
+        v2.set(x2, y2);
+        v2.controls.left.set(lx, ly);
+        v2.controls.right.set(rx, ry);
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagWidth = this._flagHeight = false;
+    super.flagReset.call(this);
+    return this;
+  }
+  clone(parent) {
+    const rx = this.width / 2;
+    const ry = this.height / 2;
+    const resolution = this.vertices.length;
+    const clone = new _Ellipse(0, 0, rx, ry, resolution);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    for (let i2 = 0; i2 < _Ellipse.Properties.length; i2++) {
+      const k2 = _Ellipse.Properties[i2];
+      object[k2] = this[k2];
+    }
+    return object;
+  }
+};
+var Ellipse = _Ellipse;
+__publicField(Ellipse, "Properties", ["width", "height"]);
+var proto15 = {
+  width: {
+    enumerable: true,
+    get: function() {
+      return this._width;
+    },
+    set: function(v2) {
+      this._width = v2;
+      this._flagWidth = true;
+    }
+  },
+  height: {
+    enumerable: true,
+    get: function() {
+      return this._height;
+    },
+    set: function(v2) {
+      this._height = v2;
+      this._flagHeight = true;
+    }
+  }
+};
+var Line = class extends Path {
+  constructor(x1, y1, x2, y2) {
+    const points = [
+      new Anchor(x1, y1),
+      new Anchor(x2, y2)
+    ];
+    super(points);
+    for (let prop in proto16) {
+      Object.defineProperty(this, prop, proto16[prop]);
+    }
+    this.vertices[0].command = Commands.move;
+    this.vertices[1].command = Commands.line;
+    this.automatic = false;
+  }
+};
+var proto16 = {
+  left: {
+    enumerable: true,
+    get: function() {
+      return this.vertices[0];
+    },
+    set: function(v2) {
+      if (_.isObject(v2)) {
+        this.vertices.splice(0, 1, v2);
+      } else {
+        const error = new TwoError("Two.Line.x argument is not an object.");
+        console.warn(error.name, error.message);
+      }
+    }
+  },
+  right: {
+    enumerable: true,
+    get: function() {
+      return this.vertices[1];
+    },
+    set: function(v2) {
+      if (_.isObject(v2)) {
+        this.vertices.splice(1, 1, v2);
+      } else {
+        const error = new TwoError("Two.Line.y argument is not an object.");
+        console.warn(error.name, error.message);
+      }
+    }
+  }
+};
+var _RoundedRectangle = class extends Path {
+  constructor(x2, y2, width, height, radius) {
+    if (typeof radius === "undefined" && typeof width === "number" && typeof height === "number") {
+      radius = Math.floor(Math.min(width, height) / 12);
+    }
+    const points = [];
+    for (let i2 = 0; i2 < 10; i2++) {
+      points.push(
+        new Anchor(
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          i2 === 0 ? Commands.move : Commands.curve
+        )
+      );
+    }
+    super(points);
+    __publicField(this, "_flagWidth", false);
+    __publicField(this, "_flagHeight", false);
+    __publicField(this, "_flagRadius", false);
+    __publicField(this, "_width", 0);
+    __publicField(this, "_height", 0);
+    __publicField(this, "_radius", 12);
+    for (let prop in proto17) {
+      Object.defineProperty(this, prop, proto17[prop]);
+    }
+    this.closed = true;
+    this.automatic = false;
+    this._renderer.flagRadius = FlagRadius.bind(this);
+    if (typeof width === "number") {
+      this.width = width;
+    }
+    if (typeof height === "number") {
+      this.height = height;
+    }
+    if (typeof radius === "number") {
+      this.radius = radius;
+    }
+    this._update();
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+  }
+  _update() {
+    if (this._flagVertices || this._flagWidth || this._flagHeight || this._flagRadius) {
+      const width = this._width;
+      const height = this._height;
+      let rx, ry;
+      if (this._radius instanceof Vector) {
+        rx = this._radius.x;
+        ry = this._radius.y;
+      } else {
+        rx = this._radius;
+        ry = this._radius;
+      }
+      let v2;
+      let w2 = width / 2;
+      let h2 = height / 2;
+      v2 = this.vertices[0];
+      v2.x = -(w2 - rx);
+      v2.y = -h2;
+      v2 = this.vertices[1];
+      v2.x = w2 - rx;
+      v2.y = -h2;
+      v2.controls.left.clear();
+      v2.controls.right.x = rx;
+      v2.controls.right.y = 0;
+      v2 = this.vertices[2];
+      v2.x = w2;
+      v2.y = -(h2 - ry);
+      v2.controls.right.clear();
+      v2.controls.left.clear();
+      v2 = this.vertices[3];
+      v2.x = w2;
+      v2.y = h2 - ry;
+      v2.controls.left.clear();
+      v2.controls.right.x = 0;
+      v2.controls.right.y = ry;
+      v2 = this.vertices[4];
+      v2.x = w2 - rx;
+      v2.y = h2;
+      v2.controls.right.clear();
+      v2.controls.left.clear();
+      v2 = this.vertices[5];
+      v2.x = -(w2 - rx);
+      v2.y = h2;
+      v2.controls.left.clear();
+      v2.controls.right.x = -rx;
+      v2.controls.right.y = 0;
+      v2 = this.vertices[6];
+      v2.x = -w2;
+      v2.y = h2 - ry;
+      v2.controls.left.clear();
+      v2.controls.right.clear();
+      v2 = this.vertices[7];
+      v2.x = -w2;
+      v2.y = -(h2 - ry);
+      v2.controls.left.clear();
+      v2.controls.right.x = 0;
+      v2.controls.right.y = -ry;
+      v2 = this.vertices[8];
+      v2.x = -(w2 - rx);
+      v2.y = -h2;
+      v2.controls.left.clear();
+      v2.controls.right.clear();
+      v2 = this.vertices[9];
+      v2.copy(this.vertices[8]);
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagWidth = this._flagHeight = this._flagRadius = false;
+    super.flagReset.call(this);
+    return this;
+  }
+  clone(parent) {
+    const width = this.width;
+    const height = this.height;
+    const radius = this.radius;
+    const clone = new _RoundedRectangle(0, 0, width, height, radius);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    for (let i2 = 0; i2 < _RoundedRectangle.Properties.length; i2++) {
+      const k2 = _RoundedRectangle.Properties[i2];
+      object[k2] = this[k2];
+    }
+    object.radius = typeof this.radius === "number" ? this.radius : this.radius.toObject();
+    return object;
+  }
+};
+var RoundedRectangle = _RoundedRectangle;
+__publicField(RoundedRectangle, "Properties", ["width", "height", "radius"]);
+var proto17 = {
+  width: {
+    enumerable: true,
+    get: function() {
+      return this._width;
+    },
+    set: function(v2) {
+      this._width = v2;
+      this._flagWidth = true;
+    }
+  },
+  height: {
+    enumerable: true,
+    get: function() {
+      return this._height;
+    },
+    set: function(v2) {
+      this._height = v2;
+      this._flagHeight = true;
+    }
+  },
+  radius: {
+    enumerable: true,
+    get: function() {
+      return this._radius;
+    },
+    set: function(v2) {
+      if (this._radius instanceof Vector) {
+        this._radius.unbind(Events.Types.change, this._renderer.flagRadius);
+      }
+      this._radius = v2;
+      if (this._radius instanceof Vector) {
+        this._radius.bind(Events.Types.change, this._renderer.flagRadius);
+      }
+      this._flagRadius = true;
+    }
+  }
+};
+function FlagRadius() {
+  this._flagRadius = true;
+}
+var canvas2;
+var min4 = Math.min;
+var max4 = Math.max;
+if (root.document) {
+  canvas2 = document.createElement("canvas");
+}
+var _Text = class extends Shape {
+  constructor(message, x2, y2, styles) {
+    super();
+    __publicField(this, "_flagValue", true);
+    __publicField(this, "_flagFamily", true);
+    __publicField(this, "_flagSize", true);
+    __publicField(this, "_flagLeading", true);
+    __publicField(this, "_flagAlignment", true);
+    __publicField(this, "_flagBaseline", true);
+    __publicField(this, "_flagStyle", true);
+    __publicField(this, "_flagWeight", true);
+    __publicField(this, "_flagDecoration", true);
+    __publicField(this, "_flagFill", true);
+    __publicField(this, "_flagStroke", true);
+    __publicField(this, "_flagLinewidth", true);
+    __publicField(this, "_flagOpacity", true);
+    __publicField(this, "_flagVisible", true);
+    __publicField(this, "_flagMask", false);
+    __publicField(this, "_flagClip", false);
+    __publicField(this, "_value", "");
+    __publicField(this, "_family", "sans-serif");
+    __publicField(this, "_size", 13);
+    __publicField(this, "_leading", 17);
+    __publicField(this, "_alignment", "center");
+    __publicField(this, "_baseline", "middle");
+    __publicField(this, "_style", "normal");
+    __publicField(this, "_weight", 500);
+    __publicField(this, "_decoration", "none");
+    __publicField(this, "_fill", "#000");
+    __publicField(this, "_stroke", "none");
+    __publicField(this, "_linewidth", 1);
+    __publicField(this, "_opacity", 1);
+    __publicField(this, "_visible", true);
+    __publicField(this, "_mask", null);
+    __publicField(this, "_clip", false);
+    __publicField(this, "_dashes", null);
+    for (let prop in proto18) {
+      Object.defineProperty(this, prop, proto18[prop]);
+    }
+    this._renderer.type = "text";
+    this._renderer.flagFill = FlagFill2.bind(this);
+    this._renderer.flagStroke = FlagStroke2.bind(this);
+    this.value = message;
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+    this.dashes = [];
+    this.dashes.offset = 0;
+    if (!_.isObject(styles)) {
+      return this;
+    }
+    for (let i2 = 0; i2 < _Text.Properties.length; i2++) {
+      const property = _Text.Properties[i2];
+      if (property in styles) {
+        this[property] = styles[property];
+      }
+    }
+  }
+  static Measure(text) {
+    if (canvas2) {
+      const ctx = canvas2.getContext("2d");
+      ctx.font = [
+        text._style,
+        text._weight,
+        `${text._size}px/${text._leading}px`,
+        text._family
+      ].join(" ");
+      const metrics = ctx.measureText(text.value, 0, 0);
+      const height = metrics.actualBoundingBoxDescent + metrics.actualBoundingBoxAscent;
+      return {
+        width: metrics.width,
+        height
+      };
+    } else {
+      const width = this.value.length * this.size * _Text.Ratio;
+      const height = this.leading;
+      console.warn("Two.Text: unable to accurately measure text, so using an approximation.");
+      return {
+        width,
+        height
+      };
+    }
+  }
+  clone(parent) {
+    const clone = new _Text(this.value);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    for (let i2 = 0; i2 < _Text.Properties.length; i2++) {
+      const prop = _Text.Properties[i2];
+      clone[prop] = this[prop];
+    }
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone._update();
+  }
+  toObject() {
+    const result = {
+      translation: this.translation.toObject(),
+      rotation: this.rotation,
+      scale: this.scale
+    };
+    if (this.matrix.manual) {
+      result.matrix = this.matrix.toObject();
+    }
+    for (let i2 = 0; i2 < _Text.Properties.length; i2++) {
+      const prop = _Text.Properties[i2];
+      result[prop] = this[prop];
+    }
+    return result;
+  }
+  noFill() {
+    this.fill = "none";
+    return this;
+  }
+  noStroke() {
+    this.stroke = "none";
+    this.linewidth = 0;
+    return this;
+  }
+  getBoundingClientRect(shallow) {
+    let matrix;
+    let left, right, top, bottom;
+    this._update(true);
+    matrix = shallow ? this.matrix : this.worldMatrix;
+    const { width, height } = _Text.Measure(this);
+    const border = (this._linewidth || 0) / 2;
+    switch (this.alignment) {
+      case "left":
+        left = -border;
+        right = width + border;
+        break;
+      case "right":
+        left = -(width + border);
+        right = border;
+        break;
+      default:
+        left = -(width / 2 + border);
+        right = width / 2 + border;
+    }
+    switch (this.baseline) {
+      case "middle":
+        top = -(height / 2 + border);
+        bottom = height / 2 + border;
+        break;
+      default:
+        top = -(height + border);
+        bottom = border;
+    }
+    const [ax, ay] = matrix.multiply(left, top);
+    const [bx, by] = matrix.multiply(left, bottom);
+    const [cx, cy] = matrix.multiply(right, top);
+    const [dx, dy] = matrix.multiply(right, bottom);
+    top = min4(ay, by, cy, dy);
+    left = min4(ax, bx, cx, dx);
+    right = max4(ax, bx, cx, dx);
+    bottom = max4(ay, by, cy, dy);
+    return {
+      top,
+      left,
+      right,
+      bottom,
+      width: right - left,
+      height: bottom - top
+    };
+  }
+  flagReset() {
+    super.flagReset.call(this);
+    this._flagValue = this._flagFamily = this._flagSize = this._flagLeading = this._flagAlignment = this._flagFill = this._flagStroke = this._flagLinewidth = this._flagOpacity = this._flagVisible = this._flagClip = this._flagDecoration = this._flagClassName = this._flagBaseline = this._flagWeight = this._flagStyle = false;
+    return this;
+  }
+};
+var Text = _Text;
+__publicField(Text, "Ratio", 0.6);
+__publicField(Text, "Properties", [
+  "value",
+  "family",
+  "size",
+  "leading",
+  "alignment",
+  "linewidth",
+  "style",
+  "weight",
+  "decoration",
+  "baseline",
+  "opacity",
+  "visible",
+  "fill",
+  "stroke"
+]);
+var proto18 = {
+  value: {
+    enumerable: true,
+    get: function() {
+      return this._value;
+    },
+    set: function(v2) {
+      this._value = v2;
+      this._flagValue = true;
+    }
+  },
+  family: {
+    enumerable: true,
+    get: function() {
+      return this._family;
+    },
+    set: function(v2) {
+      this._family = v2;
+      this._flagFamily = true;
+    }
+  },
+  size: {
+    enumerable: true,
+    get: function() {
+      return this._size;
+    },
+    set: function(v2) {
+      this._size = v2;
+      this._flagSize = true;
+    }
+  },
+  leading: {
+    enumerable: true,
+    get: function() {
+      return this._leading;
+    },
+    set: function(v2) {
+      this._leading = v2;
+      this._flagLeading = true;
+    }
+  },
+  alignment: {
+    enumerable: true,
+    get: function() {
+      return this._alignment;
+    },
+    set: function(v2) {
+      this._alignment = v2;
+      this._flagAlignment = true;
+    }
+  },
+  linewidth: {
+    enumerable: true,
+    get: function() {
+      return this._linewidth;
+    },
+    set: function(v2) {
+      this._linewidth = v2;
+      this._flagLinewidth = true;
+    }
+  },
+  style: {
+    enumerable: true,
+    get: function() {
+      return this._style;
+    },
+    set: function(v2) {
+      this._style = v2;
+      this._flagStyle = true;
+    }
+  },
+  weight: {
+    enumerable: true,
+    get: function() {
+      return this._weight;
+    },
+    set: function(v2) {
+      this._weight = v2;
+      this._flagWeight = true;
+    }
+  },
+  decoration: {
+    enumerable: true,
+    get: function() {
+      return this._decoration;
+    },
+    set: function(v2) {
+      this._decoration = v2;
+      this._flagDecoration = true;
+    }
+  },
+  baseline: {
+    enumerable: true,
+    get: function() {
+      return this._baseline;
+    },
+    set: function(v2) {
+      this._baseline = v2;
+      this._flagBaseline = true;
+    }
+  },
+  opacity: {
+    enumerable: true,
+    get: function() {
+      return this._opacity;
+    },
+    set: function(v2) {
+      this._opacity = v2;
+      this._flagOpacity = true;
+    }
+  },
+  visible: {
+    enumerable: true,
+    get: function() {
+      return this._visible;
+    },
+    set: function(v2) {
+      this._visible = v2;
+      this._flagVisible = true;
+    }
+  },
+  fill: {
+    enumerable: true,
+    get: function() {
+      return this._fill;
+    },
+    set: function(f2) {
+      if (this._fill instanceof Gradient || this._fill instanceof LinearGradient || this._fill instanceof RadialGradient || this._fill instanceof Texture) {
+        this._fill.unbind(Events.Types.change, this._renderer.flagFill);
+      }
+      this._fill = f2;
+      this._flagFill = true;
+      if (this._fill instanceof Gradient || this._fill instanceof LinearGradient || this._fill instanceof RadialGradient || this._fill instanceof Texture) {
+        this._fill.bind(Events.Types.change, this._renderer.flagFill);
+      }
+    }
+  },
+  stroke: {
+    enumerable: true,
+    get: function() {
+      return this._stroke;
+    },
+    set: function(f2) {
+      if (this._stroke instanceof Gradient || this._stroke instanceof LinearGradient || this._stroke instanceof RadialGradient || this._stroke instanceof Texture) {
+        this._stroke.unbind(Events.Types.change, this._renderer.flagStroke);
+      }
+      this._stroke = f2;
+      this._flagStroke = true;
+      if (this._stroke instanceof Gradient || this._stroke instanceof LinearGradient || this._stroke instanceof RadialGradient || this._stroke instanceof Texture) {
+        this._stroke.bind(Events.Types.change, this._renderer.flagStroke);
+      }
+    }
+  },
+  mask: {
+    enumerable: true,
+    get: function() {
+      return this._mask;
+    },
+    set: function(v2) {
+      this._mask = v2;
+      this._flagMask = true;
+      if (_.isObject(v2) && !v2.clip) {
+        v2.clip = true;
+      }
+    }
+  },
+  clip: {
+    enumerable: true,
+    get: function() {
+      return this._clip;
+    },
+    set: function(v2) {
+      this._clip = v2;
+      this._flagClip = true;
+    }
+  },
+  dashes: {
+    enumerable: true,
+    get: function() {
+      return this._dashes;
+    },
+    set: function(v2) {
+      if (typeof v2.offset !== "number") {
+        v2.offset = this.dashes && this._dashes.offset || 0;
+      }
+      this._dashes = v2;
+    }
+  }
+};
+function FlagFill2() {
+  this._flagFill = true;
+}
+function FlagStroke2() {
+  this._flagStroke = true;
+}
+var regex2 = {
+  path: /[+-]?(?:\d*\.\d+|\d+)(?:[eE][+-]\d+)?/g,
+  cssBackgroundImage: /url\(['"]?#([\w\d-_]*)['"]?\)/i,
+  unitSuffix: /[a-zA-Z%]*/i
+};
+var alignments = {
+  start: "left",
+  middle: "center",
+  end: "right"
+};
+var reservedAttributesToRemove = ["id", "class", "transform", "xmlns", "viewBox"];
+var overwriteAttrs = ["x", "y", "width", "height", "href", "xlink:href"];
+function getAlignment(anchor2) {
+  return alignments[anchor2];
+}
+function getBaseline(node) {
+  const a2 = node.getAttribute("dominant-baseline");
+  const b2 = node.getAttribute("alignment-baseline");
+  return a2 || b2;
+}
+function getTagName(tag) {
+  return tag.replace(/svg:/ig, "").toLowerCase();
+}
+function applyTransformsToVector(transforms, vector2) {
+  vector2.x += transforms.translateX;
+  vector2.y += transforms.translateY;
+  vector2.x *= transforms.scaleX;
+  vector2.y *= transforms.scaleY;
+  if (transforms.rotation !== 0) {
+    const l2 = vector2.length();
+    vector2.x = l2 * Math.cos(transforms.rotation);
+    vector2.y = l2 * Math.sin(transforms.rotation);
+  }
+}
+function extractCSSText(text, styles) {
+  if (!styles) {
+    styles = {};
+  }
+  const commands = text.split(";");
+  for (let i2 = 0; i2 < commands.length; i2++) {
+    const command = commands[i2].split(":");
+    const name = command[0];
+    const value = command[1];
+    if (typeof name === "undefined" || typeof value === "undefined") {
+      continue;
+    }
+    styles[name] = value.replace(/\s/, "");
+  }
+  return styles;
+}
+function getSvgStyles(node) {
+  const styles = {};
+  const attributes = getSvgAttributes(node);
+  const length = Math.max(attributes.length, node.style.length);
+  for (let i2 = 0; i2 < length; i2++) {
+    const command = node.style[i2];
+    const attribute = attributes[i2];
+    if (command) {
+      styles[command] = node.style[command];
+    }
+    if (attribute) {
+      styles[attribute] = node.getAttribute(attribute);
+    }
+  }
+  return styles;
+}
+function getSvgAttributes(node) {
+  const attributes = node.getAttributeNames();
+  for (let i2 = 0; i2 < reservedAttributesToRemove.length; i2++) {
+    const keyword = reservedAttributesToRemove[i2];
+    const index = Array.prototype.indexOf.call(attributes, keyword);
+    if (index >= 0) {
+      attributes.splice(index, 1);
+    }
+  }
+  return attributes;
+}
+function applySvgViewBox(node, value) {
+  const elements = value.split(/[\s,]/);
+  const x2 = -parseFloat(elements[0]);
+  const y2 = -parseFloat(elements[1]);
+  const width = parseFloat(elements[2]);
+  const height = parseFloat(elements[3]);
+  if (x2 && y2) {
+    for (let i2 = 0; i2 < node.children.length; i2++) {
+      const child = node.children[i2];
+      if ("translation" in child) {
+        child.translation.add(x2, y2);
+      } else if ("x" in child) {
+        child.x = x2;
+      } else if ("y" in child) {
+        child.y = y2;
+      }
+    }
+  }
+  const xExists = typeof node.x === "number";
+  const yExists = typeof node.y === "number";
+  const widthExists = typeof node.width === "number";
+  const heightExists = typeof node.height === "number";
+  if (xExists) {
+    node.translation.x += node.x;
+  }
+  if (yExists) {
+    node.translation.y += node.y;
+  }
+  if (widthExists || heightExists) {
+    node.scale = new Vector(1, 1);
+  }
+  if (widthExists) {
+    node.scale.x = node.width / width;
+  }
+  if (heightExists) {
+    node.scale.y = node.height / height;
+  }
+  node.mask = new Rectangle(0, 0, width, height);
+  node.mask.origin.set(-width / 2, -height / 2);
+  return node;
+}
+function applySvgAttributes(node, elem, parentStyles) {
+  const styles = {}, attributes = {}, extracted = {};
+  let i2, m2, key, value, prop, attr;
+  let transforms, x2, y2;
+  let id, scene, ref, tagName;
+  let ca, cb, cc, error;
+  if (node === null) {
+    return styles;
+  }
+  if (root.getComputedStyle) {
+    const computedStyles = root.getComputedStyle(node);
+    i2 = computedStyles.length;
+    while (i2--) {
+      key = computedStyles[i2];
+      value = computedStyles[key];
+      if (typeof value !== "undefined") {
+        styles[key] = value;
+      }
+    }
+  }
+  for (i2 = 0; i2 < node.attributes.length; i2++) {
+    attr = node.attributes[i2];
+    if (/style/i.test(attr.nodeName)) {
+      extractCSSText(attr.value, extracted);
+    } else {
+      attributes[attr.nodeName] = attr.value;
+    }
+  }
+  if (typeof styles.opacity !== "undefined") {
+    styles["stroke-opacity"] = styles.opacity;
+    styles["fill-opacity"] = styles.opacity;
+    delete styles.opacity;
+  }
+  if (parentStyles) {
+    _.defaults(styles, parentStyles);
+  }
+  _.extend(styles, extracted, attributes);
+  styles.visible = !(typeof styles.display === "undefined" && /none/i.test(styles.display)) || typeof styles.visibility === "undefined" && /hidden/i.test(styles.visibility);
+  for (key in styles) {
+    value = styles[key];
+    switch (key) {
+      case "gradientTransform":
+        if (/none/i.test(value))
+          break;
+        m2 = node.gradientTransform && node.gradientTransform.baseVal && node.gradientTransform.baseVal.length > 0 ? node.gradientTransform.baseVal[0].matrix : node.getCTM ? node.getCTM() : null;
+        if (m2 === null)
+          break;
+        transforms = decomposeMatrix(m2);
+        switch (elem._renderer.type) {
+          case "linear-gradient":
+            applyTransformsToVector(transforms, elem.left);
+            applyTransformsToVector(transforms, elem.right);
+            break;
+          case "radial-gradient":
+            elem.center.x += transforms.translateX;
+            elem.center.y += transforms.translateY;
+            elem.focal.x += transforms.translateX;
+            elem.focal.y += transforms.translateY;
+            elem.radius *= Math.max(transforms.scaleX, transforms.scaleY);
+            break;
+        }
+        break;
+      case "transform":
+        if (/none/i.test(value))
+          break;
+        m2 = node.transform && node.transform.baseVal && node.transform.baseVal.length > 0 ? node.transform.baseVal[0].matrix : node.getCTM ? node.getCTM() : null;
+        if (m2 === null)
+          break;
+        {
+          transforms = decomposeMatrix(m2);
+          elem.translation.set(transforms.translateX, transforms.translateY);
+          elem.rotation = Math.PI * (transforms.rotation / 180);
+          elem.scale = new Vector(transforms.scaleX, transforms.scaleY);
+          x2 = parseFloat((styles.x + "").replace("px"));
+          y2 = parseFloat((styles.y + "").replace("px"));
+          if (x2) {
+            elem.translation.x = x2;
+          }
+          if (y2) {
+            elem.translation.y = y2;
+          }
+        }
+        break;
+      case "visible":
+        if (elem instanceof Group) {
+          elem._visible = value;
+          break;
+        }
+        elem.visible = value;
+        break;
+      case "stroke-linecap":
+        if (elem instanceof Group) {
+          elem._cap = value;
+          break;
+        }
+        elem.cap = value;
+        break;
+      case "stroke-linejoin":
+        if (elem instanceof Group) {
+          elem._join = value;
+          break;
+        }
+        elem.join = value;
+        break;
+      case "stroke-miterlimit":
+        if (elem instanceof Group) {
+          elem._miter = value;
+          break;
+        }
+        elem.miter = value;
+        break;
+      case "stroke-width":
+        if (elem instanceof Group) {
+          elem._linewidth = parseFloat(value);
+          break;
+        }
+        elem.linewidth = parseFloat(value);
+        break;
+      case "opacity":
+      case "stroke-opacity":
+      case "fill-opacity":
+        if (elem instanceof Group) {
+          elem._opacity = parseFloat(value);
+          break;
+        }
+        elem.opacity = parseFloat(value);
+        break;
+      case "clip-path":
+        if (regex2.cssBackgroundImage.test(value)) {
+          id = value.replace(regex2.cssBackgroundImage, "$1");
+          if (read.defs.current && read.defs.current.contains(id)) {
+            ref = read.defs.current.get(id);
+            if (ref && ref.childNodes.length > 0) {
+              ref = ref.childNodes[0];
+              tagName = getTagName(ref.nodeName);
+              elem.mask = read[tagName].call(this, ref, {});
+              switch (elem._renderer.type) {
+                case "text":
+                case "path":
+                  elem.position.add(elem.mask.position);
+                  elem.mask.position.clear();
+                  break;
+              }
+            }
+          }
+        }
+        break;
+      case "fill":
+      case "stroke":
+        prop = (elem instanceof Group ? "_" : "") + key;
+        if (regex2.cssBackgroundImage.test(value)) {
+          id = value.replace(regex2.cssBackgroundImage, "$1");
+          if (read.defs.current && read.defs.current.contains(id)) {
+            ref = read.defs.current.get(id);
+            if (!ref.object) {
+              tagName = getTagName(ref.nodeName);
+              ref.object = read[tagName].call(this, ref, {});
+            }
+            ref = ref.object;
+          } else {
+            scene = getScene(this);
+            ref = scene.getById(id);
+          }
+          elem[prop] = ref;
+        } else {
+          elem[prop] = value;
+        }
+        break;
+      case "id":
+        elem.id = value;
+        break;
+      case "class":
+      case "className":
+        elem.classList = value.split(" ");
+        elem._flagClassName = true;
+        break;
+      case "x":
+      case "y":
+        ca = elem instanceof Gradient;
+        cb = elem instanceof LinearGradient;
+        cc = elem instanceof RadialGradient;
+        if (ca || cb || cc) {
+          break;
+        }
+        if (value.match("[a-z%]$") && !value.endsWith("px")) {
+          error = new TwoError(
+            "only pixel values are supported with the " + key + " attribute."
+          );
+          console.warn(error.name, error.message);
+        }
+        elem.translation[key] = parseFloat(value);
+        break;
+      case "font-family":
+        if (elem instanceof Text) {
+          elem.family = value;
+        }
+        break;
+      case "font-size":
+        if (elem instanceof Text) {
+          elem.size = value;
+        }
+        break;
+      case "font-weight":
+        if (elem instanceof Text) {
+          elem.weight = value;
+        }
+        break;
+      case "font-style":
+        if (elem instanceof Text) {
+          elem.style = value;
+        }
+        break;
+      case "text-decoration":
+        if (elem instanceof Text) {
+          elem.decoration = value;
+        }
+        break;
+      case "line-height":
+        if (elem instanceof Text) {
+          elem.leading = value;
+        }
+        break;
+    }
+  }
+  if (Object.keys(node.dataset).length)
+    elem.dataset = node.dataset;
+  return styles;
+}
+function updateDefsCache(node, defsCache) {
+  for (let i2 = 0, l2 = node.childNodes.length; i2 < l2; i2++) {
+    const n2 = node.childNodes[i2];
+    if (!n2.id)
+      continue;
+    const tagName = getTagName(node.nodeName);
+    if (tagName === "#text")
+      continue;
+    defsCache.add(n2.id, n2);
+  }
+}
+function getScene(node) {
+  while (node.parent) {
+    node = node.parent;
+  }
+  return node.scene;
+}
+var read = {
+  svg: function(node) {
+    const defs = read.defs.current = new Registry();
+    const elements = node.getElementsByTagName("defs");
+    for (let i2 = 0; i2 < elements.length; i2++) {
+      updateDefsCache(elements[i2], defs);
+    }
+    const svg2 = read.g.call(this, node);
+    const viewBox = node.getAttribute("viewBox");
+    const x2 = node.getAttribute("x");
+    const y2 = node.getAttribute("y");
+    const width = node.getAttribute("width");
+    const height = node.getAttribute("height");
+    svg2.defs = defs;
+    const viewBoxExists = viewBox !== null;
+    const xExists = x2 !== null;
+    const yExists = y2 !== null;
+    const widthExists = width !== null;
+    const heightExists = height !== null;
+    if (xExists) {
+      svg2.x = parseFloat(x2.replace(regex2.unitSuffix, ""));
+    }
+    if (yExists) {
+      svg2.y = parseFloat(y2.replace(regex2.unitSuffix, ""));
+    }
+    if (widthExists) {
+      svg2.width = parseFloat(width.replace(regex2.unitSuffix, ""));
+    }
+    if (heightExists) {
+      svg2.height = parseFloat(height.replace(regex2.unitSuffix, ""));
+    }
+    if (viewBoxExists) {
+      applySvgViewBox(svg2, viewBox);
+    }
+    delete read.defs.current;
+    return svg2;
+  },
+  defs: function(node) {
+    return null;
+  },
+  use: function(node, styles) {
+    let error;
+    const href = node.getAttribute("href") || node.getAttribute("xlink:href");
+    if (!href) {
+      error = new TwoError("encountered <use /> with no href.");
+      console.warn(error.name, error.message);
+      return null;
+    }
+    const id = href.slice(1);
+    if (!read.defs.current.contains(id)) {
+      error = new TwoError(
+        "unable to find element for reference " + href + "."
+      );
+      console.warn(error.name, error.message);
+      return null;
+    }
+    const template = read.defs.current.get(id);
+    const fullNode = template.cloneNode(true);
+    for (let i2 = 0; i2 < node.attributes.length; i2++) {
+      const attr = node.attributes[i2];
+      const ca = overwriteAttrs.includes(attr.nodeName);
+      const cb = !fullNode.hasAttribute(attr.nodeName);
+      if (ca || cb) {
+        fullNode.setAttribute(attr.nodeName, attr.value);
+      }
+    }
+    const tagName = getTagName(fullNode.nodeName);
+    return read[tagName].call(this, fullNode, styles);
+  },
+  g: function(node, parentStyles) {
+    const group = new Group();
+    applySvgAttributes.call(this, node, group, parentStyles);
+    this.add(group);
+    const styles = getSvgStyles.call(this, node);
+    for (let i2 = 0, l2 = node.childNodes.length; i2 < l2; i2++) {
+      const n2 = node.childNodes[i2];
+      const tag = n2.nodeName;
+      if (!tag)
+        return;
+      const tagName = getTagName(tag);
+      if (tagName in read) {
+        const o2 = read[tagName].call(group, n2, styles);
+        if (!!o2 && !o2.parent) {
+          group.add(o2);
+        }
+      }
+    }
+    return group;
+  },
+  polygon: function(node, parentStyles) {
+    let points;
+    if (typeof node === "string") {
+      points = node;
+    } else {
+      points = node.getAttribute("points");
+    }
+    const verts = [];
+    points.replace(/(-?[\d.eE-]+)[,|\s](-?[\d.eE-]+)/g, function(match, p1, p2) {
+      verts.push(new Anchor(parseFloat(p1), parseFloat(p2)));
+    });
+    const poly = new Path(verts, true).noStroke();
+    poly.fill = "black";
+    applySvgAttributes.call(this, node, poly, parentStyles);
+    return poly;
+  },
+  polyline: function(node, parentStyles) {
+    const poly = read.polygon.call(this, node, parentStyles);
+    poly.closed = false;
+    return poly;
+  },
+  path: function(node, parentStyles) {
+    let path2;
+    if (typeof node === "string") {
+      path2 = node;
+      node = null;
+    } else {
+      path2 = node.getAttribute("d");
+    }
+    let points = [];
+    let closed2 = false, relative = false;
+    if (path2) {
+      let coord = new Anchor();
+      let control, coords;
+      let commands = path2.match(/[a-df-z][^a-df-z]*/ig);
+      const last = commands.length - 1;
+      _.each(commands.slice(0), function(command, i2) {
+        const items = command.slice(1).trim().match(regex2.path);
+        const type2 = command[0];
+        const lower = type2.toLowerCase();
+        let bin, j2, l2, ct, times;
+        const result = [];
+        if (i2 === 0) {
+          commands = [];
+        }
+        switch (lower) {
+          case "h":
+          case "v":
+            if (items.length > 1) {
+              bin = 1;
+            }
+            break;
+          case "m":
+          case "l":
+          case "t":
+            if (items.length > 2) {
+              bin = 2;
+            }
+            break;
+          case "s":
+          case "q":
+            if (items.length > 4) {
+              bin = 4;
+            }
+            break;
+          case "c":
+            if (items.length > 6) {
+              bin = 6;
+            }
+            break;
+          case "a":
+            if (items.length > 7) {
+              bin = 7;
+            }
+            break;
+        }
+        if (bin) {
+          for (j2 = 0, l2 = items.length, times = 0; j2 < l2; j2 += bin) {
+            ct = type2;
+            if (times > 0) {
+              switch (type2) {
+                case "m":
+                  ct = "l";
+                  break;
+                case "M":
+                  ct = "L";
+                  break;
+              }
+            }
+            result.push(ct + items.slice(j2, j2 + bin).join(" "));
+            times++;
+          }
+          commands = Array.prototype.concat.apply(commands, result);
+        } else {
+          commands.push(command);
+        }
+      });
+      _.each(commands, function(command, i2) {
+        let result, x2, y2;
+        const type2 = command[0];
+        const lower = type2.toLowerCase();
+        coords = command.slice(1).trim().match(regex2.path);
+        relative = type2 === lower;
+        let x1, y1, x22, y22, x3, y3, x4, y4, reflection;
+        let a2, b2;
+        let anchor2, rx, ry, xAxisRotation, largeArcFlag, sweepFlag;
+        switch (lower) {
+          case "z":
+            if (i2 >= last) {
+              closed2 = true;
+            } else {
+              x2 = coord.x;
+              y2 = coord.y;
+              result = new Anchor(
+                x2,
+                y2,
+                void 0,
+                void 0,
+                void 0,
+                void 0,
+                Commands.close
+              );
+              for (let j2 = points.length - 1; j2 >= 0; j2--) {
+                const point = points[j2];
+                if (/m/i.test(point.command)) {
+                  coord = point;
+                  break;
+                }
+              }
+            }
+            break;
+          case "m":
+          case "l":
+            control = void 0;
+            x2 = parseFloat(coords[0]);
+            y2 = parseFloat(coords[1]);
+            result = new Anchor(
+              x2,
+              y2,
+              void 0,
+              void 0,
+              void 0,
+              void 0,
+              /m/i.test(lower) ? Commands.move : Commands.line
+            );
+            if (relative) {
+              result.addSelf(coord);
+            }
+            coord = result;
+            break;
+          case "h":
+          case "v":
+            a2 = /h/i.test(lower) ? "x" : "y";
+            b2 = /x/i.test(a2) ? "y" : "x";
+            result = new Anchor(
+              void 0,
+              void 0,
+              void 0,
+              void 0,
+              void 0,
+              void 0,
+              Commands.line
+            );
+            result[a2] = parseFloat(coords[0]);
+            result[b2] = coord[b2];
+            if (relative) {
+              result[a2] += coord[a2];
+            }
+            coord = result;
+            break;
+          case "c":
+          case "s":
+            x1 = coord.x;
+            y1 = coord.y;
+            if (!control) {
+              control = new Vector();
+            }
+            if (/c/i.test(lower)) {
+              x22 = parseFloat(coords[0]);
+              y22 = parseFloat(coords[1]);
+              x3 = parseFloat(coords[2]);
+              y3 = parseFloat(coords[3]);
+              x4 = parseFloat(coords[4]);
+              y4 = parseFloat(coords[5]);
+            } else {
+              reflection = getReflection(coord, control, relative);
+              x22 = reflection.x;
+              y22 = reflection.y;
+              x3 = parseFloat(coords[0]);
+              y3 = parseFloat(coords[1]);
+              x4 = parseFloat(coords[2]);
+              y4 = parseFloat(coords[3]);
+            }
+            if (relative) {
+              x22 += x1;
+              y22 += y1;
+              x3 += x1;
+              y3 += y1;
+              x4 += x1;
+              y4 += y1;
+            }
+            coord.controls.right.set(x22 - coord.x, y22 - coord.y);
+            result = new Anchor(
+              x4,
+              y4,
+              x3 - x4,
+              y3 - y4,
+              void 0,
+              void 0,
+              Commands.curve
+            );
+            coord = result;
+            control = result.controls.left;
+            break;
+          case "t":
+          case "q":
+            x1 = coord.x;
+            y1 = coord.y;
+            if (!control) {
+              control = new Vector();
+            }
+            if (/q/i.test(lower)) {
+              x22 = parseFloat(coords[0]);
+              y22 = parseFloat(coords[1]);
+              x3 = parseFloat(coords[0]);
+              y3 = parseFloat(coords[1]);
+              x4 = parseFloat(coords[2]);
+              y4 = parseFloat(coords[3]);
+            } else {
+              reflection = getReflection(coord, control, relative);
+              x22 = reflection.x;
+              y22 = reflection.y;
+              x3 = reflection.x;
+              y3 = reflection.y;
+              x4 = parseFloat(coords[0]);
+              y4 = parseFloat(coords[1]);
+            }
+            if (relative) {
+              x22 += x1;
+              y22 += y1;
+              x3 += x1;
+              y3 += y1;
+              x4 += x1;
+              y4 += y1;
+            }
+            coord.controls.right.set(
+              (x22 - coord.x) * 0.33,
+              (y22 - coord.y) * 0.33
+            );
+            result = new Anchor(
+              x4,
+              y4,
+              x3 - x4,
+              y3 - y4,
+              void 0,
+              void 0,
+              Commands.curve
+            );
+            coord = result;
+            control = result.controls.left;
+            break;
+          case "a":
+            x1 = coord.x;
+            y1 = coord.y;
+            rx = parseFloat(coords[0]);
+            ry = parseFloat(coords[1]);
+            xAxisRotation = parseFloat(coords[2]);
+            largeArcFlag = parseFloat(coords[3]);
+            sweepFlag = parseFloat(coords[4]);
+            x4 = parseFloat(coords[5]);
+            y4 = parseFloat(coords[6]);
+            if (relative) {
+              x4 += x1;
+              y4 += y1;
+            }
+            anchor2 = new Anchor(x4, y4);
+            anchor2.command = Commands.arc;
+            anchor2.rx = rx;
+            anchor2.ry = ry;
+            anchor2.xAxisRotation = xAxisRotation;
+            anchor2.largeArcFlag = largeArcFlag;
+            anchor2.sweepFlag = sweepFlag;
+            result = anchor2;
+            coord = anchor2;
+            control = void 0;
+            break;
+        }
+        if (result) {
+          if (Array.isArray(result)) {
+            points = points.concat(result);
+          } else {
+            points.push(result);
+          }
+        }
+      });
+    }
+    path2 = new Path(points, closed2, void 0, true).noStroke();
+    path2.fill = "black";
+    const rect = path2.getBoundingClientRect(true);
+    rect.centroid = {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2
+    };
+    _.each(path2.vertices, function(v2) {
+      v2.subSelf(rect.centroid);
+    });
+    applySvgAttributes.call(this, node, path2, parentStyles);
+    path2.translation.addSelf(rect.centroid);
+    return path2;
+  },
+  circle: function(node, parentStyles) {
+    const x2 = parseFloat(node.getAttribute("cx"));
+    const y2 = parseFloat(node.getAttribute("cy"));
+    const r2 = parseFloat(node.getAttribute("r"));
+    const circle = new Circle(0, 0, r2).noStroke();
+    circle.fill = "black";
+    applySvgAttributes.call(this, node, circle, parentStyles);
+    circle.translation.x = x2;
+    circle.translation.y = y2;
+    return circle;
+  },
+  ellipse: function(node, parentStyles) {
+    const x2 = parseFloat(node.getAttribute("cx"));
+    const y2 = parseFloat(node.getAttribute("cy"));
+    const width = parseFloat(node.getAttribute("rx"));
+    const height = parseFloat(node.getAttribute("ry"));
+    const ellipse = new Ellipse(0, 0, width, height).noStroke();
+    ellipse.fill = "black";
+    applySvgAttributes.call(this, node, ellipse, parentStyles);
+    ellipse.translation.x = x2;
+    ellipse.translation.y = y2;
+    return ellipse;
+  },
+  rect: function(node, parentStyles) {
+    const rx = parseFloat(node.getAttribute("rx"));
+    const ry = parseFloat(node.getAttribute("ry"));
+    if (!_.isNaN(rx) || !_.isNaN(ry)) {
+      return read["rounded-rect"](node);
+    }
+    const width = parseFloat(node.getAttribute("width"));
+    const height = parseFloat(node.getAttribute("height"));
+    const w2 = width / 2;
+    const h2 = height / 2;
+    const rect = new Rectangle(0, 0, width, height).noStroke();
+    rect.fill = "black";
+    applySvgAttributes.call(this, node, rect, parentStyles);
+    rect.translation.x += w2;
+    rect.translation.y += h2;
+    return rect;
+  },
+  "rounded-rect": function(node, parentStyles) {
+    const rx = parseFloat(node.getAttribute("rx")) || 0;
+    const ry = parseFloat(node.getAttribute("ry")) || 0;
+    const width = parseFloat(node.getAttribute("width"));
+    const height = parseFloat(node.getAttribute("height"));
+    const w2 = width / 2;
+    const h2 = height / 2;
+    const radius = new Vector(rx, ry);
+    const rect = new RoundedRectangle(0, 0, width, height, radius).noStroke();
+    rect.fill = "black";
+    applySvgAttributes.call(this, node, rect, parentStyles);
+    rect.translation.x += w2;
+    rect.translation.y += h2;
+    return rect;
+  },
+  line: function(node, parentStyles) {
+    const x1 = parseFloat(node.getAttribute("x1"));
+    const y1 = parseFloat(node.getAttribute("y1"));
+    const x2 = parseFloat(node.getAttribute("x2"));
+    const y2 = parseFloat(node.getAttribute("y2"));
+    const line = new Line(x1, y1, x2, y2).noFill();
+    applySvgAttributes.call(this, node, line, parentStyles);
+    return line;
+  },
+  lineargradient: function(node, parentStyles) {
+    let units = node.getAttribute("gradientUnits");
+    let spread = node.getAttribute("spreadMethod");
+    if (!units) {
+      units = "objectBoundingBox";
+    }
+    if (!spread) {
+      spread = "pad";
+    }
+    let x1 = parseFloat(node.getAttribute("x1") || 0);
+    let y1 = parseFloat(node.getAttribute("y1") || 0);
+    let x2 = parseFloat(node.getAttribute("x2") || 0);
+    let y2 = parseFloat(node.getAttribute("y2") || 0);
+    const ox = (x2 + x1) / 2;
+    const oy = (y2 + y1) / 2;
+    if (/userSpaceOnUse/i.test(units)) {
+      x1 -= ox;
+      y1 -= oy;
+      x2 -= ox;
+      y2 -= oy;
+    }
+    const stops = [];
+    for (let i2 = 0; i2 < node.children.length; i2++) {
+      const child = node.children[i2];
+      let offset = child.getAttribute("offset");
+      if (/%/ig.test(offset)) {
+        offset = parseFloat(offset.replace(/%/ig, "")) / 100;
+      }
+      offset = parseFloat(offset);
+      let color = child.getAttribute("stop-color");
+      let opacity = child.getAttribute("stop-opacity");
+      let style = child.getAttribute("style");
+      let matches;
+      if (color === null) {
+        matches = style ? style.match(/stop-color:\s?([#a-fA-F0-9]*)/) : false;
+        color = matches && matches.length > 1 ? matches[1] : void 0;
+      }
+      if (opacity === null) {
+        matches = style ? style.match(/stop-opacity:\s?([0-9.-]*)/) : false;
+        opacity = matches && matches.length > 1 ? parseFloat(matches[1]) : 1;
+      } else {
+        opacity = parseFloat(opacity);
+      }
+      stops.push(new Stop(offset, color, opacity));
+    }
+    const gradient = new LinearGradient(x1, y1, x2, y2, stops);
+    gradient.spread = spread;
+    gradient.units = units;
+    applySvgAttributes.call(this, node, gradient, parentStyles);
+    return gradient;
+  },
+  radialgradient: function(node, parentStyles) {
+    let units = node.getAttribute("gradientUnits");
+    let spread = node.getAttribute("spreadMethod");
+    if (!units) {
+      units = "objectBoundingBox";
+    }
+    if (!spread) {
+      spread = "pad";
+    }
+    let cx = parseFloat(node.getAttribute("cx")) || 0;
+    let cy = parseFloat(node.getAttribute("cy")) || 0;
+    let r2 = parseFloat(node.getAttribute("r"));
+    let fx = parseFloat(node.getAttribute("fx"));
+    let fy = parseFloat(node.getAttribute("fy"));
+    if (_.isNaN(fx)) {
+      fx = cx;
+    }
+    if (_.isNaN(fy)) {
+      fy = cy;
+    }
+    const ox = Math.abs(cx + fx) / 2;
+    const oy = Math.abs(cy + fy) / 2;
+    if (/userSpaceOnUse/i.test(units)) {
+      cx -= ox;
+      cy -= oy;
+      fx -= ox;
+      fy -= oy;
+    }
+    const stops = [];
+    for (let i2 = 0; i2 < node.children.length; i2++) {
+      const child = node.children[i2];
+      let offset = child.getAttribute("offset");
+      if (/%/ig.test(offset)) {
+        offset = parseFloat(offset.replace(/%/ig, "")) / 100;
+      }
+      offset = parseFloat(offset);
+      let color = child.getAttribute("stop-color");
+      let opacity = child.getAttribute("stop-opacity");
+      let style = child.getAttribute("style");
+      let matches;
+      if (color === null) {
+        matches = style ? style.match(/stop-color:\s?([#a-fA-F0-9]*)/) : false;
+        color = matches && matches.length > 1 ? matches[1] : void 0;
+      }
+      if (opacity === null) {
+        matches = style ? style.match(/stop-opacity:\s?([0-9.-]*)/) : false;
+        opacity = matches && matches.length > 1 ? parseFloat(matches[1]) : 1;
+      } else {
+        opacity = parseFloat(opacity);
+      }
+      stops.push(new Stop(offset, color, opacity));
+    }
+    const gradient = new RadialGradient(cx, cy, r2, stops, fx, fy);
+    gradient.spread = spread;
+    gradient.units = units;
+    applySvgAttributes.call(this, node, gradient, parentStyles);
+    return gradient;
+  },
+  text: function(node, parentStyles) {
+    const alignment = getAlignment(node.getAttribute("text-anchor")) || "left";
+    const baseline = getBaseline(node) || "baseline";
+    const message = node.textContent;
+    const text = new Text(message);
+    applySvgAttributes.call(this, node, text, parentStyles);
+    text.alignment = alignment;
+    text.baseline = baseline;
+    return text;
+  },
+  clippath: function(node, parentStyles) {
+    if (read.defs.current && !read.defs.current.contains(node.id)) {
+      read.defs.current.add(node.id, node);
+    }
+    return null;
+  },
+  image: function(node, parentStyles) {
+    let error;
+    const href = node.getAttribute("href") || node.getAttribute("xlink:href");
+    if (!href) {
+      error = new TwoError("encountered <image /> with no href.");
+      console.warn(error.name, error.message);
+      return null;
+    }
+    const x2 = parseFloat(node.getAttribute("x")) || 0;
+    const y2 = parseFloat(node.getAttribute("y")) || 0;
+    const width = parseFloat(node.getAttribute("width"));
+    const height = parseFloat(node.getAttribute("height"));
+    const sprite = new Sprite(href, x2, y2);
+    if (!_.isNaN(width)) {
+      sprite.width = width;
+    }
+    if (!_.isNaN(height)) {
+      sprite.height = height;
+    }
+    applySvgAttributes.call(this, node, sprite, parentStyles);
+    return sprite;
+  }
+};
+function xhr(path2, callback) {
+  const xhr2 = new XMLHttpRequest();
+  xhr2.open("GET", path2);
+  xhr2.onreadystatechange = function() {
+    if (xhr2.readyState === 4 && xhr2.status === 200) {
+      callback(xhr2.responseText);
+    }
+  };
+  xhr2.send();
+  return xhr2;
+}
+var _ImageSequence = class extends Rectangle {
+  constructor(paths, ox, oy, frameRate) {
+    super(ox, oy, 0, 0);
+    __publicField(this, "_flagTextures", false);
+    __publicField(this, "_flagFrameRate", false);
+    __publicField(this, "_flagIndex", false);
+    __publicField(this, "_amount", 1);
+    __publicField(this, "_duration", 0);
+    __publicField(this, "_index", 0);
+    __publicField(this, "_startTime", 0);
+    __publicField(this, "_playing", false);
+    __publicField(this, "_firstFrame", 0);
+    __publicField(this, "_lastFrame", 0);
+    __publicField(this, "_loop", true);
+    __publicField(this, "_textures", null);
+    __publicField(this, "_frameRate", 0);
+    __publicField(this, "_origin", null);
+    for (let prop in proto19) {
+      Object.defineProperty(this, prop, proto19[prop]);
+    }
+    this._renderer.flagTextures = FlagTextures.bind(this);
+    this._renderer.bindTextures = BindTextures.bind(this);
+    this._renderer.unbindTextures = UnbindTextures.bind(this);
+    this.noStroke();
+    this.noFill();
+    if (Array.isArray(paths)) {
+      this.textures = paths.map(GenerateTexture.bind(this));
+    } else {
+      this.textures = [GenerateTexture(paths)];
+    }
+    this.origin = new Vector();
+    this._update();
+    if (typeof frameRate === "number") {
+      this.frameRate = frameRate;
+    } else {
+      this.frameRate = _ImageSequence.DefaultFrameRate;
+    }
+    this.index = 0;
+  }
+  play(firstFrame, lastFrame, onLastFrame) {
+    this._playing = true;
+    this._firstFrame = 0;
+    this._lastFrame = this.amount - 1;
+    this._startTime = _.performance.now();
+    if (typeof firstFrame === "number") {
+      this._firstFrame = firstFrame;
+    }
+    if (typeof lastFrame === "number") {
+      this._lastFrame = lastFrame;
+    }
+    if (typeof onLastFrame === "function") {
+      this._onLastFrame = onLastFrame;
+    } else {
+      delete this._onLastFrame;
+    }
+    if (this._index !== this._firstFrame) {
+      this._startTime -= 1e3 * Math.abs(this._index - this._firstFrame) / this._frameRate;
+    }
+    return this;
+  }
+  pause() {
+    this._playing = false;
+    return this;
+  }
+  stop() {
+    this._playing = false;
+    this._index = this._firstFrame;
+    return this;
+  }
+  clone(parent) {
+    const clone = new _ImageSequence(
+      this.textures,
+      this.translation.x,
+      this.translation.y,
+      this.frameRate
+    );
+    clone._loop = this._loop;
+    if (this._playing) {
+      clone.play();
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    object.textures = this.textures.map(function(texture) {
+      return texture.toObject();
+    });
+    object.frameRate = this.frameRate;
+    object.index = this.index;
+    object._firstFrame = this._firstFrame;
+    object._lastFrame = this._lastFrame;
+    object._loop = this._loop;
+    return object;
+  }
+  _update() {
+    const effect = this._textures;
+    let width, height, elapsed, amount, duration, texture;
+    let index, frames;
+    if (effect) {
+      if (this._flagTextures) {
+        this._amount = effect.length;
+      }
+      if (this._flagFrameRate) {
+        this._duration = 1e3 * this._amount / this._frameRate;
+      }
+      if (this._playing && this._frameRate > 0) {
+        amount = this._amount;
+        if (_.isNaN(this._lastFrame)) {
+          this._lastFrame = amount - 1;
+        }
+        elapsed = _.performance.now() - this._startTime;
+        frames = this._lastFrame + 1;
+        duration = 1e3 * (frames - this._firstFrame) / this._frameRate;
+        if (this._loop) {
+          elapsed = elapsed % duration;
+        } else {
+          elapsed = Math.min(elapsed, duration);
+        }
+        index = lerp(this._firstFrame, frames, elapsed / duration);
+        index = Math.floor(index);
+        if (index !== this._index) {
+          this._index = index;
+          texture = effect[this._index];
+          if (texture.loaded) {
+            width = texture.image.width;
+            height = texture.image.height;
+            if (this.width !== width) {
+              this.width = width;
+            }
+            if (this.height !== height) {
+              this.height = height;
+            }
+            this.fill = texture;
+            if (index >= this._lastFrame - 1 && this._onLastFrame) {
+              this._onLastFrame();
+            }
+          }
+        }
+      } else if (this._flagIndex || !(this.fill instanceof Texture)) {
+        texture = effect[this._index];
+        if (texture.loaded) {
+          width = texture.image.width;
+          height = texture.image.height;
+          if (this.width !== width) {
+            this.width = width;
+          }
+          if (this.height !== height) {
+            this.height = height;
+          }
+        }
+        this.fill = texture;
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagTextures = this._flagFrameRate = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var ImageSequence = _ImageSequence;
+__publicField(ImageSequence, "Properties", [
+  "textures",
+  "frameRate",
+  "index"
+]);
+__publicField(ImageSequence, "DefaultFrameRate", 30);
+var proto19 = {
+  frameRate: {
+    enumerable: true,
+    get: function() {
+      return this._frameRate;
+    },
+    set: function(v2) {
+      this._frameRate = v2;
+      this._flagFrameRate = true;
+    }
+  },
+  index: {
+    enumerable: true,
+    get: function() {
+      return this._index;
+    },
+    set: function(v2) {
+      this._index = v2;
+      this._flagIndex = true;
+    }
+  },
+  textures: {
+    enumerable: true,
+    get: function() {
+      return this._textures;
+    },
+    set: function(textures) {
+      const bindTextures = this._renderer.bindTextures;
+      const unbindTextures = this._renderer.unbindTextures;
+      if (this._textures) {
+        this._textures.unbind(Events.Types.insert, bindTextures).unbind(Events.Types.remove, unbindTextures);
+      }
+      this._textures = new Collection((textures || []).slice(0));
+      this._textures.bind(Events.Types.insert, bindTextures).bind(Events.Types.remove, unbindTextures);
+      bindTextures(this._textures);
+    }
+  }
+};
+function FlagTextures() {
+  this._flagTextures = true;
+}
+function BindTextures(items) {
+  let i2 = items.length;
+  while (i2--) {
+    items[i2].bind(Events.Types.change, this._renderer.flagTextures);
+  }
+  this._renderer.flagTextures();
+}
+function UnbindTextures(items) {
+  let i2 = items.length;
+  while (i2--) {
+    items[i2].unbind(Events.Types.change, this._renderer.flagTextures);
+  }
+  this._renderer.flagTextures();
+}
+function GenerateTexture(obj) {
+  if (obj instanceof Texture) {
+    return obj;
+  } else if (typeof obj === "string") {
+    return new Texture(obj);
+  }
+}
+var _ArcSegment = class extends Path {
+  constructor(x2, y2, ir, or, sa, ea, res) {
+    const amount = res || Constants.Resolution * 3;
+    const points = [];
+    for (let i2 = 0; i2 < amount; i2++) {
+      points.push(new Anchor());
+    }
+    super(points, true, false, true);
+    __publicField(this, "_flagStartAngle", false);
+    __publicField(this, "_flagEndAngle", false);
+    __publicField(this, "_flagInnerRadius", false);
+    __publicField(this, "_flagOuterRadius", false);
+    __publicField(this, "_startAngle", 0);
+    __publicField(this, "_endAngle", TWO_PI);
+    __publicField(this, "_innerRadius", 0);
+    __publicField(this, "_outerRadius", 0);
+    for (let prop in proto20) {
+      Object.defineProperty(this, prop, proto20[prop]);
+    }
+    if (typeof ir === "number") {
+      this.innerRadius = ir;
+    }
+    if (typeof or === "number") {
+      this.outerRadius = or;
+    }
+    if (typeof sa === "number") {
+      this.startAngle = sa;
+    }
+    if (typeof ea === "number") {
+      this.endAngle = ea;
+    }
+    this._update();
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+  }
+  _update() {
+    if (this._flagVertices || this._flagStartAngle || this._flagEndAngle || this._flagInnerRadius || this._flagOuterRadius) {
+      const sa = this._startAngle;
+      const ea = this._endAngle;
+      const ir = this._innerRadius;
+      const or = this._outerRadius;
+      const connected = mod(sa, TWO_PI) === mod(ea, TWO_PI);
+      const punctured = ir > 0;
+      const vertices = this.vertices;
+      let length = punctured ? vertices.length / 2 : vertices.length;
+      let command, id = 0;
+      let i2, last, pct, v2, theta, step, x2, y2, amp;
+      if (connected) {
+        length--;
+      } else if (!punctured) {
+        length -= 2;
+      }
+      for (i2 = 0, last = length - 1; i2 < length; i2++) {
+        pct = i2 / last;
+        v2 = vertices[id];
+        theta = pct * (ea - sa) + sa;
+        step = (ea - sa) / length;
+        x2 = or * Math.cos(theta);
+        y2 = or * Math.sin(theta);
+        switch (i2) {
+          case 0:
+            command = Commands.move;
+            break;
+          default:
+            command = Commands.curve;
+        }
+        v2.command = command;
+        v2.x = x2;
+        v2.y = y2;
+        v2.controls.left.clear();
+        v2.controls.right.clear();
+        if (v2.command === Commands.curve) {
+          amp = or * step / Math.PI;
+          v2.controls.left.x = amp * Math.cos(theta - HALF_PI);
+          v2.controls.left.y = amp * Math.sin(theta - HALF_PI);
+          v2.controls.right.x = amp * Math.cos(theta + HALF_PI);
+          v2.controls.right.y = amp * Math.sin(theta + HALF_PI);
+          if (i2 === 1) {
+            v2.controls.left.multiplyScalar(2);
+          }
+          if (i2 === last) {
+            v2.controls.right.multiplyScalar(2);
+          }
+        }
+        id++;
+      }
+      if (punctured) {
+        if (connected) {
+          vertices[id].command = Commands.close;
+          id++;
+        } else {
+          length--;
+          last = length - 1;
+        }
+        for (i2 = 0; i2 < length; i2++) {
+          pct = i2 / last;
+          v2 = vertices[id];
+          theta = (1 - pct) * (ea - sa) + sa;
+          step = (ea - sa) / length;
+          x2 = ir * Math.cos(theta);
+          y2 = ir * Math.sin(theta);
+          command = Commands.curve;
+          if (i2 <= 0) {
+            command = connected ? Commands.move : Commands.line;
+          }
+          v2.command = command;
+          v2.x = x2;
+          v2.y = y2;
+          v2.controls.left.clear();
+          v2.controls.right.clear();
+          if (v2.command === Commands.curve) {
+            amp = ir * step / Math.PI;
+            v2.controls.left.x = amp * Math.cos(theta + HALF_PI);
+            v2.controls.left.y = amp * Math.sin(theta + HALF_PI);
+            v2.controls.right.x = amp * Math.cos(theta - HALF_PI);
+            v2.controls.right.y = amp * Math.sin(theta - HALF_PI);
+            if (i2 === 1) {
+              v2.controls.left.multiplyScalar(2);
+            }
+            if (i2 === last) {
+              v2.controls.right.multiplyScalar(2);
+            }
+          }
+          id++;
+        }
+        vertices[id].copy(vertices[0]);
+        vertices[id].command = Commands.line;
+      } else if (!connected) {
+        vertices[id].command = Commands.line;
+        vertices[id].x = 0;
+        vertices[id].y = 0;
+        id++;
+        vertices[id].copy(vertices[0]);
+        vertices[id].command = Commands.line;
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    super.flagReset.call(this);
+    this._flagStartAngle = this._flagEndAngle = this._flagInnerRadius = this._flagOuterRadius = false;
+    return this;
+  }
+  clone(parent) {
+    const ir = this.innerRadius;
+    const or = this.outerRadius;
+    const sa = this.startAngle;
+    const ea = this.endAngle;
+    const resolution = this.vertices.length;
+    const clone = new _ArcSegment(0, 0, ir, or, sa, ea, resolution);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    for (let i2 = 0; i2 < _ArcSegment.Properties.length; i2++) {
+      const k2 = _ArcSegment.Properties[i2];
+      object[k2] = this[k2];
+    }
+    return object;
+  }
+};
+var ArcSegment = _ArcSegment;
+__publicField(ArcSegment, "Properties", ["startAngle", "endAngle", "innerRadius", "outerRadius"]);
+var proto20 = {
+  startAngle: {
+    enumerable: true,
+    get: function() {
+      return this._startAngle;
+    },
+    set: function(v2) {
+      this._startAngle = v2;
+      this._flagStartAngle = true;
+    }
+  },
+  endAngle: {
+    enumerable: true,
+    get: function() {
+      return this._endAngle;
+    },
+    set: function(v2) {
+      this._endAngle = v2;
+      this._flagEndAngle = true;
+    }
+  },
+  innerRadius: {
+    enumerable: true,
+    get: function() {
+      return this._innerRadius;
+    },
+    set: function(v2) {
+      this._innerRadius = v2;
+      this._flagInnerRadius = true;
+    }
+  },
+  outerRadius: {
+    enumerable: true,
+    get: function() {
+      return this._outerRadius;
+    },
+    set: function(v2) {
+      this._outerRadius = v2;
+      this._flagOuterRadius = true;
+    }
+  }
+};
+var ceil2 = Math.ceil;
+var floor3 = Math.floor;
+var _Points = class extends Shape {
+  constructor(vertices) {
+    super();
+    __publicField(this, "_flagVertices", true);
+    __publicField(this, "_flagLength", true);
+    __publicField(this, "_flagFill", true);
+    __publicField(this, "_flagStroke", true);
+    __publicField(this, "_flagLinewidth", true);
+    __publicField(this, "_flagOpacity", true);
+    __publicField(this, "_flagVisible", true);
+    __publicField(this, "_flagSize", true);
+    __publicField(this, "_flagSizeAttenuation", true);
+    __publicField(this, "_length", 0);
+    __publicField(this, "_fill", "#fff");
+    __publicField(this, "_stroke", "#000");
+    __publicField(this, "_linewidth", 1);
+    __publicField(this, "_opacity", 1);
+    __publicField(this, "_visible", true);
+    __publicField(this, "_size", 1);
+    __publicField(this, "_sizeAttenuation", false);
+    __publicField(this, "_beginning", 0);
+    __publicField(this, "_ending", 1);
+    __publicField(this, "_dashes", null);
+    __publicField(this, "noFill", Path.prototype.noFill);
+    __publicField(this, "noStroke", Path.prototype.noStroke);
+    __publicField(this, "corner", Path.prototype.corner);
+    __publicField(this, "center", Path.prototype.center);
+    __publicField(this, "getBoundingClientRect", Path.prototype.getBoundingClientRect);
+    __publicField(this, "_updateLength", Path.prototype._updateLength);
+    for (let prop in proto21) {
+      Object.defineProperty(this, prop, proto21[prop]);
+    }
+    this._renderer.type = "points";
+    this._renderer.flagVertices = FlagVertices.bind(this);
+    this._renderer.bindVertices = BindVertices.bind(this);
+    this._renderer.unbindVertices = UnbindVertices.bind(this);
+    this._renderer.flagFill = FlagFill.bind(this);
+    this._renderer.flagStroke = FlagStroke.bind(this);
+    this._renderer.vertices = null;
+    this._renderer.collection = null;
+    this.sizeAttenuation = false;
+    this.beginning = 0;
+    this.ending = 1;
+    this.fill = "#fff";
+    this.stroke = "#000";
+    this.className = "";
+    this.visible = true;
+    this.vertices = vertices;
+    this.dashes = [];
+    this.dashes.offset = 0;
+  }
+  clone(parent) {
+    const clone = new _Points();
+    for (let j2 = 0; j2 < this.vertices.length; j2++) {
+      clone.vertices.push(this.vertices[j2].clone());
+    }
+    for (let i2 = 0; i2 < _Points.Properties.length; i2++) {
+      const k2 = _Points.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    clone.className = this.className;
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone._update();
+  }
+  toObject() {
+    const result = {
+      vertices: this.vertices.map(function(v2) {
+        return v2.toObject();
+      })
+    };
+    _.each(_Points.Properties, function(k2) {
+      result[k2] = this[k2];
+    }, this);
+    result.className = this.className;
+    result.translation = this.translation.toObject();
+    result.rotation = this.rotation;
+    result.scale = this.scale instanceof Vector ? this.scale.toObject() : this.scale;
+    result.skewX = this.skewX;
+    result.skewY = this.skewY;
+    if (this.matrix.manual) {
+      result.matrix = this.matrix.toObject();
+    }
+    return result;
+  }
+  subdivide(limit) {
+    this._update();
+    let points = [];
+    for (let i2 = 0; i2 < this.vertices.length; i2++) {
+      const a2 = this.vertices[i2];
+      const b2 = this.vertices[i2 - 1];
+      if (!b2) {
+        continue;
+      }
+      const x1 = a2.x;
+      const y1 = a2.y;
+      const x2 = b2.x;
+      const y2 = b2.y;
+      const subdivisions = subdivide(x1, y1, x1, y1, x2, y2, x2, y2, limit);
+      points = points.concat(subdivisions);
+    }
+    this.vertices = points;
+    return this;
+  }
+  _update() {
+    if (this._flagVertices) {
+      if (this._flagLength) {
+        this._updateLength(void 0, true);
+      }
+      const beginning = Math.min(this._beginning, this._ending);
+      const ending = Math.max(this._beginning, this._ending);
+      const bid = getIdByLength(this, beginning * this._length);
+      const eid = getIdByLength(this, ending * this._length);
+      const low = ceil2(bid);
+      const high = floor3(eid);
+      let j2 = 0, v2;
+      this._renderer.vertices = [];
+      this._renderer.collection = [];
+      for (let i2 = 0; i2 < this._collection.length; i2++) {
+        if (i2 >= low && i2 <= high) {
+          v2 = this._collection[i2];
+          this._renderer.collection.push(v2);
+          this._renderer.vertices[j2 * 2 + 0] = v2.x;
+          this._renderer.vertices[j2 * 2 + 1] = v2.y;
+          j2++;
+        }
+      }
+    }
+    super._update.apply(this, arguments);
+    return this;
+  }
+  flagReset() {
+    this._flagVertices = this._flagLength = this._flagFill = this._flagStroke = this._flagLinewidth = this._flagOpacity = this._flagVisible = this._flagSize = this._flagSizeAttenuation = false;
+    super.flagReset.call(this);
+    return this;
+  }
+};
+var Points = _Points;
+__publicField(Points, "Properties", [
+  "fill",
+  "stroke",
+  "linewidth",
+  "opacity",
+  "visible",
+  "size",
+  "sizeAttenuation",
+  "beginning",
+  "ending"
+]);
+var proto21 = {
+  linewidth: {
+    enumerable: true,
+    get: function() {
+      return this._linewidth;
+    },
+    set: function(v2) {
+      this._linewidth = v2;
+      this._flagLinewidth = true;
+    }
+  },
+  opacity: {
+    enumerable: true,
+    get: function() {
+      return this._opacity;
+    },
+    set: function(v2) {
+      this._opacity = v2;
+      this._flagOpacity = true;
+    }
+  },
+  visible: {
+    enumerable: true,
+    get: function() {
+      return this._visible;
+    },
+    set: function(v2) {
+      this._visible = v2;
+      this._flagVisible = true;
+    }
+  },
+  size: {
+    enumerable: true,
+    get: function() {
+      return this._size;
+    },
+    set: function(v2) {
+      this._size = v2;
+      this._flagSize = true;
+    }
+  },
+  sizeAttenuation: {
+    enumerable: true,
+    get: function() {
+      return this._sizeAttenuation;
+    },
+    set: function(v2) {
+      this._sizeAttenuation = v2;
+      this._flagSizeAttenuation = true;
+    }
+  },
+  fill: {
+    enumerable: true,
+    get: function() {
+      return this._fill;
+    },
+    set: function(f2) {
+      if (this._fill instanceof Gradient || this._fill instanceof LinearGradient || this._fill instanceof RadialGradient || this._fill instanceof Texture) {
+        this._fill.unbind(Events.Types.change, this._renderer.flagFill);
+      }
+      this._fill = f2;
+      this._flagFill = true;
+      if (this._fill instanceof Gradient || this._fill instanceof LinearGradient || this._fill instanceof RadialGradient || this._fill instanceof Texture) {
+        this._fill.bind(Events.Types.change, this._renderer.flagFill);
+      }
+    }
+  },
+  stroke: {
+    enumerable: true,
+    get: function() {
+      return this._stroke;
+    },
+    set: function(f2) {
+      if (this._stroke instanceof Gradient || this._stroke instanceof LinearGradient || this._stroke instanceof RadialGradient || this._stroke instanceof Texture) {
+        this._stroke.unbind(Events.Types.change, this._renderer.flagStroke);
+      }
+      this._stroke = f2;
+      this._flagStroke = true;
+      if (this._stroke instanceof Gradient || this._stroke instanceof LinearGradient || this._stroke instanceof RadialGradient || this._stroke instanceof Texture) {
+        this._stroke.bind(Events.Types.change, this._renderer.flagStroke);
+      }
+    }
+  },
+  length: {
+    get: function() {
+      if (this._flagLength) {
+        this._updateLength();
+      }
+      return this._length;
+    }
+  },
+  beginning: {
+    enumerable: true,
+    get: function() {
+      return this._beginning;
+    },
+    set: function(v2) {
+      this._beginning = v2;
+      this._flagVertices = true;
+    }
+  },
+  ending: {
+    enumerable: true,
+    get: function() {
+      return this._ending;
+    },
+    set: function(v2) {
+      this._ending = v2;
+      this._flagVertices = true;
+    }
+  },
+  vertices: {
+    enumerable: true,
+    get: function() {
+      return this._collection;
+    },
+    set: function(vertices) {
+      const bindVertices = this._renderer.bindVertices;
+      const unbindVertices = this._renderer.unbindVertices;
+      if (this._collection) {
+        this._collection.unbind(Events.Types.insert, bindVertices).unbind(Events.Types.remove, unbindVertices);
+      }
+      if (vertices instanceof Collection) {
+        this._collection = vertices;
+      } else {
+        this._collection = new Collection(vertices || []);
+      }
+      this._collection.bind(Events.Types.insert, bindVertices).bind(Events.Types.remove, unbindVertices);
+      bindVertices(this._collection);
+    }
+  },
+  dashes: {
+    enumerable: true,
+    get: function() {
+      return this._dashes;
+    },
+    set: function(v2) {
+      if (typeof v2.offset !== "number") {
+        v2.offset = this.dashes && this._dashes.offset || 0;
+      }
+      this._dashes = v2;
+    }
+  }
+};
+var cos5 = Math.cos;
+var sin5 = Math.sin;
+var _Polygon = class extends Path {
+  constructor(x2, y2, radius, sides) {
+    sides = Math.max(sides || 0, 3);
+    super();
+    __publicField(this, "_flagWidth", false);
+    __publicField(this, "_flagHeight", false);
+    __publicField(this, "_flagSides", false);
+    __publicField(this, "_radius", 0);
+    __publicField(this, "_width", 0);
+    __publicField(this, "_height", 0);
+    __publicField(this, "_sides", 0);
+    for (let prop in proto22) {
+      Object.defineProperty(this, prop, proto22[prop]);
+    }
+    this.closed = true;
+    this.automatic = false;
+    if (typeof radius === "number") {
+      this.radius = radius;
+    }
+    if (typeof sides === "number") {
+      this.sides = sides;
+    }
+    this._update();
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+  }
+  _update() {
+    if (this._flagVertices || this._flagWidth || this._flagHeight || this._flagSides) {
+      const sides = this._sides;
+      const amount = sides + 1;
+      let length = this.vertices.length;
+      if (length > sides) {
+        this.vertices.splice(sides - 1, length - sides);
+        length = sides;
+      }
+      for (let i2 = 0; i2 < amount; i2++) {
+        const pct = (i2 + 0.5) / sides;
+        const theta = TWO_PI * pct + Math.PI / 2;
+        const x2 = this._width * cos5(theta) / 2;
+        const y2 = this._height * sin5(theta) / 2;
+        if (i2 >= length) {
+          this.vertices.push(new Anchor(x2, y2));
+        } else {
+          this.vertices[i2].set(x2, y2);
+        }
+        this.vertices[i2].command = i2 === 0 ? Commands.move : Commands.line;
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagWidth = this._flagHeight = this._flagSides = false;
+    super.flagReset.call(this);
+    return this;
+  }
+  clone(parent) {
+    const clone = new _Polygon(0, 0, 0, this.sides);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    clone.width = this.width;
+    clone.height = this.height;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    for (let i2 = 0; i2 < _Polygon.Properties.length; i2++) {
+      const k2 = _Polygon.Properties[i2];
+      object[k2] = this[k2];
+    }
+    return object;
+  }
+};
+var Polygon = _Polygon;
+__publicField(Polygon, "Properties", ["width", "height", "sides"]);
+var proto22 = {
+  radius: {
+    enumerable: true,
+    get: function() {
+      return this._radius;
+    },
+    set: function(v2) {
+      this._radius = v2;
+      this.width = v2 * 2;
+      this.height = v2 * 2;
+    }
+  },
+  width: {
+    enumerable: true,
+    get: function() {
+      return this._width;
+    },
+    set: function(v2) {
+      this._width = v2;
+      this._flagWidth = true;
+      this._radius = Math.max(this.width, this.height) / 2;
+    }
+  },
+  height: {
+    enumerable: true,
+    get: function() {
+      return this._height;
+    },
+    set: function(v2) {
+      this._height = v2;
+      this._flagHeight = true;
+      this._radius = Math.max(this.width, this.height) / 2;
+    }
+  },
+  sides: {
+    enumerable: true,
+    get: function() {
+      return this._sides;
+    },
+    set: function(v2) {
+      this._sides = v2;
+      this._flagSides = true;
+    }
+  }
+};
+var cos6 = Math.cos;
+var sin6 = Math.sin;
+var _Star = class extends Path {
+  constructor(x2, y2, innerRadius, outerRadius, sides) {
+    if (arguments.length <= 3) {
+      outerRadius = innerRadius;
+      innerRadius = outerRadius / 2;
+    }
+    if (typeof sides !== "number" || sides <= 0) {
+      sides = 5;
+    }
+    super();
+    __publicField(this, "_flagInnerRadius", false);
+    __publicField(this, "_flagOuterRadius", false);
+    __publicField(this, "_flagSides", false);
+    __publicField(this, "_innerRadius", 0);
+    __publicField(this, "_outerRadius", 0);
+    __publicField(this, "_sides", 0);
+    for (let prop in proto23) {
+      Object.defineProperty(this, prop, proto23[prop]);
+    }
+    this.closed = true;
+    this.automatic = false;
+    if (typeof innerRadius === "number") {
+      this.innerRadius = innerRadius;
+    }
+    if (typeof outerRadius === "number") {
+      this.outerRadius = outerRadius;
+    }
+    if (typeof sides === "number") {
+      this.sides = sides;
+    }
+    this._update();
+    if (typeof x2 === "number") {
+      this.translation.x = x2;
+    }
+    if (typeof y2 === "number") {
+      this.translation.y = y2;
+    }
+  }
+  _update() {
+    if (this._flagVertices || this._flagInnerRadius || this._flagOuterRadius || this._flagSides) {
+      const sides = this._sides * 2;
+      const amount = sides + 1;
+      let length = this.vertices.length;
+      if (length > sides) {
+        this.vertices.splice(sides - 1, length - sides);
+        length = sides;
+      }
+      for (let i2 = 0; i2 < amount; i2++) {
+        const pct = (i2 + 0.5) / sides;
+        const theta = TWO_PI * pct;
+        const r2 = (!(i2 % 2) ? this._innerRadius : this._outerRadius) / 2;
+        const x2 = r2 * cos6(theta);
+        const y2 = r2 * sin6(theta);
+        if (i2 >= length) {
+          this.vertices.push(new Anchor(x2, y2));
+        } else {
+          this.vertices[i2].set(x2, y2);
+        }
+        this.vertices[i2].command = i2 === 0 ? Commands.move : Commands.line;
+      }
+    }
+    super._update.call(this);
+    return this;
+  }
+  flagReset() {
+    this._flagInnerRadius = this._flagOuterRadius = this._flagSides = false;
+    super.flagReset.call(this);
+    return this;
+  }
+  clone(parent) {
+    const ir = this.innerRadius;
+    const or = this.outerRadius;
+    const sides = this.sides;
+    const clone = new _Star(0, 0, ir, or, sides);
+    clone.translation.copy(this.translation);
+    clone.rotation = this.rotation;
+    clone.scale = this.scale;
+    clone.skewX = this.skewX;
+    clone.skewY = this.skewY;
+    if (this.matrix.manual) {
+      clone.matrix.copy(this.matrix);
+    }
+    for (let i2 = 0; i2 < Path.Properties.length; i2++) {
+      const k2 = Path.Properties[i2];
+      clone[k2] = this[k2];
+    }
+    if (parent) {
+      parent.add(clone);
+    }
+    return clone;
+  }
+  toObject() {
+    const object = super.toObject.call(this);
+    for (let i2 = 0; i2 < _Star.Properties.length; i2++) {
+      const k2 = _Star.Properties[i2];
+      object[k2] = this[k2];
+    }
+    return object;
+  }
+};
+var Star = _Star;
+__publicField(Star, "Properties", ["innerRadius", "outerRadius", "sides"]);
+var proto23 = {
+  innerRadius: {
+    enumerable: true,
+    get: function() {
+      return this._innerRadius;
+    },
+    set: function(v2) {
+      this._innerRadius = v2;
+      this._flagInnerRadius = true;
+    }
+  },
+  outerRadius: {
+    enumerable: true,
+    get: function() {
+      return this._outerRadius;
+    },
+    set: function(v2) {
+      this._outerRadius = v2;
+      this._flagOuterRadius = true;
+    }
+  },
+  sides: {
+    enumerable: true,
+    get: function() {
+      return this._sides;
+    },
+    set: function(v2) {
+      this._sides = v2;
+      this._flagSides = true;
+    }
+  }
+};
+var svg = {
+  version: 1.1,
+  ns: "http://www.w3.org/2000/svg",
+  xlink: "http://www.w3.org/1999/xlink",
+  alignments: {
+    left: "start",
+    center: "middle",
+    right: "end"
+  },
+  createElement: function(name, attrs) {
+    const tag = name;
+    const elem = document.createElementNS(svg.ns, tag);
+    if (tag === "svg") {
+      attrs = _.defaults(attrs || {}, {
+        version: svg.version
+      });
+    }
+    if (attrs && Object.keys(attrs).length > 0) {
+      svg.setAttributes(elem, attrs);
+    }
+    return elem;
+  },
+  setAttributes: function(elem, attrs) {
+    const keys = Object.keys(attrs);
+    for (let i2 = 0; i2 < keys.length; i2++) {
+      if (/href/.test(keys[i2])) {
+        elem.setAttributeNS(svg.xlink, keys[i2], attrs[keys[i2]]);
+      } else {
+        elem.setAttribute(keys[i2], attrs[keys[i2]]);
+      }
+    }
+    return this;
+  },
+  removeAttributes: function(elem, attrs) {
+    for (let key in attrs) {
+      elem.removeAttribute(key);
+    }
+    return this;
+  },
+  toString: function(points, closed2) {
+    let l2 = points.length, last = l2 - 1, d2, string = "";
+    for (let i2 = 0; i2 < l2; i2++) {
+      const b2 = points[i2];
+      const prev = closed2 ? mod(i2 - 1, l2) : Math.max(i2 - 1, 0);
+      const a2 = points[prev];
+      let command, c2;
+      let vx2, vy2, ux2, uy2, ar, bl, br, cl;
+      let rx, ry, xAxisRotation, largeArcFlag, sweepFlag;
+      let x2 = toFixed(b2.x);
+      let y2 = toFixed(b2.y);
+      switch (b2.command) {
+        case Commands.close:
+          command = Commands.close;
+          break;
+        case Commands.arc:
+          rx = b2.rx;
+          ry = b2.ry;
+          xAxisRotation = b2.xAxisRotation;
+          largeArcFlag = b2.largeArcFlag;
+          sweepFlag = b2.sweepFlag;
+          command = Commands.arc + " " + rx + " " + ry + " " + xAxisRotation + " " + largeArcFlag + " " + sweepFlag + " " + x2 + " " + y2;
+          break;
+        case Commands.curve:
+          ar = a2.controls && a2.controls.right || Vector.zero;
+          bl = b2.controls && b2.controls.left || Vector.zero;
+          if (a2.relative) {
+            vx2 = toFixed(ar.x + a2.x);
+            vy2 = toFixed(ar.y + a2.y);
+          } else {
+            vx2 = toFixed(ar.x);
+            vy2 = toFixed(ar.y);
+          }
+          if (b2.relative) {
+            ux2 = toFixed(bl.x + b2.x);
+            uy2 = toFixed(bl.y + b2.y);
+          } else {
+            ux2 = toFixed(bl.x);
+            uy2 = toFixed(bl.y);
+          }
+          command = (i2 === 0 ? Commands.move : Commands.curve) + " " + vx2 + " " + vy2 + " " + ux2 + " " + uy2 + " " + x2 + " " + y2;
+          break;
+        case Commands.move:
+          d2 = b2;
+          command = Commands.move + " " + x2 + " " + y2;
+          break;
+        default:
+          command = b2.command + " " + x2 + " " + y2;
+      }
+      if (i2 >= last && closed2) {
+        if (b2.command === Commands.curve) {
+          c2 = d2;
+          br = b2.controls && b2.controls.right || b2;
+          cl = c2.controls && c2.controls.left || c2;
+          if (b2.relative) {
+            vx2 = toFixed(br.x + b2.x);
+            vy2 = toFixed(br.y + b2.y);
+          } else {
+            vx2 = toFixed(br.x);
+            vy2 = toFixed(br.y);
+          }
+          if (c2.relative) {
+            ux2 = toFixed(cl.x + c2.x);
+            uy2 = toFixed(cl.y + c2.y);
+          } else {
+            ux2 = toFixed(cl.x);
+            uy2 = toFixed(cl.y);
+          }
+          x2 = toFixed(c2.x);
+          y2 = toFixed(c2.y);
+          command += " C " + vx2 + " " + vy2 + " " + ux2 + " " + uy2 + " " + x2 + " " + y2;
+        }
+        if (b2.command !== Commands.close) {
+          command += " Z";
+        }
+      }
+      string += command + " ";
+    }
+    return string;
+  },
+  pointsToString: function(points, size) {
+    let string = "";
+    const r2 = size * 0.5;
+    for (let i2 = 0; i2 < points.length; i2++) {
+      const x2 = points[i2].x;
+      const y2 = points[i2].y - r2;
+      string += Commands.move + " " + x2 + " " + y2 + " ";
+      string += "a " + r2 + " " + r2 + " 0 1 0 0.001 0 Z";
+    }
+    return string;
+  },
+  getClip: function(shape, domElement) {
+    let clip = shape._renderer.clip;
+    if (!clip) {
+      clip = shape._renderer.clip = svg.createElement("clipPath", {
+        "clip-rule": "nonzero"
+      });
+    }
+    if (clip.parentNode === null) {
+      domElement.defs.appendChild(clip);
+    }
+    return clip;
+  },
+  defs: {
+    update: function(domElement) {
+      const { defs } = domElement;
+      if (defs._flagUpdate) {
+        const children = Array.prototype.slice.call(
+          defs.children,
+          0
+        );
+        for (let i2 = 0; i2 < children.length; i2++) {
+          const child = children[i2];
+          const id = child.id;
+          const selector = `[fill="url(#${id})"],[stroke="url(#${id})"],[clip-path="url(#${id})"]`;
+          const exists = domElement.querySelector(selector);
+          if (!exists) {
+            defs.removeChild(child);
+          }
+        }
+        defs._flagUpdate = false;
+      }
+    }
+  },
+  group: {
+    appendChild: function(object) {
+      const elem = object._renderer.elem;
+      if (!elem) {
+        return;
+      }
+      const tag = elem.nodeName;
+      if (!tag || /(radial|linear)gradient/i.test(tag) || object._clip) {
+        return;
+      }
+      this.elem.appendChild(elem);
+    },
+    removeChild: function(object) {
+      const elem = object._renderer.elem;
+      if (!elem || elem.parentNode != this.elem) {
+        return;
+      }
+      const tag = elem.nodeName;
+      if (!tag) {
+        return;
+      }
+      if (object._clip) {
+        return;
+      }
+      this.elem.removeChild(elem);
+    },
+    orderChild: function(object) {
+      this.elem.appendChild(object._renderer.elem);
+    },
+    renderChild: function(child) {
+      svg[child._renderer.type].render.call(child, this);
+    },
+    render: function(domElement) {
+      if (!this._visible && !this._flagVisible || this._opacity === 0 && !this._flagOpacity) {
+        return this;
+      }
+      this._update();
+      if (!this._renderer.elem) {
+        this._renderer.elem = svg.createElement("g", {
+          id: this.id
+        });
+        domElement.appendChild(this._renderer.elem);
+      }
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      const context2 = {
+        domElement,
+        elem: this._renderer.elem
+      };
+      if (flagMatrix) {
+        this._renderer.elem.setAttribute("transform", "matrix(" + this._matrix.toString() + ")");
+      }
+      for (let i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        svg[child._renderer.type].render.call(child, domElement);
+      }
+      if (this._flagId) {
+        this._renderer.elem.setAttribute("id", this._id);
+      }
+      if (this._flagOpacity) {
+        this._renderer.elem.setAttribute("opacity", this._opacity);
+      }
+      if (this._flagVisible) {
+        this._renderer.elem.setAttribute("display", this._visible ? "inline" : "none");
+      }
+      if (this._flagClassName) {
+        this._renderer.elem.setAttribute("class", this.classList.join(" "));
+      }
+      if (this._flagAdditions) {
+        this.additions.forEach(svg.group.appendChild, context2);
+      }
+      if (this._flagSubtractions) {
+        this.subtractions.forEach(svg.group.removeChild, context2);
+      }
+      if (this._flagOrder) {
+        this.children.forEach(svg.group.orderChild, context2);
+      }
+      if (this._flagMask) {
+        if (this._mask) {
+          svg[this._mask._renderer.type].render.call(this._mask, domElement);
+          this._renderer.elem.setAttribute("clip-path", "url(#" + this._mask.id + ")");
+        } else {
+          this._renderer.elem.removeAttribute("clip-path");
+        }
+      }
+      if (this.dataset) {
+        Object.assign(this._renderer.elem.dataset, this.dataset);
+      }
+      return this.flagReset();
+    }
+  },
+  path: {
+    render: function(domElement) {
+      if (this._opacity === 0 && !this._flagOpacity) {
+        return this;
+      }
+      this._update();
+      const changed = {};
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      if (flagMatrix) {
+        changed.transform = "matrix(" + this._matrix.toString() + ")";
+      }
+      if (this._flagId) {
+        changed.id = this._id;
+      }
+      if (this._flagVertices) {
+        const vertices = svg.toString(this._renderer.vertices, this._closed);
+        changed.d = vertices;
+      }
+      if (this._fill && this._fill._renderer) {
+        this._renderer.hasFillEffect = true;
+        this._fill._update();
+        svg[this._fill._renderer.type].render.call(this._fill, domElement, true);
+      }
+      if (this._flagFill) {
+        changed.fill = this._fill && this._fill.id ? "url(#" + this._fill.id + ")" : this._fill;
+        if (this._renderer.hasFillEffect && typeof this._fill.id === "undefined") {
+          domElement.defs._flagUpdate = true;
+          delete this._renderer.hasFillEffect;
+        }
+      }
+      if (this._stroke && this._stroke._renderer) {
+        this._renderer.hasStrokeEffect = true;
+        this._stroke._update();
+        svg[this._stroke._renderer.type].render.call(this._stroke, domElement, true);
+      }
+      if (this._flagStroke) {
+        changed.stroke = this._stroke && this._stroke.id ? "url(#" + this._stroke.id + ")" : this._stroke;
+        if (this._renderer.hasStrokeEffect && typeof this._stroke.id === "undefined") {
+          domElement.defs._flagUpdate = true;
+          delete this._renderer.hasStrokeEffect;
+        }
+      }
+      if (this._flagLinewidth) {
+        changed["stroke-width"] = this._linewidth;
+      }
+      if (this._flagOpacity) {
+        changed["stroke-opacity"] = this._opacity;
+        changed["fill-opacity"] = this._opacity;
+      }
+      if (this._flagClassName) {
+        changed["class"] = this.classList.join(" ");
+      }
+      if (this._flagVisible) {
+        changed.visibility = this._visible ? "visible" : "hidden";
+      }
+      if (this._flagCap) {
+        changed["stroke-linecap"] = this._cap;
+      }
+      if (this._flagJoin) {
+        changed["stroke-linejoin"] = this._join;
+      }
+      if (this._flagMiter) {
+        changed["stroke-miterlimit"] = this._miter;
+      }
+      if (this.dashes && this.dashes.length > 0) {
+        changed["stroke-dasharray"] = this.dashes.join(" ");
+        changed["stroke-dashoffset"] = this.dashes.offset || 0;
+      }
+      if (!this._renderer.elem) {
+        changed.id = this._id;
+        this._renderer.elem = svg.createElement("path", changed);
+        domElement.appendChild(this._renderer.elem);
+      } else {
+        svg.setAttributes(this._renderer.elem, changed);
+      }
+      if (this._flagClip) {
+        const clip = svg.getClip(this, domElement);
+        const elem = this._renderer.elem;
+        if (this._clip) {
+          elem.removeAttribute("id");
+          clip.setAttribute("id", this.id);
+          clip.appendChild(elem);
+        } else {
+          clip.removeAttribute("id");
+          elem.setAttribute("id", this.id);
+          this.parent._renderer.elem.appendChild(elem);
+        }
+      }
+      if (this._flagMask) {
+        if (this._mask) {
+          svg[this._mask._renderer.type].render.call(this._mask, domElement);
+          this._renderer.elem.setAttribute("clip-path", "url(#" + this._mask.id + ")");
+        } else {
+          this._renderer.elem.removeAttribute("clip-path");
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  points: {
+    render: function(domElement) {
+      if (this._opacity === 0 && !this._flagOpacity) {
+        return this;
+      }
+      this._update();
+      const changed = {};
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      if (flagMatrix) {
+        changed.transform = "matrix(" + this._matrix.toString() + ")";
+      }
+      if (this._flagId) {
+        changed.id = this._id;
+      }
+      if (this._flagVertices || this._flagSize || this._flagSizeAttenuation) {
+        let size = this._size;
+        if (!this._sizeAttenuation) {
+          const me = this.worldMatrix.elements;
+          const m2 = decomposeMatrix(me[0], me[3], me[1], me[4], me[2], me[5]);
+          size /= Math.max(m2.scaleX, m2.scaleY);
+        }
+        const vertices = svg.pointsToString(this._renderer.collection, size);
+        changed.d = vertices;
+      }
+      if (this._fill && this._fill._renderer) {
+        this._renderer.hasFillEffect = true;
+        this._fill._update();
+        svg[this._fill._renderer.type].render.call(this._fill, domElement, true);
+      }
+      if (this._flagFill) {
+        changed.fill = this._fill && this._fill.id ? "url(#" + this._fill.id + ")" : this._fill;
+        if (this._renderer.hasFillEffect && typeof this._fill.id === "undefined") {
+          domElement.defs._flagUpdate = true;
+          delete this._renderer.hasFillEffect;
+        }
+      }
+      if (this._stroke && this._stroke._renderer) {
+        this._renderer.hasStrokeEffect = true;
+        this._stroke._update();
+        svg[this._stroke._renderer.type].render.call(this._stroke, domElement, true);
+      }
+      if (this._flagStroke) {
+        changed.stroke = this._stroke && this._stroke.id ? "url(#" + this._stroke.id + ")" : this._stroke;
+        if (this._renderer.hasStrokeEffect && typeof this._stroke.id === "undefined") {
+          domElement.defs._flagUpdate = true;
+          delete this._renderer.hasStrokeEffect;
+        }
+      }
+      if (this._flagLinewidth) {
+        changed["stroke-width"] = this._linewidth;
+      }
+      if (this._flagOpacity) {
+        changed["stroke-opacity"] = this._opacity;
+        changed["fill-opacity"] = this._opacity;
+      }
+      if (this._flagClassName) {
+        changed["class"] = this.classList.join(" ");
+      }
+      if (this._flagVisible) {
+        changed.visibility = this._visible ? "visible" : "hidden";
+      }
+      if (this.dashes && this.dashes.length > 0) {
+        changed["stroke-dasharray"] = this.dashes.join(" ");
+        changed["stroke-dashoffset"] = this.dashes.offset || 0;
+      }
+      if (!this._renderer.elem) {
+        changed.id = this._id;
+        this._renderer.elem = svg.createElement("path", changed);
+        domElement.appendChild(this._renderer.elem);
+      } else {
+        svg.setAttributes(this._renderer.elem, changed);
+      }
+      return this.flagReset();
+    }
+  },
+  text: {
+    render: function(domElement) {
+      this._update();
+      const changed = {};
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      if (flagMatrix) {
+        changed.transform = "matrix(" + this._matrix.toString() + ")";
+      }
+      if (this._flagId) {
+        changed.id = this._id;
+      }
+      if (this._flagFamily) {
+        changed["font-family"] = this._family;
+      }
+      if (this._flagSize) {
+        changed["font-size"] = this._size;
+      }
+      if (this._flagLeading) {
+        changed["line-height"] = this._leading;
+      }
+      if (this._flagAlignment) {
+        changed["text-anchor"] = svg.alignments[this._alignment] || this._alignment;
+      }
+      if (this._flagBaseline) {
+        changed["alignment-baseline"] = changed["dominant-baseline"] = this._baseline;
+      }
+      if (this._flagStyle) {
+        changed["font-style"] = this._style;
+      }
+      if (this._flagWeight) {
+        changed["font-weight"] = this._weight;
+      }
+      if (this._flagDecoration) {
+        changed["text-decoration"] = this._decoration;
+      }
+      if (this._fill && this._fill._renderer) {
+        this._renderer.hasFillEffect = true;
+        this._fill._update();
+        svg[this._fill._renderer.type].render.call(this._fill, domElement, true);
+      }
+      if (this._flagFill) {
+        changed.fill = this._fill && this._fill.id ? "url(#" + this._fill.id + ")" : this._fill;
+        if (this._renderer.hasFillEffect && typeof this._fill.id === "undefined") {
+          domElement.defs._flagUpdate = true;
+          delete this._renderer.hasFillEffect;
+        }
+      }
+      if (this._stroke && this._stroke._renderer) {
+        this._renderer.hasStrokeEffect = true;
+        this._stroke._update();
+        svg[this._stroke._renderer.type].render.call(this._stroke, domElement, true);
+      }
+      if (this._flagStroke) {
+        changed.stroke = this._stroke && this._stroke.id ? "url(#" + this._stroke.id + ")" : this._stroke;
+        if (this._renderer.hasStrokeEffect && typeof this._stroke.id === "undefined") {
+          domElement.defs._flagUpdate = true;
+          delete this._renderer.hasStrokeEffect;
+        }
+      }
+      if (this._flagLinewidth) {
+        changed["stroke-width"] = this._linewidth;
+      }
+      if (this._flagOpacity) {
+        changed.opacity = this._opacity;
+      }
+      if (this._flagClassName) {
+        changed["class"] = this.classList.join(" ");
+      }
+      if (this._flagVisible) {
+        changed.visibility = this._visible ? "visible" : "hidden";
+      }
+      if (this.dashes && this.dashes.length > 0) {
+        changed["stroke-dasharray"] = this.dashes.join(" ");
+        changed["stroke-dashoffset"] = this.dashes.offset || 0;
+      }
+      if (!this._renderer.elem) {
+        changed.id = this._id;
+        this._renderer.elem = svg.createElement("text", changed);
+        domElement.appendChild(this._renderer.elem);
+      } else {
+        svg.setAttributes(this._renderer.elem, changed);
+      }
+      if (this._flagClip) {
+        const clip = svg.getClip(this, domElement);
+        const elem = this._renderer.elem;
+        if (this._clip) {
+          elem.removeAttribute("id");
+          clip.setAttribute("id", this.id);
+          clip.appendChild(elem);
+        } else {
+          clip.removeAttribute("id");
+          elem.setAttribute("id", this.id);
+          this.parent._renderer.elem.appendChild(elem);
+        }
+      }
+      if (this._flagMask) {
+        if (this._mask) {
+          svg[this._mask._renderer.type].render.call(this._mask, domElement);
+          this._renderer.elem.setAttribute("clip-path", "url(#" + this._mask.id + ")");
+        } else {
+          this._renderer.elem.removeAttribute("clip-path");
+        }
+      }
+      if (this._flagValue) {
+        this._renderer.elem.textContent = this._value;
+      }
+      return this.flagReset();
+    }
+  },
+  "linear-gradient": {
+    render: function(domElement, silent) {
+      if (!silent) {
+        this._update();
+      }
+      const changed = {};
+      if (this._flagId) {
+        changed.id = this._id;
+      }
+      if (this._flagEndPoints) {
+        changed.x1 = this.left._x;
+        changed.y1 = this.left._y;
+        changed.x2 = this.right._x;
+        changed.y2 = this.right._y;
+      }
+      if (this._flagSpread) {
+        changed.spreadMethod = this._spread;
+      }
+      if (this._flagUnits) {
+        changed.gradientUnits = this._units;
+      }
+      if (!this._renderer.elem) {
+        changed.id = this._id;
+        this._renderer.elem = svg.createElement("linearGradient", changed);
+      } else {
+        svg.setAttributes(this._renderer.elem, changed);
+      }
+      if (this._renderer.elem.parentNode === null) {
+        domElement.defs.appendChild(this._renderer.elem);
+      }
+      if (this._flagStops) {
+        const lengthChanged = this._renderer.elem.childNodes.length !== this.stops.length;
+        if (lengthChanged) {
+          while (this._renderer.elem.lastChild) {
+            this._renderer.elem.removeChild(this._renderer.elem.lastChild);
+          }
+        }
+        for (let i2 = 0; i2 < this.stops.length; i2++) {
+          const stop = this.stops[i2];
+          const attrs = {};
+          if (stop._flagOffset) {
+            attrs.offset = 100 * stop._offset + "%";
+          }
+          if (stop._flagColor) {
+            attrs["stop-color"] = stop._color;
+          }
+          if (stop._flagOpacity) {
+            attrs["stop-opacity"] = stop._opacity;
+          }
+          if (!stop._renderer.elem) {
+            stop._renderer.elem = svg.createElement("stop", attrs);
+          } else {
+            svg.setAttributes(stop._renderer.elem, attrs);
+          }
+          if (lengthChanged) {
+            this._renderer.elem.appendChild(stop._renderer.elem);
+          }
+          stop.flagReset();
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  "radial-gradient": {
+    render: function(domElement, silent) {
+      if (!silent) {
+        this._update();
+      }
+      const changed = {};
+      if (this._flagId) {
+        changed.id = this._id;
+      }
+      if (this._flagCenter) {
+        changed.cx = this.center._x;
+        changed.cy = this.center._y;
+      }
+      if (this._flagFocal) {
+        changed.fx = this.focal._x;
+        changed.fy = this.focal._y;
+      }
+      if (this._flagRadius) {
+        changed.r = this._radius;
+      }
+      if (this._flagSpread) {
+        changed.spreadMethod = this._spread;
+      }
+      if (this._flagUnits) {
+        changed.gradientUnits = this._units;
+      }
+      if (!this._renderer.elem) {
+        changed.id = this._id;
+        this._renderer.elem = svg.createElement("radialGradient", changed);
+      } else {
+        svg.setAttributes(this._renderer.elem, changed);
+      }
+      if (this._renderer.elem.parentNode === null) {
+        domElement.defs.appendChild(this._renderer.elem);
+      }
+      if (this._flagStops) {
+        const lengthChanged = this._renderer.elem.childNodes.length !== this.stops.length;
+        if (lengthChanged) {
+          while (this._renderer.elem.lastChild) {
+            this._renderer.elem.removeChild(this._renderer.elem.lastChild);
+          }
+        }
+        for (let i2 = 0; i2 < this.stops.length; i2++) {
+          const stop = this.stops[i2];
+          const attrs = {};
+          if (stop._flagOffset) {
+            attrs.offset = 100 * stop._offset + "%";
+          }
+          if (stop._flagColor) {
+            attrs["stop-color"] = stop._color;
+          }
+          if (stop._flagOpacity) {
+            attrs["stop-opacity"] = stop._opacity;
+          }
+          if (!stop._renderer.elem) {
+            stop._renderer.elem = svg.createElement("stop", attrs);
+          } else {
+            svg.setAttributes(stop._renderer.elem, attrs);
+          }
+          if (lengthChanged) {
+            this._renderer.elem.appendChild(stop._renderer.elem);
+          }
+          stop.flagReset();
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  texture: {
+    render: function(domElement, silent) {
+      if (!silent) {
+        this._update();
+      }
+      const changed = {};
+      const styles = { x: 0, y: 0 };
+      const image = this.image;
+      if (this._flagId) {
+        changed.id = this._id;
+      }
+      if (this._flagLoaded && this.loaded) {
+        switch (image.nodeName.toLowerCase()) {
+          case "canvas":
+            styles.href = styles["xlink:href"] = image.toDataURL("image/png");
+            break;
+          case "img":
+          case "image":
+            styles.href = styles["xlink:href"] = this.src;
+            break;
+        }
+      }
+      if (this._flagOffset || this._flagLoaded || this._flagScale) {
+        changed.x = this._offset.x;
+        changed.y = this._offset.y;
+        if (image) {
+          changed.x -= image.width / 2;
+          changed.y -= image.height / 2;
+          if (this._scale instanceof Vector) {
+            changed.x *= this._scale.x;
+            changed.y *= this._scale.y;
+          } else {
+            changed.x *= this._scale;
+            changed.y *= this._scale;
+          }
+        }
+        if (changed.x > 0) {
+          changed.x *= -1;
+        }
+        if (changed.y > 0) {
+          changed.y *= -1;
+        }
+      }
+      if (this._flagScale || this._flagLoaded || this._flagRepeat) {
+        changed.width = 0;
+        changed.height = 0;
+        if (image) {
+          styles.width = changed.width = image.width;
+          styles.height = changed.height = image.height;
+          switch (this._repeat) {
+            case "no-repeat":
+              changed.width += 1;
+              changed.height += 1;
+              break;
+          }
+          if (this._scale instanceof Vector) {
+            changed.width *= this._scale.x;
+            changed.height *= this._scale.y;
+          } else {
+            changed.width *= this._scale;
+            changed.height *= this._scale;
+          }
+        }
+      }
+      if (this._flagScale || this._flagLoaded) {
+        if (!this._renderer.image) {
+          this._renderer.image = svg.createElement("image", styles);
+        } else {
+          svg.setAttributes(this._renderer.image, styles);
+        }
+      }
+      if (!this._renderer.elem) {
+        changed.id = this._id;
+        changed.patternUnits = "userSpaceOnUse";
+        this._renderer.elem = svg.createElement("pattern", changed);
+      } else if (Object.keys(changed).length !== 0) {
+        svg.setAttributes(this._renderer.elem, changed);
+      }
+      if (this._renderer.elem.parentNode === null) {
+        domElement.defs.appendChild(this._renderer.elem);
+      }
+      if (this._renderer.elem && this._renderer.image && !this._renderer.appended) {
+        this._renderer.elem.appendChild(this._renderer.image);
+        this._renderer.appended = true;
+      }
+      return this.flagReset();
+    }
+  }
+};
+var Renderer2 = class extends Events {
+  constructor(params) {
+    super();
+    this.domElement = params.domElement || svg.createElement("svg");
+    this.scene = new Group();
+    this.scene.parent = this;
+    this.defs = svg.createElement("defs");
+    this.defs._flagUpdate = false;
+    this.domElement.appendChild(this.defs);
+    this.domElement.defs = this.defs;
+    this.domElement.style.overflow = "hidden";
+  }
+  setSize(width, height) {
+    this.width = width;
+    this.height = height;
+    svg.setAttributes(this.domElement, {
+      width,
+      height
+    });
+    return this.trigger(Events.Types.resize, width, height);
+  }
+  render() {
+    svg.group.render.call(this.scene, this.domElement);
+    svg.defs.update(this.domElement);
+    return this;
+  }
+};
+__publicField(Renderer2, "Utils", svg);
+var shaders = {
+  create: function(gl, source, type2) {
+    const shader = gl.createShader(gl[type2]);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    if (!compiled) {
+      const error = gl.getShaderInfoLog(shader);
+      gl.deleteShader(shader);
+      throw new TwoError("unable to compile shader " + shader + ": " + error);
+    }
+    return shader;
+  },
+  types: {
+    vertex: "VERTEX_SHADER",
+    fragment: "FRAGMENT_SHADER"
+  },
+  path: {
+    vertex: `
+      precision mediump float;
+      attribute vec2 a_position;
+
+      uniform mat3 u_matrix;
+      uniform vec2 u_resolution;
+      uniform vec4 u_rect;
+
+      varying vec2 v_textureCoords;
+
+      void main() {
+        vec2 rectCoords = (a_position * (u_rect.zw - u_rect.xy)) + u_rect.xy;
+        vec2 projected = (u_matrix * vec3(rectCoords, 1.0)).xy;
+        vec2 normal = projected / u_resolution;
+        vec2 clipspace = (normal * 2.0) - 1.0;
+
+        gl_Position = vec4(clipspace * vec2(1.0, -1.0), 0.0, 1.0);
+        v_textureCoords = a_position;
+      }
+    `,
+    fragment: `
+      precision mediump float;
+
+      uniform sampler2D u_image;
+      varying vec2 v_textureCoords;
+
+      void main() {
+        vec4 texel = texture2D(u_image, v_textureCoords);
+        if (texel.a == 0.0) {
+          discard;
+        }
+        gl_FragColor = texel;
+      }
+    `
+  },
+  points: {
+    vertex: `
+      precision mediump float;
+      attribute vec2 a_position;
+
+      uniform float u_size;
+      uniform mat3 u_matrix;
+      uniform vec2 u_resolution;
+
+      varying vec2 v_textureCoords;
+
+      void main() {
+        vec2 projected = (u_matrix * vec3(a_position, 1.0)).xy;
+        vec2 normal = projected / u_resolution;
+        vec2 clipspace = (normal * 2.0) - 1.0;
+
+        gl_PointSize = u_size;
+        gl_Position = vec4(clipspace * vec2(1.0, -1.0), 0.0, 1.0);
+        v_textureCoords = a_position;
+      }
+    `,
+    fragment: `
+      precision mediump float;
+
+      uniform sampler2D u_image;
+
+      void main() {
+        vec4 texel = texture2D(u_image, gl_PointCoord);
+        if (texel.a == 0.0) {
+          discard;
+        }
+        gl_FragColor = texel;
+      }
+    `
+  }
+};
+var multiplyMatrix = Matrix2.Multiply;
+var identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+var transformation = new NumArray(9);
+var CanvasUtils = Renderer.Utils;
+var quad = new NumArray([
+  0,
+  0,
+  1,
+  0,
+  0,
+  1,
+  0,
+  1,
+  1,
+  0,
+  1,
+  1
+]);
+var webgl = {
+  precision: 0.9,
+  isHidden: /(undefined|none|transparent)/i,
+  canvas: root.document ? root.document.createElement("canvas") : { getContext: function() {
+  } },
+  alignments: {
+    left: "start",
+    middle: "center",
+    right: "end"
+  },
+  matrix: new Matrix2(),
+  group: {
+    removeChild: function(child, gl) {
+      if (child.children) {
+        for (let i2 = 0; i2 < child.children.length; i2++) {
+          webgl.group.removeChild(child.children[i2], gl);
+        }
+      }
+      if (child._renderer.texture) {
+        gl.deleteTexture(child._renderer.texture);
+        delete child._renderer.texture;
+      }
+      if (child._renderer.positionBuffer) {
+        gl.deleteBuffer(child._renderer.positionBuffer);
+        delete child._renderer.positionBuffer;
+      }
+    },
+    render: function(gl, programs) {
+      if (!this._visible) {
+        return;
+      }
+      this._update();
+      const parent = this.parent;
+      const flagParentMatrix = parent._matrix && parent._matrix.manual || parent._flagMatrix;
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      if (flagParentMatrix || flagMatrix) {
+        if (!this._renderer.matrix) {
+          this._renderer.matrix = new NumArray(9);
+        }
+        this._matrix.toTransformArray(true, transformation);
+        multiplyMatrix(transformation, parent._renderer.matrix, this._renderer.matrix);
+        if (!(this._renderer.scale instanceof Vector)) {
+          this._renderer.scale = new Vector();
+        }
+        if (this._scale instanceof Vector) {
+          this._renderer.scale.x = this._scale.x;
+          this._renderer.scale.y = this._scale.y;
+        } else {
+          this._renderer.scale.x = this._scale;
+          this._renderer.scale.y = this._scale;
+        }
+        if (!/renderer/i.test(parent._renderer.type)) {
+          this._renderer.scale.x *= parent._renderer.scale.x;
+          this._renderer.scale.y *= parent._renderer.scale.y;
+        }
+        if (flagParentMatrix) {
+          this._flagMatrix = true;
+        }
+      }
+      if (this._mask) {
+        gl.clear(gl.STENCIL_BUFFER_BIT);
+        gl.enable(gl.STENCIL_TEST);
+        gl.stencilFunc(gl.ALWAYS, 1, 0);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
+        gl.colorMask(false, false, false, false);
+        webgl[this._mask._renderer.type].render.call(this._mask, gl, programs, this);
+        gl.stencilFunc(gl.EQUAL, 1, 255);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+        gl.colorMask(true, true, true, true);
+      }
+      this._flagOpacity = parent._flagOpacity || this._flagOpacity;
+      this._renderer.opacity = this._opacity * (parent && parent._renderer ? parent._renderer.opacity : 1);
+      let i2;
+      if (this._flagSubtractions) {
+        for (i2 = 0; i2 < this.subtractions.length; i2++) {
+          webgl.group.removeChild(this.subtractions[i2], gl);
+        }
+      }
+      for (i2 = 0; i2 < this.children.length; i2++) {
+        const child = this.children[i2];
+        webgl[child._renderer.type].render.call(child, gl, programs);
+      }
+      if (this._mask) {
+        gl.disable(gl.STENCIL_TEST);
+      }
+      return this.flagReset();
+    }
+  },
+  path: {
+    updateCanvas: function(elem) {
+      let prev, a2, c2, ux2, uy2, vx2, vy2, ar, bl, br, cl, x2, y2;
+      let isOffset;
+      const commands = elem._renderer.vertices;
+      const canvas3 = this.canvas;
+      const ctx = this.ctx;
+      const scale = elem._renderer.scale;
+      const stroke = elem._stroke;
+      const linewidth = elem._linewidth;
+      const fill = elem._fill;
+      const opacity = elem._renderer.opacity || elem._opacity;
+      const cap = elem._cap;
+      const join = elem._join;
+      const miter = elem._miter;
+      const closed2 = elem._closed;
+      const dashes = elem.dashes;
+      const length = commands.length;
+      const last = length - 1;
+      canvas3.width = Math.max(Math.ceil(elem._renderer.rect.width * scale.x), 1);
+      canvas3.height = Math.max(Math.ceil(elem._renderer.rect.height * scale.y), 1);
+      const centroid = elem._renderer.rect.centroid;
+      const cx = centroid.x;
+      const cy = centroid.y;
+      ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+      if (fill) {
+        if (typeof fill === "string") {
+          ctx.fillStyle = fill;
+        } else {
+          webgl[fill._renderer.type].render.call(fill, ctx, elem);
+          ctx.fillStyle = fill._renderer.effect;
+        }
+      }
+      if (stroke) {
+        if (typeof stroke === "string") {
+          ctx.strokeStyle = stroke;
+        } else {
+          webgl[stroke._renderer.type].render.call(stroke, ctx, elem);
+          ctx.strokeStyle = stroke._renderer.effect;
+        }
+        if (linewidth) {
+          ctx.lineWidth = linewidth;
+        }
+        if (miter) {
+          ctx.miterLimit = miter;
+        }
+        if (join) {
+          ctx.lineJoin = join;
+        }
+        if (!closed2 && cap) {
+          ctx.lineCap = cap;
+        }
+      }
+      if (typeof opacity === "number") {
+        ctx.globalAlpha = opacity;
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.lineDashOffset = dashes.offset || 0;
+        ctx.setLineDash(dashes);
+      }
+      let d2, rx, ry, xAxisRotation, largeArcFlag, sweepFlag, ax, ay;
+      ctx.save();
+      ctx.scale(scale.x, scale.y);
+      ctx.translate(cx, cy);
+      ctx.beginPath();
+      for (let i2 = 0; i2 < commands.length; i2++) {
+        const b2 = commands[i2];
+        x2 = b2.x;
+        y2 = b2.y;
+        switch (b2.command) {
+          case Commands.close:
+            ctx.closePath();
+            break;
+          case Commands.arc:
+            rx = b2.rx;
+            ry = b2.ry;
+            xAxisRotation = b2.xAxisRotation;
+            largeArcFlag = b2.largeArcFlag;
+            sweepFlag = b2.sweepFlag;
+            prev = closed2 ? mod(i2 - 1, length) : Math.max(i2 - 1, 0);
+            a2 = commands[prev];
+            ax = a2.x;
+            ay = a2.y;
+            CanvasUtils.renderSvgArcCommand(ctx, ax, ay, rx, ry, largeArcFlag, sweepFlag, xAxisRotation, x2, y2);
+            break;
+          case Commands.curve:
+            prev = closed2 ? mod(i2 - 1, length) : Math.max(i2 - 1, 0);
+            a2 = commands[prev];
+            ar = a2.controls && a2.controls.right || Vector.zero;
+            bl = b2.controls && b2.controls.left || Vector.zero;
+            if (a2._relative) {
+              vx2 = ar.x + a2.x;
+              vy2 = ar.y + a2.y;
+            } else {
+              vx2 = ar.x;
+              vy2 = ar.y;
+            }
+            if (b2._relative) {
+              ux2 = bl.x + b2.x;
+              uy2 = bl.y + b2.y;
+            } else {
+              ux2 = bl.x;
+              uy2 = bl.y;
+            }
+            ctx.bezierCurveTo(vx2, vy2, ux2, uy2, x2, y2);
+            if (i2 >= last && closed2) {
+              c2 = d2;
+              br = b2.controls && b2.controls.right || Vector.zero;
+              cl = c2.controls && c2.controls.left || Vector.zero;
+              if (b2._relative) {
+                vx2 = br.x + b2.x;
+                vy2 = br.y + b2.y;
+              } else {
+                vx2 = br.x;
+                vy2 = br.y;
+              }
+              if (c2._relative) {
+                ux2 = cl.x + c2.x;
+                uy2 = cl.y + c2.y;
+              } else {
+                ux2 = cl.x;
+                uy2 = cl.y;
+              }
+              x2 = c2.x;
+              y2 = c2.y;
+              ctx.bezierCurveTo(vx2, vy2, ux2, uy2, x2, y2);
+            }
+            break;
+          case Commands.line:
+            ctx.lineTo(x2, y2);
+            break;
+          case Commands.move:
+            d2 = b2;
+            ctx.moveTo(x2, y2);
+            break;
+        }
+      }
+      if (closed2) {
+        ctx.closePath();
+      }
+      if (!webgl.isHidden.test(fill)) {
+        isOffset = fill._renderer && fill._renderer.offset;
+        if (isOffset) {
+          ctx.save();
+          ctx.translate(
+            -fill._renderer.offset.x,
+            -fill._renderer.offset.y
+          );
+          ctx.scale(fill._renderer.scale.x, fill._renderer.scale.y);
+        }
+        ctx.fill();
+        if (isOffset) {
+          ctx.restore();
+        }
+      }
+      if (!webgl.isHidden.test(stroke)) {
+        isOffset = stroke._renderer && stroke._renderer.offset;
+        if (isOffset) {
+          ctx.save();
+          ctx.translate(
+            -stroke._renderer.offset.x,
+            -stroke._renderer.offset.y
+          );
+          ctx.scale(stroke._renderer.scale.x, stroke._renderer.scale.y);
+          ctx.lineWidth = linewidth / stroke._renderer.scale.x;
+        }
+        ctx.stroke();
+        if (isOffset) {
+          ctx.restore();
+        }
+      }
+      ctx.restore();
+    },
+    getBoundingClientRect: function(vertices, border, rect) {
+      let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity, width, height;
+      vertices.forEach(function(v2) {
+        const x2 = v2.x, y2 = v2.y, controls = v2.controls;
+        let a2, b2, c2, d2, cl, cr;
+        top = Math.min(y2, top);
+        left = Math.min(x2, left);
+        right = Math.max(x2, right);
+        bottom = Math.max(y2, bottom);
+        if (!v2.controls) {
+          return;
+        }
+        cl = controls.left;
+        cr = controls.right;
+        if (!cl || !cr) {
+          return;
+        }
+        a2 = v2._relative ? cl.x + x2 : cl.x;
+        b2 = v2._relative ? cl.y + y2 : cl.y;
+        c2 = v2._relative ? cr.x + x2 : cr.x;
+        d2 = v2._relative ? cr.y + y2 : cr.y;
+        if (!a2 || !b2 || !c2 || !d2) {
+          return;
+        }
+        top = Math.min(b2, d2, top);
+        left = Math.min(a2, c2, left);
+        right = Math.max(a2, c2, right);
+        bottom = Math.max(b2, d2, bottom);
+      });
+      if (typeof border === "number") {
+        top -= border;
+        left -= border;
+        right += border;
+        bottom += border;
+      }
+      width = right - left;
+      height = bottom - top;
+      rect.top = top;
+      rect.left = left;
+      rect.right = right;
+      rect.bottom = bottom;
+      rect.width = width;
+      rect.height = height;
+      if (!rect.centroid) {
+        rect.centroid = {};
+      }
+      rect.centroid.x = -left;
+      rect.centroid.y = -top;
+    },
+    render: function(gl, programs, forcedParent) {
+      if (!this._visible || !this._opacity) {
+        return this;
+      }
+      this._update();
+      const parent = forcedParent || this.parent;
+      const program = programs[this._renderer.type];
+      const flagParentMatrix = parent._matrix.manual || parent._flagMatrix;
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      const parentChanged = this._renderer.parent !== parent;
+      const flagTexture = this._flagVertices || this._flagFill || this._fill instanceof LinearGradient && (this._fill._flagSpread || this._fill._flagStops || this._fill._flagEndPoints) || this._fill instanceof RadialGradient && (this._fill._flagSpread || this._fill._flagStops || this._fill._flagRadius || this._fill._flagCenter || this._fill._flagFocal) || this._fill instanceof Texture && (this._fill._flagLoaded && this._fill.loaded || this._fill._flagImage || this._fill._flagVideo || this._fill._flagRepeat || this._fill._flagOffset || this._fill._flagScale) || this._stroke instanceof LinearGradient && (this._stroke._flagSpread || this._stroke._flagStops || this._stroke._flagEndPoints) || this._stroke instanceof RadialGradient && (this._stroke._flagSpread || this._stroke._flagStops || this._stroke._flagRadius || this._stroke._flagCenter || this._stroke._flagFocal) || this._stroke instanceof Texture && (this._stroke._flagLoaded && this._stroke.loaded || this._stroke._flagImage || this._stroke._flagVideo || this._stroke._flagRepeat || this._stroke._flagOffset || this._fill._flagScale) || this._flagStroke || this._flagLinewidth || this._flagOpacity || parent._flagOpacity || this._flagVisible || this._flagCap || this._flagJoin || this._flagMiter || this._flagScale || this.dashes && this.dashes.length > 0 || !this._renderer.texture;
+      if (flagParentMatrix || flagMatrix || parentChanged) {
+        if (!this._renderer.matrix) {
+          this._renderer.matrix = new NumArray(9);
+        }
+        this._matrix.toTransformArray(true, transformation);
+        multiplyMatrix(transformation, parent._renderer.matrix, this._renderer.matrix);
+        if (!(this._renderer.scale instanceof Vector)) {
+          this._renderer.scale = new Vector();
+        }
+        if (this._scale instanceof Vector) {
+          this._renderer.scale.x = this._scale.x * parent._renderer.scale.x;
+          this._renderer.scale.y = this._scale.y * parent._renderer.scale.y;
+        } else {
+          this._renderer.scale.x = this._scale * parent._renderer.scale.x;
+          this._renderer.scale.y = this._scale * parent._renderer.scale.y;
+        }
+        if (parentChanged) {
+          this._renderer.parent = parent;
+        }
+      }
+      if (this._mask) {
+        gl.clear(gl.STENCIL_BUFFER_BIT);
+        gl.enable(gl.STENCIL_TEST);
+        gl.stencilFunc(gl.ALWAYS, 1, 0);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
+        gl.colorMask(false, false, false, false);
+        webgl[this._mask._renderer.type].render.call(this._mask, gl, programs, this);
+        gl.stencilFunc(gl.EQUAL, 1, 255);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+        gl.colorMask(true, true, true, true);
+      }
+      if (flagTexture) {
+        if (!this._renderer.rect) {
+          this._renderer.rect = {};
+        }
+        this._renderer.opacity = this._opacity * parent._renderer.opacity;
+        webgl.path.getBoundingClientRect(
+          this._renderer.vertices,
+          this._linewidth,
+          this._renderer.rect
+        );
+        webgl.updateTexture.call(webgl, gl, this);
+      } else {
+        if (this._fill && this._fill._update) {
+          this._fill._update();
+        }
+        if (this._stroke && this._stroke._update) {
+          this._stroke._update();
+        }
+      }
+      if (this._clip && !forcedParent || !this._renderer.texture) {
+        return this;
+      }
+      if (programs.current !== program) {
+        gl.useProgram(program);
+        gl.bindBuffer(gl.ARRAY_BUFFER, programs.buffers.position);
+        gl.vertexAttribPointer(program.position, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(program.position);
+        gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+        if (!programs.resolution.flagged) {
+          gl.uniform2f(
+            gl.getUniformLocation(program, "u_resolution"),
+            programs.resolution.width,
+            programs.resolution.height
+          );
+        }
+        programs.current = program;
+      }
+      if (programs.resolution.flagged) {
+        gl.uniform2f(
+          gl.getUniformLocation(program, "u_resolution"),
+          programs.resolution.width,
+          programs.resolution.height
+        );
+      }
+      gl.bindTexture(gl.TEXTURE_2D, this._renderer.texture);
+      const rect = this._renderer.rect;
+      gl.uniformMatrix3fv(program.matrix, false, this._renderer.matrix);
+      gl.uniform4f(program.rect, rect.left, rect.top, rect.right, rect.bottom);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      if (this._mask) {
+        gl.disable(gl.STENCIL_TEST);
+      }
+      return this.flagReset();
+    }
+  },
+  points: {
+    updateCanvas: function(elem) {
+      let isOffset;
+      const canvas3 = this.canvas;
+      const ctx = this.ctx;
+      const stroke = elem._stroke;
+      const linewidth = elem._linewidth;
+      const fill = elem._fill;
+      const opacity = elem._renderer.opacity || elem._opacity;
+      const dashes = elem.dashes;
+      const size = elem._size;
+      let dimension = size;
+      if (!webgl.isHidden.test(stroke)) {
+        dimension += linewidth;
+      }
+      canvas3.width = getPoT(dimension);
+      canvas3.height = canvas3.width;
+      const aspect2 = dimension / canvas3.width;
+      const cx = canvas3.width / 2;
+      const cy = canvas3.height / 2;
+      ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+      if (fill) {
+        if (typeof fill === "string") {
+          ctx.fillStyle = fill;
+        } else {
+          webgl[fill._renderer.type].render.call(fill, ctx, elem);
+          ctx.fillStyle = fill._renderer.effect;
+        }
+      }
+      if (stroke) {
+        if (typeof stroke === "string") {
+          ctx.strokeStyle = stroke;
+        } else {
+          webgl[stroke._renderer.type].render.call(stroke, ctx, elem);
+          ctx.strokeStyle = stroke._renderer.effect;
+        }
+        if (linewidth) {
+          ctx.lineWidth = linewidth / aspect2;
+        }
+      }
+      if (typeof opacity === "number") {
+        ctx.globalAlpha = opacity;
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.lineDashOffset = dashes.offset || 0;
+        ctx.setLineDash(dashes);
+      }
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.scale(webgl.precision, webgl.precision);
+      ctx.beginPath();
+      ctx.arc(0, 0, size / aspect2 * 0.5, 0, TWO_PI);
+      ctx.restore();
+      if (closed) {
+        ctx.closePath();
+      }
+      if (!webgl.isHidden.test(fill)) {
+        isOffset = fill._renderer && fill._renderer.offset;
+        if (isOffset) {
+          ctx.save();
+          ctx.translate(
+            -fill._renderer.offset.x,
+            -fill._renderer.offset.y
+          );
+          ctx.scale(fill._renderer.scale.x, fill._renderer.scale.y);
+        }
+        ctx.fill();
+        if (isOffset) {
+          ctx.restore();
+        }
+      }
+      if (!webgl.isHidden.test(stroke)) {
+        isOffset = stroke._renderer && stroke._renderer.offset;
+        if (isOffset) {
+          ctx.save();
+          ctx.translate(
+            -stroke._renderer.offset.x,
+            -stroke._renderer.offset.y
+          );
+          ctx.scale(stroke._renderer.scale.x, stroke._renderer.scale.y);
+          ctx.lineWidth = linewidth / stroke._renderer.scale.x;
+        }
+        ctx.stroke();
+        if (isOffset) {
+          ctx.restore();
+        }
+      }
+    },
+    render: function(gl, programs, forcedParent) {
+      if (!this._visible || !this._opacity) {
+        return this;
+      }
+      this._update();
+      let size = this._size;
+      const parent = forcedParent || this.parent;
+      const program = programs[this._renderer.type];
+      const sizeAttenuation = this._sizeAttenuation;
+      const stroke = this._stroke;
+      const linewidth = this._linewidth;
+      const flagParentMatrix = parent._matrix.manual || parent._flagMatrix;
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      const parentChanged = this._renderer.parent !== parent;
+      const commands = this._renderer.vertices;
+      const length = this._renderer.collection.length;
+      const flagVertices = this._flagVertices;
+      const flagTexture = this._flagFill || this._fill instanceof LinearGradient && (this._fill._flagSpread || this._fill._flagStops || this._fill._flagEndPoints) || this._fill instanceof RadialGradient && (this._fill._flagSpread || this._fill._flagStops || this._fill._flagRadius || this._fill._flagCenter || this._fill._flagFocal) || this._fill instanceof Texture && (this._fill._flagLoaded && this._fill.loaded || this._fill._flagImage || this._fill._flagVideo || this._fill._flagRepeat || this._fill._flagOffset || this._fill._flagScale) || this._stroke instanceof LinearGradient && (this._stroke._flagSpread || this._stroke._flagStops || this._stroke._flagEndPoints) || this._stroke instanceof RadialGradient && (this._stroke._flagSpread || this._stroke._flagStops || this._stroke._flagRadius || this._stroke._flagCenter || this._stroke._flagFocal) || this._stroke instanceof Texture && (this._stroke._flagLoaded && this._stroke.loaded || this._stroke._flagImage || this._stroke._flagVideo || this._stroke._flagRepeat || this._stroke._flagOffset || this._fill._flagScale) || this._flagStroke || this._flagLinewidth || this._flagOpacity || parent._flagOpacity || this._flagVisible || this._flagScale || this.dashes && this.dashes.length > 0 || !this._renderer.texture;
+      if (flagParentMatrix || flagMatrix || parentChanged) {
+        if (!this._renderer.matrix) {
+          this._renderer.matrix = new NumArray(9);
+        }
+        this._matrix.toTransformArray(true, transformation);
+        multiplyMatrix(transformation, parent._renderer.matrix, this._renderer.matrix);
+        if (!(this._renderer.scale instanceof Vector)) {
+          this._renderer.scale = new Vector();
+        }
+        if (this._scale instanceof Vector) {
+          this._renderer.scale.x = this._scale.x * parent._renderer.scale.x;
+          this._renderer.scale.y = this._scale.y * parent._renderer.scale.y;
+        } else {
+          this._renderer.scale.x = this._scale * parent._renderer.scale.x;
+          this._renderer.scale.y = this._scale * parent._renderer.scale.y;
+        }
+        if (parentChanged) {
+          this._renderer.parent = parent;
+        }
+      }
+      if (flagVertices) {
+        const positionBuffer = this._renderer.positionBuffer;
+        if (positionBuffer) {
+          gl.deleteBuffer(positionBuffer);
+        }
+        this._renderer.positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, this._renderer.positionBuffer);
+        gl.vertexAttribPointer(program.position, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(program.position);
+        gl.bufferData(gl.ARRAY_BUFFER, commands, gl.STATIC_DRAW);
+      }
+      if (flagTexture) {
+        this._renderer.opacity = this._opacity * parent._renderer.opacity;
+        webgl.updateTexture.call(webgl, gl, this);
+      } else {
+        if (this._fill && this._fill._update) {
+          this._fill._update();
+        }
+        if (this._stroke && this._stroke._update) {
+          this._stroke._update();
+        }
+      }
+      if (this._clip && !forcedParent || !this._renderer.texture) {
+        return this;
+      }
+      if (!webgl.isHidden.test(stroke)) {
+        size += linewidth;
+      }
+      size /= webgl.precision;
+      if (sizeAttenuation) {
+        size *= Math.max(this._renderer.scale.x, this._renderer.scale.y);
+      }
+      if (programs.current !== program) {
+        gl.useProgram(program);
+        if (!programs.resolution.flagged) {
+          gl.uniform2f(
+            gl.getUniformLocation(program, "u_resolution"),
+            programs.resolution.width,
+            programs.resolution.height
+          );
+        }
+        programs.current = program;
+      }
+      if (programs.resolution.flagged) {
+        gl.uniform2f(
+          gl.getUniformLocation(program, "u_resolution"),
+          programs.resolution.width,
+          programs.resolution.height
+        );
+      }
+      gl.bindTexture(gl.TEXTURE_2D, this._renderer.texture);
+      gl.uniformMatrix3fv(program.matrix, false, this._renderer.matrix);
+      gl.uniform1f(program.size, size * programs.resolution.ratio);
+      gl.drawArrays(gl.POINTS, 0, length);
+      return this.flagReset();
+    }
+  },
+  text: {
+    updateCanvas: function(elem) {
+      const canvas3 = this.canvas;
+      const ctx = this.ctx;
+      const scale = elem._renderer.scale;
+      const stroke = elem._stroke;
+      const linewidth = elem._linewidth * scale;
+      const fill = elem._fill;
+      const opacity = elem._renderer.opacity || elem._opacity;
+      const dashes = elem.dashes;
+      const decoration = elem._decoration;
+      canvas3.width = Math.max(Math.ceil(elem._renderer.rect.width * scale.x), 1);
+      canvas3.height = Math.max(Math.ceil(elem._renderer.rect.height * scale.y), 1);
+      const centroid = elem._renderer.rect.centroid;
+      const cx = centroid.x;
+      const cy = centroid.y;
+      let a2, b2, c2, d2, e2, sx, sy, x1, y1, x2, y2;
+      const isOffset = fill._renderer && fill._renderer.offset && stroke._renderer && stroke._renderer.offset;
+      ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+      if (!isOffset) {
+        ctx.font = [elem._style, elem._weight, elem._size + "px/" + elem._leading + "px", elem._family].join(" ");
+      }
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      if (fill) {
+        if (typeof fill === "string") {
+          ctx.fillStyle = fill;
+        } else {
+          webgl[fill._renderer.type].render.call(fill, ctx, elem);
+          ctx.fillStyle = fill._renderer.effect;
+        }
+      }
+      if (stroke) {
+        if (typeof stroke === "string") {
+          ctx.strokeStyle = stroke;
+        } else {
+          webgl[stroke._renderer.type].render.call(stroke, ctx, elem);
+          ctx.strokeStyle = stroke._renderer.effect;
+        }
+        if (linewidth) {
+          ctx.lineWidth = linewidth;
+        }
+      }
+      if (typeof opacity === "number") {
+        ctx.globalAlpha = opacity;
+      }
+      if (dashes && dashes.length > 0) {
+        ctx.lineDashOffset = dashes.offset || 0;
+        ctx.setLineDash(dashes);
+      }
+      ctx.save();
+      ctx.scale(scale.x, scale.y);
+      ctx.translate(cx, cy);
+      if (!webgl.isHidden.test(fill)) {
+        if (fill._renderer && fill._renderer.offset) {
+          sx = fill._renderer.scale.x;
+          sy = fill._renderer.scale.y;
+          ctx.save();
+          ctx.translate(
+            -fill._renderer.offset.x,
+            -fill._renderer.offset.y
+          );
+          ctx.scale(sx, sy);
+          a2 = elem._size / fill._renderer.scale.y;
+          b2 = elem._leading / fill._renderer.scale.y;
+          ctx.font = [
+            elem._style,
+            elem._weight,
+            a2 + "px/",
+            b2 + "px",
+            elem._family
+          ].join(" ");
+          c2 = fill._renderer.offset.x / fill._renderer.scale.x;
+          d2 = fill._renderer.offset.y / fill._renderer.scale.y;
+          ctx.fillText(elem.value, c2, d2);
+          ctx.restore();
+        } else {
+          ctx.fillText(elem.value, 0, 0);
+        }
+      }
+      if (!webgl.isHidden.test(stroke)) {
+        if (stroke._renderer && stroke._renderer.offset) {
+          sx = stroke._renderer.scale.x;
+          sy = stroke._renderer.scale.y;
+          ctx.save();
+          ctx.translate(
+            -stroke._renderer.offset.x,
+            -stroke._renderer.offset.y
+          );
+          ctx.scale(sx, sy);
+          a2 = elem._size / stroke._renderer.scale.y;
+          b2 = elem._leading / stroke._renderer.scale.y;
+          ctx.font = [
+            elem._style,
+            elem._weight,
+            a2 + "px/",
+            b2 + "px",
+            elem._family
+          ].join(" ");
+          c2 = stroke._renderer.offset.x / stroke._renderer.scale.x;
+          d2 = stroke._renderer.offset.y / stroke._renderer.scale.y;
+          e2 = linewidth / stroke._renderer.scale.x;
+          ctx.lineWidth = e2;
+          ctx.strokeText(elem.value, c2, d2);
+          ctx.restore();
+        } else {
+          ctx.strokeText(elem.value, 0, 0);
+        }
+      }
+      if (/(underline|strikethrough)/i.test(decoration)) {
+        const metrics = ctx.measureText(elem.value);
+        switch (decoration) {
+          case "underline":
+            y1 = metrics.actualBoundingBoxAscent;
+            y2 = metrics.actualBoundingBoxAscent;
+            break;
+          case "strikethrough":
+            y1 = 0;
+            y2 = 0;
+            break;
+        }
+        x1 = -metrics.width / 2;
+        x2 = metrics.width / 2;
+        ctx.lineWidth = Math.max(Math.floor(elem._size / 15), 1);
+        ctx.strokeStyle = ctx.fillStyle;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    },
+    getBoundingClientRect: function(elem, rect) {
+      const ctx = webgl.ctx;
+      ctx.font = [elem._style, elem._weight, elem._size + "px/" + elem._leading + "px", elem._family].join(" ");
+      ctx.textAlign = "center";
+      ctx.textBaseline = elem._baseline;
+      let width = ctx.measureText(elem._value).width * 1.25;
+      let height = Math.max(elem._size, elem._leading) * 1.25;
+      if (this._linewidth && !webgl.isHidden.test(this._stroke)) {
+        width += this._linewidth * 2;
+        height += this._linewidth * 2;
+      }
+      const w2 = width / 2;
+      const h2 = height / 2;
+      switch (webgl.alignments[elem._alignment] || elem._alignment) {
+        case webgl.alignments.left:
+          rect.left = 0;
+          rect.right = width;
+          break;
+        case webgl.alignments.right:
+          rect.left = -width;
+          rect.right = 0;
+          break;
+        default:
+          rect.left = -w2;
+          rect.right = w2;
+      }
+      switch (elem._baseline) {
+        case "bottom":
+          rect.top = -height;
+          rect.bottom = 0;
+          break;
+        case "top":
+          rect.top = 0;
+          rect.bottom = height;
+          break;
+        default:
+          rect.top = -h2;
+          rect.bottom = h2;
+      }
+      rect.width = width;
+      rect.height = height;
+      if (!rect.centroid) {
+        rect.centroid = {};
+      }
+      rect.centroid.x = w2;
+      rect.centroid.y = h2;
+    },
+    render: function(gl, programs, forcedParent) {
+      if (!this._visible || !this._opacity) {
+        return this;
+      }
+      this._update();
+      const parent = forcedParent || this.parent;
+      const program = programs[this._renderer.type];
+      const flagParentMatrix = parent._matrix.manual || parent._flagMatrix;
+      const flagMatrix = this._matrix.manual || this._flagMatrix;
+      const parentChanged = this._renderer.parent !== parent;
+      const flagTexture = this._flagVertices || this._flagFill || this._fill instanceof LinearGradient && (this._fill._flagSpread || this._fill._flagStops || this._fill._flagEndPoints) || this._fill instanceof RadialGradient && (this._fill._flagSpread || this._fill._flagStops || this._fill._flagRadius || this._fill._flagCenter || this._fill._flagFocal) || this._fill instanceof Texture && (this._fill._flagLoaded && this._fill.loaded || this._fill._flagImage || this._fill._flagVideo || this._fill._flagRepeat || this._fill._flagOffset || this._fill._flagScale) || this._stroke instanceof LinearGradient && (this._stroke._flagSpread || this._stroke._flagStops || this._stroke._flagEndPoints) || this._stroke instanceof RadialGradient && (this._stroke._flagSpread || this._stroke._flagStops || this._stroke._flagRadius || this._stroke._flagCenter || this._stroke._flagFocal) || this._stroke instanceof Texture && (this._stroke._flagLoaded && this._stroke.loaded || this._stroke._flagImage || this._stroke._flagVideo || this._stroke._flagRepeat || this._stroke._flagOffset || this._fill._flagScale) || this._flagStroke || this._flagLinewidth || this._flagOpacity || parent._flagOpacity || this._flagVisible || this._flagScale || this._flagValue || this._flagFamily || this._flagSize || this._flagLeading || this._flagAlignment || this._flagBaseline || this._flagStyle || this._flagWeight || this._flagDecoration || this.dashes && this.dashes.length > 0 || !this._renderer.texture;
+      if (flagParentMatrix || flagMatrix || parentChanged) {
+        if (!this._renderer.matrix) {
+          this._renderer.matrix = new NumArray(9);
+        }
+        this._matrix.toTransformArray(true, transformation);
+        multiplyMatrix(transformation, parent._renderer.matrix, this._renderer.matrix);
+        if (!(this._renderer.scale instanceof Vector)) {
+          this._renderer.scale = new Vector();
+        }
+        if (this._scale instanceof Vector) {
+          this._renderer.scale.x = this._scale.x * parent._renderer.scale.x;
+          this._renderer.scale.y = this._scale.y * parent._renderer.scale.y;
+        } else {
+          this._renderer.scale.x = this._scale * parent._renderer.scale.x;
+          this._renderer.scale.y = this._scale * parent._renderer.scale.y;
+        }
+        if (parentChanged) {
+          this._renderer.parent = parent;
+        }
+      }
+      if (this._mask) {
+        gl.clear(gl.STENCIL_BUFFER_BIT);
+        gl.enable(gl.STENCIL_TEST);
+        gl.stencilFunc(gl.ALWAYS, 1, 0);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
+        gl.colorMask(false, false, false, false);
+        webgl[this._mask._renderer.type].render.call(this._mask, gl, programs, this);
+        gl.stencilFunc(gl.EQUAL, 1, 255);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+        gl.colorMask(true, true, true, true);
+      }
+      if (flagTexture) {
+        if (!this._renderer.rect) {
+          this._renderer.rect = {};
+        }
+        this._renderer.opacity = this._opacity * parent._renderer.opacity;
+        webgl.text.getBoundingClientRect(this, this._renderer.rect);
+        webgl.updateTexture.call(webgl, gl, this);
+      } else {
+        if (this._fill && this._fill._update) {
+          this._fill._update();
+        }
+        if (this._stroke && this._stroke._update) {
+          this._stroke._update();
+        }
+      }
+      if (this._clip && !forcedParent || !this._renderer.texture) {
+        return this;
+      }
+      if (programs.current !== program) {
+        gl.useProgram(program);
+        gl.bindBuffer(gl.ARRAY_BUFFER, programs.buffers.position);
+        gl.vertexAttribPointer(program.position, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(program.position);
+        gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+        if (!programs.resolution.flagged) {
+          gl.uniform2f(
+            gl.getUniformLocation(program, "u_resolution"),
+            programs.resolution.width,
+            programs.resolution.height
+          );
+        }
+        programs.current = program;
+      }
+      if (programs.resolution.flagged) {
+        gl.uniform2f(
+          gl.getUniformLocation(program, "u_resolution"),
+          programs.resolution.width,
+          programs.resolution.height
+        );
+      }
+      gl.bindTexture(gl.TEXTURE_2D, this._renderer.texture);
+      const rect = this._renderer.rect;
+      gl.uniformMatrix3fv(program.matrix, false, this._renderer.matrix);
+      gl.uniform4f(program.rect, rect.left, rect.top, rect.right, rect.bottom);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      if (this._mask) {
+        gl.disable(gl.STENCIL_TEST);
+      }
+      return this.flagReset();
+    }
+  },
+  "linear-gradient": {
+    render: function(ctx, parent) {
+      if (!ctx.canvas.getContext("2d") || !parent) {
+        return;
+      }
+      this._update();
+      if (!this._renderer.effect || this._flagEndPoints || this._flagStops || this._flagUnits) {
+        let rect;
+        let lx = this.left._x;
+        let ly = this.left._y;
+        let rx = this.right._x;
+        let ry = this.right._y;
+        if (/objectBoundingBox/i.test(this._units)) {
+          rect = parent.getBoundingClientRect(true);
+          lx = (lx - 0.5) * rect.width;
+          ly = (ly - 0.5) * rect.height;
+          rx = (rx - 0.5) * rect.width;
+          ry = (ry - 0.5) * rect.height;
+        }
+        this._renderer.effect = ctx.createLinearGradient(lx, ly, rx, ry);
+        for (let i2 = 0; i2 < this.stops.length; i2++) {
+          const stop = this.stops[i2];
+          this._renderer.effect.addColorStop(stop._offset, stop._color);
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  "radial-gradient": {
+    render: function(ctx, parent) {
+      if (!ctx.canvas.getContext("2d") || !parent) {
+        return;
+      }
+      this._update();
+      if (!this._renderer.effect || this._flagCenter || this._flagFocal || this._flagRadius || this._flagStops || this._flagUnits) {
+        let rect;
+        let cx = this.center._x;
+        let cy = this.center._y;
+        let fx = this.focal._x;
+        let fy = this.focal._y;
+        let radius = this._radius;
+        if (/objectBoundingBox/i.test(this._units)) {
+          rect = parent.getBoundingClientRect(true);
+          cx = cx * rect.width * 0.5;
+          cy = cy * rect.height * 0.5;
+          fx = fx * rect.width * 0.5;
+          fy = fy * rect.height * 0.5;
+          radius *= Math.min(rect.width, rect.height) * 0.5;
+        }
+        this._renderer.effect = ctx.createRadialGradient(
+          cx,
+          cy,
+          0,
+          fx,
+          fy,
+          radius
+        );
+        for (let i2 = 0; i2 < this.stops.length; i2++) {
+          const stop = this.stops[i2];
+          this._renderer.effect.addColorStop(stop._offset, stop._color);
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  texture: {
+    render: function(ctx, elem) {
+      if (!ctx.canvas.getContext("2d")) {
+        return;
+      }
+      this._update();
+      const image = this.image;
+      if ((this._flagLoaded || this._flagImage || this._flagVideo || this._flagRepeat) && this.loaded) {
+        this._renderer.effect = ctx.createPattern(image, this._repeat);
+      } else if (!this._renderer.effect) {
+        return this.flagReset();
+      }
+      if (this._flagOffset || this._flagLoaded || this._flagScale) {
+        if (!(this._renderer.offset instanceof Vector)) {
+          this._renderer.offset = new Vector();
+        }
+        this._renderer.offset.x = -this._offset.x;
+        this._renderer.offset.y = -this._offset.y;
+        if (image) {
+          this._renderer.offset.x += image.width / 2;
+          this._renderer.offset.y += image.height / 2;
+          if (this._scale instanceof Vector) {
+            this._renderer.offset.x *= this._scale.x;
+            this._renderer.offset.y *= this._scale.y;
+          } else {
+            this._renderer.offset.x *= this._scale;
+            this._renderer.offset.y *= this._scale;
+          }
+        }
+      }
+      if (this._flagScale || this._flagLoaded) {
+        if (!(this._renderer.scale instanceof Vector)) {
+          this._renderer.scale = new Vector();
+        }
+        if (this._scale instanceof Vector) {
+          this._renderer.scale.copy(this._scale);
+        } else {
+          this._renderer.scale.set(this._scale, this._scale);
+        }
+      }
+      return this.flagReset();
+    }
+  },
+  updateTexture: function(gl, elem) {
+    this[elem._renderer.type].updateCanvas.call(webgl, elem);
+    if (this.canvas.width <= 0 || this.canvas.height <= 0) {
+      if (elem._renderer.texture) {
+        gl.deleteTexture(elem._renderer.texture);
+      }
+      delete elem._renderer.texture;
+      return;
+    }
+    if (!elem._renderer.texture) {
+      elem._renderer.texture = gl.createTexture();
+    }
+    gl.bindTexture(gl.TEXTURE_2D, elem._renderer.texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.canvas);
+  },
+  program: {
+    create: function(gl, shaders2) {
+      let program, linked, error;
+      program = gl.createProgram();
+      _.each(shaders2, function(s2) {
+        gl.attachShader(program, s2);
+      });
+      gl.linkProgram(program);
+      linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+      if (!linked) {
+        error = gl.getProgramInfoLog(program);
+        gl.deleteProgram(program);
+        throw new TwoError("unable to link program: " + error);
+      }
+      return program;
+    }
+  },
+  TextureRegistry: new Registry()
+};
+webgl.ctx = webgl.canvas.getContext("2d");
+var Renderer3 = class extends Events {
+  constructor(params) {
+    super();
+    let gl, program, vs, fs;
+    this.domElement = params.domElement || document.createElement("canvas");
+    if (typeof params.offscreenElement !== "undefined") {
+      webgl.canvas = params.offscreenElement;
+      webgl.ctx = webgl.canvas.getContext("2d");
+    }
+    this.scene = new Group();
+    this.scene.parent = this;
+    this._renderer = {
+      type: "renderer",
+      matrix: new NumArray(identity),
+      scale: 1,
+      opacity: 1
+    };
+    this._flagMatrix = true;
+    params = _.defaults(params || {}, {
+      antialias: false,
+      alpha: true,
+      premultipliedAlpha: true,
+      stencil: true,
+      preserveDrawingBuffer: true,
+      overdraw: false
+    });
+    this.overdraw = params.overdraw;
+    gl = this.ctx = this.domElement.getContext("webgl", params) || this.domElement.getContext("experimental-webgl", params);
+    if (!this.ctx) {
+      throw new TwoError(
+        "unable to create a webgl context. Try using another renderer."
+      );
+    }
+    vs = shaders.create(gl, shaders.path.vertex, shaders.types.vertex);
+    fs = shaders.create(gl, shaders.path.fragment, shaders.types.fragment);
+    this.programs = {
+      current: null,
+      buffers: {
+        position: gl.createBuffer()
+      },
+      resolution: {
+        width: 0,
+        height: 0,
+        ratio: 1,
+        flagged: false
+      }
+    };
+    program = this.programs.path = webgl.program.create(gl, [vs, fs]);
+    this.programs.text = this.programs.path;
+    program.position = gl.getAttribLocation(program, "a_position");
+    program.matrix = gl.getUniformLocation(program, "u_matrix");
+    program.rect = gl.getUniformLocation(program, "u_rect");
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.vertexAttribPointer(program.position, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(program.position);
+    gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+    vs = shaders.create(gl, shaders.points.vertex, shaders.types.vertex);
+    fs = shaders.create(gl, shaders.points.fragment, shaders.types.fragment);
+    program = this.programs.points = webgl.program.create(gl, [vs, fs]);
+    program.position = gl.getAttribLocation(program, "a_position");
+    program.matrix = gl.getUniformLocation(program, "u_matrix");
+    program.size = gl.getUniformLocation(program, "u_size");
+    gl.enable(gl.BLEND);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+    gl.blendEquation(gl.FUNC_ADD);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+  }
+  setSize(width, height, ratio) {
+    let w2, h2;
+    const ctx = this.ctx;
+    this.width = width;
+    this.height = height;
+    this.ratio = typeof ratio === "undefined" ? getRatio(ctx) : ratio;
+    this.domElement.width = width * this.ratio;
+    this.domElement.height = height * this.ratio;
+    if (_.isObject(this.domElement.style)) {
+      _.extend(this.domElement.style, {
+        width: width + "px",
+        height: height + "px"
+      });
+    }
+    this._renderer.matrix[0] = this._renderer.matrix[4] = this._renderer.scale = this.ratio;
+    this._flagMatrix = true;
+    w2 = width * this.ratio;
+    h2 = height * this.ratio;
+    ctx.viewport(0, 0, w2, h2);
+    this.programs.resolution.width = w2;
+    this.programs.resolution.height = h2;
+    this.programs.resolution.ratio = this.ratio;
+    this.programs.resolution.flagged = true;
+    return this.trigger(Events.Types.resize, width, height, ratio);
+  }
+  render() {
+    const gl = this.ctx;
+    if (!this.overdraw) {
+      gl.clear(gl.COLOR_BUFFER_BIT);
+    }
+    webgl.group.render.call(this.scene, gl, this.programs);
+    this._flagMatrix = false;
+    this.programs.resolution.flagged = true;
+    return this;
+  }
+};
+__publicField(Renderer3, "Utils", webgl);
+var Utils = _.extend({
+  Error: TwoError,
+  getRatio,
+  read,
+  xhr
+}, _, CanvasShim, curves_exports, math_exports);
+var _Two = class {
+  constructor(options) {
+    __publicField(this, "_events", new Events());
+    __publicField(this, "type", "");
+    __publicField(this, "renderer", null);
+    __publicField(this, "scene", null);
+    __publicField(this, "width", 0);
+    __publicField(this, "height", 0);
+    __publicField(this, "frameCount", 0);
+    __publicField(this, "timeDelta", 0);
+    __publicField(this, "playing", false);
+    const params = _.defaults(options || {}, {
+      fullscreen: false,
+      fitted: false,
+      width: 640,
+      height: 480,
+      type: _Two.Types.svg,
+      autostart: false
+    });
+    _.each(params, function(v2, k2) {
+      if (/fullscreen/i.test(k2) || /autostart/i.test(k2)) {
+        return;
+      }
+      this[k2] = v2;
+    }, this);
+    if (_.isElement(params.domElement)) {
+      const tagName = params.domElement.tagName.toLowerCase();
+      if (!/^(CanvasRenderer-canvas|WebGLRenderer-canvas|SVGRenderer-svg)$/.test(this.type + "-" + tagName)) {
+        this.type = _Two.Types[tagName];
+      }
+    }
+    this.renderer = new _Two[this.type](this);
+    this.setPlaying(params.autostart);
+    this.frameCount = 0;
+    if (params.fullscreen) {
+      this.fit = fitToWindow.bind(this);
+      this.fit.domElement = window;
+      this.fit.attached = true;
+      _.extend(document.body.style, {
+        overflow: "hidden",
+        margin: 0,
+        padding: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: "fixed"
+      });
+      _.extend(this.renderer.domElement.style, {
+        display: "block",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: "fixed"
+      });
+      dom.bind(this.fit.domElement, "resize", this.fit);
+      this.fit();
+    } else if (params.fitted) {
+      this.fit = fitToParent.bind(this);
+      _.extend(this.renderer.domElement.style, {
+        display: "block"
+      });
+    } else if (!_.isElement(params.domElement)) {
+      this.renderer.setSize(params.width, params.height, this.ratio);
+      this.width = params.width;
+      this.height = params.height;
+    }
+    this.renderer.bind(Events.Types.resize, updateDimensions.bind(this));
+    this.scene = this.renderer.scene;
+    _Two.Instances.push(this);
+    if (params.autostart) {
+      raf.init();
+    }
+  }
+  get _bound() {
+    return this._events._bound;
+  }
+  set _bound(v2) {
+    this._events._bound = v2;
+  }
+  addEventListener() {
+    return this._events.addEventListener.apply(this, arguments);
+  }
+  on() {
+    return this._events.addEventListener.apply(this, arguments);
+  }
+  bind() {
+    return this._events.addEventListener.apply(this, arguments);
+  }
+  removeEventListener() {
+    return this._events.removeEventListener.apply(this, arguments);
+  }
+  off() {
+    return this._events.removeEventListener.apply(this, arguments);
+  }
+  unbind() {
+    return this._events.removeEventListener.apply(this, arguments);
+  }
+  dispatchEvent() {
+    return this._events.dispatchEvent.apply(this, arguments);
+  }
+  trigger() {
+    return this._events.dispatchEvent.apply(this, arguments);
+  }
+  listen() {
+    return this._events.listen.apply(this, arguments);
+  }
+  ignore() {
+    return this._events.ignore.apply(this, arguments);
+  }
+  appendTo(elem) {
+    elem.appendChild(this.renderer.domElement);
+    if (this.fit) {
+      if (this.fit.domElement !== window) {
+        this.fit.domElement = elem;
+        this.fit.attached = false;
+      }
+      this.update();
+    }
+    return this;
+  }
+  play() {
+    this.playing = true;
+    raf.init();
+    return this.trigger(Events.Types.play);
+  }
+  pause() {
+    this.playing = false;
+    return this.trigger(Events.Types.pause);
+  }
+  setPlaying(p2) {
+    this.playing = p2;
+  }
+  release(obj) {
+    let i2, v2, child;
+    if (!_.isObject(obj)) {
+      return this.release(this.scene);
+    }
+    if (typeof obj.unbind === "function") {
+      obj.unbind();
+    }
+    if (obj.vertices) {
+      if (typeof obj.vertices.unbind === "function") {
+        obj.vertices.unbind();
+      }
+      for (i2 = 0; i2 < obj.vertices.length; i2++) {
+        v2 = obj.vertices[i2];
+        if (typeof v2.unbind === "function") {
+          v2.unbind();
+        }
+        if (v2.controls) {
+          if (v2.controls.left && typeof v2.controls.left.unbind === "function") {
+            v2.controls.left.unbind();
+          }
+          if (v2.controls.right && typeof v2.controls.right.unbind === "function") {
+            v2.controls.right.unbind();
+          }
+        }
+      }
+    }
+    if (obj.children) {
+      for (i2 = 0; i2 < obj.children.length; i2++) {
+        child = obj.children[i2];
+        this.release(child);
+      }
+      if (typeof obj.children.unbind === "function") {
+        obj.children.unbind();
+      }
+    }
+    return obj;
+  }
+  update() {
+    const animated = !!this._lastFrame;
+    const now = _.performance.now();
+    if (animated) {
+      this.timeDelta = parseFloat((now - this._lastFrame).toFixed(3));
+    }
+    this._lastFrame = now;
+    if (this.fit && this.fit.domElement && !this.fit.attached) {
+      dom.bind(this.fit.domElement, "resize", this.fit);
+      this.fit.attached = true;
+      this.fit();
+    }
+    const width = this.width;
+    const height = this.height;
+    const renderer = this.renderer;
+    if (width !== renderer.width || height !== renderer.height) {
+      renderer.setSize(width, height, this.ratio);
+    }
+    this.trigger(Events.Types.update, this.frameCount, this.timeDelta);
+    return this.render();
+  }
+  render() {
+    this.renderer.render();
+    return this.trigger(Events.Types.render, this.frameCount++);
+  }
+  add(objects) {
+    if (!(objects instanceof Array)) {
+      objects = Array.prototype.slice.call(arguments);
+    }
+    this.scene.add(objects);
+    return this;
+  }
+  remove(objects) {
+    if (!(objects instanceof Array)) {
+      objects = Array.prototype.slice.call(arguments);
+    }
+    this.scene.remove(objects);
+    return this;
+  }
+  clear() {
+    this.scene.remove(this.scene.children);
+    return this;
+  }
+  makeLine(x1, y1, x2, y2) {
+    const line = new Line(x1, y1, x2, y2);
+    this.scene.add(line);
+    return line;
+  }
+  makeArrow(x1, y1, x2, y2, size) {
+    const headlen = typeof size === "number" ? size : 10;
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const vertices = [
+      new Anchor(x1, y1, void 0, void 0, void 0, void 0, Commands.move),
+      new Anchor(x2, y2, void 0, void 0, void 0, void 0, Commands.line),
+      new Anchor(
+        x2 - headlen * Math.cos(angle - Math.PI / 4),
+        y2 - headlen * Math.sin(angle - Math.PI / 4),
+        void 0,
+        void 0,
+        void 0,
+        void 0,
+        Commands.line
+      ),
+      new Anchor(x2, y2, void 0, void 0, void 0, void 0, Commands.move),
+      new Anchor(
+        x2 - headlen * Math.cos(angle + Math.PI / 4),
+        y2 - headlen * Math.sin(angle + Math.PI / 4),
+        void 0,
+        void 0,
+        void 0,
+        void 0,
+        Commands.line
+      )
+    ];
+    const path2 = new Path(vertices, false, false, true);
+    path2.noFill();
+    path2.cap = "round";
+    path2.join = "round";
+    this.scene.add(path2);
+    return path2;
+  }
+  makeRectangle(x2, y2, width, height) {
+    const rect = new Rectangle(x2, y2, width, height);
+    this.scene.add(rect);
+    return rect;
+  }
+  makeRoundedRectangle(x2, y2, width, height, sides) {
+    const rect = new RoundedRectangle(x2, y2, width, height, sides);
+    this.scene.add(rect);
+    return rect;
+  }
+  makeCircle(x2, y2, radius, resolution) {
+    const circle = new Circle(x2, y2, radius, resolution);
+    this.scene.add(circle);
+    return circle;
+  }
+  makeEllipse(x2, y2, rx, ry, resolution) {
+    const ellipse = new Ellipse(x2, y2, rx, ry, resolution);
+    this.scene.add(ellipse);
+    return ellipse;
+  }
+  makeStar(x2, y2, outerRadius, innerRadius, sides) {
+    const star = new Star(x2, y2, outerRadius, innerRadius, sides);
+    this.scene.add(star);
+    return star;
+  }
+  makeCurve(points) {
+    const l2 = arguments.length;
+    if (!Array.isArray(points)) {
+      points = [];
+      for (let i2 = 0; i2 < l2; i2 += 2) {
+        const x2 = arguments[i2];
+        if (typeof x2 !== "number") {
+          break;
+        }
+        const y2 = arguments[i2 + 1];
+        points.push(new Anchor(x2, y2));
+      }
+    }
+    const last = arguments[l2 - 1];
+    const curve = new Path(points, !(typeof last === "boolean" ? last : void 0), true);
+    const rect = curve.getBoundingClientRect();
+    curve.center().translation.set(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    this.scene.add(curve);
+    return curve;
+  }
+  makePolygon(x2, y2, radius, sides) {
+    const poly = new Polygon(x2, y2, radius, sides);
+    this.scene.add(poly);
+    return poly;
+  }
+  makeArcSegment(x2, y2, innerRadius, outerRadius, startAngle, endAngle, resolution) {
+    const arcSegment = new ArcSegment(
+      x2,
+      y2,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle,
+      resolution
+    );
+    this.scene.add(arcSegment);
+    return arcSegment;
+  }
+  makePoints(p2) {
+    const l2 = arguments.length;
+    let vertices = p2;
+    if (!Array.isArray(p2)) {
+      vertices = [];
+      for (let i2 = 0; i2 < l2; i2 += 2) {
+        const x2 = arguments[i2];
+        if (typeof x2 !== "number") {
+          break;
+        }
+        const y2 = arguments[i2 + 1];
+        vertices.push(new Vector(x2, y2));
+      }
+    }
+    const points = new Points(vertices);
+    this.scene.add(points);
+    return points;
+  }
+  makePath(p2) {
+    const l2 = arguments.length;
+    let points = p2;
+    if (!Array.isArray(p2)) {
+      points = [];
+      for (let i2 = 0; i2 < l2; i2 += 2) {
+        const x2 = arguments[i2];
+        if (typeof x2 !== "number") {
+          break;
+        }
+        const y2 = arguments[i2 + 1];
+        points.push(new Anchor(x2, y2));
+      }
+    }
+    const last = arguments[l2 - 1];
+    const path2 = new Path(points, !(typeof last === "boolean" ? last : void 0));
+    const rect = path2.getBoundingClientRect();
+    if (typeof rect.top === "number" && typeof rect.left === "number" && typeof rect.right === "number" && typeof rect.bottom === "number") {
+      path2.center().translation.set(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
+    this.scene.add(path2);
+    return path2;
+  }
+  makeText(message, x2, y2, styles) {
+    const text = new Text(message, x2, y2, styles);
+    this.add(text);
+    return text;
+  }
+  makeLinearGradient(x1, y1, x2, y2) {
+    const stops = Array.prototype.slice.call(arguments, 4);
+    const gradient = new LinearGradient(x1, y1, x2, y2, stops);
+    this.add(gradient);
+    return gradient;
+  }
+  makeRadialGradient(x1, y1, radius) {
+    const stops = Array.prototype.slice.call(arguments, 3);
+    const gradient = new RadialGradient(x1, y1, radius, stops);
+    this.add(gradient);
+    return gradient;
+  }
+  makeSprite(pathOrTexture, x2, y2, columns, rows, frameRate, autostart) {
+    const sprite = new Sprite(pathOrTexture, x2, y2, columns, rows, frameRate);
+    if (autostart) {
+      sprite.play();
+    }
+    this.add(sprite);
+    return sprite;
+  }
+  makeImageSequence(pathsOrTextures, x2, y2, frameRate, autostart) {
+    const imageSequence = new ImageSequence(pathsOrTextures, x2, y2, frameRate);
+    if (autostart) {
+      imageSequence.play();
+    }
+    this.add(imageSequence);
+    return imageSequence;
+  }
+  makeTexture(pathOrSource, callback) {
+    const texture = new Texture(pathOrSource, callback);
+    return texture;
+  }
+  makeGroup(objects) {
+    if (!(objects instanceof Array)) {
+      objects = Array.prototype.slice.call(arguments);
+    }
+    const group = new Group();
+    this.scene.add(group);
+    group.add(objects);
+    return group;
+  }
+  interpret(svg2, shallow, add) {
+    const tag = svg2.tagName.toLowerCase();
+    add = typeof add !== "undefined" ? add : true;
+    if (!(tag in read)) {
+      return null;
+    }
+    const node = read[tag].call(this, svg2);
+    if (add) {
+      this.add(shallow && node instanceof Group ? node.children : node);
+    } else if (node.parent) {
+      node.remove();
+    }
+    return node;
+  }
+  load(pathOrSVGContent, callback) {
+    const group = new Group();
+    let elem, i2, child;
+    const attach = function(data) {
+      dom.temp.innerHTML = data;
+      for (i2 = 0; i2 < dom.temp.children.length; i2++) {
+        elem = dom.temp.children[i2];
+        child = this.interpret(elem, false, false);
+        if (child !== null) {
+          group.add(child);
+        }
+      }
+      if (typeof callback === "function") {
+        const svg2 = dom.temp.children.length <= 1 ? dom.temp.children[0] : dom.temp.children;
+        callback(group, svg2);
+      }
+    }.bind(this);
+    if (/\.svg$/i.test(pathOrSVGContent)) {
+      xhr(pathOrSVGContent, attach);
+      return group;
+    }
+    attach(pathOrSVGContent);
+    return group;
+  }
+};
+var Two = _Two;
+__publicField(Two, "nextFrameID", Constants.nextFrameID);
+__publicField(Two, "Types", Constants.Types);
+__publicField(Two, "Version", Constants.Version);
+__publicField(Two, "PublishDate", Constants.PublishDate);
+__publicField(Two, "Identifier", Constants.Identifier);
+__publicField(Two, "Resolution", Constants.Resolution);
+__publicField(Two, "AutoCalculateImportedMatrices", Constants.AutoCalculateImportedMatrices);
+__publicField(Two, "Instances", Constants.Instances);
+__publicField(Two, "uniqueId", Constants.uniqueId);
+__publicField(Two, "Anchor", Anchor);
+__publicField(Two, "Collection", Collection);
+__publicField(Two, "Events", Events);
+__publicField(Two, "Group", Group);
+__publicField(Two, "Matrix", Matrix2);
+__publicField(Two, "Path", Path);
+__publicField(Two, "Registry", Registry);
+__publicField(Two, "Shape", Shape);
+__publicField(Two, "Text", Text);
+__publicField(Two, "Vector", Vector);
+__publicField(Two, "Gradient", Gradient);
+__publicField(Two, "ImageSequence", ImageSequence);
+__publicField(Two, "LinearGradient", LinearGradient);
+__publicField(Two, "RadialGradient", RadialGradient);
+__publicField(Two, "Sprite", Sprite);
+__publicField(Two, "Stop", Stop);
+__publicField(Two, "Texture", Texture);
+__publicField(Two, "ArcSegment", ArcSegment);
+__publicField(Two, "Circle", Circle);
+__publicField(Two, "Ellipse", Ellipse);
+__publicField(Two, "Line", Line);
+__publicField(Two, "Points", Points);
+__publicField(Two, "Polygon", Polygon);
+__publicField(Two, "Rectangle", Rectangle);
+__publicField(Two, "RoundedRectangle", RoundedRectangle);
+__publicField(Two, "Star", Star);
+__publicField(Two, "CanvasRenderer", Renderer);
+__publicField(Two, "SVGRenderer", Renderer2);
+__publicField(Two, "WebGLRenderer", Renderer3);
+__publicField(Two, "Commands", Commands);
+__publicField(Two, "Utils", Utils);
+function fitToWindow() {
+  const wr = document.body.getBoundingClientRect();
+  const width = this.width = wr.width;
+  const height = this.height = wr.height;
+  this.renderer.setSize(width, height, this.ratio);
+}
+function fitToParent() {
+  const parent = this.renderer.domElement.parentElement;
+  if (!parent) {
+    console.warn("Two.js: Attempting to fit to parent, but no parent found.");
+    return;
+  }
+  const wr = parent.getBoundingClientRect();
+  const width = this.width = wr.width;
+  const height = this.height = wr.height;
+  this.renderer.setSize(width, height, this.ratio);
+}
+function updateDimensions(width, height) {
+  this.width = width;
+  this.height = height;
+  this.trigger(Events.Types.resize, width, height);
+}
+var raf = dom.getRequestAnimationFrame();
+function loop() {
+  for (let i2 = 0; i2 < Two.Instances.length; i2++) {
+    const t2 = Two.Instances[i2];
+    if (t2.playing) {
+      t2.update();
+    }
+  }
+  Two.nextFrameID = raf(loop);
+}
+raf.init = function() {
+  loop();
+  raf.init = function() {
+  };
+};
+var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
+function Component() {
+  const divRef = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    const div = divRef.current;
+    if (!div) {
+      return;
+    }
+    const two = new Two({
+      fullscreen: true,
+      autostart: true,
+      type: Two.Types.svg
+    }).appendTo(div);
+    const rect = two.makeRectangle(two.width / 2, two.height / 2, 50, 50);
+    two.bind("update", () => {
+      rect.rotation += 0.01;
+    });
+    return () => {
+      two.unbind("update");
+      two.pause();
+      div.removeChild(two.renderer.domElement);
+    };
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
+    ref: divRef
+  }, void 0, false, {
+    fileName: _jsxFileName$1,
+    lineNumber: 33,
+    columnNumber: 10
+  }, this);
+}
+const example = {
+  id: "two-hello-world",
+  filename: "12-two-hello-world.tsx",
+  name: "Two hello world",
+  description: "Two.js hello world",
   Component
 };
 const all = [
+  example$c,
   example$b,
   example$a,
   example$9,
@@ -65385,7 +75951,7 @@ function compilePath(path2, caseSensitive, end) {
   }
   warning(path2 === "*" || !path2.endsWith("*") || path2.endsWith("/*"), 'Route path "' + path2 + '" will be treated as if it were ' + ('"' + path2.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path2.replace(/\*$/, "/*") + '".'));
   let paramNames = [];
-  let regexpSource = "^" + path2.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_, paramName) => {
+  let regexpSource = "^" + path2.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_2, paramName) => {
     paramNames.push(paramName);
     return "([^\\/]+)";
   });
