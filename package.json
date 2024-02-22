@@ -18,7 +18,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
-    "three": "^0.152.2"
+    "three": "^0.152.2",
+    "two.js": "^0.8.12"
   },
   "devDependencies": {
     "@types/offscreencanvas": "^2019.7.0",
