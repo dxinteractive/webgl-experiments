@@ -23704,24 +23704,24 @@ var reactJsxDevRuntime_development = {};
     module.exports = reactJsxDevRuntime_development;
   }
 })(jsxDevRuntime);
-var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
-function Component$c() {
+var _jsxFileName$e = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
+function Component$d() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     children: "..."
   }, void 0, false, {
-    fileName: _jsxFileName$d,
+    fileName: _jsxFileName$e,
     lineNumber: 4,
     columnNumber: 10
   }, this);
 }
-const example$c = {
+const example$d = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
   description: "Duplicate this to make new experiments.",
-  Component: Component$c
+  Component: Component$d
 };
-var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
+var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
 function renderBitmap$6() {
   const offscreen = new OffscreenCanvas(400, 400);
   const ctx = offscreen.getContext("2d");
@@ -23733,7 +23733,7 @@ function renderBitmap$6() {
   ctx.fillRect(0, 0, 400, 400);
   return offscreen.transferToImageBitmap();
 }
-function Component$b() {
+function Component$c() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23748,19 +23748,19 @@ function Component$b() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$c,
+    fileName: _jsxFileName$d,
     lineNumber: 25,
     columnNumber: 10
   }, this);
 }
-const example$b = {
+const example$c = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
   description: "Usage of an offscreen canvas",
-  Component: Component$b
+  Component: Component$c
 };
-var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
+var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
 async function renderBitmap$5() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
@@ -23772,7 +23772,7 @@ async function renderBitmap$5() {
     worker.postMessage("begin");
   });
 }
-function Component$a() {
+function Component$b() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23789,17 +23789,17 @@ function Component$a() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$b,
+    fileName: _jsxFileName$c,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$a = {
+const example$b = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
   description: "Usage of an offscreen canvas in a worker",
-  Component: Component$a
+  Component: Component$b
 };
 var ENV = /* @__PURE__ */ ((ENV2) => {
   ENV2[ENV2["WEBGL_LEGACY"] = 0] = "WEBGL_LEGACY";
@@ -26411,8 +26411,8 @@ const premultiplyBlendMode = mapPremultipliedBlendModes();
 function correctBlendMode(blendMode, premultiplied) {
   return premultiplyBlendMode[premultiplied ? 1 : 0][blendMode];
 }
-function createIndicesForQuads(size, outBuffer = null) {
-  const totalIndices = size * 6;
+function createIndicesForQuads(size2, outBuffer = null) {
+  const totalIndices = size2 * 6;
   outBuffer = outBuffer || new Uint16Array(totalIndices);
   if (outBuffer.length !== totalIndices) {
     throw new Error(`Out buffer length is incorrect, got ${outBuffer.length} and expected ${totalIndices}`);
@@ -27434,9 +27434,9 @@ class Buffer {
   }
 }
 class Attribute {
-  constructor(buffer, size = 0, normalized = false, type2 = TYPES.FLOAT, stride, start, instance, divisor = 1) {
+  constructor(buffer, size2 = 0, normalized = false, type2 = TYPES.FLOAT, stride, start, instance, divisor = 1) {
     this.buffer = buffer;
-    this.size = size;
+    this.size = size2;
     this.normalized = normalized;
     this.type = type2;
     this.stride = stride;
@@ -27447,8 +27447,8 @@ class Attribute {
   destroy() {
     this.buffer = null;
   }
-  static from(buffer, size, normalized, type2, stride) {
-    return new Attribute(buffer, size, normalized, type2, stride);
+  static from(buffer, size2, normalized, type2, stride) {
+    return new Attribute(buffer, size2, normalized, type2, stride);
   }
 }
 const map$1 = {
@@ -27469,7 +27469,7 @@ function interleaveTypedArrays(arrays, sizes) {
   let out = null;
   let littleOffset = 0;
   for (let i2 = 0; i2 < arrays.length; i2++) {
-    const size = sizes[i2];
+    const size2 = sizes[i2];
     const array2 = arrays[i2];
     const type2 = getBufferType(array2);
     if (!views[type2]) {
@@ -27477,11 +27477,11 @@ function interleaveTypedArrays(arrays, sizes) {
     }
     out = views[type2];
     for (let j2 = 0; j2 < array2.length; j2++) {
-      const indexStart = (j2 / size | 0) * stride + littleOffset;
-      const index = j2 % size;
+      const indexStart = (j2 / size2 | 0) * stride + littleOffset;
+      const index = j2 % size2;
       out[indexStart + index] = array2[j2];
     }
-    littleOffset += size;
+    littleOffset += size2;
   }
   return new Float32Array(buffer);
 }
@@ -27506,7 +27506,7 @@ class Geometry {
     this.disposeRunner = new Runner("disposeGeometry");
     this.refCount = 0;
   }
-  addAttribute(id, buffer, size = 0, normalized = false, type2, stride, start, instance = false) {
+  addAttribute(id, buffer, size2 = 0, normalized = false, type2, stride, start, instance = false) {
     if (!buffer) {
       throw new Error("You must pass a buffer when creating an attribute");
     }
@@ -27519,7 +27519,7 @@ class Geometry {
     const ids = id.split("|");
     if (ids.length > 1) {
       for (let i2 = 0; i2 < ids.length; i2++) {
-        this.addAttribute(ids[i2], buffer, size, normalized, type2);
+        this.addAttribute(ids[i2], buffer, size2, normalized, type2);
       }
       return this;
     }
@@ -27528,7 +27528,7 @@ class Geometry {
       this.buffers.push(buffer);
       bufferIndex = this.buffers.length - 1;
     }
-    this.attributes[id] = new Attribute(bufferIndex, size, normalized, type2, stride, start, instance);
+    this.attributes[id] = new Attribute(bufferIndex, size2, normalized, type2, stride, start, instance);
     this.instanced = this.instanced || instance;
     return this;
   }
@@ -28467,48 +28467,48 @@ function compileShader(gl, type2, src) {
   gl.compileShader(shader);
   return shader;
 }
-function booleanArray(size) {
-  const array2 = new Array(size);
+function booleanArray(size2) {
+  const array2 = new Array(size2);
   for (let i2 = 0; i2 < array2.length; i2++) {
     array2[i2] = false;
   }
   return array2;
 }
-function defaultValue(type2, size) {
+function defaultValue(type2, size2) {
   switch (type2) {
     case "float":
       return 0;
     case "vec2":
-      return new Float32Array(2 * size);
+      return new Float32Array(2 * size2);
     case "vec3":
-      return new Float32Array(3 * size);
+      return new Float32Array(3 * size2);
     case "vec4":
-      return new Float32Array(4 * size);
+      return new Float32Array(4 * size2);
     case "int":
     case "uint":
     case "sampler2D":
     case "sampler2DArray":
       return 0;
     case "ivec2":
-      return new Int32Array(2 * size);
+      return new Int32Array(2 * size2);
     case "ivec3":
-      return new Int32Array(3 * size);
+      return new Int32Array(3 * size2);
     case "ivec4":
-      return new Int32Array(4 * size);
+      return new Int32Array(4 * size2);
     case "uvec2":
-      return new Uint32Array(2 * size);
+      return new Uint32Array(2 * size2);
     case "uvec3":
-      return new Uint32Array(3 * size);
+      return new Uint32Array(3 * size2);
     case "uvec4":
-      return new Uint32Array(4 * size);
+      return new Uint32Array(4 * size2);
     case "bool":
       return false;
     case "bvec2":
-      return booleanArray(2 * size);
+      return booleanArray(2 * size2);
     case "bvec3":
-      return booleanArray(3 * size);
+      return booleanArray(3 * size2);
     case "bvec4":
-      return booleanArray(4 * size);
+      return booleanArray(4 * size2);
     case "mat2":
       return new Float32Array([
         1,
@@ -29578,14 +29578,14 @@ const _BatchRenderer = class extends ObjectRenderer {
     const drawCalls = _BatchRenderer._drawCallPool;
     let curTexArray = null;
     for (let i2 = 0; i2 < dcCount; i2++) {
-      const { texArray, type: type2, size, start, blend } = drawCalls[i2];
+      const { texArray, type: type2, size: size2, start, blend } = drawCalls[i2];
       if (curTexArray !== texArray) {
         curTexArray = texArray;
         this.bindAndClearTexArray(texArray);
       }
       this.state.blendMode = blend;
       stateSystem.set(this.state);
-      gl.drawElements(type2, size, gl.UNSIGNED_SHORT, start * 2);
+      gl.drawElements(type2, size2, gl.UNSIGNED_SHORT, start * 2);
     }
   }
   flush() {
@@ -29633,8 +29633,8 @@ const _BatchRenderer = class extends ObjectRenderer {
     }
     super.destroy();
   }
-  getAttributeBuffer(size) {
-    const roundedP2 = nextPow2(Math.ceil(size / 8));
+  getAttributeBuffer(size2) {
+    const roundedP2 = nextPow2(Math.ceil(size2 / 8));
     const roundedSizeIndex = log2(roundedP2);
     const roundedSize = roundedP2 * 8;
     if (this._aBuffers.length <= roundedSizeIndex) {
@@ -29646,8 +29646,8 @@ const _BatchRenderer = class extends ObjectRenderer {
     }
     return buffer;
   }
-  getIndexBuffer(size) {
-    const roundedP2 = nextPow2(Math.ceil(size / 12));
+  getIndexBuffer(size2) {
+    const roundedP2 = nextPow2(Math.ceil(size2 / 12));
     const roundedSizeIndex = log2(roundedP2);
     const roundedSize = roundedP2 * 12;
     if (this._iBuffers.length <= roundedSizeIndex) {
@@ -30784,11 +30784,11 @@ class RenderTexturePool {
     }
     this.texturePool = {};
   }
-  setScreenSize(size) {
-    if (size.width === this._pixelsWidth && size.height === this._pixelsHeight) {
+  setScreenSize(size2) {
+    if (size2.width === this._pixelsWidth && size2.height === this._pixelsHeight) {
       return;
     }
-    this.enableFullScreen = size.width > 0 && size.height > 0;
+    this.enableFullScreen = size2.width > 0 && size2.height > 0;
     for (const i2 in this.texturePool) {
       if (!(Number(i2) < 0)) {
         continue;
@@ -30801,8 +30801,8 @@ class RenderTexturePool {
       }
       this.texturePool[i2] = [];
     }
-    this._pixelsWidth = size.width;
-    this._pixelsHeight = size.height;
+    this._pixelsWidth = size2.width;
+    this._pixelsHeight = size2.height;
   }
 }
 RenderTexturePool.SCREEN_KEY = -1;
@@ -31773,7 +31773,7 @@ class GeometrySystem {
       }
     }
   }
-  draw(type2, size, start, instanceCount) {
+  draw(type2, size2, start, instanceCount) {
     const { gl } = this;
     const geometry = this._activeGeometry;
     if (geometry.indexBuffer) {
@@ -31781,17 +31781,17 @@ class GeometrySystem {
       const glType = byteSize === 2 ? gl.UNSIGNED_SHORT : gl.UNSIGNED_INT;
       if (byteSize === 2 || byteSize === 4 && this.canUseUInt32ElementIndex) {
         if (geometry.instanced) {
-          gl.drawElementsInstanced(type2, size || geometry.indexBuffer.data.length, glType, (start || 0) * byteSize, instanceCount || 1);
+          gl.drawElementsInstanced(type2, size2 || geometry.indexBuffer.data.length, glType, (start || 0) * byteSize, instanceCount || 1);
         } else {
-          gl.drawElements(type2, size || geometry.indexBuffer.data.length, glType, (start || 0) * byteSize);
+          gl.drawElements(type2, size2 || geometry.indexBuffer.data.length, glType, (start || 0) * byteSize);
         }
       } else {
         console.warn("unsupported index buffer type: uint32");
       }
     } else if (geometry.instanced) {
-      gl.drawArraysInstanced(type2, start, size || geometry.getSize(), instanceCount || 1);
+      gl.drawArraysInstanced(type2, start, size2 || geometry.getSize(), instanceCount || 1);
     } else {
-      gl.drawArrays(type2, start, size || geometry.getSize());
+      gl.drawArrays(type2, start, size2 || geometry.getSize());
     }
     return this;
   }
@@ -32759,30 +32759,30 @@ function createUBOElements(uniformData) {
     dataLen: 0,
     dirty: 0
   }));
-  let size = 0;
+  let size2 = 0;
   let chunkSize = 0;
   let offset = 0;
   for (let i2 = 0; i2 < uboElements.length; i2++) {
     const uboElement = uboElements[i2];
-    size = GLSL_TO_STD40_SIZE[uboElement.data.type];
+    size2 = GLSL_TO_STD40_SIZE[uboElement.data.type];
     if (uboElement.data.size > 1) {
-      size = Math.max(size, 16) * uboElement.data.size;
+      size2 = Math.max(size2, 16) * uboElement.data.size;
     }
-    uboElement.dataLen = size;
-    if (chunkSize % size !== 0 && chunkSize < 16) {
-      const lineUpValue = chunkSize % size % 16;
+    uboElement.dataLen = size2;
+    if (chunkSize % size2 !== 0 && chunkSize < 16) {
+      const lineUpValue = chunkSize % size2 % 16;
       chunkSize += lineUpValue;
       offset += lineUpValue;
     }
-    if (chunkSize + size > 16) {
+    if (chunkSize + size2 > 16) {
       offset = Math.ceil(offset / 16) * 16;
       uboElement.offset = offset;
-      offset += size;
-      chunkSize = size;
+      offset += size2;
+      chunkSize = size2;
     } else {
       uboElement.offset = offset;
-      chunkSize += size;
-      offset += size;
+      chunkSize += size2;
+      offset += size2;
     }
   }
   offset = Math.ceil(offset / 16) * 16;
@@ -32803,7 +32803,7 @@ function generateUniformBufferSync(group, uniformData) {
     return { size: 0, syncFunc: uboUpdate };
   }
   const usedUniformDatas = getUBOData(group.uniforms, uniformData);
-  const { uboElements, size } = createUBOElements(usedUniformDatas);
+  const { uboElements, size: size2 } = createUBOElements(usedUniformDatas);
   const funcFragments = [`
     var v = null;
     var v2 = null;
@@ -32828,9 +32828,9 @@ function generateUniformBufferSync(group, uniformData) {
     }
     if (!parsed) {
       if (uboElement.data.size > 1) {
-        const size2 = mapSize(uboElement.data.type);
+        const size22 = mapSize(uboElement.data.type);
         const rowSize = Math.max(GLSL_TO_STD40_SIZE[uboElement.data.type] / 16, 1);
-        const elementSize = size2 / rowSize;
+        const elementSize = size22 / rowSize;
         const remainder = (4 - elementSize % 4) % 4;
         funcFragments.push(`
                 cv = ud.${name}.value;
@@ -32864,7 +32864,7 @@ function generateUniformBufferSync(group, uniformData) {
        renderer.buffer.update(buffer);
     `);
   return {
-    size,
+    size: size2,
     syncFunc: new Function("ud", "uv", "renderer", "syncData", "buffer", funcFragments.join("\n"))
   };
 }
@@ -34970,12 +34970,12 @@ const _SVGResource = class extends BaseImageResource {
   }
   static getSize(svgString) {
     const sizeMatch = _SVGResource.SVG_SIZE.exec(svgString);
-    const size = {};
+    const size2 = {};
     if (sizeMatch) {
-      size[sizeMatch[1]] = Math.round(parseFloat(sizeMatch[3]));
-      size[sizeMatch[5]] = Math.round(parseFloat(sizeMatch[7]));
+      size2[sizeMatch[1]] = Math.round(parseFloat(sizeMatch[3]));
+      size2[sizeMatch[5]] = Math.round(parseFloat(sizeMatch[7]));
     }
-    return size;
+    return size2;
   }
   dispose() {
     super.dispose();
@@ -42337,8 +42337,8 @@ const _GraphicsGeometry = class extends BatchGeometry {
         } else {
           this.processLine(data);
         }
-        const size = this.points.length / 2 - attribIndex;
-        if (size === 0)
+        const size2 = this.points.length / 2 - attribIndex;
+        if (size2 === 0)
           continue;
         if (batchPart && !this._compareStyles(currentStyle, style)) {
           batchPart.end(index2, attribIndex);
@@ -42350,7 +42350,7 @@ const _GraphicsGeometry = class extends BatchGeometry {
           this.batches.push(batchPart);
           currentStyle = style;
         }
-        this.addUvs(this.points, uvs, style.texture, attribIndex, size, style.matrix);
+        this.addUvs(this.points, uvs, style.texture, attribIndex, size2, style.matrix);
       }
     }
     const index = this.indices.length;
@@ -42560,25 +42560,25 @@ const _GraphicsGeometry = class extends BatchGeometry {
       points[i2 * 2 + 1] = matrix.b * x2 + matrix.d * y2 + matrix.ty;
     }
   }
-  addColors(colors, color, alpha, size, offset = 0) {
+  addColors(colors, color, alpha, size2, offset = 0) {
     const bgr = Color$1.shared.setValue(color).toLittleEndianNumber();
     const result = Color$1.shared.setValue(bgr).toPremultiplied(alpha);
-    colors.length = Math.max(colors.length, offset + size);
-    for (let i2 = 0; i2 < size; i2++) {
+    colors.length = Math.max(colors.length, offset + size2);
+    for (let i2 = 0; i2 < size2; i2++) {
       colors[offset + i2] = result;
     }
   }
-  addTextureIds(textureIds, id, size, offset = 0) {
-    textureIds.length = Math.max(textureIds.length, offset + size);
-    for (let i2 = 0; i2 < size; i2++) {
+  addTextureIds(textureIds, id, size2, offset = 0) {
+    textureIds.length = Math.max(textureIds.length, offset + size2);
+    for (let i2 = 0; i2 < size2; i2++) {
       textureIds[offset + i2] = id;
     }
   }
-  addUvs(verts, uvs, texture, start, size, matrix = null) {
+  addUvs(verts, uvs, texture, start, size2, matrix = null) {
     let index = 0;
     const uvsStart = uvs.length;
     const frame = texture.frame;
-    while (index < size) {
+    while (index < size2) {
       let x2 = verts[(start + index) * 2];
       let y2 = verts[(start + index) * 2 + 1];
       if (matrix) {
@@ -42591,13 +42591,13 @@ const _GraphicsGeometry = class extends BatchGeometry {
     }
     const baseTexture = texture.baseTexture;
     if (frame.width < baseTexture.width || frame.height < baseTexture.height) {
-      this.adjustUvs(uvs, texture, uvsStart, size);
+      this.adjustUvs(uvs, texture, uvsStart, size2);
     }
   }
-  adjustUvs(uvs, texture, start, size) {
+  adjustUvs(uvs, texture, start, size2) {
     const baseTexture = texture.baseTexture;
     const eps = 1e-6;
-    const finish = start + size * 2;
+    const finish = start + size2 * 2;
     const frame = texture.frame;
     const scaleX = frame.width / baseTexture.width;
     const scaleY = frame.height / baseTexture.height;
@@ -43032,12 +43032,12 @@ const _Graphics = class extends Container {
     }
   }
   _renderDrawCallDirect(renderer, drawCall) {
-    const { texArray, type: type2, size, start } = drawCall;
+    const { texArray, type: type2, size: size2, start } = drawCall;
     const groupTextureCount = texArray.count;
     for (let j2 = 0; j2 < groupTextureCount; j2++) {
       renderer.texture.bind(texArray.elements[j2], j2);
     }
-    renderer.geometry.draw(type2, size, start);
+    renderer.geometry.draw(type2, size2, start);
   }
   _resolveDirectShader(renderer) {
     let shader = this.shader;
@@ -43471,10 +43471,10 @@ class MeshMaterial extends Shader {
   }
 }
 class ParticleBuffer {
-  constructor(properties, dynamicPropertyFlags, size) {
+  constructor(properties, dynamicPropertyFlags, size2) {
     this.geometry = new Geometry();
     this.indexBuffer = null;
-    this.size = size;
+    this.size = size2;
     this.dynamicProperties = [];
     this.staticProperties = [];
     for (let i2 = 0; i2 < properties.length; ++i2) {
@@ -43660,10 +43660,10 @@ class ParticleRenderer extends ObjectRenderer {
   }
   generateBuffers(container) {
     const buffers = [];
-    const size = container._maxSize;
+    const size2 = container._maxSize;
     const batchSize = container._batchSize;
     const dynamicPropertyFlags = container._properties;
-    for (let i2 = 0; i2 < size; i2 += batchSize) {
+    for (let i2 = 0; i2 < size2; i2 += batchSize) {
       buffers.push(new ParticleBuffer(this.properties, dynamicPropertyFlags, batchSize));
     }
     return buffers;
@@ -46243,13 +46243,13 @@ const _BitmapText = class extends Container {
       this._resolution = renderer.resolution;
       this.dirty = true;
     }
-    const { distanceFieldRange, distanceFieldType, size } = BitmapFont.available[this._fontName];
+    const { distanceFieldRange, distanceFieldType, size: size2 } = BitmapFont.available[this._fontName];
     if (distanceFieldType !== "none") {
       const { a: a2, b: b2, c: c2, d: d2 } = this.worldTransform;
       const dx = Math.sqrt(a2 * a2 + b2 * b2);
       const dy = Math.sqrt(c2 * c2 + d2 * d2);
       const worldScale = (Math.abs(dx) + Math.abs(dy)) / 2;
-      const fontScale = this.fontSize / size;
+      const fontScale = this.fontSize / size2;
       const resolution = renderer._view.resolution;
       for (const mesh of this._activePagesMeshData) {
         mesh.mesh.shader.uniforms.uFWidth = worldScale * distanceFieldRange * fontScale * resolution;
@@ -46950,7 +46950,7 @@ HTMLText.defaultDestroyOptions = {
 HTMLText.defaultMaxWidth = 2024;
 HTMLText.defaultMaxHeight = 2024;
 HTMLText.defaultAutoResolution = true;
-var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
+var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
 function createBunnies$1(view) {
   const app = new Application({
     background: "#1099bb",
@@ -46974,7 +46974,7 @@ function createBunnies$1(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$9() {
+function Component$a() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -46987,19 +46987,19 @@ function Component$9() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$a,
+    fileName: _jsxFileName$b,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example$9 = {
+const example$a = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
   description: "Hello world for Pixi.js.",
-  Component: Component$9
+  Component: Component$a
 };
-var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
+var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
 async function renderBitmap$4() {
   const canvas3 = document.createElement("canvas");
   document.body.appendChild(canvas3);
@@ -47007,6 +47007,56 @@ async function renderBitmap$4() {
   const renderer = new Renderer$1({
     background: "#1099bb",
     view: offscreen
+  });
+  const container = new Container();
+  const texture = Texture$2.from("bunny.png");
+  await new Promise((r2) => setTimeout(r2, 200));
+  for (let i2 = 0; i2 < 25; i2++) {
+    const bunny = new Sprite$1(texture);
+    bunny.anchor.set(0.5);
+    bunny.x = i2 % 5 * 40;
+    bunny.y = Math.floor(i2 / 5) * 40;
+    container.addChild(bunny);
+  }
+  renderer.render(container);
+  return offscreen;
+}
+function Component$9() {
+  const ref = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a2;
+    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
+    if (!ctx) {
+      throw new Error("Could not create 2d canvas context");
+    }
+    renderBitmap$4().then((bitmap) => {
+      ctx.drawImage(bitmap, 0, 0);
+    });
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+    ref,
+    width: 400,
+    height: 400
+  }, void 0, false, {
+    fileName: _jsxFileName$a,
+    lineNumber: 47,
+    columnNumber: 10
+  }, this);
+}
+const example$9 = {
+  id: "pixijs-bunnies-offscreen",
+  filename: "04-pixijs-bunnies-offscreen.tsx",
+  name: "Pixi bunnies on offscreen canvas",
+  description: "Using canvas.transferControlToOffscreen()",
+  Component: Component$9
+};
+var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
+async function renderBitmap$3() {
+  const offscreen = new OffscreenCanvas(400, 400);
+  const renderer = new Renderer$1({
+    background: "#1099bb",
+    view: offscreen,
+    antialias: true
   });
   const container = new Container();
   const texture = Texture$2.from("bunny.png");
@@ -47029,56 +47079,6 @@ function Component$8() {
     if (!ctx) {
       throw new Error("Could not create 2d canvas context");
     }
-    renderBitmap$4().then((bitmap) => {
-      ctx.drawImage(bitmap, 0, 0);
-    });
-  }, []);
-  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
-    ref,
-    width: 400,
-    height: 400
-  }, void 0, false, {
-    fileName: _jsxFileName$9,
-    lineNumber: 47,
-    columnNumber: 10
-  }, this);
-}
-const example$8 = {
-  id: "pixijs-bunnies-offscreen",
-  filename: "04-pixijs-bunnies-offscreen.tsx",
-  name: "Pixi bunnies on offscreen canvas",
-  description: "Using canvas.transferControlToOffscreen()",
-  Component: Component$8
-};
-var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
-async function renderBitmap$3() {
-  const offscreen = new OffscreenCanvas(400, 400);
-  const renderer = new Renderer$1({
-    background: "#1099bb",
-    view: offscreen,
-    antialias: true
-  });
-  const container = new Container();
-  const texture = Texture$2.from("bunny.png");
-  await new Promise((r2) => setTimeout(r2, 200));
-  for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite$1(texture);
-    bunny.anchor.set(0.5);
-    bunny.x = i2 % 5 * 40;
-    bunny.y = Math.floor(i2 / 5) * 40;
-    container.addChild(bunny);
-  }
-  renderer.render(container);
-  return offscreen;
-}
-function Component$7() {
-  const ref = react.exports.useRef(null);
-  react.exports.useEffect(() => {
-    var _a2;
-    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
-    if (!ctx) {
-      throw new Error("Could not create 2d canvas context");
-    }
     renderBitmap$3().then((bitmap) => {
       ctx.drawImage(bitmap, 0, 0);
     });
@@ -47088,19 +47088,19 @@ function Component$7() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$8,
+    fileName: _jsxFileName$9,
     lineNumber: 46,
     columnNumber: 10
   }, this);
 }
-const example$7 = {
+const example$8 = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
   description: "Using new OffscreenCanvas()",
-  Component: Component$7
+  Component: Component$8
 };
-var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
+var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap$2() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
@@ -47112,7 +47112,7 @@ async function renderBitmap$2() {
     worker.postMessage("begin");
   });
 }
-function Component$6() {
+function Component$7() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47129,26 +47129,26 @@ function Component$6() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$7,
+    fileName: _jsxFileName$8,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$6 = {
+const example$7 = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
   description: "Pixi.js bunnies in a worker",
-  Component: Component$6
+  Component: Component$7
 };
-var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
+var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
   const worker = new Worker(new URL("/webgl-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
 }
-function Component$5() {
+function Component$6() {
   const ref = react.exports.useRef(null);
   const transferred = react.exports.useRef(false);
   react.exports.useEffect(() => {
@@ -47166,17 +47166,17 @@ function Component$5() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$6,
+    fileName: _jsxFileName$7,
     lineNumber: 27,
     columnNumber: 10
   }, this);
 }
-const example$5 = {
+const example$6 = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
   description: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
-  Component: Component$5
+  Component: Component$6
 };
 /**
  * @license
@@ -49675,8 +49675,8 @@ class Box3 {
     }
     return this;
   }
-  setFromCenterAndSize(center, size) {
-    const halfSize = _vector$a.copy(size).multiplyScalar(0.5);
+  setFromCenterAndSize(center, size2) {
+    const halfSize = _vector$a.copy(size2).multiplyScalar(0.5);
     this.min.copy(center).sub(halfSize);
     this.max.copy(center).add(halfSize);
     return this;
@@ -52624,15 +52624,15 @@ class Color {
       }
     } else if (m2 = /^\#([A-Fa-f\d]+)$/.exec(style)) {
       const hex = m2[1];
-      const size = hex.length;
-      if (size === 3) {
+      const size2 = hex.length;
+      if (size2 === 3) {
         return this.setRGB(
           parseInt(hex.charAt(0), 16) / 15,
           parseInt(hex.charAt(1), 16) / 15,
           parseInt(hex.charAt(2), 16) / 15,
           colorSpace
         );
-      } else if (size === 6) {
+      } else if (size2 === 6) {
         return this.setHex(parseInt(hex, 16), colorSpace);
       } else {
         console.warn("THREE.Color: Invalid hex color " + style);
@@ -54398,10 +54398,10 @@ class CubeTexture extends Texture$1 {
   }
 }
 class WebGLCubeRenderTarget extends WebGLRenderTarget {
-  constructor(size = 1, options = {}) {
-    super(size, size, options);
+  constructor(size2 = 1, options = {}) {
+    super(size2, size2, options);
     this.isWebGLCubeRenderTarget = true;
-    const image = { width: size, height: size, depth: 1 };
+    const image = { width: size2, height: size2, depth: 1 };
     const images = [image, image, image, image, image, image];
     if (options.encoding !== void 0) {
       warnOnce("THREE.WebGLCubeRenderTarget: option.encoding has been replaced by option.colorSpace.");
@@ -55916,11 +55916,11 @@ function WebGLBindingStates(gl, extensions2, attributes, capabilities) {
       }
     }
   }
-  function vertexAttribPointer(index, size, type2, normalized, stride, offset) {
+  function vertexAttribPointer(index, size2, type2, normalized, stride, offset) {
     if (capabilities.isWebGL2 === true && (type2 === gl.INT || type2 === gl.UNSIGNED_INT)) {
-      gl.vertexAttribIPointer(index, size, type2, stride, offset);
+      gl.vertexAttribIPointer(index, size2, type2, stride, offset);
     } else {
-      gl.vertexAttribPointer(index, size, type2, normalized, stride, offset);
+      gl.vertexAttribPointer(index, size2, type2, normalized, stride, offset);
     }
   }
   function setupVertexAttributes(object, material, program, geometry) {
@@ -55944,7 +55944,7 @@ function WebGLBindingStates(gl, extensions2, attributes, capabilities) {
         }
         if (geometryAttribute !== void 0) {
           const normalized = geometryAttribute.normalized;
-          const size = geometryAttribute.itemSize;
+          const size2 = geometryAttribute.itemSize;
           const attribute = attributes.get(geometryAttribute);
           if (attribute === void 0)
             continue;
@@ -55971,11 +55971,11 @@ function WebGLBindingStates(gl, extensions2, attributes, capabilities) {
             for (let i2 = 0; i2 < programAttribute.locationSize; i2++) {
               vertexAttribPointer(
                 programAttribute.location + i2,
-                size / programAttribute.locationSize,
+                size2 / programAttribute.locationSize,
                 type2,
                 normalized,
                 stride * bytesPerElement,
-                (offset + size / programAttribute.locationSize * i2) * bytesPerElement
+                (offset + size2 / programAttribute.locationSize * i2) * bytesPerElement
               );
             }
           } else {
@@ -55995,11 +55995,11 @@ function WebGLBindingStates(gl, extensions2, attributes, capabilities) {
             for (let i2 = 0; i2 < programAttribute.locationSize; i2++) {
               vertexAttribPointer(
                 programAttribute.location + i2,
-                size / programAttribute.locationSize,
+                size2 / programAttribute.locationSize,
                 type2,
                 normalized,
-                size * bytesPerElement,
-                size / programAttribute.locationSize * i2 * bytesPerElement
+                size2 * bytesPerElement,
+                size2 / programAttribute.locationSize * i2 * bytesPerElement
               );
             }
           }
@@ -56583,8 +56583,8 @@ class PMREMGenerator {
         cubeCamera.up.set(0, upSign[i2], 0);
         cubeCamera.lookAt(0, 0, forwardSign[i2]);
       }
-      const size = this._cubeSize;
-      _setViewport(cubeUVRenderTarget, col * size, i2 > 2 ? size : 0, size, size);
+      const size2 = this._cubeSize;
+      _setViewport(cubeUVRenderTarget, col * size2, i2 > 2 ? size2 : 0, size2, size2);
       renderer.setRenderTarget(cubeUVRenderTarget);
       if (useSolidColor) {
         renderer.render(backgroundBox, cubeCamera);
@@ -56614,8 +56614,8 @@ class PMREMGenerator {
     const mesh = new Mesh(this._lodPlanes[0], material);
     const uniforms = material.uniforms;
     uniforms["envMap"].value = texture;
-    const size = this._cubeSize;
-    _setViewport(cubeUVRenderTarget, 0, 0, 3 * size, 2 * size);
+    const size2 = this._cubeSize;
+    _setViewport(cubeUVRenderTarget, 0, 0, 3 * size2, 2 * size2);
     renderer.setRenderTarget(cubeUVRenderTarget);
     renderer.render(mesh, _flatCamera);
   }
@@ -63010,10 +63010,10 @@ function WebGLUniformsGroups(gl, info, capabilities, state) {
     const bindingPointIndex = allocateBindingPointIndex();
     uniformsGroup.__bindingPointIndex = bindingPointIndex;
     const buffer = gl.createBuffer();
-    const size = uniformsGroup.__size;
+    const size2 = uniformsGroup.__size;
     const usage = uniformsGroup.usage;
     gl.bindBuffer(gl.UNIFORM_BUFFER, buffer);
-    gl.bufferData(gl.UNIFORM_BUFFER, size, usage);
+    gl.bufferData(gl.UNIFORM_BUFFER, size2, usage);
     gl.bindBuffer(gl.UNIFORM_BUFFER, null);
     gl.bindBufferBase(gl.UNIFORM_BUFFER, bindingPointIndex, buffer);
     return buffer;
@@ -64687,7 +64687,7 @@ if (typeof window !== "undefined") {
     window.__THREE__ = REVISION;
   }
 }
-var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
+var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
 function helloThreeJs(canvas3) {
   const scene = new Scene();
   const camera = new PerspectiveCamera(75, 1, 0.1, 1e3);
@@ -64705,7 +64705,7 @@ function helloThreeJs(canvas3) {
   camera.position.z = 5;
   renderer.render(scene, camera);
 }
-function Component$4() {
+function Component$5() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const canvas3 = ref.current;
@@ -64719,19 +64719,19 @@ function Component$4() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$5,
+    fileName: _jsxFileName$6,
     lineNumber: 35,
     columnNumber: 10
   }, this);
 }
-const example$4 = {
+const example$5 = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
   description: "Three.js hello world",
-  Component: Component$4
+  Component: Component$5
 };
-var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
+var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
 async function renderBitmap$1() {
   const w2 = 400;
   const h2 = 400;
@@ -64755,7 +64755,7 @@ async function renderBitmap$1() {
   renderer.render(scene, camera);
   return canvas3.transferToImageBitmap();
 }
-function Component$3() {
+function Component$4() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64772,19 +64772,19 @@ function Component$3() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$4,
+    fileName: _jsxFileName$5,
     lineNumber: 44,
     columnNumber: 10
   }, this);
 }
-const example$3 = {
+const example$4 = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
   description: "Three.js with offscreen canvas",
-  Component: Component$3
+  Component: Component$4
 };
-var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
+var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
 async function renderBitmap(w2, h2) {
   const bunnySize = [26, 37];
   const canvas3 = new OffscreenCanvas(w2, h2);
@@ -64812,7 +64812,7 @@ async function renderBitmap(w2, h2) {
   renderer.render(scene, camera);
   return canvas3.transferToImageBitmap();
 }
-function Component$2() {
+function Component$3() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64831,26 +64831,26 @@ function Component$2() {
       width: 260,
       height: 370
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 55,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("img", {
       src: "/bunny.png"
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 56,
       columnNumber: 7
     }, this)]
   }, void 0, true);
 }
-const example$2 = {
+const example$3 = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
   description: "Three.js rendering a texture",
-  Component: Component$2
+  Component: Component$3
 };
-var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
+var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
 function createBunnies(view) {
   const app = new Application({
     background: "#1099bb",
@@ -64874,7 +64874,7 @@ function createBunnies(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$1() {
+function Component$2() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -64887,17 +64887,17 @@ function Component$1() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$2,
+    fileName: _jsxFileName$3,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example$1 = {
+const example$2 = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
   description: "",
-  Component: Component$1
+  Component: Component$2
 };
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -67421,7 +67421,7 @@ var canvas = {
   },
   points: {
     render: function(ctx, forced, parentClipped) {
-      let me, stroke, linewidth, fill, opacity, visible, size, commands, length, b2, x2, y2, defaultMatrix, isOffset, dashes, po;
+      let me, stroke, linewidth, fill, opacity, visible, size2, commands, length, b2, x2, y2, defaultMatrix, isOffset, dashes, po;
       po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
       opacity = this._opacity * (po || 1);
       visible = this._visible;
@@ -67437,7 +67437,7 @@ var canvas = {
       length = commands.length;
       defaultMatrix = isDefaultMatrix(me);
       dashes = this.dashes;
-      size = this._size;
+      size2 = this._size;
       if (!defaultMatrix) {
         ctx.save();
         ctx.transform(me[0], me[3], me[1], me[4], me[2], me[5]);
@@ -67469,7 +67469,7 @@ var canvas = {
         ctx.setLineDash(dashes);
       }
       ctx.beginPath();
-      let radius = size * 0.5, m2;
+      let radius = size2 * 0.5, m2;
       if (!this._sizeAttenuation) {
         m2 = this.worldMatrix.elements;
         m2 = decomposeMatrix(m2[0], m2[3], m2[1], m2[4], m2[2], m2[5]);
@@ -73015,9 +73015,9 @@ var svg = {
     }
     return string;
   },
-  pointsToString: function(points, size) {
+  pointsToString: function(points, size2) {
     let string = "";
-    const r2 = size * 0.5;
+    const r2 = size2 * 0.5;
     for (let i2 = 0; i2 < points.length; i2++) {
       const x2 = points[i2].x;
       const y2 = points[i2].y - r2;
@@ -73263,13 +73263,13 @@ var svg = {
         changed.id = this._id;
       }
       if (this._flagVertices || this._flagSize || this._flagSizeAttenuation) {
-        let size = this._size;
+        let size2 = this._size;
         if (!this._sizeAttenuation) {
           const me = this.worldMatrix.elements;
           const m2 = decomposeMatrix(me[0], me[3], me[1], me[4], me[2], me[5]);
-          size /= Math.max(m2.scaleX, m2.scaleY);
+          size2 /= Math.max(m2.scaleX, m2.scaleY);
         }
-        const vertices = svg.pointsToString(this._renderer.collection, size);
+        const vertices = svg.pointsToString(this._renderer.collection, size2);
         changed.d = vertices;
       }
       if (this._fill && this._fill._renderer) {
@@ -74204,8 +74204,8 @@ var webgl = {
       const fill = elem._fill;
       const opacity = elem._renderer.opacity || elem._opacity;
       const dashes = elem.dashes;
-      const size = elem._size;
-      let dimension = size;
+      const size2 = elem._size;
+      let dimension = size2;
       if (!webgl.isHidden.test(stroke)) {
         dimension += linewidth;
       }
@@ -74245,7 +74245,7 @@ var webgl = {
       ctx.translate(cx, cy);
       ctx.scale(webgl.precision, webgl.precision);
       ctx.beginPath();
-      ctx.arc(0, 0, size / aspect2 * 0.5, 0, TWO_PI);
+      ctx.arc(0, 0, size2 / aspect2 * 0.5, 0, TWO_PI);
       ctx.restore();
       if (closed) {
         ctx.closePath();
@@ -74287,7 +74287,7 @@ var webgl = {
         return this;
       }
       this._update();
-      let size = this._size;
+      let size2 = this._size;
       const parent = forcedParent || this.parent;
       const program = programs[this._renderer.type];
       const sizeAttenuation = this._sizeAttenuation;
@@ -74346,11 +74346,11 @@ var webgl = {
         return this;
       }
       if (!webgl.isHidden.test(stroke)) {
-        size += linewidth;
+        size2 += linewidth;
       }
-      size /= webgl.precision;
+      size2 /= webgl.precision;
       if (sizeAttenuation) {
-        size *= Math.max(this._renderer.scale.x, this._renderer.scale.y);
+        size2 *= Math.max(this._renderer.scale.x, this._renderer.scale.y);
       }
       if (programs.current !== program) {
         gl.useProgram(program);
@@ -74372,7 +74372,7 @@ var webgl = {
       }
       gl.bindTexture(gl.TEXTURE_2D, this._renderer.texture);
       gl.uniformMatrix3fv(program.matrix, false, this._renderer.matrix);
-      gl.uniform1f(program.size, size * programs.resolution.ratio);
+      gl.uniform1f(program.size, size2 * programs.resolution.ratio);
       gl.drawArrays(gl.POINTS, 0, length);
       return this.flagReset();
     }
@@ -75126,8 +75126,8 @@ var _Two = class {
     this.scene.add(line);
     return line;
   }
-  makeArrow(x1, y1, x2, y2, size) {
-    const headlen = typeof size === "number" ? size : 10;
+  makeArrow(x1, y1, x2, y2, size2) {
+    const headlen = typeof size2 === "number" ? size2 : 10;
     const angle = Math.atan2(y2 - y1, x2 - x1);
     const vertices = [
       new Anchor(x1, y1, void 0, void 0, void 0, void 0, Commands.move),
@@ -75426,8 +75426,8 @@ raf.init = function() {
   raf.init = function() {
   };
 };
-var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
-function Component() {
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
+function Component$1() {
   const divRef = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const div = divRef.current;
@@ -75452,19 +75452,124 @@ function Component() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     ref: divRef
   }, void 0, false, {
-    fileName: _jsxFileName$1,
+    fileName: _jsxFileName$2,
     lineNumber: 33,
     columnNumber: 10
   }, this);
 }
-const example = {
+const example$1 = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
   description: "Two.js hello world",
+  Component: Component$1
+};
+var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/13-lab-color.tsx";
+const size = 30;
+function Component() {
+  const [valueL, setL] = react.exports.useState(10);
+  const [valueA, setA] = react.exports.useState(-5);
+  const [valueB, setB] = react.exports.useState(5);
+  const ref = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a2;
+    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
+    if (!ctx) {
+      throw new Error("Could not create 2d canvas context");
+    }
+    ctx.clearRect(0, 0, 1e3, 700);
+    for (let l2 = 0; l2 <= valueL; l2++) {
+      for (let x2 = valueA; x2 < 5; x2++) {
+        for (let y2 = -5; y2 < valueB; y2++) {
+          ctx.fillStyle = `lab(${l2 * 10}% ${x2 * 25} ${y2 * 25})`;
+          ctx.fillRect((x2 + 5) * size + l2 * 25, (y2 + 5) * size + (10 - l2) * 25, size, size);
+        }
+      }
+    }
+  }, [valueL, valueA, valueB]);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(jsxDevRuntime.exports.Fragment, {
+    children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
+      label: "L",
+      value: valueL,
+      onChange: setL,
+      min: 0,
+      max: 10
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 36,
+      columnNumber: 7
+    }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
+      label: "A",
+      value: valueA,
+      onChange: setA,
+      min: -5,
+      max: 5
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 37,
+      columnNumber: 7
+    }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
+      label: "B",
+      value: valueB,
+      onChange: setB,
+      min: -5,
+      max: 5
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 38,
+      columnNumber: 7
+    }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+      ref,
+      style: {
+        width: "1000px",
+        height: "700px"
+      },
+      width: 1e3,
+      height: 700
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 39,
+      columnNumber: 7
+    }, this)]
+  }, void 0, true);
+}
+function Slider({
+  label,
+  value,
+  onChange,
+  min: min5,
+  max: max5
+}) {
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
+    children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("input", {
+      type: "range",
+      style: {
+        width: "400px"
+      },
+      min: min5,
+      max: max5,
+      value,
+      onChange: (e2) => onChange(Number(e2.target.value))
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 64,
+      columnNumber: 7
+    }, this), label, ": ", value]
+  }, void 0, true, {
+    fileName: _jsxFileName$1,
+    lineNumber: 63,
+    columnNumber: 5
+  }, this);
+}
+const example = {
+  id: "lab-color",
+  filename: "13-lab-color.tsx",
+  name: "Lab color experiment",
+  description: "Lab color experiment",
   Component
 };
 const all = [
+  example$d,
   example$c,
   example$b,
   example$a,
