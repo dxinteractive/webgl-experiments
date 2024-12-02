@@ -13,6 +13,7 @@ import threejsHelloWorldOffscreen from "./09-threejs-hello-world-offscreen";
 import threejsTexture from "./10-threejs-texture";
 import pixijsBlendModes from "./11-pixijs-blend-modes";
 import twojsHelloWorld from "./12-twojs-hello-world";
+import labColor from "./13-lab-color";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -28,4 +29,5 @@ export const all: ExperimentDefinition[] = [
   threejsTexture,
   pixijsBlendModes,
   twojsHelloWorld,
+  labColor,
 ];
