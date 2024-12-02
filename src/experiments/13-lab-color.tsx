@@ -17,8 +17,8 @@ function Component() {
     ctx.clearRect(0, 0, 1000, 700);
 
     for (let l = 0; l <= valueL; l++) {
-      for (let x = valueA; x < 5; x++) {
-        for (let y = -5; y < valueB; y++) {
+      for (let x = valueA; x <= 5; x++) {
+        for (let y = -5; y <= valueB; y++) {
           ctx.fillStyle = `lab(${l * 10}% ${x * 25} ${y * 25})`;
           ctx.fillRect(
             (x + 5) * size + l * 25,
