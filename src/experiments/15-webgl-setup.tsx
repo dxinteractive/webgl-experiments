@@ -159,26 +159,23 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   // render
   //
 
+  let rafId = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    const timeUniformLocation = gl.getUniformLocation(program, "u_time");
     gl.uniform1f(timeUniformLocation, Date.now() - startTime);
-
-    // update matrices in gl
-    //  gl.uniformMatrix4fv(this.matrixLocations.model, false, this.matrices.model);
-    //  gl.uniformMatrix4fv(this.matrixLocations.view, false, this.matrices.view);
 
     gl.bindVertexArray(vertexArray);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     gl.bindVertexArray(null);
 
-    requestAnimationFrame(render);
+    rafId = requestAnimationFrame(render);
   };
 
   render();
 
   return () => {
+    cancelAnimationFrame(rafId);
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
   };
