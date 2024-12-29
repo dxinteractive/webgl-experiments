@@ -41,9 +41,9 @@ var _a;
   }
 })();
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-function getDefaultExportFromCjs(x2) {
-  return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
-}
+var client = {};
+var reactDom = { exports: {} };
+var reactDom_development = {};
 var react = { exports: {} };
 var react_development = { exports: {} };
 /**
@@ -1845,10 +1845,6 @@ var react_development = { exports: {} };
     module.exports = react_development.exports;
   }
 })(react);
-const React = /* @__PURE__ */ getDefaultExportFromCjs(react.exports);
-var client = {};
-var reactDom = { exports: {} };
-var reactDom_development = {};
 var scheduler = { exports: {} };
 var scheduler_development = {};
 /**
@@ -2315,9 +2311,9 @@ var scheduler_development = {};
     if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
       __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
     }
-    var React2 = react.exports;
+    var React = react.exports;
     var Scheduler = scheduler.exports;
-    var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     var suppressWarning = false;
     function setSuppressWarning(newSuppressWarning) {
       {
@@ -3838,7 +3834,7 @@ var scheduler_development = {};
       {
         if (props.value == null) {
           if (typeof props.children === "object" && props.children !== null) {
-            React2.Children.forEach(props.children, function(child) {
+            React.Children.forEach(props.children, function(child) {
               if (child == null) {
                 return;
               }
@@ -11424,7 +11420,7 @@ var scheduler_development = {};
       }
     }
     var fakeInternalInstance = {};
-    var emptyRefsObject = new React2.Component().refs;
+    var emptyRefsObject = new React.Component().refs;
     var didWarnAboutStateAssignmentForComponent;
     var didWarnAboutUninitializedState;
     var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22852,7 +22848,7 @@ var reactJsxDevRuntime_development = {};
  */
 {
   (function() {
-    var React2 = react.exports;
+    var React = react.exports;
     var enableScopeAPI = false;
     var enableCacheElement = false;
     var enableTransitionTracing = false;
@@ -22883,7 +22879,7 @@ var reactJsxDevRuntime_development = {};
       }
       return null;
     }
-    var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function error(format2) {
       {
         {
@@ -75672,8 +75668,8 @@ const example$1 = {
   description: "OKLAB color experiment",
   Component: Component$1
 };
-const vertexShaderSource = "#version 300 es\n\nlayout (location = 0) in vec3 aPosition;\n\nout vec2 uv;\n\nvoid main() {\n  gl_Position = vec4(aPosition, 1.0);\n  uv = aPosition.xy * vec2(0.5, 0.5) + vec2(0.5, 0.5);\n}\n";
-const fragmentShaderSource = "#version 300 es\n\nprecision highp float;\n\nin vec2 uv;\nout vec4 outColor;\n\nvoid main() {\n  outColor = vec4(uv.x, 0.2, uv.y, 1.0);\n}\n";
+const vertexShaderSource = "#version 300 es\n\nprecision highp float;\n\nlayout (location = 0) in vec3 aPosition;\n\nuniform float u_time;\n\nout vec2 uv;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.1;\n  vec3 p = aPosition + vec3(0.0, wave, 0.0);\n  gl_Position = vec4(p, 1.0);\n  uv = aPosition.xy * vec2(0.5, 0.5);\n}";
+const fragmentShaderSource = "#version 300 es\n\nprecision highp float;\n\nuniform float u_time;\n\nin vec2 uv;\nout vec4 outColor;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.5 + 0.5;\n  outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);\n}\n";
 var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
 function compileShader(gl, type2, source) {
   const shader = gl.createShader(type2);
@@ -75721,16 +75717,16 @@ function setupWebgl(canvas3) {
     throw new Error("gl not supported");
   }
   updateCanvasSize(canvas3, gl);
-  const vertexData = new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]);
+  const program = setupShaders(gl, vertexShaderSource, fragmentShaderSource);
+  gl.useProgram(program);
   const vertexBuffer = gl.createBuffer();
   if (!vertexBuffer) {
     throw new Error("gl.createBuffer() failed");
   }
+  const vertexData = new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]);
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
-  const program = setupShaders(gl, vertexShaderSource, fragmentShaderSource);
-  gl.useProgram(program);
   const vertexArray = gl.createVertexArray();
   if (!vertexArray) {
     throw new Error("Failed to create VAO");
@@ -75741,11 +75737,21 @@ function setupWebgl(canvas3) {
   gl.enableVertexAttribArray(positionAttributeLocation);
   gl.vertexAttribPointer(positionAttributeLocation, 3, gl.FLOAT, false, 3 * 4, 0);
   gl.bindVertexArray(null);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  const timeUniformLocation = gl.getUniformLocation(program, "u_time");
+  gl.uniform1f(timeUniformLocation, 0);
   gl.clearColor(0, 0, 0, 0);
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-  gl.bindVertexArray(vertexArray);
-  gl.drawArrays(gl.TRIANGLES, 0, 3);
-  gl.bindVertexArray(null);
+  const startTime = Date.now();
+  const render = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    const timeUniformLocation2 = gl.getUniformLocation(program, "u_time");
+    gl.uniform1f(timeUniformLocation2, Date.now() - startTime);
+    gl.bindVertexArray(vertexArray);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.bindVertexArray(null);
+    requestAnimationFrame(render);
+  };
+  render();
   return () => {
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
@@ -75767,7 +75773,7 @@ function Component() {
     }
   }, void 0, false, {
     fileName: _jsxFileName$1,
-    lineNumber: 182,
+    lineNumber: 198,
     columnNumber: 10
   }, this);
 }
@@ -76778,59 +76784,55 @@ function useLinkClickHandler(to, _temp) {
   }, [location, navigate, path2, replaceProp, state, target, to]);
 }
 var _jsxFileName = "/home/runner/work/webgl-experiments/webgl-experiments/src/dev.tsx";
-client.createRoot(document.getElementById("root")).render(/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(React.StrictMode, {
-  children: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(HashRouter, {
+client.createRoot(document.getElementById("root")).render(
+  /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(HashRouter, {
     children: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Routes, {
       children: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Route, {
         path: "/",
         element: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Main, {}, void 0, false, {
           fileName: _jsxFileName,
           lineNumber: 23,
-          columnNumber: 34
+          columnNumber: 32
         }, globalThis),
         children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Route, {
           index: true,
           element: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(List, {}, void 0, false, {
             fileName: _jsxFileName,
             lineNumber: 24,
-            columnNumber: 33
+            columnNumber: 31
           }, globalThis)
         }, void 0, false, {
           fileName: _jsxFileName,
           lineNumber: 24,
-          columnNumber: 11
+          columnNumber: 9
         }, globalThis), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Route, {
           path: ":id",
           element: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(ExperimentRoute, {}, void 0, false, {
             fileName: _jsxFileName,
             lineNumber: 25,
-            columnNumber: 38
+            columnNumber: 36
           }, globalThis)
         }, void 0, false, {
           fileName: _jsxFileName,
           lineNumber: 25,
-          columnNumber: 11
+          columnNumber: 9
         }, globalThis)]
       }, void 0, true, {
         fileName: _jsxFileName,
         lineNumber: 23,
-        columnNumber: 9
+        columnNumber: 7
       }, globalThis)
     }, void 0, false, {
       fileName: _jsxFileName,
       lineNumber: 22,
-      columnNumber: 7
+      columnNumber: 5
     }, globalThis)
   }, void 0, false, {
     fileName: _jsxFileName,
     lineNumber: 21,
-    columnNumber: 5
+    columnNumber: 3
   }, globalThis)
-}, void 0, false, {
-  fileName: _jsxFileName,
-  lineNumber: 20,
-  columnNumber: 3
-}, globalThis));
+);
 function Main() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     className: classes.main,
