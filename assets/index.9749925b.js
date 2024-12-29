@@ -75742,17 +75742,18 @@ function setupWebgl(canvas3) {
   gl.uniform1f(timeUniformLocation, 0);
   gl.clearColor(0, 0, 0, 0);
   const startTime = Date.now();
+  let rafId = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    const timeUniformLocation2 = gl.getUniformLocation(program, "u_time");
-    gl.uniform1f(timeUniformLocation2, Date.now() - startTime);
+    gl.uniform1f(timeUniformLocation, Date.now() - startTime);
     gl.bindVertexArray(vertexArray);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     gl.bindVertexArray(null);
-    requestAnimationFrame(render);
+    rafId = requestAnimationFrame(render);
   };
   render();
   return () => {
+    cancelAnimationFrame(rafId);
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
   };
@@ -75773,7 +75774,7 @@ function Component() {
     }
   }, void 0, false, {
     fileName: _jsxFileName$1,
-    lineNumber: 198,
+    lineNumber: 195,
     columnNumber: 10
   }, this);
 }
