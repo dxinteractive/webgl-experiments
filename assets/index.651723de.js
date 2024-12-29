@@ -75741,7 +75741,7 @@ function setupWebgl(canvas3) {
   gl.enableVertexAttribArray(positionAttributeLocation);
   gl.vertexAttribPointer(positionAttributeLocation, 3, gl.FLOAT, false, 3 * 4, 0);
   gl.bindVertexArray(null);
-  gl.clearColor(0, 0, 0, 1);
+  gl.clearColor(0, 0, 0, 0);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   gl.bindVertexArray(vertexArray);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
