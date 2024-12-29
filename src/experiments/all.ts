@@ -14,6 +14,8 @@ import threejsTexture from "./10-threejs-texture";
 import pixijsBlendModes from "./11-pixijs-blend-modes";
 import twojsHelloWorld from "./12-twojs-hello-world";
 import labColor from "./13-lab-color";
+import oklabColor from "./14-oklab-color";
+import webglSetup from "./15-webgl-setup";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -30,4 +32,6 @@ export const all: ExperimentDefinition[] = [
   pixijsBlendModes,
   twojsHelloWorld,
   labColor,
+  oklabColor,
+  webglSetup,
 ];

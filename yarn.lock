@@ -630,6 +630,162 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@thi.ng/api@^8.11.14":
+  version "8.11.14"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/api/-/api-8.11.14.tgz#f7c3e463e24c365345eeed7817447eae5a858864"
+  integrity sha512-g2uyP4ul/ABa58lrFpMViocr2Tigs1+L4T2S1o4oievpzZIz+/NWQE6Hz7bQyQSt7/NJ6kvh3fhjgEt7pRKfLA==
+
+"@thi.ng/arrays@^2.10.7":
+  version "2.10.7"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/arrays/-/arrays-2.10.7.tgz#7eeee923852d3f9587c8de3c7f266b95839c08f2"
+  integrity sha512-0NfQPCQg+Vy/xn75dtXgOJGFz+aChmQ7ZIbSPFj9OcKMmS/6P1U4wc/y4WIaUefctWzf8V03k2KM3nbfCJaIPg==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/checks" "^3.6.16"
+    "@thi.ng/compare" "^2.4.6"
+    "@thi.ng/equiv" "^2.1.70"
+    "@thi.ng/errors" "^2.5.20"
+    "@thi.ng/random" "^4.1.5"
+
+"@thi.ng/binary@^3.4.37":
+  version "3.4.37"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/binary/-/binary-3.4.37.tgz#9d7ffeb30bce5666b6b27afc0f38bc3b12b2c5f6"
+  integrity sha512-LGaEn3lb7t6PUdQOR4+LGAV5Qp8dfDKAOGT9jjfJ3ecrzcXNqg6UJpU7vxq2xzP3qLqN9BcbYrsjXI5/uO7z3Q==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+
+"@thi.ng/checks@^3.6.16":
+  version "3.6.16"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/checks/-/checks-3.6.16.tgz#0ac6facb4b1d0d819e36d680763d5ad59514d745"
+  integrity sha512-l3XBBlDsYrvc84JRXMEPEgtWbPgH5oIhOd0fe7U6O7czgkZLjV5yav2xYhBI9uS4+oyun5Q6TtmmZT95iEFK1Q==
+  dependencies:
+    tslib "^2.8.1"
+
+"@thi.ng/color@5.7.14":
+  version "5.7.14"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/color/-/color-5.7.14.tgz#b7a4fa0ba89d7649c5561093f431b60db4e62c81"
+  integrity sha512-21hopfmfUbbl59VeMJZ9HHc+sdR7iUq4BX4U5fkc/0PbS4K6ftJkTtlgM+VR0OboMYLHUMmbiuzeiJ3OP3Kcaw==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/arrays" "^2.10.7"
+    "@thi.ng/binary" "^3.4.37"
+    "@thi.ng/checks" "^3.6.16"
+    "@thi.ng/compare" "^2.4.6"
+    "@thi.ng/compose" "^3.0.17"
+    "@thi.ng/defmulti" "^3.0.52"
+    "@thi.ng/errors" "^2.5.20"
+    "@thi.ng/math" "^5.11.14"
+    "@thi.ng/random" "^4.1.5"
+    "@thi.ng/strings" "^3.8.12"
+    "@thi.ng/transducers" "^9.2.10"
+    "@thi.ng/vectors" "^7.12.11"
+
+"@thi.ng/compare@^2.4.6":
+  version "2.4.6"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/compare/-/compare-2.4.6.tgz#8ec9d377a1c12674e83fc505dae919cc5e161c0b"
+  integrity sha512-EQb1IyPDju1JRI4tWImWgcscWwCbXkw8Sd3l45BDVxkT3jtIKFsUWcgdYiBg8afoOQnAT8+TDhfHjcIEYp1nZQ==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+
+"@thi.ng/compose@^3.0.17":
+  version "3.0.17"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/compose/-/compose-3.0.17.tgz#7ba8f22dee1f3ca1eb18429ee85aebb694abb51b"
+  integrity sha512-G8zYbutKe432PRz3xrl1pV+uFiR7E1Cyi55IhOLfwuwE7t8sdFzeVNWJNQaSeDXuZbfVSOnGweEbteBqXxNkuQ==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/errors" "^2.5.20"
+
+"@thi.ng/defmulti@^3.0.52":
+  version "3.0.52"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/defmulti/-/defmulti-3.0.52.tgz#8bb8f4dc10e3fbd6e53e4e6dd42d7e2f09050f12"
+  integrity sha512-1fMS6y7mUcUkPFdo5gt52dfpgh+gNzVOqPHF2bpxAoWhj/8BUrr0Cig+VldlkkDZ6sgTQLAu/3gwwvHXgBQeAw==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/errors" "^2.5.20"
+    "@thi.ng/logger" "^3.0.24"
+
+"@thi.ng/equiv@^2.1.70":
+  version "2.1.70"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/equiv/-/equiv-2.1.70.tgz#0dcef04258eb471c357443edd6d8a0bf9f790ea8"
+  integrity sha512-ooOx8brwasd+3XqEIHLNjhrVuxiWqy1uxZk2s1WYhPkxGGAcICxJd7Xzz38G9neiqS/NUxBlBlyT1bmThJj8Xg==
+
+"@thi.ng/errors@^2.5.20":
+  version "2.5.20"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/errors/-/errors-2.5.20.tgz#e118042802205d8f6934d6350bce5120cbc6c8f7"
+  integrity sha512-sZnYdMsHQxyHKZYRIg6QwdSgBaNyh8rmD8+6lGlLGxgXhBis4DhjNTNsDSXksFsE9GnSOYpmU4mpf/aemdJStg==
+
+"@thi.ng/hex@^2.3.58":
+  version "2.3.58"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/hex/-/hex-2.3.58.tgz#6abc3cc802e19e3afd39c3fa2470a12d8a7dd2dd"
+  integrity sha512-YreWDb2yZ8mgV+OOkgFyUkcnEsa6suqI6Mg+6s6jN+LlOWTkoTEZiu2hEv18Fn3L4nJdLe59fmouec5kQiixNA==
+
+"@thi.ng/logger@^3.0.24":
+  version "3.0.24"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/logger/-/logger-3.0.24.tgz#e9c47d864bf38a27062d1243997e64cd2ce3a739"
+  integrity sha512-0Efs1gXBVzTORamuoxORp1fNGQg3LWffVd6zaOD9iI2naBnK8rEe7p0PVNigKJ7lnzEmD0Ju0wA5n/IS/RLbXQ==
+
+"@thi.ng/math@^5.11.14":
+  version "5.11.14"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/math/-/math-5.11.14.tgz#c987353c0199d089a4656fd22567426c448fb318"
+  integrity sha512-kqaoH68kdNg5A7smIFmSpSfo2fZf0DyU9o7BSENsZav+ivLteAkXRnrt7lNTcuwOxjkR1ptC6SIo+4biZEwSEg==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+
+"@thi.ng/memoize@^4.0.4":
+  version "4.0.4"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/memoize/-/memoize-4.0.4.tgz#fbe961100d30ddd13dcf029bdcb09acf65107e57"
+  integrity sha512-vUQi8mLTMVEqNJ7kBgT8UjslWeRO6imav6t3WX1Dxp2op0Bn1ZujUo7kIXFBkg+JOwuEnhNigD6N22sJDKaqJg==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+
+"@thi.ng/random@^4.1.5":
+  version "4.1.5"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/random/-/random-4.1.5.tgz#5e13b47d63edeb3c4d3adec14f33461c6e2acf19"
+  integrity sha512-2Et4LpGLFXM6iFnpVrlfsnmvgu9uWiJw3mdthXB0LrEoqYSQ/CYuiV8m1HPiWbyacHqHam6HS3I4sPJsmx5jrg==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/errors" "^2.5.20"
+
+"@thi.ng/strings@^3.8.12":
+  version "3.8.12"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/strings/-/strings-3.8.12.tgz#d89f58586848e0c7e158c909e3ad7054148120ad"
+  integrity sha512-pEPL8I+1NKSlst7ZGWRDWVcGqyU2JbiHwVOX/YT3DLl/asbaztQOghRC9Abp65MNBI1Xhl+doZHHM83Gq9LIjw==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/errors" "^2.5.20"
+    "@thi.ng/hex" "^2.3.58"
+    "@thi.ng/memoize" "^4.0.4"
+
+"@thi.ng/transducers@^9.2.10":
+  version "9.2.10"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/transducers/-/transducers-9.2.10.tgz#96a4b93542e0074a8a7e267f24f13938834f7f8b"
+  integrity sha512-8PS0fcnFZBH0xaC6tOytEf0nBZcN5Lh4f+Nto2DxVGHiufs3tAsoN+p9L6v1yIra/8iNwc8fbFYRChW73n3DJg==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/arrays" "^2.10.7"
+    "@thi.ng/checks" "^3.6.16"
+    "@thi.ng/compare" "^2.4.6"
+    "@thi.ng/compose" "^3.0.17"
+    "@thi.ng/errors" "^2.5.20"
+    "@thi.ng/math" "^5.11.14"
+    "@thi.ng/random" "^4.1.5"
+
+"@thi.ng/vectors@^7.12.11":
+  version "7.12.11"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@thi.ng/vectors/-/vectors-7.12.11.tgz#5bb8eca084c364c01eb36894f56d8880342dd75f"
+  integrity sha512-JRr3sZ8+ORBJheV69o9ENg6CLfxBJDkdJH/UgQ/b5ltOHDJYc9NfoNmfOgdy9gkjVE1aMJRVMYoceSaa1iESAA==
+  dependencies:
+    "@thi.ng/api" "^8.11.14"
+    "@thi.ng/binary" "^3.4.37"
+    "@thi.ng/checks" "^3.6.16"
+    "@thi.ng/equiv" "^2.1.70"
+    "@thi.ng/errors" "^2.5.20"
+    "@thi.ng/math" "^5.11.14"
+    "@thi.ng/memoize" "^4.0.4"
+    "@thi.ng/random" "^4.1.5"
+    "@thi.ng/strings" "^3.8.12"
+    "@thi.ng/transducers" "^9.2.10"
+
 "@tweenjs/tween.js@~18.6.4":
   version "18.6.4"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@tweenjs/tween.js/-/tween.js-18.6.4.tgz#40a3d0a93647124872dec8e0fd1bd5926695b6ca"
@@ -2347,6 +2503,11 @@ tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
+
+tslib@^2.8.1:
+  version "2.8.1"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
+  integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
 tsutils@^3.21.0:
   version "3.21.0"
