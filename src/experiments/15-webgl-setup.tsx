@@ -102,21 +102,21 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 
   updateCanvasSize(canvas, gl);
 
-  const vertexData = new Float32Array([
-    0.0, 1.0, 0.0, -1.0, -1.0, 0.0, 1.0, -1.0, 0.0,
-  ]);
+  const program = setupShaders(gl, vertexShaderSource, fragmentShaderSource);
+  gl.useProgram(program);
 
   const vertexBuffer = gl.createBuffer();
   if (!vertexBuffer) {
     throw new Error("gl.createBuffer() failed");
   }
 
+  const vertexData = new Float32Array([
+    0.0, 1.0, 0.0, -1.0, -1.0, 0.0, 1.0, -1.0, 0.0,
+  ]);
+
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
-
-  const program = setupShaders(gl, vertexShaderSource, fragmentShaderSource);
-  gl.useProgram(program);
 
   const vertexArray = gl.createVertexArray();
   if (!vertexArray) {
@@ -146,21 +146,37 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   );
 
   gl.bindVertexArray(null);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+  const timeUniformLocation = gl.getUniformLocation(program, "u_time");
+  gl.uniform1f(timeUniformLocation, 0);
+
+  gl.clearColor(0.0, 0.0, 0.0, 0.0);
+
+  const startTime = Date.now();
 
   //
   // render
   //
 
-  gl.clearColor(0.0, 0.0, 0.0, 0.0);
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  const render = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  // update matrices in gl
-  //  gl.uniformMatrix4fv(this.matrixLocations.model, false, this.matrices.model);
-  //  gl.uniformMatrix4fv(this.matrixLocations.view, false, this.matrices.view);
+    const timeUniformLocation = gl.getUniformLocation(program, "u_time");
+    gl.uniform1f(timeUniformLocation, Date.now() - startTime);
 
-  gl.bindVertexArray(vertexArray);
-  gl.drawArrays(gl.TRIANGLES, 0, 3);
-  gl.bindVertexArray(null);
+    // update matrices in gl
+    //  gl.uniformMatrix4fv(this.matrixLocations.model, false, this.matrices.model);
+    //  gl.uniformMatrix4fv(this.matrixLocations.view, false, this.matrices.view);
+
+    gl.bindVertexArray(vertexArray);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.bindVertexArray(null);
+
+    requestAnimationFrame(render);
+  };
+
+  render();
 
   return () => {
     gl.deleteBuffer(vertexBuffer);
