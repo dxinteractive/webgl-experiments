@@ -1,7 +1,38 @@
 import { useEffect, useRef } from "react";
 import type { ExperimentDefinition } from "../types";
-import vertexShaderSource from "./15-vertex-shader.glsl?raw";
-import fragmentShaderSource from "./15-fragment-shader.glsl?raw";
+
+const vertexShaderSource = `#version 300 es
+
+precision highp float;
+
+layout (location = 0) in vec3 aPosition;
+
+uniform float u_time;
+
+out vec2 uv;
+
+void main() {
+  float wave = sin(u_time * 0.005) * 0.1;
+  vec3 p = aPosition + vec3(0.0, wave, 0.0);
+  gl_Position = vec4(p, 1.0);
+  uv = aPosition.xy * vec2(0.5, 0.5);
+}
+`;
+
+const fragmentShaderSource = `#version 300 es
+
+precision highp float;
+
+uniform float u_time;
+
+in vec2 uv;
+out vec4 outColor;
+
+void main() {
+  float wave = sin(u_time * 0.005) * 0.5 + 0.5;
+  outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);
+}
+`;
 
 function compileShader(
   gl: WebGL2RenderingContext,
@@ -180,10 +211,11 @@ function Component() {
 }
 
 const example: ExperimentDefinition = {
-  id: "webgl-setup",
-  filename: "15-webgl-setup.tsx",
-  name: "WebGL setup",
-  description: "Hello world for WebGL2.",
+  id: "webgl-setup-streamlined",
+  filename: "16-webgl-setup-streamlined.tsx",
+  name: "WebGL setup streamlined",
+  description:
+    "Hello world for WebGL2 with reduced boilerplate using utility functions.",
   Component,
 };
 
