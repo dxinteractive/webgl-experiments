@@ -77140,53 +77140,21 @@ client.createRoot(document.getElementById("root")).render(
 function Main() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     className: classes.main,
-    children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Outlet, {}, void 0, false, {
+    children: /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Outlet, {}, void 0, false, {
       fileName: _jsxFileName,
       lineNumber: 35,
       columnNumber: 7
-    }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
-      className: classes.footer,
-      children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(FooterLink, {
-        href: "https://pixijs.download/release/docs/index.html",
-        children: "Pixijs docs"
-      }, void 0, false, {
-        fileName: _jsxFileName,
-        lineNumber: 37,
-        columnNumber: 9
-      }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(FooterLink, {
-        href: "https://github.com/pixijs/pixijs",
-        children: "Pixijs github"
-      }, void 0, false, {
-        fileName: _jsxFileName,
-        lineNumber: 40,
-        columnNumber: 9
-      }, this)]
-    }, void 0, true, {
-      fileName: _jsxFileName,
-      lineNumber: 36,
-      columnNumber: 7
-    }, this)]
-  }, void 0, true, {
+    }, this)
+  }, void 0, false, {
     fileName: _jsxFileName,
     lineNumber: 34,
     columnNumber: 5
   }, this);
 }
-function FooterLink(props) {
-  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("a", {
-    className: classes.link,
-    target: "_blank",
-    ...props
-  }, void 0, false, {
-    fileName: _jsxFileName,
-    lineNumber: 54,
-    columnNumber: 10
-  }, this);
-}
 function List() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(jsxDevRuntime.exports.Fragment, {
     children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(ListHeader, {
-      children: ["Pixijs experiments -", " ", /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("a", {
+      children: ["WebGL experiments -", " ", /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("a", {
         className: classes.link,
         href: "https://github.com/dxinteractive/webgl-experiments",
         children: "github repo"
