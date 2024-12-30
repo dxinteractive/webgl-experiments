@@ -33,32 +33,32 @@ function Main() {
   return (
     <div className={classes.main}>
       <Outlet />
-      <div className={classes.footer}>
+      {/* <div className={classes.footer}>
         <FooterLink href="https://pixijs.download/release/docs/index.html">
           Pixijs docs
         </FooterLink>
         <FooterLink href="https://github.com/pixijs/pixijs">
           Pixijs github
         </FooterLink>
-      </div>
+      </div> */}
     </div>
   );
 }
 
-type FooterLinkProps = {
-  children: React.ReactNode;
-  href: string;
-};
+// type FooterLinkProps = {
+//   children: React.ReactNode;
+//   href: string;
+// };
 
-function FooterLink(props: FooterLinkProps) {
-  return <a className={classes.link} target="_blank" {...props} />;
-}
+// function FooterLink(props: FooterLinkProps) {
+//   return <a className={classes.link} target="_blank" {...props} />;
+// }
 
 function List() {
   return (
     <>
       <ListHeader>
-        Pixijs experiments -{" "}
+        WebGL experiments -{" "}
         <a
           className={classes.link}
           href="https://github.com/dxinteractive/webgl-experiments"
