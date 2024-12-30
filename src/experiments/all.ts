@@ -17,6 +17,7 @@ import labColor from "./13-lab-color";
 import oklabColor from "./14-oklab-color";
 import webglSetup from "./15-webgl-setup";
 import webglSetupStreamlined from "./16-webgl-setup-streamlined";
+import webglTexture from "./17-webgl-texture";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -36,4 +37,5 @@ export const all: ExperimentDefinition[] = [
   oklabColor,
   webglSetup,
   webglSetupStreamlined,
+  webglTexture,
 ];
