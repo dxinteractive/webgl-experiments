@@ -1,3 +1,9 @@
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
 var _a;
 (function polyfill() {
   const relList = document.createElement("link").relList;
@@ -23710,7 +23716,7 @@ function Component$f() {
     columnNumber: 10
   }, this);
 }
-const example$i = {
+const example$j = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
@@ -23749,7 +23755,7 @@ function Component$e() {
     columnNumber: 10
   }, this);
 }
-const example$h = {
+const example$i = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
@@ -23790,7 +23796,7 @@ function Component$d() {
     columnNumber: 10
   }, this);
 }
-const example$g = {
+const example$h = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
@@ -27392,7 +27398,7 @@ class BatchDrawCall {
   }
 }
 let UID$4 = 0;
-class Buffer {
+class Buffer2 {
   constructor(data, _static = true, index = false) {
     this.data = data || new Float32Array(1);
     this._glBuffers = {};
@@ -27426,7 +27432,7 @@ class Buffer {
     if (data instanceof Array) {
       data = new Float32Array(data);
     }
-    return new Buffer(data);
+    return new Buffer2(data);
   }
 }
 class Attribute {
@@ -27506,11 +27512,11 @@ class Geometry {
     if (!buffer) {
       throw new Error("You must pass a buffer when creating an attribute");
     }
-    if (!(buffer instanceof Buffer)) {
+    if (!(buffer instanceof Buffer2)) {
       if (buffer instanceof Array) {
         buffer = new Float32Array(buffer);
       }
-      buffer = new Buffer(buffer);
+      buffer = new Buffer2(buffer);
     }
     const ids = id.split("|");
     if (ids.length > 1) {
@@ -27535,11 +27541,11 @@ class Geometry {
     return this.buffers[this.getAttribute(id).buffer];
   }
   addIndex(buffer) {
-    if (!(buffer instanceof Buffer)) {
+    if (!(buffer instanceof Buffer2)) {
       if (buffer instanceof Array) {
         buffer = new Uint16Array(buffer);
       }
-      buffer = new Buffer(buffer);
+      buffer = new Buffer2(buffer);
     }
     buffer.type = BUFFER_TYPE.ELEMENT_ARRAY_BUFFER;
     this.indexBuffer = buffer;
@@ -27556,7 +27562,7 @@ class Geometry {
       return this;
     const arrays = [];
     const sizes = [];
-    const interleavedBuffer = new Buffer();
+    const interleavedBuffer = new Buffer2();
     let i2;
     for (i2 in this.attributes) {
       const attribute = this.attributes[i2];
@@ -27597,7 +27603,7 @@ class Geometry {
   clone() {
     const geometry = new Geometry();
     for (let i2 = 0; i2 < this.buffers.length; i2++) {
-      geometry.buffers[i2] = new Buffer(this.buffers[i2].data.slice(0));
+      geometry.buffers[i2] = new Buffer2(this.buffers[i2].data.slice(0));
     }
     for (const i2 in this.attributes) {
       const attrib = this.attributes[i2];
@@ -27625,7 +27631,7 @@ class Geometry {
     }
     for (let i2 = 0; i2 < geometry.buffers.length; i2++) {
       arrays[i2] = new map[getBufferType(geometry.buffers[i2].data)](sizes[i2]);
-      geometryOut.buffers[i2] = new Buffer(arrays[i2]);
+      geometryOut.buffers[i2] = new Buffer2(arrays[i2]);
     }
     for (let i2 = 0; i2 < geometries.length; i2++) {
       geometry = geometries[i2];
@@ -27669,8 +27675,8 @@ class Geometry {
 class BatchGeometry extends Geometry {
   constructor(_static = false) {
     super();
-    this._buffer = new Buffer(null, _static, false);
-    this._indexBuffer = new Buffer(null, _static, true);
+    this._buffer = new Buffer2(null, _static, false);
+    this._indexBuffer = new Buffer2(null, _static, true);
     this.addAttribute("aVertexPosition", this._buffer, 2, false, TYPES.FLOAT).addAttribute("aTextureCoord", this._buffer, 2, false, TYPES.FLOAT).addAttribute("aColor", this._buffer, 4, true, TYPES.UNSIGNED_BYTE).addAttribute("aTextureId", this._buffer, 1, true, TYPES.FLOAT).addIndex(this._indexBuffer);
   }
 }
@@ -29161,7 +29167,7 @@ class UniformGroup {
     this.id = UID$1++;
     this.static = !!isStatic;
     this.ubo = !!isUbo;
-    if (uniforms instanceof Buffer) {
+    if (uniforms instanceof Buffer2) {
       this.buffer = uniforms;
       this.buffer.type = BUFFER_TYPE.UNIFORM_BUFFER;
       this.autoManage = false;
@@ -29169,7 +29175,7 @@ class UniformGroup {
     } else {
       this.uniforms = uniforms;
       if (this.ubo) {
-        this.buffer = new Buffer(new Float32Array(1));
+        this.buffer = new Buffer2(new Float32Array(1));
         this.buffer.type = BUFFER_TYPE.UNIFORM_BUFFER;
         this.autoManage = true;
       }
@@ -30840,8 +30846,8 @@ class QuadUv extends Geometry {
       0,
       1
     ]);
-    this.vertexBuffer = new Buffer(this.vertices);
-    this.uvBuffer = new Buffer(this.uvs);
+    this.vertexBuffer = new Buffer2(this.vertices);
+    this.uvBuffer = new Buffer2(this.uvs);
     this.addAttribute("aVertexPosition", this.vertexBuffer).addAttribute("aTextureCoord", this.uvBuffer).addIndex([0, 1, 2, 0, 2, 3]);
   }
   map(targetTextureFrame, destinationFrame) {
@@ -43382,9 +43388,9 @@ Mesh$1.BATCHABLE_SIZE = 100;
 class MeshGeometry extends Geometry {
   constructor(vertices, uvs, index) {
     super();
-    const verticesBuffer = new Buffer(vertices);
-    const uvsBuffer = new Buffer(uvs, true);
-    const indexBuffer = new Buffer(index, true, true);
+    const verticesBuffer = new Buffer2(vertices);
+    const uvsBuffer = new Buffer2(uvs, true);
+    const indexBuffer = new Buffer2(index, true, true);
     this.addAttribute("aVertexPosition", verticesBuffer, 2, false, TYPES.FLOAT).addAttribute("aTextureCoord", uvsBuffer, 2, false, TYPES.FLOAT).addIndex(indexBuffer);
     this._updateId = -1;
   }
@@ -43502,7 +43508,7 @@ class ParticleBuffer {
   initBuffers() {
     const geometry = this.geometry;
     let dynamicOffset = 0;
-    this.indexBuffer = new Buffer(createIndicesForQuads(this.size), true, true);
+    this.indexBuffer = new Buffer2(createIndicesForQuads(this.size), true, true);
     geometry.addIndex(this.indexBuffer);
     this.dynamicStride = 0;
     for (let i2 = 0; i2 < this.dynamicProperties.length; ++i2) {
@@ -43514,7 +43520,7 @@ class ParticleBuffer {
     const dynBuffer = new ArrayBuffer(this.size * this.dynamicStride * 4 * 4);
     this.dynamicData = new Float32Array(dynBuffer);
     this.dynamicDataUint32 = new Uint32Array(dynBuffer);
-    this.dynamicBuffer = new Buffer(this.dynamicData, false, false);
+    this.dynamicBuffer = new Buffer2(this.dynamicData, false, false);
     let staticOffset = 0;
     this.staticStride = 0;
     for (let i2 = 0; i2 < this.staticProperties.length; ++i2) {
@@ -43526,7 +43532,7 @@ class ParticleBuffer {
     const statBuffer = new ArrayBuffer(this.size * this.staticStride * 4 * 4);
     this.staticData = new Float32Array(statBuffer);
     this.staticDataUint32 = new Uint32Array(statBuffer);
-    this.staticBuffer = new Buffer(this.staticData, true, false);
+    this.staticBuffer = new Buffer2(this.staticData, true, false);
     for (let i2 = 0; i2 < this.dynamicProperties.length; ++i2) {
       const property = this.dynamicProperties[i2];
       geometry.addAttribute(property.attributeName, this.dynamicBuffer, 0, property.type === TYPES.UNSIGNED_BYTE, property.type, this.dynamicStride * 4, property.offset * 4);
@@ -46988,7 +46994,7 @@ function Component$c() {
     columnNumber: 10
   }, this);
 }
-const example$f = {
+const example$g = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
@@ -47039,7 +47045,7 @@ function Component$b() {
     columnNumber: 10
   }, this);
 }
-const example$e = {
+const example$f = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
@@ -47089,7 +47095,7 @@ function Component$a() {
     columnNumber: 10
   }, this);
 }
-const example$d = {
+const example$e = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
@@ -47130,7 +47136,7 @@ function Component$9() {
     columnNumber: 10
   }, this);
 }
-const example$c = {
+const example$d = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
@@ -47167,7 +47173,7 @@ function Component$8() {
     columnNumber: 10
   }, this);
 }
-const example$b = {
+const example$c = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
@@ -64720,7 +64726,7 @@ function Component$7() {
     columnNumber: 10
   }, this);
 }
-const example$a = {
+const example$b = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
@@ -64773,7 +64779,7 @@ function Component$6() {
     columnNumber: 10
   }, this);
 }
-const example$9 = {
+const example$a = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
@@ -64839,7 +64845,7 @@ function Component$5() {
     }, this)]
   }, void 0, true);
 }
-const example$8 = {
+const example$9 = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
@@ -64888,21 +64894,21 @@ function Component$4() {
     columnNumber: 10
   }, this);
 }
-const example$7 = {
+const example$8 = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
   description: "",
   Component: Component$4
 };
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __defProp2 = Object.defineProperty;
+var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __export = (target, all2) => {
   for (var name in all2)
-    __defProp(target, name, { get: all2[name], enumerable: true });
+    __defProp2(target, name, { get: all2[name], enumerable: true });
 };
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+var __publicField2 = (obj, key, value) => {
+  __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
 var Commands = {
@@ -65023,8 +65029,8 @@ __export(curves_exports, {
 });
 var Events = class {
   constructor() {
-    __publicField(this, "_events", {});
-    __publicField(this, "_bound", false);
+    __publicField2(this, "_events", {});
+    __publicField2(this, "_bound", false);
   }
   addEventListener(name, handler) {
     const list2 = this._events[name] || (this._events[name] = []);
@@ -65107,7 +65113,7 @@ var Events = class {
     return this;
   }
 };
-__publicField(Events, "Types", {
+__publicField2(Events, "Types", {
   play: "play",
   pause: "pause",
   update: "update",
@@ -65119,7 +65125,7 @@ __publicField(Events, "Types", {
   order: "order",
   load: "load"
 });
-__publicField(Events, "Methods", [
+__publicField2(Events, "Methods", [
   "addEventListener",
   "on",
   "removeEventListener",
@@ -65163,8 +65169,8 @@ var proto = {
 var _Vector = class extends Events {
   constructor(x2 = 0, y2 = 0) {
     super();
-    __publicField(this, "_x", 0);
-    __publicField(this, "_y", 0);
+    __publicField2(this, "_x", 0);
+    __publicField2(this, "_y", 0);
     for (let prop in proto) {
       Object.defineProperty(this, prop, proto[prop]);
     }
@@ -65373,25 +65379,25 @@ var _Vector = class extends Events {
   }
 };
 var Vector = _Vector;
-__publicField(Vector, "zero", new _Vector());
-__publicField(Vector, "left", new _Vector(-1, 0));
-__publicField(Vector, "right", new _Vector(1, 0));
-__publicField(Vector, "up", new _Vector(0, -1));
-__publicField(Vector, "down", new _Vector(0, 1));
+__publicField2(Vector, "zero", new _Vector());
+__publicField2(Vector, "left", new _Vector(-1, 0));
+__publicField2(Vector, "right", new _Vector(1, 0));
+__publicField2(Vector, "up", new _Vector(0, -1));
+__publicField2(Vector, "down", new _Vector(0, 1));
 var Anchor = class extends Vector {
   constructor(x2 = 0, y2 = 0, ax = 0, ay = 0, bx = 0, by = 0, command = Commands.move) {
     super(x2, y2);
-    __publicField(this, "controls", {
+    __publicField2(this, "controls", {
       left: new Vector(),
       right: new Vector()
     });
-    __publicField(this, "_command", Commands.move);
-    __publicField(this, "_relative", true);
-    __publicField(this, "_rx", 0);
-    __publicField(this, "_ry", 0);
-    __publicField(this, "_xAxisRotation", 0);
-    __publicField(this, "_largeArcFlag", 0);
-    __publicField(this, "_sweepFlag", 1);
+    __publicField2(this, "_command", Commands.move);
+    __publicField2(this, "_relative", true);
+    __publicField2(this, "_rx", 0);
+    __publicField2(this, "_ry", 0);
+    __publicField2(this, "_xAxisRotation", 0);
+    __publicField2(this, "_largeArcFlag", 0);
+    __publicField2(this, "_sweepFlag", 1);
     for (let prop in proto2) {
       Object.defineProperty(this, prop, proto2[prop]);
     }
@@ -65858,12 +65864,12 @@ var _ = {
 var Element = class extends Events {
   constructor() {
     super();
-    __publicField(this, "_flagId", false);
-    __publicField(this, "_flagClassName", false);
-    __publicField(this, "_renderer", {});
-    __publicField(this, "_id", "");
-    __publicField(this, "_className", "");
-    __publicField(this, "classList", []);
+    __publicField2(this, "_flagId", false);
+    __publicField2(this, "_flagClassName", false);
+    __publicField2(this, "_renderer", {});
+    __publicField2(this, "_id", "");
+    __publicField2(this, "_className", "");
+    __publicField2(this, "classList", []);
     for (let prop in proto3) {
       Object.defineProperty(this, prop, proto3[prop]);
     }
@@ -65918,8 +65924,8 @@ var array = [];
 var _Matrix = class extends Events {
   constructor(a2, b2, c2, d2, e2, f2) {
     super();
-    __publicField(this, "elements", new NumArray(9));
-    __publicField(this, "manual", false);
+    __publicField2(this, "elements", new NumArray(9));
+    __publicField2(this, "manual", false);
     let elements = a2;
     if (!Array.isArray(elements)) {
       elements = Array.prototype.slice.call(arguments);
@@ -66225,7 +66231,7 @@ var _Matrix = class extends Events {
   }
 };
 var Matrix2 = _Matrix;
-__publicField(Matrix2, "Identity", [
+__publicField2(Matrix2, "Identity", [
   1,
   0,
   0,
@@ -66240,15 +66246,15 @@ setMatrix(Matrix2);
 var Shape = class extends Element {
   constructor() {
     super();
-    __publicField(this, "_flagMatrix", true);
-    __publicField(this, "_flagScale", false);
-    __publicField(this, "_matrix", null);
-    __publicField(this, "_worldMatrix", null);
-    __publicField(this, "_position", null);
-    __publicField(this, "_rotation", 0);
-    __publicField(this, "_scale", 1);
-    __publicField(this, "_skewX", 0);
-    __publicField(this, "_skewY", 0);
+    __publicField2(this, "_flagMatrix", true);
+    __publicField2(this, "_flagScale", false);
+    __publicField2(this, "_matrix", null);
+    __publicField2(this, "_worldMatrix", null);
+    __publicField2(this, "_position", null);
+    __publicField2(this, "_rotation", 0);
+    __publicField2(this, "_scale", 1);
+    __publicField2(this, "_skewX", 0);
+    __publicField2(this, "_skewY", 0);
     for (let prop in proto4) {
       Object.defineProperty(this, prop, proto4[prop]);
     }
@@ -66415,7 +66421,7 @@ function FlagMatrix() {
 var Collection = class extends Array {
   constructor() {
     super();
-    __publicField(this, "_events", new Events());
+    __publicField2(this, "_events", new Events());
     if (arguments[0] && Array.isArray(arguments[0])) {
       if (arguments[0].length > 0) {
         this.push.apply(this, arguments[0]);
@@ -66522,7 +66528,7 @@ var Children = class extends Collection {
   constructor(children) {
     children = Array.isArray(children) ? children : Array.prototype.slice.call(arguments);
     super(children);
-    __publicField(this, "ids", {});
+    __publicField2(this, "ids", {});
     this.attach(children);
     this.on(Events.Types.insert, this.attach);
     this.on(Events.Types.remove, this.detach);
@@ -66548,29 +66554,29 @@ var max = Math.max;
 var _Group = class extends Shape {
   constructor(children) {
     super();
-    __publicField(this, "_flagAdditions", false);
-    __publicField(this, "_flagSubtractions", false);
-    __publicField(this, "_flagOrder", false);
-    __publicField(this, "_flagOpacity", true);
-    __publicField(this, "_flagBeginning", false);
-    __publicField(this, "_flagEnding", false);
-    __publicField(this, "_flagLength", false);
-    __publicField(this, "_flagMask", false);
-    __publicField(this, "_fill", "#fff");
-    __publicField(this, "_stroke", "#000");
-    __publicField(this, "_linewidth", 1);
-    __publicField(this, "_opacity", 1);
-    __publicField(this, "_visible", true);
-    __publicField(this, "_cap", "round");
-    __publicField(this, "_join", "round");
-    __publicField(this, "_miter", 4);
-    __publicField(this, "_closed", true);
-    __publicField(this, "_curved", false);
-    __publicField(this, "_automatic", true);
-    __publicField(this, "_beginning", 0);
-    __publicField(this, "_ending", 1);
-    __publicField(this, "_length", 0);
-    __publicField(this, "_mask", null);
+    __publicField2(this, "_flagAdditions", false);
+    __publicField2(this, "_flagSubtractions", false);
+    __publicField2(this, "_flagOrder", false);
+    __publicField2(this, "_flagOpacity", true);
+    __publicField2(this, "_flagBeginning", false);
+    __publicField2(this, "_flagEnding", false);
+    __publicField2(this, "_flagLength", false);
+    __publicField2(this, "_flagMask", false);
+    __publicField2(this, "_fill", "#fff");
+    __publicField2(this, "_stroke", "#000");
+    __publicField2(this, "_linewidth", 1);
+    __publicField2(this, "_opacity", 1);
+    __publicField2(this, "_visible", true);
+    __publicField2(this, "_cap", "round");
+    __publicField2(this, "_join", "round");
+    __publicField2(this, "_miter", 4);
+    __publicField2(this, "_closed", true);
+    __publicField2(this, "_curved", false);
+    __publicField2(this, "_automatic", true);
+    __publicField2(this, "_beginning", 0);
+    __publicField2(this, "_ending", 1);
+    __publicField2(this, "_length", 0);
+    __publicField2(this, "_mask", null);
     for (let prop in proto5) {
       Object.defineProperty(this, prop, proto5[prop]);
     }
@@ -66864,8 +66870,8 @@ var _Group = class extends Shape {
   }
 };
 var Group = _Group;
-__publicField(Group, "Children", Children);
-__publicField(Group, "Properties", [
+__publicField2(Group, "Children", Children);
+__publicField2(Group, "Properties", [
   "fill",
   "stroke",
   "linewidth",
@@ -67894,7 +67900,7 @@ var Renderer = class extends Events {
     return this;
   }
 };
-__publicField(Renderer, "Utils", canvas);
+__publicField2(Renderer, "Utils", canvas);
 function renderArcEstimate(ctx, ox, oy, rx, ry, startAngle, endAngle, clockwise, xAxisRotation) {
   const delta = endAngle - startAngle;
   const epsilon = Curve.Tolerance.epsilon;
@@ -68010,14 +68016,14 @@ Object.defineProperty(dom, "temp", {
 var TwoError = class extends Error {
   constructor(message) {
     super();
-    __publicField(this, "name", "Two.js");
-    __publicField(this, "message");
+    __publicField2(this, "name", "Two.js");
+    __publicField2(this, "message");
     this.message = message;
   }
 };
 var Registry = class {
   constructor() {
-    __publicField(this, "map", {});
+    __publicField2(this, "map", {});
   }
   add(id, obj) {
     this.map[id] = obj;
@@ -68113,12 +68119,12 @@ function getSubdivisions(a2, b2, limit) {
 var _Stop = class extends Element {
   constructor(offset, color, opacity) {
     super();
-    __publicField(this, "_flagOffset", true);
-    __publicField(this, "_flagOpacity", true);
-    __publicField(this, "_flagColor", true);
-    __publicField(this, "_offset", 0);
-    __publicField(this, "_opacity", 1);
-    __publicField(this, "_color", "#fff");
+    __publicField2(this, "_flagOffset", true);
+    __publicField2(this, "_flagOpacity", true);
+    __publicField2(this, "_flagColor", true);
+    __publicField2(this, "_offset", 0);
+    __publicField2(this, "_opacity", 1);
+    __publicField2(this, "_color", "#fff");
     for (let prop in proto6) {
       Object.defineProperty(this, prop, proto6[prop]);
     }
@@ -68152,8 +68158,8 @@ var _Stop = class extends Element {
   }
 };
 var Stop = _Stop;
-__publicField(Stop, "Index", 0);
-__publicField(Stop, "Properties", ["offset", "opacity", "color"]);
+__publicField2(Stop, "Index", 0);
+__publicField2(Stop, "Properties", ["offset", "opacity", "color"]);
 var proto6 = {
   offset: {
     enumerable: true,
@@ -68198,11 +68204,11 @@ var proto6 = {
 var _Gradient = class extends Element {
   constructor(stops) {
     super();
-    __publicField(this, "_flagStops", false);
-    __publicField(this, "_flagSpread", false);
-    __publicField(this, "_flagUnits", false);
-    __publicField(this, "_spread", "");
-    __publicField(this, "_units", "");
+    __publicField2(this, "_flagStops", false);
+    __publicField2(this, "_flagSpread", false);
+    __publicField2(this, "_flagUnits", false);
+    __publicField2(this, "_spread", "");
+    __publicField2(this, "_units", "");
     for (let prop in proto7) {
       Object.defineProperty(this, prop, proto7[prop]);
     }
@@ -68255,8 +68261,8 @@ var _Gradient = class extends Element {
   }
 };
 var Gradient = _Gradient;
-__publicField(Gradient, "Stop", Stop);
-__publicField(Gradient, "Properties", ["spread", "stops", "renderer", "units"]);
+__publicField2(Gradient, "Stop", Stop);
+__publicField2(Gradient, "Properties", ["spread", "stops", "renderer", "units"]);
 var proto7 = {
   spread: {
     enumerable: true,
@@ -68317,9 +68323,9 @@ function UnbindStops(items) {
 var _LinearGradient = class extends Gradient {
   constructor(x1, y1, x2, y2, stops) {
     super(stops);
-    __publicField(this, "_flagEndPoints", false);
-    __publicField(this, "_left", null);
-    __publicField(this, "_right", null);
+    __publicField2(this, "_flagEndPoints", false);
+    __publicField2(this, "_left", null);
+    __publicField2(this, "_right", null);
     for (let prop in proto8) {
       Object.defineProperty(this, prop, proto8[prop]);
     }
@@ -68378,8 +68384,8 @@ var _LinearGradient = class extends Gradient {
   }
 };
 var LinearGradient = _LinearGradient;
-__publicField(LinearGradient, "Properties", ["left", "right"]);
-__publicField(LinearGradient, "Stop", Stop);
+__publicField2(LinearGradient, "Properties", ["left", "right"]);
+__publicField2(LinearGradient, "Stop", Stop);
 var proto8 = {
   left: {
     enumerable: true,
@@ -68416,12 +68422,12 @@ function FlagEndPoints() {
 var _RadialGradient = class extends Gradient {
   constructor(cx, cy, r2, stops, fx, fy) {
     super(stops);
-    __publicField(this, "_flagRadius", false);
-    __publicField(this, "_flagCenter", false);
-    __publicField(this, "_flagFocal", false);
-    __publicField(this, "_radius", 0);
-    __publicField(this, "_center", null);
-    __publicField(this, "_focal", null);
+    __publicField2(this, "_flagRadius", false);
+    __publicField2(this, "_flagCenter", false);
+    __publicField2(this, "_flagFocal", false);
+    __publicField2(this, "_radius", 0);
+    __publicField2(this, "_center", null);
+    __publicField2(this, "_focal", null);
     for (let prop in proto9) {
       Object.defineProperty(this, prop, proto9[prop]);
     }
@@ -68487,8 +68493,8 @@ var _RadialGradient = class extends Gradient {
   }
 };
 var RadialGradient = _RadialGradient;
-__publicField(RadialGradient, "Stop", Stop);
-__publicField(RadialGradient, "Properties", ["center", "radius", "focal"]);
+__publicField2(RadialGradient, "Stop", Stop);
+__publicField2(RadialGradient, "Properties", ["center", "radius", "focal"]);
 var proto9 = {
   radius: {
     enumerable: true,
@@ -68547,19 +68553,19 @@ if (root.document) {
 var _Texture = class extends Element {
   constructor(src, callback) {
     super();
-    __publicField(this, "_flagSrc", false);
-    __publicField(this, "_flagImage", false);
-    __publicField(this, "_flagVideo", false);
-    __publicField(this, "_flagLoaded", false);
-    __publicField(this, "_flagRepeat", false);
-    __publicField(this, "_flagOffset", false);
-    __publicField(this, "_flagScale", false);
-    __publicField(this, "_src", "");
-    __publicField(this, "_image", null);
-    __publicField(this, "_loaded", false);
-    __publicField(this, "_repeat", "no-repeat");
-    __publicField(this, "_scale", 1);
-    __publicField(this, "_offset", null);
+    __publicField2(this, "_flagSrc", false);
+    __publicField2(this, "_flagImage", false);
+    __publicField2(this, "_flagVideo", false);
+    __publicField2(this, "_flagLoaded", false);
+    __publicField2(this, "_flagRepeat", false);
+    __publicField2(this, "_flagOffset", false);
+    __publicField2(this, "_flagScale", false);
+    __publicField2(this, "_src", "");
+    __publicField2(this, "_image", null);
+    __publicField2(this, "_loaded", false);
+    __publicField2(this, "_repeat", "no-repeat");
+    __publicField2(this, "_scale", 1);
+    __publicField2(this, "_offset", null);
     this._renderer = {};
     for (let prop in proto10) {
       Object.defineProperty(this, prop, proto10[prop]);
@@ -68685,7 +68691,7 @@ var _Texture = class extends Element {
   }
 };
 var Texture = _Texture;
-__publicField(Texture, "Properties", [
+__publicField2(Texture, "Properties", [
   "src",
   "loaded",
   "repeat",
@@ -68693,9 +68699,9 @@ __publicField(Texture, "Properties", [
   "offset",
   "image"
 ]);
-__publicField(Texture, "RegularExpressions", regex);
-__publicField(Texture, "ImageRegistry", new Registry());
-__publicField(Texture, "Register", {
+__publicField2(Texture, "RegularExpressions", regex);
+__publicField2(Texture, "ImageRegistry", new Registry());
+__publicField2(Texture, "Register", {
   canvas: function(texture, callback) {
     texture._src = "#" + texture.id;
     _Texture.ImageRegistry.add(texture.src, texture.image);
@@ -68873,35 +68879,35 @@ var vector = new Vector();
 var _Path = class extends Shape {
   constructor(vertices, closed2, curved, manual) {
     super();
-    __publicField(this, "_flagVertices", true);
-    __publicField(this, "_flagLength", true);
-    __publicField(this, "_flagFill", true);
-    __publicField(this, "_flagStroke", true);
-    __publicField(this, "_flagLinewidth", true);
-    __publicField(this, "_flagOpacity", true);
-    __publicField(this, "_flagVisible", true);
-    __publicField(this, "_flagCap", true);
-    __publicField(this, "_flagJoin", true);
-    __publicField(this, "_flagMiter", true);
-    __publicField(this, "_flagMask", false);
-    __publicField(this, "_flagClip", false);
-    __publicField(this, "_length", 0);
-    __publicField(this, "_fill", "#fff");
-    __publicField(this, "_stroke", "#000");
-    __publicField(this, "_linewidth", 1);
-    __publicField(this, "_opacity", 1);
-    __publicField(this, "_visible", true);
-    __publicField(this, "_cap", "round");
-    __publicField(this, "_join", "round");
-    __publicField(this, "_miter", 4);
-    __publicField(this, "_closed", true);
-    __publicField(this, "_curved", false);
-    __publicField(this, "_automatic", true);
-    __publicField(this, "_beginning", 0);
-    __publicField(this, "_ending", 1);
-    __publicField(this, "_mask", null);
-    __publicField(this, "_clip", false);
-    __publicField(this, "_dashes", null);
+    __publicField2(this, "_flagVertices", true);
+    __publicField2(this, "_flagLength", true);
+    __publicField2(this, "_flagFill", true);
+    __publicField2(this, "_flagStroke", true);
+    __publicField2(this, "_flagLinewidth", true);
+    __publicField2(this, "_flagOpacity", true);
+    __publicField2(this, "_flagVisible", true);
+    __publicField2(this, "_flagCap", true);
+    __publicField2(this, "_flagJoin", true);
+    __publicField2(this, "_flagMiter", true);
+    __publicField2(this, "_flagMask", false);
+    __publicField2(this, "_flagClip", false);
+    __publicField2(this, "_length", 0);
+    __publicField2(this, "_fill", "#fff");
+    __publicField2(this, "_stroke", "#000");
+    __publicField2(this, "_linewidth", 1);
+    __publicField2(this, "_opacity", 1);
+    __publicField2(this, "_visible", true);
+    __publicField2(this, "_cap", "round");
+    __publicField2(this, "_join", "round");
+    __publicField2(this, "_miter", 4);
+    __publicField2(this, "_closed", true);
+    __publicField2(this, "_curved", false);
+    __publicField2(this, "_automatic", true);
+    __publicField2(this, "_beginning", 0);
+    __publicField2(this, "_ending", 1);
+    __publicField2(this, "_mask", null);
+    __publicField2(this, "_clip", false);
+    __publicField2(this, "_dashes", null);
     for (let prop in proto11) {
       Object.defineProperty(this, prop, proto11[prop]);
     }
@@ -69398,7 +69404,7 @@ var _Path = class extends Shape {
   }
 };
 var Path = _Path;
-__publicField(Path, "Properties", [
+__publicField2(Path, "Properties", [
   "fill",
   "stroke",
   "linewidth",
@@ -69413,7 +69419,7 @@ __publicField(Path, "Properties", [
   "beginning",
   "ending"
 ]);
-__publicField(Path, "Utils", {
+__publicField2(Path, "Utils", {
   getCurveLength: getCurveLength2
 });
 var proto11 = {
@@ -69665,11 +69671,11 @@ var _Rectangle = class extends Path {
       new Anchor()
     ];
     super(points, true, false, true);
-    __publicField(this, "_flagWidth", 0);
-    __publicField(this, "_flagHeight", 0);
-    __publicField(this, "_width", 0);
-    __publicField(this, "_height", 0);
-    __publicField(this, "_origin", null);
+    __publicField2(this, "_flagWidth", 0);
+    __publicField2(this, "_flagHeight", 0);
+    __publicField2(this, "_width", 0);
+    __publicField2(this, "_height", 0);
+    __publicField2(this, "_origin", null);
     for (let prop in proto12) {
       Object.defineProperty(this, prop, proto12[prop]);
     }
@@ -69735,7 +69741,7 @@ var _Rectangle = class extends Path {
   }
 };
 var Rectangle = _Rectangle;
-__publicField(Rectangle, "Properties", ["width", "height"]);
+__publicField2(Rectangle, "Properties", ["width", "height"]);
 var proto12 = {
   width: {
     enumerable: true,
@@ -69775,24 +69781,24 @@ var proto12 = {
 var _Sprite = class extends Rectangle {
   constructor(path2, ox, oy, cols, rows, frameRate) {
     super(ox, oy, 0, 0);
-    __publicField(this, "_flagTexture", false);
-    __publicField(this, "_flagColumns", false);
-    __publicField(this, "_flagRows", false);
-    __publicField(this, "_flagFrameRate", false);
-    __publicField(this, "_flagIndex", false);
-    __publicField(this, "_amount", 1);
-    __publicField(this, "_duration", 0);
-    __publicField(this, "_startTime", 0);
-    __publicField(this, "_playing", false);
-    __publicField(this, "_firstFrame", 0);
-    __publicField(this, "_lastFrame", 0);
-    __publicField(this, "_loop", true);
-    __publicField(this, "_texture", null);
-    __publicField(this, "_columns", 1);
-    __publicField(this, "_rows", 1);
-    __publicField(this, "_frameRate", 0);
-    __publicField(this, "_index", 0);
-    __publicField(this, "_origin", null);
+    __publicField2(this, "_flagTexture", false);
+    __publicField2(this, "_flagColumns", false);
+    __publicField2(this, "_flagRows", false);
+    __publicField2(this, "_flagFrameRate", false);
+    __publicField2(this, "_flagIndex", false);
+    __publicField2(this, "_amount", 1);
+    __publicField2(this, "_duration", 0);
+    __publicField2(this, "_startTime", 0);
+    __publicField2(this, "_playing", false);
+    __publicField2(this, "_firstFrame", 0);
+    __publicField2(this, "_lastFrame", 0);
+    __publicField2(this, "_loop", true);
+    __publicField2(this, "_texture", null);
+    __publicField2(this, "_columns", 1);
+    __publicField2(this, "_rows", 1);
+    __publicField2(this, "_frameRate", 0);
+    __publicField2(this, "_index", 0);
+    __publicField2(this, "_origin", null);
     for (let prop in proto13) {
       Object.defineProperty(this, prop, proto13[prop]);
     }
@@ -69947,7 +69953,7 @@ var _Sprite = class extends Rectangle {
   }
 };
 var Sprite = _Sprite;
-__publicField(Sprite, "Properties", [
+__publicField2(Sprite, "Properties", [
   "texture",
   "columns",
   "rows",
@@ -70016,8 +70022,8 @@ var _Circle = class extends Path {
       points.push(new Anchor(0, 0, 0, 0, 0, 0));
     }
     super(points, true, true, true);
-    __publicField(this, "_flagRadius", false);
-    __publicField(this, "_radius", 0);
+    __publicField2(this, "_flagRadius", false);
+    __publicField2(this, "_radius", 0);
     for (let prop in proto14) {
       Object.defineProperty(this, prop, proto14[prop]);
     }
@@ -70094,7 +70100,7 @@ var _Circle = class extends Path {
   }
 };
 var Circle = _Circle;
-__publicField(Circle, "Properties", ["radius"]);
+__publicField2(Circle, "Properties", ["radius"]);
 var proto14 = {
   radius: {
     enumerable: true,
@@ -70120,10 +70126,10 @@ var _Ellipse = class extends Path {
       points.push(new Anchor());
     }
     super(points, true, true, true);
-    __publicField(this, "_flagWidth", false);
-    __publicField(this, "_flagHeight", false);
-    __publicField(this, "_width", 0);
-    __publicField(this, "_height", 0);
+    __publicField2(this, "_flagWidth", false);
+    __publicField2(this, "_flagHeight", false);
+    __publicField2(this, "_width", 0);
+    __publicField2(this, "_height", 0);
     for (let prop in proto15) {
       Object.defineProperty(this, prop, proto15[prop]);
     }
@@ -70206,7 +70212,7 @@ var _Ellipse = class extends Path {
   }
 };
 var Ellipse = _Ellipse;
-__publicField(Ellipse, "Properties", ["width", "height"]);
+__publicField2(Ellipse, "Properties", ["width", "height"]);
 var proto15 = {
   width: {
     enumerable: true,
@@ -70294,12 +70300,12 @@ var _RoundedRectangle = class extends Path {
       );
     }
     super(points);
-    __publicField(this, "_flagWidth", false);
-    __publicField(this, "_flagHeight", false);
-    __publicField(this, "_flagRadius", false);
-    __publicField(this, "_width", 0);
-    __publicField(this, "_height", 0);
-    __publicField(this, "_radius", 12);
+    __publicField2(this, "_flagWidth", false);
+    __publicField2(this, "_flagHeight", false);
+    __publicField2(this, "_flagRadius", false);
+    __publicField2(this, "_width", 0);
+    __publicField2(this, "_height", 0);
+    __publicField2(this, "_radius", 12);
     for (let prop in proto17) {
       Object.defineProperty(this, prop, proto17[prop]);
     }
@@ -70429,7 +70435,7 @@ var _RoundedRectangle = class extends Path {
   }
 };
 var RoundedRectangle = _RoundedRectangle;
-__publicField(RoundedRectangle, "Properties", ["width", "height", "radius"]);
+__publicField2(RoundedRectangle, "Properties", ["width", "height", "radius"]);
 var proto17 = {
   width: {
     enumerable: true,
@@ -70480,39 +70486,39 @@ if (root.document) {
 var _Text = class extends Shape {
   constructor(message, x2, y2, styles) {
     super();
-    __publicField(this, "_flagValue", true);
-    __publicField(this, "_flagFamily", true);
-    __publicField(this, "_flagSize", true);
-    __publicField(this, "_flagLeading", true);
-    __publicField(this, "_flagAlignment", true);
-    __publicField(this, "_flagBaseline", true);
-    __publicField(this, "_flagStyle", true);
-    __publicField(this, "_flagWeight", true);
-    __publicField(this, "_flagDecoration", true);
-    __publicField(this, "_flagFill", true);
-    __publicField(this, "_flagStroke", true);
-    __publicField(this, "_flagLinewidth", true);
-    __publicField(this, "_flagOpacity", true);
-    __publicField(this, "_flagVisible", true);
-    __publicField(this, "_flagMask", false);
-    __publicField(this, "_flagClip", false);
-    __publicField(this, "_value", "");
-    __publicField(this, "_family", "sans-serif");
-    __publicField(this, "_size", 13);
-    __publicField(this, "_leading", 17);
-    __publicField(this, "_alignment", "center");
-    __publicField(this, "_baseline", "middle");
-    __publicField(this, "_style", "normal");
-    __publicField(this, "_weight", 500);
-    __publicField(this, "_decoration", "none");
-    __publicField(this, "_fill", "#000");
-    __publicField(this, "_stroke", "none");
-    __publicField(this, "_linewidth", 1);
-    __publicField(this, "_opacity", 1);
-    __publicField(this, "_visible", true);
-    __publicField(this, "_mask", null);
-    __publicField(this, "_clip", false);
-    __publicField(this, "_dashes", null);
+    __publicField2(this, "_flagValue", true);
+    __publicField2(this, "_flagFamily", true);
+    __publicField2(this, "_flagSize", true);
+    __publicField2(this, "_flagLeading", true);
+    __publicField2(this, "_flagAlignment", true);
+    __publicField2(this, "_flagBaseline", true);
+    __publicField2(this, "_flagStyle", true);
+    __publicField2(this, "_flagWeight", true);
+    __publicField2(this, "_flagDecoration", true);
+    __publicField2(this, "_flagFill", true);
+    __publicField2(this, "_flagStroke", true);
+    __publicField2(this, "_flagLinewidth", true);
+    __publicField2(this, "_flagOpacity", true);
+    __publicField2(this, "_flagVisible", true);
+    __publicField2(this, "_flagMask", false);
+    __publicField2(this, "_flagClip", false);
+    __publicField2(this, "_value", "");
+    __publicField2(this, "_family", "sans-serif");
+    __publicField2(this, "_size", 13);
+    __publicField2(this, "_leading", 17);
+    __publicField2(this, "_alignment", "center");
+    __publicField2(this, "_baseline", "middle");
+    __publicField2(this, "_style", "normal");
+    __publicField2(this, "_weight", 500);
+    __publicField2(this, "_decoration", "none");
+    __publicField2(this, "_fill", "#000");
+    __publicField2(this, "_stroke", "none");
+    __publicField2(this, "_linewidth", 1);
+    __publicField2(this, "_opacity", 1);
+    __publicField2(this, "_visible", true);
+    __publicField2(this, "_mask", null);
+    __publicField2(this, "_clip", false);
+    __publicField2(this, "_dashes", null);
     for (let prop in proto18) {
       Object.defineProperty(this, prop, proto18[prop]);
     }
@@ -70657,8 +70663,8 @@ var _Text = class extends Shape {
   }
 };
 var Text = _Text;
-__publicField(Text, "Ratio", 0.6);
-__publicField(Text, "Properties", [
+__publicField2(Text, "Ratio", 0.6);
+__publicField2(Text, "Properties", [
   "value",
   "family",
   "size",
@@ -71857,20 +71863,20 @@ function xhr(path2, callback) {
 var _ImageSequence = class extends Rectangle {
   constructor(paths, ox, oy, frameRate) {
     super(ox, oy, 0, 0);
-    __publicField(this, "_flagTextures", false);
-    __publicField(this, "_flagFrameRate", false);
-    __publicField(this, "_flagIndex", false);
-    __publicField(this, "_amount", 1);
-    __publicField(this, "_duration", 0);
-    __publicField(this, "_index", 0);
-    __publicField(this, "_startTime", 0);
-    __publicField(this, "_playing", false);
-    __publicField(this, "_firstFrame", 0);
-    __publicField(this, "_lastFrame", 0);
-    __publicField(this, "_loop", true);
-    __publicField(this, "_textures", null);
-    __publicField(this, "_frameRate", 0);
-    __publicField(this, "_origin", null);
+    __publicField2(this, "_flagTextures", false);
+    __publicField2(this, "_flagFrameRate", false);
+    __publicField2(this, "_flagIndex", false);
+    __publicField2(this, "_amount", 1);
+    __publicField2(this, "_duration", 0);
+    __publicField2(this, "_index", 0);
+    __publicField2(this, "_startTime", 0);
+    __publicField2(this, "_playing", false);
+    __publicField2(this, "_firstFrame", 0);
+    __publicField2(this, "_lastFrame", 0);
+    __publicField2(this, "_loop", true);
+    __publicField2(this, "_textures", null);
+    __publicField2(this, "_frameRate", 0);
+    __publicField2(this, "_origin", null);
     for (let prop in proto19) {
       Object.defineProperty(this, prop, proto19[prop]);
     }
@@ -72020,12 +72026,12 @@ var _ImageSequence = class extends Rectangle {
   }
 };
 var ImageSequence = _ImageSequence;
-__publicField(ImageSequence, "Properties", [
+__publicField2(ImageSequence, "Properties", [
   "textures",
   "frameRate",
   "index"
 ]);
-__publicField(ImageSequence, "DefaultFrameRate", 30);
+__publicField2(ImageSequence, "DefaultFrameRate", 30);
 var proto19 = {
   frameRate: {
     enumerable: true,
@@ -72096,14 +72102,14 @@ var _ArcSegment = class extends Path {
       points.push(new Anchor());
     }
     super(points, true, false, true);
-    __publicField(this, "_flagStartAngle", false);
-    __publicField(this, "_flagEndAngle", false);
-    __publicField(this, "_flagInnerRadius", false);
-    __publicField(this, "_flagOuterRadius", false);
-    __publicField(this, "_startAngle", 0);
-    __publicField(this, "_endAngle", TWO_PI);
-    __publicField(this, "_innerRadius", 0);
-    __publicField(this, "_outerRadius", 0);
+    __publicField2(this, "_flagStartAngle", false);
+    __publicField2(this, "_flagEndAngle", false);
+    __publicField2(this, "_flagInnerRadius", false);
+    __publicField2(this, "_flagOuterRadius", false);
+    __publicField2(this, "_startAngle", 0);
+    __publicField2(this, "_endAngle", TWO_PI);
+    __publicField2(this, "_innerRadius", 0);
+    __publicField2(this, "_outerRadius", 0);
     for (let prop in proto20) {
       Object.defineProperty(this, prop, proto20[prop]);
     }
@@ -72270,7 +72276,7 @@ var _ArcSegment = class extends Path {
   }
 };
 var ArcSegment = _ArcSegment;
-__publicField(ArcSegment, "Properties", ["startAngle", "endAngle", "innerRadius", "outerRadius"]);
+__publicField2(ArcSegment, "Properties", ["startAngle", "endAngle", "innerRadius", "outerRadius"]);
 var proto20 = {
   startAngle: {
     enumerable: true,
@@ -72318,32 +72324,32 @@ var floor3 = Math.floor;
 var _Points = class extends Shape {
   constructor(vertices) {
     super();
-    __publicField(this, "_flagVertices", true);
-    __publicField(this, "_flagLength", true);
-    __publicField(this, "_flagFill", true);
-    __publicField(this, "_flagStroke", true);
-    __publicField(this, "_flagLinewidth", true);
-    __publicField(this, "_flagOpacity", true);
-    __publicField(this, "_flagVisible", true);
-    __publicField(this, "_flagSize", true);
-    __publicField(this, "_flagSizeAttenuation", true);
-    __publicField(this, "_length", 0);
-    __publicField(this, "_fill", "#fff");
-    __publicField(this, "_stroke", "#000");
-    __publicField(this, "_linewidth", 1);
-    __publicField(this, "_opacity", 1);
-    __publicField(this, "_visible", true);
-    __publicField(this, "_size", 1);
-    __publicField(this, "_sizeAttenuation", false);
-    __publicField(this, "_beginning", 0);
-    __publicField(this, "_ending", 1);
-    __publicField(this, "_dashes", null);
-    __publicField(this, "noFill", Path.prototype.noFill);
-    __publicField(this, "noStroke", Path.prototype.noStroke);
-    __publicField(this, "corner", Path.prototype.corner);
-    __publicField(this, "center", Path.prototype.center);
-    __publicField(this, "getBoundingClientRect", Path.prototype.getBoundingClientRect);
-    __publicField(this, "_updateLength", Path.prototype._updateLength);
+    __publicField2(this, "_flagVertices", true);
+    __publicField2(this, "_flagLength", true);
+    __publicField2(this, "_flagFill", true);
+    __publicField2(this, "_flagStroke", true);
+    __publicField2(this, "_flagLinewidth", true);
+    __publicField2(this, "_flagOpacity", true);
+    __publicField2(this, "_flagVisible", true);
+    __publicField2(this, "_flagSize", true);
+    __publicField2(this, "_flagSizeAttenuation", true);
+    __publicField2(this, "_length", 0);
+    __publicField2(this, "_fill", "#fff");
+    __publicField2(this, "_stroke", "#000");
+    __publicField2(this, "_linewidth", 1);
+    __publicField2(this, "_opacity", 1);
+    __publicField2(this, "_visible", true);
+    __publicField2(this, "_size", 1);
+    __publicField2(this, "_sizeAttenuation", false);
+    __publicField2(this, "_beginning", 0);
+    __publicField2(this, "_ending", 1);
+    __publicField2(this, "_dashes", null);
+    __publicField2(this, "noFill", Path.prototype.noFill);
+    __publicField2(this, "noStroke", Path.prototype.noStroke);
+    __publicField2(this, "corner", Path.prototype.corner);
+    __publicField2(this, "center", Path.prototype.center);
+    __publicField2(this, "getBoundingClientRect", Path.prototype.getBoundingClientRect);
+    __publicField2(this, "_updateLength", Path.prototype._updateLength);
     for (let prop in proto21) {
       Object.defineProperty(this, prop, proto21[prop]);
     }
@@ -72462,7 +72468,7 @@ var _Points = class extends Shape {
   }
 };
 var Points = _Points;
-__publicField(Points, "Properties", [
+__publicField2(Points, "Properties", [
   "fill",
   "stroke",
   "linewidth",
@@ -72623,13 +72629,13 @@ var _Polygon = class extends Path {
   constructor(x2, y2, radius, sides) {
     sides = Math.max(sides || 0, 3);
     super();
-    __publicField(this, "_flagWidth", false);
-    __publicField(this, "_flagHeight", false);
-    __publicField(this, "_flagSides", false);
-    __publicField(this, "_radius", 0);
-    __publicField(this, "_width", 0);
-    __publicField(this, "_height", 0);
-    __publicField(this, "_sides", 0);
+    __publicField2(this, "_flagWidth", false);
+    __publicField2(this, "_flagHeight", false);
+    __publicField2(this, "_flagSides", false);
+    __publicField2(this, "_radius", 0);
+    __publicField2(this, "_width", 0);
+    __publicField2(this, "_height", 0);
+    __publicField2(this, "_sides", 0);
     for (let prop in proto22) {
       Object.defineProperty(this, prop, proto22[prop]);
     }
@@ -72710,7 +72716,7 @@ var _Polygon = class extends Path {
   }
 };
 var Polygon = _Polygon;
-__publicField(Polygon, "Properties", ["width", "height", "sides"]);
+__publicField2(Polygon, "Properties", ["width", "height", "sides"]);
 var proto22 = {
   radius: {
     enumerable: true,
@@ -72768,12 +72774,12 @@ var _Star = class extends Path {
       sides = 5;
     }
     super();
-    __publicField(this, "_flagInnerRadius", false);
-    __publicField(this, "_flagOuterRadius", false);
-    __publicField(this, "_flagSides", false);
-    __publicField(this, "_innerRadius", 0);
-    __publicField(this, "_outerRadius", 0);
-    __publicField(this, "_sides", 0);
+    __publicField2(this, "_flagInnerRadius", false);
+    __publicField2(this, "_flagOuterRadius", false);
+    __publicField2(this, "_flagSides", false);
+    __publicField2(this, "_innerRadius", 0);
+    __publicField2(this, "_outerRadius", 0);
+    __publicField2(this, "_sides", 0);
     for (let prop in proto23) {
       Object.defineProperty(this, prop, proto23[prop]);
     }
@@ -72859,7 +72865,7 @@ var _Star = class extends Path {
   }
 };
 var Star = _Star;
-__publicField(Star, "Properties", ["innerRadius", "outerRadius", "sides"]);
+__publicField2(Star, "Properties", ["innerRadius", "outerRadius", "sides"]);
 var proto23 = {
   innerRadius: {
     enumerable: true,
@@ -73675,7 +73681,7 @@ var Renderer2 = class extends Events {
     return this;
   }
 };
-__publicField(Renderer2, "Utils", svg);
+__publicField2(Renderer2, "Utils", svg);
 var shaders = {
   create: function(gl, source, type2) {
     const shader = gl.createShader(gl[type2]);
@@ -74895,7 +74901,7 @@ var Renderer3 = class extends Events {
     return this;
   }
 };
-__publicField(Renderer3, "Utils", webgl);
+__publicField2(Renderer3, "Utils", webgl);
 var Utils = _.extend({
   Error: TwoError,
   getRatio,
@@ -74904,15 +74910,15 @@ var Utils = _.extend({
 }, _, CanvasShim, curves_exports, math_exports);
 var _Two = class {
   constructor(options) {
-    __publicField(this, "_events", new Events());
-    __publicField(this, "type", "");
-    __publicField(this, "renderer", null);
-    __publicField(this, "scene", null);
-    __publicField(this, "width", 0);
-    __publicField(this, "height", 0);
-    __publicField(this, "frameCount", 0);
-    __publicField(this, "timeDelta", 0);
-    __publicField(this, "playing", false);
+    __publicField2(this, "_events", new Events());
+    __publicField2(this, "type", "");
+    __publicField2(this, "renderer", null);
+    __publicField2(this, "scene", null);
+    __publicField2(this, "width", 0);
+    __publicField2(this, "height", 0);
+    __publicField2(this, "frameCount", 0);
+    __publicField2(this, "timeDelta", 0);
+    __publicField2(this, "playing", false);
     const params = _.defaults(options || {}, {
       fullscreen: false,
       fitted: false,
@@ -75345,46 +75351,46 @@ var _Two = class {
   }
 };
 var Two = _Two;
-__publicField(Two, "nextFrameID", Constants.nextFrameID);
-__publicField(Two, "Types", Constants.Types);
-__publicField(Two, "Version", Constants.Version);
-__publicField(Two, "PublishDate", Constants.PublishDate);
-__publicField(Two, "Identifier", Constants.Identifier);
-__publicField(Two, "Resolution", Constants.Resolution);
-__publicField(Two, "AutoCalculateImportedMatrices", Constants.AutoCalculateImportedMatrices);
-__publicField(Two, "Instances", Constants.Instances);
-__publicField(Two, "uniqueId", Constants.uniqueId);
-__publicField(Two, "Anchor", Anchor);
-__publicField(Two, "Collection", Collection);
-__publicField(Two, "Events", Events);
-__publicField(Two, "Group", Group);
-__publicField(Two, "Matrix", Matrix2);
-__publicField(Two, "Path", Path);
-__publicField(Two, "Registry", Registry);
-__publicField(Two, "Shape", Shape);
-__publicField(Two, "Text", Text);
-__publicField(Two, "Vector", Vector);
-__publicField(Two, "Gradient", Gradient);
-__publicField(Two, "ImageSequence", ImageSequence);
-__publicField(Two, "LinearGradient", LinearGradient);
-__publicField(Two, "RadialGradient", RadialGradient);
-__publicField(Two, "Sprite", Sprite);
-__publicField(Two, "Stop", Stop);
-__publicField(Two, "Texture", Texture);
-__publicField(Two, "ArcSegment", ArcSegment);
-__publicField(Two, "Circle", Circle);
-__publicField(Two, "Ellipse", Ellipse);
-__publicField(Two, "Line", Line);
-__publicField(Two, "Points", Points);
-__publicField(Two, "Polygon", Polygon);
-__publicField(Two, "Rectangle", Rectangle);
-__publicField(Two, "RoundedRectangle", RoundedRectangle);
-__publicField(Two, "Star", Star);
-__publicField(Two, "CanvasRenderer", Renderer);
-__publicField(Two, "SVGRenderer", Renderer2);
-__publicField(Two, "WebGLRenderer", Renderer3);
-__publicField(Two, "Commands", Commands);
-__publicField(Two, "Utils", Utils);
+__publicField2(Two, "nextFrameID", Constants.nextFrameID);
+__publicField2(Two, "Types", Constants.Types);
+__publicField2(Two, "Version", Constants.Version);
+__publicField2(Two, "PublishDate", Constants.PublishDate);
+__publicField2(Two, "Identifier", Constants.Identifier);
+__publicField2(Two, "Resolution", Constants.Resolution);
+__publicField2(Two, "AutoCalculateImportedMatrices", Constants.AutoCalculateImportedMatrices);
+__publicField2(Two, "Instances", Constants.Instances);
+__publicField2(Two, "uniqueId", Constants.uniqueId);
+__publicField2(Two, "Anchor", Anchor);
+__publicField2(Two, "Collection", Collection);
+__publicField2(Two, "Events", Events);
+__publicField2(Two, "Group", Group);
+__publicField2(Two, "Matrix", Matrix2);
+__publicField2(Two, "Path", Path);
+__publicField2(Two, "Registry", Registry);
+__publicField2(Two, "Shape", Shape);
+__publicField2(Two, "Text", Text);
+__publicField2(Two, "Vector", Vector);
+__publicField2(Two, "Gradient", Gradient);
+__publicField2(Two, "ImageSequence", ImageSequence);
+__publicField2(Two, "LinearGradient", LinearGradient);
+__publicField2(Two, "RadialGradient", RadialGradient);
+__publicField2(Two, "Sprite", Sprite);
+__publicField2(Two, "Stop", Stop);
+__publicField2(Two, "Texture", Texture);
+__publicField2(Two, "ArcSegment", ArcSegment);
+__publicField2(Two, "Circle", Circle);
+__publicField2(Two, "Ellipse", Ellipse);
+__publicField2(Two, "Line", Line);
+__publicField2(Two, "Points", Points);
+__publicField2(Two, "Polygon", Polygon);
+__publicField2(Two, "Rectangle", Rectangle);
+__publicField2(Two, "RoundedRectangle", RoundedRectangle);
+__publicField2(Two, "Star", Star);
+__publicField2(Two, "CanvasRenderer", Renderer);
+__publicField2(Two, "SVGRenderer", Renderer2);
+__publicField2(Two, "WebGLRenderer", Renderer3);
+__publicField2(Two, "Commands", Commands);
+__publicField2(Two, "Utils", Utils);
 function fitToWindow() {
   const wr = document.body.getBoundingClientRect();
   const width = this.width = wr.width;
@@ -75453,7 +75459,7 @@ function Component$3() {
     columnNumber: 10
   }, this);
 }
-const example$6 = {
+const example$7 = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
@@ -75557,7 +75563,7 @@ function Slider$1({
     columnNumber: 5
   }, this);
 }
-const example$5 = {
+const example$6 = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
@@ -75661,7 +75667,7 @@ function Slider({
     columnNumber: 5
   }, this);
 }
-const example$4 = {
+const example$5 = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
@@ -75670,7 +75676,125 @@ const example$4 = {
 };
 const vertexShaderSource = "#version 300 es\n\nprecision highp float;\n\nlayout (location = 0) in vec3 aPosition;\n\nuniform float u_time;\n\nout vec2 uv;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.1;\n  vec3 p = aPosition + vec3(0.0, wave, 0.0);\n  gl_Position = vec4(p, 1.0);\n  uv = aPosition.xy * vec2(0.5, 0.5);\n}";
 const fragmentShaderSource = "#version 300 es\n\nprecision highp float;\n\nuniform float u_time;\n\nin vec2 uv;\nout vec4 outColor;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.5 + 0.5;\n  outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);\n}\n";
-var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
+function getWebgl2Context(canvas3) {
+  const gl = canvas3.getContext("webgl2");
+  if (!gl) {
+    throw new Error("gl not supported");
+  }
+  return gl;
+}
+function createBuffer(gl, initialData) {
+  const buffer = gl.createBuffer();
+  if (!buffer) {
+    throw new Error("gl.createBuffer() failed");
+  }
+  if (initialData !== void 0) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, initialData, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  }
+  return buffer;
+}
+function createVertexArray(gl) {
+  const vao = gl.createVertexArray();
+  if (!vao) {
+    throw new Error("gl.createVertexArray() failed");
+  }
+  return vao;
+}
+function createTexture(gl) {
+  const texture = gl.createTexture();
+  if (!texture) {
+    throw new Error("gl.createTexture() failed");
+  }
+  return texture;
+}
+function createAttribute(gl, program, options) {
+  const {
+    name,
+    buffer,
+    size: size2 = 1,
+    type: type2 = gl.FLOAT,
+    normalized = false,
+    stride = 0,
+    offset = 0
+  } = options;
+  const attributeLocation = gl.getAttribLocation(program, name);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.enableVertexAttribArray(attributeLocation);
+  gl.vertexAttribPointer(
+    attributeLocation,
+    size2,
+    type2,
+    normalized,
+    stride,
+    offset
+  );
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+}
+class WebGLResourceManager {
+  constructor(gl) {
+    __publicField(this, "buffers", /* @__PURE__ */ new Set());
+    __publicField(this, "vaos", /* @__PURE__ */ new Set());
+    __publicField(this, "textures", /* @__PURE__ */ new Set());
+    this.gl = gl;
+  }
+  createBuffer(initialData) {
+    const buffer = createBuffer(this.gl, initialData);
+    this.buffers.add(buffer);
+    return buffer;
+  }
+  createVertexArray() {
+    const vao = createVertexArray(this.gl);
+    this.vaos.add(vao);
+    return vao;
+  }
+  createTexture() {
+    const texture = createTexture(this.gl);
+    this.textures.add(texture);
+    return texture;
+  }
+  deleteBuffer(buffer) {
+    this.gl.deleteBuffer(buffer);
+    this.buffers.delete(buffer);
+  }
+  deleteVertexArray(vao) {
+    this.gl.deleteVertexArray(vao);
+    this.vaos.delete(vao);
+  }
+  deleteTexture(texture) {
+    this.gl.deleteBuffer(texture);
+    this.textures.delete(texture);
+  }
+  deleteAll() {
+    for (const buffer of this.buffers) {
+      this.gl.deleteBuffer(buffer);
+    }
+    for (const vao of this.vaos) {
+      this.gl.deleteVertexArray(vao);
+    }
+    for (const texture of this.textures) {
+      this.gl.deleteTexture(texture);
+    }
+    this.buffers.clear();
+    this.vaos.clear();
+    this.textures.clear();
+  }
+}
+function getUniformLocation(gl, program, name) {
+  const location = gl.getUniformLocation(program, name);
+  if (!location) {
+    throw new Error("could not create location");
+  }
+  return location;
+}
+function getUniformLocations(gl, program, names) {
+  const obj = {};
+  for (const name of names) {
+    obj[name] = getUniformLocation(gl, program, name);
+  }
+  return obj;
+}
 function compileShader$1(gl, type2, source) {
   const shader = gl.createShader(type2);
   if (!shader) {
@@ -75702,7 +75826,11 @@ function createProgram$1(gl, vertexShader2, fragmentShader2) {
 }
 function createProgramForShaders$1(gl, vertexShaderSource2, fragmentShaderSource2) {
   const vertexShader2 = compileShader$1(gl, gl.VERTEX_SHADER, vertexShaderSource2);
-  const fragmentShader2 = compileShader$1(gl, gl.FRAGMENT_SHADER, fragmentShaderSource2);
+  const fragmentShader2 = compileShader$1(
+    gl,
+    gl.FRAGMENT_SHADER,
+    fragmentShaderSource2
+  );
   return createProgram$1(gl, vertexShader2, fragmentShader2);
 }
 function updateCanvasSize$1(canvas3, gl) {
@@ -75711,13 +75839,66 @@ function updateCanvasSize$1(canvas3, gl) {
   canvas3.height = canvas3.clientHeight * dpr;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
 }
-function setupWebgl$3(canvas3) {
+function unbindAll(gl) {
+  const numTextureUnits = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
+  for (let unit = 0; unit < numTextureUnits; ++unit) {
+    gl.activeTexture(gl.TEXTURE0 + unit);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+  }
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+  gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+}
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
+function compileShader(gl, type2, source) {
+  const shader = gl.createShader(type2);
+  if (!shader) {
+    throw new Error("Failed to create shader");
+  }
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    const log = gl.getShaderInfoLog(shader);
+    gl.deleteShader(shader);
+    throw new Error(`Shader compilation error: ${log}`);
+  }
+  return shader;
+}
+function createProgram(gl, vertexShader2, fragmentShader2) {
+  const program = gl.createProgram();
+  if (!program) {
+    throw new Error("Failed to create program");
+  }
+  gl.attachShader(program, vertexShader2);
+  gl.attachShader(program, fragmentShader2);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    const log = gl.getProgramInfoLog(program);
+    gl.deleteProgram(program);
+    throw new Error(`program linking error: ${log}`);
+  }
+  return program;
+}
+function createProgramForShaders(gl, vertexShaderSource2, fragmentShaderSource2) {
+  const vertexShader2 = compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource2);
+  const fragmentShader2 = compileShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource2);
+  return createProgram(gl, vertexShader2, fragmentShader2);
+}
+function updateCanvasSize(canvas3, gl) {
+  const dpr = window.devicePixelRatio || 1;
+  canvas3.width = canvas3.clientWidth * dpr;
+  canvas3.height = canvas3.clientHeight * dpr;
+  gl.viewport(0, 0, canvas3.width, canvas3.height);
+}
+function setupWebgl$4(canvas3) {
   const gl = canvas3.getContext("webgl2");
   if (!gl) {
     throw new Error("gl not supported");
   }
-  updateCanvasSize$1(canvas3, gl);
-  const program = createProgramForShaders$1(gl, vertexShaderSource, fragmentShaderSource);
+  updateCanvasSize(canvas3, gl);
+  const program = createProgramForShaders(gl, vertexShaderSource, fragmentShaderSource);
   gl.useProgram(program);
   const vertexBuffer = gl.createBuffer();
   if (!vertexBuffer) {
@@ -75754,6 +75935,7 @@ function setupWebgl$3(canvas3) {
   render();
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
   };
@@ -75765,7 +75947,7 @@ function Component() {
     if (!canvas3) {
       return;
     }
-    return setupWebgl$3(canvas3);
+    return setupWebgl$4(canvas3);
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
     ref,
@@ -75774,89 +75956,17 @@ function Component() {
     }
   }, void 0, false, {
     fileName: _jsxFileName$2,
-    lineNumber: 179,
+    lineNumber: 181,
     columnNumber: 10
   }, this);
 }
-const example$3 = {
+const example$4 = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
   description: "Hello world for WebGL2.",
   Component
 };
-function getWebgl2Context(canvas3) {
-  const gl = canvas3.getContext("webgl2");
-  if (!gl) {
-    throw new Error("gl not supported");
-  }
-  return gl;
-}
-function createBuffer(gl) {
-  const buffer = gl.createBuffer();
-  if (!buffer) {
-    throw new Error("gl.createBuffer() failed");
-  }
-  return buffer;
-}
-function createVertexArray(gl) {
-  const buffer = gl.createVertexArray();
-  if (!buffer) {
-    throw new Error("gl.createVertexArray() failed");
-  }
-  return buffer;
-}
-function createTexture(gl) {
-  const texture = gl.createTexture();
-  if (!texture) {
-    throw new Error("gl.createTexture() failed");
-  }
-  return texture;
-}
-function compileShader(gl, type2, source) {
-  const shader = gl.createShader(type2);
-  if (!shader) {
-    throw new Error("Failed to create shader");
-  }
-  gl.shaderSource(shader, source);
-  gl.compileShader(shader);
-  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    const log = gl.getShaderInfoLog(shader);
-    gl.deleteShader(shader);
-    throw new Error(`Shader compilation error: ${log}`);
-  }
-  return shader;
-}
-function createProgram(gl, vertexShader2, fragmentShader2) {
-  const program = gl.createProgram();
-  if (!program) {
-    throw new Error("Failed to create program");
-  }
-  gl.attachShader(program, vertexShader2);
-  gl.attachShader(program, fragmentShader2);
-  gl.linkProgram(program);
-  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    const log = gl.getProgramInfoLog(program);
-    gl.deleteProgram(program);
-    throw new Error(`program linking error: ${log}`);
-  }
-  return program;
-}
-function createProgramForShaders(gl, vertexShaderSource2, fragmentShaderSource2) {
-  const vertexShader2 = compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource2);
-  const fragmentShader2 = compileShader(
-    gl,
-    gl.FRAGMENT_SHADER,
-    fragmentShaderSource2
-  );
-  return createProgram(gl, vertexShader2, fragmentShader2);
-}
-function updateCanvasSize(canvas3, gl) {
-  const dpr = window.devicePixelRatio || 1;
-  canvas3.width = canvas3.clientWidth * dpr;
-  canvas3.height = canvas3.clientHeight * dpr;
-  gl.viewport(0, 0, canvas3.width, canvas3.height);
-}
 var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/utils/create-canvas-component.tsx";
 function createCanvasComponent(onMount, props = {}) {
   return function CanvasComponent() {
@@ -75878,7 +75988,7 @@ function createCanvasComponent(onMount, props = {}) {
     }, this);
   };
 }
-const vertexShader$2 = `#version 300 es
+const vertexShader$3 = `#version 300 es
 
 precision highp float;
 
@@ -75895,7 +76005,7 @@ void main() {
   uv = aPosition.xy * vec2(0.5, 0.5);
 }
 `;
-const fragmentShader$2 = `#version 300 es
+const fragmentShader$3 = `#version 300 es
 
 precision highp float;
 
@@ -75909,10 +76019,10 @@ void main() {
   outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);
 }
 `;
-function setupWebgl$2(canvas3) {
+function setupWebgl$3(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  updateCanvasSize(canvas3, gl);
-  const program = createProgramForShaders(gl, vertexShader$2, fragmentShader$2);
+  updateCanvasSize$1(canvas3, gl);
+  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
   gl.useProgram(program);
   const vertexBuffer = createBuffer(gl);
   const vertexData = new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]);
@@ -75948,18 +76058,153 @@ function setupWebgl$2(canvas3) {
   render();
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$2 = {
+const example$3 = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
   description: "Hello world for WebGL2 with reduced boilerplate using utility functions.",
-  Component: createCanvasComponent(setupWebgl$2, {
+  Component: createCanvasComponent(setupWebgl$3, {
     style: {
       height: "640px"
+    }
+  })
+};
+const WIDTH$1 = 8;
+const HEIGHT$1 = 8;
+const vertexShader$2 = `#version 300 es
+
+in vec2 a_position;
+in vec2 a_texCoord;
+
+uniform vec2 u_resolution;
+
+out vec2 v_texCoord;
+
+void main() {
+  vec2 unitSpace = a_position / u_resolution;
+  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
+
+  gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+
+  // pass the texCoord to the fragment shader
+  // The GPU will interpolate this value between points.
+  v_texCoord = a_texCoord;
+}
+`;
+const fragmentShader$2 = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_texCoord;
+out vec4 outColor;
+
+void main() {
+  outColor = texture(u_image, v_texCoord);
+}
+`;
+const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
+async function loadImage$2(src) {
+  return new Promise((resolve2) => {
+    const image = new Image();
+    image.src = src;
+    image.onload = () => resolve2(image);
+  });
+}
+function getQuadPositions$1(x2, y2, w2, h2) {
+  const x1 = x2;
+  const y1 = y2;
+  const x22 = x1 + w2;
+  const y22 = y1 + h2;
+  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
+}
+function createAndUploadTexture$2(gl, image) {
+  const texture = createTexture(gl);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+  return texture;
+}
+function setupWebglWithImages$2(canvas3, images) {
+  const gl = getWebgl2Context(canvas3);
+  canvas3.width = WIDTH$1;
+  canvas3.height = HEIGHT$1;
+  gl.viewport(0, 0, canvas3.width, canvas3.height);
+  gl.clearColor(0, 0, 0, 0);
+  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
+  const vao = createVertexArray(gl);
+  gl.bindVertexArray(vao);
+  const positionBuffer = createBuffer(gl);
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions$1(0, 0, WIDTH$1, HEIGHT$1), gl.STATIC_DRAW);
+  const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+  gl.enableVertexAttribArray(positionAttributeLocation);
+  gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  const texCoordBuffer = createBuffer(gl);
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), gl.STATIC_DRAW);
+  const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
+  gl.enableVertexAttribArray(texCoordAttributeLocation);
+  gl.vertexAttribPointer(texCoordAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  gl.bindVertexArray(null);
+  gl.activeTexture(gl.TEXTURE0 + 0);
+  const textures = images.map((image) => createAndUploadTexture$2(gl, image));
+  const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+  const imageLocation = gl.getUniformLocation(program, "u_image");
+  let rafId = 0;
+  const render = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(program);
+    gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform1i(imageLocation, 0);
+    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
+    gl.bindVertexArray(vao);
+    gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.bindVertexArray(null);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    rafId = requestAnimationFrame(render);
+  };
+  render();
+  return () => {
+    cancelAnimationFrame(rafId);
+    unbindAll(gl);
+    gl.deleteBuffer(positionBuffer);
+    gl.deleteBuffer(texCoordBuffer);
+    gl.deleteVertexArray(vao);
+    for (const texture of textures) {
+      gl.deleteTexture(texture);
+    }
+  };
+}
+function setupWebgl$2(canvas3) {
+  let cleanup = () => {
+  };
+  Promise.all(IMAGES$2.map((img) => loadImage$2(img))).then((images) => {
+    cleanup = setupWebglWithImages$2(canvas3, images);
+  });
+  return () => cleanup();
+}
+const example$2 = {
+  id: "webgl-texture",
+  filename: "17-webgl-texture.tsx",
+  name: "WebGL texture",
+  description: "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
+  Component: createCanvasComponent(setupWebgl$2, {
+    style: {
+      height: "320px",
+      imageRendering: "pixelated"
     }
   })
 };
@@ -76008,19 +76253,19 @@ function createAndUploadTexture$1(gl, image) {
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
 function setupWebglWithImages$1(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = 8;
-  canvas3.height = 8;
+  canvas3.width = 8 * 16;
+  canvas3.height = 8 * 16;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders(gl, vertexShader$1, fragmentShader$1);
+  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
   const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
@@ -76048,13 +76293,13 @@ function setupWebglWithImages$1(canvas3, images) {
     gl.uniform1i(imageLocation, 0);
     const x1 = 0;
     const y1 = 0;
-    const x2 = x1 + 8;
-    const y2 = y1 + 8;
+    const x2 = x1 + 8 * 16;
+    const y2 = y1 + 8 * 16;
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]), gl.STATIC_DRAW);
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
     gl.bindVertexArray(vao);
-    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
+    const textureIndex = 0;
     gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     gl.bindVertexArray(null);
@@ -76064,6 +76309,13 @@ function setupWebglWithImages$1(canvas3, images) {
   render();
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
+    gl.deleteBuffer(positionBuffer);
+    gl.deleteBuffer(texCoordBuffer);
+    gl.deleteVertexArray(vao);
+    for (const texture of textures) {
+      gl.deleteTexture(texture);
+    }
   };
 }
 function setupWebgl$1(canvas3) {
@@ -76075,17 +76327,19 @@ function setupWebgl$1(canvas3) {
   return () => cleanup();
 }
 const example$1 = {
-  id: "webgl-texture",
-  filename: "17-webgl-texture.tsx",
-  name: "WebGL texture",
-  description: "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
+  id: "webgl-texture-upscale",
+  filename: "18-webgl-texture-upscale.tsx",
+  name: "WebGL texture upscale",
+  description: "Load and render a texture with WebGL2 while upscaling linearly",
   Component: createCanvasComponent(setupWebgl$1, {
     style: {
-      height: "320px",
+      height: "640px",
       imageRendering: "pixelated"
     }
   })
 };
+const WIDTH = 8;
+const HEIGHT = 8;
 const vertexShader = `#version 300 es
 
 in vec2 a_position;
@@ -76126,58 +76380,56 @@ async function loadImage(src) {
     image.onload = () => resolve2(image);
   });
 }
-function createAndUploadTexture(gl, image) {
-  const texture = createTexture(gl);
+function getQuadPositions(x2, y2, w2, h2) {
+  const x1 = x2;
+  const y1 = y2;
+  const x22 = x1 + w2;
+  const y22 = y1 + h2;
+  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
+}
+function createAndUploadTexture(gl, resources, image) {
+  const texture = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
 function setupWebglWithImages(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = 8 * 16;
-  canvas3.height = 8 * 16;
+  canvas3.width = WIDTH;
+  canvas3.height = HEIGHT;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders(gl, vertexShader, fragmentShader);
-  const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
-  const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
-  const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
-  const imageLocation = gl.getUniformLocation(program, "u_image");
-  const vao = createVertexArray(gl);
+  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
+  const resources = new WebGLResourceManager(gl);
+  const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
-  const positionBuffer = createBuffer(gl);
-  gl.enableVertexAttribArray(positionAttributeLocation);
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
-  const texCoordBuffer = createBuffer(gl);
-  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), gl.STATIC_DRAW);
-  gl.enableVertexAttribArray(texCoordAttributeLocation);
-  gl.vertexAttribPointer(texCoordAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  createAttribute(gl, program, {
+    name: "a_position",
+    buffer: resources.createBuffer(getQuadPositions(0, 0, WIDTH, HEIGHT)),
+    size: 2
+  });
+  createAttribute(gl, program, {
+    name: "a_texCoord",
+    buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
+    size: 2
+  });
   gl.activeTexture(gl.TEXTURE0 + 0);
-  const textures = images.map((image) => createAndUploadTexture(gl, image));
+  const textures = images.map((image) => createAndUploadTexture(gl, resources, image));
+  gl.bindVertexArray(null);
+  const uniforms = getUniformLocations(gl, program, ["u_resolution", "u_image"]);
   let rafId = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(program);
-    gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
-    gl.uniform1i(imageLocation, 0);
-    const x1 = 0;
-    const y1 = 0;
-    const x2 = x1 + 8 * 16;
-    const y2 = y1 + 8 * 16;
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]), gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
+    gl.uniform1i(uniforms.u_image, 0);
+    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
     gl.bindVertexArray(vao);
-    const textureIndex = 0;
     gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     gl.bindVertexArray(null);
@@ -76187,6 +76439,8 @@ function setupWebglWithImages(canvas3, images) {
   render();
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
+    resources.deleteAll();
   };
 }
 function setupWebgl(canvas3) {
@@ -76198,18 +76452,19 @@ function setupWebgl(canvas3) {
   return () => cleanup();
 }
 const example = {
-  id: "webgl-texture-upscale",
-  filename: "18-webgl-texture-upscale.tsx",
-  name: "WebGL texture upscale",
-  description: "Load and render a texture with WebGL2 while upscaling linearly",
+  id: "webgl-texture-streamlined",
+  filename: "19-webgl-texture-streamlined.tsx",
+  name: "WebGL texture streamlined",
+  description: "Load and render a texture with WebGL2 simplified a bit",
   Component: createCanvasComponent(setupWebgl, {
     style: {
-      height: "640px",
+      height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
 const all = [
+  example$j,
   example$i,
   example$h,
   example$g,
