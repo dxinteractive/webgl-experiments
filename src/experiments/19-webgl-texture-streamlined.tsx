@@ -1,16 +1,13 @@
 import type { ExperimentDefinition } from "../types";
 import {
   createAttribute,
-  createBuffer,
   createProgramForShaders,
-  createTexture,
-  createVertexArray,
   getUniformLocations,
   getWebgl2Context,
   unbindAll,
   WebGLResourceManager,
 } from "./utils/webgl-utils";
-import { createCanvasComponent } from "./utils/create-canvas-component";
+import { createCanvasComponentWithImages } from "./utils/create-canvas-component";
 
 const WIDTH = 8;
 const HEIGHT = 8;
@@ -52,20 +49,6 @@ void main() {
 }
 `;
 
-const IMAGES = [
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=",
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=",
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII=",
-];
-
-async function loadImage(src: string): Promise<HTMLImageElement> {
-  return new Promise((resolve) => {
-    const image = new Image();
-    image.src = src;
-    image.onload = () => resolve(image);
-  });
-}
-
 function getQuadPositions(x: number, y: number, w: number, h: number) {
   const x1 = x;
   const y1 = y;
@@ -96,7 +79,7 @@ function createAndUploadTexture(
   return texture;
 }
 
-function setupWebglWithImages(
+function setupWebgl(
   canvas: HTMLCanvasElement,
   images: HTMLImageElement[]
 ): () => void {
@@ -175,25 +158,18 @@ function setupWebglWithImages(
   };
 }
 
-function setupWebgl(canvas: HTMLCanvasElement) {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  let cleanup = () => {};
-
-  Promise.all(IMAGES.map((img) => loadImage(img))).then(
-    (images: HTMLImageElement[]) => {
-      cleanup = setupWebglWithImages(canvas, images);
-    }
-  );
-
-  return () => cleanup();
-}
+const IMAGES = [
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=",
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=",
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII=",
+];
 
 const example: ExperimentDefinition = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
   description: "Load and render a texture with WebGL2 simplified a bit",
-  Component: createCanvasComponent(setupWebgl, {
+  Component: createCanvasComponentWithImages(setupWebgl, IMAGES, {
     style: { height: "320px", imageRendering: "pixelated" },
   }),
 };
