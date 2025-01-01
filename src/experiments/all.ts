@@ -20,6 +20,7 @@ import webglSetupStreamlined from "./16-webgl-setup-streamlined";
 import webglTexture from "./17-webgl-texture";
 import webglTextureUpscale from "./18-webgl-texture-upscale";
 import webglTextureStreamlined from "./19-webgl-texture-streamlined";
+import webglTextureData from "./20-webgl-texture-data";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -42,4 +43,5 @@ export const all: ExperimentDefinition[] = [
   webglTexture,
   webglTextureUpscale,
   webglTextureStreamlined,
+  webglTextureData,
 ];
