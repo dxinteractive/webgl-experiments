@@ -2516,6 +2516,11 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
+twgl.js@^5.5.4:
+  version "5.5.4"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/twgl.js/-/twgl.js-5.5.4.tgz#ce79dd59ee5f4dffc9acdbb402431123ec84277a"
+  integrity sha512-6kFOmijOpmblTN9CCwOTCxK4lPg7rCyQjLuub6EMOlEp89Ex6yUcsMjsmH7andNPL2NE3XmHdqHeP5gVKKPhxw==
+
 two.js@^0.8.12:
   version "0.8.12"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/two.js/-/two.js-0.8.12.tgz#624a9e1799afaa4639f9a91d4717d4666f562582"

@@ -4,6 +4,7 @@ import {
   createProgramForShaders,
   createVertexArray,
   getWebgl2Context,
+  unbindAll,
   updateCanvasSize,
 } from "./utils/webgl-utils";
 import { createCanvasComponent } from "./utils/create-canvas-component";
@@ -98,6 +99,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
   };

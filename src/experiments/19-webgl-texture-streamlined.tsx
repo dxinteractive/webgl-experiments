@@ -1,11 +1,14 @@
 import type { ExperimentDefinition } from "../types";
 import {
+  createAttribute,
   createBuffer,
   createProgramForShaders,
   createTexture,
   createVertexArray,
+  getUniformLocations,
   getWebgl2Context,
   unbindAll,
+  WebGLResourceManager,
 } from "./utils/webgl-utils";
 import { createCanvasComponent } from "./utils/create-canvas-component";
 
@@ -73,9 +76,10 @@ function getQuadPositions(x: number, y: number, w: number, h: number) {
 
 function createAndUploadTexture(
   gl: WebGL2RenderingContext,
+  resources: WebGLResourceManager,
   image: HTMLImageElement
 ) {
-  const texture = createTexture(gl);
+  const texture = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
 
   // Set the parameters so we don't need mips and so we're not filtering
@@ -106,53 +110,50 @@ function setupWebglWithImages(
   // program
   const program = createProgramForShaders(gl, vertexShader, fragmentShader);
 
+  // resources
+  const resources = new WebGLResourceManager(gl);
+
   // geometry
-  const vao = createVertexArray(gl);
+  const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
 
-  const positionBuffer = createBuffer(gl);
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.bufferData(
-    gl.ARRAY_BUFFER,
-    getQuadPositions(0, 0, WIDTH, HEIGHT),
-    gl.STATIC_DRAW
-  );
+  createAttribute(gl, program, {
+    name: "a_position",
+    buffer: resources.createBuffer(getQuadPositions(0, 0, WIDTH, HEIGHT)),
+    size: 2,
+  });
 
-  const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
-  gl.enableVertexAttribArray(positionAttributeLocation);
-  gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
-
-  const texCoordBuffer = createBuffer(gl);
-  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-  gl.bufferData(
-    gl.ARRAY_BUFFER,
-    new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
-    gl.STATIC_DRAW
-  );
-
-  const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
-  gl.enableVertexAttribArray(texCoordAttributeLocation);
-  gl.vertexAttribPointer(texCoordAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
-  gl.bindVertexArray(null);
+  createAttribute(gl, program, {
+    name: "a_texCoord",
+    buffer: resources.createBuffer(
+      new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
+    ),
+    size: 2,
+  });
 
   // textures
   gl.activeTexture(gl.TEXTURE0 + 0);
-  const textures = images.map((image) => createAndUploadTexture(gl, image));
+  const textures = images.map((image) =>
+    createAndUploadTexture(gl, resources, image)
+  );
+
+  gl.bindVertexArray(null);
 
   // uniforms
-  const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
-  const imageLocation = gl.getUniformLocation(program, "u_image");
+  const uniforms = getUniformLocations(gl, program, [
+    "u_resolution",
+    "u_image",
+  ]);
 
+  // render
   let rafId = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     gl.useProgram(program);
 
-    gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
-    gl.uniform1i(imageLocation, 0);
+    gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
+    gl.uniform1i(uniforms.u_image, 0);
 
     const textureIndex = Math.floor(Date.now() * 0.001) % images.length;
 
@@ -170,12 +171,7 @@ function setupWebglWithImages(
   return () => {
     cancelAnimationFrame(rafId);
     unbindAll(gl);
-    gl.deleteBuffer(positionBuffer);
-    gl.deleteBuffer(texCoordBuffer);
-    gl.deleteVertexArray(vao);
-    for (const texture of textures) {
-      gl.deleteTexture(texture);
-    }
+    resources.deleteAll();
   };
 }
 
@@ -193,11 +189,10 @@ function setupWebgl(canvas: HTMLCanvasElement) {
 }
 
 const example: ExperimentDefinition = {
-  id: "webgl-texture",
-  filename: "17-webgl-texture.tsx",
-  name: "WebGL texture",
-  description:
-    "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
+  id: "webgl-texture-streamlined",
+  filename: "19-webgl-texture-streamlined.tsx",
+  name: "WebGL texture streamlined",
+  description: "Load and render a texture with WebGL2 simplified a bit",
   Component: createCanvasComponent(setupWebgl, {
     style: { height: "320px", imageRendering: "pixelated" },
   }),

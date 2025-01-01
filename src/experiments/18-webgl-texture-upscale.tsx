@@ -5,6 +5,7 @@ import {
   createTexture,
   createVertexArray,
   getWebgl2Context,
+  unbindAll,
 } from "./utils/webgl-utils";
 import { createCanvasComponent } from "./utils/create-canvas-component";
 
@@ -161,6 +162,13 @@ function setupWebglWithImages(
 
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
+    gl.deleteBuffer(positionBuffer);
+    gl.deleteBuffer(texCoordBuffer);
+    gl.deleteVertexArray(vao);
+    for (const texture of textures) {
+      gl.deleteTexture(texture);
+    }
   };
 }
 

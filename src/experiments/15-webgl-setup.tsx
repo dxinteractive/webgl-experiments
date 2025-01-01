@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import type { ExperimentDefinition } from "../types";
 import vertexShaderSource from "./15-vertex-shader.glsl?raw";
 import fragmentShaderSource from "./15-fragment-shader.glsl?raw";
+import { unbindAll } from "./utils/webgl-utils";
 
 function compileShader(
   gl: WebGL2RenderingContext,
@@ -160,6 +161,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 
   return () => {
     cancelAnimationFrame(rafId);
+    unbindAll(gl);
     gl.deleteBuffer(vertexBuffer);
     gl.deleteVertexArray(vertexArray);
   };

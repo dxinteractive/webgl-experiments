@@ -6,20 +6,28 @@ export function getWebgl2Context(canvas: HTMLCanvasElement) {
   return gl;
 }
 
-export function createBuffer(gl: WebGL2RenderingContext) {
+export function createBuffer(
+  gl: WebGL2RenderingContext,
+  initialData?: ArrayBuffer | ArrayBufferView
+) {
   const buffer = gl.createBuffer();
   if (!buffer) {
     throw new Error("gl.createBuffer() failed");
+  }
+  if (initialData !== undefined) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, initialData, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
   }
   return buffer;
 }
 
 export function createVertexArray(gl: WebGL2RenderingContext) {
-  const buffer = gl.createVertexArray();
-  if (!buffer) {
+  const vao = gl.createVertexArray();
+  if (!vao) {
     throw new Error("gl.createVertexArray() failed");
   }
-  return buffer;
+  return vao;
 }
 
 export function createTexture(gl: WebGL2RenderingContext) {
@@ -28,6 +36,111 @@ export function createTexture(gl: WebGL2RenderingContext) {
     throw new Error("gl.createTexture() failed");
   }
   return texture;
+}
+
+export function withVertexArray(
+  gl: WebGL2RenderingContext,
+  vao: WebGLVertexArrayObject,
+  callback: () => void
+) {
+  gl.bindVertexArray(vao);
+  callback();
+  gl.bindVertexArray(null);
+}
+
+export type AttributeOptions = {
+  name: string;
+  buffer: WebGLBuffer;
+  size?: GLint;
+  type?: GLenum;
+  normalized?: boolean;
+  stride?: number;
+  offset?: number;
+};
+
+export function createAttribute(
+  gl: WebGL2RenderingContext,
+  program: WebGLProgram,
+  options: AttributeOptions
+) {
+  const {
+    name,
+    buffer,
+    size = 1,
+    type = gl.FLOAT,
+    normalized = false,
+    stride = 0,
+    offset = 0,
+  } = options;
+
+  const attributeLocation = gl.getAttribLocation(program, name);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.enableVertexAttribArray(attributeLocation);
+  gl.vertexAttribPointer(
+    attributeLocation,
+    size,
+    type,
+    normalized,
+    stride,
+    offset
+  );
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+}
+
+export class WebGLResourceManager {
+  private buffers = new Set<WebGLBuffer>();
+  private vaos = new Set<WebGLVertexArrayObject>();
+  private textures = new Set<WebGLTexture>();
+
+  constructor(private gl: WebGL2RenderingContext) {}
+
+  createBuffer(initialData?: ArrayBuffer | ArrayBufferView) {
+    const buffer = createBuffer(this.gl, initialData);
+    this.buffers.add(buffer);
+    return buffer;
+  }
+
+  createVertexArray() {
+    const vao = createVertexArray(this.gl);
+    this.vaos.add(vao);
+    return vao;
+  }
+
+  createTexture() {
+    const texture = createTexture(this.gl);
+    this.textures.add(texture);
+    return texture;
+  }
+
+  deleteBuffer(buffer: WebGLBuffer) {
+    this.gl.deleteBuffer(buffer);
+    this.buffers.delete(buffer);
+  }
+
+  deleteVertexArray(vao: WebGLVertexArrayObject) {
+    this.gl.deleteVertexArray(vao);
+    this.vaos.delete(vao);
+  }
+
+  deleteTexture(texture: WebGLTexture) {
+    this.gl.deleteBuffer(texture);
+    this.textures.delete(texture);
+  }
+
+  deleteAll() {
+    for (const buffer of this.buffers) {
+      this.gl.deleteBuffer(buffer);
+    }
+    for (const vao of this.vaos) {
+      this.gl.deleteVertexArray(vao);
+    }
+    for (const texture of this.textures) {
+      this.gl.deleteTexture(texture);
+    }
+    this.buffers.clear();
+    this.vaos.clear();
+    this.textures.clear();
+  }
 }
 
 export function getUniformLocation(
@@ -40,6 +153,19 @@ export function getUniformLocation(
     throw new Error("could not create location");
   }
   return location;
+}
+
+export function getUniformLocations<N extends string>(
+  gl: WebGL2RenderingContext,
+  program: WebGLProgram,
+  names: N[]
+): Record<N, WebGLUniformLocation> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const obj = {} as any;
+  for (const name of names) {
+    obj[name] = getUniformLocation(gl, program, name);
+  }
+  return obj as Record<N, WebGLUniformLocation>;
 }
 
 export function compileShader(
@@ -111,4 +237,17 @@ export function updateCanvasSize(
   canvas.width = canvas.clientWidth * dpr;
   canvas.height = canvas.clientHeight * dpr;
   gl.viewport(0, 0, canvas.width, canvas.height);
+}
+
+export function unbindAll(gl: WebGL2RenderingContext) {
+  const numTextureUnits = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
+  for (let unit = 0; unit < numTextureUnits; ++unit) {
+    gl.activeTexture(gl.TEXTURE0 + unit);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+  }
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+  gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 }
