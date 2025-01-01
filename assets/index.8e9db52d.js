@@ -75988,6 +75988,23 @@ function createCanvasComponent(onMount, props = {}) {
     }, this);
   };
 }
+async function loadImage$2(src) {
+  return new Promise((resolve2) => {
+    const image = new Image();
+    image.src = src;
+    image.onload = () => resolve2(image);
+  });
+}
+function createCanvasComponentWithImages(onMount, imageSrcs, props = {}) {
+  return createCanvasComponent((canvas3) => {
+    let cleanup = () => {
+    };
+    Promise.all(imageSrcs.map((img) => loadImage$2(img))).then((images) => {
+      cleanup = onMount(canvas3, images);
+    });
+    return () => cleanup();
+  }, props);
+}
 const vertexShader$3 = `#version 300 es
 
 precision highp float;
@@ -76109,7 +76126,7 @@ void main() {
 }
 `;
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-async function loadImage$2(src) {
+async function loadImage$1(src) {
   return new Promise((resolve2) => {
     const image = new Image();
     image.src = src;
@@ -76134,7 +76151,7 @@ function createAndUploadTexture$2(gl, image) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-function setupWebglWithImages$2(canvas3, images) {
+function setupWebglWithImages$1(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$1;
   canvas3.height = HEIGHT$1;
@@ -76191,8 +76208,8 @@ function setupWebglWithImages$2(canvas3, images) {
 function setupWebgl$2(canvas3) {
   let cleanup = () => {
   };
-  Promise.all(IMAGES$2.map((img) => loadImage$2(img))).then((images) => {
-    cleanup = setupWebglWithImages$2(canvas3, images);
+  Promise.all(IMAGES$2.map((img) => loadImage$1(img))).then((images) => {
+    cleanup = setupWebglWithImages$1(canvas3, images);
   });
   return () => cleanup();
 }
@@ -76241,7 +76258,7 @@ void main() {
 }
 `;
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-async function loadImage$1(src) {
+async function loadImage(src) {
   return new Promise((resolve2) => {
     const image = new Image();
     image.src = src;
@@ -76259,7 +76276,7 @@ function createAndUploadTexture$1(gl, image) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-function setupWebglWithImages$1(canvas3, images) {
+function setupWebglWithImages(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = 8 * 16;
   canvas3.height = 8 * 16;
@@ -76321,8 +76338,8 @@ function setupWebglWithImages$1(canvas3, images) {
 function setupWebgl$1(canvas3) {
   let cleanup = () => {
   };
-  Promise.all(IMAGES$1.map((img) => loadImage$1(img))).then((images) => {
-    cleanup = setupWebglWithImages$1(canvas3, images);
+  Promise.all(IMAGES$1.map((img) => loadImage(img))).then((images) => {
+    cleanup = setupWebglWithImages(canvas3, images);
   });
   return () => cleanup();
 }
@@ -76372,14 +76389,6 @@ void main() {
   outColor = texture(u_image, v_texCoord);
 }
 `;
-const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-async function loadImage(src) {
-  return new Promise((resolve2) => {
-    const image = new Image();
-    image.src = src;
-    image.onload = () => resolve2(image);
-  });
-}
 function getQuadPositions(x2, y2, w2, h2) {
   const x1 = x2;
   const y1 = y2;
@@ -76398,7 +76407,7 @@ function createAndUploadTexture(gl, resources, image) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-function setupWebglWithImages(canvas3, images) {
+function setupWebgl(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH;
   canvas3.height = HEIGHT;
@@ -76443,20 +76452,13 @@ function setupWebglWithImages(canvas3, images) {
     resources.deleteAll();
   };
 }
-function setupWebgl(canvas3) {
-  let cleanup = () => {
-  };
-  Promise.all(IMAGES.map((img) => loadImage(img))).then((images) => {
-    cleanup = setupWebglWithImages(canvas3, images);
-  });
-  return () => cleanup();
-}
+const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
 const example = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
   description: "Load and render a texture with WebGL2 simplified a bit",
-  Component: createCanvasComponent(setupWebgl, {
+  Component: createCanvasComponentWithImages(setupWebgl, IMAGES, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
