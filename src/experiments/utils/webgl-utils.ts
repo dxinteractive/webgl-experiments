@@ -38,6 +38,14 @@ export function createTexture(gl: WebGL2RenderingContext) {
   return texture;
 }
 
+export function createFramebuffer(gl: WebGL2RenderingContext) {
+  const fbo = gl.createFramebuffer();
+  if (!fbo) {
+    throw new Error("gl.createFramebuffer() failed");
+  }
+  return fbo;
+}
+
 export function withVertexArray(
   gl: WebGL2RenderingContext,
   vao: WebGLVertexArrayObject,
@@ -97,6 +105,7 @@ export class WebGLResourceManager {
   private buffers = new Set<WebGLBuffer>();
   private vaos = new Set<WebGLVertexArrayObject>();
   private textures = new Set<WebGLTexture>();
+  private framebuffers = new Set<WebGLFramebuffer>();
 
   constructor(private gl: WebGL2RenderingContext) {}
 
@@ -118,6 +127,12 @@ export class WebGLResourceManager {
     return texture;
   }
 
+  createFramebuffer() {
+    const framebuffer = createFramebuffer(this.gl);
+    this.framebuffers.add(framebuffer);
+    return framebuffer;
+  }
+
   deleteBuffer(buffer: WebGLBuffer) {
     this.gl.deleteBuffer(buffer);
     this.buffers.delete(buffer);
@@ -133,6 +148,11 @@ export class WebGLResourceManager {
     this.textures.delete(texture);
   }
 
+  deleteFramebuffer(framebuffer: WebGLFramebuffer) {
+    this.gl.deleteFramebuffer(framebuffer);
+    this.framebuffers.delete(framebuffer);
+  }
+
   deleteAll() {
     for (const buffer of this.buffers) {
       this.gl.deleteBuffer(buffer);
@@ -143,9 +163,13 @@ export class WebGLResourceManager {
     for (const texture of this.textures) {
       this.gl.deleteTexture(texture);
     }
+    for (const framebuffer of this.framebuffers) {
+      this.gl.deleteFramebuffer(framebuffer);
+    }
     this.buffers.clear();
     this.vaos.clear();
     this.textures.clear();
+    this.framebuffers.clear();
   }
 }
 
