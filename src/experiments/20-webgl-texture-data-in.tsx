@@ -121,34 +121,25 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   ]);
 
   // render
-  let rafId = 0;
-  const render = () => {
-    gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.useProgram(program);
 
-    gl.useProgram(program);
+  gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
+  gl.uniform1i(uniforms.u_image, 0);
 
-    gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
-    gl.uniform1i(uniforms.u_image, 0);
-
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-    rafId = requestAnimationFrame(render);
-  };
-
-  render();
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
 
   return () => {
-    cancelAnimationFrame(rafId);
     unbindAll(gl);
     resources.deleteAll();
   };
 }
 
 const example: ExperimentDefinition = {
-  id: "webgl-texture-data",
-  filename: "20-webgl-texture-data.tsx",
+  id: "webgl-texture-data-in",
+  filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
-  description: "Loading data through a texture",
+  description: "Loading data into a texture",
   Component: createCanvasComponent(setupWebgl, {
     style: { height: "320px", imageRendering: "pixelated" },
   }),

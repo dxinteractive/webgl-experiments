@@ -56,6 +56,7 @@ export type AttributeOptions = {
   normalized?: boolean;
   stride?: number;
   offset?: number;
+  int?: boolean;
 };
 
 export function createAttribute(
@@ -71,19 +72,24 @@ export function createAttribute(
     normalized = false,
     stride = 0,
     offset = 0,
+    int = false,
   } = options;
 
   const attributeLocation = gl.getAttribLocation(program, name);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.enableVertexAttribArray(attributeLocation);
-  gl.vertexAttribPointer(
-    attributeLocation,
-    size,
-    type,
-    normalized,
-    stride,
-    offset
-  );
+  if (int) {
+    gl.vertexAttribIPointer(attributeLocation, size, type, stride, offset);
+  } else {
+    gl.vertexAttribPointer(
+      attributeLocation,
+      size,
+      type,
+      normalized,
+      stride,
+      offset
+    );
+  }
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
 }
 

@@ -138,7 +138,8 @@ function setupWebglWithImages(
   gl.bindVertexArray(null);
 
   // textures
-  gl.activeTexture(gl.TEXTURE0 + 0);
+  const TEXTURE_INDEX = 0;
+  gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
   const textures = images.map((image) => createAndUploadTexture(gl, image));
 
   // uniforms
@@ -152,7 +153,7 @@ function setupWebglWithImages(
     gl.useProgram(program);
 
     gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
-    gl.uniform1i(imageLocation, 0);
+    gl.uniform1i(imageLocation, TEXTURE_INDEX);
 
     const textureIndex = Math.floor(Date.now() * 0.001) % images.length;
 

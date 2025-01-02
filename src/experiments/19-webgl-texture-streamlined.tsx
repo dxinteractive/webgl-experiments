@@ -115,7 +115,8 @@ function setupWebgl(
   });
 
   // textures
-  gl.activeTexture(gl.TEXTURE0 + 0);
+  const TEXTURE_INDEX = 0;
+  gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
   const textures = images.map((image) =>
     createAndUploadTexture(gl, resources, image)
   );
@@ -123,20 +124,20 @@ function setupWebgl(
   gl.bindVertexArray(null);
 
   // uniforms
+
+  gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, [
     "u_resolution",
     "u_image",
   ]);
 
+  gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
+  gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);
+
   // render
   let rafId = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT);
-
-    gl.useProgram(program);
-
-    gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
-    gl.uniform1i(uniforms.u_image, 0);
 
     const textureIndex = Math.floor(Date.now() * 0.001) % images.length;
 
