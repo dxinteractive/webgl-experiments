@@ -23,6 +23,7 @@ import webglTextureStreamlined from "./19-webgl-texture-streamlined";
 import webglTextureDataIn from "./20-webgl-texture-data-in";
 import webglTextureDataFloats from "./21-webgl-texture-data-floats";
 import webglExtractFramebuffer from "./22-webgl-extract-framebuffer";
+import webglBufferInterleaved from "./23-webgl-buffer-interleaved";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -48,4 +49,5 @@ export const all: ExperimentDefinition[] = [
   webglTextureDataIn,
   webglTextureDataFloats,
   webglExtractFramebuffer,
+  webglBufferInterleaved,
 ];

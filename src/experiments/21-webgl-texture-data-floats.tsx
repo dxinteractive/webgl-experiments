@@ -89,12 +89,14 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
     size: 2,
   });
 
-  createAttribute(gl, program, {
-    name: "aTriangleIndex",
-    buffer: resources.createBuffer(new Int32Array(TRIANGLE_INDICES)),
-    type: gl.INT,
-    int: true,
-  });
+  const triangleIndexLoc = gl.getAttribLocation(program, "aTriangleIndex");
+  gl.bindBuffer(
+    gl.ARRAY_BUFFER,
+    resources.createBuffer(new Int32Array(TRIANGLE_INDICES))
+  );
+  gl.enableVertexAttribArray(triangleIndexLoc);
+  gl.vertexAttribIPointer(triangleIndexLoc, 1, gl.INT, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
   // textures
   const TEXTURE_INDEX = 0;

@@ -2,7 +2,6 @@ import type { ExperimentDefinition } from "../types";
 import {
   createAttribute,
   createProgramForShaders,
-  createTexture,
   getUniformLocations,
   getWebgl2Context,
   unbindAll,
@@ -15,27 +14,24 @@ const HEIGHT = 8;
 
 const vertexShader = `#version 300 es
 
-in vec2 a_position;
-in vec2 a_texCoord;
+in vec2 aPosition;
+in vec2 aTexCoord;
 
 uniform vec2 u_resolution;
 
 out vec2 v_texCoord;
 
 void main() {
-  vec2 unitSpace = a_position / u_resolution;
+  vec2 unitSpace = aPosition / u_resolution;
   vec2 clipSpace = (unitSpace * 2.0) - 1.0;
 
   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
 
   // pass the texCoord to the fragment shader
   // The GPU will interpolate this value between points.
-  v_texCoord = a_texCoord;
+  v_texCoord = aTexCoord;
 }
 `;
-
-// vec2 onePixel = vec2(1) / vec2(textureSize(u_image, 0));
-// outColor = texture(u_image, v_texCoord).bgra;
 
 const fragmentShader = `#version 300 es
 precision highp float;
@@ -105,13 +101,13 @@ function setupWebgl(
   gl.bindVertexArray(vao);
 
   createAttribute(gl, program, {
-    name: "a_position",
+    name: "aPosition",
     buffer: resources.createBuffer(getQuadPositions(0, 0, WIDTH, HEIGHT)),
     size: 2,
   });
 
   createAttribute(gl, program, {
-    name: "a_texCoord",
+    name: "aTexCoord",
     buffer: resources.createBuffer(
       new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
     ),

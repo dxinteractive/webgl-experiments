@@ -8,7 +8,8 @@ export function getWebgl2Context(canvas: HTMLCanvasElement) {
 
 export function createBuffer(
   gl: WebGL2RenderingContext,
-  initialData?: ArrayBuffer | ArrayBufferView
+  initialData?: ArrayBuffer | ArrayBufferView,
+  usage: GLenum = gl.STATIC_DRAW
 ) {
   const buffer = gl.createBuffer();
   if (!buffer) {
@@ -16,7 +17,7 @@ export function createBuffer(
   }
   if (initialData !== undefined) {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, initialData, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, initialData, usage);
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
   }
   return buffer;
@@ -64,7 +65,6 @@ export type AttributeOptions = {
   normalized?: boolean;
   stride?: number;
   offset?: number;
-  int?: boolean;
 };
 
 export function createAttribute(
@@ -80,24 +80,19 @@ export function createAttribute(
     normalized = false,
     stride = 0,
     offset = 0,
-    int = false,
   } = options;
 
   const attributeLocation = gl.getAttribLocation(program, name);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.enableVertexAttribArray(attributeLocation);
-  if (int) {
-    gl.vertexAttribIPointer(attributeLocation, size, type, stride, offset);
-  } else {
-    gl.vertexAttribPointer(
-      attributeLocation,
-      size,
-      type,
-      normalized,
-      stride,
-      offset
-    );
-  }
+  gl.vertexAttribPointer(
+    attributeLocation,
+    size,
+    type,
+    normalized,
+    stride,
+    offset
+  );
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
 }
 
