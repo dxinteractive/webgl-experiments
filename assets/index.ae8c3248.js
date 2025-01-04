@@ -75805,7 +75805,7 @@ class WebGLResourceManager {
 function getUniformLocation(gl, program, name) {
   const location = gl.getUniformLocation(program, name);
   if (!location) {
-    throw new Error("could not create location");
+    throw new Error(`could not create location ${name}`);
   }
   return location;
 }
@@ -76154,7 +76154,7 @@ async function loadImage$1(src) {
     image.onload = () => resolve2(image);
   });
 }
-function getQuadPositions$3(x2, y2, w2, h2) {
+function getQuadPositions(x2, y2, w2, h2) {
   const x1 = x2;
   const y1 = y2;
   const x22 = x1 + w2;
@@ -76183,7 +76183,7 @@ function setupWebglWithImages$1(canvas3, images) {
   gl.bindVertexArray(vao);
   const positionBuffer = createBuffer(gl);
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions$3(0, 0, WIDTH$3, HEIGHT$3), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$3, HEIGHT$3), gl.STATIC_DRAW);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   gl.enableVertexAttribArray(positionAttributeLocation);
   gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
@@ -76381,22 +76381,13 @@ const WIDTH$2 = 8;
 const HEIGHT$2 = 8;
 const vertexShader$4 = `#version 300 es
 
-in vec2 a_position;
-in vec2 a_texCoord;
-
-uniform vec2 u_resolution;
-
-out vec2 v_texCoord;
+in vec2 a_pos;
+out vec2 v_uv;
 
 void main() {
-  vec2 unitSpace = a_position / u_resolution;
-  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
-
+  vec2 clipSpace = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-  // pass the texCoord to the fragment shader
-  // The GPU will interpolate this value between points.
-  v_texCoord = a_texCoord;
+  v_uv = a_pos;
 }
 `;
 const fragmentShader$4 = `#version 300 es
@@ -76404,20 +76395,13 @@ precision highp float;
 
 uniform sampler2D u_image;
 
-in vec2 v_texCoord;
+in vec2 v_uv;
 out vec4 outColor;
 
 void main() {
-  outColor = texture(u_image, v_texCoord);
+  outColor = texture(u_image, v_uv);
 }
 `;
-function getQuadPositions$2(x2, y2, w2, h2) {
-  const x1 = x2;
-  const y1 = y2;
-  const x22 = x1 + w2;
-  const y22 = y1 + h2;
-  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
-}
 function createAndUploadTexture$1(gl, resources, image) {
   const texture = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -76440,12 +76424,7 @@ function setupWebgl$4(canvas3, images) {
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
   createAttribute(gl, program, {
-    name: "a_position",
-    buffer: resources.createBuffer(getQuadPositions$2(0, 0, WIDTH$2, HEIGHT$2)),
-    size: 2
-  });
-  createAttribute(gl, program, {
-    name: "a_texCoord",
+    name: "a_pos",
     buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
     size: 2
   });
@@ -76454,8 +76433,7 @@ function setupWebgl$4(canvas3, images) {
   const textures = images.map((image) => createAndUploadTexture$1(gl, resources, image));
   gl.bindVertexArray(null);
   gl.useProgram(program);
-  const uniforms = getUniformLocations(gl, program, ["u_resolution", "u_image"]);
-  gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
+  const uniforms = getUniformLocations(gl, program, ["u_image"]);
   gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);
   let rafId = 0;
   const render = () => {
@@ -76492,22 +76470,13 @@ const WIDTH$1 = 8;
 const HEIGHT$1 = 8;
 const vertexShader$3 = `#version 300 es
 
-in vec2 a_position;
-in vec2 a_texCoord;
-
-uniform vec2 u_resolution;
-
-out vec2 v_texCoord;
+in vec2 a_pos;
+out vec2 v_uv;
 
 void main() {
-  vec2 unitSpace = a_position / u_resolution;
-  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
-
+  vec2 clipSpace = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-  // pass the texCoord to the fragment shader
-  // The GPU will interpolate this value between points.
-  v_texCoord = a_texCoord;
+  v_uv = a_pos;
 }
 `;
 const fragmentShader$3 = `#version 300 es
@@ -76515,20 +76484,13 @@ precision highp float;
 
 uniform sampler2D u_image;
 
-in vec2 v_texCoord;
+in vec2 v_uv;
 out vec4 outColor;
 
 void main() {
-  outColor = texture(u_image, v_texCoord);
+  outColor = texture(u_image, v_uv);
 }
 `;
-function getQuadPositions$1(x2, y2, w2, h2) {
-  const x1 = x2;
-  const y1 = y2;
-  const x22 = x1 + w2;
-  const y22 = y1 + h2;
-  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
-}
 function setupWebgl$3(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$1;
@@ -76541,12 +76503,7 @@ function setupWebgl$3(canvas3) {
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
   createAttribute(gl, program, {
-    name: "a_position",
-    buffer: resources.createBuffer(getQuadPositions$1(0, 0, WIDTH$1, HEIGHT$1)),
-    size: 2
-  });
-  createAttribute(gl, program, {
-    name: "a_texCoord",
+    name: "a_pos",
     buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
     size: 2
   });
@@ -76559,10 +76516,9 @@ function setupWebgl$3(canvas3) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
   const data = new Uint8Array([128, 64, 128, 0, 192, 0, 64, 128]);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, 4, 2, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, data);
-  const uniforms = getUniformLocations(gl, program, ["u_resolution", "u_image"]);
+  const uniforms = getUniformLocations(gl, program, ["u_image"]);
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.useProgram(program);
-  gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
   gl.uniform1i(uniforms.u_image, 0);
   gl.drawArrays(gl.TRIANGLES, 0, 6);
   return () => {
@@ -76585,10 +76541,10 @@ const example$3 = {
 const vertexShader$2 = `#version 300 es
 precision highp float;
 
-uniform sampler2D uDataTexture;
+uniform sampler2D u_dataTexture;
 
-in vec2 aClipPosition;
-in int aTriangleIndex;
+in vec2 a_pos;
+in int a_triangleIndex;
  
 vec4 getTexel(sampler2D tex, int index) {
   int texWidth = textureSize(tex, 0).x;
@@ -76598,8 +76554,8 @@ vec4 getTexel(sampler2D tex, int index) {
 }
 
 void main() {
-  vec4 data = getTexel(uDataTexture, aTriangleIndex);
-  gl_Position = vec4(aClipPosition.x, aClipPosition.y + data.x, 0.0, 1.0);
+  vec4 data = getTexel(u_dataTexture, a_triangleIndex);
+  gl_Position = vec4(a_pos.x, a_pos.y + data.x, 0.0, 1.0);
 }
 `;
 const fragmentShader$2 = `#version 300 es
@@ -76640,11 +76596,11 @@ function setupWebgl$2(canvas3) {
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
   createAttribute(gl, program, {
-    name: "aClipPosition",
+    name: "a_pos",
     buffer: resources.createBuffer(new Float32Array(VERTICES)),
     size: 2
   });
-  const triangleIndexLoc = gl.getAttribLocation(program, "aTriangleIndex");
+  const triangleIndexLoc = gl.getAttribLocation(program, "a_triangleIndex");
   gl.bindBuffer(gl.ARRAY_BUFFER, resources.createBuffer(new Int32Array(TRIANGLE_INDICES)));
   gl.enableVertexAttribArray(triangleIndexLoc);
   gl.vertexAttribIPointer(triangleIndexLoc, 1, gl.INT, 0, 0);
@@ -76669,8 +76625,8 @@ function setupWebgl$2(canvas3) {
     new Float32Array(POSITION_OFFSETS)
   );
   gl.useProgram(program);
-  const uniforms = getUniformLocations(gl, program, ["uDataTexture"]);
-  gl.uniform1i(uniforms.uDataTexture, TEXTURE_INDEX);
+  const uniforms = getUniformLocations(gl, program, ["u_dataTexture"]);
+  gl.uniform1i(uniforms.u_dataTexture, TEXTURE_INDEX);
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES, 0, VERTICES.length / 2);
   return () => {
@@ -76693,22 +76649,13 @@ const WIDTH = 8;
 const HEIGHT = 8;
 const vertexShader$1 = `#version 300 es
 
-in vec2 aPosition;
-in vec2 aTexCoord;
-
-uniform vec2 u_resolution;
-
-out vec2 v_texCoord;
+in vec2 a_pos;
+out vec2 v_uv;
 
 void main() {
-  vec2 unitSpace = aPosition / u_resolution;
-  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
-
+  vec2 clipSpace = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-  // pass the texCoord to the fragment shader
-  // The GPU will interpolate this value between points.
-  v_texCoord = aTexCoord;
+  v_uv = a_pos;
 }
 `;
 const fragmentShader$1 = `#version 300 es
@@ -76716,20 +76663,13 @@ precision highp float;
 
 uniform sampler2D u_image;
 
-in vec2 v_texCoord;
+in vec2 v_uv;
 out vec4 outColor;
 
 void main() {
-  outColor = texture(u_image, v_texCoord);
+  outColor = texture(u_image, v_uv);
 }
 `;
-function getQuadPositions(x2, y2, w2, h2) {
-  const x1 = x2;
-  const y1 = y2;
-  const x22 = x1 + w2;
-  const y22 = y1 + h2;
-  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
-}
 function createAndUploadTexture(gl, resources, image) {
   const texture = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -76755,12 +76695,7 @@ function setupWebgl$1(canvas3, [image]) {
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
   createAttribute(gl, program, {
-    name: "aPosition",
-    buffer: resources.createBuffer(getQuadPositions(0, 0, WIDTH, HEIGHT)),
-    size: 2
-  });
-  createAttribute(gl, program, {
-    name: "aTexCoord",
+    name: "a_pos",
     buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
     size: 2
   });
@@ -76782,9 +76717,8 @@ function setupWebgl$1(canvas3, [image]) {
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, framebufferTexture, 0);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  const uniforms = getUniformLocations(gl, program, ["u_resolution", "u_image"]);
+  const uniforms = getUniformLocations(gl, program, ["u_image"]);
   gl.useProgram(program);
-  gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
   gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.bindVertexArray(vao);
@@ -76819,25 +76753,23 @@ const example$1 = {
 const vertexShader = `#version 300 es
 precision highp float;
 
-in vec2 aClipPosition;
-in vec3 aColor;
-
-out vec3 vColor;
+in vec2 a_pos;
+in vec3 a_color;
+out vec3 v_color;
 
 void main() {
-  gl_Position = vec4(aClipPosition, 0.0, 1.0);
-  vColor = aColor;
+  gl_Position = vec4(a_pos, 0.0, 1.0);
+  v_color = a_color;
 }
 `;
 const fragmentShader = `#version 300 es
 precision highp float;
 
-in vec3 vColor;
-
+in vec3 v_color;
 out vec4 outColor;
 
 void main() {
-  outColor = vec4(vColor, 1.0);
+  outColor = vec4(v_color, 1.0);
 }
 `;
 function setupWebgl(canvas3) {
@@ -76899,10 +76831,10 @@ function setupWebgl(canvas3) {
   ];
   const buffer = resources.createBuffer(new Float32Array(bufferData));
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  const clipPositionLoc = gl.getAttribLocation(program, "aClipPosition");
+  const clipPositionLoc = gl.getAttribLocation(program, "a_pos");
   gl.enableVertexAttribArray(clipPositionLoc);
   gl.vertexAttribPointer(clipPositionLoc, 2, gl.FLOAT, false, ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT, 0);
-  const colorLoc = gl.getAttribLocation(program, "aColor");
+  const colorLoc = gl.getAttribLocation(program, "a_color");
   gl.enableVertexAttribArray(colorLoc);
   gl.vertexAttribPointer(colorLoc, 3, gl.FLOAT, false, ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT, 2 * BYTES_IN_FLOAT);
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
