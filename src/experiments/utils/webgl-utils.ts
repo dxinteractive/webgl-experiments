@@ -175,7 +175,7 @@ export function getUniformLocation(
 ) {
   const location = gl.getUniformLocation(program, name);
   if (!location) {
-    throw new Error("could not create location");
+    throw new Error(`could not create location ${name}`);
   }
   return location;
 }
@@ -275,4 +275,54 @@ export function unbindAll(gl: WebGL2RenderingContext) {
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
   gl.bindRenderbuffer(gl.RENDERBUFFER, null);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+}
+
+export function createFullscreenQuadAttributes(
+  gl: WebGL2RenderingContext,
+  program: WebGLProgram,
+  resources: WebGLResourceManager
+) {
+  const z = 0;
+  const w = 1;
+
+  createAttribute(gl, program, {
+    name: "aPosition",
+    buffer: resources.createBuffer(
+      new Float32Array([
+        -1,
+        1,
+        z,
+        w,
+        1,
+        1,
+        z,
+        w,
+        -1,
+        -1,
+        z,
+        w,
+        -1,
+        -1,
+        z,
+        w,
+        1,
+        1,
+        z,
+        w,
+        1,
+        -1,
+        z,
+        w,
+      ])
+    ),
+    size: 4,
+  });
+
+  createAttribute(gl, program, {
+    name: "aTexCoord",
+    buffer: resources.createBuffer(
+      new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
+    ),
+    size: 2,
+  });
 }

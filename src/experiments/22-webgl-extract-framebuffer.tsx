@@ -14,22 +14,13 @@ const HEIGHT = 8;
 
 const vertexShader = `#version 300 es
 
-in vec2 aPosition;
-in vec2 aTexCoord;
-
-uniform vec2 u_resolution;
-
-out vec2 v_texCoord;
+in vec2 a_pos;
+out vec2 v_uv;
 
 void main() {
-  vec2 unitSpace = aPosition / u_resolution;
-  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
-
+  vec2 clipSpace = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-  // pass the texCoord to the fragment shader
-  // The GPU will interpolate this value between points.
-  v_texCoord = aTexCoord;
+  v_uv = a_pos;
 }
 `;
 
@@ -38,21 +29,13 @@ precision highp float;
 
 uniform sampler2D u_image;
 
-in vec2 v_texCoord;
+in vec2 v_uv;
 out vec4 outColor;
 
 void main() {
-  outColor = texture(u_image, v_texCoord);
+  outColor = texture(u_image, v_uv);
 }
 `;
-
-function getQuadPositions(x: number, y: number, w: number, h: number) {
-  const x1 = x;
-  const y1 = y;
-  const x2 = x1 + w;
-  const y2 = y1 + h;
-  return new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]);
-}
 
 function createAndUploadTexture(
   gl: WebGL2RenderingContext,
@@ -101,13 +84,7 @@ function setupWebgl(
   gl.bindVertexArray(vao);
 
   createAttribute(gl, program, {
-    name: "aPosition",
-    buffer: resources.createBuffer(getQuadPositions(0, 0, WIDTH, HEIGHT)),
-    size: 2,
-  });
-
-  createAttribute(gl, program, {
-    name: "aTexCoord",
+    name: "a_pos",
     buffer: resources.createBuffer(
       new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
     ),
@@ -147,13 +124,9 @@ function setupWebgl(
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
   // uniforms
-  const uniforms = getUniformLocations(gl, program, [
-    "u_resolution",
-    "u_image",
-  ]);
+  const uniforms = getUniformLocations(gl, program, ["u_image"]);
 
   gl.useProgram(program);
-  gl.uniform2f(uniforms.u_resolution, gl.canvas.width, gl.canvas.height);
   gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);
 
   // render

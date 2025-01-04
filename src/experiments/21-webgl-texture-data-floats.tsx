@@ -13,10 +13,10 @@ import { createCanvasComponent } from "./utils/create-canvas-component";
 const vertexShader = `#version 300 es
 precision highp float;
 
-uniform sampler2D uDataTexture;
+uniform sampler2D u_dataTexture;
 
-in vec2 aClipPosition;
-in int aTriangleIndex;
+in vec2 a_pos;
+in int a_triangleIndex;
  
 vec4 getTexel(sampler2D tex, int index) {
   int texWidth = textureSize(tex, 0).x;
@@ -26,8 +26,8 @@ vec4 getTexel(sampler2D tex, int index) {
 }
 
 void main() {
-  vec4 data = getTexel(uDataTexture, aTriangleIndex);
-  gl_Position = vec4(aClipPosition.x, aClipPosition.y + data.x, 0.0, 1.0);
+  vec4 data = getTexel(u_dataTexture, a_triangleIndex);
+  gl_Position = vec4(a_pos.x, a_pos.y + data.x, 0.0, 1.0);
 }
 `;
 
@@ -84,12 +84,12 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   gl.bindVertexArray(vao);
 
   createAttribute(gl, program, {
-    name: "aClipPosition",
+    name: "a_pos",
     buffer: resources.createBuffer(new Float32Array(VERTICES)),
     size: 2,
   });
 
-  const triangleIndexLoc = gl.getAttribLocation(program, "aTriangleIndex");
+  const triangleIndexLoc = gl.getAttribLocation(program, "a_triangleIndex");
   gl.bindBuffer(
     gl.ARRAY_BUFFER,
     resources.createBuffer(new Int32Array(TRIANGLE_INDICES))
@@ -122,8 +122,8 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 
   // uniforms
   gl.useProgram(program);
-  const uniforms = getUniformLocations(gl, program, ["uDataTexture"]);
-  gl.uniform1i(uniforms.uDataTexture, TEXTURE_INDEX);
+  const uniforms = getUniformLocations(gl, program, ["u_dataTexture"]);
+  gl.uniform1i(uniforms.u_dataTexture, TEXTURE_INDEX);
 
   // render
   gl.clear(gl.COLOR_BUFFER_BIT);

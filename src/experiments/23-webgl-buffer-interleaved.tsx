@@ -11,26 +11,24 @@ import { createCanvasComponent } from "./utils/create-canvas-component";
 const vertexShader = `#version 300 es
 precision highp float;
 
-in vec2 aClipPosition;
-in vec3 aColor;
-
-out vec3 vColor;
+in vec2 a_pos;
+in vec3 a_color;
+out vec3 v_color;
 
 void main() {
-  gl_Position = vec4(aClipPosition, 0.0, 1.0);
-  vColor = aColor;
+  gl_Position = vec4(a_pos, 0.0, 1.0);
+  v_color = a_color;
 }
 `;
 
 const fragmentShader = `#version 300 es
 precision highp float;
 
-in vec3 vColor;
-
+in vec3 v_color;
 out vec4 outColor;
 
 void main() {
-  outColor = vec4(vColor, 1.0);
+  outColor = vec4(v_color, 1.0);
 }
 `;
 
@@ -107,7 +105,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   const buffer = resources.createBuffer(new Float32Array(bufferData));
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 
-  const clipPositionLoc = gl.getAttribLocation(program, "aClipPosition");
+  const clipPositionLoc = gl.getAttribLocation(program, "a_pos");
   gl.enableVertexAttribArray(clipPositionLoc);
   gl.vertexAttribPointer(
     clipPositionLoc,
@@ -118,7 +116,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
     0
   );
 
-  const colorLoc = gl.getAttribLocation(program, "aColor");
+  const colorLoc = gl.getAttribLocation(program, "a_color");
   gl.enableVertexAttribArray(colorLoc);
   gl.vertexAttribPointer(
     colorLoc,
