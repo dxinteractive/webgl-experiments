@@ -24,6 +24,8 @@ import webglTextureDataIn from "./20-webgl-texture-data-in";
 import webglTextureDataFloats from "./21-webgl-texture-data-floats";
 import webglExtractFramebuffer from "./22-webgl-extract-framebuffer";
 import webglBufferInterleaved from "./23-webgl-buffer-interleaved";
+import webglInstancing from "./24-webgl-instancing";
+import webglOklabColor from "./25-webgl-oklab-color";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -50,4 +52,6 @@ export const all: ExperimentDefinition[] = [
   webglTextureDataFloats,
   webglExtractFramebuffer,
   webglBufferInterleaved,
+  webglInstancing,
+  webglOklabColor,
 ];

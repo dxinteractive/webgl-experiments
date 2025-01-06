@@ -18,8 +18,7 @@ in vec2 a_pos;
 out vec2 v_uv;
 
 void main() {
-  vec2 clipSpace = (a_pos * 2.0) - 1.0;
-  gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
   v_uv = a_pos;
 }
 `;
@@ -37,14 +36,6 @@ void main() {
 }
 `;
 
-function getQuadPositions(x: number, y: number, w: number, h: number) {
-  const x1 = x;
-  const y1 = y;
-  const x2 = x1 + w;
-  const y2 = y1 + h;
-  return new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]);
-}
-
 function setupWebgl(canvas: HTMLCanvasElement): () => void {
   const gl = getWebgl2Context(canvas);
 
@@ -52,8 +43,11 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   canvas.height = HEIGHT;
   gl.viewport(0, 0, canvas.width, canvas.height);
   gl.clearColor(0.0, 0.0, 0.0, 0.0);
+
   // required for data texture
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+  // correct gl's flipped y when unpacking texture
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
   // program
   const program = createProgramForShaders(gl, vertexShader, fragmentShader);

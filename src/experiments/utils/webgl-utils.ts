@@ -65,6 +65,7 @@ export type AttributeOptions = {
   normalized?: boolean;
   stride?: number;
   offset?: number;
+  instanced?: boolean | number;
 };
 
 export function createAttribute(
@@ -80,19 +81,19 @@ export function createAttribute(
     normalized = false,
     stride = 0,
     offset = 0,
+    instanced = false,
   } = options;
 
-  const attributeLocation = gl.getAttribLocation(program, name);
+  const attributeLoc = gl.getAttribLocation(program, name);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.enableVertexAttribArray(attributeLocation);
-  gl.vertexAttribPointer(
-    attributeLocation,
-    size,
-    type,
-    normalized,
-    stride,
-    offset
-  );
+  gl.enableVertexAttribArray(attributeLoc);
+  gl.vertexAttribPointer(attributeLoc, size, type, normalized, stride, offset);
+
+  if (instanced) {
+    const count = typeof instanced === "boolean" ? 1 : instanced;
+    gl.vertexAttribDivisor(attributeLoc, count);
+  }
+
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
 }
 

@@ -18,8 +18,7 @@ in vec2 a_pos;
 out vec2 v_uv;
 
 void main() {
-  vec2 clipSpace = (a_pos * 2.0) - 1.0;
-  gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
   v_uv = a_pos;
 }
 `;
@@ -70,6 +69,9 @@ function setupWebgl(
   gl.viewport(0, 0, canvas.width, canvas.height);
   gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
+  // correct gl's flipped y when unpacking texture
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
   // program
   const program = createProgramForShaders(gl, vertexShader, fragmentShader);
 
@@ -98,7 +100,6 @@ function setupWebgl(
   gl.bindVertexArray(null);
 
   // uniforms
-
   gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, ["u_image"]);
   gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);

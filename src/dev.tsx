@@ -66,7 +66,7 @@ function List() {
           github repo
         </a>
       </ListHeader>
-      <ol className={classes.list}>
+      <ol className={classes.list} start={0}>
         {all.map((experiment) => {
           return (
             <li className={classes.listItem} key={experiment.id}>
