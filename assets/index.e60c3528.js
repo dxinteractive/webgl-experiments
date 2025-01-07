@@ -77129,7 +77129,7 @@ function setupWebgl(canvas3) {
     stride: ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT,
     offset: 2 * BYTES_IN_FLOAT
   });
-  const elementIndexBuffer = gl.createBuffer();
+  const elementIndexBuffer = resources.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elementIndexBuffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(elementIndexData), gl.STATIC_DRAW);
   gl.useProgram(program);
