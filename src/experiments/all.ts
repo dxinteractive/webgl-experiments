@@ -26,6 +26,7 @@ import webglExtractFramebuffer from "./22-webgl-extract-framebuffer";
 import webglBufferInterleaved from "./23-webgl-buffer-interleaved";
 import webglInstancing from "./24-webgl-instancing";
 import webglOklabColor from "./25-webgl-oklab-color";
+import webglDrawElements from "./26-webgl-draw-elements";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -54,4 +55,5 @@ export const all: ExperimentDefinition[] = [
   webglBufferInterleaved,
   webglInstancing,
   webglOklabColor,
+  webglDrawElements,
 ];

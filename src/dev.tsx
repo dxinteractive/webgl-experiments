@@ -75,6 +75,33 @@ function List() {
           );
         })}
       </ol>
+      <br />
+      <br />
+      <br />
+      <hr />
+      <br />
+      Ideas for later
+      <ol>
+        <li>draw element array textured</li>
+        <li>test texture nearest on tiled equilateral triangles</li>
+        <li>3D textures vs sprite sheets</li>
+        <li>Update and patch a texture</li>
+        <li>mipmaps test</li>
+        <li>custom mipmaps</li>
+        <li>stacking transparent textures test</li>
+        <li>
+          render sequential gl programs offscreen as a pure function (image
+          buffer in, image buffer out)
+        </li>
+        <li>perspective projection</li>
+        <li>pushing matrix transforms from model to camera to clip space</li>
+        <li>matrices + instancing</li>
+        <li>
+          gamedev lighting and material maps (ambient, diffuse, specular, bump,
+          normal etc)
+        </li>
+        <li>hard mode: SSAO</li>
+      </ol>
     </>
   );
 }
