@@ -109,7 +109,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
     offset: 2 * BYTES_IN_FLOAT,
   });
 
-  const elementIndexBuffer = gl.createBuffer();
+  const elementIndexBuffer = resources.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elementIndexBuffer);
   gl.bufferData(
     gl.ELEMENT_ARRAY_BUFFER,
