@@ -20,7 +20,7 @@ out vec3 v_color;
 void main() {
   vec2 pos = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(pos, 0, 1);
-  v_color = vec3(u_colorLightness, pos.x * 0.2, pos.y * -0.2);
+  v_color = vec3(u_colorLightness, pos.x * 0.4, pos.y * -0.4);
 }
 `;
 
@@ -29,6 +29,18 @@ precision highp float;
 
 in vec3 v_color;
 out vec4 outColor;
+
+vec3 linearToSrgb(vec3 linearColor) {
+    vec3 srgbColor;
+    for (int i = 0; i < 3; ++i) {
+        if (linearColor[i] <= 0.0031308) {
+            srgbColor[i] = linearColor[i] * 12.92;
+        } else {
+            srgbColor[i] = 1.055 * pow(linearColor[i], 1.0 / 2.4) - 0.055;
+        }
+    }
+    return srgbColor;
+}
 
 void main() {
   float l_ = v_color.x + 0.3963377774f * v_color.y + 0.2158037573f * v_color.z;
@@ -45,10 +57,12 @@ void main() {
 		-0.0041960863f * l - 0.7034186147f * m + 1.7076147010f * s
   );
 
+  vec3 srgb = linearToSrgb(rgb);
+
   // todo - linear rgb to srgb needed for gamma correction
   // todo - use vec3s, declare outside main, tidy up etc
 
-  outColor = vec4(rgb, 1.0);
+  outColor = vec4(srgb, 1.0);
 }
 `;
 
