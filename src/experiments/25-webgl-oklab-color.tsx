@@ -5,10 +5,9 @@ import {
   getUniformLocations,
   getWebgl2Context,
   unbindAll,
-  updateCanvasSize,
   WebGLResourceManager,
 } from "./utils/webgl-utils";
-import { createCanvasComponent } from "./utils/create-canvas-component";
+import { useEffect, useRef } from "react";
 
 const vertexShader = `#version 300 es
 precision highp float;
@@ -21,7 +20,7 @@ out vec3 v_color;
 void main() {
   vec2 pos = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(pos, 0, 1);
-  v_color = vec3(u_colorLightness, pos.x * 0.2, pos.y * 0.2);
+  v_color = vec3(u_colorLightness, pos.x * 0.2, pos.y * -0.2);
 }
 `;
 
@@ -53,9 +52,21 @@ void main() {
 }
 `;
 
-function setupWebgl(canvas: HTMLCanvasElement): () => void {
-  const gl = getWebgl2Context(canvas);
-  updateCanvasSize(canvas, gl);
+function setupWebgl(
+  canvasgl: HTMLCanvasElement,
+  canvas2d: HTMLCanvasElement
+): () => void {
+  const gl = getWebgl2Context(canvasgl);
+  const ctx = canvas2d.getContext("2d");
+  if (!ctx) {
+    throw new Error("no 2d ctx");
+  }
+
+  canvasgl.width = 640;
+  canvasgl.height = 320;
+  canvas2d.width = 640;
+  canvas2d.height = 320;
+  gl.viewport(0, 0, canvasgl.width, canvasgl.height);
 
   gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
@@ -82,18 +93,46 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   // uniforms
   gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, ["u_colorLightness"]);
-  gl.uniform1f(uniforms.u_colorLightness, 0.8);
 
   // render
   let rafId = 0;
+  let time = 0;
   const render = () => {
+    // gl
     gl.clear(gl.COLOR_BUFFER_BIT);
+
+    const lightness = (time * 0.001) % 1;
+    gl.uniform1f(uniforms.u_colorLightness, lightness);
 
     gl.bindVertexArray(vao);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     gl.bindVertexArray(null);
 
+    // 2d
+    const steps = 20;
+    ctx.clearRect(0, 0, canvas2d.width, canvas2d.height);
+    for (let x = 0; x < steps; x++) {
+      const xp = x / (steps - 1);
+
+      for (let y = 0; y < steps; y++) {
+        const yp = y / (steps - 1);
+
+        const l = lightness;
+        const a = xp * 0.8 - 0.4;
+        const b = yp * 0.8 - 0.4;
+
+        ctx.fillStyle = `oklab(${l} ${a} ${b})`;
+        ctx.fillRect(
+          canvas2d.width * (x / steps),
+          canvas2d.height * (y / steps),
+          canvas2d.width / steps,
+          canvas2d.height / steps
+        );
+      }
+    }
+
     rafId = requestAnimationFrame(render);
+    time++;
   };
 
   render();
@@ -105,12 +144,33 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   };
 }
 
+function Component() {
+  const refgl = useRef<HTMLCanvasElement | null>(null);
+  const ref2d = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvasgl = refgl.current;
+    const canvas2d = ref2d.current;
+    if (!canvasgl || !canvas2d) {
+      return;
+    }
+    return setupWebgl(canvasgl, canvas2d);
+  }, []);
+
+  return (
+    <div>
+      <canvas ref={refgl} style={{ width: "640px", height: "320px" }} />
+      <canvas ref={ref2d} style={{ width: "640px", height: "320px" }} />
+    </div>
+  );
+}
+
 const example: ExperimentDefinition = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL (unfinished)",
   description: "OKLAB color experiment in WebGL",
-  Component: createCanvasComponent(setupWebgl, { style: { height: "640px" } }),
+  Component,
 };
 
 export default example;
