@@ -23706,12 +23706,12 @@ var reactJsxDevRuntime_development = {};
     module.exports = reactJsxDevRuntime_development;
   }
 })(jsxDevRuntime);
-var _jsxFileName$h = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
-function Component$f() {
+var _jsxFileName$i = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
+function Component$g() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     children: "..."
   }, void 0, false, {
-    fileName: _jsxFileName$h,
+    fileName: _jsxFileName$i,
     lineNumber: 4,
     columnNumber: 10
   }, this);
@@ -23721,9 +23721,9 @@ const example$q = {
   filename: "00-blank.tsx",
   name: "Blank experiment",
   description: "Duplicate this to make new experiments.",
-  Component: Component$f
+  Component: Component$g
 };
-var _jsxFileName$g = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
+var _jsxFileName$h = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
 function renderBitmap$6() {
   const offscreen = new OffscreenCanvas(400, 400);
   const ctx = offscreen.getContext("2d");
@@ -23735,7 +23735,7 @@ function renderBitmap$6() {
   ctx.fillRect(0, 0, 400, 400);
   return offscreen.transferToImageBitmap();
 }
-function Component$e() {
+function Component$f() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23750,7 +23750,7 @@ function Component$e() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$g,
+    fileName: _jsxFileName$h,
     lineNumber: 25,
     columnNumber: 10
   }, this);
@@ -23760,9 +23760,9 @@ const example$p = {
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
   description: "Usage of an offscreen canvas",
-  Component: Component$e
+  Component: Component$f
 };
-var _jsxFileName$f = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
+var _jsxFileName$g = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
 async function renderBitmap$5() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
@@ -23774,7 +23774,7 @@ async function renderBitmap$5() {
     worker.postMessage("begin");
   });
 }
-function Component$d() {
+function Component$e() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23791,7 +23791,7 @@ function Component$d() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$f,
+    fileName: _jsxFileName$g,
     lineNumber: 30,
     columnNumber: 10
   }, this);
@@ -23801,7 +23801,7 @@ const example$o = {
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
   description: "Usage of an offscreen canvas in a worker",
-  Component: Component$d
+  Component: Component$e
 };
 var ENV = /* @__PURE__ */ ((ENV2) => {
   ENV2[ENV2["WEBGL_LEGACY"] = 0] = "WEBGL_LEGACY";
@@ -46952,7 +46952,7 @@ HTMLText.defaultDestroyOptions = {
 HTMLText.defaultMaxWidth = 2024;
 HTMLText.defaultMaxHeight = 2024;
 HTMLText.defaultAutoResolution = true;
-var _jsxFileName$e = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
+var _jsxFileName$f = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
 function createBunnies$1(view) {
   const app = new Application({
     background: "#1099bb",
@@ -46976,7 +46976,7 @@ function createBunnies$1(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$c() {
+function Component$d() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -46989,7 +46989,7 @@ function Component$c() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$e,
+    fileName: _jsxFileName$f,
     lineNumber: 51,
     columnNumber: 10
   }, this);
@@ -46999,9 +46999,9 @@ const example$n = {
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
   description: "Hello world for Pixi.js.",
-  Component: Component$c
+  Component: Component$d
 };
-var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
+var _jsxFileName$e = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
 async function renderBitmap$4() {
   const canvas3 = document.createElement("canvas");
   document.body.appendChild(canvas3);
@@ -47009,6 +47009,56 @@ async function renderBitmap$4() {
   const renderer = new Renderer$1({
     background: "#1099bb",
     view: offscreen
+  });
+  const container = new Container();
+  const texture = Texture$2.from("bunny.png");
+  await new Promise((r2) => setTimeout(r2, 200));
+  for (let i2 = 0; i2 < 25; i2++) {
+    const bunny = new Sprite$1(texture);
+    bunny.anchor.set(0.5);
+    bunny.x = i2 % 5 * 40;
+    bunny.y = Math.floor(i2 / 5) * 40;
+    container.addChild(bunny);
+  }
+  renderer.render(container);
+  return offscreen;
+}
+function Component$c() {
+  const ref = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a2;
+    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
+    if (!ctx) {
+      throw new Error("Could not create 2d canvas context");
+    }
+    renderBitmap$4().then((bitmap) => {
+      ctx.drawImage(bitmap, 0, 0);
+    });
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+    ref,
+    width: 400,
+    height: 400
+  }, void 0, false, {
+    fileName: _jsxFileName$e,
+    lineNumber: 47,
+    columnNumber: 10
+  }, this);
+}
+const example$m = {
+  id: "pixijs-bunnies-offscreen",
+  filename: "04-pixijs-bunnies-offscreen.tsx",
+  name: "Pixi bunnies on offscreen canvas",
+  description: "Using canvas.transferControlToOffscreen()",
+  Component: Component$c
+};
+var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
+async function renderBitmap$3() {
+  const offscreen = new OffscreenCanvas(400, 400);
+  const renderer = new Renderer$1({
+    background: "#1099bb",
+    view: offscreen,
+    antialias: true
   });
   const container = new Container();
   const texture = Texture$2.from("bunny.png");
@@ -47031,56 +47081,6 @@ function Component$b() {
     if (!ctx) {
       throw new Error("Could not create 2d canvas context");
     }
-    renderBitmap$4().then((bitmap) => {
-      ctx.drawImage(bitmap, 0, 0);
-    });
-  }, []);
-  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
-    ref,
-    width: 400,
-    height: 400
-  }, void 0, false, {
-    fileName: _jsxFileName$d,
-    lineNumber: 47,
-    columnNumber: 10
-  }, this);
-}
-const example$m = {
-  id: "pixijs-bunnies-offscreen",
-  filename: "04-pixijs-bunnies-offscreen.tsx",
-  name: "Pixi bunnies on offscreen canvas",
-  description: "Using canvas.transferControlToOffscreen()",
-  Component: Component$b
-};
-var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
-async function renderBitmap$3() {
-  const offscreen = new OffscreenCanvas(400, 400);
-  const renderer = new Renderer$1({
-    background: "#1099bb",
-    view: offscreen,
-    antialias: true
-  });
-  const container = new Container();
-  const texture = Texture$2.from("bunny.png");
-  await new Promise((r2) => setTimeout(r2, 200));
-  for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite$1(texture);
-    bunny.anchor.set(0.5);
-    bunny.x = i2 % 5 * 40;
-    bunny.y = Math.floor(i2 / 5) * 40;
-    container.addChild(bunny);
-  }
-  renderer.render(container);
-  return offscreen;
-}
-function Component$a() {
-  const ref = react.exports.useRef(null);
-  react.exports.useEffect(() => {
-    var _a2;
-    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
-    if (!ctx) {
-      throw new Error("Could not create 2d canvas context");
-    }
     renderBitmap$3().then((bitmap) => {
       ctx.drawImage(bitmap, 0, 0);
     });
@@ -47090,7 +47090,7 @@ function Component$a() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$c,
+    fileName: _jsxFileName$d,
     lineNumber: 46,
     columnNumber: 10
   }, this);
@@ -47100,9 +47100,9 @@ const example$l = {
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
   description: "Using new OffscreenCanvas()",
-  Component: Component$a
+  Component: Component$b
 };
-var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
+var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap$2() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
@@ -47114,7 +47114,7 @@ async function renderBitmap$2() {
     worker.postMessage("begin");
   });
 }
-function Component$9() {
+function Component$a() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47131,7 +47131,7 @@ function Component$9() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$b,
+    fileName: _jsxFileName$c,
     lineNumber: 30,
     columnNumber: 10
   }, this);
@@ -47141,16 +47141,16 @@ const example$k = {
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
   description: "Pixi.js bunnies in a worker",
-  Component: Component$9
+  Component: Component$a
 };
-var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
+var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
   const worker = new Worker(new URL("/webgl-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
 }
-function Component$8() {
+function Component$9() {
   const ref = react.exports.useRef(null);
   const transferred = react.exports.useRef(false);
   react.exports.useEffect(() => {
@@ -47168,7 +47168,7 @@ function Component$8() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$a,
+    fileName: _jsxFileName$b,
     lineNumber: 27,
     columnNumber: 10
   }, this);
@@ -47178,7 +47178,7 @@ const example$j = {
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
   description: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
-  Component: Component$8
+  Component: Component$9
 };
 /**
  * @license
@@ -64689,7 +64689,7 @@ if (typeof window !== "undefined") {
     window.__THREE__ = REVISION;
   }
 }
-var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
+var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
 function helloThreeJs(canvas3) {
   const scene = new Scene();
   const camera = new PerspectiveCamera(75, 1, 0.1, 1e3);
@@ -64707,7 +64707,7 @@ function helloThreeJs(canvas3) {
   camera.position.z = 5;
   renderer.render(scene, camera);
 }
-function Component$7() {
+function Component$8() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const canvas3 = ref.current;
@@ -64721,7 +64721,7 @@ function Component$7() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$9,
+    fileName: _jsxFileName$a,
     lineNumber: 35,
     columnNumber: 10
   }, this);
@@ -64731,9 +64731,9 @@ const example$i = {
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
   description: "Three.js hello world",
-  Component: Component$7
+  Component: Component$8
 };
-var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
+var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
 async function renderBitmap$1() {
   const w2 = 400;
   const h2 = 400;
@@ -64757,7 +64757,7 @@ async function renderBitmap$1() {
   renderer.render(scene, camera);
   return canvas3.transferToImageBitmap();
 }
-function Component$6() {
+function Component$7() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64774,7 +64774,7 @@ function Component$6() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$8,
+    fileName: _jsxFileName$9,
     lineNumber: 44,
     columnNumber: 10
   }, this);
@@ -64784,9 +64784,9 @@ const example$h = {
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
   description: "Three.js with offscreen canvas",
-  Component: Component$6
+  Component: Component$7
 };
-var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
+var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
 async function renderBitmap(w2, h2) {
   const bunnySize = [26, 37];
   const canvas3 = new OffscreenCanvas(w2, h2);
@@ -64814,7 +64814,7 @@ async function renderBitmap(w2, h2) {
   renderer.render(scene, camera);
   return canvas3.transferToImageBitmap();
 }
-function Component$5() {
+function Component$6() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64833,13 +64833,13 @@ function Component$5() {
       width: 260,
       height: 370
     }, void 0, false, {
-      fileName: _jsxFileName$7,
+      fileName: _jsxFileName$8,
       lineNumber: 55,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("img", {
       src: "/bunny.png"
     }, void 0, false, {
-      fileName: _jsxFileName$7,
+      fileName: _jsxFileName$8,
       lineNumber: 56,
       columnNumber: 7
     }, this)]
@@ -64850,9 +64850,9 @@ const example$g = {
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
   description: "Three.js rendering a texture",
-  Component: Component$5
+  Component: Component$6
 };
-var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
+var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
 function createBunnies(view) {
   const app = new Application({
     background: "#1099bb",
@@ -64876,7 +64876,7 @@ function createBunnies(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$4() {
+function Component$5() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -64889,7 +64889,7 @@ function Component$4() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$6,
+    fileName: _jsxFileName$7,
     lineNumber: 51,
     columnNumber: 10
   }, this);
@@ -64899,7 +64899,7 @@ const example$f = {
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
   description: "",
-  Component: Component$4
+  Component: Component$5
 };
 var __defProp2 = Object.defineProperty;
 var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -75428,8 +75428,8 @@ raf.init = function() {
   raf.init = function() {
   };
 };
-var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
-function Component$3() {
+var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
+function Component$4() {
   const divRef = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const div = divRef.current;
@@ -75454,7 +75454,7 @@ function Component$3() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     ref: divRef
   }, void 0, false, {
-    fileName: _jsxFileName$5,
+    fileName: _jsxFileName$6,
     lineNumber: 33,
     columnNumber: 10
   }, this);
@@ -75464,11 +75464,11 @@ const example$e = {
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
   description: "Two.js hello world",
-  Component: Component$3
+  Component: Component$4
 };
-var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/13-lab-color.tsx";
+var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/13-lab-color.tsx";
 const size$1 = 30;
-function Component$2() {
+function Component$3() {
   const [valueL, setL] = react.exports.useState(10);
   const [valueA, setA] = react.exports.useState(-5);
   const [valueB, setB] = react.exports.useState(5);
@@ -75497,7 +75497,7 @@ function Component$2() {
       min: 0,
       max: 10
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 36,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider$1, {
@@ -75507,7 +75507,7 @@ function Component$2() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 37,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider$1, {
@@ -75517,7 +75517,7 @@ function Component$2() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 38,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -75529,7 +75529,7 @@ function Component$2() {
       width: 1e3,
       height: 700
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 39,
       columnNumber: 7
     }, this)]
@@ -75553,12 +75553,12 @@ function Slider$1({
       value,
       onChange: (e2) => onChange(Number(e2.target.value))
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 64,
       columnNumber: 7
     }, this), label, ": ", value]
   }, void 0, true, {
-    fileName: _jsxFileName$4,
+    fileName: _jsxFileName$5,
     lineNumber: 63,
     columnNumber: 5
   }, this);
@@ -75568,11 +75568,11 @@ const example$d = {
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
   description: "Lab color experiment",
-  Component: Component$2
+  Component: Component$3
 };
-var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/14-oklab-color.tsx";
+var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/14-oklab-color.tsx";
 const size = 30;
-function Component$1() {
+function Component$2() {
   const [valueL, setL] = react.exports.useState(10);
   const [valueA, setA] = react.exports.useState(-5);
   const [valueB, setB] = react.exports.useState(5);
@@ -75601,7 +75601,7 @@ function Component$1() {
       min: 0,
       max: 10
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 36,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
@@ -75611,7 +75611,7 @@ function Component$1() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 37,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
@@ -75621,7 +75621,7 @@ function Component$1() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 38,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -75633,7 +75633,7 @@ function Component$1() {
       width: 1e3,
       height: 700
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 39,
       columnNumber: 7
     }, this)]
@@ -75657,12 +75657,12 @@ function Slider({
       value,
       onChange: (e2) => onChange(Number(e2.target.value))
     }, void 0, false, {
-      fileName: _jsxFileName$3,
+      fileName: _jsxFileName$4,
       lineNumber: 64,
       columnNumber: 7
     }, this), label, ": ", value]
   }, void 0, true, {
-    fileName: _jsxFileName$3,
+    fileName: _jsxFileName$4,
     lineNumber: 63,
     columnNumber: 5
   }, this);
@@ -75672,7 +75672,7 @@ const example$c = {
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
   description: "OKLAB color experiment",
-  Component: Component$1
+  Component: Component$2
 };
 const vertexShaderSource = "#version 300 es\n\nprecision highp float;\n\nlayout (location = 0) in vec3 aPosition;\n\nuniform float u_time;\n\nout vec2 uv;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.1;\n  vec3 p = aPosition + vec3(0.0, wave, 0.0);\n  gl_Position = vec4(p, 1.0);\n  uv = aPosition.xy * vec2(0.5, 0.5);\n}";
 const fragmentShaderSource = "#version 300 es\n\nprecision highp float;\n\nuniform float u_time;\n\nin vec2 uv;\nout vec4 outColor;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.5 + 0.5;\n  outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);\n}\n";
@@ -75870,7 +75870,7 @@ function unbindAll(gl) {
   gl.bindRenderbuffer(gl.RENDERBUFFER, null);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 }
-var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
+var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
 function compileShader(gl, type2, source) {
   const shader = gl.createShader(type2);
   if (!shader) {
@@ -75959,7 +75959,7 @@ function setupWebgl$b(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-function Component() {
+function Component$1() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const canvas3 = ref.current;
@@ -75974,7 +75974,7 @@ function Component() {
       height: "640px"
     }
   }, void 0, false, {
-    fileName: _jsxFileName$2,
+    fileName: _jsxFileName$3,
     lineNumber: 181,
     columnNumber: 10
   }, this);
@@ -75984,9 +75984,9 @@ const example$b = {
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
   description: "Hello world for WebGL2.",
-  Component
+  Component: Component$1
 };
-var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/utils/create-canvas-component.tsx";
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/utils/create-canvas-component.tsx";
 function createCanvasComponent(onMount, props = {}) {
   return function CanvasComponent() {
     const ref = react.exports.useRef(null);
@@ -76001,7 +76001,7 @@ function createCanvasComponent(onMount, props = {}) {
       ref,
       ...props
     }, void 0, false, {
-      fileName: _jsxFileName$1,
+      fileName: _jsxFileName$2,
       lineNumber: 18,
       columnNumber: 12
     }, this);
@@ -76953,6 +76953,7 @@ const example$2 = {
     }
   })
 };
+var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/25-webgl-oklab-color.tsx";
 const vertexShader$1 = `#version 300 es
 precision highp float;
 
@@ -76964,7 +76965,7 @@ out vec3 v_color;
 void main() {
   vec2 pos = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(pos, 0, 1);
-  v_color = vec3(u_colorLightness, pos.x * 0.2, pos.y * 0.2);
+  v_color = vec3(u_colorLightness, pos.x * 0.2, pos.y * -0.2);
 }
 `;
 const fragmentShader$1 = `#version 300 es
@@ -76994,9 +76995,17 @@ void main() {
   outColor = vec4(rgb, 1.0);
 }
 `;
-function setupWebgl$1(canvas3) {
-  const gl = getWebgl2Context(canvas3);
-  updateCanvasSize$1(canvas3, gl);
+function setupWebgl$1(canvasgl, canvas2d) {
+  const gl = getWebgl2Context(canvasgl);
+  const ctx = canvas2d.getContext("2d");
+  if (!ctx) {
+    throw new Error("no 2d ctx");
+  }
+  canvasgl.width = 640;
+  canvasgl.height = 320;
+  canvas2d.width = 640;
+  canvas2d.height = 320;
+  gl.viewport(0, 0, canvasgl.width, canvasgl.height);
   gl.clearColor(0, 0, 0, 0);
   const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
   const resources = new WebGLResourceManager(gl);
@@ -77010,14 +77019,30 @@ function setupWebgl$1(canvas3) {
   gl.bindVertexArray(null);
   gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, ["u_colorLightness"]);
-  gl.uniform1f(uniforms.u_colorLightness, 0.8);
   let rafId = 0;
+  let time = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT);
+    const lightness = time * 1e-3 % 1;
+    gl.uniform1f(uniforms.u_colorLightness, lightness);
     gl.bindVertexArray(vao);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     gl.bindVertexArray(null);
+    const steps = 20;
+    ctx.clearRect(0, 0, canvas2d.width, canvas2d.height);
+    for (let x2 = 0; x2 < steps; x2++) {
+      const xp = x2 / (steps - 1);
+      for (let y2 = 0; y2 < steps; y2++) {
+        const yp = y2 / (steps - 1);
+        const l2 = lightness;
+        const a2 = xp * 0.8 - 0.4;
+        const b2 = yp * 0.8 - 0.4;
+        ctx.fillStyle = `oklab(${l2} ${a2} ${b2})`;
+        ctx.fillRect(canvas2d.width * (x2 / steps), canvas2d.height * (y2 / steps), canvas2d.width / steps, canvas2d.height / steps);
+      }
+    }
     rafId = requestAnimationFrame(render);
+    time++;
   };
   render();
   return () => {
@@ -77026,16 +77051,51 @@ function setupWebgl$1(canvas3) {
     resources.deleteAll();
   };
 }
+function Component() {
+  const refgl = react.exports.useRef(null);
+  const ref2d = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    const canvasgl = refgl.current;
+    const canvas2d = ref2d.current;
+    if (!canvasgl || !canvas2d) {
+      return;
+    }
+    return setupWebgl$1(canvasgl, canvas2d);
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
+    children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+      ref: refgl,
+      style: {
+        width: "640px",
+        height: "320px"
+      }
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 162,
+      columnNumber: 7
+    }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+      ref: ref2d,
+      style: {
+        width: "640px",
+        height: "320px"
+      }
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 163,
+      columnNumber: 7
+    }, this)]
+  }, void 0, true, {
+    fileName: _jsxFileName$1,
+    lineNumber: 161,
+    columnNumber: 5
+  }, this);
+}
 const example$1 = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL (unfinished)",
   description: "OKLAB color experiment in WebGL",
-  Component: createCanvasComponent(setupWebgl$1, {
-    style: {
-      height: "640px"
-    }
-  })
+  Component
 };
 const vertexShader = `#version 300 es
 precision highp float;
