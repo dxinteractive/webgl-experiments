@@ -7,7 +7,7 @@ import {
   unbindAll,
   WebGLResourceManager,
 } from "./utils/webgl-utils";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const vertexShader = `#version 300 es
 precision highp float;
@@ -20,7 +20,7 @@ out vec3 v_color;
 void main() {
   vec2 pos = (a_pos * 2.0) - 1.0;
   gl_Position = vec4(pos, 0, 1);
-  v_color = vec3(u_colorLightness, pos.x * 0.4, pos.y * -0.4);
+  v_color = vec3(u_colorLightness, pos.x * 0.33, pos.y * -0.33);
 }
 `;
 
@@ -30,41 +30,65 @@ precision highp float;
 in vec3 v_color;
 out vec4 outColor;
 
-vec3 linearToSrgb(vec3 linearColor) {
-    vec3 srgbColor;
-    for (int i = 0; i < 3; ++i) {
-        if (linearColor[i] <= 0.0031308) {
-            srgbColor[i] = linearColor[i] * 12.92;
-        } else {
-            srgbColor[i] = 1.055 * pow(linearColor[i], 1.0 / 2.4) - 0.055;
-        }
-    }
-    return srgbColor;
+float ungamma(float c) {
+  return c <= 0.04045 ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4);
 }
 
+vec3 srgb_to_rgb(vec3 c){return vec3(ungamma(c.r),ungamma(c.g),ungamma(c.b));}
+
+float gamma(float c) {
+  return c < 0.0031308 ? c * 12.92 : 1.055 * pow(c, 0.41666) - 0.055;
+}
+
+vec3 rgb_to_srgb(vec3 c) {
+  return vec3(gamma(c.r),gamma(c.g),gamma(c.b));
+}
+
+vec3 rgb_to_oklab(vec3 c) {
+  float l = 0.4121656120f * c.r + 0.5362752080f * c.g + 0.0514575653f * c.b;
+  float m = 0.2118591070f * c.r + 0.6807189584f * c.g + 0.1074065790f * c.b;
+  float s = 0.0883097947f * c.r + 0.2818474174f * c.g + 0.6302613616f * c.b;
+
+  float l_ = pow(l, 1./3.);
+  float m_ = pow(m, 1./3.);
+  float s_ = pow(s, 1./3.);
+
+  vec3 labResult;
+  labResult.x = 0.2104542553f*l_ + 0.7936177850f*m_ - 0.0040720468f*s_;
+  labResult.y = 1.9779984951f*l_ - 2.4285922050f*m_ + 0.4505937099f*s_;
+  labResult.z = 0.0259040371f*l_ + 0.7827717662f*m_ - 0.8086757660f*s_;
+  return labResult;
+}
+
+vec3 oklab_to_rgb(vec3 c) {
+    float l_ = c.x + 0.3963377774f * c.y + 0.2158037573f * c.z;
+    float m_ = c.x - 0.1055613458f * c.y - 0.0638541728f * c.z;
+    float s_ = c.x - 0.0894841775f * c.y - 1.2914855480f * c.z;
+
+    float l = l_*l_*l_;
+    float m = m_*m_*m_;
+    float s = s_*s_*s_;
+
+    vec3 rgbResult;
+    rgbResult.r = + 4.0767245293f*l - 3.3072168827f*m + 0.2307590544f*s;
+    rgbResult.g = - 1.2681437731f*l + 2.6093323231f*m - 0.3411344290f*s;
+    rgbResult.b = - 0.0041119885f*l - 0.7034763098f*m + 1.7068625689f*s;
+    return rgbResult;
+}
+    
 void main() {
-  float l_ = v_color.x + 0.3963377774f * v_color.y + 0.2158037573f * v_color.z;
-  float m_ = v_color.x - 0.1055613458f * v_color.y - 0.0638541728f * v_color.z;
-  float s_ = v_color.x - 0.0894841775f * v_color.y - 1.2914855480f * v_color.z;
-
-  float l = l_*l_*l_;
-  float m = m_*m_*m_;
-  float s = s_*s_*s_;
-
-  vec3 rgb = vec3(
-		+4.0767416621f * l - 3.3077115913f * m + 0.2309699292f * s,
-		-1.2684380046f * l + 2.6097574011f * m - 0.3413193965f * s,
-		-0.0041960863f * l - 0.7034186147f * m + 1.7076147010f * s
-  );
-
-  vec3 srgb = linearToSrgb(rgb);
-
-  // todo - linear rgb to srgb needed for gamma correction
-  // todo - use vec3s, declare outside main, tidy up etc
-
+  vec3 srgb = rgb_to_srgb(oklab_to_rgb(v_color));
   outColor = vec4(srgb, 1.0);
-}
-`;
+
+  float diff = length(outColor.rgb - clamp(outColor.rgb, 0., 1.));
+  if(diff != 0.0) {
+    // outColor = vec4(0.5,0.5,0.5,1.);
+  }
+}`;
+
+const lightness = {
+  current: 0,
+};
 
 function setupWebgl(
   canvasgl: HTMLCanvasElement,
@@ -110,13 +134,11 @@ function setupWebgl(
 
   // render
   let rafId = 0;
-  let time = 0;
   const render = () => {
     // gl
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    const lightness = (time * 0.001) % 1;
-    gl.uniform1f(uniforms.u_colorLightness, lightness);
+    gl.uniform1f(uniforms.u_colorLightness, lightness.current);
 
     gl.bindVertexArray(vao);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -131,9 +153,9 @@ function setupWebgl(
       for (let y = 0; y < steps; y++) {
         const yp = y / (steps - 1);
 
-        const l = lightness;
-        const a = xp * 0.8 - 0.4;
-        const b = yp * 0.8 - 0.4;
+        const l = lightness.current;
+        const a = xp * 0.66 - 0.33;
+        const b = yp * 0.66 - 0.33;
 
         ctx.fillStyle = `oklab(${l} ${a} ${b})`;
         ctx.fillRect(
@@ -146,7 +168,6 @@ function setupWebgl(
     }
 
     rafId = requestAnimationFrame(render);
-    time++;
   };
 
   render();
@@ -171,8 +192,21 @@ function Component() {
     return setupWebgl(canvasgl, canvas2d);
   }, []);
 
+  const [valueL, setL] = useState(1);
+  lightness.current = valueL;
+
   return (
     <div>
+      <input
+        type="range"
+        style={{ width: "400px" }}
+        min={0}
+        max={1}
+        value={valueL}
+        onChange={(e) => setL(Number(e.target.value))}
+        step={0.01}
+      />
+      {valueL}
       <canvas ref={refgl} style={{ width: "640px", height: "320px" }} />
       <canvas ref={ref2d} style={{ width: "640px", height: "320px" }} />
     </div>
@@ -182,7 +216,7 @@ function Component() {
 const example: ExperimentDefinition = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
-  name: "OKLAB color experiment in WebGL (unfinished)",
+  name: "OKLAB color experiment in WebGL",
   description: "OKLAB color experiment in WebGL",
   Component,
 };
