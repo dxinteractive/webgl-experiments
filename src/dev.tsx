@@ -85,7 +85,6 @@ function List() {
         <li>draw element array textured</li>
         <li>test texture nearest on tiled equilateral triangles</li>
         <li>3D textures vs sprite sheets</li>
-        <li>Update and patch a texture</li>
         <li>mipmaps test</li>
         <li>custom mipmaps</li>
         <li>stacking transparent textures test</li>

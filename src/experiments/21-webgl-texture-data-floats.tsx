@@ -137,7 +137,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 
 const example: ExperimentDefinition = {
   id: "webgl-texture-floats",
-  filename: "21-webgl-texture-floats.tsx",
+  filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
   description:
     "Renders tris from positions directly in clip space, then offsets them according to float data passed through a texture.",
