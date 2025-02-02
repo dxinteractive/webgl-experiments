@@ -32,6 +32,7 @@ import _28 from "./28-webgl-framebuffer-bouncing";
 import _29 from "./29-webgl-texture-many-samplers";
 import _30 from "./30-webgl-draw-elements-textured";
 import _31 from "./31-webgl-scissor";
+import _32 from "./32-webgl-scissor-perf";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -66,4 +67,5 @@ export const all: ExperimentDefinition[] = [
   _29,
   _30,
   _31,
+  _32,
 ];
