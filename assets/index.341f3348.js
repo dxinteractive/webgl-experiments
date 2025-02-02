@@ -77387,7 +77387,7 @@ void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
 }
 `;
-const postprocessFragmentShader = `#version 300 es
+const hueCycleFragmentShader = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77400,6 +77400,18 @@ void main() {
   outColor = vec4(sampled.g, sampled.b, sampled.r, 1.0);
 }
 `;
+const tileFragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  outColor = texture(u_image, v_uv * 2.0);
+}
+`;
 function setupWebgl(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH;
@@ -77409,12 +77421,13 @@ function setupWebgl(canvas3) {
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  const quadProgram = createProgramForShaders$1(gl, quadVertexShader, gradientFragmentShader);
-  const postprocessProgram = createProgramForShaders$1(gl, quadVertexShader, postprocessFragmentShader);
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader, gradientFragmentShader);
+  const hueCycleProgram = createProgramForShaders$1(gl, quadVertexShader, hueCycleFragmentShader);
+  const tileProgram = createProgramForShaders$1(gl, quadVertexShader, tileFragmentShader);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
-  createAttribute(gl, quadProgram, {
+  createAttribute(gl, gradientProgram, {
     name: "a_pos",
     buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
     size: 2
@@ -77433,15 +77446,25 @@ function setupWebgl(canvas3) {
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer2);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, framebufferTexture2, 0);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  gl.useProgram(quadProgram);
+  const renderQuad = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  };
+  gl.useProgram(gradientProgram);
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
-  gl.useProgram(postprocessProgram);
+  renderQuad();
+  gl.useProgram(hueCycleProgram);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer2);
+  renderQuad();
+  gl.useProgram(hueCycleProgram);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
+  renderQuad();
+  gl.useProgram(tileProgram);
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  renderQuad();
   return () => {
     unbindAll(gl);
     resources.deleteAll();
