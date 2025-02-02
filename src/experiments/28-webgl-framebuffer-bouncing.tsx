@@ -33,7 +33,7 @@ void main() {
 }
 `;
 
-const postprocessFragmentShader = `#version 300 es
+const hueCycleFragmentShader = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -44,6 +44,19 @@ out vec4 outColor;
 void main() {
   vec4 sampled = texture(u_image, v_uv);
   outColor = vec4(sampled.g, sampled.b, sampled.r, 1.0);
+}
+`;
+
+const tileFragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  outColor = texture(u_image, v_uv * 2.0);
 }
 `;
 
@@ -60,16 +73,22 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   }
 
   // programs
-  const quadProgram = createProgramForShaders(
+  const gradientProgram = createProgramForShaders(
     gl,
     quadVertexShader,
     gradientFragmentShader
   );
 
-  const postprocessProgram = createProgramForShaders(
+  const hueCycleProgram = createProgramForShaders(
     gl,
     quadVertexShader,
-    postprocessFragmentShader
+    hueCycleFragmentShader
+  );
+
+  const tileProgram = createProgramForShaders(
+    gl,
+    quadVertexShader,
+    tileFragmentShader
   );
 
   // resources
@@ -79,7 +98,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
 
-  createAttribute(gl, quadProgram, {
+  createAttribute(gl, gradientProgram, {
     name: "a_pos",
     buffer: resources.createBuffer(
       new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
@@ -121,20 +140,34 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
+  // set up rendering
+  const renderQuad = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  };
+
   // render quad to framebuffer1
-  gl.useProgram(quadProgram);
+  gl.useProgram(gradientProgram);
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  renderQuad();
 
-  // render framebuffer1 > postprocess > canvas
-  gl.useProgram(postprocessProgram);
+  // render framebuffer1 > hue cycle > framebuffer2
+  gl.useProgram(hueCycleProgram);
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
-  gl.bindFramebuffer(gl.FRAMEBUFFER, null); // output to canvas
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer2);
+  renderQuad();
 
-  // TODO add more freamebuffers in a chain
+  // render framebuffer2 > hue cycle > framebuffer1
+  gl.useProgram(hueCycleProgram);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
+  renderQuad();
+
+  // render framebuffer2 > tile > out
+  gl.useProgram(tileProgram);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  renderQuad();
 
   return () => {
     unbindAll(gl);
