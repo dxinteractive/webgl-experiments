@@ -179,7 +179,7 @@ const example: ExperimentDefinition = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
-  description: "Renders to and framebuffers repeatedly",
+  description: "Renders to and from framebuffers repeatedly",
   Component: createCanvasComponent(setupWebgl, {
     style: { height: "320px", imageRendering: "pixelated" },
   }),
