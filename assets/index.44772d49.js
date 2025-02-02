@@ -76024,7 +76024,7 @@ function createCanvasComponentWithImages(onMount, imageSrcs, props = {}) {
     return () => cleanup();
   }, props);
 }
-const vertexShader$c = `#version 300 es
+const vertexShader$b = `#version 300 es
 
 precision highp float;
 
@@ -76041,7 +76041,7 @@ void main() {
   uv = aPosition.xy * vec2(0.5, 0.5);
 }
 `;
-const fragmentShader$c = `#version 300 es
+const fragmentShader$b = `#version 300 es
 
 precision highp float;
 
@@ -76058,7 +76058,7 @@ void main() {
 function setupWebgl$c(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
-  const program = createProgramForShaders$1(gl, vertexShader$c, fragmentShader$c);
+  const program = createProgramForShaders$1(gl, vertexShader$b, fragmentShader$b);
   gl.useProgram(program);
   const vertexBuffer = createBuffer(gl);
   const vertexData = new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]);
@@ -76112,7 +76112,7 @@ const example$c = {
 };
 const WIDTH$5 = 8;
 const HEIGHT$5 = 8;
-const vertexShader$b = `#version 300 es
+const vertexShader$a = `#version 300 es
 
 in vec2 a_position;
 in vec2 a_texCoord;
@@ -76132,7 +76132,7 @@ void main() {
   v_texCoord = a_texCoord;
 }
 `;
-const fragmentShader$b = `#version 300 es
+const fragmentShader$a = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76176,7 +76176,7 @@ function setupWebglWithImages$1(canvas3, images) {
   canvas3.height = HEIGHT$5;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$b, fragmentShader$b);
+  const program = createProgramForShaders$1(gl, vertexShader$a, fragmentShader$a);
   const vao = createVertexArray(gl);
   gl.bindVertexArray(vao);
   const positionBuffer = createBuffer(gl);
@@ -76245,7 +76245,7 @@ const example$b = {
     }
   })
 };
-const vertexShader$a = `#version 300 es
+const vertexShader$9 = `#version 300 es
 
 in vec2 a_position;
 in vec2 a_texCoord;
@@ -76265,7 +76265,7 @@ void main() {
   v_texCoord = a_texCoord;
 }
 `;
-const fragmentShader$a = `#version 300 es
+const fragmentShader$9 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76302,7 +76302,7 @@ function setupWebglWithImages(canvas3, images) {
   canvas3.height = 8 * 16;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$a, fragmentShader$a);
+  const program = createProgramForShaders$1(gl, vertexShader$9, fragmentShader$9);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
   const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
@@ -76377,7 +76377,7 @@ const example$a = {
 };
 const WIDTH$4 = 8;
 const HEIGHT$4 = 8;
-const vertexShader$9 = `#version 300 es
+const vertexShader$8 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76387,7 +76387,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$9 = `#version 300 es
+const fragmentShader$8 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76417,7 +76417,7 @@ function setupWebgl$9(canvas3, images) {
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$9, fragmentShader$9);
+  const program = createProgramForShaders$1(gl, vertexShader$8, fragmentShader$8);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76466,7 +76466,7 @@ const example$9 = {
 };
 const WIDTH$3 = 8;
 const HEIGHT$3 = 8;
-const vertexShader$8 = `#version 300 es
+const vertexShader$7 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76476,7 +76476,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$8 = `#version 300 es
+const fragmentShader$7 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76496,7 +76496,7 @@ function setupWebgl$8(canvas3) {
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$8, fragmentShader$8);
+  const program = createProgramForShaders$1(gl, vertexShader$7, fragmentShader$7);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76536,7 +76536,7 @@ const example$8 = {
     }
   })
 };
-const vertexShader$7 = `#version 300 es
+const vertexShader$6 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_dataTexture;
@@ -76556,7 +76556,7 @@ void main() {
   gl_Position = vec4(a_pos.x, a_pos.y + data.x, 0.0, 1.0);
 }
 `;
-const fragmentShader$7 = `#version 300 es
+const fragmentShader$6 = `#version 300 es
 precision highp float;
 
 out vec4 outColor;
@@ -76589,7 +76589,7 @@ function setupWebgl$7(canvas3) {
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
-  const program = createProgramForShaders$1(gl, vertexShader$7, fragmentShader$7);
+  const program = createProgramForShaders$1(gl, vertexShader$6, fragmentShader$6);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76645,7 +76645,7 @@ const example$7 = {
 };
 const WIDTH$2 = 8;
 const HEIGHT$2 = 8;
-const vertexShader$6 = `#version 300 es
+const vertexShader$5 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76655,7 +76655,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$6 = `#version 300 es
+const fragmentShader$5 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76688,7 +76688,7 @@ function setupWebgl$6(canvas3, [image]) {
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$6, fragmentShader$6);
+  const program = createProgramForShaders$1(gl, vertexShader$5, fragmentShader$5);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76748,7 +76748,7 @@ const example$6 = {
     }
   })
 };
-const vertexShader$5 = `#version 300 es
+const vertexShader$4 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -76760,7 +76760,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$5 = `#version 300 es
+const fragmentShader$4 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -76774,7 +76774,7 @@ function setupWebgl$5(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$5, fragmentShader$5);
+  const program = createProgramForShaders$1(gl, vertexShader$4, fragmentShader$4);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76855,7 +76855,7 @@ const example$5 = {
     }
   })
 };
-const vertexShader$4 = `#version 300 es
+const vertexShader$3 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -76868,7 +76868,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$4 = `#version 300 es
+const fragmentShader$3 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -76882,7 +76882,7 @@ function setupWebgl$4(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$4, fragmentShader$4);
+  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76954,7 +76954,7 @@ const example$4 = {
   })
 };
 var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/25-webgl-oklab-color.tsx";
-const vertexShader$3 = `#version 300 es
+const vertexShader$2 = `#version 300 es
 precision highp float;
 
 uniform float u_colorLightness;
@@ -76968,7 +76968,7 @@ void main() {
   v_color = vec3(u_colorLightness, pos.x * 0.33, pos.y * -0.33);
 }
 `;
-const fragmentShader$3 = `#version 300 es
+const fragmentShader$2 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -77044,7 +77044,7 @@ function setupWebgl$3(canvasgl, canvas2d) {
   canvas2d.height = 320;
   gl.viewport(0, 0, canvasgl.width, canvasgl.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
+  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77147,7 +77147,7 @@ const example$3 = {
   description: "OKLAB color experiment in WebGL",
   Component
 };
-const vertexShader$2 = `#version 300 es
+const vertexShader$1 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -77159,7 +77159,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$2 = `#version 300 es
+const fragmentShader$1 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -77173,7 +77173,7 @@ function setupWebgl$2(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
+  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77263,7 +77263,7 @@ const example$2 = {
 };
 const WIDTH$1 = 8;
 const HEIGHT$1 = 8;
-const vertexShader$1 = `#version 300 es
+const vertexShader = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77273,7 +77273,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$1 = `#version 300 es
+const fragmentShader = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77303,7 +77303,7 @@ function setupWebgl$1(canvas3, [image1, image2]) {
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
+  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77367,7 +77367,7 @@ const example$1 = {
 };
 const WIDTH = 8;
 const HEIGHT = 8;
-const vertexShader = `#version 300 es
+const quadVertexShader = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77377,7 +77377,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader = `#version 300 es
+const gradientFragmentShader = `#version 300 es
 precision highp float;
 
 in vec2 v_uv;
@@ -77387,25 +77387,60 @@ void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
 }
 `;
+const postprocessFragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  vec4 sampled = texture(u_image, v_uv);
+  outColor = vec4(sampled.g, sampled.b, sampled.r, 1.0);
+}
+`;
 function setupWebgl(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH;
   canvas3.height = HEIGHT;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
+  if (!gl.getExtension("EXT_color_buffer_float")) {
+    throw new Error("No EXT_color_buffer_float");
+  }
+  const quadProgram = createProgramForShaders$1(gl, quadVertexShader, gradientFragmentShader);
+  const postprocessProgram = createProgramForShaders$1(gl, quadVertexShader, postprocessFragmentShader);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
-  createAttribute(gl, program, {
+  createAttribute(gl, quadProgram, {
     name: "a_pos",
     buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
     size: 2
   });
-  gl.bindVertexArray(null);
-  gl.useProgram(program);
+  const framebufferTexture1 = resources.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
+  const framebufferTexture2 = resources.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+  const framebuffer1 = resources.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, framebufferTexture1, 0);
+  const framebuffer2 = resources.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer2);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, framebufferTexture2, 0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.useProgram(quadProgram);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
   gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.bindVertexArray(vao);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  gl.useProgram(postprocessProgram);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES, 0, 6);
   return () => {
     unbindAll(gl);
@@ -77415,7 +77450,7 @@ function setupWebgl(canvas3) {
 const example = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
-  name: "WebGL framebuffer bouncing (unfinished)",
+  name: "WebGL framebuffer bouncing",
   description: "Renders to and framebuffers repeatedly",
   Component: createCanvasComponent(setupWebgl, {
     style: {
