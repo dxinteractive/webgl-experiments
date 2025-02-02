@@ -82,14 +82,14 @@ function List() {
       <br />
       Ideas for later
       <ol>
-        <li>test texture nearest on tiled equilateral triangles</li>
         <li>3D textures vs sprite sheets</li>
-        <li>mipmaps test</li>
-        <li>custom mipmaps</li>
         <li>stacking transparent textures test</li>
         <li>perspective projection</li>
         <li>pushing matrix transforms from model to camera to clip space</li>
+        <li>reflections of skybox</li>
         <li>matrices + instancing</li>
+        <li>mipmaps test</li>
+        <li>custom mipmaps</li>
         <li>
           gamedev lighting and material maps (ambient, diffuse, specular, bump,
           normal etc)
