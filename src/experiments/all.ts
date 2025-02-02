@@ -1,65 +1,67 @@
 import type { ExperimentDefinition } from "../types";
 
-import blank from "./00-blank";
-import offscreenCanvas from "./01-offscreen-canvas";
-import offscreenCanvasWorker from "./02-offscreen-canvas-worker";
-import pixijsBunnies from "./03-pixijs-bunnies";
-import pixijsBunniesOffscreen from "./04-pixijs-bunnies-offscreen";
-import pixijsBunniesOffscreen2 from "./05-pixijs-bunnies-offscreen-2";
-import pixijsBunniesWorker from "./06-pixijs-bunnies-worker";
-import pixijsBunniesWorkerTransfer from "./07-pixijs-bunnies-worker-transfer";
-import threejsHelloWorld from "./08-threejs-hello-world";
-import threejsHelloWorldOffscreen from "./09-threejs-hello-world-offscreen";
-import threejsTexture from "./10-threejs-texture";
-import pixijsBlendModes from "./11-pixijs-blend-modes";
-import twojsHelloWorld from "./12-twojs-hello-world";
-import labColor from "./13-lab-color";
-import oklabColor from "./14-oklab-color";
-import webglSetup from "./15-webgl-setup";
-import webglSetupStreamlined from "./16-webgl-setup-streamlined";
-import webglTexture from "./17-webgl-texture";
-import webglTextureUpscale from "./18-webgl-texture-upscale";
-import webglTextureStreamlined from "./19-webgl-texture-streamlined";
-import webglTextureDataIn from "./20-webgl-texture-data-in";
-import webglTextureDataFloats from "./21-webgl-texture-data-floats";
-import webglExtractFramebuffer from "./22-webgl-extract-framebuffer";
-import webglBufferInterleaved from "./23-webgl-buffer-interleaved";
-import webglInstancing from "./24-webgl-instancing";
-import webglOklabColor from "./25-webgl-oklab-color";
-import webglDrawElements from "./26-webgl-draw-elements";
-import webglTexturesPatch from "./27-webgl-texture-patch";
-import webglFramebufferBouncing from "./28-webgl-framebuffer-bouncing";
-import webglTextureManySamplers from "./29-webgl-texture-many-samplers";
+import _00 from "./00-blank";
+import _01 from "./01-offscreen-canvas";
+import _02 from "./02-offscreen-canvas-worker";
+import _03 from "./03-pixijs-bunnies";
+import _04 from "./04-pixijs-bunnies-offscreen";
+import _05 from "./05-pixijs-bunnies-offscreen-2";
+import _06 from "./06-pixijs-bunnies-worker";
+import _07 from "./07-pixijs-bunnies-worker-transfer";
+import _08 from "./08-threejs-hello-world";
+import _09 from "./09-threejs-hello-world-offscreen";
+import _10 from "./10-threejs-texture";
+import _11 from "./11-pixijs-blend-modes";
+import _12 from "./12-twojs-hello-world";
+import _13 from "./13-lab-color";
+import _14 from "./14-oklab-color";
+import _15 from "./15-webgl-setup";
+import _16 from "./16-webgl-setup-streamlined";
+import _17 from "./17-webgl-texture";
+import _18 from "./18-webgl-texture-upscale";
+import _19 from "./19-webgl-texture-streamlined";
+import _20 from "./20-webgl-texture-data-in";
+import _21 from "./21-webgl-texture-data-floats";
+import _22 from "./22-webgl-extract-framebuffer";
+import _23 from "./23-webgl-buffer-interleaved";
+import _24 from "./24-webgl-instancing";
+import _25 from "./25-webgl-oklab-color";
+import _26 from "./26-webgl-draw-elements";
+import _27 from "./27-webgl-texture-patch";
+import _28 from "./28-webgl-framebuffer-bouncing";
+import _29 from "./29-webgl-texture-many-samplers";
+import _30 from "./30-webgl-draw-elements-textured";
 
 export const all: ExperimentDefinition[] = [
-  blank,
-  offscreenCanvas,
-  offscreenCanvasWorker,
-  pixijsBunnies,
-  pixijsBunniesOffscreen,
-  pixijsBunniesOffscreen2,
-  pixijsBunniesWorker,
-  pixijsBunniesWorkerTransfer,
-  threejsHelloWorld,
-  threejsHelloWorldOffscreen,
-  threejsTexture,
-  pixijsBlendModes,
-  twojsHelloWorld,
-  labColor,
-  oklabColor,
-  webglSetup,
-  webglSetupStreamlined,
-  webglTexture,
-  webglTextureUpscale,
-  webglTextureStreamlined,
-  webglTextureDataIn,
-  webglTextureDataFloats,
-  webglExtractFramebuffer,
-  webglBufferInterleaved,
-  webglInstancing,
-  webglOklabColor,
-  webglDrawElements,
-  webglTexturesPatch,
-  webglFramebufferBouncing,
-  webglTextureManySamplers,
+  _00,
+  _01,
+  _02,
+  _03,
+  _04,
+  _05,
+  _06,
+  _07,
+  _08,
+  _09,
+  _10,
+  _11,
+  _12,
+  _13,
+  _14,
+  _15,
+  _16,
+  _17,
+  _18,
+  _19,
+  _20,
+  _21,
+  _22,
+  _23,
+  _24,
+  _25,
+  _26,
+  _27,
+  _28,
+  _29,
+  _30,
 ];
