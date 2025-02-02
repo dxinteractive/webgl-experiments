@@ -82,7 +82,6 @@ function List() {
       <br />
       Ideas for later
       <ol>
-        <li>draw element array textured</li>
         <li>test texture nearest on tiled equilateral triangles</li>
         <li>3D textures vs sprite sheets</li>
         <li>mipmaps test</li>
