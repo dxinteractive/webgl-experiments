@@ -11,7 +11,7 @@ import { createCanvasComponent } from "./utils/create-canvas-component";
 const WIDTH = 8;
 const HEIGHT = 8;
 
-const vertexShader = `#version 300 es
+const quadVertexShader = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -22,7 +22,7 @@ void main() {
 }
 `;
 
-const fragmentShader = `#version 300 es
+const gradientFragmentShader = `#version 300 es
 precision highp float;
 
 in vec2 v_uv;
@@ -30,6 +30,20 @@ out vec4 outColor;
 
 void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
+}
+`;
+
+const postprocessFragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  vec4 sampled = texture(u_image, v_uv);
+  outColor = vec4(sampled.g, sampled.b, sampled.r, 1.0);
 }
 `;
 
@@ -41,11 +55,22 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   gl.viewport(0, 0, canvas.width, canvas.height);
   gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
-  // correct gl's flipped y when unpacking texture
-  // gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  if (!gl.getExtension("EXT_color_buffer_float")) {
+    throw new Error("No EXT_color_buffer_float");
+  }
 
-  // program
-  const program = createProgramForShaders(gl, vertexShader, fragmentShader);
+  // programs
+  const quadProgram = createProgramForShaders(
+    gl,
+    quadVertexShader,
+    gradientFragmentShader
+  );
+
+  const postprocessProgram = createProgramForShaders(
+    gl,
+    quadVertexShader,
+    postprocessFragmentShader
+  );
 
   // resources
   const resources = new WebGLResourceManager(gl);
@@ -54,7 +79,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
 
-  createAttribute(gl, program, {
+  createAttribute(gl, quadProgram, {
     name: "a_pos",
     buffer: resources.createBuffer(
       new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
@@ -62,42 +87,54 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
     size: 2,
   });
 
-  gl.bindVertexArray(null);
+  // framebuffer textures
+  const framebufferTexture1 = resources.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
 
-  // framebuffer
-  // const framebufferTexture = resources.createTexture();
-  // gl.bindTexture(gl.TEXTURE_2D, framebufferTexture);
-  // gl.texStorage2D(
-  //   gl.TEXTURE_2D,
-  //   1,
-  //   gl.RGBA16F,
-  //   // use gl.RGBA8 to draw pixels to gl.UNSIGNED_BYTE,
-  //   // use gl.RGBA##F and EXT_color_buffer_float extension to draw pixels to gl.FLOAT
-  //   WIDTH,
-  //   HEIGHT
-  // );
-  // gl.bindTexture(gl.TEXTURE_2D, null);
+  const framebufferTexture2 = resources.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
 
-  // const framebuffer = resources.createFramebuffer();
-  // gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
-  // gl.framebufferTexture2D(
-  //   gl.FRAMEBUFFER,
-  //   gl.COLOR_ATTACHMENT0,
-  //   gl.TEXTURE_2D,
-  //   framebufferTexture,
-  //   0
-  // );
-  // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.bindTexture(gl.TEXTURE_2D, null);
 
-  gl.useProgram(program);
+  // framebuffers
+  const framebuffer1 = resources.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
+  gl.framebufferTexture2D(
+    gl.FRAMEBUFFER,
+    gl.COLOR_ATTACHMENT0,
+    gl.TEXTURE_2D,
+    framebufferTexture1,
+    0
+  );
 
-  // render
+  const framebuffer2 = resources.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer2);
+  gl.framebufferTexture2D(
+    gl.FRAMEBUFFER,
+    gl.COLOR_ATTACHMENT0,
+    gl.TEXTURE_2D,
+    framebufferTexture2,
+    0
+  );
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+  // render quad to framebuffer1
+  gl.useProgram(quadProgram);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
   gl.clear(gl.COLOR_BUFFER_BIT);
-
-  gl.bindVertexArray(vao);
-
-  // also draw to canvas
   gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+  // render framebuffer1 > postprocess > canvas
+  gl.useProgram(postprocessProgram);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null); // output to canvas
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+  // TODO add more freamebuffers in a chain
 
   return () => {
     unbindAll(gl);
@@ -108,7 +145,7 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
 const example: ExperimentDefinition = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
-  name: "WebGL framebuffer bouncing (unfinished)",
+  name: "WebGL framebuffer bouncing",
   description: "Renders to and framebuffers repeatedly",
   Component: createCanvasComponent(setupWebgl, {
     style: { height: "320px", imageRendering: "pixelated" },
