@@ -78839,49 +78839,49 @@ function List() {
       columnNumber: 7
     }, this), "Ideas for later", /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("ol", {
       children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "test texture nearest on tiled equilateral triangles"
+        children: "3D textures vs sprite sheets"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 85,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "3D textures vs sprite sheets"
+        children: "stacking transparent textures test"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 86,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "mipmaps test"
+        children: "perspective projection"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 87,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "custom mipmaps"
+        children: "pushing matrix transforms from model to camera to clip space"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 88,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "stacking transparent textures test"
+        children: "reflections of skybox"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 89,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "perspective projection"
+        children: "matrices + instancing"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 90,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "pushing matrix transforms from model to camera to clip space"
+        children: "mipmaps test"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 91,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "matrices + instancing"
+        children: "custom mipmaps"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 92,
