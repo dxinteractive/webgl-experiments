@@ -29,6 +29,7 @@ import webglOklabColor from "./25-webgl-oklab-color";
 import webglDrawElements from "./26-webgl-draw-elements";
 import webglTexturesPatch from "./27-webgl-texture-patch";
 import webglFramebufferBouncing from "./28-webgl-framebuffer-bouncing";
+import webglTextureManySamplers from "./29-webgl-texture-many-samplers";
 
 export const all: ExperimentDefinition[] = [
   blank,
@@ -60,4 +61,5 @@ export const all: ExperimentDefinition[] = [
   webglDrawElements,
   webglTexturesPatch,
   webglFramebufferBouncing,
+  webglTextureManySamplers,
 ];
