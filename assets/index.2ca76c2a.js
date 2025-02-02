@@ -76539,7 +76539,7 @@ const example$a = {
 const vertexShader$8 = `#version 300 es
 precision highp float;
 
-uniform sampler2D u_dataTexture;
+uniform highp sampler2D u_dataTexture;
 
 in vec2 a_pos;
 in int a_triangleIndex;
@@ -77365,8 +77365,8 @@ const example$3 = {
     }
   })
 };
-const WIDTH$1 = 8;
-const HEIGHT$1 = 8;
+const WIDTH$1 = 256;
+const HEIGHT$1 = 256;
 const quadVertexShader = `#version 300 es
 
 in vec2 a_pos;
@@ -77434,10 +77434,10 @@ function setupWebgl$2(canvas3) {
   });
   const framebufferTexture1 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$1, HEIGHT$1);
   const framebufferTexture2 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$1, HEIGHT$1);
   gl.bindTexture(gl.TEXTURE_2D, null);
   const framebuffer1 = resources.createFramebuffer();
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
