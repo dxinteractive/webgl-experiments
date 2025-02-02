@@ -78656,40 +78656,34 @@ function List() {
         lineNumber: 90,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "render sequential gl programs offscreen as a pure function (image buffer in, image buffer out)"
+        children: "perspective projection"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 91,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "perspective projection"
-      }, void 0, false, {
-        fileName: _jsxFileName,
-        lineNumber: 95,
-        columnNumber: 9
-      }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
         children: "pushing matrix transforms from model to camera to clip space"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 96,
+        lineNumber: 92,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
         children: "matrices + instancing"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 97,
+        lineNumber: 93,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
         children: "gamedev lighting and material maps (ambient, diffuse, specular, bump, normal etc)"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 98,
+        lineNumber: 94,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
         children: "hard mode: SSAO"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 102,
+        lineNumber: 98,
         columnNumber: 9
       }, this)]
     }, void 0, true, {
@@ -78707,12 +78701,12 @@ function ListHeader(props) {
       children: props.children
     }, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 115,
+      lineNumber: 111,
       columnNumber: 7
     }, this)
   }, void 0, false, {
     fileName: _jsxFileName,
-    lineNumber: 114,
+    lineNumber: 110,
     columnNumber: 5
   }, this);
 }
@@ -78726,7 +78720,7 @@ function ExperimentRoute() {
       children: ['Experiment "', id, '" not found']
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 125,
+      lineNumber: 121,
       columnNumber: 12
     }, this);
   }
@@ -78734,7 +78728,7 @@ function ExperimentRoute() {
     experiment
   }, void 0, false, {
     fileName: _jsxFileName,
-    lineNumber: 128,
+    lineNumber: 124,
     columnNumber: 10
   }, this);
 }
@@ -78755,11 +78749,11 @@ function ExperimentPage(props) {
         children: name
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 144,
+        lineNumber: 140,
         columnNumber: 9
       }, this), " - ", description, /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("br", {}, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 145,
+        lineNumber: 141,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("a", {
         className: classes.link,
@@ -78767,16 +78761,16 @@ function ExperimentPage(props) {
         children: "source code"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 146,
+        lineNumber: 142,
         columnNumber: 9
       }, this)]
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 143,
+      lineNumber: 139,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Component2, {}, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 150,
+      lineNumber: 146,
       columnNumber: 7
     }, this)]
   }, void 0, true);
@@ -78789,7 +78783,7 @@ function Header(props) {
       children: props.children
     }, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 162,
+      lineNumber: 158,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
       className: classes.headerBack,
@@ -78798,17 +78792,17 @@ function Header(props) {
         children: "back"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 164,
+        lineNumber: 160,
         columnNumber: 9
       }, this)
     }, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 163,
+      lineNumber: 159,
       columnNumber: 7
     }, this)]
   }, void 0, true, {
     fileName: _jsxFileName,
-    lineNumber: 161,
+    lineNumber: 157,
     columnNumber: 5
   }, this);
 }
