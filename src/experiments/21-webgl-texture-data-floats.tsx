@@ -13,7 +13,7 @@ import { createCanvasComponent } from "./utils/create-canvas-component";
 const vertexShader = `#version 300 es
 precision highp float;
 
-uniform sampler2D u_dataTexture;
+uniform highp sampler2D u_dataTexture;
 
 in vec2 a_pos;
 in int a_triangleIndex;

@@ -8,8 +8,8 @@ import {
 } from "./utils/webgl-utils";
 import { createCanvasComponent } from "./utils/create-canvas-component";
 
-const WIDTH = 8;
-const HEIGHT = 8;
+const WIDTH = 256;
+const HEIGHT = 256;
 
 const quadVertexShader = `#version 300 es
 
@@ -109,11 +109,11 @@ function setupWebgl(canvas: HTMLCanvasElement): () => void {
   // framebuffer textures
   const framebufferTexture1 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH, HEIGHT);
 
   const framebufferTexture2 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, 8, 8);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH, HEIGHT);
 
   gl.bindTexture(gl.TEXTURE_2D, null);
 
