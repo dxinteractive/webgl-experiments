@@ -77474,7 +77474,7 @@ const example$2 = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
-  description: "Renders to and framebuffers repeatedly",
+  description: "Renders to and from framebuffers repeatedly",
   Component: createCanvasComponent(setupWebgl$2, {
     style: {
       height: "320px",
