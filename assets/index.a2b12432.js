@@ -23716,7 +23716,7 @@ function Component$g() {
     columnNumber: 10
   }, this);
 }
-const example$v = {
+const example$w = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
@@ -23755,7 +23755,7 @@ function Component$f() {
     columnNumber: 10
   }, this);
 }
-const example$u = {
+const example$v = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
@@ -23796,7 +23796,7 @@ function Component$e() {
     columnNumber: 10
   }, this);
 }
-const example$t = {
+const example$u = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
@@ -46994,7 +46994,7 @@ function Component$d() {
     columnNumber: 10
   }, this);
 }
-const example$s = {
+const example$t = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
@@ -47045,7 +47045,7 @@ function Component$c() {
     columnNumber: 10
   }, this);
 }
-const example$r = {
+const example$s = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
@@ -47095,7 +47095,7 @@ function Component$b() {
     columnNumber: 10
   }, this);
 }
-const example$q = {
+const example$r = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
@@ -47136,7 +47136,7 @@ function Component$a() {
     columnNumber: 10
   }, this);
 }
-const example$p = {
+const example$q = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
@@ -47173,7 +47173,7 @@ function Component$9() {
     columnNumber: 10
   }, this);
 }
-const example$o = {
+const example$p = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
@@ -64726,7 +64726,7 @@ function Component$8() {
     columnNumber: 10
   }, this);
 }
-const example$n = {
+const example$o = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
@@ -64779,7 +64779,7 @@ function Component$7() {
     columnNumber: 10
   }, this);
 }
-const example$m = {
+const example$n = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
@@ -64845,7 +64845,7 @@ function Component$6() {
     }, this)]
   }, void 0, true);
 }
-const example$l = {
+const example$m = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
@@ -64894,7 +64894,7 @@ function Component$5() {
     columnNumber: 10
   }, this);
 }
-const example$k = {
+const example$l = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
@@ -75459,7 +75459,7 @@ function Component$4() {
     columnNumber: 10
   }, this);
 }
-const example$j = {
+const example$k = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
@@ -75563,7 +75563,7 @@ function Slider$1({
     columnNumber: 5
   }, this);
 }
-const example$i = {
+const example$j = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
@@ -75667,7 +75667,7 @@ function Slider({
     columnNumber: 5
   }, this);
 }
-const example$h = {
+const example$i = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
@@ -75911,7 +75911,7 @@ function updateCanvasSize(canvas3, gl) {
   canvas3.height = canvas3.clientHeight * dpr;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
 }
-function setupWebgl$g(canvas3) {
+function setupWebgl$h(canvas3) {
   const gl = canvas3.getContext("webgl2");
   if (!gl) {
     throw new Error("gl not supported");
@@ -75966,7 +75966,7 @@ function Component$1() {
     if (!canvas3) {
       return;
     }
-    return setupWebgl$g(canvas3);
+    return setupWebgl$h(canvas3);
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
     ref,
@@ -75979,7 +75979,7 @@ function Component$1() {
     columnNumber: 10
   }, this);
 }
-const example$g = {
+const example$h = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
@@ -76055,7 +76055,7 @@ void main() {
   outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);
 }
 `;
-function setupWebgl$f(canvas3) {
+function setupWebgl$g(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   const program = createProgramForShaders$1(gl, vertexShader$d, fragmentShader$d);
@@ -76099,19 +76099,19 @@ function setupWebgl$f(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$f = {
+const example$g = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
   description: "Hello world for WebGL2 with reduced boilerplate using utility functions.",
-  Component: createCanvasComponent(setupWebgl$f, {
+  Component: createCanvasComponent(setupWebgl$g, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$7 = 8;
-const HEIGHT$7 = 8;
+const WIDTH$8 = 8;
+const HEIGHT$8 = 8;
 const vertexShader$c = `#version 300 es
 
 in vec2 a_position;
@@ -76172,8 +76172,8 @@ function createAndUploadTexture$4(gl, image) {
 }
 function setupWebglWithImages$1(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$7;
-  canvas3.height = HEIGHT$7;
+  canvas3.width = WIDTH$8;
+  canvas3.height = HEIGHT$8;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   const program = createProgramForShaders$1(gl, vertexShader$c, fragmentShader$c);
@@ -76181,7 +76181,7 @@ function setupWebglWithImages$1(canvas3, images) {
   gl.bindVertexArray(vao);
   const positionBuffer = createBuffer(gl);
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$7, HEIGHT$7), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$8, HEIGHT$8), gl.STATIC_DRAW);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   gl.enableVertexAttribArray(positionAttributeLocation);
   gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
@@ -76225,7 +76225,7 @@ function setupWebglWithImages$1(canvas3, images) {
     }
   };
 }
-function setupWebgl$e(canvas3) {
+function setupWebgl$f(canvas3) {
   let cleanup = () => {
   };
   Promise.all(IMAGES$5.map((img) => loadImage$1(img))).then((images) => {
@@ -76233,12 +76233,12 @@ function setupWebgl$e(canvas3) {
   });
   return () => cleanup();
 }
-const example$e = {
+const example$f = {
   id: "webgl-texture",
   filename: "17-webgl-texture.tsx",
   name: "WebGL texture",
   description: "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
-  Component: createCanvasComponent(setupWebgl$e, {
+  Component: createCanvasComponent(setupWebgl$f, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -76355,7 +76355,7 @@ function setupWebglWithImages(canvas3, images) {
     }
   };
 }
-function setupWebgl$d(canvas3) {
+function setupWebgl$e(canvas3) {
   let cleanup = () => {
   };
   Promise.all(IMAGES$4.map((img) => loadImage(img))).then((images) => {
@@ -76363,20 +76363,20 @@ function setupWebgl$d(canvas3) {
   });
   return () => cleanup();
 }
-const example$d = {
+const example$e = {
   id: "webgl-texture-upscale",
   filename: "18-webgl-texture-upscale.tsx",
   name: "WebGL texture upscale",
   description: "Load and render a texture with WebGL2 while upscaling linearly",
-  Component: createCanvasComponent(setupWebgl$d, {
+  Component: createCanvasComponent(setupWebgl$e, {
     style: {
       height: "640px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$6 = 8;
-const HEIGHT$6 = 8;
+const WIDTH$7 = 8;
+const HEIGHT$7 = 8;
 const vertexShader$a = `#version 300 es
 
 in vec2 a_pos;
@@ -76410,10 +76410,10 @@ function createAndUploadTexture$2(gl, resources, image) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-function setupWebgl$c(canvas3, images) {
+function setupWebgl$d(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$6;
-  canvas3.height = HEIGHT$6;
+  canvas3.width = WIDTH$7;
+  canvas3.height = HEIGHT$7;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -76452,20 +76452,20 @@ function setupWebgl$c(canvas3, images) {
   };
 }
 const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$c = {
+const example$d = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
   description: "Load and render a texture with WebGL2 simplified a bit",
-  Component: createCanvasComponentWithImages(setupWebgl$c, IMAGES$3, {
+  Component: createCanvasComponentWithImages(setupWebgl$d, IMAGES$3, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$5 = 8;
-const HEIGHT$5 = 8;
+const WIDTH$6 = 8;
+const HEIGHT$6 = 8;
 const vertexShader$9 = `#version 300 es
 
 in vec2 a_pos;
@@ -76488,10 +76488,10 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$b(canvas3) {
+function setupWebgl$c(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$5;
-  canvas3.height = HEIGHT$5;
+  canvas3.width = WIDTH$6;
+  canvas3.height = HEIGHT$6;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
@@ -76524,12 +76524,12 @@ function setupWebgl$b(canvas3) {
     resources.deleteAll();
   };
 }
-const example$b = {
+const example$c = {
   id: "webgl-texture-data-in",
   filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
   description: "Loading data into a texture",
-  Component: createCanvasComponent(setupWebgl$b, {
+  Component: createCanvasComponent(setupWebgl$c, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -76578,7 +76578,7 @@ for (let x2 = -1; x2 < 1; x2 += 0.1) {
   POSITION_OFFSETS.push(x2 * x2 * x2, 0, 0, 0);
   i++;
 }
-function setupWebgl$a(canvas3) {
+function setupWebgl$b(canvas3) {
   const gl = getWebgl2Context(canvas3);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
@@ -76632,19 +76632,19 @@ function setupWebgl$a(canvas3) {
     resources.deleteAll();
   };
 }
-const example$a = {
+const example$b = {
   id: "webgl-texture-floats",
   filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
   description: "Renders tris from positions directly in clip space, then offsets them according to float data passed through a texture.",
-  Component: createCanvasComponent(setupWebgl$a, {
+  Component: createCanvasComponent(setupWebgl$b, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$4 = 8;
-const HEIGHT$4 = 8;
+const WIDTH$5 = 8;
+const HEIGHT$5 = 8;
 const vertexShader$7 = `#version 300 es
 
 in vec2 a_pos;
@@ -76678,13 +76678,13 @@ function createAndUploadTexture$1(gl, resources, image) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-function setupWebgl$9(canvas3, [image]) {
+function setupWebgl$a(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  canvas3.width = WIDTH$4;
-  canvas3.height = HEIGHT$4;
+  canvas3.width = WIDTH$5;
+  canvas3.height = HEIGHT$5;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -76707,8 +76707,8 @@ function setupWebgl$9(canvas3, [image]) {
     gl.TEXTURE_2D,
     1,
     gl.RGBA16F,
-    WIDTH$4,
-    HEIGHT$4
+    WIDTH$5,
+    HEIGHT$5
   );
   gl.bindTexture(gl.TEXTURE_2D, null);
   const framebuffer = resources.createFramebuffer();
@@ -76723,8 +76723,8 @@ function setupWebgl$9(canvas3, [image]) {
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.drawArrays(gl.TRIANGLES, 0, 6);
-  const readAsFloat = new Float32Array(WIDTH$4 * HEIGHT$4 * 4);
-  gl.readPixels(0, 0, WIDTH$4, HEIGHT$4, gl.RGBA, gl.FLOAT, readAsFloat);
+  const readAsFloat = new Float32Array(WIDTH$5 * HEIGHT$5 * 4);
+  gl.readPixels(0, 0, WIDTH$5, HEIGHT$5, gl.RGBA, gl.FLOAT, readAsFloat);
   console.log("float values for R G B and A channels, left to right, bottom to top", readAsFloat);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
   gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -76736,12 +76736,12 @@ function setupWebgl$9(canvas3, [image]) {
   };
 }
 const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
-const example$9 = {
+const example$a = {
   id: "webgl-extract-framebuffer",
   filename: "22-webgl-extract-framebuffer.tsx",
   name: "WebGL extract framebuffer",
   description: "Extract data from a framebuffer, logging float values to console",
-  Component: createCanvasComponentWithImages(setupWebgl$9, [IMAGE], {
+  Component: createCanvasComponentWithImages(setupWebgl$a, [IMAGE], {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -76770,7 +76770,7 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$8(canvas3) {
+function setupWebgl$9(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
@@ -76844,12 +76844,12 @@ function setupWebgl$8(canvas3) {
     resources.deleteAll();
   };
 }
-const example$8 = {
+const example$9 = {
   id: "webgl-buffer-interleaved",
   filename: "23-webgl-buffer-interleaved.tsx",
   name: "WebGL buffer interleaved",
   description: "Renders tris from positions directly in clip space from a single buffer of various interleaved attributes.",
-  Component: createCanvasComponent(setupWebgl$8, {
+  Component: createCanvasComponent(setupWebgl$9, {
     style: {
       height: "640px"
     }
@@ -76878,7 +76878,7 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$7(canvas3) {
+function setupWebgl$8(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
@@ -76942,12 +76942,12 @@ function setupWebgl$7(canvas3) {
     resources.deleteAll();
   };
 }
-const example$7 = {
+const example$8 = {
   id: "webgl-instancing",
   filename: "24-webgl-instancing.tsx",
   name: "WebGL buffer instancing",
   description: "Renders instanced triangles.",
-  Component: createCanvasComponent(setupWebgl$7, {
+  Component: createCanvasComponent(setupWebgl$8, {
     style: {
       height: "640px"
     }
@@ -77032,7 +77032,7 @@ void main() {
 const lightness = {
   current: 0
 };
-function setupWebgl$6(canvasgl, canvas2d) {
+function setupWebgl$7(canvasgl, canvas2d) {
   const gl = getWebgl2Context(canvasgl);
   const ctx = canvas2d.getContext("2d");
   if (!ctx) {
@@ -77094,7 +77094,7 @@ function Component() {
     if (!canvasgl || !canvas2d) {
       return;
     }
-    return setupWebgl$6(canvasgl, canvas2d);
+    return setupWebgl$7(canvasgl, canvas2d);
   }, []);
   const [valueL, setL] = react.exports.useState(1);
   lightness.current = valueL;
@@ -77140,7 +77140,7 @@ function Component() {
     columnNumber: 5
   }, this);
 }
-const example$6 = {
+const example$7 = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL",
@@ -77169,7 +77169,7 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$5(canvas3) {
+function setupWebgl$6(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
@@ -77250,19 +77250,19 @@ function setupWebgl$5(canvas3) {
     resources.deleteAll();
   };
 }
-const example$5 = {
+const example$6 = {
   id: "webgl-draw-elements",
   filename: "26-webgl-draw-elements.tsx",
   name: "WebGL elements mesh",
   description: "Renders a mesh using drawElements()",
-  Component: createCanvasComponent(setupWebgl$5, {
+  Component: createCanvasComponent(setupWebgl$6, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$3 = 8;
-const HEIGHT$3 = 8;
+const WIDTH$4 = 8;
+const HEIGHT$4 = 8;
 const vertexShader$2 = `#version 300 es
 
 in vec2 a_pos;
@@ -77296,10 +77296,10 @@ function createAndUploadTexture(gl, resources, image) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-function setupWebgl$4(canvas3, [image1, image2]) {
+function setupWebgl$5(canvas3, [image1, image2]) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$3;
-  canvas3.height = HEIGHT$3;
+  canvas3.width = WIDTH$4;
+  canvas3.height = HEIGHT$4;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -77329,9 +77329,9 @@ function setupWebgl$4(canvas3, [image1, image2]) {
     gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.pixelStorei(gl.UNPACK_SKIP_PIXELS, xo);
-    gl.pixelStorei(gl.UNPACK_SKIP_ROWS, HEIGHT$3 - h2 - yo);
+    gl.pixelStorei(gl.UNPACK_SKIP_ROWS, HEIGHT$4 - h2 - yo);
     gl.pixelStorei(gl.UNPACK_ROW_LENGTH, w2);
-    gl.texSubImage2D(gl.TEXTURE_2D, 0, x2, HEIGHT$3 - h2 - y2, w2, h2, gl.RGBA, gl.UNSIGNED_BYTE, image2);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, x2, HEIGHT$4 - h2 - y2, w2, h2, gl.RGBA, gl.UNSIGNED_BYTE, image2);
     gl.bindTexture(gl.TEXTURE_2D, null);
   };
   const render = () => {
@@ -77353,21 +77353,21 @@ function setupWebgl$4(canvas3, [image1, image2]) {
   };
 }
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$4 = {
+const example$5 = {
   id: "webgl-texture-patch",
   filename: "27-webgl-texture-patch.tsx",
   name: "WebGL texture patch",
   description: "Load and render a texture with WebGL2, then patch a subset of pixels",
-  Component: createCanvasComponentWithImages(setupWebgl$4, IMAGES$2, {
+  Component: createCanvasComponentWithImages(setupWebgl$5, IMAGES$2, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$2 = 256;
-const HEIGHT$2 = 256;
-const quadVertexShader$1 = `#version 300 es
+const WIDTH$3 = 256;
+const HEIGHT$3 = 256;
+const quadVertexShader$2 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77377,7 +77377,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const gradientFragmentShader$1 = `#version 300 es
+const gradientFragmentShader$2 = `#version 300 es
 precision highp float;
 
 in vec2 v_uv;
@@ -77412,18 +77412,18 @@ void main() {
   outColor = texture(u_image, v_uv * 2.0);
 }
 `;
-function setupWebgl$3(canvas3) {
+function setupWebgl$4(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$2;
-  canvas3.height = HEIGHT$2;
+  canvas3.width = WIDTH$3;
+  canvas3.height = HEIGHT$3;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$1, gradientFragmentShader$1);
-  const hueCycleProgram = createProgramForShaders$1(gl, quadVertexShader$1, hueCycleFragmentShader);
-  const tileProgram = createProgramForShaders$1(gl, quadVertexShader$1, tileFragmentShader);
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$2, gradientFragmentShader$2);
+  const hueCycleProgram = createProgramForShaders$1(gl, quadVertexShader$2, hueCycleFragmentShader);
+  const tileProgram = createProgramForShaders$1(gl, quadVertexShader$2, tileFragmentShader);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77434,10 +77434,10 @@ function setupWebgl$3(canvas3) {
   });
   const framebufferTexture1 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$2, HEIGHT$2);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$3, HEIGHT$3);
   const framebufferTexture2 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$2, HEIGHT$2);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$3, HEIGHT$3);
   gl.bindTexture(gl.TEXTURE_2D, null);
   const framebuffer1 = resources.createFramebuffer();
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
@@ -77470,20 +77470,20 @@ function setupWebgl$3(canvas3) {
     resources.deleteAll();
   };
 }
-const example$3 = {
+const example$4 = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
   description: "Renders to and from framebuffers repeatedly",
-  Component: createCanvasComponent(setupWebgl$3, {
+  Component: createCanvasComponent(setupWebgl$4, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$1 = 64;
-const HEIGHT$1 = 64;
+const WIDTH$2 = 64;
+const HEIGHT$2 = 64;
 const vertexShader$1 = `#version 300 es
 
 in vec2 a_pos;
@@ -77524,10 +77524,10 @@ function createUploadAndBindTexture(gl, resources, image, slot) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   gl.bindTexture(gl.TEXTURE_2D, texture);
 }
-function setupWebgl$2(canvas3, [image1, image2, image3]) {
+function setupWebgl$3(canvas3, [image1, image2, image3]) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$1;
-  canvas3.height = HEIGHT$1;
+  canvas3.width = WIDTH$2;
+  canvas3.height = HEIGHT$2;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -77558,12 +77558,12 @@ function setupWebgl$2(canvas3, [image1, image2, image3]) {
   };
 }
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$2 = {
+const example$3 = {
   id: "webgl-texture-many-samplers",
   filename: "29-webgl-texture-many-samplers.tsx",
   name: "WebGL texture many samplers",
   description: "Load and render a combination of 3 textures in the same frag shader",
-  Component: createCanvasComponentWithImages(setupWebgl$2, IMAGES$1, {
+  Component: createCanvasComponentWithImages(setupWebgl$3, IMAGES$1, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -77596,7 +77596,7 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$1(canvas3, [image]) {
+function setupWebgl$2(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
@@ -77688,20 +77688,20 @@ function setupWebgl$1(canvas3, [image]) {
   };
 }
 const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII="];
-const example$1 = {
+const example$2 = {
   id: "webgl-draw-elements-textured",
   filename: "30-webgl-draw-elements-textured.tsx",
   name: "WebGL elements textured mesh",
   description: "Renders a textured mesh using drawElements()",
-  Component: createCanvasComponentWithImages(setupWebgl$1, IMAGES, {
+  Component: createCanvasComponentWithImages(setupWebgl$2, IMAGES, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH = 256;
-const HEIGHT = 256;
-const quadVertexShader = `#version 300 es
+const WIDTH$1 = 256;
+const HEIGHT$1 = 256;
+const quadVertexShader$1 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77711,7 +77711,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const gradientFragmentShader = `#version 300 es
+const gradientFragmentShader$1 = `#version 300 es
 precision highp float;
 
 in vec2 v_uv;
@@ -77721,16 +77721,16 @@ void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
 }
 `;
-function setupWebgl(canvas3) {
+function setupWebgl$1(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH;
-  canvas3.height = HEIGHT;
+  canvas3.width = WIDTH$1;
+  canvas3.height = HEIGHT$1;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader, gradientFragmentShader);
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$1, gradientFragmentShader$1);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77750,11 +77750,110 @@ function setupWebgl(canvas3) {
     resources.deleteAll();
   };
 }
-const example = {
+const example$1 = {
   id: "webgl-scissor",
   filename: "31-webgl-scissor.tsx",
   name: "WebGL scissor",
   description: "Renders only a small region of a gradient using gl.scissor",
+  Component: createCanvasComponent(setupWebgl$1, {
+    style: {
+      height: "320px",
+      imageRendering: "pixelated"
+    }
+  })
+};
+const WIDTH = 8192;
+const HEIGHT = 8192;
+const quadVertexShader = `#version 300 es
+
+in vec2 a_pos;
+out vec2 v_uv;
+
+void main() {
+  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
+  v_uv = a_pos;
+}
+`;
+const gradientFragmentShader = `#version 300 es
+precision highp float;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  for(int j = 0; j < 10000; j++) {
+    outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
+  }
+}
+`;
+function setupWebgl(canvas3) {
+  const gl = getWebgl2Context(canvas3);
+  canvas3.width = WIDTH;
+  canvas3.height = HEIGHT;
+  gl.viewport(0, 0, canvas3.width, canvas3.height);
+  gl.clearColor(0, 0, 0, 0);
+  if (!gl.getExtension("EXT_color_buffer_float")) {
+    throw new Error("No EXT_color_buffer_float");
+  }
+  const ext = gl.getExtension("EXT_disjoint_timer_query_webgl2");
+  if (!ext) {
+    throw new Error("EXT_disjoint_timer_query_webgl2 not supported.");
+  }
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader, gradientFragmentShader);
+  const resources = new WebGLResourceManager(gl);
+  const vao = resources.createVertexArray();
+  gl.bindVertexArray(vao);
+  createAttribute(gl, gradientProgram, {
+    name: "a_pos",
+    buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
+    size: 2
+  });
+  gl.useProgram(gradientProgram);
+  const renderAndMeasure = async () => {
+    const timerQuery = gl.createQuery();
+    if (!timerQuery) {
+      throw new Error("no timer query");
+    }
+    gl.beginQuery(ext.TIME_ELAPSED_EXT, timerQuery);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.endQuery(ext.TIME_ELAPSED_EXT);
+    return new Promise((resolve2) => {
+      const check = () => {
+        if (gl.getQueryParameter(timerQuery, gl.QUERY_RESULT_AVAILABLE)) {
+          const timeElapsed = gl.getQueryParameter(timerQuery, gl.QUERY_RESULT);
+          resolve2(timeElapsed);
+          return;
+        }
+        requestAnimationFrame(check);
+      };
+      check();
+    });
+  };
+  (async () => {
+    const REPEATS = 100;
+    let total1 = 0;
+    for (let i2 = 0; i2 < REPEATS; i2++) {
+      total1 += await renderAndMeasure();
+    }
+    console.log("avg time without scissor:", total1 / REPEATS);
+    gl.enable(gl.SCISSOR_TEST);
+    gl.scissor(50, 150, 1, 1);
+    let total2 = 0;
+    for (let i2 = 0; i2 < REPEATS; i2++) {
+      total2 += await renderAndMeasure();
+    }
+    console.log("avg time with scissor single pixel:", total2 / REPEATS);
+  })();
+  return () => {
+    unbindAll(gl);
+    resources.deleteAll();
+  };
+}
+const example = {
+  id: "webgl-scissor-perf",
+  filename: "32-webgl-scissor-perf.tsx",
+  name: "WebGL scissor perf test",
+  description: "Renders a huge canvas with and without scissoring a single pixel to try to see any measurable evidence of performance differences. Answer: it does not, the discards might happen after the fragment shader",
   Component: createCanvasComponent(setupWebgl, {
     style: {
       height: "320px",
@@ -77763,6 +77862,7 @@ const example = {
   })
 };
 const all = [
+  example$w,
   example$v,
   example$u,
   example$t,
