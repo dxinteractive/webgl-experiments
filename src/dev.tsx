@@ -88,10 +88,6 @@ function List() {
         <li>mipmaps test</li>
         <li>custom mipmaps</li>
         <li>stacking transparent textures test</li>
-        <li>
-          render sequential gl programs offscreen as a pure function (image
-          buffer in, image buffer out)
-        </li>
         <li>perspective projection</li>
         <li>pushing matrix transforms from model to camera to clip space</li>
         <li>matrices + instancing</li>
