@@ -33,7 +33,9 @@ import _29 from "./29-webgl-texture-many-samplers";
 import _30 from "./30-webgl-draw-elements-textured";
 import _31 from "./31-webgl-scissor";
 import _32 from "./32-webgl-scissor-perf";
-import _33 from "./33-webgl-shadertoy-clone";
+import _33 from "./33-webgl-overlay-transparent-textures";
+import _34 from "./34-shadertoy-clone";
+import _35 from "./35-shadertoy-exact-pixel";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -70,4 +72,6 @@ export const all: ExperimentDefinition[] = [
   _31,
   _32,
   _33,
+  _34,
+  _35,
 ];

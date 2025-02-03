@@ -82,8 +82,8 @@ function List() {
       <br />
       Ideas for later
       <ol>
-        <li>3D textures vs sprite sheets</li>
-        <li>stacking transparent textures test</li>
+        <li>SDF sprites</li>
+        <li>Raymarching</li>
         <li>perspective projection</li>
         <li>pushing matrix transforms from model to camera to clip space</li>
         <li>reflections of skybox</li>

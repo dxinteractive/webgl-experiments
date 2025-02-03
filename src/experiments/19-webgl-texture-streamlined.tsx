@@ -5,6 +5,7 @@ import {
   getUniformLocations,
   getWebgl2Context,
   unbindAll,
+  uploadTexture,
   WebGLResourceManager,
 } from "./utils/webgl-utils";
 import { createCanvasComponentWithImages } from "./utils/create-canvas-component";
@@ -35,28 +36,6 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-
-function createAndUploadTexture(
-  gl: WebGL2RenderingContext,
-  resources: WebGLResourceManager,
-  image: HTMLImageElement
-) {
-  const texture = resources.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-
-  // Set the parameters so we don't need mips and so we're not filtering
-  // and we don't repeat
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-
-  // Upload the image into the texture.
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-  gl.bindTexture(gl.TEXTURE_2D, null);
-
-  return texture;
-}
 
 function setupWebgl(
   canvas: HTMLCanvasElement,
@@ -90,19 +69,18 @@ function setupWebgl(
     size: 2,
   });
 
-  // textures
-  const TEXTURE_INDEX = 0;
-  gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
-  const textures = images.map((image) =>
-    createAndUploadTexture(gl, resources, image)
-  );
-
   gl.bindVertexArray(null);
+
+  // textures
+  gl.activeTexture(gl.TEXTURE0);
+  const textures = images.map((image) =>
+    uploadTexture(gl, resources.createTexture(), image, { nearest: true })
+  );
 
   // uniforms
   gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, ["u_image"]);
-  gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);
+  gl.uniform1i(uniforms.u_image, 0);
 
   // render
   let rafId = 0;

@@ -6,6 +6,7 @@ import {
   getWebgl2Context,
   unbindAll,
   updateCanvasSize,
+  uploadTexture,
   WebGLResourceManager,
 } from "./utils/webgl-utils";
 import { createCanvasComponentWithImages } from "./utils/create-canvas-component";
@@ -126,18 +127,10 @@ function setupWebgl(
   );
 
   // texture
-  const texture = resources.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
 
-  // Set the parameters so we don't need mips and so we're not filtering
-  // and we don't repeat
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-
-  // Upload the image into the texture.
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  const texture = uploadTexture(gl, resources.createTexture(), image, {
+    nearest: true,
+  });
 
   // uniforms
   gl.useProgram(program);
@@ -147,6 +140,7 @@ function setupWebgl(
   // render
   gl.useProgram(program);
   gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.drawElements(gl.TRIANGLES, elementIndexData.length, gl.UNSIGNED_BYTE, 0);
 
   return () => {
