@@ -12,7 +12,7 @@ void main() {
   } else {
     color = v_view;
   }
-  fragColor = vec4(color.x, 0., color.y, 1.);
+  outColor = vec4(color.x, 0., color.y, 1.);
 }
 `;
 

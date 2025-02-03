@@ -82,19 +82,16 @@ function List() {
       <br />
       Ideas for later
       <ol>
-        <li>SDF sprites</li>
-        <li>Raymarching</li>
+        <li>SDF textures</li>
+        <li>Raymarch lighting, shadows, highlights, reflections</li>
+        <li>Refract a texture</li>
+        <li>voronoi</li>
+        <li>https://iquilezles.org/articles/</li>
         <li>perspective projection</li>
-        <li>pushing matrix transforms from model to camera to clip space</li>
         <li>reflections of skybox</li>
         <li>matrices + instancing</li>
         <li>mipmaps test</li>
         <li>custom mipmaps</li>
-        <li>
-          gamedev lighting and material maps (ambient, diffuse, specular, bump,
-          normal etc)
-        </li>
-        <li>hard mode: SSAO</li>
       </ol>
     </>
   );

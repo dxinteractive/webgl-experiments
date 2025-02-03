@@ -36,6 +36,7 @@ import _32 from "./32-webgl-scissor-perf";
 import _33 from "./33-webgl-overlay-transparent-textures";
 import _34 from "./34-shadertoy-clone";
 import _35 from "./35-shadertoy-exact-pixel";
+import _36 from "./36-shadertoy-raymarching-metaballs";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -74,4 +75,5 @@ export const all: ExperimentDefinition[] = [
   _33,
   _34,
   _35,
+  _36,
 ];

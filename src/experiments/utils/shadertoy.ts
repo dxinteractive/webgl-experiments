@@ -58,7 +58,7 @@ in vec2 v_uv;
 in vec2 v_clip;
 in vec2 v_view;
 in vec2 v_pixel;
-out vec4 fragColor;
+out vec4 outColor;
 
 ${config.shader}
 `;

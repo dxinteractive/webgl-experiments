@@ -5,7 +5,7 @@ const shader = `
 void main() {
   float r = mod((v_pixel.x) / 4., 1.);
   float b = mod((v_pixel.y) / 4., 1.);
-  fragColor = vec4(r, 0., b, 1.);
+  outColor = vec4(r, 0., b, 1.);
 }
 `;
 
