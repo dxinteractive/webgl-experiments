@@ -172,10 +172,11 @@ export class WebGLResourceManager {
 export function getUniformLocation(
   gl: WebGL2RenderingContext,
   program: WebGLProgram,
-  name: string
+  name: string,
+  silent = false
 ) {
   const location = gl.getUniformLocation(program, name);
-  if (!location) {
+  if (!location && !silent) {
     throw new Error(`could not create location ${name}`);
   }
   return location;
@@ -184,12 +185,13 @@ export function getUniformLocation(
 export function getUniformLocations<N extends string>(
   gl: WebGL2RenderingContext,
   program: WebGLProgram,
-  names: N[]
+  names: N[],
+  silent = false
 ): Record<N, WebGLUniformLocation> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj = {} as any;
   for (const name of names) {
-    obj[name] = getUniformLocation(gl, program, name);
+    obj[name] = getUniformLocation(gl, program, name, silent);
   }
   return obj as Record<N, WebGLUniformLocation>;
 }
