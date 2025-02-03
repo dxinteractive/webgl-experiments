@@ -57,8 +57,8 @@ void main() {
 `;
 
 const example: ExperimentDefinition = {
-  id: "shadertoy-raymarching-metaballs",
-  filename: "36-shadertoy-raymarching-metaballs.tsx",
+  id: "raymarching-metaballs",
+  filename: "36-raymarching-metaballs.tsx",
   name: "Shadertoy raymarching metaballs",
   description:
     "Raymarching test guided by artofcode's 'Raymarching for dummies' and kishimisu's 'An introduction to Raymarching'",
