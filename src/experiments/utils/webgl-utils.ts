@@ -105,8 +105,11 @@ export class WebGLResourceManager {
 
   constructor(private gl: WebGL2RenderingContext) {}
 
-  createBuffer(initialData?: ArrayBuffer | ArrayBufferView) {
-    const buffer = createBuffer(this.gl, initialData);
+  createBuffer(
+    initialData?: ArrayBuffer | ArrayBufferView,
+    usage: GLenum = this.gl.STATIC_DRAW
+  ) {
+    const buffer = createBuffer(this.gl, initialData, usage);
     this.buffers.add(buffer);
     return buffer;
   }
