@@ -23716,7 +23716,7 @@ function Component$g() {
     columnNumber: 10
   }, this);
 }
-const example$w = {
+const example$x = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
@@ -23755,7 +23755,7 @@ function Component$f() {
     columnNumber: 10
   }, this);
 }
-const example$v = {
+const example$w = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
@@ -23796,7 +23796,7 @@ function Component$e() {
     columnNumber: 10
   }, this);
 }
-const example$u = {
+const example$v = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
@@ -26848,12 +26848,12 @@ function checkMaxIfStatementsInShader(maxIfs, gl) {
   if (maxIfs === 0) {
     throw new Error("Invalid value of `0` passed to `checkMaxIfStatementsInShader`");
   }
-  const shader = gl.createShader(gl.FRAGMENT_SHADER);
+  const shader2 = gl.createShader(gl.FRAGMENT_SHADER);
   while (true) {
     const fragmentSrc = fragTemplate$1.replace(/%forloop%/gi, generateIfTestSrc(maxIfs));
-    gl.shaderSource(shader, fragmentSrc);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    gl.shaderSource(shader2, fragmentSrc);
+    gl.compileShader(shader2);
+    if (!gl.getShaderParameter(shader2, gl.COMPILE_STATUS)) {
       maxIfs = maxIfs / 2 | 0;
     } else {
       break;
@@ -28464,10 +28464,10 @@ Transform.IDENTITY = new _Transform();
 var defaultFragment$2 = "varying vec2 vTextureCoord;\n\nuniform sampler2D uSampler;\n\nvoid main(void){\n   gl_FragColor *= texture2D(uSampler, vTextureCoord);\n}";
 var defaultVertex$3 = "attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void){\n   gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n   vTextureCoord = aTextureCoord;\n}\n";
 function compileShader$2(gl, type2, src) {
-  const shader = gl.createShader(type2);
-  gl.shaderSource(shader, src);
-  gl.compileShader(shader);
-  return shader;
+  const shader2 = gl.createShader(type2);
+  gl.shaderSource(shader2, src);
+  gl.compileShader(shader2);
+  return shader2;
 }
 function booleanArray(size2) {
   const array2 = new Array(size2);
@@ -28980,9 +28980,9 @@ function getMaxFragmentPrecision() {
   }
   return maxFragmentPrecision;
 }
-function logPrettyShaderError(gl, shader) {
-  const shaderSrc = gl.getShaderSource(shader).split("\n").map((line, index) => `${index}: ${line}`);
-  const shaderLog = gl.getShaderInfoLog(shader);
+function logPrettyShaderError(gl, shader2) {
+  const shaderSrc = gl.getShaderSource(shader2).split("\n").map((line, index) => `${index}: ${line}`);
+  const shaderLog = gl.getShaderInfoLog(shader2);
   const splitShader = shaderLog.split("\n");
   const dedupe = {};
   const lineNumbers = splitShader.map((line) => parseFloat(line.replace(/^ERROR\: 0\:([\d]+)\:.*$/, "$1"))).filter((n2) => {
@@ -31582,8 +31582,8 @@ class GeometrySystem {
     }
     this.canUseUInt32ElementIndex = context2.webGLVersion === 2 || !!context2.extensions.uint32ElementIndex;
   }
-  bind(geometry, shader) {
-    shader = shader || this.renderer.shader.shader;
+  bind(geometry, shader2) {
+    shader2 = shader2 || this.renderer.shader.shader;
     const { gl } = this;
     let vaos = geometry.glVertexArrayObjects[this.CONTEXT_UID];
     let incRefCount = false;
@@ -31593,14 +31593,14 @@ class GeometrySystem {
       geometry.glVertexArrayObjects[this.CONTEXT_UID] = vaos = {};
       incRefCount = true;
     }
-    const vao = vaos[shader.program.id] || this.initGeometryVao(geometry, shader, incRefCount);
+    const vao = vaos[shader2.program.id] || this.initGeometryVao(geometry, shader2, incRefCount);
     this._activeGeometry = geometry;
     if (this._activeVao !== vao) {
       this._activeVao = vao;
       if (this.hasVao) {
         gl.bindVertexArray(vao);
       } else {
-        this.activateVao(geometry, shader.program);
+        this.activateVao(geometry, shader2.program);
       }
     }
     this.updateBuffers();
@@ -31636,13 +31636,13 @@ class GeometrySystem {
     }
     return strings.join("-");
   }
-  initGeometryVao(geometry, shader, incRefCount = true) {
+  initGeometryVao(geometry, shader2, incRefCount = true) {
     const gl = this.gl;
     const CONTEXT_UID = this.CONTEXT_UID;
     const bufferSystem = this.renderer.buffer;
-    const program = shader.program;
+    const program = shader2.program;
     if (!program.glPrograms[CONTEXT_UID]) {
-      this.renderer.shader.generateProgram(shader);
+      this.renderer.shader.generateProgram(shader2);
     }
     this.checkCompatibility(geometry, program);
     const signature = this.getSignature(geometry, program);
@@ -32893,12 +32893,12 @@ class ShaderSystem {
     this.gl = gl;
     this.reset();
   }
-  bind(shader, dontSync) {
-    shader.disposeRunner.add(this);
-    shader.uniforms.globals = this.renderer.globalUniforms;
-    const program = shader.program;
-    const glProgram = program.glPrograms[this.renderer.CONTEXT_UID] || this.generateProgram(shader);
-    this.shader = shader;
+  bind(shader2, dontSync) {
+    shader2.disposeRunner.add(this);
+    shader2.uniforms.globals = this.renderer.globalUniforms;
+    const program = shader2.program;
+    const glProgram = program.glPrograms[this.renderer.CONTEXT_UID] || this.generateProgram(shader2);
+    this.shader = shader2;
     if (this.program !== program) {
       this.program = program;
       this.gl.useProgram(glProgram.program);
@@ -32906,14 +32906,14 @@ class ShaderSystem {
     if (!dontSync) {
       defaultSyncData.textureCount = 0;
       defaultSyncData.uboCount = 0;
-      this.syncUniformGroup(shader.uniformGroup, defaultSyncData);
+      this.syncUniformGroup(shader2.uniformGroup, defaultSyncData);
     }
     return glProgram;
   }
   setUniforms(uniforms) {
-    const shader = this.shader.program;
-    const glProgram = shader.glPrograms[this.renderer.CONTEXT_UID];
-    shader.syncUniforms(glProgram.uniformData, uniforms, this.renderer);
+    const shader2 = this.shader.program;
+    const glProgram = shader2.glPrograms[this.renderer.CONTEXT_UID];
+    shader2.syncUniforms(glProgram.uniformData, uniforms, this.renderer);
   }
   syncUniformGroup(group, syncData) {
     const glProgram = this.getGlProgram();
@@ -32980,9 +32980,9 @@ class ShaderSystem {
     }
     return null;
   }
-  generateProgram(shader) {
+  generateProgram(shader2) {
     const gl = this.gl;
-    const program = shader.program;
+    const program = shader2.program;
     const glProgram = generateProgram(gl, program);
     program.glPrograms[this.renderer.CONTEXT_UID] = glProgram;
     return glProgram;
@@ -32991,8 +32991,8 @@ class ShaderSystem {
     this.program = null;
     this.shader = null;
   }
-  disposeShader(shader) {
-    if (this.shader === shader) {
+  disposeShader(shader2) {
+    if (this.shader === shader2) {
       this.shader = null;
     }
   }
@@ -33682,10 +33682,10 @@ class TransformFeedbackSystem {
     const { gl } = this;
     gl.bindTransformFeedback(gl.TRANSFORM_FEEDBACK, null);
   }
-  beginTransformFeedback(drawMode, shader) {
+  beginTransformFeedback(drawMode, shader2) {
     const { gl, renderer } = this;
-    if (shader) {
-      renderer.shader.bind(shader);
+    if (shader2) {
+      renderer.shader.bind(shader2);
     }
     gl.beginTransformFeedback(drawMode);
   }
@@ -43019,15 +43019,15 @@ const _Graphics = class extends Container {
     }
   }
   _renderDirect(renderer) {
-    const shader = this._resolveDirectShader(renderer);
+    const shader2 = this._resolveDirectShader(renderer);
     const geometry = this._geometry;
     const worldAlpha = this.worldAlpha;
-    const uniforms = shader.uniforms;
+    const uniforms = shader2.uniforms;
     const drawCalls = geometry.drawCalls;
     uniforms.translationMatrix = this.transform.worldTransform;
     Color$1.shared.setValue(this._tintColor).premultiply(worldAlpha).toArray(uniforms.tint);
-    renderer.shader.bind(shader);
-    renderer.geometry.bind(geometry, shader);
+    renderer.shader.bind(shader2);
+    renderer.geometry.bind(geometry, shader2);
     renderer.state.set(this.state);
     for (let i2 = 0, l2 = drawCalls.length; i2 < l2; i2++) {
       this._renderDrawCallDirect(renderer, geometry.drawCalls[i2]);
@@ -43042,9 +43042,9 @@ const _Graphics = class extends Container {
     renderer.geometry.draw(type2, size2, start);
   }
   _resolveDirectShader(renderer) {
-    let shader = this.shader;
+    let shader2 = this.shader;
     const pluginName = this.pluginName;
-    if (!shader) {
+    if (!shader2) {
       if (!DEFAULT_SHADERS[pluginName]) {
         const { maxTextures } = renderer.plugins[pluginName];
         const sampleValues = new Int32Array(maxTextures);
@@ -43059,9 +43059,9 @@ const _Graphics = class extends Container {
         const program = renderer.plugins[pluginName]._shader.program;
         DEFAULT_SHADERS[pluginName] = new Shader(program, uniforms);
       }
-      shader = DEFAULT_SHADERS[pluginName];
+      shader2 = DEFAULT_SHADERS[pluginName];
     }
-    return shader;
+    return shader2;
   }
   _calculateBounds() {
     this.finishPoly();
@@ -43178,10 +43178,10 @@ class MeshBatchUvs {
 const tempPoint = new Point();
 const tempPolygon = new Polygon$1();
 const _Mesh = class extends Container {
-  constructor(geometry, shader, state, drawMode = DRAW_MODES.TRIANGLES) {
+  constructor(geometry, shader2, state, drawMode = DRAW_MODES.TRIANGLES) {
     super();
     this.geometry = geometry;
-    this.shader = shader;
+    this.shader = shader2;
     this.state = state || State.for2d();
     this.drawMode = drawMode;
     this.start = 0;
@@ -43257,37 +43257,37 @@ const _Mesh = class extends Container {
   }
   _render(renderer) {
     const vertices = this.geometry.buffers[0].data;
-    const shader = this.shader;
-    if (shader.batchable && this.drawMode === DRAW_MODES.TRIANGLES && vertices.length < _Mesh.BATCHABLE_SIZE * 2) {
+    const shader2 = this.shader;
+    if (shader2.batchable && this.drawMode === DRAW_MODES.TRIANGLES && vertices.length < _Mesh.BATCHABLE_SIZE * 2) {
       this._renderToBatch(renderer);
     } else {
       this._renderDefault(renderer);
     }
   }
   _renderDefault(renderer) {
-    const shader = this.shader;
-    shader.alpha = this.worldAlpha;
-    if (shader.update) {
-      shader.update();
+    const shader2 = this.shader;
+    shader2.alpha = this.worldAlpha;
+    if (shader2.update) {
+      shader2.update();
     }
     renderer.batch.flush();
-    shader.uniforms.translationMatrix = this.transform.worldTransform.toArray(true);
-    renderer.shader.bind(shader);
+    shader2.uniforms.translationMatrix = this.transform.worldTransform.toArray(true);
+    renderer.shader.bind(shader2);
     renderer.state.set(this.state);
-    renderer.geometry.bind(this.geometry, shader);
+    renderer.geometry.bind(this.geometry, shader2);
     renderer.geometry.draw(this.drawMode, this.size, this.start, this.geometry.instanceCount);
   }
   _renderToBatch(renderer) {
     const geometry = this.geometry;
-    const shader = this.shader;
-    if (shader.uvMatrix) {
-      shader.uvMatrix.update();
+    const shader2 = this.shader;
+    if (shader2.uvMatrix) {
+      shader2.uvMatrix.update();
       this.calculateUvs();
     }
     this.calculateVertices();
     this.indices = geometry.indexBuffer.data;
-    this._tintRGB = shader._tintRGB;
-    this._texture = shader.texture;
+    this._tintRGB = shader2._tintRGB;
+    this._texture = shader2.texture;
     const pluginName = this.material.pluginName;
     renderer.batch.setObjectRenderer(renderer.plugins[pluginName]);
     renderer.plugins[pluginName].render(this);
@@ -43328,10 +43328,10 @@ const _Mesh = class extends Container {
   }
   calculateUvs() {
     const geomUvs = this.geometry.buffers[1];
-    const shader = this.shader;
-    if (!shader.uvMatrix.isSimple) {
+    const shader2 = this.shader;
+    if (!shader2.uvMatrix.isSimple) {
       if (!this.batchUvs) {
-        this.batchUvs = new MeshBatchUvs(geomUvs, shader.uvMatrix);
+        this.batchUvs = new MeshBatchUvs(geomUvs, shader2.uvMatrix);
       }
       this.batchUvs.update();
       this.uvs = this.batchUvs.data;
@@ -45199,7 +45199,7 @@ class TilingSpriteRenderer extends ObjectRenderer {
         isSimple = baseTex.wrapMode !== WRAP_MODES.CLAMP;
       }
     }
-    const shader = isSimple ? this.simpleShader : this.shader;
+    const shader2 = isSimple ? this.simpleShader : this.shader;
     const w2 = tex.width;
     const h2 = tex.height;
     const W = ts._width;
@@ -45209,15 +45209,15 @@ class TilingSpriteRenderer extends ObjectRenderer {
     if (isSimple) {
       tempMat.prepend(uv.mapCoord);
     } else {
-      shader.uniforms.uMapCoord = uv.mapCoord.toArray(true);
-      shader.uniforms.uClampFrame = uv.uClampFrame;
-      shader.uniforms.uClampOffset = uv.uClampOffset;
+      shader2.uniforms.uMapCoord = uv.mapCoord.toArray(true);
+      shader2.uniforms.uClampFrame = uv.uClampFrame;
+      shader2.uniforms.uClampOffset = uv.uClampOffset;
     }
-    shader.uniforms.uTransform = tempMat.toArray(true);
-    shader.uniforms.uColor = Color$1.shared.setValue(ts.tint).premultiply(ts.worldAlpha, premultiplied).toArray(shader.uniforms.uColor);
-    shader.uniforms.translationMatrix = ts.transform.worldTransform.toArray(true);
-    shader.uniforms.uSampler = tex;
-    renderer.shader.bind(shader);
+    shader2.uniforms.uTransform = tempMat.toArray(true);
+    shader2.uniforms.uColor = Color$1.shared.setValue(ts.tint).premultiply(ts.worldAlpha, premultiplied).toArray(shader2.uniforms.uColor);
+    shader2.uniforms.translationMatrix = ts.transform.worldTransform.toArray(true);
+    shader2.uniforms.uSampler = tex;
+    renderer.shader.bind(shader2);
     renderer.geometry.bind(quad2);
     this.state.blendMode = correctBlendMode(ts.blendMode, premultiplied);
     renderer.state.set(this.state);
@@ -46994,7 +46994,7 @@ function Component$d() {
     columnNumber: 10
   }, this);
 }
-const example$t = {
+const example$u = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
@@ -47045,7 +47045,7 @@ function Component$c() {
     columnNumber: 10
   }, this);
 }
-const example$s = {
+const example$t = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
@@ -47095,7 +47095,7 @@ function Component$b() {
     columnNumber: 10
   }, this);
 }
-const example$r = {
+const example$s = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
@@ -47136,7 +47136,7 @@ function Component$a() {
     columnNumber: 10
   }, this);
 }
-const example$q = {
+const example$r = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
@@ -47173,7 +47173,7 @@ function Component$9() {
     columnNumber: 10
   }, this);
 }
-const example$p = {
+const example$q = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
@@ -54420,7 +54420,7 @@ class WebGLCubeRenderTarget extends WebGLRenderTarget {
     this.texture.generateMipmaps = texture.generateMipmaps;
     this.texture.minFilter = texture.minFilter;
     this.texture.magFilter = texture.magFilter;
-    const shader = {
+    const shader2 = {
       uniforms: {
         tEquirect: { value: null }
       },
@@ -54465,9 +54465,9 @@ class WebGLCubeRenderTarget extends WebGLRenderTarget {
     const geometry = new BoxGeometry(5, 5, 5);
     const material = new ShaderMaterial({
       name: "CubemapFromEquirect",
-      uniforms: cloneUniforms(shader.uniforms),
-      vertexShader: shader.vertexShader,
-      fragmentShader: shader.fragmentShader,
+      uniforms: cloneUniforms(shader2.uniforms),
+      vertexShader: shader2.vertexShader,
+      fragmentShader: shader2.fragmentShader,
       side: BackSide,
       blending: NoBlending
     });
@@ -58119,10 +58119,10 @@ class WebGLUniforms {
   }
 }
 function WebGLShader(gl, type2, string) {
-  const shader = gl.createShader(type2);
-  gl.shaderSource(shader, string);
-  gl.compileShader(shader);
-  return shader;
+  const shader2 = gl.createShader(type2);
+  gl.shaderSource(shader2, string);
+  gl.compileShader(shader2);
+  return shader2;
 }
 let programIdCount = 0;
 function handleSource(string, errorLine) {
@@ -58147,15 +58147,15 @@ function getEncodingComponents(colorSpace) {
       return ["Linear", "( value )"];
   }
 }
-function getShaderErrors(gl, shader, type2) {
-  const status = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-  const errors = gl.getShaderInfoLog(shader).trim();
+function getShaderErrors(gl, shader2, type2) {
+  const status = gl.getShaderParameter(shader2, gl.COMPILE_STATUS);
+  const errors = gl.getShaderInfoLog(shader2).trim();
   if (status && errors === "")
     return "";
   const errorMatches = /ERROR: 0:(\d+)/.exec(errors);
   if (errorMatches) {
     const errorLine = parseInt(errorMatches[1]);
-    return type2.toUpperCase() + "\n\n" + errors + "\n\n" + handleSource(gl.getShaderSource(shader), errorLine);
+    return type2.toUpperCase() + "\n\n" + errors + "\n\n" + handleSource(gl.getShaderSource(shader2), errorLine);
   } else {
     return errors;
   }
@@ -58811,9 +58811,9 @@ function WebGLPrograms(renderer, cubemaps, cubeuvmaps, extensions2, capabilities
     let vertexShader2, fragmentShader2;
     let customVertexShaderID, customFragmentShaderID;
     if (shaderID) {
-      const shader = ShaderLib[shaderID];
-      vertexShader2 = shader.vertexShader;
-      fragmentShader2 = shader.fragmentShader;
+      const shader2 = ShaderLib[shaderID];
+      vertexShader2 = shader2.vertexShader;
+      fragmentShader2 = shader2.fragmentShader;
     } else {
       vertexShader2 = material.vertexShader;
       fragmentShader2 = material.fragmentShader;
@@ -59136,8 +59136,8 @@ function WebGLPrograms(renderer, cubemaps, cubeuvmaps, extensions2, capabilities
     const shaderID = shaderIDs[material.type];
     let uniforms;
     if (shaderID) {
-      const shader = ShaderLib[shaderID];
-      uniforms = UniformsUtils.clone(shader.uniforms);
+      const shader2 = ShaderLib[shaderID];
+      uniforms = UniformsUtils.clone(shader2.uniforms);
     } else {
       uniforms = material.uniforms;
     }
@@ -64726,7 +64726,7 @@ function Component$8() {
     columnNumber: 10
   }, this);
 }
-const example$o = {
+const example$p = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
@@ -64779,7 +64779,7 @@ function Component$7() {
     columnNumber: 10
   }, this);
 }
-const example$n = {
+const example$o = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
@@ -64845,7 +64845,7 @@ function Component$6() {
     }, this)]
   }, void 0, true);
 }
-const example$m = {
+const example$n = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
@@ -64894,7 +64894,7 @@ function Component$5() {
     columnNumber: 10
   }, this);
 }
-const example$l = {
+const example$m = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
@@ -73684,16 +73684,16 @@ var Renderer2 = class extends Events {
 __publicField2(Renderer2, "Utils", svg);
 var shaders = {
   create: function(gl, source, type2) {
-    const shader = gl.createShader(gl[type2]);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    const shader2 = gl.createShader(gl[type2]);
+    gl.shaderSource(shader2, source);
+    gl.compileShader(shader2);
+    const compiled = gl.getShaderParameter(shader2, gl.COMPILE_STATUS);
     if (!compiled) {
-      const error = gl.getShaderInfoLog(shader);
-      gl.deleteShader(shader);
-      throw new TwoError("unable to compile shader " + shader + ": " + error);
+      const error = gl.getShaderInfoLog(shader2);
+      gl.deleteShader(shader2);
+      throw new TwoError("unable to compile shader " + shader2 + ": " + error);
     }
-    return shader;
+    return shader2;
   },
   types: {
     vertex: "VERTEX_SHADER",
@@ -75459,7 +75459,7 @@ function Component$4() {
     columnNumber: 10
   }, this);
 }
-const example$k = {
+const example$l = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
@@ -75563,7 +75563,7 @@ function Slider$1({
     columnNumber: 5
   }, this);
 }
-const example$j = {
+const example$k = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
@@ -75667,7 +75667,7 @@ function Slider({
     columnNumber: 5
   }, this);
 }
-const example$i = {
+const example$j = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
@@ -75800,33 +75800,33 @@ class WebGLResourceManager {
     this.framebuffers.clear();
   }
 }
-function getUniformLocation(gl, program, name) {
+function getUniformLocation(gl, program, name, silent = false) {
   const location = gl.getUniformLocation(program, name);
-  if (!location) {
+  if (!location && !silent) {
     throw new Error(`could not create location ${name}`);
   }
   return location;
 }
-function getUniformLocations(gl, program, names) {
+function getUniformLocations(gl, program, names, silent = false) {
   const obj = {};
   for (const name of names) {
-    obj[name] = getUniformLocation(gl, program, name);
+    obj[name] = getUniformLocation(gl, program, name, silent);
   }
   return obj;
 }
 function compileShader$1(gl, type2, source) {
-  const shader = gl.createShader(type2);
-  if (!shader) {
+  const shader2 = gl.createShader(type2);
+  if (!shader2) {
     throw new Error("Failed to create shader");
   }
-  gl.shaderSource(shader, source);
-  gl.compileShader(shader);
-  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    const log = gl.getShaderInfoLog(shader);
-    gl.deleteShader(shader);
+  gl.shaderSource(shader2, source);
+  gl.compileShader(shader2);
+  if (!gl.getShaderParameter(shader2, gl.COMPILE_STATUS)) {
+    const log = gl.getShaderInfoLog(shader2);
+    gl.deleteShader(shader2);
     throw new Error(`Shader compilation error: ${log}`);
   }
-  return shader;
+  return shader2;
 }
 function createProgram$1(gl, vertexShader2, fragmentShader2) {
   const program = gl.createProgram();
@@ -75872,18 +75872,18 @@ function unbindAll(gl) {
 }
 var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
 function compileShader(gl, type2, source) {
-  const shader = gl.createShader(type2);
-  if (!shader) {
+  const shader2 = gl.createShader(type2);
+  if (!shader2) {
     throw new Error("Failed to create shader");
   }
-  gl.shaderSource(shader, source);
-  gl.compileShader(shader);
-  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    const log = gl.getShaderInfoLog(shader);
-    gl.deleteShader(shader);
+  gl.shaderSource(shader2, source);
+  gl.compileShader(shader2);
+  if (!gl.getShaderParameter(shader2, gl.COMPILE_STATUS)) {
+    const log = gl.getShaderInfoLog(shader2);
+    gl.deleteShader(shader2);
     throw new Error(`Shader compilation error: ${log}`);
   }
-  return shader;
+  return shader2;
 }
 function createProgram(gl, vertexShader2, fragmentShader2) {
   const program = gl.createProgram();
@@ -75979,7 +75979,7 @@ function Component$1() {
     columnNumber: 10
   }, this);
 }
-const example$h = {
+const example$i = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
@@ -76099,7 +76099,7 @@ function setupWebgl$g(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$g = {
+const example$h = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
@@ -76233,7 +76233,7 @@ function setupWebgl$f(canvas3) {
   });
   return () => cleanup();
 }
-const example$f = {
+const example$g = {
   id: "webgl-texture",
   filename: "17-webgl-texture.tsx",
   name: "WebGL texture",
@@ -76363,7 +76363,7 @@ function setupWebgl$e(canvas3) {
   });
   return () => cleanup();
 }
-const example$e = {
+const example$f = {
   id: "webgl-texture-upscale",
   filename: "18-webgl-texture-upscale.tsx",
   name: "WebGL texture upscale",
@@ -76452,7 +76452,7 @@ function setupWebgl$d(canvas3, images) {
   };
 }
 const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$d = {
+const example$e = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
@@ -76524,7 +76524,7 @@ function setupWebgl$c(canvas3) {
     resources.deleteAll();
   };
 }
-const example$c = {
+const example$d = {
   id: "webgl-texture-data-in",
   filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
@@ -76632,7 +76632,7 @@ function setupWebgl$b(canvas3) {
     resources.deleteAll();
   };
 }
-const example$b = {
+const example$c = {
   id: "webgl-texture-floats",
   filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
@@ -76736,7 +76736,7 @@ function setupWebgl$a(canvas3, [image]) {
   };
 }
 const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
-const example$a = {
+const example$b = {
   id: "webgl-extract-framebuffer",
   filename: "22-webgl-extract-framebuffer.tsx",
   name: "WebGL extract framebuffer",
@@ -76844,7 +76844,7 @@ function setupWebgl$9(canvas3) {
     resources.deleteAll();
   };
 }
-const example$9 = {
+const example$a = {
   id: "webgl-buffer-interleaved",
   filename: "23-webgl-buffer-interleaved.tsx",
   name: "WebGL buffer interleaved",
@@ -76942,7 +76942,7 @@ function setupWebgl$8(canvas3) {
     resources.deleteAll();
   };
 }
-const example$8 = {
+const example$9 = {
   id: "webgl-instancing",
   filename: "24-webgl-instancing.tsx",
   name: "WebGL buffer instancing",
@@ -77140,7 +77140,7 @@ function Component() {
     columnNumber: 5
   }, this);
 }
-const example$7 = {
+const example$8 = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL",
@@ -77250,7 +77250,7 @@ function setupWebgl$6(canvas3) {
     resources.deleteAll();
   };
 }
-const example$6 = {
+const example$7 = {
   id: "webgl-draw-elements",
   filename: "26-webgl-draw-elements.tsx",
   name: "WebGL elements mesh",
@@ -77353,7 +77353,7 @@ function setupWebgl$5(canvas3, [image1, image2]) {
   };
 }
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$5 = {
+const example$6 = {
   id: "webgl-texture-patch",
   filename: "27-webgl-texture-patch.tsx",
   name: "WebGL texture patch",
@@ -77470,7 +77470,7 @@ function setupWebgl$4(canvas3) {
     resources.deleteAll();
   };
 }
-const example$4 = {
+const example$5 = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
@@ -77558,7 +77558,7 @@ function setupWebgl$3(canvas3, [image1, image2, image3]) {
   };
 }
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$3 = {
+const example$4 = {
   id: "webgl-texture-many-samplers",
   filename: "29-webgl-texture-many-samplers.tsx",
   name: "WebGL texture many samplers",
@@ -77688,7 +77688,7 @@ function setupWebgl$2(canvas3, [image]) {
   };
 }
 const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII="];
-const example$2 = {
+const example$3 = {
   id: "webgl-draw-elements-textured",
   filename: "30-webgl-draw-elements-textured.tsx",
   name: "WebGL elements textured mesh",
@@ -77750,7 +77750,7 @@ function setupWebgl$1(canvas3) {
     resources.deleteAll();
   };
 }
-const example$1 = {
+const example$2 = {
   id: "webgl-scissor",
   filename: "31-webgl-scissor.tsx",
   name: "WebGL scissor",
@@ -77849,7 +77849,7 @@ function setupWebgl(canvas3) {
     resources.deleteAll();
   };
 }
-const example = {
+const example$1 = {
   id: "webgl-scissor-perf",
   filename: "32-webgl-scissor-perf.tsx",
   name: "WebGL scissor perf test",
@@ -77861,7 +77861,103 @@ const example = {
     }
   })
 };
+function shadertoy(config) {
+  const style = {};
+  if (config.cssWidth) {
+    style.width = config.cssWidth;
+  }
+  if (config.cssHeight) {
+    style.width = config.cssHeight;
+  }
+  if (config.pixelated) {
+    style.imageRendering = "pixelated";
+  }
+  const vertexShader2 = `#version 300 es
+
+in vec2 a_pos;
+out vec2 v_uv;
+
+void main() {
+  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
+  v_uv = a_pos;
+}
+`;
+  const fragmentShader2 = `#version 300 es
+precision highp float;
+
+uniform vec2 u_resolution;
+uniform float u_time;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+${config.shader}
+`;
+  function setupWebgl2(canvas3) {
+    const gl = getWebgl2Context(canvas3);
+    canvas3.width = config.width;
+    canvas3.height = config.height;
+    gl.viewport(0, 0, canvas3.width, canvas3.height);
+    gl.clearColor(0, 0, 0, 0);
+    const program = createProgramForShaders$1(gl, vertexShader2, fragmentShader2);
+    const resources = new WebGLResourceManager(gl);
+    const vao = resources.createVertexArray();
+    gl.bindVertexArray(vao);
+    createAttribute(gl, program, {
+      name: "a_pos",
+      buffer: resources.createBuffer(
+        new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
+      ),
+      size: 2
+    });
+    gl.bindVertexArray(null);
+    gl.useProgram(program);
+    const uniforms = getUniformLocations(
+      gl,
+      program,
+      ["u_resolution", "u_time"],
+      true
+    );
+    gl.uniform2f(uniforms.u_resolution, config.width, config.height);
+    gl.uniform1f(uniforms.u_time, 0);
+    let rafId = 0;
+    const startTime = Date.now();
+    const render = () => {
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.uniform1f(uniforms.u_time, (Date.now() - startTime) / 1e3);
+      gl.bindVertexArray(vao);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      gl.bindVertexArray(null);
+      rafId = requestAnimationFrame(render);
+    };
+    render();
+    return () => {
+      cancelAnimationFrame(rafId);
+      unbindAll(gl);
+      resources.deleteAll();
+    };
+  }
+  return createCanvasComponent(setupWebgl2, { style });
+}
+const shader = `
+void main() {
+  fragColor = vec4(v_uv, sin(u_time), 1.0);
+}
+`;
+const example = {
+  id: "shadertoy-clone",
+  filename: "33-shadertoy-clone.tsx",
+  name: "Webgl shadertoy clone",
+  description: "A shadertoy clone for easily writing frag shaders on full screen quads",
+  Component: shadertoy({
+    width: 128,
+    height: 96,
+    cssWidth: "640px",
+    shader
+  })
+};
 const all = [
+  example$x,
   example$w,
   example$v,
   example$u,
