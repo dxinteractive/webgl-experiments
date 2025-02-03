@@ -75745,8 +75745,8 @@ class WebGLResourceManager {
     __publicField(this, "framebuffers", /* @__PURE__ */ new Set());
     this.gl = gl;
   }
-  createBuffer(initialData) {
-    const buffer = createBuffer(this.gl, initialData);
+  createBuffer(initialData, usage = this.gl.STATIC_DRAW) {
+    const buffer = createBuffer(this.gl, initialData, usage);
     this.buffers.add(buffer);
     return buffer;
   }
