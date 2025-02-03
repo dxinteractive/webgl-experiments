@@ -131,7 +131,7 @@ const example: ExperimentDefinition = {
   filename: "32-webgl-scissor-perf.tsx",
   name: "WebGL scissor perf test",
   description:
-    "Renders a huge canvas with and without scissoring a single pixel to try to see any measurable evidence of performance differences. Answer: it does not, the discards might happen after the fragment shader",
+    "Renders a huge canvas with and without scissoring a single pixel to try to see any measurable evidence of performance differences. Answer: i cant tell",
   Component: createCanvasComponent(setupWebgl, {
     style: { height: "320px", imageRendering: "pixelated" },
   }),
