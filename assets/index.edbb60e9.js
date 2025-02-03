@@ -23716,7 +23716,7 @@ function Component$g() {
     columnNumber: 10
   }, this);
 }
-const example$x = {
+const example$z = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
@@ -23755,7 +23755,7 @@ function Component$f() {
     columnNumber: 10
   }, this);
 }
-const example$w = {
+const example$y = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
@@ -23796,7 +23796,7 @@ function Component$e() {
     columnNumber: 10
   }, this);
 }
-const example$v = {
+const example$x = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
@@ -46994,7 +46994,7 @@ function Component$d() {
     columnNumber: 10
   }, this);
 }
-const example$u = {
+const example$w = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
@@ -47045,7 +47045,7 @@ function Component$c() {
     columnNumber: 10
   }, this);
 }
-const example$t = {
+const example$v = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
@@ -47095,7 +47095,7 @@ function Component$b() {
     columnNumber: 10
   }, this);
 }
-const example$s = {
+const example$u = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
@@ -47136,7 +47136,7 @@ function Component$a() {
     columnNumber: 10
   }, this);
 }
-const example$r = {
+const example$t = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
@@ -47173,7 +47173,7 @@ function Component$9() {
     columnNumber: 10
   }, this);
 }
-const example$q = {
+const example$s = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
@@ -61016,7 +61016,7 @@ function WebGLTextures(_gl, extensions2, state, properties, capabilities, utils,
       } else if (image.complete === false) {
         console.warn("THREE.WebGLRenderer: Texture marked for update but image is incomplete");
       } else {
-        uploadTexture(textureProperties, texture, slot);
+        uploadTexture2(textureProperties, texture, slot);
         return;
       }
     }
@@ -61025,7 +61025,7 @@ function WebGLTextures(_gl, extensions2, state, properties, capabilities, utils,
   function setTexture2DArray(texture, slot) {
     const textureProperties = properties.get(texture);
     if (texture.version > 0 && textureProperties.__version !== texture.version) {
-      uploadTexture(textureProperties, texture, slot);
+      uploadTexture2(textureProperties, texture, slot);
       return;
     }
     state.bindTexture(_gl.TEXTURE_2D_ARRAY, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
@@ -61033,7 +61033,7 @@ function WebGLTextures(_gl, extensions2, state, properties, capabilities, utils,
   function setTexture3D(texture, slot) {
     const textureProperties = properties.get(texture);
     if (texture.version > 0 && textureProperties.__version !== texture.version) {
-      uploadTexture(textureProperties, texture, slot);
+      uploadTexture2(textureProperties, texture, slot);
       return;
     }
     state.bindTexture(_gl.TEXTURE_3D, textureProperties.__webglTexture, _gl.TEXTURE0 + slot);
@@ -61134,7 +61134,7 @@ function WebGLTextures(_gl, extensions2, state, properties, capabilities, utils,
     }
     return forceUpload;
   }
-  function uploadTexture(textureProperties, texture, slot) {
+  function uploadTexture2(textureProperties, texture, slot) {
     let textureType = _gl.TEXTURE_2D;
     if (texture.isDataArrayTexture || texture.isCompressedArrayTexture)
       textureType = _gl.TEXTURE_2D_ARRAY;
@@ -64726,7 +64726,7 @@ function Component$8() {
     columnNumber: 10
   }, this);
 }
-const example$p = {
+const example$r = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
@@ -64779,7 +64779,7 @@ function Component$7() {
     columnNumber: 10
   }, this);
 }
-const example$o = {
+const example$q = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
@@ -64845,7 +64845,7 @@ function Component$6() {
     }, this)]
   }, void 0, true);
 }
-const example$n = {
+const example$p = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
@@ -64894,7 +64894,7 @@ function Component$5() {
     columnNumber: 10
   }, this);
 }
-const example$m = {
+const example$o = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
@@ -75459,7 +75459,7 @@ function Component$4() {
     columnNumber: 10
   }, this);
 }
-const example$l = {
+const example$n = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
@@ -75563,7 +75563,7 @@ function Slider$1({
     columnNumber: 5
   }, this);
 }
-const example$k = {
+const example$m = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
@@ -75667,7 +75667,7 @@ function Slider({
     columnNumber: 5
   }, this);
 }
-const example$j = {
+const example$l = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
@@ -75870,6 +75870,24 @@ function unbindAll(gl) {
   gl.bindRenderbuffer(gl.RENDERBUFFER, null);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 }
+function uploadTexture(gl, texture, source, options = {}) {
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(
+    gl.TEXTURE_2D,
+    gl.TEXTURE_MIN_FILTER,
+    options.nearest ? gl.NEAREST : gl.LINEAR
+  );
+  gl.texParameteri(
+    gl.TEXTURE_2D,
+    gl.TEXTURE_MAG_FILTER,
+    options.nearest ? gl.NEAREST : gl.LINEAR
+  );
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+  return texture;
+}
 var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
 function compileShader(gl, type2, source) {
   const shader2 = gl.createShader(type2);
@@ -75911,7 +75929,7 @@ function updateCanvasSize(canvas3, gl) {
   canvas3.height = canvas3.clientHeight * dpr;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
 }
-function setupWebgl$h(canvas3) {
+function setupWebgl$i(canvas3) {
   const gl = canvas3.getContext("webgl2");
   if (!gl) {
     throw new Error("gl not supported");
@@ -75966,7 +75984,7 @@ function Component$1() {
     if (!canvas3) {
       return;
     }
-    return setupWebgl$h(canvas3);
+    return setupWebgl$i(canvas3);
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
     ref,
@@ -75979,7 +75997,7 @@ function Component$1() {
     columnNumber: 10
   }, this);
 }
-const example$i = {
+const example$k = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
@@ -76024,7 +76042,7 @@ function createCanvasComponentWithImages(onMount, imageSrcs, props = {}) {
     return () => cleanup();
   }, props);
 }
-const vertexShader$d = `#version 300 es
+const vertexShader$e = `#version 300 es
 
 precision highp float;
 
@@ -76041,7 +76059,7 @@ void main() {
   uv = aPosition.xy * vec2(0.5, 0.5);
 }
 `;
-const fragmentShader$d = `#version 300 es
+const fragmentShader$e = `#version 300 es
 
 precision highp float;
 
@@ -76055,10 +76073,10 @@ void main() {
   outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);
 }
 `;
-function setupWebgl$g(canvas3) {
+function setupWebgl$h(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
-  const program = createProgramForShaders$1(gl, vertexShader$d, fragmentShader$d);
+  const program = createProgramForShaders$1(gl, vertexShader$e, fragmentShader$e);
   gl.useProgram(program);
   const vertexBuffer = createBuffer(gl);
   const vertexData = new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]);
@@ -76099,12 +76117,12 @@ function setupWebgl$g(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$h = {
+const example$j = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
   description: "Hello world for WebGL2 with reduced boilerplate using utility functions.",
-  Component: createCanvasComponent(setupWebgl$g, {
+  Component: createCanvasComponent(setupWebgl$h, {
     style: {
       height: "640px"
     }
@@ -76112,6 +76130,139 @@ const example$h = {
 };
 const WIDTH$8 = 8;
 const HEIGHT$8 = 8;
+const vertexShader$d = `#version 300 es
+
+in vec2 a_position;
+in vec2 a_texCoord;
+
+uniform vec2 u_resolution;
+
+out vec2 v_texCoord;
+
+void main() {
+  vec2 unitSpace = a_position / u_resolution;
+  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
+
+  gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+
+  // pass the texCoord to the fragment shader
+  // The GPU will interpolate this value between points.
+  v_texCoord = a_texCoord;
+}
+`;
+const fragmentShader$d = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_texCoord;
+out vec4 outColor;
+
+void main() {
+  outColor = texture(u_image, v_texCoord);
+}
+`;
+const IMAGES$5 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
+async function loadImage$1(src) {
+  return new Promise((resolve2) => {
+    const image = new Image();
+    image.src = src;
+    image.onload = () => resolve2(image);
+  });
+}
+function getQuadPositions(x2, y2, w2, h2) {
+  const x1 = x2;
+  const y1 = y2;
+  const x22 = x1 + w2;
+  const y22 = y1 + h2;
+  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
+}
+function createAndUploadTexture$1(gl, image) {
+  const texture = createTexture(gl);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+  return texture;
+}
+function setupWebglWithImages$1(canvas3, images) {
+  const gl = getWebgl2Context(canvas3);
+  canvas3.width = WIDTH$8;
+  canvas3.height = HEIGHT$8;
+  gl.viewport(0, 0, canvas3.width, canvas3.height);
+  gl.clearColor(0, 0, 0, 0);
+  const program = createProgramForShaders$1(gl, vertexShader$d, fragmentShader$d);
+  const vao = createVertexArray(gl);
+  gl.bindVertexArray(vao);
+  const positionBuffer = createBuffer(gl);
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$8, HEIGHT$8), gl.STATIC_DRAW);
+  const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+  gl.enableVertexAttribArray(positionAttributeLocation);
+  gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  const texCoordBuffer = createBuffer(gl);
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), gl.STATIC_DRAW);
+  const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
+  gl.enableVertexAttribArray(texCoordAttributeLocation);
+  gl.vertexAttribPointer(texCoordAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  gl.bindVertexArray(null);
+  const TEXTURE_INDEX = 0;
+  gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
+  const textures = images.map((image) => createAndUploadTexture$1(gl, image));
+  const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+  const imageLocation = gl.getUniformLocation(program, "u_image");
+  let rafId = 0;
+  const render = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(program);
+    gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform1i(imageLocation, TEXTURE_INDEX);
+    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
+    gl.bindVertexArray(vao);
+    gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.bindVertexArray(null);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    rafId = requestAnimationFrame(render);
+  };
+  render();
+  return () => {
+    cancelAnimationFrame(rafId);
+    unbindAll(gl);
+    gl.deleteBuffer(positionBuffer);
+    gl.deleteBuffer(texCoordBuffer);
+    gl.deleteVertexArray(vao);
+    for (const texture of textures) {
+      gl.deleteTexture(texture);
+    }
+  };
+}
+function setupWebgl$g(canvas3) {
+  let cleanup = () => {
+  };
+  Promise.all(IMAGES$5.map((img) => loadImage$1(img))).then((images) => {
+    cleanup = setupWebglWithImages$1(canvas3, images);
+  });
+  return () => cleanup();
+}
+const example$i = {
+  id: "webgl-texture",
+  filename: "17-webgl-texture.tsx",
+  name: "WebGL texture",
+  description: "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
+  Component: createCanvasComponent(setupWebgl$g, {
+    style: {
+      height: "320px",
+      imageRendering: "pixelated"
+    }
+  })
+};
 const vertexShader$c = `#version 300 es
 
 in vec2 a_position;
@@ -76144,139 +76295,6 @@ void main() {
   outColor = texture(u_image, v_texCoord);
 }
 `;
-const IMAGES$5 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-async function loadImage$1(src) {
-  return new Promise((resolve2) => {
-    const image = new Image();
-    image.src = src;
-    image.onload = () => resolve2(image);
-  });
-}
-function getQuadPositions(x2, y2, w2, h2) {
-  const x1 = x2;
-  const y1 = y2;
-  const x22 = x1 + w2;
-  const y22 = y1 + h2;
-  return new Float32Array([x1, y1, x22, y1, x1, y22, x1, y22, x22, y1, x22, y22]);
-}
-function createAndUploadTexture$4(gl, image) {
-  const texture = createTexture(gl);
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-  gl.bindTexture(gl.TEXTURE_2D, null);
-  return texture;
-}
-function setupWebglWithImages$1(canvas3, images) {
-  const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$8;
-  canvas3.height = HEIGHT$8;
-  gl.viewport(0, 0, canvas3.width, canvas3.height);
-  gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$c, fragmentShader$c);
-  const vao = createVertexArray(gl);
-  gl.bindVertexArray(vao);
-  const positionBuffer = createBuffer(gl);
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$8, HEIGHT$8), gl.STATIC_DRAW);
-  const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
-  gl.enableVertexAttribArray(positionAttributeLocation);
-  gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
-  const texCoordBuffer = createBuffer(gl);
-  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), gl.STATIC_DRAW);
-  const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
-  gl.enableVertexAttribArray(texCoordAttributeLocation);
-  gl.vertexAttribPointer(texCoordAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
-  gl.bindVertexArray(null);
-  const TEXTURE_INDEX = 0;
-  gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
-  const textures = images.map((image) => createAndUploadTexture$4(gl, image));
-  const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
-  const imageLocation = gl.getUniformLocation(program, "u_image");
-  let rafId = 0;
-  const render = () => {
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(program);
-    gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
-    gl.uniform1i(imageLocation, TEXTURE_INDEX);
-    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
-    gl.bindVertexArray(vao);
-    gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-    gl.bindVertexArray(null);
-    gl.bindTexture(gl.TEXTURE_2D, null);
-    rafId = requestAnimationFrame(render);
-  };
-  render();
-  return () => {
-    cancelAnimationFrame(rafId);
-    unbindAll(gl);
-    gl.deleteBuffer(positionBuffer);
-    gl.deleteBuffer(texCoordBuffer);
-    gl.deleteVertexArray(vao);
-    for (const texture of textures) {
-      gl.deleteTexture(texture);
-    }
-  };
-}
-function setupWebgl$f(canvas3) {
-  let cleanup = () => {
-  };
-  Promise.all(IMAGES$5.map((img) => loadImage$1(img))).then((images) => {
-    cleanup = setupWebglWithImages$1(canvas3, images);
-  });
-  return () => cleanup();
-}
-const example$g = {
-  id: "webgl-texture",
-  filename: "17-webgl-texture.tsx",
-  name: "WebGL texture",
-  description: "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
-  Component: createCanvasComponent(setupWebgl$f, {
-    style: {
-      height: "320px",
-      imageRendering: "pixelated"
-    }
-  })
-};
-const vertexShader$b = `#version 300 es
-
-in vec2 a_position;
-in vec2 a_texCoord;
-
-uniform vec2 u_resolution;
-
-out vec2 v_texCoord;
-
-void main() {
-  vec2 unitSpace = a_position / u_resolution;
-  vec2 clipSpace = (unitSpace * 2.0) - 1.0;
-
-  gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-  // pass the texCoord to the fragment shader
-  // The GPU will interpolate this value between points.
-  v_texCoord = a_texCoord;
-}
-`;
-const fragmentShader$b = `#version 300 es
-precision highp float;
-
-uniform sampler2D u_image;
-
-in vec2 v_texCoord;
-out vec4 outColor;
-
-void main() {
-  outColor = texture(u_image, v_texCoord);
-}
-`;
 const IMAGES$4 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
 async function loadImage(src) {
   return new Promise((resolve2) => {
@@ -76285,7 +76303,7 @@ async function loadImage(src) {
     image.onload = () => resolve2(image);
   });
 }
-function createAndUploadTexture$3(gl, image) {
+function createAndUploadTexture(gl, image) {
   const texture = createTexture(gl);
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -76302,7 +76320,7 @@ function setupWebglWithImages(canvas3, images) {
   canvas3.height = 8 * 16;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$b, fragmentShader$b);
+  const program = createProgramForShaders$1(gl, vertexShader$c, fragmentShader$c);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
   const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
@@ -76321,7 +76339,7 @@ function setupWebglWithImages(canvas3, images) {
   gl.vertexAttribPointer(texCoordAttributeLocation, 2, gl.FLOAT, false, 0, 0);
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
   gl.activeTexture(gl.TEXTURE0 + 0);
-  const textures = images.map((image) => createAndUploadTexture$3(gl, image));
+  const textures = images.map((image) => createAndUploadTexture(gl, image));
   let rafId = 0;
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -76355,7 +76373,7 @@ function setupWebglWithImages(canvas3, images) {
     }
   };
 }
-function setupWebgl$e(canvas3) {
+function setupWebgl$f(canvas3) {
   let cleanup = () => {
   };
   Promise.all(IMAGES$4.map((img) => loadImage(img))).then((images) => {
@@ -76363,12 +76381,12 @@ function setupWebgl$e(canvas3) {
   });
   return () => cleanup();
 }
-const example$f = {
+const example$h = {
   id: "webgl-texture-upscale",
   filename: "18-webgl-texture-upscale.tsx",
   name: "WebGL texture upscale",
   description: "Load and render a texture with WebGL2 while upscaling linearly",
-  Component: createCanvasComponent(setupWebgl$e, {
+  Component: createCanvasComponent(setupWebgl$f, {
     style: {
       height: "640px",
       imageRendering: "pixelated"
@@ -76377,6 +76395,85 @@ const example$f = {
 };
 const WIDTH$7 = 8;
 const HEIGHT$7 = 8;
+const vertexShader$b = `#version 300 es
+
+in vec2 a_pos;
+out vec2 v_uv;
+
+void main() {
+  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
+  v_uv = a_pos;
+}
+`;
+const fragmentShader$b = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  outColor = texture(u_image, v_uv);
+}
+`;
+function setupWebgl$e(canvas3, images) {
+  const gl = getWebgl2Context(canvas3);
+  canvas3.width = WIDTH$7;
+  canvas3.height = HEIGHT$7;
+  gl.viewport(0, 0, canvas3.width, canvas3.height);
+  gl.clearColor(0, 0, 0, 0);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  const program = createProgramForShaders$1(gl, vertexShader$b, fragmentShader$b);
+  const resources = new WebGLResourceManager(gl);
+  const vao = resources.createVertexArray();
+  gl.bindVertexArray(vao);
+  createAttribute(gl, program, {
+    name: "a_pos",
+    buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
+    size: 2
+  });
+  gl.bindVertexArray(null);
+  gl.activeTexture(gl.TEXTURE0);
+  const textures = images.map((image) => uploadTexture(gl, resources.createTexture(), image, {
+    nearest: true
+  }));
+  gl.useProgram(program);
+  const uniforms = getUniformLocations(gl, program, ["u_image"]);
+  gl.uniform1i(uniforms.u_image, 0);
+  let rafId = 0;
+  const render = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
+    gl.bindVertexArray(vao);
+    gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.bindVertexArray(null);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    rafId = requestAnimationFrame(render);
+  };
+  render();
+  return () => {
+    cancelAnimationFrame(rafId);
+    unbindAll(gl);
+    resources.deleteAll();
+  };
+}
+const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
+const example$g = {
+  id: "webgl-texture-streamlined",
+  filename: "19-webgl-texture-streamlined.tsx",
+  name: "WebGL texture streamlined",
+  description: "Load and render a texture with WebGL2 simplified a bit",
+  Component: createCanvasComponentWithImages(setupWebgl$e, IMAGES$3, {
+    style: {
+      height: "320px",
+      imageRendering: "pixelated"
+    }
+  })
+};
+const WIDTH$6 = 8;
+const HEIGHT$6 = 8;
 const vertexShader$a = `#version 300 es
 
 in vec2 a_pos;
@@ -76399,96 +76496,7 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function createAndUploadTexture$2(gl, resources, image) {
-  const texture = resources.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-  gl.bindTexture(gl.TEXTURE_2D, null);
-  return texture;
-}
-function setupWebgl$d(canvas3, images) {
-  const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$7;
-  canvas3.height = HEIGHT$7;
-  gl.viewport(0, 0, canvas3.width, canvas3.height);
-  gl.clearColor(0, 0, 0, 0);
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$a, fragmentShader$a);
-  const resources = new WebGLResourceManager(gl);
-  const vao = resources.createVertexArray();
-  gl.bindVertexArray(vao);
-  createAttribute(gl, program, {
-    name: "a_pos",
-    buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])),
-    size: 2
-  });
-  const TEXTURE_INDEX = 0;
-  gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
-  const textures = images.map((image) => createAndUploadTexture$2(gl, resources, image));
-  gl.bindVertexArray(null);
-  gl.useProgram(program);
-  const uniforms = getUniformLocations(gl, program, ["u_image"]);
-  gl.uniform1i(uniforms.u_image, TEXTURE_INDEX);
-  let rafId = 0;
-  const render = () => {
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    const textureIndex = Math.floor(Date.now() * 1e-3) % images.length;
-    gl.bindVertexArray(vao);
-    gl.bindTexture(gl.TEXTURE_2D, textures[textureIndex]);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-    gl.bindVertexArray(null);
-    gl.bindTexture(gl.TEXTURE_2D, null);
-    rafId = requestAnimationFrame(render);
-  };
-  render();
-  return () => {
-    cancelAnimationFrame(rafId);
-    unbindAll(gl);
-    resources.deleteAll();
-  };
-}
-const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$e = {
-  id: "webgl-texture-streamlined",
-  filename: "19-webgl-texture-streamlined.tsx",
-  name: "WebGL texture streamlined",
-  description: "Load and render a texture with WebGL2 simplified a bit",
-  Component: createCanvasComponentWithImages(setupWebgl$d, IMAGES$3, {
-    style: {
-      height: "320px",
-      imageRendering: "pixelated"
-    }
-  })
-};
-const WIDTH$6 = 8;
-const HEIGHT$6 = 8;
-const vertexShader$9 = `#version 300 es
-
-in vec2 a_pos;
-out vec2 v_uv;
-
-void main() {
-  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
-  v_uv = a_pos;
-}
-`;
-const fragmentShader$9 = `#version 300 es
-precision highp float;
-
-uniform sampler2D u_image;
-
-in vec2 v_uv;
-out vec4 outColor;
-
-void main() {
-  outColor = texture(u_image, v_uv);
-}
-`;
-function setupWebgl$c(canvas3) {
+function setupWebgl$d(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$6;
   canvas3.height = HEIGHT$6;
@@ -76496,7 +76504,7 @@ function setupWebgl$c(canvas3) {
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$9, fragmentShader$9);
+  const program = createProgramForShaders$1(gl, vertexShader$a, fragmentShader$a);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76524,19 +76532,19 @@ function setupWebgl$c(canvas3) {
     resources.deleteAll();
   };
 }
-const example$d = {
+const example$f = {
   id: "webgl-texture-data-in",
   filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
   description: "Loading data into a texture",
-  Component: createCanvasComponent(setupWebgl$c, {
+  Component: createCanvasComponent(setupWebgl$d, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader$8 = `#version 300 es
+const vertexShader$9 = `#version 300 es
 precision highp float;
 
 uniform highp sampler2D u_dataTexture;
@@ -76556,7 +76564,7 @@ void main() {
   gl_Position = vec4(a_pos.x, a_pos.y + data.x, 0.0, 1.0);
 }
 `;
-const fragmentShader$8 = `#version 300 es
+const fragmentShader$9 = `#version 300 es
 precision highp float;
 
 out vec4 outColor;
@@ -76578,7 +76586,7 @@ for (let x2 = -1; x2 < 1; x2 += 0.1) {
   POSITION_OFFSETS.push(x2 * x2 * x2, 0, 0, 0);
   i++;
 }
-function setupWebgl$b(canvas3) {
+function setupWebgl$c(canvas3) {
   const gl = getWebgl2Context(canvas3);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
@@ -76589,7 +76597,7 @@ function setupWebgl$b(canvas3) {
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
-  const program = createProgramForShaders$1(gl, vertexShader$8, fragmentShader$8);
+  const program = createProgramForShaders$1(gl, vertexShader$9, fragmentShader$9);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76632,12 +76640,12 @@ function setupWebgl$b(canvas3) {
     resources.deleteAll();
   };
 }
-const example$c = {
+const example$e = {
   id: "webgl-texture-floats",
   filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
   description: "Renders tris from positions directly in clip space, then offsets them according to float data passed through a texture.",
-  Component: createCanvasComponent(setupWebgl$b, {
+  Component: createCanvasComponent(setupWebgl$c, {
     style: {
       height: "640px"
     }
@@ -76645,7 +76653,7 @@ const example$c = {
 };
 const WIDTH$5 = 8;
 const HEIGHT$5 = 8;
-const vertexShader$7 = `#version 300 es
+const vertexShader$8 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76655,7 +76663,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$7 = `#version 300 es
+const fragmentShader$8 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76667,18 +76675,7 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function createAndUploadTexture$1(gl, resources, image) {
-  const texture = resources.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-  gl.bindTexture(gl.TEXTURE_2D, null);
-  return texture;
-}
-function setupWebgl$a(canvas3, [image]) {
+function setupWebgl$b(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
@@ -76688,7 +76685,7 @@ function setupWebgl$a(canvas3, [image]) {
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$7, fragmentShader$7);
+  const program = createProgramForShaders$1(gl, vertexShader$8, fragmentShader$8);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76699,7 +76696,9 @@ function setupWebgl$a(canvas3, [image]) {
   });
   const TEXTURE_INDEX = 0;
   gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
-  const texture = createAndUploadTexture$1(gl, resources, image);
+  const texture = uploadTexture(gl, resources.createTexture(), image, {
+    nearest: true
+  });
   gl.bindVertexArray(null);
   const framebufferTexture = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture);
@@ -76735,20 +76734,20 @@ function setupWebgl$a(canvas3, [image]) {
     resources.deleteAll();
   };
 }
-const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
-const example$b = {
+const IMAGE$1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
+const example$d = {
   id: "webgl-extract-framebuffer",
   filename: "22-webgl-extract-framebuffer.tsx",
   name: "WebGL extract framebuffer",
   description: "Extract data from a framebuffer, logging float values to console",
-  Component: createCanvasComponentWithImages(setupWebgl$a, [IMAGE], {
+  Component: createCanvasComponentWithImages(setupWebgl$b, [IMAGE$1], {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader$6 = `#version 300 es
+const vertexShader$7 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -76760,7 +76759,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$6 = `#version 300 es
+const fragmentShader$7 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -76770,11 +76769,11 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$9(canvas3) {
+function setupWebgl$a(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$6, fragmentShader$6);
+  const program = createProgramForShaders$1(gl, vertexShader$7, fragmentShader$7);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76844,18 +76843,18 @@ function setupWebgl$9(canvas3) {
     resources.deleteAll();
   };
 }
-const example$a = {
+const example$c = {
   id: "webgl-buffer-interleaved",
   filename: "23-webgl-buffer-interleaved.tsx",
   name: "WebGL buffer interleaved",
   description: "Renders tris from positions directly in clip space from a single buffer of various interleaved attributes.",
-  Component: createCanvasComponent(setupWebgl$9, {
+  Component: createCanvasComponent(setupWebgl$a, {
     style: {
       height: "640px"
     }
   })
 };
-const vertexShader$5 = `#version 300 es
+const vertexShader$6 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -76868,7 +76867,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$5 = `#version 300 es
+const fragmentShader$6 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -76878,11 +76877,11 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$8(canvas3) {
+function setupWebgl$9(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$5, fragmentShader$5);
+  const program = createProgramForShaders$1(gl, vertexShader$6, fragmentShader$6);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76942,19 +76941,19 @@ function setupWebgl$8(canvas3) {
     resources.deleteAll();
   };
 }
-const example$9 = {
+const example$b = {
   id: "webgl-instancing",
   filename: "24-webgl-instancing.tsx",
   name: "WebGL buffer instancing",
   description: "Renders instanced triangles.",
-  Component: createCanvasComponent(setupWebgl$8, {
+  Component: createCanvasComponent(setupWebgl$9, {
     style: {
       height: "640px"
     }
   })
 };
 var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/25-webgl-oklab-color.tsx";
-const vertexShader$4 = `#version 300 es
+const vertexShader$5 = `#version 300 es
 precision highp float;
 
 uniform float u_colorLightness;
@@ -76968,7 +76967,7 @@ void main() {
   v_color = vec3(u_colorLightness, pos.x * 0.33, pos.y * -0.33);
 }
 `;
-const fragmentShader$4 = `#version 300 es
+const fragmentShader$5 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -77032,7 +77031,7 @@ void main() {
 const lightness = {
   current: 0
 };
-function setupWebgl$7(canvasgl, canvas2d) {
+function setupWebgl$8(canvasgl, canvas2d) {
   const gl = getWebgl2Context(canvasgl);
   const ctx = canvas2d.getContext("2d");
   if (!ctx) {
@@ -77044,7 +77043,7 @@ function setupWebgl$7(canvasgl, canvas2d) {
   canvas2d.height = 320;
   gl.viewport(0, 0, canvasgl.width, canvasgl.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$4, fragmentShader$4);
+  const program = createProgramForShaders$1(gl, vertexShader$5, fragmentShader$5);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77094,7 +77093,7 @@ function Component() {
     if (!canvasgl || !canvas2d) {
       return;
     }
-    return setupWebgl$7(canvasgl, canvas2d);
+    return setupWebgl$8(canvasgl, canvas2d);
   }, []);
   const [valueL, setL] = react.exports.useState(1);
   lightness.current = valueL;
@@ -77140,14 +77139,14 @@ function Component() {
     columnNumber: 5
   }, this);
 }
-const example$8 = {
+const example$a = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL",
   description: "OKLAB color experiment in WebGL",
   Component
 };
-const vertexShader$3 = `#version 300 es
+const vertexShader$4 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -77159,7 +77158,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$3 = `#version 300 es
+const fragmentShader$4 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -77169,11 +77168,11 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$6(canvas3) {
+function setupWebgl$7(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
+  const program = createProgramForShaders$1(gl, vertexShader$4, fragmentShader$4);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77250,12 +77249,12 @@ function setupWebgl$6(canvas3) {
     resources.deleteAll();
   };
 }
-const example$7 = {
+const example$9 = {
   id: "webgl-draw-elements",
   filename: "26-webgl-draw-elements.tsx",
   name: "WebGL elements mesh",
   description: "Renders a mesh using drawElements()",
-  Component: createCanvasComponent(setupWebgl$6, {
+  Component: createCanvasComponent(setupWebgl$7, {
     style: {
       height: "640px"
     }
@@ -77263,7 +77262,7 @@ const example$7 = {
 };
 const WIDTH$4 = 8;
 const HEIGHT$4 = 8;
-const vertexShader$2 = `#version 300 es
+const vertexShader$3 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77273,7 +77272,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$2 = `#version 300 es
+const fragmentShader$3 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77285,25 +77284,14 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function createAndUploadTexture(gl, resources, image) {
-  const texture = resources.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-  gl.bindTexture(gl.TEXTURE_2D, null);
-  return texture;
-}
-function setupWebgl$5(canvas3, [image1, image2]) {
+function setupWebgl$6(canvas3, [image1, image2]) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$4;
   canvas3.height = HEIGHT$4;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
+  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77314,7 +77302,9 @@ function setupWebgl$5(canvas3, [image1, image2]) {
   });
   const TEXTURE_INDEX = 0;
   gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
-  const texture = createAndUploadTexture(gl, resources, image1);
+  const texture = uploadTexture(gl, resources.createTexture(), image1, {
+    nearest: true
+  });
   gl.bindVertexArray(null);
   gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, ["u_image"]);
@@ -77353,12 +77343,12 @@ function setupWebgl$5(canvas3, [image1, image2]) {
   };
 }
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$6 = {
+const example$8 = {
   id: "webgl-texture-patch",
   filename: "27-webgl-texture-patch.tsx",
   name: "WebGL texture patch",
   description: "Load and render a texture with WebGL2, then patch a subset of pixels",
-  Component: createCanvasComponentWithImages(setupWebgl$5, IMAGES$2, {
+  Component: createCanvasComponentWithImages(setupWebgl$6, IMAGES$2, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -77412,7 +77402,7 @@ void main() {
   outColor = texture(u_image, v_uv * 2.0);
 }
 `;
-function setupWebgl$4(canvas3) {
+function setupWebgl$5(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$3;
   canvas3.height = HEIGHT$3;
@@ -77470,12 +77460,12 @@ function setupWebgl$4(canvas3) {
     resources.deleteAll();
   };
 }
-const example$5 = {
+const example$7 = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
   description: "Renders to and from framebuffers repeatedly",
-  Component: createCanvasComponent(setupWebgl$4, {
+  Component: createCanvasComponent(setupWebgl$5, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -77484,7 +77474,7 @@ const example$5 = {
 };
 const WIDTH$2 = 64;
 const HEIGHT$2 = 64;
-const vertexShader$1 = `#version 300 es
+const vertexShader$2 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77494,7 +77484,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$1 = `#version 300 es
+const fragmentShader$2 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image1;
@@ -77524,14 +77514,14 @@ function createUploadAndBindTexture(gl, resources, image, slot) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   gl.bindTexture(gl.TEXTURE_2D, texture);
 }
-function setupWebgl$3(canvas3, [image1, image2, image3]) {
+function setupWebgl$4(canvas3, [image1, image2, image3]) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$2;
   canvas3.height = HEIGHT$2;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
+  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77558,19 +77548,19 @@ function setupWebgl$3(canvas3, [image1, image2, image3]) {
   };
 }
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$4 = {
+const example$6 = {
   id: "webgl-texture-many-samplers",
   filename: "29-webgl-texture-many-samplers.tsx",
   name: "WebGL texture many samplers",
   description: "Load and render a combination of 3 textures in the same frag shader",
-  Component: createCanvasComponentWithImages(setupWebgl$3, IMAGES$1, {
+  Component: createCanvasComponentWithImages(setupWebgl$4, IMAGES$1, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader = `#version 300 es
+const vertexShader$1 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -77584,7 +77574,7 @@ void main() {
   v_uv.y /= 0.3;
 }
 `;
-const fragmentShader = `#version 300 es
+const fragmentShader$1 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77596,11 +77586,11 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$2(canvas3, [image]) {
+function setupWebgl$3(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
+  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77669,18 +77659,15 @@ function setupWebgl$2(canvas3, [image]) {
   const elementIndexBuffer = resources.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elementIndexBuffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(elementIndexData), gl.STATIC_DRAW);
-  const texture = resources.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  const texture = uploadTexture(gl, resources.createTexture(), image, {
+    nearest: true
+  });
   gl.useProgram(program);
   const uniforms = getUniformLocations(gl, program, ["u_image"]);
   gl.uniform1i(uniforms.u_image, 0);
   gl.useProgram(program);
   gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.drawElements(gl.TRIANGLES, elementIndexData.length, gl.UNSIGNED_BYTE, 0);
   return () => {
     unbindAll(gl);
@@ -77688,12 +77675,12 @@ function setupWebgl$2(canvas3, [image]) {
   };
 }
 const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII="];
-const example$3 = {
+const example$5 = {
   id: "webgl-draw-elements-textured",
   filename: "30-webgl-draw-elements-textured.tsx",
   name: "WebGL elements textured mesh",
   description: "Renders a textured mesh using drawElements()",
-  Component: createCanvasComponentWithImages(setupWebgl$2, IMAGES, {
+  Component: createCanvasComponentWithImages(setupWebgl$3, IMAGES, {
     style: {
       height: "640px"
     }
@@ -77721,7 +77708,7 @@ void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
 }
 `;
-function setupWebgl$1(canvas3) {
+function setupWebgl$2(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH$1;
   canvas3.height = HEIGHT$1;
@@ -77750,12 +77737,12 @@ function setupWebgl$1(canvas3) {
     resources.deleteAll();
   };
 }
-const example$2 = {
+const example$4 = {
   id: "webgl-scissor",
   filename: "31-webgl-scissor.tsx",
   name: "WebGL scissor",
   description: "Renders only a small region of a gradient using gl.scissor",
-  Component: createCanvasComponent(setupWebgl$1, {
+  Component: createCanvasComponent(setupWebgl$2, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
@@ -77786,7 +77773,7 @@ void main() {
   }
 }
 `;
-function setupWebgl(canvas3) {
+function setupWebgl$1(canvas3) {
   const gl = getWebgl2Context(canvas3);
   canvas3.width = WIDTH;
   canvas3.height = HEIGHT;
@@ -77849,15 +77836,137 @@ function setupWebgl(canvas3) {
     resources.deleteAll();
   };
 }
-const example$1 = {
+const example$3 = {
   id: "webgl-scissor-perf",
   filename: "32-webgl-scissor-perf.tsx",
   name: "WebGL scissor perf test",
   description: "Renders a huge canvas with and without scissoring a single pixel to try to see any measurable evidence of performance differences. Answer: it does not, the discards might happen after the fragment shader",
-  Component: createCanvasComponent(setupWebgl, {
+  Component: createCanvasComponent(setupWebgl$1, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
+    }
+  })
+};
+const vertexShader = `#version 300 es
+precision highp float;
+
+in vec2 a_pos;
+in vec3 a_color;
+in vec2 a_vertexPos;
+out vec2 v_uv;
+out vec3 v_color;
+
+void main() {
+  gl_Position = vec4(a_pos + (a_vertexPos * .8), 0.0, 1.0);
+  v_uv = a_vertexPos;
+  v_color = a_color;
+}
+`;
+const fragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+in vec3 v_color;
+
+out vec4 outColor;
+
+void main() {
+  outColor = vec4(v_color, texture(u_image, v_uv).r);
+}
+`;
+function setupWebgl(canvas3, [image]) {
+  const gl = getWebgl2Context(canvas3);
+  updateCanvasSize$1(canvas3, gl);
+  gl.clearColor(0, 0, 0, 0);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
+  const resources = new WebGLResourceManager(gl);
+  const vao = resources.createVertexArray();
+  gl.bindVertexArray(vao);
+  const VERTEX_COUNT = 6;
+  createAttribute(gl, program, {
+    name: "a_vertexPos",
+    buffer: resources.createBuffer(new Float32Array([0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1])),
+    size: 2
+  });
+  const texture = uploadTexture(gl, resources.createTexture(), image, {
+    nearest: true
+  });
+  gl.useProgram(program);
+  const uniforms = getUniformLocations(gl, program, ["u_image"]);
+  gl.uniform1i(uniforms.u_image, 0);
+  const bufferData = [
+    -0.9,
+    0.1,
+    1,
+    1,
+    0,
+    -0.8,
+    0,
+    0,
+    1,
+    1,
+    -0.7,
+    -0.1,
+    1,
+    0,
+    1,
+    -0.65,
+    -0.15,
+    1,
+    1,
+    0,
+    -0.7,
+    -0.2,
+    0,
+    1,
+    1,
+    -0.75,
+    -0.25,
+    1,
+    0,
+    1
+  ];
+  const buffer = resources.createBuffer(new Float32Array(bufferData));
+  const ELEMENTS_PER_CHUNK = 5;
+  const BYTES_IN_FLOAT = 4;
+  createAttribute(gl, program, {
+    name: "a_pos",
+    buffer,
+    size: 2,
+    stride: ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT,
+    instanced: true
+  });
+  createAttribute(gl, program, {
+    name: "a_color",
+    buffer,
+    size: 3,
+    stride: ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT,
+    offset: 2 * BYTES_IN_FLOAT,
+    instanced: true
+  });
+  gl.useProgram(program);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.drawArraysInstanced(gl.TRIANGLES, 0, VERTEX_COUNT, bufferData.length / ELEMENTS_PER_CHUNK);
+  return () => {
+    unbindAll(gl);
+    resources.deleteAll();
+  };
+}
+const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAGBJREFUKFOVkEsNwEAIRAczawADqwZPoAYDGMBMGzalSQ9tuhzhZT4QgAPXiAiYGREBM+s1aAtqlTEGMvOhRiKy7MqmgDkn3P0G60aquqAGOkiDC/ql1ME/M221K++3P51AL08w00t2+wAAAABJRU5ErkJggg==";
+const example$2 = {
+  id: "webgl-overlay-transparent-textures",
+  filename: "33-webgl-overlay-transparent-textures.tsx",
+  name: "WebGL overlay transparent textures",
+  description: "Renders many transparent textured sprites on top of each other. Uses instancing.",
+  Component: createCanvasComponentWithImages(setupWebgl, [IMAGE], {
+    style: {
+      height: "640px"
     }
   })
 };
@@ -77874,12 +77983,20 @@ function shadertoy(config) {
   }
   const vertexShader2 = `#version 300 es
 
+uniform vec2 u_resolution;
+
 in vec2 a_pos;
 out vec2 v_uv;
+out vec2 v_clip;
+out vec2 v_view;
+out vec2 v_pixel;
 
 void main() {
   gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
   v_uv = a_pos;
+  v_clip = gl_Position.xy;
+  v_view = (v_clip * u_resolution) / u_resolution.y;
+  v_pixel = u_resolution * v_uv;
 }
 `;
   const fragmentShader2 = `#version 300 es
@@ -77889,6 +78006,9 @@ uniform vec2 u_resolution;
 uniform float u_time;
 
 in vec2 v_uv;
+in vec2 v_clip;
+in vec2 v_view;
+in vec2 v_pixel;
 out vec4 fragColor;
 
 ${config.shader}
@@ -77939,24 +78059,55 @@ ${config.shader}
   }
   return createCanvasComponent(setupWebgl2, { style });
 }
+const shader$1 = `
+void main() {
+  int phase = int(mod(u_time, 3.));
+  vec2 color;
+  if(phase == 0) {
+    color = v_uv;
+  } else if(phase == 1) {
+    color = v_clip;
+  } else {
+    color = v_view;
+  }
+  fragColor = vec4(color.x, 0., color.y, 1.);
+}
+`;
+const example$1 = {
+  id: "shadertoy-clone",
+  filename: "34-shadertoy-clone.tsx",
+  name: "Shadertoy clone",
+  description: "A shadertoy clone for easily writing frag shaders on full screen quads. Renders uv coords (0 - 1), then clip coords (-1 - 1), then view coords (-1 - 1 on y axis, aspect locked x axis)",
+  Component: shadertoy({
+    width: 128,
+    height: 64,
+    cssWidth: "640px",
+    shader: shader$1
+  })
+};
 const shader = `
 void main() {
-  fragColor = vec4(v_uv, sin(u_time), 1.0);
+  float r = mod((v_pixel.x) / 4., 1.);
+  float b = mod((v_pixel.y) / 4., 1.);
+  fragColor = vec4(r, 0., b, 1.);
 }
 `;
 const example = {
-  id: "shadertoy-clone",
-  filename: "33-shadertoy-clone.tsx",
-  name: "Webgl shadertoy clone",
-  description: "A shadertoy clone for easily writing frag shaders on full screen quads",
+  id: "shadertoy-exact-pixel",
+  filename: "35-shadertoy-exact-pixel.tsx",
+  name: "Shadertoy exact pixel",
+  description: "Accessing exact pixel coords in frag shader of shadertoy clone",
   Component: shadertoy({
-    width: 128,
-    height: 96,
-    cssWidth: "640px",
+    width: 16,
+    height: 16,
+    pixelated: true,
+    cssHeight: "320px",
     shader
   })
 };
 const all = [
+  example$z,
+  example$y,
   example$x,
   example$w,
   example$v,
@@ -79099,13 +79250,13 @@ function List() {
       columnNumber: 7
     }, this), "Ideas for later", /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("ol", {
       children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "3D textures vs sprite sheets"
+        children: "SDF sprites"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 85,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "stacking transparent textures test"
+        children: "Raymarching"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 86,
