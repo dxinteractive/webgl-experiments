@@ -4,9 +4,13 @@ import {
   getUniformLocations,
   getWebgl2Context,
   unbindAll,
+  uploadTexture,
   WebGLResourceManager,
 } from "./webgl-utils";
-import { createCanvasComponent } from "./create-canvas-component";
+import {
+  createCanvasComponent,
+  createCanvasComponentWithImages,
+} from "./create-canvas-component";
 
 type ShadertoyConfig = {
   shader: string;
@@ -15,6 +19,7 @@ type ShadertoyConfig = {
   cssWidth?: string;
   cssHeight?: string;
   pixelated?: boolean;
+  image?: string;
 };
 
 export function shadertoy(config: ShadertoyConfig) {
@@ -23,7 +28,7 @@ export function shadertoy(config: ShadertoyConfig) {
     style.width = config.cssWidth;
   }
   if (config.cssHeight) {
-    style.width = config.cssHeight;
+    style.height = config.cssHeight;
   }
   if (config.pixelated) {
     style.imageRendering = "pixelated";
@@ -53,6 +58,7 @@ precision highp float;
 
 uniform vec2 u_resolution;
 uniform float u_time;
+uniform sampler2D u_image;
 
 in vec2 v_uv;
 in vec2 v_clip;
@@ -63,13 +69,19 @@ out vec4 outColor;
 ${config.shader}
 `;
 
-  function setupWebgl(canvas: HTMLCanvasElement): () => void {
+  function setupWebgl(
+    canvas: HTMLCanvasElement,
+    images: HTMLImageElement[] = []
+  ): () => void {
     const gl = getWebgl2Context(canvas);
 
     canvas.width = config.width;
     canvas.height = config.height;
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
+
+    // correct gl's flipped y when unpacking texture
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
     // program
     const program = createProgramForShaders(gl, vertexShader, fragmentShader);
@@ -91,16 +103,26 @@ ${config.shader}
 
     gl.bindVertexArray(null);
 
+    // texture
+    if (images.length > 0) {
+      gl.activeTexture(gl.TEXTURE0);
+      const texture = uploadTexture(gl, resources.createTexture(), images[0], {
+        nearest: true,
+      });
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+    }
+
     // uniforms
     gl.useProgram(program);
     const uniforms = getUniformLocations(
       gl,
       program,
-      ["u_resolution", "u_time"],
+      ["u_resolution", "u_time", "u_image"],
       true
     );
     gl.uniform2f(uniforms.u_resolution, config.width, config.height);
     gl.uniform1f(uniforms.u_time, 0);
+    gl.uniform1i(uniforms.u_image, 0);
 
     // render
     let rafId = 0;
@@ -125,5 +147,7 @@ ${config.shader}
     };
   }
 
-  return createCanvasComponent(setupWebgl, { style });
+  return config.image
+    ? createCanvasComponentWithImages(setupWebgl, [config.image], { style })
+    : createCanvasComponent((a) => setupWebgl(a), { style });
 }

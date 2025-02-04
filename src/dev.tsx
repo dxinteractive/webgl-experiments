@@ -82,6 +82,8 @@ function List() {
       <br />
       Ideas for later
       <ol>
+        <li>blur effect</li>
+        <li>scatter-sample blur effect</li>
         <li>SDF textures</li>
         <li>Raymarch lighting, shadows, highlights, reflections</li>
         <li>Refract a texture</li>
