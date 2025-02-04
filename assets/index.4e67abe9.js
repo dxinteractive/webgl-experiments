@@ -23716,7 +23716,7 @@ function Component$g() {
     columnNumber: 10
   }, this);
 }
-const example$B = {
+const example$C = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
@@ -23755,7 +23755,7 @@ function Component$f() {
     columnNumber: 10
   }, this);
 }
-const example$A = {
+const example$B = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
@@ -23796,7 +23796,7 @@ function Component$e() {
     columnNumber: 10
   }, this);
 }
-const example$z = {
+const example$A = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
@@ -46994,7 +46994,7 @@ function Component$d() {
     columnNumber: 10
   }, this);
 }
-const example$y = {
+const example$z = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
@@ -47045,7 +47045,7 @@ function Component$c() {
     columnNumber: 10
   }, this);
 }
-const example$x = {
+const example$y = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
@@ -47095,7 +47095,7 @@ function Component$b() {
     columnNumber: 10
   }, this);
 }
-const example$w = {
+const example$x = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
@@ -47136,7 +47136,7 @@ function Component$a() {
     columnNumber: 10
   }, this);
 }
-const example$v = {
+const example$w = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
@@ -47173,7 +47173,7 @@ function Component$9() {
     columnNumber: 10
   }, this);
 }
-const example$u = {
+const example$v = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
@@ -64726,7 +64726,7 @@ function Component$8() {
     columnNumber: 10
   }, this);
 }
-const example$t = {
+const example$u = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
@@ -64779,7 +64779,7 @@ function Component$7() {
     columnNumber: 10
   }, this);
 }
-const example$s = {
+const example$t = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
@@ -64845,7 +64845,7 @@ function Component$6() {
     }, this)]
   }, void 0, true);
 }
-const example$r = {
+const example$s = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
@@ -64894,7 +64894,7 @@ function Component$5() {
     columnNumber: 10
   }, this);
 }
-const example$q = {
+const example$r = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
@@ -75459,7 +75459,7 @@ function Component$4() {
     columnNumber: 10
   }, this);
 }
-const example$p = {
+const example$q = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
@@ -75563,7 +75563,7 @@ function Slider$1({
     columnNumber: 5
   }, this);
 }
-const example$o = {
+const example$p = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
@@ -75667,7 +75667,7 @@ function Slider({
     columnNumber: 5
   }, this);
 }
-const example$n = {
+const example$o = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
@@ -75997,7 +75997,7 @@ function Component$1() {
     columnNumber: 10
   }, this);
 }
-const example$m = {
+const example$n = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
@@ -76117,7 +76117,7 @@ function setupWebgl$h(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$l = {
+const example$m = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
@@ -76251,7 +76251,7 @@ function setupWebgl$g(canvas3) {
   });
   return () => cleanup();
 }
-const example$k = {
+const example$l = {
   id: "webgl-texture",
   filename: "17-webgl-texture.tsx",
   name: "WebGL texture",
@@ -76381,7 +76381,7 @@ function setupWebgl$f(canvas3) {
   });
   return () => cleanup();
 }
-const example$j = {
+const example$k = {
   id: "webgl-texture-upscale",
   filename: "18-webgl-texture-upscale.tsx",
   name: "WebGL texture upscale",
@@ -76460,7 +76460,7 @@ function setupWebgl$e(canvas3, images) {
   };
 }
 const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$i = {
+const example$j = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
@@ -76532,7 +76532,7 @@ function setupWebgl$d(canvas3) {
     resources.deleteAll();
   };
 }
-const example$h = {
+const example$i = {
   id: "webgl-texture-data-in",
   filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
@@ -76640,7 +76640,7 @@ function setupWebgl$c(canvas3) {
     resources.deleteAll();
   };
 }
-const example$g = {
+const example$h = {
   id: "webgl-texture-floats",
   filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
@@ -76735,7 +76735,7 @@ function setupWebgl$b(canvas3, [image]) {
   };
 }
 const IMAGE$1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
-const example$f = {
+const example$g = {
   id: "webgl-extract-framebuffer",
   filename: "22-webgl-extract-framebuffer.tsx",
   name: "WebGL extract framebuffer",
@@ -76843,7 +76843,7 @@ function setupWebgl$a(canvas3) {
     resources.deleteAll();
   };
 }
-const example$e = {
+const example$f = {
   id: "webgl-buffer-interleaved",
   filename: "23-webgl-buffer-interleaved.tsx",
   name: "WebGL buffer interleaved",
@@ -76941,7 +76941,7 @@ function setupWebgl$9(canvas3) {
     resources.deleteAll();
   };
 }
-const example$d = {
+const example$e = {
   id: "webgl-instancing",
   filename: "24-webgl-instancing.tsx",
   name: "WebGL buffer instancing",
@@ -77139,7 +77139,7 @@ function Component() {
     columnNumber: 5
   }, this);
 }
-const example$c = {
+const example$d = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL",
@@ -77249,7 +77249,7 @@ function setupWebgl$7(canvas3) {
     resources.deleteAll();
   };
 }
-const example$b = {
+const example$c = {
   id: "webgl-draw-elements",
   filename: "26-webgl-draw-elements.tsx",
   name: "WebGL elements mesh",
@@ -77343,7 +77343,7 @@ function setupWebgl$6(canvas3, [image1, image2]) {
   };
 }
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$a = {
+const example$b = {
   id: "webgl-texture-patch",
   filename: "27-webgl-texture-patch.tsx",
   name: "WebGL texture patch",
@@ -77460,7 +77460,7 @@ function setupWebgl$5(canvas3) {
     resources.deleteAll();
   };
 }
-const example$9 = {
+const example$a = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
@@ -77548,7 +77548,7 @@ function setupWebgl$4(canvas3, [image1, image2, image3]) {
   };
 }
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$8 = {
+const example$9 = {
   id: "webgl-texture-many-samplers",
   filename: "29-webgl-texture-many-samplers.tsx",
   name: "WebGL texture many samplers",
@@ -77675,7 +77675,7 @@ function setupWebgl$3(canvas3, [image]) {
   };
 }
 const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII="];
-const example$7 = {
+const example$8 = {
   id: "webgl-draw-elements-textured",
   filename: "30-webgl-draw-elements-textured.tsx",
   name: "WebGL elements textured mesh",
@@ -77737,7 +77737,7 @@ function setupWebgl$2(canvas3) {
     resources.deleteAll();
   };
 }
-const example$6 = {
+const example$7 = {
   id: "webgl-scissor",
   filename: "31-webgl-scissor.tsx",
   name: "WebGL scissor",
@@ -77836,7 +77836,7 @@ function setupWebgl$1(canvas3) {
     resources.deleteAll();
   };
 }
-const example$5 = {
+const example$6 = {
   id: "webgl-scissor-perf",
   filename: "32-webgl-scissor-perf.tsx",
   name: "WebGL scissor perf test",
@@ -77959,7 +77959,7 @@ function setupWebgl(canvas3, [image]) {
   };
 }
 const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAGBJREFUKFOVkEsNwEAIRAczawADqwZPoAYDGMBMGzalSQ9tuhzhZT4QgAPXiAiYGREBM+s1aAtqlTEGMvOhRiKy7MqmgDkn3P0G60aquqAGOkiDC/ql1ME/M221K++3P51AL08w00t2+wAAAABJRU5ErkJggg==";
-const example$4 = {
+const example$5 = {
   id: "webgl-overlay-transparent-textures",
   filename: "33-webgl-overlay-transparent-textures.tsx",
   name: "WebGL overlay transparent textures",
@@ -77976,7 +77976,7 @@ function shadertoy(config) {
     style.width = config.cssWidth;
   }
   if (config.cssHeight) {
-    style.width = config.cssHeight;
+    style.height = config.cssHeight;
   }
   if (config.pixelated) {
     style.imageRendering = "pixelated";
@@ -78004,6 +78004,7 @@ precision highp float;
 
 uniform vec2 u_resolution;
 uniform float u_time;
+uniform sampler2D u_image;
 
 in vec2 v_uv;
 in vec2 v_clip;
@@ -78013,12 +78014,13 @@ out vec4 outColor;
 
 ${config.shader}
 `;
-  function setupWebgl2(canvas3) {
+  function setupWebgl2(canvas3, images = []) {
     const gl = getWebgl2Context(canvas3);
     canvas3.width = config.width;
     canvas3.height = config.height;
     gl.viewport(0, 0, canvas3.width, canvas3.height);
     gl.clearColor(0, 0, 0, 0);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     const program = createProgramForShaders$1(gl, vertexShader2, fragmentShader2);
     const resources = new WebGLResourceManager(gl);
     const vao = resources.createVertexArray();
@@ -78031,15 +78033,23 @@ ${config.shader}
       size: 2
     });
     gl.bindVertexArray(null);
+    if (images.length > 0) {
+      gl.activeTexture(gl.TEXTURE0);
+      const texture = uploadTexture(gl, resources.createTexture(), images[0], {
+        nearest: true
+      });
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+    }
     gl.useProgram(program);
     const uniforms = getUniformLocations(
       gl,
       program,
-      ["u_resolution", "u_time"],
+      ["u_resolution", "u_time", "u_image"],
       true
     );
     gl.uniform2f(uniforms.u_resolution, config.width, config.height);
     gl.uniform1f(uniforms.u_time, 0);
+    gl.uniform1i(uniforms.u_image, 0);
     let rafId = 0;
     const startTime = Date.now();
     const render = () => {
@@ -78057,9 +78067,9 @@ ${config.shader}
       resources.deleteAll();
     };
   }
-  return createCanvasComponent(setupWebgl2, { style });
+  return config.image ? createCanvasComponentWithImages(setupWebgl2, [config.image], { style }) : createCanvasComponent((a2) => setupWebgl2(a2), { style });
 }
-const shader$3 = `
+const shader$4 = `
 void main() {
   int phase = int(mod(u_time, 3.));
   vec2 color;
@@ -78073,7 +78083,7 @@ void main() {
   outColor = vec4(color.x, 0., color.y, 1.);
 }
 `;
-const example$3 = {
+const example$4 = {
   id: "shadertoy-clone",
   filename: "34-shadertoy-clone.tsx",
   name: "Shadertoy clone",
@@ -78082,17 +78092,17 @@ const example$3 = {
     width: 128,
     height: 64,
     cssWidth: "640px",
-    shader: shader$3
+    shader: shader$4
   })
 };
-const shader$2 = `
+const shader$3 = `
 void main() {
   float r = mod((v_pixel.x) / 4., 1.);
   float b = mod((v_pixel.y) / 4., 1.);
   outColor = vec4(r, 0., b, 1.);
 }
 `;
-const example$2 = {
+const example$3 = {
   id: "shadertoy-exact-pixel",
   filename: "35-shadertoy-exact-pixel.tsx",
   name: "Shadertoy exact pixel",
@@ -78102,10 +78112,10 @@ const example$2 = {
     height: 16,
     pixelated: true,
     cssHeight: "320px",
-    shader: shader$2
+    shader: shader$3
   })
 };
-const shader$1 = `
+const shader$2 = `
 #define RAYMARCH_MAX_STEPS 100
 #define RAYMARCH_MAX_DIST 100.
 #define RAYMARCH_SURF_DIST .01
@@ -78159,7 +78169,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example$1 = {
+const example$2 = {
   id: "raymarching-metaballs",
   filename: "36-raymarching-metaballs.tsx",
   name: "Shadertoy raymarching metaballs",
@@ -78168,10 +78178,10 @@ const example$1 = {
     width: 800,
     height: 600,
     cssWidth: "800px",
-    shader: shader$1
+    shader: shader$2
   })
 };
-const shader = `
+const shader$1 = `
 #define RAYMARCH_MAX_STEPS 100
 #define RAYMARCH_MAX_DIST 100.
 #define RAYMARCH_SURF_DIST .01
@@ -78257,7 +78267,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example = {
+const example$1 = {
   id: "raymarching-metaballs-with-light",
   filename: "37-raymarching-metaballs-with-light.tsx",
   name: "Shadertoy raymarching metaballs with light",
@@ -78266,10 +78276,315 @@ const example = {
     width: 800,
     height: 600,
     cssWidth: "800px",
+    shader: shader$1
+  })
+};
+const shader = `
+# copied from https://www.shadertoy.com/view/tdfyD2
+
+#define LUMINANCE_WEIGHT 1.0
+#define EQUAL_COLOR_TOLERANCE 20.0/255.0
+#define DOMINANT_DIRECTION_THRESHOLD 2.6
+#define STEEP_DIRECTION_THRESHOLD 4.6
+
+float DistYCbCr(const vec3 pixA, const vec3 pixB)
+{
+	const vec3 w = vec3(0.2627, 0.6780, 0.0593);
+	const float scaleB = 0.5 / (1.0 - w.b);
+	const float scaleR = 0.5 / (1.0 - w.r);
+	vec3 diff = pixA - pixB;
+	float Y = dot(diff, w);
+	float Cb = scaleB * (diff.b - Y);
+	float Cr = scaleR * (diff.r - Y);
+		
+	return sqrt( ((LUMINANCE_WEIGHT * Y) * (LUMINANCE_WEIGHT * Y)) + (Cb * Cb) + (Cr * Cr) );
+}
+	
+bool IsPixEqual(const vec3 pixA, const vec3 pixB)
+{
+	return (DistYCbCr(pixA, pixB) < EQUAL_COLOR_TOLERANCE);
+}
+float reduce(const vec3 color)
+{
+	return dot(color, vec3(65536.0, 256.0, 1.0));
+}	
+bool IsBlendingNeeded(const int blend0,const int blend1,const int blend2,const int blend3)
+{
+	//return any(!(blend == int4(BLEND_NONE,BLEND_NONE,BLEND_NONE,BLEND_NONE)));
+    return blend0 != 0||blend1 != 0||blend2 != 0||blend3 != 0;
+}
+	
+	//---------------------------------------
+	// Input Pixel Mapping:  --|21|22|23|--
+	//                       19|06|07|08|09
+	//                       18|05|00|01|10
+	//                       17|04|03|02|11
+	//                       --|15|14|13|--
+	//
+	// Output Pixel Mapping:  06|07|08|09
+	//                        05|00|01|10
+	//                        04|03|02|11
+	//                        15|14|13|12
+
+
+/* FRAGMENT SHADER */
+vec3 four_xBRZ(sampler2D image, vec2 texture_size, vec2 texCoord)
+{
+
+	vec2 f = fract(texCoord*texture_size);
+
+	//---------------------------------------
+	// Input Pixel Mapping:  20|21|22|23|24
+	//                       19|06|07|08|09
+	//                       18|05|00|01|10
+	//                       17|04|03|02|11
+	//                       16|15|14|13|12
+    float dx = 1.0/texture_size.x;
+    float dy = 1.0/texture_size.y;
+    vec4 t1 = texCoord.xxxy + vec4( -dx, 0, dx,-2.0*dy); // A1 B1 C1
+	vec4 t2 = texCoord.xxxy + vec4( -dx, 0, dx, -dy); // A B C
+	vec4 t3 = texCoord.xxxy + vec4( -dx, 0, dx, 0); // D E F
+	vec4 t4 = texCoord.xxxy + vec4( -dx, 0, dx, dy); // G H I
+	vec4 t5 = texCoord.xxxy + vec4( -dx, 0, dx, 2.0*dy); // G5 H5 I5
+	vec4 t6 = texCoord.xyyy + vec4(-2.0*dx,-dy, 0, dy); // A0 D0 G0
+	vec4 t7 = texCoord.xyyy + vec4( 2.0*dx,-dy, 0, dy); // C4 F4 I4
+	vec3 src[25];
+  
+	src[21] = texture(image, floor(t1.xw*texture_size)/texture_size).rgb;
+	src[22] = texture(image, floor(t1.yw*texture_size)/texture_size).rgb;
+	src[23] = texture(image, floor(t1.zw*texture_size)/texture_size).rgb;
+	src[ 6] = texture(image, floor(t2.xw*texture_size)/texture_size).rgb;
+	src[ 7] = texture(image, floor(t2.yw*texture_size)/texture_size).rgb;
+	src[ 8] = texture(image, floor(t2.zw*texture_size)/texture_size).rgb;
+	src[ 5] = texture(image, floor(t3.xw*texture_size)/texture_size).rgb;
+	src[ 0] = texture(image, floor(t3.yw*texture_size)/texture_size).rgb;
+	src[ 1] = texture(image, floor(t3.zw*texture_size)/texture_size).rgb;
+	src[ 4] = texture(image, floor(t4.xw*texture_size)/texture_size).rgb;
+	src[ 3] = texture(image, floor(t4.yw*texture_size)/texture_size).rgb;
+	src[ 2] = texture(image, floor(t4.zw*texture_size)/texture_size).rgb;
+	src[15] = texture(image, floor(t5.xw*texture_size)/texture_size).rgb;
+	src[14] = texture(image, floor(t5.yw*texture_size)/texture_size).rgb;
+	src[13] = texture(image, floor(t5.zw*texture_size)/texture_size).rgb;
+	src[19] = texture(image, floor(t6.xy*texture_size)/texture_size).rgb;
+	src[18] = texture(image, floor(t6.xz*texture_size)/texture_size).rgb;
+	src[17] = texture(image, floor(t6.xw*texture_size)/texture_size).rgb;
+	src[ 9] = texture(image, floor(t7.xy*texture_size)/texture_size).rgb;
+	src[10] = texture(image, floor(t7.xz*texture_size)/texture_size).rgb;
+	src[11] = texture(image, floor(t7.xw*texture_size)/texture_size).rgb;
+
+		float v[9];
+		v[0] = reduce(src[0]);
+		v[1] = reduce(src[1]);
+		v[2] = reduce(src[2]);
+		v[3] = reduce(src[3]);
+		v[4] = reduce(src[4]);
+		v[5] = reduce(src[5]);
+		v[6] = reduce(src[6]);
+		v[7] = reduce(src[7]);
+		v[8] = reduce(src[8]);
+		
+		int blendResult0 = 0;
+		int blendResult1 = 1;
+		int blendResult2 = 2;
+		int blendResult3 = 3;
+		
+		// Preprocess corners
+		// Pixel Tap Mapping: --|--|--|--|--
+		//                    --|--|07|08|--
+		//                    --|05|00|01|10
+		//                    --|04|03|02|11
+		//                    --|--|14|13|--
+		
+		// Corner (1, 1)
+		if ( !((v[0] == v[1] && v[3] == v[2]) || (v[0] == v[3] && v[1] == v[2])) )
+		{
+			float dist_03_01 = DistYCbCr(src[ 4], src[ 0]) + DistYCbCr(src[ 0], src[ 8]) + DistYCbCr(src[14], src[ 2]) + DistYCbCr(src[ 2], src[10]) + (4.0 * DistYCbCr(src[ 3], src[ 1]));
+			float dist_00_02 = DistYCbCr(src[ 5], src[ 3]) + DistYCbCr(src[ 3], src[13]) + DistYCbCr(src[ 7], src[ 1]) + DistYCbCr(src[ 1], src[11]) + (4.0 * DistYCbCr(src[ 0], src[ 2]));
+			bool dominantGradient = (DOMINANT_DIRECTION_THRESHOLD * dist_03_01) < dist_00_02;
+			blendResult2 = ((dist_03_01 < dist_00_02) && (v[0] != v[1]) && (v[0] != v[3])) ? ((dominantGradient) ? 2 : 1) : 0;
+		}
+		
+		
+		// Pixel Tap Mapping: --|--|--|--|--
+		//                    --|06|07|--|--
+		//                    18|05|00|01|--
+		//                    17|04|03|02|--
+		//                    --|15|14|--|--
+		// Corner (0, 1)
+		if ( !((v[5] == v[0] && v[4] == v[3]) || (v[5] == v[4] && v[0] == v[3])) )
+		{
+			float dist_04_00 = DistYCbCr(src[17], src[ 5]) + DistYCbCr(src[ 5], src[ 7]) + DistYCbCr(src[15], src[ 3]) + DistYCbCr(src[ 3], src[ 1]) + (4.0 * DistYCbCr(src[ 4], src[ 0]));
+			float dist_05_03 = DistYCbCr(src[18], src[ 4]) + DistYCbCr(src[ 4], src[14]) + DistYCbCr(src[ 6], src[ 0]) + DistYCbCr(src[ 0], src[ 2]) + (4.0 * DistYCbCr(src[ 5], src[ 3]));
+			bool dominantGradient = (DOMINANT_DIRECTION_THRESHOLD * dist_05_03) < dist_04_00;
+			blendResult3 = ((dist_04_00 > dist_05_03) && (v[0] != v[5]) && (v[0] != v[3])) ? ((dominantGradient) ? 2 : 1) : 0;
+		}
+		
+		// Pixel Tap Mapping: --|--|22|23|--
+		//                    --|06|07|08|09
+		//                    --|05|00|01|10
+		//                    --|--|03|02|--
+		//                    --|--|--|--|--
+		// Corner (1, 0)
+		if ( !((v[7] == v[8] && v[0] == v[1]) || (v[7] == v[0] && v[8] == v[1])) )
+		{
+			float dist_00_08 = DistYCbCr(src[ 5], src[ 7]) + DistYCbCr(src[ 7], src[23]) + DistYCbCr(src[ 3], src[ 1]) + DistYCbCr(src[ 1], src[ 9]) + (4.0 * DistYCbCr(src[ 0], src[ 8]));
+			float dist_07_01 = DistYCbCr(src[ 6], src[ 0]) + DistYCbCr(src[ 0], src[ 2]) + DistYCbCr(src[22], src[ 8]) + DistYCbCr(src[ 8], src[10]) + (4.0 * DistYCbCr(src[ 7], src[ 1]));
+			bool dominantGradient = (DOMINANT_DIRECTION_THRESHOLD * dist_07_01) < dist_00_08;
+			blendResult1 = ((dist_00_08 > dist_07_01) && (v[0] != v[7]) && (v[0] != v[1])) ? ((dominantGradient) ? 2 : 1) : 0;
+		}
+		
+		// Pixel Tap Mapping: --|21|22|--|--
+		//                    19|06|07|08|--
+		//                    18|05|00|01|--
+		//                    --|04|03|--|--
+		//                    --|--|--|--|--
+		// Corner (0, 0)
+		if ( !((v[6] == v[7] && v[5] == v[0]) || (v[6] == v[5] && v[7] == v[0])) )
+		{
+			float dist_05_07 = DistYCbCr(src[18], src[ 6]) + DistYCbCr(src[ 6], src[22]) + DistYCbCr(src[ 4], src[ 0]) + DistYCbCr(src[ 0], src[ 8]) + (4.0 * DistYCbCr(src[ 5], src[ 7]));
+			float dist_06_00 = DistYCbCr(src[19], src[ 5]) + DistYCbCr(src[ 5], src[ 3]) + DistYCbCr(src[21], src[ 7]) + DistYCbCr(src[ 7], src[ 1]) + (4.0 * DistYCbCr(src[ 6], src[ 0]));
+			bool dominantGradient = (DOMINANT_DIRECTION_THRESHOLD * dist_05_07) < dist_06_00;
+			blendResult0 = ((dist_05_07 < dist_06_00) && (v[0] != v[5]) && (v[0] != v[7])) ? ((dominantGradient) ? 2 : 1) : 0;
+		}
+		
+		vec3 dst[16];
+		dst[ 0] = src[0];
+		dst[ 1] = src[0];
+		dst[ 2] = src[0];
+		dst[ 3] = src[0];
+		dst[ 4] = src[0];
+		dst[ 5] = src[0];
+		dst[ 6] = src[0];
+		dst[ 7] = src[0];
+		dst[ 8] = src[0];
+		dst[ 9] = src[0];
+		dst[10] = src[0];
+		dst[11] = src[0];
+		dst[12] = src[0];
+		dst[13] = src[0];
+		dst[14] = src[0];
+		dst[15] = src[0];
+		
+		// Scale pixel
+		if (IsBlendingNeeded(blendResult0,blendResult1,blendResult2,blendResult3))
+		{
+			float dist_01_04 = DistYCbCr(src[1], src[4]);
+			float dist_03_08 = DistYCbCr(src[3], src[8]);
+			bool haveShallowLine = (STEEP_DIRECTION_THRESHOLD * dist_01_04 <= dist_03_08) && (v[0] != v[4]) && (v[5] != v[4]);
+			bool haveSteepLine   = (STEEP_DIRECTION_THRESHOLD * dist_03_08 <= dist_01_04) && (v[0] != v[8]) && (v[7] != v[8]);
+			bool needBlend = (blendResult2 != 0);
+			bool doLineBlend = (  blendResult2 >= 2 ||
+							   !((blendResult1 != 0 && !IsPixEqual(src[0], src[4])) ||
+								 (blendResult3 != 0 && !IsPixEqual(src[0], src[8])) ||
+								 (IsPixEqual(src[4], src[3]) && IsPixEqual(src[3], src[2]) && IsPixEqual(src[2], src[1]) && IsPixEqual(src[1], src[8]) && !IsPixEqual(src[0], src[2])) ) );
+			
+			vec3 blendPix = ( DistYCbCr(src[0], src[1]) <= DistYCbCr(src[0], src[3]) ) ? src[1] : src[3];
+			dst[ 2] = mix(dst[ 2], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 1.0/3.0 : 0.25) : ((haveSteepLine) ? 0.25 : 0.00)) : 0.00);
+			dst[ 9] = mix(dst[ 9], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.00);
+			dst[10] = mix(dst[10], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.00);
+			dst[11] = mix(dst[11], blendPix, (needBlend) ? ((doLineBlend) ? ((haveSteepLine) ? 1.00 : ((haveShallowLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[12] = mix(dst[12], blendPix, (needBlend) ? ((doLineBlend) ? 1.00 : 0.6848532563) : 0.00);
+			dst[13] = mix(dst[13], blendPix, (needBlend) ? ((doLineBlend) ? ((haveShallowLine) ? 1.00 : ((haveSteepLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[14] = mix(dst[14], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.75 : 0.00);
+			dst[15] = mix(dst[15], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.25 : 0.00);
+			
+			
+			dist_01_04 = DistYCbCr(src[7], src[2]);
+			dist_03_08 = DistYCbCr(src[1], src[6]);
+			haveShallowLine = (STEEP_DIRECTION_THRESHOLD * dist_01_04 <= dist_03_08) && (v[0] != v[2]) && (v[3] != v[2]);
+			haveSteepLine   = (STEEP_DIRECTION_THRESHOLD * dist_03_08 <= dist_01_04) && (v[0] != v[6]) && (v[5] != v[6]);
+			needBlend = (blendResult1 != 0);
+			doLineBlend = (  blendResult1 >= 2 ||
+						  !((blendResult0 != 0 && !IsPixEqual(src[0], src[2])) ||
+							(blendResult2 != 0 && !IsPixEqual(src[0], src[6])) ||
+							(IsPixEqual(src[2], src[1]) && IsPixEqual(src[1], src[8]) && IsPixEqual(src[8], src[7]) && IsPixEqual(src[7], src[6]) && !IsPixEqual(src[0], src[8])) ) );
+			
+			blendPix = ( DistYCbCr(src[0], src[7]) <= DistYCbCr(src[0], src[1]) ) ? src[7] : src[1];
+			dst[ 1] = mix(dst[ 1], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 1.0/3.0 : 0.25) : ((haveSteepLine) ? 0.25 : 0.00)) : 0.00);
+			dst[ 6] = mix(dst[ 6], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.00);
+			dst[ 7] = mix(dst[ 7], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.00);
+			dst[ 8] = mix(dst[ 8], blendPix, (needBlend) ? ((doLineBlend) ? ((haveSteepLine) ? 1.00 : ((haveShallowLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[ 9] = mix(dst[ 9], blendPix, (needBlend) ? ((doLineBlend) ? 1.00 : 0.6848532563) : 0.00);
+			dst[10] = mix(dst[10], blendPix, (needBlend) ? ((doLineBlend) ? ((haveShallowLine) ? 1.00 : ((haveSteepLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[11] = mix(dst[11], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.75 : 0.00);
+			dst[12] = mix(dst[12], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.25 : 0.00);
+			
+			
+			dist_01_04 = DistYCbCr(src[5], src[8]);
+			dist_03_08 = DistYCbCr(src[7], src[4]);
+			haveShallowLine = (STEEP_DIRECTION_THRESHOLD * dist_01_04 <= dist_03_08) && (v[0] != v[8]) && (v[1] != v[8]);
+			haveSteepLine   = (STEEP_DIRECTION_THRESHOLD * dist_03_08 <= dist_01_04) && (v[0] != v[4]) && (v[3] != v[4]);
+			needBlend = (blendResult0 != 0);
+			doLineBlend = (  blendResult0 >= 2 ||
+						  !((blendResult3 != 0 && !IsPixEqual(src[0], src[8])) ||
+							(blendResult1 != 0 && !IsPixEqual(src[0], src[4])) ||
+							(IsPixEqual(src[8], src[7]) && IsPixEqual(src[7], src[6]) && IsPixEqual(src[6], src[5]) && IsPixEqual(src[5], src[4]) && !IsPixEqual(src[0], src[6])) ) );
+			
+			blendPix = ( DistYCbCr(src[0], src[5]) <= DistYCbCr(src[0], src[7]) ) ? src[5] : src[7];
+			dst[ 0] = mix(dst[ 0], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 1.0/3.0 : 0.25) : ((haveSteepLine) ? 0.25 : 0.00)) : 0.00);
+			dst[15] = mix(dst[15], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.00);
+			dst[ 4] = mix(dst[ 4], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.00);
+			dst[ 5] = mix(dst[ 5], blendPix, (needBlend) ? ((doLineBlend) ? ((haveSteepLine) ? 1.00 : ((haveShallowLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[ 6] = mix(dst[ 6], blendPix, (needBlend) ? ((doLineBlend) ? 1.00 : 0.6848532563) : 0.00);
+			dst[ 7] = mix(dst[ 7], blendPix, (needBlend) ? ((doLineBlend) ? ((haveShallowLine) ? 1.00 : ((haveSteepLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[ 8] = mix(dst[ 8], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.75 : 0.00);
+			dst[ 9] = mix(dst[ 9], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.25 : 0.00);
+			
+			
+			dist_01_04 = DistYCbCr(src[3], src[6]);
+			dist_03_08 = DistYCbCr(src[5], src[2]);
+			haveShallowLine = (STEEP_DIRECTION_THRESHOLD * dist_01_04 <= dist_03_08) && (v[0] != v[6]) && (v[7] != v[6]);
+			haveSteepLine   = (STEEP_DIRECTION_THRESHOLD * dist_03_08 <= dist_01_04) && (v[0] != v[2]) && (v[1] != v[2]);
+			needBlend = (blendResult3 != 0);
+			doLineBlend = (  blendResult3 >= 2 ||
+						  !((blendResult2 != 0 && !IsPixEqual(src[0], src[6])) ||
+							(blendResult0 != 0 && !IsPixEqual(src[0], src[2])) ||
+							(IsPixEqual(src[6], src[5]) && IsPixEqual(src[5], src[4]) && IsPixEqual(src[4], src[3]) && IsPixEqual(src[3], src[2]) && !IsPixEqual(src[0], src[4])) ) );
+			
+			blendPix = ( DistYCbCr(src[0], src[3]) <= DistYCbCr(src[0], src[5]) ) ? src[3] : src[5];
+			dst[ 3] = mix(dst[ 3], blendPix, (needBlend && doLineBlend) ? ((haveShallowLine) ? ((haveSteepLine) ? 1.0/3.0 : 0.25) : ((haveSteepLine) ? 0.25 : 0.00)) : 0.00);
+			dst[12] = mix(dst[12], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.25 : 0.00);
+			dst[13] = mix(dst[13], blendPix, (needBlend && doLineBlend && haveSteepLine) ? 0.75 : 0.00);
+			dst[14] = mix(dst[14], blendPix, (needBlend) ? ((doLineBlend) ? ((haveSteepLine) ? 1.00 : ((haveShallowLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[15] = mix(dst[15], blendPix, (needBlend) ? ((doLineBlend) ? 1.00 : 0.6848532563) : 0.00);
+			dst[ 4] = mix(dst[ 4], blendPix, (needBlend) ? ((doLineBlend) ? ((haveShallowLine) ? 1.00 : ((haveSteepLine) ? 0.75 : 0.50)) : 0.08677704501) : 0.00);
+			dst[ 5] = mix(dst[ 5], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.75 : 0.00);
+			dst[ 6] = mix(dst[ 6], blendPix, (needBlend && doLineBlend && haveShallowLine) ? 0.25 : 0.00);
+		}
+		
+		vec3 res = mix( mix( mix( mix(dst[ 6], dst[ 7], step(0.25, f.x)), mix(dst[ 8], dst[ 9], step(0.75, f.x)), step(0.50, f.x)),
+		                             mix( mix(dst[ 5], dst[ 0], step(0.25, f.x)), mix(dst[ 1], dst[10], step(0.75, f.x)), step(0.50, f.x)), step(0.25, f.y)),
+		                        mix( mix( mix(dst[ 4], dst[ 3], step(0.25, f.x)), mix(dst[ 2], dst[11], step(0.75, f.x)), step(0.50, f.x)),
+		                             mix( mix(dst[15], dst[14], step(0.25, f.x)), mix(dst[13], dst[12], step(0.75, f.x)), step(0.50, f.x)), step(0.75, f.y)),
+		                                                                                                                                    step(0.50, f.y));
+
+
+		return res;
+}
+
+void main() {
+  vec3 color = texture(u_image, v_uv).rgb;
+  if(int(mod(u_time, 2.)) == 1) {
+    color = four_xBRZ(u_image, vec2(64., 32.), v_uv);
+  }
+  outColor = vec4(color, 1.);
+}
+`;
+const example = {
+  id: "4xbr-smoothing",
+  filename: "38-4xbr-smoothing.tsx",
+  name: "4xBR smoothing",
+  description: "4xBR smoothing like Animal Crossing uses, adapted from https://www.shadertoy.com/view/tdfyD2",
+  Component: shadertoy({
+    width: 64 * 8,
+    height: 32 * 8,
+    cssHeight: `${32 * 8}px`,
+    image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAABmklEQVRoge2YsW3EMAxFWd4ECeIB0qu5BbLLrZAtUqSSq2yUdYKDgTBFIEBhKH5Zlo8+2MUHjLNo8D9SlM80hAvvWeSdgLf+AWBm96TcACTze4JwdIB3At5yA0BEi7UqgOvzgyn0YCuWiHj6jIvVAwIho70lzfM7z1ZPCK4AigbPo3qtQVgPwMejLWS2EJcAIIO1nbAcADLaWRIAUhp4andkAFoH46YBEBHHGDnG+AeCBCDXdQHwxU+maozmSnEIQF7h3JgGIQGQa2YBQEZbJauSILR2gHyWrPwmAWgQNAClQagZROoGIPDJFAIQ+FSEgDpgOo9N5lsgEDK6VBqEBMA6AiUA5nJHyHubApBDqO2A0gDUftPudQHw8vZtCpnWYhAA7QSYxl/VtH5aOwsAMtpb8lUYDcAcgKyyvL47AGgrlLaBpuZToJToK9liZtOoFiPnQO1f3rWOwCFcmJDRXppTzVt+IHEBkCdc077amiVtXwVAW5x/MJXbAcWXqlVbQSu21fwQjo+iB4BmAPl2uGcdHeCdgLd2D+AHBk69MX7ZEDkAAAAASUVORK5CYII=",
     shader
   })
 };
 const all = [
+  example$C,
   example$B,
   example$A,
   example$z,
@@ -79416,64 +79731,76 @@ function List() {
       columnNumber: 7
     }, this), "Ideas for later", /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("ol", {
       children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "SDF textures"
+        children: "blur effect"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 85,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "Raymarch lighting, shadows, highlights, reflections"
+        children: "scatter-sample blur effect"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 86,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "Refract a texture"
+        children: "SDF textures"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 87,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "voronoi"
+        children: "Raymarch lighting, shadows, highlights, reflections"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 88,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "https://iquilezles.org/articles/"
+        children: "Refract a texture"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 89,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "perspective projection"
+        children: "voronoi"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 90,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "reflections of skybox"
+        children: "https://iquilezles.org/articles/"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 91,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "matrices + instancing"
+        children: "perspective projection"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 92,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "mipmaps test"
+        children: "reflections of skybox"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 93,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
-        children: "custom mipmaps"
+        children: "matrices + instancing"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 94,
+        columnNumber: 9
+      }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
+        children: "mipmaps test"
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 95,
+        columnNumber: 9
+      }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("li", {
+        children: "custom mipmaps"
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 96,
         columnNumber: 9
       }, this)]
     }, void 0, true, {
@@ -79491,12 +79818,12 @@ function ListHeader(props) {
       children: props.children
     }, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 107,
+      lineNumber: 109,
       columnNumber: 7
     }, this)
   }, void 0, false, {
     fileName: _jsxFileName,
-    lineNumber: 106,
+    lineNumber: 108,
     columnNumber: 5
   }, this);
 }
@@ -79510,7 +79837,7 @@ function ExperimentRoute() {
       children: ['Experiment "', id, '" not found']
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 117,
+      lineNumber: 119,
       columnNumber: 12
     }, this);
   }
@@ -79518,7 +79845,7 @@ function ExperimentRoute() {
     experiment
   }, void 0, false, {
     fileName: _jsxFileName,
-    lineNumber: 120,
+    lineNumber: 122,
     columnNumber: 10
   }, this);
 }
@@ -79539,11 +79866,11 @@ function ExperimentPage(props) {
         children: name
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 136,
+        lineNumber: 138,
         columnNumber: 9
       }, this), " - ", description, /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("br", {}, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 137,
+        lineNumber: 139,
         columnNumber: 9
       }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("a", {
         className: classes.link,
@@ -79551,16 +79878,16 @@ function ExperimentPage(props) {
         children: "source code"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 138,
+        lineNumber: 140,
         columnNumber: 9
       }, this)]
     }, void 0, true, {
       fileName: _jsxFileName,
-      lineNumber: 135,
+      lineNumber: 137,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Component2, {}, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 142,
+      lineNumber: 144,
       columnNumber: 7
     }, this)]
   }, void 0, true);
@@ -79573,7 +79900,7 @@ function Header(props) {
       children: props.children
     }, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 154,
+      lineNumber: 156,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
       className: classes.headerBack,
@@ -79582,17 +79909,17 @@ function Header(props) {
         children: "back"
       }, void 0, false, {
         fileName: _jsxFileName,
-        lineNumber: 156,
+        lineNumber: 158,
         columnNumber: 9
       }, this)
     }, void 0, false, {
       fileName: _jsxFileName,
-      lineNumber: 155,
+      lineNumber: 157,
       columnNumber: 7
     }, this)]
   }, void 0, true, {
     fileName: _jsxFileName,
-    lineNumber: 153,
+    lineNumber: 155,
     columnNumber: 5
   }, this);
 }
