@@ -40,6 +40,7 @@ import _36 from "./36-raymarching-metaballs";
 import _37 from "./37-raymarching-metaballs-with-light";
 import _38 from "./38-4xbr-smoothing";
 import _39 from "./39-webgl-framebuffer-sizing";
+import _40 from "./40-webgl-mat2d-transform";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -82,4 +83,5 @@ export const all: ExperimentDefinition[] = [
   _37,
   _38,
   _39,
+  _40,
 ];

@@ -61,6 +61,7 @@ export type AttributeOptions = {
   name: string;
   buffer: WebGLBuffer;
   size?: GLint;
+  matrixSize?: number;
   type?: GLenum;
   normalized?: boolean;
   stride?: number;
@@ -77,6 +78,7 @@ export function createAttribute(
     name,
     buffer,
     size = 1,
+    matrixSize = 1,
     type = gl.FLOAT,
     normalized = false,
     stride = 0,
@@ -86,14 +88,19 @@ export function createAttribute(
 
   const attributeLoc = gl.getAttribLocation(program, name);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.enableVertexAttribArray(attributeLoc);
-  gl.vertexAttribPointer(attributeLoc, size, type, normalized, stride, offset);
 
-  if (instanced) {
-    const count = typeof instanced === "boolean" ? 1 : instanced;
-    gl.vertexAttribDivisor(attributeLoc, count);
+  for (let i = 0; i < matrixSize; i++) {
+    const loc = attributeLoc + i;
+    const off = offset + i * matrixSize * 4;
+
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, size, type, normalized, stride, off);
+
+    if (instanced) {
+      const count = typeof instanced === "boolean" ? 1 : instanced;
+      gl.vertexAttribDivisor(loc, count);
+    }
   }
-
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
 }
 
