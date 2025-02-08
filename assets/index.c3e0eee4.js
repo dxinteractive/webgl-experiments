@@ -78177,7 +78177,7 @@ void main() {
 const example$4 = {
   id: "raymarching-metaballs",
   filename: "36-raymarching-metaballs.tsx",
-  name: "Shadertoy raymarching metaballs",
+  name: "Raymarching metaballs",
   description: "Raymarching test guided by artofcode's 'Raymarching for dummies' and kishimisu's 'An introduction to Raymarching'",
   Component: shadertoy({
     width: 800,
@@ -78275,7 +78275,7 @@ void main() {
 const example$3 = {
   id: "raymarching-metaballs-with-light",
   filename: "37-raymarching-metaballs-with-light.tsx",
-  name: "Shadertoy raymarching metaballs with light",
+  name: "Raymarching metaballs with light",
   description: "Raymarching lighting guided by artofcode's 'Raymarching for dummies'",
   Component: shadertoy({
     width: 800,
@@ -78285,7 +78285,7 @@ const example$3 = {
   })
 };
 const shader = `
-# copied from https://www.shadertoy.com/view/tdfyD2
+// copied from https://www.shadertoy.com/view/tdfyD2
 
 #define LUMINANCE_WEIGHT 1.0
 #define EQUAL_COLOR_TOLERANCE 20.0/255.0
