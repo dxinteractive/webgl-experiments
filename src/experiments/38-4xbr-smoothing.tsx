@@ -2,7 +2,7 @@ import type { ExperimentDefinition } from "../types";
 import { shadertoy } from "./utils/shadertoy";
 
 const shader = `
-# copied from https://www.shadertoy.com/view/tdfyD2
+// copied from https://www.shadertoy.com/view/tdfyD2
 
 #define LUMINANCE_WEIGHT 1.0
 #define EQUAL_COLOR_TOLERANCE 20.0/255.0
