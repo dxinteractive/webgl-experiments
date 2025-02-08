@@ -33,14 +33,6 @@ function Main() {
   return (
     <div className={classes.main}>
       <Outlet />
-      {/* <div className={classes.footer}>
-        <FooterLink href="https://pixijs.download/release/docs/index.html">
-          Pixijs docs
-        </FooterLink>
-        <FooterLink href="https://github.com/pixijs/pixijs">
-          Pixijs github
-        </FooterLink>
-      </div> */}
     </div>
   );
 }
@@ -85,7 +77,7 @@ function List() {
         <li>blur effect</li>
         <li>scatter-sample blur effect</li>
         <li>SDF textures</li>
-        <li>Raymarch lighting, shadows, highlights, reflections</li>
+        <li>Raymarch reflections</li>
         <li>Refract a texture</li>
         <li>voronoi</li>
         <li>https://iquilezles.org/articles/</li>

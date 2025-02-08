@@ -41,6 +41,7 @@ import _37 from "./37-raymarching-metaballs-with-light";
 import _38 from "./38-4xbr-smoothing";
 import _39 from "./39-webgl-framebuffer-sizing";
 import _40 from "./40-webgl-mat2d-transform";
+import _41 from "./41-texture-warp";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -84,4 +85,5 @@ export const all: ExperimentDefinition[] = [
   _38,
   _39,
   _40,
+  _41,
 ];
