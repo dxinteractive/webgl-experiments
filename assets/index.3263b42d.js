@@ -1048,29 +1048,29 @@ var react_development = { exports: {} };
         var dispatcher = resolveDispatcher();
         return dispatcher.useRef(initialValue);
       }
-      function useEffect(create, deps) {
+      function useEffect(create2, deps) {
         var dispatcher = resolveDispatcher();
-        return dispatcher.useEffect(create, deps);
+        return dispatcher.useEffect(create2, deps);
       }
-      function useInsertionEffect(create, deps) {
+      function useInsertionEffect(create2, deps) {
         var dispatcher = resolveDispatcher();
-        return dispatcher.useInsertionEffect(create, deps);
+        return dispatcher.useInsertionEffect(create2, deps);
       }
-      function useLayoutEffect(create, deps) {
+      function useLayoutEffect(create2, deps) {
         var dispatcher = resolveDispatcher();
-        return dispatcher.useLayoutEffect(create, deps);
+        return dispatcher.useLayoutEffect(create2, deps);
       }
       function useCallback(callback, deps) {
         var dispatcher = resolveDispatcher();
         return dispatcher.useCallback(callback, deps);
       }
-      function useMemo(create, deps) {
+      function useMemo(create2, deps) {
         var dispatcher = resolveDispatcher();
-        return dispatcher.useMemo(create, deps);
+        return dispatcher.useMemo(create2, deps);
       }
-      function useImperativeHandle(ref, create, deps) {
+      function useImperativeHandle(ref, create2, deps) {
         var dispatcher = resolveDispatcher();
-        return dispatcher.useImperativeHandle(ref, create, deps);
+        return dispatcher.useImperativeHandle(ref, create2, deps);
       }
       function useDebugValue(value, formatterFn) {
         {
@@ -11091,14 +11091,14 @@ var scheduler_development = {};
       var queue = workInProgress2.updateQueue;
       var currentQueue = current2.updateQueue;
       if (queue === currentQueue) {
-        var clone = {
+        var clone2 = {
           baseState: currentQueue.baseState,
           firstBaseUpdate: currentQueue.firstBaseUpdate,
           lastBaseUpdate: currentQueue.lastBaseUpdate,
           shared: currentQueue.shared,
           effects: currentQueue.effects
         };
-        workInProgress2.updateQueue = clone;
+        workInProgress2.updateQueue = clone2;
       }
     }
     function createUpdate(eventTime, lane) {
@@ -11171,7 +11171,7 @@ var scheduler_development = {};
           if (firstBaseUpdate !== null) {
             var update = firstBaseUpdate;
             do {
-              var clone = {
+              var clone2 = {
                 eventTime: update.eventTime,
                 lane: update.lane,
                 tag: update.tag,
@@ -11180,10 +11180,10 @@ var scheduler_development = {};
                 next: null
               };
               if (newLast === null) {
-                newFirst = newLast = clone;
+                newFirst = newLast = clone2;
               } else {
-                newLast.next = clone;
-                newLast = clone;
+                newLast.next = clone2;
+                newLast = clone2;
               }
               update = update.next;
             } while (update !== null);
@@ -11321,7 +11321,7 @@ var scheduler_development = {};
           var updateLane = update.lane;
           var updateEventTime = update.eventTime;
           if (!isSubsetOfLanes(renderLanes2, updateLane)) {
-            var clone = {
+            var clone2 = {
               eventTime: updateEventTime,
               lane: updateLane,
               tag: update.tag,
@@ -11330,10 +11330,10 @@ var scheduler_development = {};
               next: null
             };
             if (newLastBaseUpdate === null) {
-              newFirstBaseUpdate = newLastBaseUpdate = clone;
+              newFirstBaseUpdate = newLastBaseUpdate = clone2;
               newBaseState = newState;
             } else {
-              newLastBaseUpdate = newLastBaseUpdate.next = clone;
+              newLastBaseUpdate = newLastBaseUpdate.next = clone2;
             }
             newLanes = mergeLanes(newLanes, updateLane);
           } else {
@@ -12658,10 +12658,10 @@ var scheduler_development = {};
         return existingChildren;
       }
       function useFiber(fiber, pendingProps) {
-        var clone = createWorkInProgress(fiber, pendingProps);
-        clone.index = 0;
-        clone.sibling = null;
-        return clone;
+        var clone2 = createWorkInProgress(fiber, pendingProps);
+        clone2.index = 0;
+        clone2.sibling = null;
+        return clone2;
       }
       function placeChild(newFiber, lastPlacedIndex, newIndex) {
         newFiber.index = newIndex;
@@ -13732,7 +13732,7 @@ var scheduler_development = {};
         do {
           var updateLane = update.lane;
           if (!isSubsetOfLanes(renderLanes, updateLane)) {
-            var clone = {
+            var clone2 = {
               lane: updateLane,
               action: update.action,
               hasEagerState: update.hasEagerState,
@@ -13740,10 +13740,10 @@ var scheduler_development = {};
               next: null
             };
             if (newBaseQueueLast === null) {
-              newBaseQueueFirst = newBaseQueueLast = clone;
+              newBaseQueueFirst = newBaseQueueLast = clone2;
               newBaseState = newState;
             } else {
-              newBaseQueueLast = newBaseQueueLast.next = clone;
+              newBaseQueueLast = newBaseQueueLast.next = clone2;
             }
             currentlyRenderingFiber$1.lanes = mergeLanes(currentlyRenderingFiber$1.lanes, updateLane);
             markSkippedUpdateLanes(updateLane);
@@ -13989,10 +13989,10 @@ var scheduler_development = {};
     function rerenderState(initialState) {
       return rerenderReducer(basicStateReducer);
     }
-    function pushEffect(tag, create, destroy, deps) {
+    function pushEffect(tag, create2, destroy, deps) {
       var effect = {
         tag,
-        create,
+        create: create2,
         destroy,
         deps,
         next: null
@@ -14029,13 +14029,13 @@ var scheduler_development = {};
       var hook = updateWorkInProgressHook();
       return hook.memoizedState;
     }
-    function mountEffectImpl(fiberFlags, hookFlags, create, deps) {
+    function mountEffectImpl(fiberFlags, hookFlags, create2, deps) {
       var hook = mountWorkInProgressHook();
       var nextDeps = deps === void 0 ? null : deps;
       currentlyRenderingFiber$1.flags |= fiberFlags;
-      hook.memoizedState = pushEffect(HasEffect | hookFlags, create, void 0, nextDeps);
+      hook.memoizedState = pushEffect(HasEffect | hookFlags, create2, void 0, nextDeps);
     }
-    function updateEffectImpl(fiberFlags, hookFlags, create, deps) {
+    function updateEffectImpl(fiberFlags, hookFlags, create2, deps) {
       var hook = updateWorkInProgressHook();
       var nextDeps = deps === void 0 ? null : deps;
       var destroy = void 0;
@@ -14045,31 +14045,31 @@ var scheduler_development = {};
         if (nextDeps !== null) {
           var prevDeps = prevEffect.deps;
           if (areHookInputsEqual(nextDeps, prevDeps)) {
-            hook.memoizedState = pushEffect(hookFlags, create, destroy, nextDeps);
+            hook.memoizedState = pushEffect(hookFlags, create2, destroy, nextDeps);
             return;
           }
         }
       }
       currentlyRenderingFiber$1.flags |= fiberFlags;
-      hook.memoizedState = pushEffect(HasEffect | hookFlags, create, destroy, nextDeps);
+      hook.memoizedState = pushEffect(HasEffect | hookFlags, create2, destroy, nextDeps);
     }
-    function mountEffect(create, deps) {
+    function mountEffect(create2, deps) {
       if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
-        return mountEffectImpl(MountPassiveDev | Passive | PassiveStatic, Passive$1, create, deps);
+        return mountEffectImpl(MountPassiveDev | Passive | PassiveStatic, Passive$1, create2, deps);
       } else {
-        return mountEffectImpl(Passive | PassiveStatic, Passive$1, create, deps);
+        return mountEffectImpl(Passive | PassiveStatic, Passive$1, create2, deps);
       }
     }
-    function updateEffect(create, deps) {
-      return updateEffectImpl(Passive, Passive$1, create, deps);
+    function updateEffect(create2, deps) {
+      return updateEffectImpl(Passive, Passive$1, create2, deps);
     }
-    function mountInsertionEffect(create, deps) {
-      return mountEffectImpl(Update, Insertion, create, deps);
+    function mountInsertionEffect(create2, deps) {
+      return mountEffectImpl(Update, Insertion, create2, deps);
     }
-    function updateInsertionEffect(create, deps) {
-      return updateEffectImpl(Update, Insertion, create, deps);
+    function updateInsertionEffect(create2, deps) {
+      return updateEffectImpl(Update, Insertion, create2, deps);
     }
-    function mountLayoutEffect(create, deps) {
+    function mountLayoutEffect(create2, deps) {
       var fiberFlags = Update;
       {
         fiberFlags |= LayoutStatic;
@@ -14077,15 +14077,15 @@ var scheduler_development = {};
       if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
         fiberFlags |= MountLayoutDev;
       }
-      return mountEffectImpl(fiberFlags, Layout, create, deps);
+      return mountEffectImpl(fiberFlags, Layout, create2, deps);
     }
-    function updateLayoutEffect(create, deps) {
-      return updateEffectImpl(Update, Layout, create, deps);
+    function updateLayoutEffect(create2, deps) {
+      return updateEffectImpl(Update, Layout, create2, deps);
     }
-    function imperativeHandleEffect(create, ref) {
+    function imperativeHandleEffect(create2, ref) {
       if (typeof ref === "function") {
         var refCallback = ref;
-        var _inst = create();
+        var _inst = create2();
         refCallback(_inst);
         return function() {
           refCallback(null);
@@ -14097,17 +14097,17 @@ var scheduler_development = {};
             error("Expected useImperativeHandle() first argument to either be a ref callback or React.createRef() object. Instead received: %s.", "an object with keys {" + Object.keys(refObject).join(", ") + "}");
           }
         }
-        var _inst2 = create();
+        var _inst2 = create2();
         refObject.current = _inst2;
         return function() {
           refObject.current = null;
         };
       }
     }
-    function mountImperativeHandle(ref, create, deps) {
+    function mountImperativeHandle(ref, create2, deps) {
       {
-        if (typeof create !== "function") {
-          error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create !== null ? typeof create : "null");
+        if (typeof create2 !== "function") {
+          error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create2 !== null ? typeof create2 : "null");
         }
       }
       var effectDeps = deps !== null && deps !== void 0 ? deps.concat([ref]) : null;
@@ -14118,16 +14118,16 @@ var scheduler_development = {};
       if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
         fiberFlags |= MountLayoutDev;
       }
-      return mountEffectImpl(fiberFlags, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+      return mountEffectImpl(fiberFlags, Layout, imperativeHandleEffect.bind(null, create2, ref), effectDeps);
     }
-    function updateImperativeHandle(ref, create, deps) {
+    function updateImperativeHandle(ref, create2, deps) {
       {
-        if (typeof create !== "function") {
-          error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create !== null ? typeof create : "null");
+        if (typeof create2 !== "function") {
+          error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create2 !== null ? typeof create2 : "null");
         }
       }
       var effectDeps = deps !== null && deps !== void 0 ? deps.concat([ref]) : null;
-      return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+      return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create2, ref), effectDeps);
     }
     function mountDebugValue(value, formatterFn) {
     }
@@ -14470,38 +14470,38 @@ var scheduler_development = {};
           mountHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           mountHookTypesDev();
           checkDepsAreArrayDev(deps);
-          return mountEffect(create, deps);
+          return mountEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           mountHookTypesDev();
           checkDepsAreArrayDev(deps);
-          return mountImperativeHandle(ref, create, deps);
+          return mountImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           mountHookTypesDev();
           checkDepsAreArrayDev(deps);
-          return mountInsertionEffect(create, deps);
+          return mountInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           mountHookTypesDev();
           checkDepsAreArrayDev(deps);
-          return mountLayoutEffect(create, deps);
+          return mountLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           mountHookTypesDev();
           checkDepsAreArrayDev(deps);
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
           try {
-            return mountMemo(create, deps);
+            return mountMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -14579,33 +14579,33 @@ var scheduler_development = {};
           updateHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           updateHookTypesDev();
-          return mountEffect(create, deps);
+          return mountEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           updateHookTypesDev();
-          return mountImperativeHandle(ref, create, deps);
+          return mountImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           updateHookTypesDev();
-          return mountInsertionEffect(create, deps);
+          return mountInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           updateHookTypesDev();
-          return mountLayoutEffect(create, deps);
+          return mountLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           updateHookTypesDev();
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
           try {
-            return mountMemo(create, deps);
+            return mountMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -14683,33 +14683,33 @@ var scheduler_development = {};
           updateHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           updateHookTypesDev();
-          return updateEffect(create, deps);
+          return updateEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           updateHookTypesDev();
-          return updateImperativeHandle(ref, create, deps);
+          return updateImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           updateHookTypesDev();
-          return updateInsertionEffect(create, deps);
+          return updateInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           updateHookTypesDev();
-          return updateLayoutEffect(create, deps);
+          return updateLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           updateHookTypesDev();
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
           try {
-            return updateMemo(create, deps);
+            return updateMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -14787,33 +14787,33 @@ var scheduler_development = {};
           updateHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           updateHookTypesDev();
-          return updateEffect(create, deps);
+          return updateEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           updateHookTypesDev();
-          return updateImperativeHandle(ref, create, deps);
+          return updateImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           updateHookTypesDev();
-          return updateInsertionEffect(create, deps);
+          return updateInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           updateHookTypesDev();
-          return updateLayoutEffect(create, deps);
+          return updateLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           updateHookTypesDev();
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnRerenderInDEV;
           try {
-            return updateMemo(create, deps);
+            return updateMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -14894,38 +14894,38 @@ var scheduler_development = {};
           mountHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           warnInvalidHookAccess();
           mountHookTypesDev();
-          return mountEffect(create, deps);
+          return mountEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           warnInvalidHookAccess();
           mountHookTypesDev();
-          return mountImperativeHandle(ref, create, deps);
+          return mountImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           warnInvalidHookAccess();
           mountHookTypesDev();
-          return mountInsertionEffect(create, deps);
+          return mountInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           warnInvalidHookAccess();
           mountHookTypesDev();
-          return mountLayoutEffect(create, deps);
+          return mountLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           warnInvalidHookAccess();
           mountHookTypesDev();
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
           try {
-            return mountMemo(create, deps);
+            return mountMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -15015,38 +15015,38 @@ var scheduler_development = {};
           updateHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateEffect(create, deps);
+          return updateEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateImperativeHandle(ref, create, deps);
+          return updateImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateInsertionEffect(create, deps);
+          return updateInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateLayoutEffect(create, deps);
+          return updateLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           warnInvalidHookAccess();
           updateHookTypesDev();
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
           try {
-            return updateMemo(create, deps);
+            return updateMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -15136,38 +15136,38 @@ var scheduler_development = {};
           updateHookTypesDev();
           return readContext(context2);
         },
-        useEffect: function(create, deps) {
+        useEffect: function(create2, deps) {
           currentHookNameInDev = "useEffect";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateEffect(create, deps);
+          return updateEffect(create2, deps);
         },
-        useImperativeHandle: function(ref, create, deps) {
+        useImperativeHandle: function(ref, create2, deps) {
           currentHookNameInDev = "useImperativeHandle";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateImperativeHandle(ref, create, deps);
+          return updateImperativeHandle(ref, create2, deps);
         },
-        useInsertionEffect: function(create, deps) {
+        useInsertionEffect: function(create2, deps) {
           currentHookNameInDev = "useInsertionEffect";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateInsertionEffect(create, deps);
+          return updateInsertionEffect(create2, deps);
         },
-        useLayoutEffect: function(create, deps) {
+        useLayoutEffect: function(create2, deps) {
           currentHookNameInDev = "useLayoutEffect";
           warnInvalidHookAccess();
           updateHookTypesDev();
-          return updateLayoutEffect(create, deps);
+          return updateLayoutEffect(create2, deps);
         },
-        useMemo: function(create, deps) {
+        useMemo: function(create2, deps) {
           currentHookNameInDev = "useMemo";
           warnInvalidHookAccess();
           updateHookTypesDev();
           var prevDispatcher = ReactCurrentDispatcher$1.current;
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
           try {
-            return updateMemo(create, deps);
+            return updateMemo(create2, deps);
           } finally {
             ReactCurrentDispatcher$1.current = prevDispatcher;
           }
@@ -18203,13 +18203,13 @@ var scheduler_development = {};
                 markComponentLayoutEffectMountStarted(finishedWork);
               }
             }
-            var create = effect.create;
+            var create2 = effect.create;
             {
               if ((flags & Insertion) !== NoFlags$1) {
                 setIsRunningInsertionEffect(true);
               }
             }
-            effect.destroy = create();
+            effect.destroy = create2();
             {
               if ((flags & Insertion) !== NoFlags$1) {
                 setIsRunningInsertionEffect(false);
@@ -23706,24 +23706,24 @@ var reactJsxDevRuntime_development = {};
     module.exports = reactJsxDevRuntime_development;
   }
 })(jsxDevRuntime);
-var _jsxFileName$i = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
-function Component$g() {
+var _jsxFileName$j = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/00-blank.tsx";
+function Component$h() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     children: "..."
   }, void 0, false, {
-    fileName: _jsxFileName$i,
+    fileName: _jsxFileName$j,
     lineNumber: 4,
     columnNumber: 10
   }, this);
 }
-const example$C = {
+const example$E = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
   description: "Duplicate this to make new experiments.",
-  Component: Component$g
+  Component: Component$h
 };
-var _jsxFileName$h = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
+var _jsxFileName$i = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/01-offscreen-canvas.tsx";
 function renderBitmap$6() {
   const offscreen = new OffscreenCanvas(400, 400);
   const ctx = offscreen.getContext("2d");
@@ -23735,7 +23735,7 @@ function renderBitmap$6() {
   ctx.fillRect(0, 0, 400, 400);
   return offscreen.transferToImageBitmap();
 }
-function Component$f() {
+function Component$g() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23750,19 +23750,19 @@ function Component$f() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$h,
+    fileName: _jsxFileName$i,
     lineNumber: 25,
     columnNumber: 10
   }, this);
 }
-const example$B = {
+const example$D = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
   description: "Usage of an offscreen canvas",
-  Component: Component$f
+  Component: Component$g
 };
-var _jsxFileName$g = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
+var _jsxFileName$h = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/02-offscreen-canvas-worker.tsx";
 async function renderBitmap$5() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/02-offscreen-canvas-worker.worker.aa9464da.js", self.location), {
@@ -23774,7 +23774,7 @@ async function renderBitmap$5() {
     worker.postMessage("begin");
   });
 }
-function Component$e() {
+function Component$f() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -23791,17 +23791,17 @@ function Component$e() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$g,
+    fileName: _jsxFileName$h,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$A = {
+const example$C = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
   description: "Usage of an offscreen canvas in a worker",
-  Component: Component$e
+  Component: Component$f
 };
 var ENV = /* @__PURE__ */ ((ENV2) => {
   ENV2[ENV2["WEBGL_LEGACY"] = 0] = "WEBGL_LEGACY";
@@ -30349,26 +30349,26 @@ class TextureUvs {
     this.y3 = 1;
     this.uvsFloat32 = new Float32Array(8);
   }
-  set(frame, baseFrame, rotate) {
+  set(frame, baseFrame, rotate2) {
     const tw = baseFrame.width;
     const th = baseFrame.height;
-    if (rotate) {
+    if (rotate2) {
       const w2 = frame.width / 2 / tw;
       const h2 = frame.height / 2 / th;
       const cX = frame.x / tw + w2;
       const cY = frame.y / th + h2;
-      rotate = groupD8.add(rotate, groupD8.NW);
-      this.x0 = cX + w2 * groupD8.uX(rotate);
-      this.y0 = cY + h2 * groupD8.uY(rotate);
-      rotate = groupD8.add(rotate, 2);
-      this.x1 = cX + w2 * groupD8.uX(rotate);
-      this.y1 = cY + h2 * groupD8.uY(rotate);
-      rotate = groupD8.add(rotate, 2);
-      this.x2 = cX + w2 * groupD8.uX(rotate);
-      this.y2 = cY + h2 * groupD8.uY(rotate);
-      rotate = groupD8.add(rotate, 2);
-      this.x3 = cX + w2 * groupD8.uX(rotate);
-      this.y3 = cY + h2 * groupD8.uY(rotate);
+      rotate2 = groupD8.add(rotate2, groupD8.NW);
+      this.x0 = cX + w2 * groupD8.uX(rotate2);
+      this.y0 = cY + h2 * groupD8.uY(rotate2);
+      rotate2 = groupD8.add(rotate2, 2);
+      this.x1 = cX + w2 * groupD8.uX(rotate2);
+      this.y1 = cY + h2 * groupD8.uY(rotate2);
+      rotate2 = groupD8.add(rotate2, 2);
+      this.x2 = cX + w2 * groupD8.uX(rotate2);
+      this.y2 = cY + h2 * groupD8.uY(rotate2);
+      rotate2 = groupD8.add(rotate2, 2);
+      this.x3 = cX + w2 * groupD8.uX(rotate2);
+      this.y3 = cY + h2 * groupD8.uY(rotate2);
     } else {
       this.x0 = frame.x / tw;
       this.y0 = frame.y / th;
@@ -30404,7 +30404,7 @@ function removeAllHandlers(tex) {
   };
 }
 class Texture$2 extends EventEmitter {
-  constructor(baseTexture, frame, orig, trim, rotate, anchor2, borders) {
+  constructor(baseTexture, frame, orig, trim, rotate2, anchor2, borders) {
     super();
     this.noFrame = false;
     if (!frame) {
@@ -30421,8 +30421,8 @@ class Texture$2 extends EventEmitter {
     this._uvs = DEFAULT_UVS;
     this.uvMatrix = null;
     this.orig = orig || frame;
-    this._rotate = Number(rotate || 0);
-    if (rotate === true) {
+    this._rotate = Number(rotate2 || 0);
+    if (rotate2 === true) {
       this._rotate = 2;
     } else if (this._rotate % 2 !== 0) {
       throw new Error("attempt to use diamond-shaped UVs. If you are sure, set rotation manually");
@@ -30638,8 +30638,8 @@ class Texture$2 extends EventEmitter {
   get rotate() {
     return this._rotate;
   }
-  set rotate(rotate) {
-    this._rotate = rotate;
+  set rotate(rotate2) {
+    this._rotate = rotate2;
     if (this.valid) {
       this.updateUvs();
     }
@@ -46952,7 +46952,7 @@ HTMLText.defaultDestroyOptions = {
 HTMLText.defaultMaxWidth = 2024;
 HTMLText.defaultMaxHeight = 2024;
 HTMLText.defaultAutoResolution = true;
-var _jsxFileName$f = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
+var _jsxFileName$g = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/03-pixijs-bunnies.tsx";
 function createBunnies$1(view) {
   const app = new Application({
     background: "#1099bb",
@@ -46976,7 +46976,7 @@ function createBunnies$1(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$d() {
+function Component$e() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -46989,19 +46989,19 @@ function Component$d() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$f,
+    fileName: _jsxFileName$g,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example$z = {
+const example$B = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
   description: "Hello world for Pixi.js.",
-  Component: Component$d
+  Component: Component$e
 };
-var _jsxFileName$e = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
+var _jsxFileName$f = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/04-pixijs-bunnies-offscreen.tsx";
 async function renderBitmap$4() {
   const canvas3 = document.createElement("canvas");
   document.body.appendChild(canvas3);
@@ -47009,6 +47009,56 @@ async function renderBitmap$4() {
   const renderer = new Renderer$1({
     background: "#1099bb",
     view: offscreen
+  });
+  const container = new Container();
+  const texture = Texture$2.from("bunny.png");
+  await new Promise((r2) => setTimeout(r2, 200));
+  for (let i2 = 0; i2 < 25; i2++) {
+    const bunny = new Sprite$1(texture);
+    bunny.anchor.set(0.5);
+    bunny.x = i2 % 5 * 40;
+    bunny.y = Math.floor(i2 / 5) * 40;
+    container.addChild(bunny);
+  }
+  renderer.render(container);
+  return offscreen;
+}
+function Component$d() {
+  const ref = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    var _a2;
+    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
+    if (!ctx) {
+      throw new Error("Could not create 2d canvas context");
+    }
+    renderBitmap$4().then((bitmap) => {
+      ctx.drawImage(bitmap, 0, 0);
+    });
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+    ref,
+    width: 400,
+    height: 400
+  }, void 0, false, {
+    fileName: _jsxFileName$f,
+    lineNumber: 47,
+    columnNumber: 10
+  }, this);
+}
+const example$A = {
+  id: "pixijs-bunnies-offscreen",
+  filename: "04-pixijs-bunnies-offscreen.tsx",
+  name: "Pixi bunnies on offscreen canvas",
+  description: "Using canvas.transferControlToOffscreen()",
+  Component: Component$d
+};
+var _jsxFileName$e = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
+async function renderBitmap$3() {
+  const offscreen = new OffscreenCanvas(400, 400);
+  const renderer = new Renderer$1({
+    background: "#1099bb",
+    view: offscreen,
+    antialias: true
   });
   const container = new Container();
   const texture = Texture$2.from("bunny.png");
@@ -47031,56 +47081,6 @@ function Component$c() {
     if (!ctx) {
       throw new Error("Could not create 2d canvas context");
     }
-    renderBitmap$4().then((bitmap) => {
-      ctx.drawImage(bitmap, 0, 0);
-    });
-  }, []);
-  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
-    ref,
-    width: 400,
-    height: 400
-  }, void 0, false, {
-    fileName: _jsxFileName$e,
-    lineNumber: 47,
-    columnNumber: 10
-  }, this);
-}
-const example$y = {
-  id: "pixijs-bunnies-offscreen",
-  filename: "04-pixijs-bunnies-offscreen.tsx",
-  name: "Pixi bunnies on offscreen canvas",
-  description: "Using canvas.transferControlToOffscreen()",
-  Component: Component$c
-};
-var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/05-pixijs-bunnies-offscreen-2.tsx";
-async function renderBitmap$3() {
-  const offscreen = new OffscreenCanvas(400, 400);
-  const renderer = new Renderer$1({
-    background: "#1099bb",
-    view: offscreen,
-    antialias: true
-  });
-  const container = new Container();
-  const texture = Texture$2.from("bunny.png");
-  await new Promise((r2) => setTimeout(r2, 200));
-  for (let i2 = 0; i2 < 25; i2++) {
-    const bunny = new Sprite$1(texture);
-    bunny.anchor.set(0.5);
-    bunny.x = i2 % 5 * 40;
-    bunny.y = Math.floor(i2 / 5) * 40;
-    container.addChild(bunny);
-  }
-  renderer.render(container);
-  return offscreen;
-}
-function Component$b() {
-  const ref = react.exports.useRef(null);
-  react.exports.useEffect(() => {
-    var _a2;
-    const ctx = (_a2 = ref.current) == null ? void 0 : _a2.getContext("2d");
-    if (!ctx) {
-      throw new Error("Could not create 2d canvas context");
-    }
     renderBitmap$3().then((bitmap) => {
       ctx.drawImage(bitmap, 0, 0);
     });
@@ -47090,19 +47090,19 @@ function Component$b() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$d,
+    fileName: _jsxFileName$e,
     lineNumber: 46,
     columnNumber: 10
   }, this);
 }
-const example$x = {
+const example$z = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
   description: "Using new OffscreenCanvas()",
-  Component: Component$b
+  Component: Component$c
 };
-var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
+var _jsxFileName$d = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/06-pixijs-bunnies-worker.tsx";
 async function renderBitmap$2() {
   return new Promise((resolve2) => {
     const worker = new Worker(new URL("/webgl-experiments/assets/06-pixijs-bunnies-worker.worker.b6978c0f.js", self.location), {
@@ -47114,7 +47114,7 @@ async function renderBitmap$2() {
     worker.postMessage("begin");
   });
 }
-function Component$a() {
+function Component$b() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -47131,26 +47131,26 @@ function Component$a() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$c,
+    fileName: _jsxFileName$d,
     lineNumber: 30,
     columnNumber: 10
   }, this);
 }
-const example$w = {
+const example$y = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
   description: "Pixi.js bunnies in a worker",
-  Component: Component$a
+  Component: Component$b
 };
-var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
+var _jsxFileName$c = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/07-pixijs-bunnies-worker-transfer.tsx";
 function renderOffscreenCanvas(offscreen) {
   const worker = new Worker(new URL("/webgl-experiments/assets/07-pixijs-bunnies-worker-transfer.worker.def3a695.js", self.location), {
     type: "module"
   });
   worker.postMessage(offscreen, [offscreen]);
 }
-function Component$9() {
+function Component$a() {
   const ref = react.exports.useRef(null);
   const transferred = react.exports.useRef(false);
   react.exports.useEffect(() => {
@@ -47168,17 +47168,17 @@ function Component$9() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$b,
+    fileName: _jsxFileName$c,
     lineNumber: 27,
     columnNumber: 10
   }, this);
 }
-const example$v = {
+const example$x = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
   description: "Pixi.js bunnies in a worker using transferControlToOffscreen()",
-  Component: Component$9
+  Component: Component$a
 };
 /**
  * @license
@@ -64689,7 +64689,7 @@ if (typeof window !== "undefined") {
     window.__THREE__ = REVISION;
   }
 }
-var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
+var _jsxFileName$b = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/08-threejs-hello-world.tsx";
 function helloThreeJs(canvas3) {
   const scene = new Scene();
   const camera = new PerspectiveCamera(75, 1, 0.1, 1e3);
@@ -64707,7 +64707,7 @@ function helloThreeJs(canvas3) {
   camera.position.z = 5;
   renderer.render(scene, camera);
 }
-function Component$8() {
+function Component$9() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const canvas3 = ref.current;
@@ -64721,19 +64721,19 @@ function Component$8() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$a,
+    fileName: _jsxFileName$b,
     lineNumber: 35,
     columnNumber: 10
   }, this);
 }
-const example$u = {
+const example$w = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
   description: "Three.js hello world",
-  Component: Component$8
+  Component: Component$9
 };
-var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
+var _jsxFileName$a = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/09-threejs-hello-world-offscreen.tsx";
 async function renderBitmap$1() {
   const w2 = 400;
   const h2 = 400;
@@ -64757,7 +64757,7 @@ async function renderBitmap$1() {
   renderer.render(scene, camera);
   return canvas3.transferToImageBitmap();
 }
-function Component$7() {
+function Component$8() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64774,19 +64774,19 @@ function Component$7() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$9,
+    fileName: _jsxFileName$a,
     lineNumber: 44,
     columnNumber: 10
   }, this);
 }
-const example$t = {
+const example$v = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
   description: "Three.js with offscreen canvas",
-  Component: Component$7
+  Component: Component$8
 };
-var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
+var _jsxFileName$9 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/10-threejs-texture.tsx";
 async function renderBitmap(w2, h2) {
   const bunnySize = [26, 37];
   const canvas3 = new OffscreenCanvas(w2, h2);
@@ -64814,7 +64814,7 @@ async function renderBitmap(w2, h2) {
   renderer.render(scene, camera);
   return canvas3.transferToImageBitmap();
 }
-function Component$6() {
+function Component$7() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     var _a2;
@@ -64833,26 +64833,26 @@ function Component$6() {
       width: 260,
       height: 370
     }, void 0, false, {
-      fileName: _jsxFileName$8,
+      fileName: _jsxFileName$9,
       lineNumber: 55,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("img", {
       src: "/bunny.png"
     }, void 0, false, {
-      fileName: _jsxFileName$8,
+      fileName: _jsxFileName$9,
       lineNumber: 56,
       columnNumber: 7
     }, this)]
   }, void 0, true);
 }
-const example$s = {
+const example$u = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
   description: "Three.js rendering a texture",
-  Component: Component$6
+  Component: Component$7
 };
-var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
+var _jsxFileName$8 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/11-pixijs-blend-modes.tsx";
 function createBunnies(view) {
   const app = new Application({
     background: "#1099bb",
@@ -64876,7 +64876,7 @@ function createBunnies(view) {
     container.rotation -= 0.01 * delta;
   });
 }
-function Component$5() {
+function Component$6() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     if (!ref.current) {
@@ -64889,17 +64889,17 @@ function Component$5() {
     width: 400,
     height: 400
   }, void 0, false, {
-    fileName: _jsxFileName$7,
+    fileName: _jsxFileName$8,
     lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-const example$r = {
+const example$t = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
   description: "",
-  Component: Component$5
+  Component: Component$6
 };
 var __defProp2 = Object.defineProperty;
 var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -66293,19 +66293,19 @@ var Shape = class extends Element {
     return this;
   }
   clone(parent) {
-    const clone = new Shape();
-    clone.position.copy(this.position);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new Shape();
+    clone2.position.copy(this.position);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone._update();
+    return clone2._update();
   }
   _update(bubbles) {
     if (!this._matrix.manual && this._flagMatrix) {
@@ -66599,26 +66599,26 @@ var _Group = class extends Shape {
     this._flagOrder = true;
   }
   clone(parent) {
-    const clone = new _Group();
+    const clone2 = new _Group();
     const children = this.children.map(function(child) {
       return child.clone();
     });
-    clone.add(children);
-    clone.opacity = this.opacity;
+    clone2.add(children);
+    clone2.opacity = this.opacity;
     if (this.mask) {
-      clone.mask = this.mask;
+      clone2.mask = this.mask;
     }
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.className = this.className;
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.className = this.className;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone._update();
+    return clone2._update();
   }
   toObject() {
     const result = {
@@ -68135,14 +68135,14 @@ var _Stop = class extends Element {
     _Stop.Index = (_Stop.Index + 1) % 2;
   }
   clone(parent) {
-    const clone = new _Stop();
+    const clone2 = new _Stop();
     _.each(_Stop.Properties, function(property) {
-      clone[property] = this[property];
+      clone2[property] = this[property];
     }, this);
     if (parent && parent.stops) {
-      parent.stops.push(clone);
+      parent.stops.push(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const result = {};
@@ -68228,14 +68228,14 @@ var _Gradient = class extends Element {
     const stops = this.stops.map(function(s2) {
       return s2.clone();
     });
-    const clone = new _Gradient(stops);
+    const clone2 = new _Gradient(stops);
     _.each(_Gradient.Properties, function(k2) {
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }, this);
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const result = {
@@ -68350,7 +68350,7 @@ var _LinearGradient = class extends Gradient {
     const stops = this.stops.map(function(stop) {
       return stop.clone();
     });
-    const clone = new _LinearGradient(
+    const clone2 = new _LinearGradient(
       this.left._x,
       this.left._y,
       this.right._x,
@@ -68358,12 +68358,12 @@ var _LinearGradient = class extends Gradient {
       stops
     );
     _.each(Gradient.Properties, function(k2) {
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }, this);
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const result = super.toObject.call(this);
@@ -68455,7 +68455,7 @@ var _RadialGradient = class extends Gradient {
     const stops = this.stops.map(function(stop) {
       return stop.clone();
     });
-    const clone = new _RadialGradient(
+    const clone2 = new _RadialGradient(
       this.center._x,
       this.center._y,
       this._radius,
@@ -68464,12 +68464,12 @@ var _RadialGradient = class extends Gradient {
       this.focal._y
     );
     _.each(Gradient.Properties.concat(_RadialGradient.Properties), function(k2) {
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }, this);
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const result = super.toObject.call(this);
@@ -68654,11 +68654,11 @@ var _Texture = class extends Element {
     }
   }
   clone() {
-    const clone = new _Texture(this.src);
-    clone.repeat = this.repeat;
-    clone.offset.copy(this.origin);
-    clone.scale = this.scale;
-    return clone;
+    const clone2 = new _Texture(this.src);
+    clone2.repeat = this.repeat;
+    clone2.offset.copy(this.origin);
+    clone2.scale = this.scale;
+    return clone2;
   }
   toObject() {
     return {
@@ -68938,27 +68938,27 @@ var _Path = class extends Shape {
     this.dashes.offset = 0;
   }
   clone(parent) {
-    const clone = new _Path();
+    const clone2 = new _Path();
     for (let j2 = 0; j2 < this.vertices.length; j2++) {
-      clone.vertices.push(this.vertices[j2].clone());
+      clone2.vertices.push(this.vertices[j2].clone());
     }
     for (let i2 = 0; i2 < _Path.Properties.length; i2++) {
       const k2 = _Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
-    clone.className = this.className;
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    clone2.className = this.className;
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone._update();
+    return clone2._update();
   }
   toObject() {
     const result = {
@@ -69714,23 +69714,23 @@ var _Rectangle = class extends Path {
     return this;
   }
   clone(parent) {
-    const clone = new _Rectangle(0, 0, this.width, this.height);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new _Rectangle(0, 0, this.width, this.height);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -69853,7 +69853,7 @@ var _Sprite = class extends Rectangle {
     return this;
   }
   clone(parent) {
-    const clone = new _Sprite(
+    const clone2 = new _Sprite(
       this.texture,
       this.translation.x,
       this.translation.y,
@@ -69862,13 +69862,13 @@ var _Sprite = class extends Rectangle {
       this.frameRate
     );
     if (this.playing) {
-      clone.play(this._firstFrame, this._lastFrame);
-      clone._loop = this._loop;
+      clone2.play(this._firstFrame, this._lastFrame);
+      clone2._loop = this._loop;
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -70072,23 +70072,23 @@ var _Circle = class extends Path {
     return this;
   }
   clone(parent) {
-    const clone = new _Circle(0, 0, this.radius, this.vertices.length);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new _Circle(0, 0, this.radius, this.vertices.length);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -70184,23 +70184,23 @@ var _Ellipse = class extends Path {
     const rx = this.width / 2;
     const ry = this.height / 2;
     const resolution = this.vertices.length;
-    const clone = new _Ellipse(0, 0, rx, ry, resolution);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new _Ellipse(0, 0, rx, ry, resolution);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -70406,23 +70406,23 @@ var _RoundedRectangle = class extends Path {
     const width = this.width;
     const height = this.height;
     const radius = this.radius;
-    const clone = new _RoundedRectangle(0, 0, width, height, radius);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new _RoundedRectangle(0, 0, width, height, radius);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -70570,21 +70570,21 @@ var _Text = class extends Shape {
     }
   }
   clone(parent) {
-    const clone = new _Text(this.value);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
+    const clone2 = new _Text(this.value);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
     for (let i2 = 0; i2 < _Text.Properties.length; i2++) {
       const prop = _Text.Properties[i2];
-      clone[prop] = this[prop];
+      clone2[prop] = this[prop];
     }
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone._update();
+    return clone2._update();
   }
   toObject() {
     const result = {
@@ -71930,20 +71930,20 @@ var _ImageSequence = class extends Rectangle {
     return this;
   }
   clone(parent) {
-    const clone = new _ImageSequence(
+    const clone2 = new _ImageSequence(
       this.textures,
       this.translation.x,
       this.translation.y,
       this.frameRate
     );
-    clone._loop = this._loop;
+    clone2._loop = this._loop;
     if (this._playing) {
-      clone.play();
+      clone2.play();
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -72248,23 +72248,23 @@ var _ArcSegment = class extends Path {
     const sa = this.startAngle;
     const ea = this.endAngle;
     const resolution = this.vertices.length;
-    const clone = new _ArcSegment(0, 0, ir, or, sa, ea, resolution);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new _ArcSegment(0, 0, ir, or, sa, ea, resolution);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -72373,27 +72373,27 @@ var _Points = class extends Shape {
     this.dashes.offset = 0;
   }
   clone(parent) {
-    const clone = new _Points();
+    const clone2 = new _Points();
     for (let j2 = 0; j2 < this.vertices.length; j2++) {
-      clone.vertices.push(this.vertices[j2].clone());
+      clone2.vertices.push(this.vertices[j2].clone());
     }
     for (let i2 = 0; i2 < _Points.Properties.length; i2++) {
       const k2 = _Points.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
-    clone.className = this.className;
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    clone2.className = this.className;
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone._update();
+    return clone2._update();
   }
   toObject() {
     const result = {
@@ -72686,25 +72686,25 @@ var _Polygon = class extends Path {
     return this;
   }
   clone(parent) {
-    const clone = new _Polygon(0, 0, 0, this.sides);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
-    clone.width = this.width;
-    clone.height = this.height;
+    const clone2 = new _Polygon(0, 0, 0, this.sides);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
+    clone2.width = this.width;
+    clone2.height = this.height;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -72837,23 +72837,23 @@ var _Star = class extends Path {
     const ir = this.innerRadius;
     const or = this.outerRadius;
     const sides = this.sides;
-    const clone = new _Star(0, 0, ir, or, sides);
-    clone.translation.copy(this.translation);
-    clone.rotation = this.rotation;
-    clone.scale = this.scale;
-    clone.skewX = this.skewX;
-    clone.skewY = this.skewY;
+    const clone2 = new _Star(0, 0, ir, or, sides);
+    clone2.translation.copy(this.translation);
+    clone2.rotation = this.rotation;
+    clone2.scale = this.scale;
+    clone2.skewX = this.skewX;
+    clone2.skewY = this.skewY;
     if (this.matrix.manual) {
-      clone.matrix.copy(this.matrix);
+      clone2.matrix.copy(this.matrix);
     }
     for (let i2 = 0; i2 < Path.Properties.length; i2++) {
       const k2 = Path.Properties[i2];
-      clone[k2] = this[k2];
+      clone2[k2] = this[k2];
     }
     if (parent) {
-      parent.add(clone);
+      parent.add(clone2);
     }
-    return clone;
+    return clone2;
   }
   toObject() {
     const object = super.toObject.call(this);
@@ -73772,7 +73772,7 @@ var shaders = {
   }
 };
 var multiplyMatrix = Matrix2.Multiply;
-var identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+var identity$1 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 var transformation = new NumArray(9);
 var CanvasUtils = Renderer.Utils;
 var quad = new NumArray([
@@ -74810,7 +74810,7 @@ var Renderer3 = class extends Events {
     this.scene.parent = this;
     this._renderer = {
       type: "renderer",
-      matrix: new NumArray(identity),
+      matrix: new NumArray(identity$1),
       scale: 1,
       opacity: 1
     };
@@ -75428,8 +75428,8 @@ raf.init = function() {
   raf.init = function() {
   };
 };
-var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
-function Component$4() {
+var _jsxFileName$7 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/12-twojs-hello-world.tsx";
+function Component$5() {
   const divRef = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const div = divRef.current;
@@ -75454,21 +75454,21 @@ function Component$4() {
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
     ref: divRef
   }, void 0, false, {
-    fileName: _jsxFileName$6,
+    fileName: _jsxFileName$7,
     lineNumber: 33,
     columnNumber: 10
   }, this);
 }
-const example$q = {
+const example$s = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
   description: "Two.js hello world",
-  Component: Component$4
+  Component: Component$5
 };
-var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/13-lab-color.tsx";
+var _jsxFileName$6 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/13-lab-color.tsx";
 const size$1 = 30;
-function Component$3() {
+function Component$4() {
   const [valueL, setL] = react.exports.useState(10);
   const [valueA, setA] = react.exports.useState(-5);
   const [valueB, setB] = react.exports.useState(5);
@@ -75497,7 +75497,7 @@ function Component$3() {
       min: 0,
       max: 10
     }, void 0, false, {
-      fileName: _jsxFileName$5,
+      fileName: _jsxFileName$6,
       lineNumber: 36,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider$1, {
@@ -75507,7 +75507,7 @@ function Component$3() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$5,
+      fileName: _jsxFileName$6,
       lineNumber: 37,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider$1, {
@@ -75517,7 +75517,7 @@ function Component$3() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$5,
+      fileName: _jsxFileName$6,
       lineNumber: 38,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -75529,7 +75529,7 @@ function Component$3() {
       width: 1e3,
       height: 700
     }, void 0, false, {
-      fileName: _jsxFileName$5,
+      fileName: _jsxFileName$6,
       lineNumber: 39,
       columnNumber: 7
     }, this)]
@@ -75553,26 +75553,26 @@ function Slider$1({
       value,
       onChange: (e2) => onChange(Number(e2.target.value))
     }, void 0, false, {
-      fileName: _jsxFileName$5,
+      fileName: _jsxFileName$6,
       lineNumber: 64,
       columnNumber: 7
     }, this), label, ": ", value]
   }, void 0, true, {
-    fileName: _jsxFileName$5,
+    fileName: _jsxFileName$6,
     lineNumber: 63,
     columnNumber: 5
   }, this);
 }
-const example$p = {
+const example$r = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
   description: "Lab color experiment",
-  Component: Component$3
+  Component: Component$4
 };
-var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/14-oklab-color.tsx";
+var _jsxFileName$5 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/14-oklab-color.tsx";
 const size = 30;
-function Component$2() {
+function Component$3() {
   const [valueL, setL] = react.exports.useState(10);
   const [valueA, setA] = react.exports.useState(-5);
   const [valueB, setB] = react.exports.useState(5);
@@ -75601,7 +75601,7 @@ function Component$2() {
       min: 0,
       max: 10
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 36,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
@@ -75611,7 +75611,7 @@ function Component$2() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 37,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV(Slider, {
@@ -75621,7 +75621,7 @@ function Component$2() {
       min: -5,
       max: 5
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 38,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -75633,7 +75633,7 @@ function Component$2() {
       width: 1e3,
       height: 700
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 39,
       columnNumber: 7
     }, this)]
@@ -75657,22 +75657,22 @@ function Slider({
       value,
       onChange: (e2) => onChange(Number(e2.target.value))
     }, void 0, false, {
-      fileName: _jsxFileName$4,
+      fileName: _jsxFileName$5,
       lineNumber: 64,
       columnNumber: 7
     }, this), label, ": ", value]
   }, void 0, true, {
-    fileName: _jsxFileName$4,
+    fileName: _jsxFileName$5,
     lineNumber: 63,
     columnNumber: 5
   }, this);
 }
-const example$o = {
+const example$q = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
   description: "OKLAB color experiment",
-  Component: Component$2
+  Component: Component$3
 };
 const vertexShaderSource = "#version 300 es\n\nprecision highp float;\n\nlayout (location = 0) in vec3 aPosition;\n\nuniform float u_time;\n\nout vec2 uv;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.1;\n  vec3 p = aPosition + vec3(0.0, wave, 0.0);\n  gl_Position = vec4(p, 1.0);\n  uv = aPosition.xy * vec2(0.5, 0.5);\n}";
 const fragmentShaderSource = "#version 300 es\n\nprecision highp float;\n\nuniform float u_time;\n\nin vec2 uv;\nout vec4 outColor;\n\nvoid main() {\n  float wave = sin(u_time * 0.005) * 0.5 + 0.5;\n  outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);\n}\n";
@@ -75721,6 +75721,7 @@ function createAttribute(gl, program, options) {
     name,
     buffer,
     size: size2 = 1,
+    matrixSize = 1,
     type: type2 = gl.FLOAT,
     normalized = false,
     stride = 0,
@@ -75729,11 +75730,15 @@ function createAttribute(gl, program, options) {
   } = options;
   const attributeLoc = gl.getAttribLocation(program, name);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.enableVertexAttribArray(attributeLoc);
-  gl.vertexAttribPointer(attributeLoc, size2, type2, normalized, stride, offset);
-  if (instanced) {
-    const count2 = typeof instanced === "boolean" ? 1 : instanced;
-    gl.vertexAttribDivisor(attributeLoc, count2);
+  for (let i2 = 0; i2 < matrixSize; i2++) {
+    const loc = attributeLoc + i2;
+    const off = offset + i2 * matrixSize * 4;
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, size2, type2, normalized, stride, off);
+    if (instanced) {
+      const count2 = typeof instanced === "boolean" ? 1 : instanced;
+      gl.vertexAttribDivisor(loc, count2);
+    }
   }
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
 }
@@ -75888,7 +75893,7 @@ function uploadTexture(gl, texture, source, options = {}) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   return texture;
 }
-var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
+var _jsxFileName$4 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/15-webgl-setup.tsx";
 function compileShader(gl, type2, source) {
   const shader2 = gl.createShader(type2);
   if (!shader2) {
@@ -75929,7 +75934,7 @@ function updateCanvasSize(canvas3, gl) {
   canvas3.height = canvas3.clientHeight * dpr;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
 }
-function setupWebgl$i(canvas3) {
+function setupWebgl$k(canvas3) {
   const gl = canvas3.getContext("webgl2");
   if (!gl) {
     throw new Error("gl not supported");
@@ -75977,14 +75982,14 @@ function setupWebgl$i(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-function Component$1() {
+function Component$2() {
   const ref = react.exports.useRef(null);
   react.exports.useEffect(() => {
     const canvas3 = ref.current;
     if (!canvas3) {
       return;
     }
-    return setupWebgl$i(canvas3);
+    return setupWebgl$k(canvas3);
   }, []);
   return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
     ref,
@@ -75992,19 +75997,19 @@ function Component$1() {
       height: "640px"
     }
   }, void 0, false, {
-    fileName: _jsxFileName$3,
+    fileName: _jsxFileName$4,
     lineNumber: 181,
     columnNumber: 10
   }, this);
 }
-const example$n = {
+const example$p = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
   description: "Hello world for WebGL2.",
-  Component: Component$1
+  Component: Component$2
 };
-var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/utils/create-canvas-component.tsx";
+var _jsxFileName$3 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/utils/create-canvas-component.tsx";
 function createCanvasComponent(onMount, props = {}) {
   return function CanvasComponent() {
     const ref = react.exports.useRef(null);
@@ -76019,7 +76024,7 @@ function createCanvasComponent(onMount, props = {}) {
       ref,
       ...props
     }, void 0, false, {
-      fileName: _jsxFileName$2,
+      fileName: _jsxFileName$3,
       lineNumber: 18,
       columnNumber: 12
     }, this);
@@ -76042,7 +76047,7 @@ function createCanvasComponentWithImages(onMount, imageSrcs, props = {}) {
     return () => cleanup();
   }, props);
 }
-const vertexShader$e = `#version 300 es
+const vertexShader$f = `#version 300 es
 
 precision highp float;
 
@@ -76059,7 +76064,7 @@ void main() {
   uv = aPosition.xy * vec2(0.5, 0.5);
 }
 `;
-const fragmentShader$e = `#version 300 es
+const fragmentShader$f = `#version 300 es
 
 precision highp float;
 
@@ -76073,10 +76078,10 @@ void main() {
   outColor = vec4(uv.x, 0.2, uv.y + wave, 1.0);
 }
 `;
-function setupWebgl$h(canvas3) {
+function setupWebgl$j(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
-  const program = createProgramForShaders$1(gl, vertexShader$e, fragmentShader$e);
+  const program = createProgramForShaders$1(gl, vertexShader$f, fragmentShader$f);
   gl.useProgram(program);
   const vertexBuffer = createBuffer(gl);
   const vertexData = new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]);
@@ -76117,20 +76122,20 @@ function setupWebgl$h(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$m = {
+const example$o = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
   description: "Hello world for WebGL2 with reduced boilerplate using utility functions.",
-  Component: createCanvasComponent(setupWebgl$h, {
+  Component: createCanvasComponent(setupWebgl$j, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$8 = 8;
-const HEIGHT$8 = 8;
-const vertexShader$d = `#version 300 es
+const WIDTH$a = 8;
+const HEIGHT$a = 8;
+const vertexShader$e = `#version 300 es
 
 in vec2 a_position;
 in vec2 a_texCoord;
@@ -76150,7 +76155,7 @@ void main() {
   v_texCoord = a_texCoord;
 }
 `;
-const fragmentShader$d = `#version 300 es
+const fragmentShader$e = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76190,16 +76195,16 @@ function createAndUploadTexture$1(gl, image) {
 }
 function setupWebglWithImages$1(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$8;
-  canvas3.height = HEIGHT$8;
+  canvas3.width = WIDTH$a;
+  canvas3.height = HEIGHT$a;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$d, fragmentShader$d);
+  const program = createProgramForShaders$1(gl, vertexShader$e, fragmentShader$e);
   const vao = createVertexArray(gl);
   gl.bindVertexArray(vao);
   const positionBuffer = createBuffer(gl);
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$8, HEIGHT$8), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, getQuadPositions(0, 0, WIDTH$a, HEIGHT$a), gl.STATIC_DRAW);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   gl.enableVertexAttribArray(positionAttributeLocation);
   gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
@@ -76243,7 +76248,7 @@ function setupWebglWithImages$1(canvas3, images) {
     }
   };
 }
-function setupWebgl$g(canvas3) {
+function setupWebgl$i(canvas3) {
   let cleanup = () => {
   };
   Promise.all(IMAGES$5.map((img) => loadImage$1(img))).then((images) => {
@@ -76251,19 +76256,19 @@ function setupWebgl$g(canvas3) {
   });
   return () => cleanup();
 }
-const example$l = {
+const example$n = {
   id: "webgl-texture",
   filename: "17-webgl-texture.tsx",
   name: "WebGL texture",
   description: "Load and render a texture with WebGL2, based off https://webgl2fundamentals.org/webgl/lessons/webgl-image-processing.html",
-  Component: createCanvasComponent(setupWebgl$g, {
+  Component: createCanvasComponent(setupWebgl$i, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader$c = `#version 300 es
+const vertexShader$d = `#version 300 es
 
 in vec2 a_position;
 in vec2 a_texCoord;
@@ -76283,7 +76288,7 @@ void main() {
   v_texCoord = a_texCoord;
 }
 `;
-const fragmentShader$c = `#version 300 es
+const fragmentShader$d = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76320,7 +76325,7 @@ function setupWebglWithImages(canvas3, images) {
   canvas3.height = 8 * 16;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$c, fragmentShader$c);
+  const program = createProgramForShaders$1(gl, vertexShader$d, fragmentShader$d);
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
   const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
@@ -76373,7 +76378,7 @@ function setupWebglWithImages(canvas3, images) {
     }
   };
 }
-function setupWebgl$f(canvas3) {
+function setupWebgl$h(canvas3) {
   let cleanup = () => {
   };
   Promise.all(IMAGES$4.map((img) => loadImage(img))).then((images) => {
@@ -76381,21 +76386,21 @@ function setupWebgl$f(canvas3) {
   });
   return () => cleanup();
 }
-const example$k = {
+const example$m = {
   id: "webgl-texture-upscale",
   filename: "18-webgl-texture-upscale.tsx",
   name: "WebGL texture upscale",
   description: "Load and render a texture with WebGL2 while upscaling linearly",
-  Component: createCanvasComponent(setupWebgl$f, {
+  Component: createCanvasComponent(setupWebgl$h, {
     style: {
       height: "640px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$7 = 8;
-const HEIGHT$7 = 8;
-const vertexShader$b = `#version 300 es
+const WIDTH$9 = 8;
+const HEIGHT$9 = 8;
+const vertexShader$c = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76405,7 +76410,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$b = `#version 300 es
+const fragmentShader$c = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76417,14 +76422,14 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$e(canvas3, images) {
+function setupWebgl$g(canvas3, images) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$7;
-  canvas3.height = HEIGHT$7;
+  canvas3.width = WIDTH$9;
+  canvas3.height = HEIGHT$9;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$b, fragmentShader$b);
+  const program = createProgramForShaders$1(gl, vertexShader$c, fragmentShader$c);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76460,21 +76465,21 @@ function setupWebgl$e(canvas3, images) {
   };
 }
 const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$j = {
+const example$l = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
   description: "Load and render a texture with WebGL2 simplified a bit",
-  Component: createCanvasComponentWithImages(setupWebgl$e, IMAGES$3, {
+  Component: createCanvasComponentWithImages(setupWebgl$g, IMAGES$3, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$6 = 8;
-const HEIGHT$6 = 8;
-const vertexShader$a = `#version 300 es
+const WIDTH$8 = 8;
+const HEIGHT$8 = 8;
+const vertexShader$b = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76484,7 +76489,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$a = `#version 300 es
+const fragmentShader$b = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76496,15 +76501,15 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$d(canvas3) {
+function setupWebgl$f(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$6;
-  canvas3.height = HEIGHT$6;
+  canvas3.width = WIDTH$8;
+  canvas3.height = HEIGHT$8;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$a, fragmentShader$a);
+  const program = createProgramForShaders$1(gl, vertexShader$b, fragmentShader$b);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76532,19 +76537,19 @@ function setupWebgl$d(canvas3) {
     resources.deleteAll();
   };
 }
-const example$i = {
+const example$k = {
   id: "webgl-texture-data-in",
   filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
   description: "Loading data into a texture",
-  Component: createCanvasComponent(setupWebgl$d, {
+  Component: createCanvasComponent(setupWebgl$f, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader$9 = `#version 300 es
+const vertexShader$a = `#version 300 es
 precision highp float;
 
 uniform highp sampler2D u_dataTexture;
@@ -76564,7 +76569,7 @@ void main() {
   gl_Position = vec4(a_pos.x, a_pos.y + data.x, 0.0, 1.0);
 }
 `;
-const fragmentShader$9 = `#version 300 es
+const fragmentShader$a = `#version 300 es
 precision highp float;
 
 out vec4 outColor;
@@ -76586,7 +76591,7 @@ for (let x2 = -1; x2 < 1; x2 += 0.1) {
   POSITION_OFFSETS.push(x2 * x2 * x2, 0, 0, 0);
   i++;
 }
-function setupWebgl$c(canvas3) {
+function setupWebgl$e(canvas3) {
   const gl = getWebgl2Context(canvas3);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
@@ -76597,7 +76602,7 @@ function setupWebgl$c(canvas3) {
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
-  const program = createProgramForShaders$1(gl, vertexShader$9, fragmentShader$9);
+  const program = createProgramForShaders$1(gl, vertexShader$a, fragmentShader$a);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76640,20 +76645,20 @@ function setupWebgl$c(canvas3) {
     resources.deleteAll();
   };
 }
-const example$h = {
+const example$j = {
   id: "webgl-texture-floats",
   filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
   description: "Renders tris from positions directly in clip space, then offsets them according to float data passed through a texture.",
-  Component: createCanvasComponent(setupWebgl$c, {
+  Component: createCanvasComponent(setupWebgl$e, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$5 = 8;
-const HEIGHT$5 = 8;
-const vertexShader$8 = `#version 300 es
+const WIDTH$7 = 8;
+const HEIGHT$7 = 8;
+const vertexShader$9 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -76663,7 +76668,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$8 = `#version 300 es
+const fragmentShader$9 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -76675,17 +76680,17 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$b(canvas3, [image]) {
+function setupWebgl$d(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  canvas3.width = WIDTH$5;
-  canvas3.height = HEIGHT$5;
+  canvas3.width = WIDTH$7;
+  canvas3.height = HEIGHT$7;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$8, fragmentShader$8);
+  const program = createProgramForShaders$1(gl, vertexShader$9, fragmentShader$9);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76706,8 +76711,8 @@ function setupWebgl$b(canvas3, [image]) {
     gl.TEXTURE_2D,
     1,
     gl.RGBA16F,
-    WIDTH$5,
-    HEIGHT$5
+    WIDTH$7,
+    HEIGHT$7
   );
   gl.bindTexture(gl.TEXTURE_2D, null);
   const framebuffer = resources.createFramebuffer();
@@ -76722,8 +76727,8 @@ function setupWebgl$b(canvas3, [image]) {
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.drawArrays(gl.TRIANGLES, 0, 6);
-  const readAsFloat = new Float32Array(WIDTH$5 * HEIGHT$5 * 4);
-  gl.readPixels(0, 0, WIDTH$5, HEIGHT$5, gl.RGBA, gl.FLOAT, readAsFloat);
+  const readAsFloat = new Float32Array(WIDTH$7 * HEIGHT$7 * 4);
+  gl.readPixels(0, 0, WIDTH$7, HEIGHT$7, gl.RGBA, gl.FLOAT, readAsFloat);
   console.log("float values for R G B and A channels, left to right, bottom to top", readAsFloat);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
   gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -76735,19 +76740,19 @@ function setupWebgl$b(canvas3, [image]) {
   };
 }
 const IMAGE$1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
-const example$g = {
+const example$i = {
   id: "webgl-extract-framebuffer",
   filename: "22-webgl-extract-framebuffer.tsx",
   name: "WebGL extract framebuffer",
   description: "Extract data from a framebuffer, logging float values to console",
-  Component: createCanvasComponentWithImages(setupWebgl$b, [IMAGE$1], {
+  Component: createCanvasComponentWithImages(setupWebgl$d, [IMAGE$1], {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader$7 = `#version 300 es
+const vertexShader$8 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -76759,7 +76764,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$7 = `#version 300 es
+const fragmentShader$8 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -76769,11 +76774,11 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$a(canvas3) {
+function setupWebgl$c(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$7, fragmentShader$7);
+  const program = createProgramForShaders$1(gl, vertexShader$8, fragmentShader$8);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76843,18 +76848,18 @@ function setupWebgl$a(canvas3) {
     resources.deleteAll();
   };
 }
-const example$f = {
+const example$h = {
   id: "webgl-buffer-interleaved",
   filename: "23-webgl-buffer-interleaved.tsx",
   name: "WebGL buffer interleaved",
   description: "Renders tris from positions directly in clip space from a single buffer of various interleaved attributes.",
-  Component: createCanvasComponent(setupWebgl$a, {
+  Component: createCanvasComponent(setupWebgl$c, {
     style: {
       height: "640px"
     }
   })
 };
-const vertexShader$6 = `#version 300 es
+const vertexShader$7 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -76867,7 +76872,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$6 = `#version 300 es
+const fragmentShader$7 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -76877,11 +76882,11 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$9(canvas3) {
+function setupWebgl$b(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$6, fragmentShader$6);
+  const program = createProgramForShaders$1(gl, vertexShader$7, fragmentShader$7);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -76941,19 +76946,19 @@ function setupWebgl$9(canvas3) {
     resources.deleteAll();
   };
 }
-const example$e = {
+const example$g = {
   id: "webgl-instancing",
   filename: "24-webgl-instancing.tsx",
   name: "WebGL buffer instancing",
   description: "Renders instanced triangles.",
-  Component: createCanvasComponent(setupWebgl$9, {
+  Component: createCanvasComponent(setupWebgl$b, {
     style: {
       height: "640px"
     }
   })
 };
-var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/25-webgl-oklab-color.tsx";
-const vertexShader$5 = `#version 300 es
+var _jsxFileName$2 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/25-webgl-oklab-color.tsx";
+const vertexShader$6 = `#version 300 es
 precision highp float;
 
 uniform float u_colorLightness;
@@ -76967,7 +76972,7 @@ void main() {
   v_color = vec3(u_colorLightness, pos.x * 0.33, pos.y * -0.33);
 }
 `;
-const fragmentShader$5 = `#version 300 es
+const fragmentShader$6 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -77031,7 +77036,7 @@ void main() {
 const lightness = {
   current: 0
 };
-function setupWebgl$8(canvasgl, canvas2d) {
+function setupWebgl$a(canvasgl, canvas2d) {
   const gl = getWebgl2Context(canvasgl);
   const ctx = canvas2d.getContext("2d");
   if (!ctx) {
@@ -77043,7 +77048,7 @@ function setupWebgl$8(canvasgl, canvas2d) {
   canvas2d.height = 320;
   gl.viewport(0, 0, canvasgl.width, canvasgl.height);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$5, fragmentShader$5);
+  const program = createProgramForShaders$1(gl, vertexShader$6, fragmentShader$6);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77084,7 +77089,7 @@ function setupWebgl$8(canvasgl, canvas2d) {
     resources.deleteAll();
   };
 }
-function Component() {
+function Component$1() {
   const refgl = react.exports.useRef(null);
   const ref2d = react.exports.useRef(null);
   react.exports.useEffect(() => {
@@ -77093,7 +77098,7 @@ function Component() {
     if (!canvasgl || !canvas2d) {
       return;
     }
-    return setupWebgl$8(canvasgl, canvas2d);
+    return setupWebgl$a(canvasgl, canvas2d);
   }, []);
   const [valueL, setL] = react.exports.useState(1);
   lightness.current = valueL;
@@ -77109,7 +77114,7 @@ function Component() {
       onChange: (e2) => setL(Number(e2.target.value)),
       step: 0.01
     }, void 0, false, {
-      fileName: _jsxFileName$1,
+      fileName: _jsxFileName$2,
       lineNumber: 200,
       columnNumber: 7
     }, this), valueL, /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -77119,7 +77124,7 @@ function Component() {
         height: "320px"
       }
     }, void 0, false, {
-      fileName: _jsxFileName$1,
+      fileName: _jsxFileName$2,
       lineNumber: 210,
       columnNumber: 7
     }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
@@ -77129,24 +77134,24 @@ function Component() {
         height: "320px"
       }
     }, void 0, false, {
-      fileName: _jsxFileName$1,
+      fileName: _jsxFileName$2,
       lineNumber: 211,
       columnNumber: 7
     }, this)]
   }, void 0, true, {
-    fileName: _jsxFileName$1,
+    fileName: _jsxFileName$2,
     lineNumber: 199,
     columnNumber: 5
   }, this);
 }
-const example$d = {
+const example$f = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL",
   description: "OKLAB color experiment in WebGL",
-  Component
+  Component: Component$1
 };
-const vertexShader$4 = `#version 300 es
+const vertexShader$5 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -77158,7 +77163,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader$4 = `#version 300 es
+const fragmentShader$5 = `#version 300 es
 precision highp float;
 
 in vec3 v_color;
@@ -77168,11 +77173,11 @@ void main() {
   outColor = vec4(v_color, 1.0);
 }
 `;
-function setupWebgl$7(canvas3) {
+function setupWebgl$9(canvas3) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$4, fragmentShader$4);
+  const program = createProgramForShaders$1(gl, vertexShader$5, fragmentShader$5);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77249,20 +77254,20 @@ function setupWebgl$7(canvas3) {
     resources.deleteAll();
   };
 }
-const example$c = {
+const example$e = {
   id: "webgl-draw-elements",
   filename: "26-webgl-draw-elements.tsx",
   name: "WebGL elements mesh",
   description: "Renders a mesh using drawElements()",
-  Component: createCanvasComponent(setupWebgl$7, {
+  Component: createCanvasComponent(setupWebgl$9, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$4 = 8;
-const HEIGHT$4 = 8;
-const vertexShader$3 = `#version 300 es
+const WIDTH$6 = 8;
+const HEIGHT$6 = 8;
+const vertexShader$4 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77272,7 +77277,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$3 = `#version 300 es
+const fragmentShader$4 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77284,14 +77289,14 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$6(canvas3, [image1, image2]) {
+function setupWebgl$8(canvas3, [image1, image2]) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$4;
-  canvas3.height = HEIGHT$4;
+  canvas3.width = WIDTH$6;
+  canvas3.height = HEIGHT$6;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
+  const program = createProgramForShaders$1(gl, vertexShader$4, fragmentShader$4);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77319,9 +77324,9 @@ function setupWebgl$6(canvas3, [image1, image2]) {
     gl.activeTexture(gl.TEXTURE0 + TEXTURE_INDEX);
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.pixelStorei(gl.UNPACK_SKIP_PIXELS, xo);
-    gl.pixelStorei(gl.UNPACK_SKIP_ROWS, HEIGHT$4 - h2 - yo);
+    gl.pixelStorei(gl.UNPACK_SKIP_ROWS, HEIGHT$6 - h2 - yo);
     gl.pixelStorei(gl.UNPACK_ROW_LENGTH, w2);
-    gl.texSubImage2D(gl.TEXTURE_2D, 0, x2, HEIGHT$4 - h2 - y2, w2, h2, gl.RGBA, gl.UNSIGNED_BYTE, image2);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, x2, HEIGHT$6 - h2 - y2, w2, h2, gl.RGBA, gl.UNSIGNED_BYTE, image2);
     gl.bindTexture(gl.TEXTURE_2D, null);
   };
   const render = () => {
@@ -77343,21 +77348,21 @@ function setupWebgl$6(canvas3, [image1, image2]) {
   };
 }
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$b = {
+const example$d = {
   id: "webgl-texture-patch",
   filename: "27-webgl-texture-patch.tsx",
   name: "WebGL texture patch",
   description: "Load and render a texture with WebGL2, then patch a subset of pixels",
-  Component: createCanvasComponentWithImages(setupWebgl$6, IMAGES$2, {
+  Component: createCanvasComponentWithImages(setupWebgl$8, IMAGES$2, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$3 = 256;
-const HEIGHT$3 = 256;
-const quadVertexShader$2 = `#version 300 es
+const WIDTH$5 = 256;
+const HEIGHT$5 = 256;
+const quadVertexShader$3 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77377,7 +77382,7 @@ void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
 }
 `;
-const hueCycleFragmentShader = `#version 300 es
+const hueCycleFragmentShader$1 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77402,18 +77407,18 @@ void main() {
   outColor = texture(u_image, v_uv * 2.0);
 }
 `;
-function setupWebgl$5(canvas3) {
+function setupWebgl$7(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$3;
-  canvas3.height = HEIGHT$3;
+  canvas3.width = WIDTH$5;
+  canvas3.height = HEIGHT$5;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$2, gradientFragmentShader$2);
-  const hueCycleProgram = createProgramForShaders$1(gl, quadVertexShader$2, hueCycleFragmentShader);
-  const tileProgram = createProgramForShaders$1(gl, quadVertexShader$2, tileFragmentShader);
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$3, gradientFragmentShader$2);
+  const hueCycleProgram = createProgramForShaders$1(gl, quadVertexShader$3, hueCycleFragmentShader$1);
+  const tileProgram = createProgramForShaders$1(gl, quadVertexShader$3, tileFragmentShader);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77424,10 +77429,10 @@ function setupWebgl$5(canvas3) {
   });
   const framebufferTexture1 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$3, HEIGHT$3);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$5, HEIGHT$5);
   const framebufferTexture2 = resources.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
-  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$3, HEIGHT$3);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$5, HEIGHT$5);
   gl.bindTexture(gl.TEXTURE_2D, null);
   const framebuffer1 = resources.createFramebuffer();
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
@@ -77460,21 +77465,21 @@ function setupWebgl$5(canvas3) {
     resources.deleteAll();
   };
 }
-const example$a = {
+const example$c = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
   description: "Renders to and from framebuffers repeatedly",
-  Component: createCanvasComponent(setupWebgl$5, {
+  Component: createCanvasComponent(setupWebgl$7, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH$2 = 64;
-const HEIGHT$2 = 64;
-const vertexShader$2 = `#version 300 es
+const WIDTH$4 = 64;
+const HEIGHT$4 = 64;
+const vertexShader$3 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77484,7 +77489,7 @@ void main() {
   v_uv = a_pos;
 }
 `;
-const fragmentShader$2 = `#version 300 es
+const fragmentShader$3 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image1;
@@ -77514,14 +77519,14 @@ function createUploadAndBindTexture(gl, resources, image, slot) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   gl.bindTexture(gl.TEXTURE_2D, texture);
 }
-function setupWebgl$4(canvas3, [image1, image2, image3]) {
+function setupWebgl$6(canvas3, [image1, image2, image3]) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$2;
-  canvas3.height = HEIGHT$2;
+  canvas3.width = WIDTH$4;
+  canvas3.height = HEIGHT$4;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
+  const program = createProgramForShaders$1(gl, vertexShader$3, fragmentShader$3);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77548,19 +77553,19 @@ function setupWebgl$4(canvas3, [image1, image2, image3]) {
   };
 }
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$9 = {
+const example$b = {
   id: "webgl-texture-many-samplers",
   filename: "29-webgl-texture-many-samplers.tsx",
   name: "WebGL texture many samplers",
   description: "Load and render a combination of 3 textures in the same frag shader",
-  Component: createCanvasComponentWithImages(setupWebgl$4, IMAGES$1, {
+  Component: createCanvasComponentWithImages(setupWebgl$6, IMAGES$1, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader$1 = `#version 300 es
+const vertexShader$2 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -77574,7 +77579,7 @@ void main() {
   v_uv.y /= 0.3;
 }
 `;
-const fragmentShader$1 = `#version 300 es
+const fragmentShader$2 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77586,11 +77591,11 @@ void main() {
   outColor = texture(u_image, v_uv);
 }
 `;
-function setupWebgl$3(canvas3, [image]) {
+function setupWebgl$5(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
-  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
+  const program = createProgramForShaders$1(gl, vertexShader$2, fragmentShader$2);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77675,20 +77680,20 @@ function setupWebgl$3(canvas3, [image]) {
   };
 }
 const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII="];
-const example$8 = {
+const example$a = {
   id: "webgl-draw-elements-textured",
   filename: "30-webgl-draw-elements-textured.tsx",
   name: "WebGL elements textured mesh",
   description: "Renders a textured mesh using drawElements()",
-  Component: createCanvasComponentWithImages(setupWebgl$3, IMAGES, {
+  Component: createCanvasComponentWithImages(setupWebgl$5, IMAGES, {
     style: {
       height: "640px"
     }
   })
 };
-const WIDTH$1 = 256;
-const HEIGHT$1 = 256;
-const quadVertexShader$1 = `#version 300 es
+const WIDTH$3 = 256;
+const HEIGHT$3 = 256;
+const quadVertexShader$2 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77708,16 +77713,16 @@ void main() {
   outColor = vec4(v_uv.x, 0.0, v_uv.y, 1.0);
 }
 `;
-function setupWebgl$2(canvas3) {
+function setupWebgl$4(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH$1;
-  canvas3.height = HEIGHT$1;
+  canvas3.width = WIDTH$3;
+  canvas3.height = HEIGHT$3;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   if (!gl.getExtension("EXT_color_buffer_float")) {
     throw new Error("No EXT_color_buffer_float");
   }
-  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$1, gradientFragmentShader$1);
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$2, gradientFragmentShader$1);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77737,21 +77742,21 @@ function setupWebgl$2(canvas3) {
     resources.deleteAll();
   };
 }
-const example$7 = {
+const example$9 = {
   id: "webgl-scissor",
   filename: "31-webgl-scissor.tsx",
   name: "WebGL scissor",
   description: "Renders only a small region of a gradient using gl.scissor",
-  Component: createCanvasComponent(setupWebgl$2, {
+  Component: createCanvasComponent(setupWebgl$4, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const WIDTH = 8192;
-const HEIGHT = 8192;
-const quadVertexShader = `#version 300 es
+const WIDTH$2 = 8192;
+const HEIGHT$2 = 8192;
+const quadVertexShader$1 = `#version 300 es
 
 in vec2 a_pos;
 out vec2 v_uv;
@@ -77773,10 +77778,10 @@ void main() {
   }
 }
 `;
-function setupWebgl$1(canvas3) {
+function setupWebgl$3(canvas3) {
   const gl = getWebgl2Context(canvas3);
-  canvas3.width = WIDTH;
-  canvas3.height = HEIGHT;
+  canvas3.width = WIDTH$2;
+  canvas3.height = HEIGHT$2;
   gl.viewport(0, 0, canvas3.width, canvas3.height);
   gl.clearColor(0, 0, 0, 0);
   if (!gl.getExtension("EXT_color_buffer_float")) {
@@ -77786,7 +77791,7 @@ function setupWebgl$1(canvas3) {
   if (!ext) {
     throw new Error("EXT_disjoint_timer_query_webgl2 not supported.");
   }
-  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader, gradientFragmentShader);
+  const gradientProgram = createProgramForShaders$1(gl, quadVertexShader$1, gradientFragmentShader);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77836,19 +77841,19 @@ function setupWebgl$1(canvas3) {
     resources.deleteAll();
   };
 }
-const example$6 = {
+const example$8 = {
   id: "webgl-scissor-perf",
   filename: "32-webgl-scissor-perf.tsx",
   name: "WebGL scissor perf test",
   description: "Renders a huge canvas with and without scissoring a single pixel to try to see any measurable evidence of performance differences. Answer: i cant tell",
-  Component: createCanvasComponent(setupWebgl$1, {
+  Component: createCanvasComponent(setupWebgl$3, {
     style: {
       height: "320px",
       imageRendering: "pixelated"
     }
   })
 };
-const vertexShader = `#version 300 es
+const vertexShader$1 = `#version 300 es
 precision highp float;
 
 in vec2 a_pos;
@@ -77863,7 +77868,7 @@ void main() {
   v_color = a_color;
 }
 `;
-const fragmentShader = `#version 300 es
+const fragmentShader$1 = `#version 300 es
 precision highp float;
 
 uniform sampler2D u_image;
@@ -77877,13 +77882,13 @@ void main() {
   outColor = vec4(v_color, texture(u_image, v_uv).r);
 }
 `;
-function setupWebgl(canvas3, [image]) {
+function setupWebgl$2(canvas3, [image]) {
   const gl = getWebgl2Context(canvas3);
   updateCanvasSize$1(canvas3, gl);
   gl.clearColor(0, 0, 0, 0);
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
+  const program = createProgramForShaders$1(gl, vertexShader$1, fragmentShader$1);
   const resources = new WebGLResourceManager(gl);
   const vao = resources.createVertexArray();
   gl.bindVertexArray(vao);
@@ -77959,12 +77964,12 @@ function setupWebgl(canvas3, [image]) {
   };
 }
 const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAGBJREFUKFOVkEsNwEAIRAczawADqwZPoAYDGMBMGzalSQ9tuhzhZT4QgAPXiAiYGREBM+s1aAtqlTEGMvOhRiKy7MqmgDkn3P0G60aquqAGOkiDC/ql1ME/M221K++3P51AL08w00t2+wAAAABJRU5ErkJggg==";
-const example$5 = {
+const example$7 = {
   id: "webgl-overlay-transparent-textures",
   filename: "33-webgl-overlay-transparent-textures.tsx",
   name: "WebGL overlay transparent textures",
   description: "Renders many transparent textured sprites on top of each other. Uses instancing.",
-  Component: createCanvasComponentWithImages(setupWebgl, [IMAGE], {
+  Component: createCanvasComponentWithImages(setupWebgl$2, [IMAGE], {
     style: {
       height: "640px"
     }
@@ -78083,7 +78088,7 @@ void main() {
   outColor = vec4(color.x, 0., color.y, 1.);
 }
 `;
-const example$4 = {
+const example$6 = {
   id: "shadertoy-clone",
   filename: "34-shadertoy-clone.tsx",
   name: "Shadertoy clone",
@@ -78102,7 +78107,7 @@ void main() {
   outColor = vec4(r, 0., b, 1.);
 }
 `;
-const example$3 = {
+const example$5 = {
   id: "shadertoy-exact-pixel",
   filename: "35-shadertoy-exact-pixel.tsx",
   name: "Shadertoy exact pixel",
@@ -78169,7 +78174,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example$2 = {
+const example$4 = {
   id: "raymarching-metaballs",
   filename: "36-raymarching-metaballs.tsx",
   name: "Shadertoy raymarching metaballs",
@@ -78267,7 +78272,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example$1 = {
+const example$3 = {
   id: "raymarching-metaballs-with-light",
   filename: "37-raymarching-metaballs-with-light.tsx",
   name: "Shadertoy raymarching metaballs with light",
@@ -78570,7 +78575,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example = {
+const example$2 = {
   id: "4xbr-smoothing",
   filename: "38-4xbr-smoothing.tsx",
   name: "4xBR smoothing",
@@ -78583,7 +78588,408 @@ const example = {
     shader
   })
 };
+const WIDTH$1 = 64;
+const HEIGHT$1 = 64;
+const FRAMEBUFFER_WIDTH = 1024;
+const FRAMEBUFFER_HEIGHT = 1024;
+const quadVertexShader = `#version 300 es
+
+in vec2 a_pos;
+out vec2 v_uv;
+
+void main() {
+  gl_Position = vec4((a_pos * 2.0) - 1.0, 0, 1);
+  v_uv = a_pos;
+}
+`;
+const noiseFragmentShader = `#version 300 es
+precision highp float;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  float r = fract(sin(v_uv.x + v_uv.y * 3.7) * 999999.9);
+  float l = 0.;
+  if(r > 0.5) {
+    l = 1.;
+  }
+  outColor = vec4(l, l, l, 1.0); // only white or black pixels
+}
+`;
+const hueCycleFragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D u_image;
+
+in vec2 v_uv;
+out vec4 outColor;
+
+void main() {
+  vec4 sampled = texture(u_image, v_uv);
+  outColor = vec4(sampled.g, sampled.b, sampled.r, 1.0);
+}
+`;
+function setupWebgl$1(canvas3) {
+  const gl = getWebgl2Context(canvas3);
+  canvas3.width = WIDTH$1;
+  canvas3.height = HEIGHT$1;
+  gl.viewport(0, 0, canvas3.width, canvas3.height);
+  gl.clearColor(0, 0, 0, 0);
+  if (!gl.getExtension("EXT_color_buffer_float")) {
+    throw new Error("No EXT_color_buffer_float");
+  }
+  const noiseProgram = createProgramForShaders$1(
+    gl,
+    quadVertexShader,
+    noiseFragmentShader
+  );
+  const hueCycleProgram = createProgramForShaders$1(
+    gl,
+    quadVertexShader,
+    hueCycleFragmentShader
+  );
+  const resources = new WebGLResourceManager(gl);
+  const vao = resources.createVertexArray();
+  gl.bindVertexArray(vao);
+  createAttribute(gl, noiseProgram, {
+    name: "a_pos",
+    buffer: resources.createBuffer(
+      new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1])
+    ),
+    size: 2
+  });
+  const framebufferTexture1 = resources.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texStorage2D(
+    gl.TEXTURE_2D,
+    1,
+    gl.RGBA16F,
+    FRAMEBUFFER_WIDTH,
+    FRAMEBUFFER_HEIGHT
+  );
+  const framebufferTexture2 = resources.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture2);
+  gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA16F, WIDTH$1, HEIGHT$1);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+  const framebuffer1 = resources.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
+  gl.framebufferTexture2D(
+    gl.FRAMEBUFFER,
+    gl.COLOR_ATTACHMENT0,
+    gl.TEXTURE_2D,
+    framebufferTexture1,
+    0
+  );
+  const framebuffer2 = resources.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer2);
+  gl.framebufferTexture2D(
+    gl.FRAMEBUFFER,
+    gl.COLOR_ATTACHMENT0,
+    gl.TEXTURE_2D,
+    framebufferTexture2,
+    0
+  );
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  const renderQuad = () => {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  };
+  gl.useProgram(noiseProgram);
+  gl.viewport(0, 0, FRAMEBUFFER_WIDTH, FRAMEBUFFER_HEIGHT);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer1);
+  renderQuad();
+  gl.useProgram(hueCycleProgram);
+  gl.viewport(0, 0, WIDTH$1, HEIGHT$1);
+  gl.bindTexture(gl.TEXTURE_2D, framebufferTexture1);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  renderQuad();
+  return () => {
+    unbindAll(gl);
+    resources.deleteAll();
+  };
+}
+const example$1 = {
+  id: "webgl-framebuffer-sizing",
+  filename: "39-webgl-framebuffer-sizing.tsx",
+  name: "WebGL framebuffer sizing",
+  description: "Renders to a framebuffer of a different size to the canvas. Grey pixels show that the framebuffer was rendered at a higher resolution and downsampled for rendering to the canvas.",
+  Component: createCanvasComponent(setupWebgl$1, {
+    style: { height: `${HEIGHT$1 * 3}px`, imageRendering: "pixelated" }
+  })
+};
+var ARRAY_TYPE = typeof Float32Array !== "undefined" ? Float32Array : Array;
+if (!Math.hypot)
+  Math.hypot = function() {
+    var y2 = 0, i2 = arguments.length;
+    while (i2--) {
+      y2 += arguments[i2] * arguments[i2];
+    }
+    return Math.sqrt(y2);
+  };
+function create$1() {
+  var out = new ARRAY_TYPE(6);
+  if (ARRAY_TYPE != Float32Array) {
+    out[1] = 0;
+    out[2] = 0;
+    out[4] = 0;
+    out[5] = 0;
+  }
+  out[0] = 1;
+  out[3] = 1;
+  return out;
+}
+function clone(a2) {
+  var out = new ARRAY_TYPE(6);
+  out[0] = a2[0];
+  out[1] = a2[1];
+  out[2] = a2[2];
+  out[3] = a2[3];
+  out[4] = a2[4];
+  out[5] = a2[5];
+  return out;
+}
+function rotate(out, a2, rad) {
+  var a0 = a2[0], a1 = a2[1], a22 = a2[2], a3 = a2[3], a4 = a2[4], a5 = a2[5];
+  var s2 = Math.sin(rad);
+  var c2 = Math.cos(rad);
+  out[0] = a0 * c2 + a22 * s2;
+  out[1] = a1 * c2 + a3 * s2;
+  out[2] = a0 * -s2 + a22 * c2;
+  out[3] = a1 * -s2 + a3 * c2;
+  out[4] = a4;
+  out[5] = a5;
+  return out;
+}
+function translate(out, a2, v2) {
+  var a0 = a2[0], a1 = a2[1], a22 = a2[2], a3 = a2[3], a4 = a2[4], a5 = a2[5];
+  var v0 = v2[0], v1 = v2[1];
+  out[0] = a0;
+  out[1] = a1;
+  out[2] = a22;
+  out[3] = a3;
+  out[4] = a0 * v0 + a22 * v1 + a4;
+  out[5] = a1 * v0 + a3 * v1 + a5;
+  return out;
+}
+function multiplyScalar(out, a2, b2) {
+  out[0] = a2[0] * b2;
+  out[1] = a2[1] * b2;
+  out[2] = a2[2] * b2;
+  out[3] = a2[3] * b2;
+  out[4] = a2[4] * b2;
+  out[5] = a2[5] * b2;
+  return out;
+}
+function create() {
+  var out = new ARRAY_TYPE(2);
+  if (ARRAY_TYPE != Float32Array) {
+    out[0] = 0;
+    out[1] = 0;
+  }
+  return out;
+}
+function fromValues(x2, y2) {
+  var out = new ARRAY_TYPE(2);
+  out[0] = x2;
+  out[1] = y2;
+  return out;
+}
+(function() {
+  var vec = create();
+  return function(a2, stride, offset, count2, fn, arg) {
+    var i2, l2;
+    if (!stride) {
+      stride = 2;
+    }
+    if (!offset) {
+      offset = 0;
+    }
+    if (count2) {
+      l2 = Math.min(count2 * stride + offset, a2.length);
+    } else {
+      l2 = a2.length;
+    }
+    for (i2 = offset; i2 < l2; i2 += stride) {
+      vec[0] = a2[i2];
+      vec[1] = a2[i2 + 1];
+      fn(vec, vec, arg);
+      a2[i2] = vec[0];
+      a2[i2 + 1] = vec[1];
+    }
+    return a2;
+  };
+})();
+var _jsxFileName$1 = "/home/runner/work/webgl-experiments/webgl-experiments/src/experiments/40-webgl-mat2d-transform.tsx";
+const vertexShader = `#version 300 es
+precision highp float;
+
+uniform vec2 u_resolution;
+
+in mat3 a_matrix;
+in vec3 a_color;
+in vec2 a_vertexPos;
+out vec3 v_color;
+
+void main() {
+  vec3 pos = a_matrix * vec3(a_vertexPos, 1.);
+  vec3 pos2 = pos / vec3(u_resolution, 1.) * 2.;
+  vec3 clip = vec3(pos2.x - 1., 1. - pos2.y, pos2.z);
+  gl_Position = vec4(clip.xy, 0., 1.);
+  v_color = a_color;
+}
+`;
+const fragmentShader = `#version 300 es
+precision highp float;
+
+in vec3 v_color;
+out vec4 outColor;
+
+void main() {
+  outColor = vec4(v_color, 1.0);
+}
+`;
+const WIDTH = 640;
+const HEIGHT = 320;
+const TRIANGLE_VERTICES = [0, 0, WIDTH * 0.1, 0, 0, HEIGHT * 0.1];
+const identity = create$1();
+const TRANSFORM_EXAMPLES = [{
+  m: clone(identity),
+  rgb: [1, 1, 1]
+}, {
+  m: multiplyScalar(create$1(), identity, 0.5),
+  rgb: [1, 0, 0]
+}, {
+  m: translate(create$1(), identity, fromValues(100, 50)),
+  rgb: [0, 0.5, 0]
+}, {
+  m: rotate(create$1(), identity, Math.PI / 3),
+  rgb: [0.3, 0.3, 1]
+}];
+function setupWebgl(canvasgl, canvas2d) {
+  const gl = getWebgl2Context(canvasgl);
+  const ctx = canvas2d.getContext("2d");
+  if (!ctx) {
+    throw new Error("no 2d ctx");
+  }
+  canvasgl.width = WIDTH;
+  canvasgl.height = HEIGHT;
+  canvas2d.width = WIDTH;
+  canvas2d.height = HEIGHT;
+  gl.viewport(0, 0, canvasgl.width, canvasgl.height);
+  for (const {
+    m: m2,
+    rgb
+  } of TRANSFORM_EXAMPLES) {
+    ctx.setTransform(m2[0], m2[1], m2[2], m2[3], m2[4], m2[5]);
+    ctx.fillStyle = `rgb(${rgb[0] * 255}, ${rgb[1] * 255}, ${rgb[2] * 255})`;
+    ctx.beginPath();
+    const t2 = TRIANGLE_VERTICES;
+    ctx.moveTo(t2[0], t2[1]);
+    ctx.lineTo(t2[2], t2[3]);
+    ctx.lineTo(t2[4], t2[5]);
+    ctx.fill();
+  }
+  const program = createProgramForShaders$1(gl, vertexShader, fragmentShader);
+  const resources = new WebGLResourceManager(gl);
+  const vao = resources.createVertexArray();
+  gl.bindVertexArray(vao);
+  const VERTEX_COUNT = 3;
+  createAttribute(gl, program, {
+    name: "a_vertexPos",
+    buffer: resources.createBuffer(new Float32Array(TRIANGLE_VERTICES)),
+    size: 2
+  });
+  const bufferData = [];
+  for (const {
+    m: m2,
+    rgb
+  } of TRANSFORM_EXAMPLES) {
+    bufferData.push(m2[0], m2[1], 0, m2[2], m2[3], 0, m2[4], m2[5], 1, ...rgb);
+  }
+  console.log("bufferData", bufferData);
+  const buffer = resources.createBuffer(new Float32Array(bufferData));
+  const ELEMENTS_PER_CHUNK = 12;
+  const BYTES_IN_FLOAT = 4;
+  createAttribute(gl, program, {
+    name: "a_matrix",
+    buffer,
+    size: 3,
+    matrixSize: 3,
+    stride: ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT,
+    instanced: true
+  });
+  createAttribute(gl, program, {
+    name: "a_color",
+    buffer,
+    size: 3,
+    stride: ELEMENTS_PER_CHUNK * BYTES_IN_FLOAT,
+    offset: 9 * BYTES_IN_FLOAT,
+    instanced: true
+  });
+  gl.useProgram(program);
+  const uniforms = getUniformLocations(gl, program, ["u_resolution"], true);
+  gl.uniform2f(uniforms.u_resolution, WIDTH, HEIGHT);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArraysInstanced(gl.TRIANGLES, 0, VERTEX_COUNT, bufferData.length / ELEMENTS_PER_CHUNK);
+  return () => {
+    unbindAll(gl);
+    resources.deleteAll();
+  };
+}
+function Component() {
+  const refgl = react.exports.useRef(null);
+  const ref2d = react.exports.useRef(null);
+  react.exports.useEffect(() => {
+    const canvasgl = refgl.current;
+    const canvas2d = ref2d.current;
+    if (!canvasgl || !canvas2d) {
+      return;
+    }
+    return setupWebgl(canvasgl, canvas2d);
+  }, []);
+  return /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("div", {
+    children: [/* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+      ref: ref2d,
+      style: {
+        width: `${WIDTH}px`,
+        height: `${HEIGHT}px`
+      }
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 188,
+      columnNumber: 7
+    }, this), /* @__PURE__ */ jsxDevRuntime.exports.jsxDEV("canvas", {
+      ref: refgl,
+      style: {
+        width: `${WIDTH}px`,
+        height: `${HEIGHT}px`
+      }
+    }, void 0, false, {
+      fileName: _jsxFileName$1,
+      lineNumber: 192,
+      columnNumber: 7
+    }, this)]
+  }, void 0, true, {
+    fileName: _jsxFileName$1,
+    lineNumber: 187,
+    columnNumber: 5
+  }, this);
+}
+const example = {
+  id: "webgl-mat2d-transform",
+  filename: "40-webgl-mat2d-transform.tsx",
+  name: "WebGL mat2d transform like 2d canvas ctx",
+  description: "Replicate canvas 2d's mat2d transform in WebGL. Also uses createAttribute() matrixSize to set multiple attribute locations to enable the use of mat data types with instancing",
+  Component
+};
 const all = [
+  example$E,
+  example$D,
   example$C,
   example$B,
   example$A,
