@@ -23716,7 +23716,7 @@ function Component$h() {
     columnNumber: 10
   }, this);
 }
-const example$F = {
+const example$G = {
   id: "blank",
   filename: "00-blank.tsx",
   name: "Blank experiment",
@@ -23755,7 +23755,7 @@ function Component$g() {
     columnNumber: 10
   }, this);
 }
-const example$E = {
+const example$F = {
   id: "offscreen-canvas",
   filename: "01-offscreen-canvas.tsx",
   name: "Offscreen canvas",
@@ -23796,7 +23796,7 @@ function Component$f() {
     columnNumber: 10
   }, this);
 }
-const example$D = {
+const example$E = {
   id: "offscreen-canvas-worker",
   filename: "02-offscreen-canvas-worker.tsx",
   name: "Offscreen canvas in a worker",
@@ -46994,7 +46994,7 @@ function Component$e() {
     columnNumber: 10
   }, this);
 }
-const example$C = {
+const example$D = {
   id: "pixijs-bunnies",
   filename: "03-pixijs-bunnies.tsx",
   name: "Pixi bunnies",
@@ -47045,7 +47045,7 @@ function Component$d() {
     columnNumber: 10
   }, this);
 }
-const example$B = {
+const example$C = {
   id: "pixijs-bunnies-offscreen",
   filename: "04-pixijs-bunnies-offscreen.tsx",
   name: "Pixi bunnies on offscreen canvas",
@@ -47095,7 +47095,7 @@ function Component$c() {
     columnNumber: 10
   }, this);
 }
-const example$A = {
+const example$B = {
   id: "pixijs-bunnies-offscreen-2",
   filename: "05-pixijs-bunnies-offscreen-2.tsx",
   name: "Pixi bunnies on offscreen canvas 2",
@@ -47136,7 +47136,7 @@ function Component$b() {
     columnNumber: 10
   }, this);
 }
-const example$z = {
+const example$A = {
   id: "pixijs-bunnies-worker",
   filename: "06-pixijs-bunnies-worker.tsx",
   name: "Pixi bunnies in a worker",
@@ -47173,7 +47173,7 @@ function Component$a() {
     columnNumber: 10
   }, this);
 }
-const example$y = {
+const example$z = {
   id: "pixijs-bunnies-worker-transfer",
   filename: "06-pixijs-bunnies-worker-transfer.tsx",
   name: "Pixi bunnies in a worker using transferControlToOffscreen()",
@@ -64726,7 +64726,7 @@ function Component$9() {
     columnNumber: 10
   }, this);
 }
-const example$x = {
+const example$y = {
   id: "threejs-hello-world",
   filename: "08-threejs-hello-world.tsx",
   name: "Three hello world",
@@ -64779,7 +64779,7 @@ function Component$8() {
     columnNumber: 10
   }, this);
 }
-const example$w = {
+const example$x = {
   id: "threejs-hello-world-offscreen",
   filename: "08-threejs-hello-world-offscreen.tsx",
   name: "Three with offscreen canvas",
@@ -64845,7 +64845,7 @@ function Component$7() {
     }, this)]
   }, void 0, true);
 }
-const example$v = {
+const example$w = {
   id: "threejs-texture",
   filename: "10-threejs-texture.tsx",
   name: "Three rendering a texture",
@@ -64894,7 +64894,7 @@ function Component$6() {
     columnNumber: 10
   }, this);
 }
-const example$u = {
+const example$v = {
   id: "pixijs-blend-modes",
   filename: "11-pixijs-blend-modes.tsx",
   name: "Pixi blend modes",
@@ -75459,7 +75459,7 @@ function Component$5() {
     columnNumber: 10
   }, this);
 }
-const example$t = {
+const example$u = {
   id: "two-hello-world",
   filename: "12-two-hello-world.tsx",
   name: "Two hello world",
@@ -75563,7 +75563,7 @@ function Slider$1({
     columnNumber: 5
   }, this);
 }
-const example$s = {
+const example$t = {
   id: "lab-color",
   filename: "13-lab-color.tsx",
   name: "Lab color experiment",
@@ -75667,7 +75667,7 @@ function Slider({
     columnNumber: 5
   }, this);
 }
-const example$r = {
+const example$s = {
   id: "oklab-color",
   filename: "13-oklab-color.tsx",
   name: "OKLAB color experiment",
@@ -76002,7 +76002,7 @@ function Component$2() {
     columnNumber: 10
   }, this);
 }
-const example$q = {
+const example$r = {
   id: "webgl-setup",
   filename: "15-webgl-setup.tsx",
   name: "WebGL setup",
@@ -76122,7 +76122,7 @@ function setupWebgl$j(canvas3) {
     gl.deleteVertexArray(vertexArray);
   };
 }
-const example$p = {
+const example$q = {
   id: "webgl-setup-streamlined",
   filename: "16-webgl-setup-streamlined.tsx",
   name: "WebGL setup streamlined",
@@ -76256,7 +76256,7 @@ function setupWebgl$i(canvas3) {
   });
   return () => cleanup();
 }
-const example$o = {
+const example$p = {
   id: "webgl-texture",
   filename: "17-webgl-texture.tsx",
   name: "WebGL texture",
@@ -76386,7 +76386,7 @@ function setupWebgl$h(canvas3) {
   });
   return () => cleanup();
 }
-const example$n = {
+const example$o = {
   id: "webgl-texture-upscale",
   filename: "18-webgl-texture-upscale.tsx",
   name: "WebGL texture upscale",
@@ -76465,7 +76465,7 @@ function setupWebgl$g(canvas3, images) {
   };
 }
 const IMAGES$3 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$m = {
+const example$n = {
   id: "webgl-texture-streamlined",
   filename: "19-webgl-texture-streamlined.tsx",
   name: "WebGL texture streamlined",
@@ -76537,7 +76537,7 @@ function setupWebgl$f(canvas3) {
     resources.deleteAll();
   };
 }
-const example$l = {
+const example$m = {
   id: "webgl-texture-data-in",
   filename: "20-webgl-texture-data-in.tsx",
   name: "WebGL data texture",
@@ -76645,7 +76645,7 @@ function setupWebgl$e(canvas3) {
     resources.deleteAll();
   };
 }
-const example$k = {
+const example$l = {
   id: "webgl-texture-floats",
   filename: "21-webgl-texture-data-floats.tsx",
   name: "WebGL texture floats",
@@ -76740,7 +76740,7 @@ function setupWebgl$d(canvas3, [image]) {
   };
 }
 const IMAGE$1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=";
-const example$j = {
+const example$k = {
   id: "webgl-extract-framebuffer",
   filename: "22-webgl-extract-framebuffer.tsx",
   name: "WebGL extract framebuffer",
@@ -76848,7 +76848,7 @@ function setupWebgl$c(canvas3) {
     resources.deleteAll();
   };
 }
-const example$i = {
+const example$j = {
   id: "webgl-buffer-interleaved",
   filename: "23-webgl-buffer-interleaved.tsx",
   name: "WebGL buffer interleaved",
@@ -76946,7 +76946,7 @@ function setupWebgl$b(canvas3) {
     resources.deleteAll();
   };
 }
-const example$h = {
+const example$i = {
   id: "webgl-instancing",
   filename: "24-webgl-instancing.tsx",
   name: "WebGL buffer instancing",
@@ -77144,7 +77144,7 @@ function Component$1() {
     columnNumber: 5
   }, this);
 }
-const example$g = {
+const example$h = {
   id: "webgl-oklab-color",
   filename: "25-webgl-oklab-color.tsx",
   name: "OKLAB color experiment in WebGL",
@@ -77254,7 +77254,7 @@ function setupWebgl$9(canvas3) {
     resources.deleteAll();
   };
 }
-const example$f = {
+const example$g = {
   id: "webgl-draw-elements",
   filename: "26-webgl-draw-elements.tsx",
   name: "WebGL elements mesh",
@@ -77348,7 +77348,7 @@ function setupWebgl$8(canvas3, [image1, image2]) {
   };
 }
 const IMAGES$2 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$e = {
+const example$f = {
   id: "webgl-texture-patch",
   filename: "27-webgl-texture-patch.tsx",
   name: "WebGL texture patch",
@@ -77465,7 +77465,7 @@ function setupWebgl$7(canvas3) {
     resources.deleteAll();
   };
 }
-const example$d = {
+const example$e = {
   id: "webgl-framebuffer-bouncing",
   filename: "28-webgl-framebuffer-bouncing.tsx",
   name: "WebGL framebuffer bouncing",
@@ -77553,7 +77553,7 @@ function setupWebgl$6(canvas3, [image1, image2, image3]) {
   };
 }
 const IMAGES$1 = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAF5JREFUKFNdj8ENwCAMA88j0HXbJ123HcFVQAGKHyhKLnaQKwbQFW9X6a0mJcA5m20gNVCAbcMtdugQCxBrGxQu0yFDF6gBBfv5xw+nAbwoDpnfyLg4NhxyEmDKtVcfQkIsN/jTJ+0AAAAASUVORK5CYII=", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAEBJREFUKFNjZEACZxjO/AdxTRhMGGHCcAZIUtFaESx+/+h9uCKwAmRJmE6YIkZsksiKCCsgaAXMOLyORFaE7k0ATz4pNzaQotYAAAAASUVORK5CYII="];
-const example$c = {
+const example$d = {
   id: "webgl-texture-many-samplers",
   filename: "29-webgl-texture-many-samplers.tsx",
   name: "WebGL texture many samplers",
@@ -77680,7 +77680,7 @@ function setupWebgl$5(canvas3, [image]) {
   };
 }
 const IMAGES = ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAE9JREFUKFNtztENgEAMAlAYQvdfTAdwCS6twZSL/bqUl3IEIEn4m5sAKyVZKkyFNQ36MZDDAEYX8hKhZ9ucURdAON7eUfcBh/6pUYM9nGgBCIsyaP7vzX4AAAAASUVORK5CYII="];
-const example$b = {
+const example$c = {
   id: "webgl-draw-elements-textured",
   filename: "30-webgl-draw-elements-textured.tsx",
   name: "WebGL elements textured mesh",
@@ -77742,7 +77742,7 @@ function setupWebgl$4(canvas3) {
     resources.deleteAll();
   };
 }
-const example$a = {
+const example$b = {
   id: "webgl-scissor",
   filename: "31-webgl-scissor.tsx",
   name: "WebGL scissor",
@@ -77841,7 +77841,7 @@ function setupWebgl$3(canvas3) {
     resources.deleteAll();
   };
 }
-const example$9 = {
+const example$a = {
   id: "webgl-scissor-perf",
   filename: "32-webgl-scissor-perf.tsx",
   name: "WebGL scissor perf test",
@@ -77964,7 +77964,7 @@ function setupWebgl$2(canvas3, [image]) {
   };
 }
 const IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAGBJREFUKFOVkEsNwEAIRAczawADqwZPoAYDGMBMGzalSQ9tuhzhZT4QgAPXiAiYGREBM+s1aAtqlTEGMvOhRiKy7MqmgDkn3P0G60aquqAGOkiDC/ql1ME/M221K++3P51AL08w00t2+wAAAABJRU5ErkJggg==";
-const example$8 = {
+const example$9 = {
   id: "webgl-overlay-transparent-textures",
   filename: "33-webgl-overlay-transparent-textures.tsx",
   name: "WebGL overlay transparent textures",
@@ -78074,7 +78074,7 @@ ${config.shader}
   }
   return config.image ? createCanvasComponentWithImages(setupWebgl2, [config.image], { style }) : createCanvasComponent((a2) => setupWebgl2(a2), { style });
 }
-const shader$5 = `
+const shader$6 = `
 void main() {
   int phase = int(mod(u_time, 3.));
   vec2 color;
@@ -78088,7 +78088,7 @@ void main() {
   outColor = vec4(color.x, 0., color.y, 1.);
 }
 `;
-const example$7 = {
+const example$8 = {
   id: "shadertoy-clone",
   filename: "34-shadertoy-clone.tsx",
   name: "Shadertoy clone",
@@ -78097,17 +78097,17 @@ const example$7 = {
     width: 128,
     height: 64,
     cssWidth: "640px",
-    shader: shader$5
+    shader: shader$6
   })
 };
-const shader$4 = `
+const shader$5 = `
 void main() {
   float r = mod((v_pixel.x) / 4., 1.);
   float b = mod((v_pixel.y) / 4., 1.);
   outColor = vec4(r, 0., b, 1.);
 }
 `;
-const example$6 = {
+const example$7 = {
   id: "shadertoy-exact-pixel",
   filename: "35-shadertoy-exact-pixel.tsx",
   name: "Shadertoy exact pixel",
@@ -78117,10 +78117,10 @@ const example$6 = {
     height: 16,
     pixelated: true,
     cssHeight: "320px",
-    shader: shader$4
+    shader: shader$5
   })
 };
-const shader$3 = `
+const shader$4 = `
 #define RAYMARCH_MAX_STEPS 100
 #define RAYMARCH_MAX_DIST 100.
 #define RAYMARCH_SURF_DIST .01
@@ -78174,7 +78174,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example$5 = {
+const example$6 = {
   id: "raymarching-metaballs",
   filename: "36-raymarching-metaballs.tsx",
   name: "Raymarching metaballs",
@@ -78183,10 +78183,10 @@ const example$5 = {
     width: 800,
     height: 600,
     cssWidth: "800px",
-    shader: shader$3
+    shader: shader$4
   })
 };
-const shader$2 = `
+const shader$3 = `
 #define RAYMARCH_MAX_STEPS 100
 #define RAYMARCH_MAX_DIST 100.
 #define RAYMARCH_SURF_DIST .01
@@ -78272,7 +78272,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example$4 = {
+const example$5 = {
   id: "raymarching-metaballs-with-light",
   filename: "37-raymarching-metaballs-with-light.tsx",
   name: "Raymarching metaballs with light",
@@ -78281,10 +78281,10 @@ const example$4 = {
     width: 800,
     height: 600,
     cssWidth: "800px",
-    shader: shader$2
+    shader: shader$3
   })
 };
-const shader$1 = `
+const shader$2 = `
 // copied from https://www.shadertoy.com/view/tdfyD2
 
 #define LUMINANCE_WEIGHT 1.0
@@ -78575,7 +78575,7 @@ void main() {
   outColor = vec4(color, 1.);
 }
 `;
-const example$3 = {
+const example$4 = {
   id: "4xbr-smoothing",
   filename: "38-4xbr-smoothing.tsx",
   name: "4xBR smoothing",
@@ -78585,7 +78585,7 @@ const example$3 = {
     height: 32 * 8,
     cssHeight: `${32 * 8}px`,
     image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAABmklEQVRoge2YsW3EMAxFWd4ECeIB0qu5BbLLrZAtUqSSq2yUdYKDgTBFIEBhKH5Zlo8+2MUHjLNo8D9SlM80hAvvWeSdgLf+AWBm96TcACTze4JwdIB3At5yA0BEi7UqgOvzgyn0YCuWiHj6jIvVAwIho70lzfM7z1ZPCK4AigbPo3qtQVgPwMejLWS2EJcAIIO1nbAcADLaWRIAUhp4andkAFoH46YBEBHHGDnG+AeCBCDXdQHwxU+maozmSnEIQF7h3JgGIQGQa2YBQEZbJauSILR2gHyWrPwmAWgQNAClQagZROoGIPDJFAIQ+FSEgDpgOo9N5lsgEDK6VBqEBMA6AiUA5nJHyHubApBDqO2A0gDUftPudQHw8vZtCpnWYhAA7QSYxl/VtH5aOwsAMtpb8lUYDcAcgKyyvL47AGgrlLaBpuZToJToK9liZtOoFiPnQO1f3rWOwCFcmJDRXppTzVt+IHEBkCdc077amiVtXwVAW5x/MJXbAcWXqlVbQSu21fwQjo+iB4BmAPl2uGcdHeCdgLd2D+AHBk69MX7ZEDkAAAAASUVORK5CYII=",
-    shader: shader$1
+    shader: shader$2
   })
 };
 const WIDTH$1 = 64;
@@ -78713,7 +78713,7 @@ function setupWebgl$1(canvas3) {
     resources.deleteAll();
   };
 }
-const example$2 = {
+const example$3 = {
   id: "webgl-framebuffer-sizing",
   filename: "39-webgl-framebuffer-sizing.tsx",
   name: "WebGL framebuffer sizing",
@@ -78980,20 +78980,20 @@ function Component() {
     columnNumber: 5
   }, this);
 }
-const example$1 = {
+const example$2 = {
   id: "webgl-mat2d-transform",
   filename: "40-webgl-mat2d-transform.tsx",
   name: "WebGL mat2d transform like 2d canvas ctx",
   description: "Replicate canvas 2d's mat2d transform in WebGL. Also uses createAttribute() matrixSize to set multiple attribute locations to enable the use of mat data types with instancing",
   Component
 };
-const shader = `
+const shader$1 = `
 void main() {
   vec2 uv = v_uv + sin(v_uv * 20. + (u_time * 4.)) * .01;
   outColor = texture(u_image, uv);
 }
 `;
-const example = {
+const example$1 = {
   id: "texture-warp",
   filename: "41-texture-warp.tsx",
   name: "Texture warp",
@@ -79003,10 +79003,58 @@ const example = {
     height: 32 * 8,
     cssHeight: `${32 * 8}px`,
     image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAABmklEQVRoge2YsW3EMAxFWd4ECeIB0qu5BbLLrZAtUqSSq2yUdYKDgTBFIEBhKH5Zlo8+2MUHjLNo8D9SlM80hAvvWeSdgLf+AWBm96TcACTze4JwdIB3At5yA0BEi7UqgOvzgyn0YCuWiHj6jIvVAwIho70lzfM7z1ZPCK4AigbPo3qtQVgPwMejLWS2EJcAIIO1nbAcADLaWRIAUhp4andkAFoH46YBEBHHGDnG+AeCBCDXdQHwxU+maozmSnEIQF7h3JgGIQGQa2YBQEZbJauSILR2gHyWrPwmAWgQNAClQagZROoGIPDJFAIQ+FSEgDpgOo9N5lsgEDK6VBqEBMA6AiUA5nJHyHubApBDqO2A0gDUftPudQHw8vZtCpnWYhAA7QSYxl/VtH5aOwsAMtpb8lUYDcAcgKyyvL47AGgrlLaBpuZToJToK9liZtOoFiPnQO1f3rWOwCFcmJDRXppTzVt+IHEBkCdc077amiVtXwVAW5x/MJXbAcWXqlVbQSu21fwQjo+iB4BmAPl2uGcdHeCdgLd2D+AHBk69MX7ZEDkAAAAASUVORK5CYII=",
+    shader: shader$1
+  })
+};
+const shader = `
+float pseudoRandom(float x) {
+  return fract(sin(x) * 999999.9);
+}
+
+float getRippleAmplitude(float time, float dropTime) {
+  float x = time - dropTime;
+  if(x < 0.) {
+    return 0.;
+  }
+  float x1 = x + 1.;
+  float s = 1. / (x1 * x1 * x1 * x1);
+  s -= .1;
+  return sin(x * 20.) * clamp(s, 0., 1.);
+}
+
+float getRippleHeight(float time, vec2 pixel, float dropTime, vec2 dropPos) {
+  float d = distance(pixel, dropPos);
+  float a = getRippleAmplitude(time, dropTime + d * .004);
+  a *= clamp(1. - (d / 800.), 0., 1.);
+  return a;
+}
+
+void main() {
+  float h = 0.;
+  for(int i = 0; i < 30; i++) {
+    float ii = float(i);
+    float x = pseudoRandom(ii);
+    float y = pseudoRandom(ii + .5);
+    h += getRippleHeight(u_time, v_pixel, float(ii) * .3, vec2(x, y) * u_resolution);
+  }
+  vec3 color = vec3(h);
+  outColor = vec4(color * .5 + .5, 1.);
+}
+`;
+const example = {
+  id: "ripple-displacement",
+  filename: "42-ripple-displacement.tsx",
+  name: "Ripple displacement",
+  description: "Height map for ripples based on some sine related something",
+  Component: shadertoy({
+    width: 800,
+    height: 400,
+    cssWidth: `800px`,
     shader
   })
 };
 const all = [
+  example$G,
   example$F,
   example$E,
   example$D,
