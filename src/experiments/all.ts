@@ -42,6 +42,7 @@ import _38 from "./38-4xbr-smoothing";
 import _39 from "./39-webgl-framebuffer-sizing";
 import _40 from "./40-webgl-mat2d-transform";
 import _41 from "./41-texture-warp";
+import _42 from "./42-ripple-displacement";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -86,4 +87,5 @@ export const all: ExperimentDefinition[] = [
   _39,
   _40,
   _41,
+  _42,
 ];
