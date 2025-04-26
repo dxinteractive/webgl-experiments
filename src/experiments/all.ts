@@ -43,6 +43,7 @@ import _39 from "./39-webgl-framebuffer-sizing";
 import _40 from "./40-webgl-mat2d-transform";
 import _41 from "./41-texture-warp";
 import _42 from "./42-ripple-displacement";
+import _43 from "./43-sprites-experiment";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -88,4 +89,5 @@ export const all: ExperimentDefinition[] = [
   _40,
   _41,
   _42,
+  _43,
 ];
