@@ -86,6 +86,24 @@ void main() {
   }
 }`;
 
+/**
+ * void main() {
+  vec3 srgb = rgb_to_srgb(oklab_to_rgb(v_color));
+  outColor = vec4(srgb, 1.0);
+
+  vec3 neg = max(-srgb, 0.);
+  outColor.xyz = srgb - vec3(neg.x + neg.y + neg.z);
+
+  // vec3 pos = min(srgb - vec3(1.), 0.);
+  // outColor.xyz = srgb + vec3(pos.x + pos.y + pos.z);
+
+  float diff = length(outColor.rgb - clamp(outColor.rgb, 0., 1.));
+  if(diff > 0.) {
+    outColor.xyz = vec3(.5);
+  }
+}
+ */
+
 const lightness = {
   current: 0,
 };

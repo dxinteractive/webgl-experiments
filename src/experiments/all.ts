@@ -44,6 +44,7 @@ import _40 from "./40-webgl-mat2d-transform";
 import _41 from "./41-texture-warp";
 import _42 from "./42-ripple-displacement";
 import _43 from "./43-sprites-experiment";
+import _44 from "./44-webgl-buffer-sub-data";
 
 export const all: ExperimentDefinition[] = [
   _00,
@@ -90,4 +91,5 @@ export const all: ExperimentDefinition[] = [
   _41,
   _42,
   _43,
+  _44,
 ];
